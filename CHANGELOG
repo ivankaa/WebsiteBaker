@@ -1,0 +1,300 @@
+Change Log
+===============================================================================
+Please note: This change log may not be accurate
+
+$Id: CHANGELOG,v 1.31 2005/06/23 06:35:06 rdjurovich Exp $
+
+Legend:
++ = Added
+- = Removed
+# = Bugfix
+! = Update/Change
+
+------------------------------------- 2.5.2 -------------------------------------
+23-Jun-2005 Ryan Djurovich
+!	create_access_file now creates all parent directories if needed
+#	Fixed bug when moving page with subpages to another level
+#	Fixed bug when saving "Settings" (in Admin) on Windows/IIS
+#	Fixed bug where query was not setting error correctly in class.database.php
+22-Jun-2005 Ryan Djurovich
+#	Fixed bug where template permissions were not saved when a adding group
+21-Jun-2005 Ryan Djurovich
+#	Added htmlspecialchars for modifying WYSIWYG, news, etc. modules (Bug #78)
+#	Fixed language problems in some area's of Admin. (Bug #70)
+#	Added a space in website/page keywords (Bug #69)
+#	Fixed bugs on settings2.php (Bug #52)
+!	Links inserted with HTMLArea now use [wblink--PAGE_ID--] instead of raw URL
+13-Jun-2005 Ryan Djurovich
+#	Fixed bug (#88) with news module
+!	Title of Administration login page now taken from language file (Bug #72)
+#	Fixed redirection admin/home to admin/start on admin/index.php
+#	Fixed bug with forgotten password page in admin (Bug #81)
+25-Apr-2005 Ryan Djurovich
+#	Fixed numerous bugs with module uninstallation
+#	Fixed bug when uploading files in Administration -> Media
+!	Installer no-longer requires you to accept the GNU GPL
+------------------------------------- 2.5.1 -------------------------------------
+16-Apr-2005 Ryan Djurovich
+#	Fixed two bugs with account login/logout
+------------------------------------- 2.5.1 -------------------------------------
+15-Apr-2005 Ryan Djurovich
+#	Fixed bug where non-english characters can get used in page filenames. Many
+	measuers have been added (including a new file: wb/framework/convert.php),
+	to prevent any possible errors that can occur in page filenames.
+#	Fixed invalid meta tags in stock templates (meta tags were not closed)
+#	Removed lines 401, 402, and 425 of wb/index.php - not needed
+#	Fixed bug where search and account pages are shown in every block
+	that is in a template
+#	Fixed numerous bugs with media home directories feature
+10-Apr-2005 Ryan Djurovich
+#	Fixed bugs in account/login.php and logout.php where users
+	gets redirected to /pages
+------------------------------------- 2.5.0 -------------------------------------
+08-Apr-2005 Ryan Djurovich
+-	Removed section language feature
++	Added page language feature (replaces need for sections language feature)
+#	Fixed bug where pages using menu_link module can have the URL changed
+-	Page directory no longer stored in link field in pages table, it is now added
+	when the page_link function is called - this makes changing the pages
+	directory much easier and quicker
+!	Pages with visibility of "none" are now no longer directly accessable
++	Added new visibility setting "hidden", acts exactly like none did previously
+!	Template info file can now specify number of menu's available and relative names
+!	Template info file can now specify number of blocks's available and relative names
+------------------------------------- 2.4.3 -------------------------------------
+07-Apr-2005 Ryan Djurovich
+#	page_filename function has been rewritten using str_replace
+	function, which should be faster and will allow characters
+	from other languages into filenames
+!	Created new media_filename function, which is now used
+	by all media functions (create,upload,rename) to determine
+	which characters should be removed from a desired filename
++	New button in Administration page list to view specific page
+#	Updated the page_link function to now be compatible with menu link
+	module when setting pages directory to root
+#	Fixed bugs in search when using "Any Words" option
+#	Fixed bug with news module when pages directory set to root
+!	Changed URL of documentation website on Administration Start page
+------------------------------------- 2.4.2 -------------------------------------
+05-Apr-2005 Ryan Djurovich
+#	Fixed bug where file could be renamed to nothing in Media
+!	Optimised Media create folder, upload file, and rename functions
+#	Fixed bug where stripslashes not run on news post titles in admin
+05-Apr-2005 Stefan Braunewell
+#	Fixed bug concerning usage of the private_sql variable
+#	Fixed bug conerning sub-pages being displayed in menus incorrectly
+------------------------------------- 2.4.1 -------------------------------------
+04-Apr-2005 Ryan Djurovich
+!	Pages with visibility of "none" are again directly accessable
+#	Fixed bugs regarding renaming files and directories in Media section
+!	When home folders disabled, all folders now visible in Media section
+------------------------------------- 2.4.0 -------------------------------------
+03-Apr-2005 Ryan Djurovich
+-	Removed recently added visibility setting of "heading", and relative config vars
++	Added new "menu" field to pages table, and new setting "multiple menus"
+	which replaces the need for the menu headings feature
++	Added links to top of groups and users sections, linking to each other
+!	Change menu width in "Round" template to 170px (was 150px)
+#	Change page "are you sure" deletion message to mention that it will delete
+	all sub-pages as well
+#	Fixed many bugs with news module when viewing posts by group
+!	Pages with visibility of "none" are now no longer directly accessable
+02-Apr-2005 Ryan Djurovich
+-	Removed need to specify DB_URL when calling database class
+#	Stopped fields without a type specified from being shown in form mod
+#	Changed '/media' to MEDIA_DIRECTORY on HTMLArea popup windows
+	for insert link and insert image
++	Added setting which allows you to specify the default WYSIWYG style
++	Added "Server Email" option, to specify what is used in "From" field when
+	sending emails using the PHP mail function. Default is admins email address.
+#	Search now excludes pages which have a visibility of none or heading
+!	Pages are now given modified_when and modified_by when added
+01-Apr-2005 Ryan Djurovich
++	Added option to News module to specify how many posts should be listed
+	per page (by default it is set to unlimited, which functions like previous version)
+#	Added stripslashes when display page titles in search
++	Page descriptions and last updated date now shown in search by default
+30-Mar-2005 Ryan Djurovich
++	Added new feature for Media home folders, where a folder can be specified
+	for a specific user or group of users only
+!	Changed URL of Help button to http://www.websitebaker.org/docs/
++	Added new feature for "Page Trash" - two modes available: inline and separate
+!	When pages are deleted, all sub-pages are now deleted (instead of being moved
+	up a level)
+29-Mar-2005 Ryan Djurovich
+-	Removed Database Settings from Administration Settings (options will not be
+	available in 3.x, so trying to match interface with WB 3.x plans
+!	Changed the name of Path Settings to Filesystem Settings in Administration
+	Settings, and removed ability to change path/url options - matching interface
+	plans for WB 3.x
++	Added same options for OS and file permissions as installer to Settings
+!	Sessions now named with APP_NAME.'_session_id' (e.g. default is wb_session_id)
+28-Mar-2005 Ryan Djurovich
++	New functions available to templates to simplify creation of them. This aims
+	to "future-proof" templates for WB 3.x plans.
+!	Default templates updated to support some of the new functions
++	Added field to pages table "page_trail" which stores a list of the pages
+	parents. This field was needed by the new page_menu function
++	Added option for page visibility "heading" to enabled support for multiple
+	menu's. Also, this helps to "future-proof" templates for WB 3.x plans
++	Added option for page visibility "registered", which acts a little like
+	private, but is still shown in the menu (although users need to log in to view
+	the pages content)
++	Form module submissions now saved to database, and feature now added to
+	limit number of submissions per hour to prevent spamming
++	New field for Form module: email. Allows you to specify their email in
+	"from" field on module settings.
+#	Fixed bug when displaying comments in News module (WB Bug #14)
++	New "under contruction" message if no pages exist
+!	Cleaned-up wb/index.php
+27-Mar-2005 Ryan Djurovich
++	Created advanced mkdir and chmod functions
+#	Fixed bug in media where wrong file/folder is deleted
++	Complete overhall of installer - now only one step! It has been greatly
+	simplified in many ways, has much better validation, reports error much more
+	nicely, and automatically logs the user into the Administrations
++	Must now specify OS type - allows for customizable file permission settings
++	Sections can now have a language code assigned to them
++	Sections can now have a block name/id assigned to them
+!	Home section of Administration renamed to Start, to save confusion with saying
+	Homepage (because this term could either mean the main website or Home section
+	in	Administration). Also, this aims to unify the interface with WB 3.x plans
+!	Moved Users and Groups sections under Access section. This aims to unify the
+	interface with WB 3.x plans, which help to unclutter the menu
+!	Interface for Settings section has been imporved for usability purposes
+#	Fixed HTMLArea where no scrollbar for "insert link" and "insert image" dialogs
+	by placing media list inside an iframe
+#	Fixed stripslashes problem for viewing news comments
+!	Added code from Formesque module (an advanced version of the original Form
+	module, modified by Rudolph Lartey from www.carbonect.com), and made further
+	interface improvements for select box/checkbox group/radio group options.
+#	Possibly fixed bugs where an S appears before file and dir modes
+#	Fixed bug where users can be added with same emails (in Administration)
+-	Removed support for PEAR, as it was deemed an unnecessary addition which only
+	makes code more bulky, and removing it will decrease package size a lot
++	New "homepage redirect" option so first page is included and not redirected to
+#	Fixed text not being shown when module uninstalled
+!	Imporved interface for basic group permissions
+26-Mar-2005 Stefan Braunewell
+#	Fixed bug with front-end logins
+#	Fixed bug when saving intro page 
++	Added check on sign-up if e-mail exists (thanks to P. Melief)
+#	Fixed bugs concerning moving/deleting pages
+#	Fixed list of parents in page settings
+#	Fixed mkdir without mode parameter
+#	Added a check on install to ensure PHP 4.1.x compatibility (thanks to Wanderer)
++	Added support for PAGES_DIRECTORY set to root
++	Search form now supports quotes (thanks to Manafta)
+#	Fixed page section ordering
+#	News items are displayed with name of poster instead of "Unknown"
+#	Deletion confirmation popup window in media section now shows correct file name
+------------------------------------- 2.3.1 -------------------------------------
+03-Fed-2005 Ryan Djurovich
++	Now there is two types of "filesystem modes", one for directories and one
+	for files. Having different settings is very common for most servers, so
+	this addition should fix many problems people had with 2.3.0.
+-	Removed filesystem mode options from installation
+!	Removed duplicate text on installation step 3 for timezone
+!	All "access files" for the news module now stored in pages/posts instead
+	of a sub-dir relative to the page (this fixes many bugs)
+#	Fixed major bugs when deleting pages with sub-pages
+!	Removed the restrictions that prevent a user for changing a pages level
+#	Fixed bug with "toggle" plus/minus in IE for pages list
+#	Fixed some bugs where /pages was not replaced with PAGES_DIRECTORY constant
+------------------------------------- 2.3.0 -------------------------------------
+26-Jan-2005 Ryan Djurovich
+#	Fixed bug in framework/functions.php that made root parent always equal 8
+#	Added missing braces in lines 182 and 208 of admin/pages/settings2.php
+#	Fixed SQL-query on line 172, placing a / after $old_link
+#	Added eregi checks for PAGES_DIRECTORY on lines 140 and 150 of
+	admin/pages/settings2.php
+#	Added ordering cleaning to delete_post.php on line 53 for news module
+!	GMT option is selected for "Default Timezone" in the installer, instead
+	of the old "Please select" message (which had the same value as GMT)
+28-Jan-2005 Ryan Djurovich
+!	Ability to specify the chmod number when WB uploads files, etc.
+!	Modified file headers (copyright/license notice) so they now look almost the
+	same, independant of font. Also, it now covers copyright for 2005.
+30-Jan-2005 Ryan Djurovich
+#	Added code on wb/admin/pages/delete.php to remove sections from the sections
+	table when a page is deleted.
++	New 'Smart Login' prevents users from using external password managers,
+	and can be set to remember the users password using cookies.
+!	SourceForge CVS module now called websitebaker2 (instead of just
+	websitebaker). Also, all file versions have been reset.
+01-Fed-2005 Ryan Djurovich
+!	Added code to prevent from changing a pages level (it simply disables
+	the select box), to prevent many possible bugs.
+------------------------------------- 2.2.4 -------------------------------------
+23-Dec-2004 Ryan Djurovich
+!	Change 'EXACT_PHRASE' to 'EXACT_MATCH' on line 261 of wb/languages/EN.php
+#	Fixed multi-language support in search
++	Added more detailed options to list of PHP error reporting level's
+-	Removed ability to change language and PHP error reporting level
+	on installation to make things easier for newbie's
++	Ability to select custom spacer for page filename's
+!	Changed the way a language code is found on language installation
++	Added template permissions to groups
+#	Fixed bug when trying to change email from Preferences (admin and frontend)
+#	Fixed bug with auto-selection of "System Default" for Preferences
+!	News module now use's WYSIWYG for modifying news posts
++	Ability to specify both the pages and media target directories
+------------------------------------ 2.2.3-c ------------------------------------
+22-Dec-2004 Ryan Djurovich
+#	Fixed problem with DB password being reset if Settings saved in basic mode
+------------------------------------ 2.2.3-b ------------------------------------
+21-Dec-2004 Ryan Djurovich
+#	Fixed minor bug on admin templates section
+#	Fixed bug on rename.php and rename2.php in admin media section
+------------------------------------- 2.2.3 -------------------------------------
+20-Dec-2004 Ryan Djurovich
++	Added WB release version in Administration (top right corner)
+!	New option to prevent users from adding level 0 pages
+#	Fixed bug when deleting post's in News module
++	Added new field in pages table for "root" parent (level 0 parent), for
+	extra flexability in creating templates
+!	Round template now supports unlimited page levels
+------------------------------------- 2.2.2 -------------------------------------
+18-Dec-2004 Ryan Djurovich
++	New option under Search Settings for selecting custom template for search
++	New option when changing page settings to set the target
+#	Fixed error when saving a user after editing
+!	Users can now modify sub-page if they dont have permissions on the parent
+------------------------------------- 2.2.1 -------------------------------------
+15-Dec-2004 Ryan Djurovich
+#	Fixed bug when changing password on preferences form (front-end)
+#	Fixed bug when retrieving user details (administration)
+#	Added check to see if module, template, or language is in use when deleting
+#	Fixed up email that is sent to user from a submitted form
+#	Fixed major problem with module permissions which stopped it from working
+------------------------------------- 2.2.0 -------------------------------------
+14-Dec-2004 (Correct date[s] unkown) Ryan Djurovich
++	Multiple-level page support
++	Multiple section's for pages (including interface)
+!	Removed text created using two words on all areas
+	(e.g. {Intro} {PAGE} is now {INTRO_PAGE})
+	this is for better language support
++	Added Languages section
+!	Moved Templates and Modules under Add-ons section
+!	Changed name of "Default" template to "Round"
++	Added "All CSS" template
++	Added "Jump"
++	Added 
+!	Modified "Box" template to support multiple page levels
++	Added "Menu Link" module
++	Added "News" module
++	Added "Code" module
++	Added "Form" module
++	Added "Wrapper" module
+!	Changed name of "Normal Page" module to "WYSIWYG"
++	Created new admin wrapper script to ease module develpment
++	Media now automatically creates index.php file for every
+	sub-folder made (for security purposes)
+!	Change "Help" link in Administration menu so it now directs
+	to the the new Website Baker documentation website found at:
+	http://www.websitebaker.org/documentation
+!	Password is now required to change email in preferences
++	User can now select custom Language and Date & Time Formats
++	Added search functionality, with three different "methods":
+	1. Using all words  2. Using any words  3. Exact match
++	Added native MySQL database support

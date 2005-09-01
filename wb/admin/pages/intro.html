@@ -1,0 +1,40 @@
+<!-- BEGIN main_block -->
+
+<script type="text/javascript">
+  _editor_url = "{WB_URL}/include/htmlarea/";
+  _editor_lang = "en";
+</script>
+<script type="text/javascript" src="{WB_URL}/include/htmlarea/htmlarea.js"></script>
+<script type="text/javascript">
+HTMLArea.loadPlugin("FullPage");
+HTMLArea.loadPlugin("ContextMenu");
+HTMLArea.loadPlugin("TableOperations");
+function initEditor() {
+  var editor = new HTMLArea("{WYSIWYG_FIELD}");
+  editor.registerPlugin(FullPage);
+  editor.registerPlugin(ContextMenu);
+  editor.registerPlugin(TableOperations);
+  editor.generate();
+}
+</script>
+
+<form action="intro2.php" method="post">
+
+<input type="hidden" name="page_id" value="{PAGE_ID}" />
+
+<textarea id="content" name="content" style="WIDTH: 100%; HEIGHT: 500px">{CONTENT}</textarea>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+	<td align="left">
+		<input type="submit" value="{TEXT_SAVE}" style="width: 100px; margin-top: 5px;" />
+	</td>
+	<td align="right">
+		</form>
+		<input type="button" value="{TEXT_CANCEL}" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
+	</td>
+</tr>
+</table>
+
+</form>
+<!-- END main_block -->
