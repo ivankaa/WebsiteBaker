@@ -1,6 +1,6 @@
 <?php
 
-// $Id: class.admin.php,v 1.13 2005/06/23 01:10:46 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -32,6 +32,9 @@ in the administration section of Website Baker.
 
 */
 
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
 
 
 require_once(WB_PATH.'/framework/class.wb.php');

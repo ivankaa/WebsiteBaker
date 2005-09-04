@@ -29,6 +29,9 @@ Frontend class
 
 */
 
+if(!defined('WB_PATH')) {
+	header('Location: ../index.php');
+}
 
 
 require_once(WB_PATH.'/framework/class.wb.php');

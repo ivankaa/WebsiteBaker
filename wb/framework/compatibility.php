@@ -27,6 +27,9 @@
 	This file is purely for ensuring compatibility with 3rd party
 	contributions made for WB version 2.5.2 or below
 */
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
 
 function page_link($link) {
 	global $wb;

@@ -26,6 +26,9 @@
 /*
 	Initializations common to frontend and backend
 */
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
 
 // Setup database object
 require_once(WB_PATH.'/framework/class.database.php');
