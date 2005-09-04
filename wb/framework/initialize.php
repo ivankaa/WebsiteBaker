@@ -69,7 +69,14 @@ if(!defined('DATE_FORMAT')) {
 		define('DATE_FORMAT', DEFAULT_DATE_FORMAT);
 	}
 }
-
+// Get users time format
+if(!defined('TIME_FORMAT')) {
+	if(isset($_SESSION['TIME_FORMAT'])) {
+		define('TIME_FORMAT', $_SESSION['TIME_FORMAT']);
+	} else {
+		define('TIME_FORMAT', DEFAULT_TIME_FORMAT);
+	}
+}
 // Load Language file
 if(!defined('LANGUAGE_LOADED')) {
 	if(!file_exists(WB_PATH.'/languages/'.LANGUAGE.'.php')) {
