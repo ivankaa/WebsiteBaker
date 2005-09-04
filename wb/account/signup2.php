@@ -1,6 +1,6 @@
 <?php
 
-// $Id: signup2.php,v 1.4 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -24,7 +24,7 @@
 */
 
 if(!defined('WB_URL')) {
-	header('Location: ../pages/index'.PAGE_EXTENSION);
+	header('Location: ../pages/index.php');
 }
 
 // Create new database object

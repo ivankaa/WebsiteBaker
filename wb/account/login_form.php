@@ -1,6 +1,6 @@
 <?php
 
-// $Id: login_form.php,v 1.2 2005/02/03 08:47:46 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -24,7 +24,7 @@
 */
 
 if(!defined('WB_URL')) {
-	header('Location: ../index.php');
+	header('Location: ../pages/index.php');
 }
 
 if(defined('SMART_LOGIN') AND SMART_LOGIN == 'enabled') {

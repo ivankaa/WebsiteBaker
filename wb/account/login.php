@@ -1,6 +1,6 @@
 <?php
 
-// $Id: login.php,v 1.8 2005/04/16 01:39:06 rdjurovich Exp $
+// $Id$
 
 /*
 

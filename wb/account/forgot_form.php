@@ -1,6 +1,6 @@
 <?php
 
-// $Id: forgot_form.php,v 1.2 2005/03/28 11:58:03 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -24,7 +24,7 @@
 */
 
 if(!defined('WB_URL')) {
-	header('Location: ../pages/index'.PAGE_EXTENSION);
+	header('Location: ../pages/index.php');
 }
 
 // Create new database object

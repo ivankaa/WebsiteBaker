@@ -1,6 +1,6 @@
 <?php
 
-// $Id: details.php,v 1.2 2005/03/28 11:58:03 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -22,6 +22,10 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
+
+if(!defined('WB_URL')) {
+	header('Location: ../pages/index.php');
+}
 
 // Get entered values
 $display_name = $admin->get_post('display_name');
