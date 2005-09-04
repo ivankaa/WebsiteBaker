@@ -1,6 +1,6 @@
 <?php
 
-// $Id: forgot.php,v 1.4 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -24,31 +24,6 @@
 */
 
 require('../config.php');
-
-// Start a session
-if(!defined('SESSION_STARTED')) {
-	session_name(APP_NAME.'_session_id');
-	session_start();
-	define('SESSION_STARTED', true);
-}
-
-// Get users language if it is not already set
-if(!defined('LANGUAGE')) {
-	if(isset($_SESSION['LANGUAGE']) AND $_SESSION['LANGUAGE'] != '') {
-		define('LANGUAGE', $_SESSION['LANGUAGE']);
-	} else {
-		define('LANGUAGE', DEFAULT_LANGUAGE);
-	}
-}
-
-// Load the language file
-if(!defined('LANGUAGE_LOADED')) {
-	if(!file_exists(WB_PATH.'/languages/'.LANGUAGE.'.php')) {
-		exit('Error loading language file '.LANGUAGE.', please check configuration');
-	} else {
-		require_once(WB_PATH.'/languages/'.LANGUAGE.'.php');
-	}
-}
 
 // Required page details
 $page_id = 0;

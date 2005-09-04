@@ -1,6 +1,6 @@
 <?php
 
-// $Id: preferences_form.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -49,7 +49,7 @@ if(!defined('WB_URL')) {
 		// Insert language values
 		if($handle = opendir(WB_PATH.'/languages/')) {
 		   while (false !== ($file = readdir($handle))) {
-				if($file != '.' AND $file != '..' AND $file != 'CVS' AND $file != 'index.php') {
+				if($file != '.' AND $file != '..' AND $file != '.svn' AND $file != 'index.php') {
 					// Get language name
 					require(WB_PATH.'/languages/'.$file);
 					// Check if it is selected

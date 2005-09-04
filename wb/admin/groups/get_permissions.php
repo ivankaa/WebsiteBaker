@@ -1,6 +1,6 @@
 <?php
 
-// $Id: get_permissions.php,v 1.2 2005/03/27 06:54:28 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -189,7 +189,7 @@ $system_permissions = $imploded_system_permissions;
 $module_permissions = '';
 if($handle = opendir(WB_PATH.'/modules/')) {
 	while (false !== ($file = readdir($handle))) {
-		if($file != "." AND $file != ".." AND $file != "CVS" AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
+		if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
 			// Include the modules info file
 			require(WB_PATH.'/modules/'.$file.'/info.php');
 			// Check if it was selected to be used or not
@@ -217,7 +217,7 @@ if($handle = opendir(WB_PATH.'/modules/')) {
 $template_permissions = '';
 if($handle = opendir(WB_PATH.'/templates/')) {
 	while (false !== ($file = readdir($handle))) {
-		if($file != "." AND $file != ".." AND $file != "CVS" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
+		if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
 			// Include the modules info file
 			require(WB_PATH.'/templates/'.$file.'/info.php');
 			// Check if it was selected to be used or not

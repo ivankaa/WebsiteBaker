@@ -1,6 +1,6 @@
 <?php
 
-// $Id: index.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -37,7 +37,7 @@ $template->set_block('page', 'main_block', 'main');
 $template->set_block('main_block', 'language_list_block', 'language_list');
 if ($handle = opendir(WB_PATH.'/languages/')) {
 	while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != 'CVS' AND $file != 'index.php') {
+		if($file != '.' AND $file != '..' AND $file != '.svn' AND $file != 'index.php') {
 			// Include the languages info file
 			require(WB_PATH.'/languages/'.$file);
 			$template->set_var('VALUE', $language_code);

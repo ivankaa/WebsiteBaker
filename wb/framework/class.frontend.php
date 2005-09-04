@@ -379,7 +379,7 @@ class frontend extends wb {
 
 	function page_content($block = 1) {
 		// Get outside objects
-		global $database,$TEXT,$MENU,$HEADING,$MESSAGE;
+		global $database,$admin,$TEXT,$MENU,$HEADING,$MESSAGE;
 		global $globals;
 		if ($this->page_access_denied==true) {
             echo $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'];

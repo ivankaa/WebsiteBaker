@@ -1,6 +1,6 @@
 <?php
 
-// $Id: index.php,v 1.5 2005/04/03 12:15:14 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -122,7 +122,7 @@ if($admin->get_permission('groups_add') != true) {
 $template->set_block('main_block', 'module_list_block', 'module_list');
 if($handle = opendir(WB_PATH.'/modules/')) {
 	while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != 'CVS' AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
+		if($file != '.' AND $file != '..' AND $file != '.svn' AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
 			// Include the modules info file
 			require(WB_PATH.'/modules/'.$file.'/info.php');
 			$template->set_var('VALUE', $file);
@@ -136,7 +136,7 @@ if($handle = opendir(WB_PATH.'/modules/')) {
 $template->set_block('main_block', 'template_list_block', 'template_list');
 if($handle = opendir(WB_PATH.'/templates/')) {
 	while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != 'CVS' AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
+		if($file != '.' AND $file != '..' AND $file != '.svn' AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
 			// Include the modules info file
 			require(WB_PATH.'/templates/'.$file.'/info.php');
 			$template->set_var('VALUE', $file);
