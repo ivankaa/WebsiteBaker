@@ -10,6 +10,21 @@ Legend:
 # = Bugfix
 ! = Update/Change
 
+------------------------------------- 2.5.3 -------------------------------------
+27-Aug-2005 Stefan Braunewell
+#	Fixed bugs 4,5,6,8,9 in bug tracker
+!	Removed 'USER_LANGUAGE' and 'GET_LANGUAGE' constants.
+	A GET['lang'] now sets the session language variable.
+26-Aug-2005 Stefan Braunewell
+!	Moved redundant code to files 'initialize.php' and into the new class
+	functions. Created 'compatibility.php' for backward compatibility with
+	modules and templates. Variables and functions can still be accessed
+	in the old way.
+!/+	Reorganized core frontend files, added new base class 'wb' from
+	which 'admin' and the new 'frontend' class inherit. Moved all frontend
+	function into new class. Completely rewrote core index.php.
+	Now all variables and functions that are available to templates and
+	modules are attributes and methods of the frontend and the wb classes
 ------------------------------------- 2.5.2 -------------------------------------
 23-Jun-2005 Ryan Djurovich
 !	create_access_file now creates all parent directories if needed
