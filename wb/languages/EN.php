@@ -1,6 +1,6 @@
 <?php
 
-// $Id: EN.php,v 1.17 2005/04/15 06:38:13 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -434,6 +434,7 @@ $MESSAGE['PREFERENCES']['PASSWORD_CHANGED'] = 'Password changed successfully';
 $MESSAGE['TEMPLATES']['CHANGE_TEMPLATE_NOTICE'] = 'Please note: to change the template you must go to the Settings section';
 
 $MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH'] = 'Cannot include ../ in the folder name';
+$MESSAGE['MEDIA']['DIR_DOES_NOT_EXIST'] = 'Directory does not exist';
 $MESSAGE['MEDIA']['TARGET_DOT_DOT_SLASH'] = 'Cannot have ../ in the folder target';
 $MESSAGE['MEDIA']['NAME_DOT_DOT_SLASH'] = 'Cannot include ../ in the name';
 $MESSAGE['MEDIA']['NAME_INDEX_PHP'] = 'Cannot use index.php as the name';

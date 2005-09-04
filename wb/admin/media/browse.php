@@ -1,6 +1,6 @@
 <?php
 
-// $Id: browse.php,v 1.4 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -46,6 +46,11 @@ if($directory == '/') {
 if(strstr($directory, '../')) {
 	$admin->print_header();
 	$admin->print_error($MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH']);
+}
+
+if(!file_exists(WB_PATH.'/media'.$directory)) {
+	$admin->print_header();
+	$admin->print_error($MESSAGE['MEDIA']['DIR_DOES_NOT_EXIST']);
 }
 
 // Check to see if the user wanted to go up a directory into the parent folder
