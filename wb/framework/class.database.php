@@ -1,6 +1,6 @@
 <?php
 
-// $Id: class.database.php,v 1.5 2005/06/23 06:34:18 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -33,7 +33,9 @@ and the Website Baker code
 */
 
 // Stop this file from being accessed directly
-if(!defined('WB_PATH')) { exit('Direct access to this file is not allowed'); }
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
 
 if(!defined('DB_URL')) {
 	//define('DB_URL', DB_TYPE.'://'.DB_USERNAME.':'.DB_PASSWORD.'@'.DB_HOST.'/'.DB_NAME);

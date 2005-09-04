@@ -1,6 +1,6 @@
 <?php
 
-// $Id: admin.php,v 1.2 2005/04/02 06:25:55 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -33,7 +33,9 @@ from Website Baker Administration to take advantage of the interface.
 */
 
 // Stop this file being access directly
-if(!defined('WB_PATH')) { exit('Direct access to this file is not allowed'); }
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
 
 // Get page id
 if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {

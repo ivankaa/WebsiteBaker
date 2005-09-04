@@ -1,6 +1,6 @@
 <?php
 
-// $Id: functions.php,v 1.20 2005/06/23 05:47:22 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -31,7 +31,9 @@ This file contains general functions used in Website Baker
 */
 
 // Stop this file from being accessed directly
-if(!defined('WB_PATH')) { exit('Direct access to this file is not allowed'); }
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
 
 // Define that this file has been loaded
 define('FUNCTIONS_FILE_LOADED', true);

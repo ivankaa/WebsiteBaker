@@ -1,6 +1,6 @@
 <?php
 
-// $Id: class.order.php,v 1.2 2005/04/02 06:25:54 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -33,7 +33,9 @@ which contains a special order field (type must be integer)
 */
 
 // Stop this file from being accessed directly
-if(!defined('WB_PATH')) { exit('Direct access to this file is not allowed'); }
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
 
 define('ORDERING_CLASS_LOADED', true);
 

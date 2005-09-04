@@ -1,6 +1,6 @@
 <?php
 
-// $Id: class.login.php,v 1.7 2005/04/02 06:25:54 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -32,7 +32,9 @@ This class will be used to with the login application
 */
 
 // Stop this file from being accessed directly
-if(!defined('WB_PATH')) { exit('Direct access to this file is not allowed'); }
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
 
 define('LOGIN_CLASS_LOADED', true);
 

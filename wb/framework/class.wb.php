@@ -30,6 +30,9 @@ wb class
 This class is the basis for admin and frontend classes.
 
 */
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
 
 
 class wb
