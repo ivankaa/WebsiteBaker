@@ -1,6 +1,6 @@
 <?php
 
-// $Id: version.php,v 1.14 2005/06/22 08:02:10 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -28,10 +28,9 @@
 Version file
 
 This file is where the WB release version is stored.
-I will try to remember to update with every release!
 
 */
 
-define('VERSION', '2.5.2');
+define('VERSION', '2.6.0');
 
 ?>
