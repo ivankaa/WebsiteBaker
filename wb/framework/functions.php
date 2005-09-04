@@ -74,7 +74,7 @@ function directory_list($directory) {
 	$dir = dir($directory);
 	while (false !== $entry = $dir->read()) {
 		// Skip pointers
-		if(substr($entry, 0, 1) == '.' || $entry == 'CVS') {
+		if(substr($entry, 0, 1) == '.' || $entry == '.svn') {
 			continue;
 		}
 		// Add dir and contents to list
@@ -98,7 +98,7 @@ function chmod_directory_contents($directory, $file_mode) {
 	$dir = dir($directory);
 	while (false !== $entry = $dir->read()) {
 		// Skip pointers
-		if(substr($entry, 0, 1) == '.' || $entry == 'CVS') {
+		if(substr($entry, 0, 1) == '.' || $entry == '.svn') {
 			continue;
 		}
 		// Chmod the sub-dirs contents
@@ -163,7 +163,7 @@ function get_home_folders() {
 			if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.$directory)) {
 				// Loop through the dirs to check the home folders sub-dirs are not shown
 			   while(false !== ($file = readdir($handle))) {
-					if(substr($file, 0, 1) != '.' AND $file != 'CVS' AND $file != 'index.php') {
+					if(substr($file, 0, 1) != '.' AND $file != '.svn' AND $file != 'index.php') {
 						if(is_dir(WB_PATH.MEDIA_DIRECTORY.$directory.'/'.$file)) {
 							if($directory != '/') { $file = $directory.'/'.$file; } else { $file = '/'.$file; }
 							foreach($home_folders AS $hf) {

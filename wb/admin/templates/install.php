@@ -102,7 +102,7 @@ if(file_exists($temp_file)) { unlink($temp_file); }
 $dir = dir($template_dir);
 while (false !== $entry = $dir->read()) {
 	// Skip pointers
-	if(substr($entry, 0, 1) != '.' AND $entry != 'CVS' AND !is_dir($template_dir.'/'.$entry)) {
+	if(substr($entry, 0, 1) != '.' AND $entry != '.svn' AND !is_dir($template_dir.'/'.$entry)) {
 		// Chmod file
 		change_mode($template_dir.'/'.$entry);
 	}

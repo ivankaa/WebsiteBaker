@@ -1,7 +1,5 @@
 <?php
 
-// $Id: index.php,v 1.9 2005/04/08 07:36:58 rdjurovich Exp $
-
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -481,7 +479,7 @@ $module_permissions = $_SESSION['MODULE_PERMISSIONS'];
 $template->set_block('main_block', 'module_list_block', 'module_list');
 if($handle = opendir(WB_PATH.'/modules/')) {
 	while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != 'CVS' AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
+		if($file != '.' AND $file != '..' AND $file != '.svn' AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
 			// Include the modules info file
 			require(WB_PATH.'/modules/'.$file.'/info.php');
 			// Check if user is allowed to use this module

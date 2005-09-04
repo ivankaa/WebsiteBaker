@@ -1,7 +1,5 @@
 <?php
 
-// $Id: index.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
-
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -49,7 +47,7 @@ $template->set_var('EMAIL', $details['email']);
 $template->set_block('main_block', 'language_list_block', 'language_list');
 if($handle = opendir(WB_PATH.'/languages/')) {
    while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != 'CVS' AND $file != 'index.php') {
+		if($file != '.' AND $file != '..' AND !is_dir($file) AND $file != 'index.php') {
 			// Get language name
 			require(WB_PATH.'/languages/'.$file);
 			// Insert code and name

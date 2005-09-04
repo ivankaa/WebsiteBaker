@@ -1,7 +1,5 @@
 <?php
 
-// $Id: sections.php,v 1.10 2005/04/09 01:00:53 rdjurovich Exp $
-
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -127,7 +125,8 @@ if(!isset($block[1]) OR $block[1] == '') {
 	// Make our own menu list
 	$block[1] = $TEXT['MAIN'];
 }
-?>
+
+?>
 <table cellpadding="5" cellspacing="0" border="0" align="center" width="100%" height="50" style="margin-bottom: 10px;">
 <tr style="background-color: #F0F0F0;">
 	<td valign="middle" align="left">
@@ -239,7 +238,7 @@ if($query_sections->numRows() == 0) {
 			// Insert module list
 			if($handle = opendir(WB_PATH.'/modules/')) {
 				while (false !== ($file = readdir($handle))) {
-					if($file != '.' AND $file != '..' AND $file != 'CVS' AND $file != 'menu_link' AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
+					if($file != '.' AND $file != '..' AND $file != '.svn' AND $file != 'menu_link' AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
 						// Include the modules info file
 						require(WB_PATH.'/modules/'.$file.'/info.php');
 						// Check if user is allowed to use this module
@@ -249,7 +248,8 @@ if($query_sections->numRows() == 0) {
 							<option value="<?php echo $file; ?>"<?php if($file == 'wysiwyg') { echo 'selected'; } ?>><?php echo $module_name; ?></option>
 							<?php
 						}
-						if(isset($module_type)) { unset($module_type); } // Unset module type			
+						if(isset($module_type)) { unset($module_type); } // Unset module type
+			
 					}
 				}
 			}

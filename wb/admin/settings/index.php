@@ -1,7 +1,5 @@
 <?php
 
-// $Id: index.php,v 1.14 2005/06/21 09:15:39 rdjurovich Exp $
-
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -173,7 +171,7 @@ if($results->numRows() > 0) {
 $template->set_block('main_block', 'language_list_block', 'language_list');
 if($handle = opendir(WB_PATH.'/languages/')) {
    while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != 'CVS' AND $file != 'index.php') {
+		if($file != '.' AND $file != '..' AND !is_dir($file) AND $file != 'index.php') {
 			// Get language name
 			require(WB_PATH.'/languages/'.$file);
 			// Insert code and name
@@ -254,7 +252,7 @@ foreach($TIME_FORMATS AS $format => $title) {
 $template->set_block('main_block', 'template_list_block', 'template_list');
 if($handle = opendir(WB_PATH.'/templates/')) {
 	while (false !== ($file = readdir($handle))) {
-		if($file != "." AND $file != ".." AND $file != "CVS" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
+		if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
 			include(WB_PATH."/templates/$file/info.php");
 			$template->set_var('FILE', $file);
 			$template->set_var('NAME', $template_name);
@@ -272,7 +270,7 @@ $template->set_var(array('FILE' => '', 'NAME' => $TEXT['SYSTEM_DEFAULT'], 'SELEC
 $template->parse('search_template_list', 'search_template_list_block', true);
 if($handle = opendir(WB_PATH.'/templates/')) {
 	while (false !== ($file = readdir($handle))) {
-		if($file != "." AND $file != ".." AND $file != "CVS" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
+		if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
 			include(WB_PATH."/templates/$file/info.php");
 			$template->set_var('FILE', $file);
 			$template->set_var('NAME', $template_name);

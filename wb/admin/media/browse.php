@@ -79,7 +79,7 @@ $template->set_block('main_block', 'list_block', 'list');
 if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 	// Loop through the files and dirs an add to list
    while(false !== ($file = readdir($handle))) {
-		if(substr($file, 0, 1) != '.' AND $file != 'CVS' AND $file != 'index.php') {
+		if(substr($file, 0, 1) != '.' AND $file != '.svn' AND $file != 'index.php') {
 			if(is_dir(WB_PATH.MEDIA_DIRECTORY.$directory.'/'.$file)) {
 				if(!isset($home_folders[$directory.'/'.$file])) {
 					$DIR[] = $file;

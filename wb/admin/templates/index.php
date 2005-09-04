@@ -1,7 +1,5 @@
 <?php
 
-// $Id: index.php,v 1.2 2005/04/02 06:25:53 rdjurovich Exp $
-
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -37,7 +35,7 @@ $template->set_block('page', 'main_block', 'main');
 $template->set_block('main_block', 'template_list_block', 'template_list');
 if($handle = opendir(WB_PATH.'/templates/')) {
 	while (false !== ($file = readdir($handle))) {
-		if($file != "." AND $file != ".." AND $file != "CVS" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
+		if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
 			// Include the templates info file
 			require(WB_PATH.'/templates/'.$file.'/info.php');
 			$template->set_var('VALUE', $file);

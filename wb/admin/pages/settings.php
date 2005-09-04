@@ -1,7 +1,5 @@
 <?php
 
-// $Id: settings.php,v 1.9 2005/04/08 07:36:58 rdjurovich Exp $
-
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -294,7 +292,7 @@ if($modified_ts == 'Unknown') {
 $template->set_block('main_block', 'template_list_block', 'template_list');
 if($handle = opendir(WB_PATH.'/templates/')) {
 	while(false !== ($file = readdir($handle))) {
-		if($file != "." AND $file != ".." AND $file != "CVS" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH.'/templates/'.$file.'/info.php')) {
+		if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH.'/templates/'.$file.'/info.php')) {
 			// Include the templates info file
 			require(WB_PATH.'/templates/'.$file.'/info.php');
 			// Check if the user has perms to use this template
@@ -349,7 +347,7 @@ foreach($menu AS $number => $name) {
 if($handle = opendir(WB_PATH.'/languages/')) {
 	$template->set_block('main_block', 'language_list_block', 'language_list');
 	while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != 'CVS' AND $file != 'index.php') {
+		if($file != '.' AND $file != '..' AND $file != '.svn' AND $file != 'index.php') {
 			// Include the languages info file
 			require(WB_PATH.'/languages/'.$file);
 			// Work-out if this language is selected
