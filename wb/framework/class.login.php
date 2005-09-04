@@ -43,6 +43,7 @@ class login extends admin {
 	function login($config_array) {
 		// Get language vars
 		global $MESSAGE;
+		$this->wb();
 		// Get configuration values
 		$this->USERS_TABLE = $config_array['USERS_TABLE'];
 		$this->GROUPS_TABLE = $config_array['GROUPS_TABLE'];

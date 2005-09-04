@@ -1,6 +1,7 @@
 <?php
 
-// $Id: save.php,v 1.15 2005/04/25 11:53:12 rdjurovich Exp $
+// $Id: save.php,v 1.15 2005/04/25 11:53:12 rdjurovich Exp $
+
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -347,9 +348,7 @@ if(!file_exists(WB_PATH.'/framework/class.admin.php')) {
 }
 
 // Include WB functions file
-if(!defined('FUNCTIONS_FILE_LOADED')) {
-	require(WB_PATH.'/framework/functions.php');
-}
+require_once(WB_PATH.'/framework/functions.php');
 
 // Try connecting to database	
 if(!mysql_connect(DB_HOST, DB_USERNAME, DB_PASSWORD)) {

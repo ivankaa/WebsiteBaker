@@ -108,7 +108,7 @@ if($results_array['visibility'] == 'public') {
 } elseif($results_array['visibility'] == 'private') {
 	$template->set_var('PRIVATE_SELECTED', ' selected');
 } elseif($results_array['visibility'] == 'registered') {
-	$template->set_var('REGISTERED_SELECTED', ' registered');
+	$template->set_var('REGISTERED_SELECTED', ' selected');
 } elseif($results_array['visibility'] == 'hidden') {
 	$template->set_var('HIDDEN_SELECTED', ' selected');
 } elseif($results_array['visibility'] == 'none') {

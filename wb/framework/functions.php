@@ -414,6 +414,7 @@ if(!function_exists('page_link')) {
 
 // Create a new file in the pages directory
 function create_access_file($filename,$page_id,$level) {
+	global $admin;
 	if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 		$admin->print_error($MESSAGE['PAGES']['CANNOT_CREATE_ACCESS_FILE']);
 	} else {

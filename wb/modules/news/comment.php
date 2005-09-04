@@ -38,9 +38,7 @@ if(!isset($_GET['id']) OR !is_numeric($_GET['id'])) {
 }
 
 // Include database class
-if(!defined('DATABASE_CLASS_LOADED')) {
-	require(WB_PATH.'/framework/class.database.php');
-}
+require_once(WB_PATH.'/framework/class.database.php');
 $database = new database();
 
 // Query post for page id

@@ -27,17 +27,9 @@
 $get_content = $database->query("SELECT content FROM ".TABLE_PREFIX."mod_wysiwyg WHERE section_id = '$section_id'");
 $fetch_content = $get_content->fetchRow();
 $content = stripslashes($fetch_content['content']);
-// Replace [wblink--PAGE_ID--] with real link
-$pattern = '/\[wblink(.+?)\]/s';
-preg_match_all($pattern,$content,$ids);
-foreach($ids[1] AS $page_id) {
-	$pattern = '/\[wblink'.$page_id.'\]/s';
-	// Get page link
-	$get_link = $database->query("SELECT link FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id' LIMIT 1");
-	$fetch_link = $get_link->fetchRow();
-	$link = page_link($fetch_link['link']);
-	$content = preg_replace($pattern,$link,$content);
-}
+
+$this->preprocess($content);
+
 echo $content;
 
 ?>

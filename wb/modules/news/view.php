@@ -186,16 +186,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
 				// Replace [wblink--PAGE_ID--] with real link
 				$short = stripslashes($post['short']);
-				$pattern = '/\[wblink(.+?)\]/s';
-				preg_match_all($pattern,$short,$ids);
-				foreach($ids[1] AS $page_id) {
-					$pattern = '/\[wblink'.$page_id.'\]/s';
-					// Get page link
-					$get_link = $database->query("SELECT link FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id' LIMIT 1");
-					$fetch_link = $get_link->fetchRow();
-					$link = page_link($fetch_link['link']);
-					$short = preg_replace($pattern,$link,$short);
-				}
+				$this->preprocess($short);
 				// Replace vars with values
 				$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[LINK]', '[DATE]', '[TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]');
 				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
@@ -281,17 +272,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	echo str_replace($vars, $values, $setting_post_header);
 	
 	// Replace [wblink--PAGE_ID--] with real link
-	$pattern = '/\[wblink(.+?)\]/s';
-	preg_match_all($pattern,$post_long,$ids);
-	foreach($ids[1] AS $page_id) {
-		$pattern = '/\[wblink'.$page_id.'\]/s';
-		// Get page link
-		$get_link = $database->query("SELECT link FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id' LIMIT 1");
-		$fetch_link = $get_link->fetchRow();
-		$link = page_link($fetch_link['link']);
-		$post_long = preg_replace($pattern,$link,$post_long);
-	}
-	
+  	$this->preprocess($postlong);
 	// Print long
 	echo $post_long;
 	
