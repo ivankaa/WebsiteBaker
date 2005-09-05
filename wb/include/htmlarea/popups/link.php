@@ -1,6 +1,6 @@
 <?php
 
-// $Id: link.php,v 1.4 2005/06/22 05:31:28 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -73,7 +73,7 @@ foreach(directory_list(WB_PATH.MEDIA_DIRECTORY) AS $name) {
 // Function to generate page list
 function gen_page_list($parent) {
 	global $template, $database;
-	$get_pages = $database->query("SELECT page_id,menu_title,link,level FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' AND visibility!='deleted'");
+	$get_pages = $database->query("SELECT page_id,menu_title,link,level FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' AND visibility!='deleted' ORDER BY position ASC");
 	while($page = $get_pages->fetchRow()) {
 		$title = stripslashes($page['menu_title']);
 		// Add leading -'s so we can tell what level a page is at
@@ -91,7 +91,7 @@ function gen_page_list($parent) {
 // Get pages and put them into the pages list
 $template->set_block('main_block', 'page_list_block', 'page_list');
 $database = new database();
-$get_pages = $database->query("SELECT page_id,menu_title,link FROM ".TABLE_PREFIX."pages WHERE parent = '0' AND visibility!='deleted'");
+$get_pages = $database->query("SELECT page_id,menu_title,link FROM ".TABLE_PREFIX."pages WHERE parent = '0' AND visibility!='deleted' ORDER BY position ASC");
 if($get_pages > 0) {
 	// Add 'Please select...'
 	$template->set_var('TITLE', 'Please select...');
