@@ -53,7 +53,7 @@ class frontend extends wb {
 	var $website_title,$website_description,$website_keywords,$website_header,$website_footer;
 
 	// ugly database stuff
-	var $extra_sql,$extra_where_sql;
+	var $extra_where_sql;
 
 	function frontend() {
 		$this->wb();
@@ -216,12 +216,7 @@ class frontend extends wb {
 		define('TEMPLATE_DIR', WB_URL.'/templates/'.TEMPLATE);
 
 		// Check if user is allow to view this page
-		if(FRONTEND_LOGIN AND VISIBILITY == 'private' OR FRONTEND_LOGIN AND VISIBILITY == 'registered') {
-			// Double-check front-end login is enabled
-			if(FRONTEND_LOGIN != true) {
-				// Users shouldnt be allowed to view private pages
-				header("Location: ".WB_URL.PAGES_DIRECTORY."/index".PAGE_EXTENSION);
-			}
+		if(VISIBILITY == 'private' OR VISIBILITY == 'registered') {
 			// Check if the user is authenticated
 			if($this->is_authenticated() == false) {
 				// User needs to login first
@@ -231,29 +226,19 @@ class frontend extends wb {
 			if($this->show_page($this->page) == false) {
 				$this->page_access_denied=true;
 			}
-			// Set extra private sql code
-			$this->extra_sql = ",viewing_groups,viewing_users";
-			$this->extra_where_sql = "visibility != 'none' AND visibility != 'hidden' AND visibility != 'deleted'";
-		} elseif(!FRONTEND_LOGIN AND VISIBILITY == 'private' OR !FRONTEND_LOGIN AND VISIBILITY == 'registered') {
-			// User isnt allowed on this page so tell them
-			$this->page_access_denied=true;
-		} elseif(VISIBILITY == 'deleted') {
+		} elseif(VISIBILITY == 'deleted' OR VISIBILITY == 'none') {
 			// User isnt allowed on this page so tell them
 			$this->page_access_denied=true;
 		}
-		if(!isset($this->extra_sql)) {
-			// Set extra private sql code
-			if(FRONTEND_LOGIN == 'enabled') {
-				if($this->is_authenticated()) {
-					$this->extra_sql = '';
-					$this->extra_where_sql = "visibility != 'none' AND visibility != 'hidden' AND visibility != 'deleted'";
-				} else {
-					$this->extra_sql = '';
-					$this->extra_where_sql = "visibility != 'none' AND visibility != 'hidden' AND visibility != 'deleted' AND visibility != 'private'";
-				}
-			} else {
-				$this->extra_sql = '';
-				$this->extra_where_sql = "visibility != 'none' AND visibility != 'hidden' AND visibility != 'deleted' AND visibility != 'private' AND visibility != 'registered'";
+		// never show no-vis, hidden or deleted pages
+		$this->extra_where_sql = "visibility != 'none' AND visibility != 'hidden' AND visibility != 'deleted'";
+		// Set extra private sql code
+		if($this->is_authenticated()==false) {
+			// if user is not authenticated, don't show private pages either
+			$this->extra_where_sql .= " AND visibility != 'private'";
+			// and 'registered' without frontend login doesn't make much sense!
+			if (FRONTEND_LOGIN==false) {
+				$this->extra_where_sql .= " AND visibility != 'registered'";
 			}
 		}
 		$this->extra_where_sql .= $this->sql_where_language;
@@ -381,7 +366,7 @@ class frontend extends wb {
 	      $menu_number = '1';
 	   }
 	   // Query pages
-	   $query_menu = $database->query("SELECT page_id,menu_title,page_title,link,target,level,visibility$this->extra_sql FROM ".
+	   $query_menu = $database->query("SELECT page_id,menu_title,page_title,link,target,level,visibility FROM ".
 	TABLE_PREFIX."pages WHERE parent = '$this->menu_parent' AND $menu_number AND $this->extra_where_sql ORDER BY position ASC");
 	   // Check if there are any pages to show
 	   if($query_menu->numRows() > 0) {

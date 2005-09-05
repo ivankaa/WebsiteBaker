@@ -37,8 +37,12 @@ define('PAGE_TITLE', $MENU['FORGOT']);
 define('MENU_TITLE', $MENU['FORGOT']);
 define('VISIBILITY', 'public');
 
-if(FRONTEND_LOGIN != 'enabled') {
-	header('Location: '.WB_URL.'/pages/index'.PAGE_EXTENSION);
+if(!FRONTEND_LOGIN) {
+	if(INTRO_PAGE) {
+		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index'.PAGE_EXTENSION);
+	} else {
+		header('Location: '.WB_URL.'/index'.PAGE_EXTENSION);
+	}
 }
 
 // Set the page content include file

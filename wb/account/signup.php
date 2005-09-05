@@ -1,6 +1,6 @@
 <?php
 
-// $Id: signup.php,v 1.3 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -25,6 +25,14 @@
 
 require('../config.php');
 
+if(!is_numeric(FRONTEND_SIGNUP)) {
+	if(INTRO_PAGE) {
+		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index'.PAGE_EXTENSION);
+	} else {
+		header('Location: '.WB_URL.'/index'.PAGE_EXTENSION);
+	}
+}
+
 // Load the language file
 if(!file_exists(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php')) {
 	exit('Error loading language file '.DEFAULT_LANGUAGE.', please check configuration');
@@ -32,6 +40,7 @@ if(!file_exists(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php')) {
 	require_once(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
 	$load_language = false;
 }
+
 
 // Required page details
 $page_id = 0;
@@ -45,10 +54,6 @@ define('PAGE_TITLE', $TEXT['SIGNUP']);
 define('MENU_TITLE', $TEXT['SIGNUP']);
 define('MODULE', '');
 define('VISIBILITY', 'public');
-
-if(!is_numeric(FRONTEND_SIGNUP)) {
-	header('Location: '.WB_URL.'/pages/index'.PAGE_EXTENSION);
-}
 
 // Set the page content include file
 if(isset($_POST['username'])) {

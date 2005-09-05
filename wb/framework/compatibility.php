@@ -94,6 +94,7 @@ $page_description=&$wb->page_description;
 $page_keywords=&$wb->page_keywords;
 $page_link=&$wb->link;
 
+// extra_sql is not used anymore - this is basically a register_globals exploit prevention...
 $extra_sql=&$wb->extra_sql;
 $extra_where_sql=&$wb->extra_where_sql;
 
