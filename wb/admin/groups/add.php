@@ -41,10 +41,6 @@ $js_back = "javascript: history.go(-1);";
 if($group_name == "") {
 	$admin->print_error($MESSAGE['GROUPS']['GROUP_NAME_BLANK'], $js_back);
 }
-$results = $database->query("SELECT * FROM ".TABLE_PREFIX."groups WHERE name = '$group_name'");
-if($results->numRows()>0) {
-	$admin->print_error($MESSAGE['GROUPS']['GROUP_NAME_EXISTS'], $js_back);
-}
 
 // Get system and module permissions
 require(ADMIN_PATH.'/groups/get_permissions.php');

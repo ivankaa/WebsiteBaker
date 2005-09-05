@@ -425,7 +425,6 @@ $MESSAGE['GROUPS']['DELETED'] = 'Group deleted successfully';
 $MESSAGE['GROUPS']['GROUP_NAME_BLANK'] = 'Group name is blank';
 $MESSAGE['GROUPS']['CONFIRM_DELETE'] = 'Are you sure you want to delete the selected group (and any users that belong to it)?';
 $MESSAGE['GROUPS']['NO_GROUPS_FOUND'] = 'No groups found';
-$MESSAGE['GROUPS']['GROUP_NAME_EXISTS'] = 'Group name already exists';
 
 $MESSAGE['PREFERENCES']['DETAILS_SAVED'] = 'Details saved successfully';
 $MESSAGE['PREFERENCES']['EMAIL_UPDATED'] = 'Email updated successfully';
