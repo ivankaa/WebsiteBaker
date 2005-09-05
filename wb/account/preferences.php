@@ -25,6 +25,19 @@
 
 require('../config.php');
 
+if(!FRONTEND_LOGIN) {
+	if(INTRO_PAGE) {
+		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index'.PAGE_EXTENSION);
+	} else {
+		header('Location: '.WB_URL.'/index'.PAGE_EXTENSION);
+	}
+}
+
+require_once(WB_PATH.'/framework/class.wb.php');
+if (wb::is_authenticated()==false) {
+	header('Location: '.WB_URL.'/account/login.php');
+}
+
 // Required page details
 $page_id = 0;
 $page_description = '';
