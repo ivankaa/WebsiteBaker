@@ -1,6 +1,6 @@
 <?php
 
-// $Id: add.php,v 1.4 2005/06/22 06:20:21 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -40,6 +40,10 @@ $js_back = "javascript: history.go(-1);";
 // Check values
 if($group_name == "") {
 	$admin->print_error($MESSAGE['GROUPS']['GROUP_NAME_BLANK'], $js_back);
+}
+$results = $database->query("SELECT * FROM ".TABLE_PREFIX."groups WHERE name = '$group_name'");
+if($results->numRows()>0) {
+	$admin->print_error($MESSAGE['GROUPS']['GROUP_NAME_EXISTS'], $js_back);
 }
 
 // Get system and module permissions
