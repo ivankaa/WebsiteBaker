@@ -45,8 +45,15 @@ function page_content($block=1) {
 // Old menu call invokes new menu function
 function page_menu($parent = 0, $menu_number = 1, $item_template = '<li><span[class]>[a][menu_title][/a]</span>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $recurse = LEVEL) {
 	global $wb;
-	$wb->menu($menu_number, 0, -1, true, $item_template, '</li>', $menu_header, $menu_footer, $default_class, $current_class, $parent);
-//	$wb->page_menu($parent, $menu_number, $item_template.'</li>', $menu_header, $menu_footer, $default_class, $current_class, $recurse);
+	$wb->menu_number=$menu_number;
+	$wb->menu_item_template=$item_template;
+	$wb->menu_parent = $parent;
+	$wb->menu_header = $menu_header; 
+	$wb->menu_footer = $menu_footer;
+	$wb->menu_default_class = $default_class;
+	$wb->menu_current_class = $current_class;
+	$wb->menu_recurse = $recurse+2; 	
+	$wb->menu();
 }
 
 // Function for page title

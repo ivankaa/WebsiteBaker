@@ -322,61 +322,102 @@ class frontend extends wb {
 		}
 	}
 	
-	function menu($menu_number = 1, $start_level=0, $recurse = -1, $collapse = true, $item_template = '<li><span[class]>[a][menu_title][/a]</span>', $item_footer = '</li>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $parent = 0) {
-	   global $database;
-	   if ($recurse==0)
-	       return;
+	function menu() {
+	   if (!isset($this->menu_number)) {
+	   	$this->menu_number = 1;
+	   }
+	   if (!isset($this->menu_start_level)) {
+	   	$this->menu_start_level = 0;
+	   }
+	   if (!isset($this->menu_recurse)) {
+	   	$this->menu_recurse = -1;
+	   }
+	   if (!isset($this->menu_collapse)) {
+	   	$this->menu_collapse = true;
+	   }
+	   if (!isset($this->menu_item_template)) {
+	   	$this->menu_item_template = '<li><span[class]>[a][menu_title][/a]</span>';
+	   }
+	   if (!isset($this->menu_item_footer)) {
+	   	$this->menu_item_footer = '</li>';
+	   }
+	   if (!isset($this->menu_header)) {
+	   	$this->menu_header = '<ul>';
+	   }
+	   if (!isset($this->menu_footer)) {
+	   	$this->menu_footer = '<ul>';
+	   }
+	   if (!isset($this->menu_default_class)) {
+	   	$this->menu_default_class = ' class="menu_default"';
+	   }
+	   if (!isset($this->menu_current_class)) {
+	   	$this->menu_current_class = ' class="menu_current"';
+	   }
+       if (!isset($this->menu_parent)) {
+     	$this->menu_parent = 0;
+	   }
+	   $this->show_menu();
 	   if ($start_level>0) {
 	       $key_array=array_keys($this->page_trail);
 	       $real_start=$key_array[$start_level-1];
 	       if (isset($real_start))
 	       {
-	          menu($menu_number, 0, $recurse,$collapse,$item_template, $item_footer, $menu_header, $menu_footer, $default_class, $current_class, $real_start);
-	      }
+	       		$this->menu_parent=$real_start;
+	          $this->show_menu();
+	       }
 	       return;
 	   }
+
+	}
+	
+	function show_menu() {
+	   global $database;
+	   if ($this->menu_recurse==0)
+	       return;
 	   // Check if we should add menu number check to query
-	   if($parent == 0) {
-	       $menu_number = "menu = '$menu_number'";
+	   if($menu_parent == 0) {
+	       $menu_number = "menu = '$this->menu_number'";
 	   } else {
 	      $menu_number = '1';
 	   }
 	   // Query pages
 	   $query_menu = $database->query("SELECT page_id,menu_title,page_title,link,target,level,visibility$this->extra_sql FROM ".
-	TABLE_PREFIX."pages WHERE parent = '$parent' AND $menu_number AND $this->extra_where_sql ORDER BY position ASC");
+	TABLE_PREFIX."pages WHERE parent = '$this->menu_parent' AND $menu_number AND $this->extra_where_sql ORDER BY position ASC");
 	   // Check if there are any pages to show
 	   if($query_menu->numRows() > 0) {
-	      // Print menu header
-	      echo "\n".$menu_header;
+	   	  // Print menu header
+	   	  echo "\n".$this->menu_header;
 	      // Loop through pages
 	      while($page = $query_menu->fetchRow()) {
-	         // Check if this page should be shown
+	      	 // Check if this page should be shown
 	         // Create vars
 	         $vars = array('[class]','[a]', '[/a]', '[menu_title]', '[page_title]');
 	         // Work-out class
 	         if($page['page_id'] == PAGE_ID) {
-	            $class = $current_class;
+	            $class = $this->menu_current_class;
 	         } else {
-	            $class = $default_class;
+	            $class = $this->menu_default_class;
 	         }
 	         // Check if link is same as first page link, and if so change to WB URL
-	         if($page['link'] == $default_link AND !INTRO_PAGE) {
+	         if($page['link'] == $this->default_link AND !INTRO_PAGE) {
 	            $link = WB_URL;
 	         } else {
-	            $link = page_link($page['link']);
+	            $link = $this->page_link($page['link']);
 	         }
 	         // Create values
 	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', stripslashes($page['menu_title']), stripslashes($page['page_title']));
 	         // Replace vars with value and print
-	         echo "\n".str_replace($vars, $values, $item_template);
+	         echo "\n".str_replace($vars, $values, $this->menu_item_template);
 	         // Generate sub-menu
-	         if($collapse==false OR ($collapse==true AND isset($this->page_trail[$page['page_id']]))) {
-	            $this->menu($menu_number, 0, $recurse-1, $collapse, $item_template, $item_footer, $menu_header, $menu_footer, $default_class, $current_class, $page['page_id']);
+	         if($this->menu_collapse==false OR ($this->menu_collapse==true AND isset($this->page_trail[$page['page_id']]))) {
+	            $this->menu_recurse--;
+	            $this->menu_parent=$page['page_id'];
+	            $this->show_menu();
 	         }
-	         echo "\n".$item_footer;
+	         echo "\n".$this->menu_item_footer;
 	      }
 	      // Print menu footer
-	      echo "\n".$menu_footer;
+	      echo "\n".$this->menu_footer;
 	   }
 	}
 
