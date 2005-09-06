@@ -1,6 +1,6 @@
 <?php
 
-// $Id: modify.php,v 1.2 2005/06/21 09:13:12 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -32,7 +32,7 @@ $template->set_block('page', 'main_block', 'main');
 $query = "SELECT content FROM ".TABLE_PREFIX."mod_code WHERE section_id = '$section_id'";
 $get_content = $database->query($query);
 $content = $get_content->fetchRow();
-$content = stripslashes(htmlspecialchars($content['content']));
+$content = $admin->stripslashes(htmlspecialchars($content['content']));
 
 // Insert vars
 $template->set_var(array(

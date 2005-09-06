@@ -73,6 +73,14 @@ class wb
 		}
 	}
 
+	function stripslashes($input) {
+		if ( !get_magic_quotes_gpc() || ( !is_string($input) ) ) {
+			return $input;
+		}
+		$output = stripslashes($input);
+		return $output;
+	}
+
 	// Get POST data
 	function get_post($field) {
 		if(isset($_POST[$field])) {
@@ -131,7 +139,7 @@ class wb
 
 	// Get the current users display name
 	function get_display_name() {
-		return stripslashes($_SESSION['DISPLAY_NAME']);
+		return $this->stripslashes($_SESSION['DISPLAY_NAME']);
 	}
 
 	// Get the current users email address

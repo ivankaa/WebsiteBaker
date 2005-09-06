@@ -1,6 +1,6 @@
 <?php
 
-// $Id: modify.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -81,7 +81,7 @@ $template->set_file('page', 'modify.html');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var(array(
 								'PAGE_ID' => $results_array['page_id'],
-								'PAGE_TITLE' => stripslashes($results_array['page_title']),
+								'PAGE_TITLE' => $admin->stripslashes($results_array['page_title']),
 								'MODIFIED_BY' => $user['display_name'],
 								'MODIFIED_BY_USERNAME' => $user['username'],
 								'MODIFIED_WHEN' => $modified_ts,

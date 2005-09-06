@@ -1,6 +1,6 @@
 <?php
 
-// $Id: intro.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -43,7 +43,7 @@ $template = new Template(ADMIN_PATH.'/pages');
 $template->set_file('page', 'intro.html');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var(array(
-								'CONTENT' => stripslashes($content),
+								'CONTENT' => $admin->stripslashes($content),
 								'WB_URL' => WB_URL,
 								'ADMIN_URL' => ADMIN_URL,
 								'TEXT_SAVE' => $TEXT['SAVE'],

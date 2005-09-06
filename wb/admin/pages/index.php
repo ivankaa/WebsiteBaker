@@ -24,7 +24,7 @@
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages');
-
+echo "hier: ".get_magic_quotes_gpc();
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
@@ -151,15 +151,15 @@ function make_list($parent, $editable_pages) {
 				</td>
 				<?php if($admin->get_permission('pages_modify') == true AND $can_modify == true) { ?>
 				<td>
-					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo stripslashes($page['page_title']); ?></a>
+					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo $admin->stripslashes($page['page_title']); ?></a>
 				</td>
 				<?php } else { ?>
 				<td>
-					<?php	echo stripslashes($page['page_title']); ?>
+					<?php	echo $admin->stripslashes($page['page_title']); ?>
 				</td>
 				<?php } ?>
 				<td align="left" width="232">
-					<font color="#999999"><?php echo $page['menu_title']; ?></font>
+					<font color="#999999"><?php echo $admin->stripslashes($page['menu_title']); ?></font>
 				</td>
 				<td align="center" valign="middle" width="90">
 				<?php if($page['visibility'] == 'public') { ?>
@@ -447,7 +447,7 @@ function parent_list($parent) {
 			for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - '; }
 				$template->set_var(array(
 												'ID' => $page['page_id'],
-												'TITLE' => stripslashes($title_prefix.$page['page_title'])
+												'TITLE' => $admin->stripslashes($title_prefix.$page['page_title'])
 												)
 										);
 				if($can_modify == true) {

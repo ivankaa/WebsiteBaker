@@ -1,6 +1,6 @@
 <?php
 
-// $Id: search.php,v 1.9 2005/04/07 07:53:15 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -33,11 +33,11 @@ if(SHOW_SEARCH != true) {
 	// Make pages_listed and items_listed blank arrays
 	$pages_listed = array();
 	$items_listed = array();
-	
+
 	// Get search string
 	if(isset($_POST['string'])) {
-		$string = addslashes(str_replace(',', '', $_POST['string']));
-		$search_string = htmlspecialchars(stripslashes($string),ENT_QUOTES);
+		$string = addslashes(addslashes(str_replace(',', '', $_POST['string'])));
+		$search_string = htmlspecialchars($this->stripslashes(str_replace(',', '', $_POST['string'])),ENT_QUOTES);
 	} else {
 		$string = '';
 		$search_string = '';
@@ -109,13 +109,13 @@ if(SHOW_SEARCH != true) {
 	// Replace vars in search settings with values
 	$vars = array('[SEARCH_STRING]', '[WB_URL]', '[PAGE_EXTENSION]', '[TEXT_RESULTS_FOR]');
 	$values = array($search_string, WB_URL, PAGE_EXTENSION, $TEXT['RESULTS_FOR']);
-	$search_footer = str_replace($vars, $values, stripslashes($fetch_footer['value']));
-	$search_results_header = str_replace($vars, $values, stripslashes($fetch_results_header['value']));
-	$search_results_footer = str_replace($vars, $values, stripslashes($fetch_results_footer['value']));
+	$search_footer = str_replace($vars, $values, $this->stripslashes($fetch_footer['value']));
+	$search_results_header = str_replace($vars, $values, $this->stripslashes($fetch_results_header['value']));
+	$search_results_footer = str_replace($vars, $values, $this->stripslashes($fetch_results_footer['value']));
 	// Do extra vars/values replacement
 	$vars = array('[SEARCH_STRING]', '[WB_URL]', '[PAGE_EXTENSION]', '[TEXT_SEARCH]', '[TEXT_ALL_WORDS]', '[TEXT_ANY_WORDS]', '[TEXT_EXACT_MATCH]', '[TEXT_MATCH]', '[TEXT_MATCHING]', '[ALL_CHECKED]', '[ANY_CHECKED]', '[EXACT_CHECKED]');
 	$values = array($search_string, WB_URL, PAGE_EXTENSION, $TEXT['SEARCH'], $TEXT['ALL_WORDS'], $TEXT['ANY_WORDS'], $TEXT['EXACT_MATCH'], $TEXT['MATCH'], $TEXT['MATCHING'], $all_checked, $any_checked, $exact_checked);
-	$search_header = str_replace($vars, $values, stripslashes($fetch_header['value']));
+	$search_header = str_replace($vars, $values, $this->stripslashes($fetch_header['value']));
 	
 	// Insert js code
 	?>
@@ -138,7 +138,6 @@ if(SHOW_SEARCH != true) {
 		
 		// Show search results_header
 		echo $search_results_header;
-		
 		// Search page details only, such as description, keywords, etc.
 		if($match == 'all' OR $match == 'exact') {
 			$query_pages = $database->query("SELECT page_id, page_title, menu_title, link, description, modified_when, modified_by FROM ".TABLE_PREFIX."pages".
@@ -173,10 +172,10 @@ if(SHOW_SEARCH != true) {
 					$date = $TEXT['UNKNOWN'].' '.$TEXT['DATE'];
 					$time = $TEXT['UNKNOWN'].' '.$TEXT['TIME'];
 				}
-				$values = array($link, stripslashes($page['page_title']),stripslashes($page['description']), $users[$page['modified_by']]['username'], $users[$page['modified_by']]['display_name'], $date, $time, $TEXT['LAST_UPDATED_BY'], strtolower($TEXT['ON']));
+				$values = array($link, $this->stripslashes($page['page_title']),$this->stripslashes($page['description']), $users[$page['modified_by']]['username'], $users[$page['modified_by']]['display_name'], $date, $time, $TEXT['LAST_UPDATED_BY'], strtolower($TEXT['ON']));
 				// Show loop code with vars replaced by values
 				if($values != array()) {
-					echo str_replace($vars, $values, stripslashes($fetch_results_loop['value']));
+					echo str_replace($vars, $values, $this->stripslashes($fetch_results_loop['value']));
 				}
 				// Say that we have already listed this page id
 				$pages_listed[$page['page_id']] = true;
@@ -199,21 +198,21 @@ if(SHOW_SEARCH != true) {
 					// Fetch query start
 					$fetch_query_start = $get_query_start->fetchRow();
 					// Prepare query start for execution by replacing {TP} with the TABLE_PREFIX
-					$query_start = str_replace('[TP]', TABLE_PREFIX, stripslashes($fetch_query_start['value']));
+					$query_start = str_replace('[TP]', TABLE_PREFIX, $this->stripslashes($fetch_query_start['value']));
 					// Get query end
 					$get_query_end = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = 'query_end' AND extra = '$module_name' LIMIT 1");
 					if($get_query_end->numRows() > 0) {
 						// Fetch query start
 						$fetch_query_end = $get_query_end->fetchRow();
 						// Set query end
-						$query_end = stripslashes($fetch_query_end['value']);
+						$query_end = $this->stripslashes($fetch_query_end['value']);
 						// Get query body
 						$get_query_body = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = 'query_body' AND extra = '$module_name' LIMIT 1");
 						if($get_query_body->numRows() > 0) {
 							// Fetch query start
 							$fetch_query_body = $get_query_body->fetchRow();
 							// Prepare query body for execution by replacing {STRING} with the correct one
-							$query_body = str_replace(array('[TP]','[O]','[W]'), array(TABLE_PREFIX,$operator,$wildcard), stripslashes($fetch_query_body['value']));
+							$query_body = str_replace(array('[TP]','[O]','[W]'), array(TABLE_PREFIX,$operator,$wildcard), $this->stripslashes($fetch_query_body['value']));
 							// If we need to match any of the words, loop through the body for each one then combine with start and end, otherwise just combine without looping
 							if($match == 'any') {
 								// Loop through query body for each string, then combine with start and end
@@ -247,9 +246,9 @@ if(SHOW_SEARCH != true) {
 											$date = $TEXT['UNKNOWN'].' '.$TEXT['DATE'];
 											$time = $TEXT['UNKNOWN'].' '.$TEXT['TIME'];
 										}
-										$values = array($link, stripslashes($page[$fields['title']]), stripslashes($page[$fields['description']]), $users[$page[$fields['modified_by']]]['username'], $users[$page[$fields['modified_by']]]['display_name'], $date, $time, $TEXT['LAST_UPDATED_BY'], strtolower($TEXT['ON']));
+										$values = array($link, $this->stripslashes($page[$fields['title']]), $this->stripslashes($page[$fields['description']]), $users[$page[$fields['modified_by']]]['username'], $users[$page[$fields['modified_by']]]['display_name'], $date, $time, $TEXT['LAST_UPDATED_BY'], strtolower($TEXT['ON']));
 										// Show loop code with vars replaced by values
-										echo str_replace($vars, $values, stripslashes($fetch_results_loop['value']));
+										echo str_replace($vars, $values, $this->stripslashes($fetch_results_loop['value']));
 										// Say that this page or item has been listed if we can
 										if(isset($fields['page_id'])) {
 											$pages_listed[$page[$fields['page_id']]] = true;

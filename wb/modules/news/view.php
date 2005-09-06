@@ -1,6 +1,6 @@
 <?php
 
-// $Id: view.php,v 1.7 2005/06/21 09:11:27 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -55,7 +55,7 @@ if($query_users->numRows() > 0) {
 	while($group = $query_users->fetchRow()) {
 		// Insert user info into users array
 		$group_id = $group['group_id'];
-		$groups[$group_id]['title'] = stripslashes($group['title']);
+		$groups[$group_id]['title'] = $this->stripslashes($group['title']);
 		$groups[$group_id]['active'] = $group['active'];
 		if(file_exists(WB_PATH.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg')) {
 			$groups[$group_id]['image'] = WB_URL.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg';
@@ -82,9 +82,9 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	$query_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
 	if($query_settings->numRows() > 0) {
 		$fetch_settings = $query_settings->fetchRow();
-		$setting_header = stripslashes($fetch_settings['header']);
-		$setting_post_loop = stripslashes($fetch_settings['post_loop']);
-		$setting_footer = stripslashes($fetch_settings['footer']);
+		$setting_header = $this->stripslashes($fetch_settings['header']);
+		$setting_post_loop = $this->stripslashes($fetch_settings['post_loop']);
+		$setting_footer = $this->stripslashes($fetch_settings['footer']);
 		$setting_posts_per_page = $fetch_settings['posts_per_page'];
 	} else {
 		$setting_header = '';
@@ -185,14 +185,14 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				if($group_image == '') { $display_image = 'none'; } else { $display_image = ''; }
 				if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
 				// Replace [wblink--PAGE_ID--] with real link
-				$short = stripslashes($post['short']);
+				$short = $this->stripslashes($post['short']);
 				$this->preprocess($short);
 				// Replace vars with values
 				$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[LINK]', '[DATE]', '[TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]');
 				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-					$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), $short, $post_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $TEXT['READ_MORE']);
+					$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $this->stripslashes($post['title']), $short, $post_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $TEXT['READ_MORE']);
 				} else {
-					$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), $short, $post_link, $post_date, $post_time, '', '', '', '', $TEXT['READ_MORE']);
+					$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $this->stripslashes($post['title']), $short, $post_link, $post_date, $post_time, '', '', '', '', $TEXT['READ_MORE']);
 				}
 				echo str_replace($vars, $values, $setting_post_loop);
 			}
@@ -212,11 +212,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	$query_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
 	if($query_settings->numRows() > 0) {
 		$fetch_settings = $query_settings->fetchRow();
-		$setting_post_header = stripslashes($fetch_settings['post_header']);
-		$setting_post_footer = stripslashes($fetch_settings['post_footer']);
-		$setting_comments_header = stripslashes($fetch_settings['comments_header']);
-		$setting_comments_loop = stripslashes($fetch_settings['comments_loop']);
-		$setting_comments_footer = stripslashes($fetch_settings['comments_footer']);
+		$setting_post_header = $this->stripslashes($fetch_settings['post_header']);
+		$setting_post_footer = $this->stripslashes($fetch_settings['post_footer']);
+		$setting_comments_header = $this->stripslashes($fetch_settings['comments_header']);
+		$setting_comments_loop = $this->stripslashes($fetch_settings['comments_loop']);
+		$setting_comments_footer = $this->stripslashes($fetch_settings['comments_footer']);
 	} else {
 		$setting_post_header = '';
 		$setting_post_footer = '';
@@ -258,11 +258,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
 			$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[BACK]', '[DATE]', '[TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]');
 			if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), stripslashes($post['short']), $page_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
+				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $this->stripslashes($post['title']), $this->stripslashes($post['short']), $page_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
 			} else {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), stripslashes($post['short']), $page_link, $post_date, $post_time, '', '', '', '');
+				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $this->stripslashes($post['title']), $this->stripslashes($post['short']), $page_link, $post_date, $post_time, '', '', '', '');
 			}
-			$post_long = stripslashes($post['long']);
+			$post_long = $this->stripslashes($post['long']);
 		}
 	} else {
 		header('Location: '.WB_URL.'/pages/');
@@ -290,17 +290,17 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		if($query_comments->numRows() > 0) {
 			while($comment = $query_comments->fetchRow()) {
 				// Display Comments without slashes, but with new-line characters
-				$comment['comment'] = nl2br(stripslashes($comment['comment']));
-				$comment['title'] = stripslashes($comment['title']);
+				$comment['comment'] = nl2br($this->stripslashes($comment['comment']));
+				$comment['title'] = $this->stripslashes($comment['title']);
 				// Print comments loop
 				$commented_date = gmdate(DATE_FORMAT, $comment['commented_when']+TIMEZONE);
 				$commented_time = gmdate(TIME_FORMAT, $comment['commented_when']+TIMEZONE);
 				$uid = $comment['commented_by'];
 				$vars = array('[TITLE]','[COMMENT]','[DATE]','[TIME]','[USER_ID]','[USERNAME]','[DISPLAY_NAME]', '[EMAIL]');
 				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-					$values = array(stripslashes($comment['title']), stripslashes($comment['comment']), $commented_date, $commented_time, $uid, stripslashes($users[$uid]['username']), stripslashes($users[$uid]['display_name']), stripslashes($users[$uid]['email']));
+					$values = array($this->stripslashes($comment['title']), $this->stripslashes($comment['comment']), $commented_date, $commented_time, $uid, $this->stripslashes($users[$uid]['username']), $this->stripslashes($users[$uid]['display_name']), $this->stripslashes($users[$uid]['email']));
 				} else {
-					$values = array(stripslashes($comment['title']), stripslashes($comment['comment']), $commented_date, $commented_time, '0', strtolower($TEXT['UNKNOWN']), $TEXT['UNKNOWN'], '');
+					$values = array($this->stripslashes($comment['title']), $this->stripslashes($comment['comment']), $commented_date, $commented_time, '0', strtolower($TEXT['UNKNOWN']), $TEXT['UNKNOWN'], '');
 				}
 				echo str_replace($vars, $values, $setting_comments_loop);
 			}

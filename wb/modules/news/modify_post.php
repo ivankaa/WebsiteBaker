@@ -1,6 +1,6 @@
 <?php
 
-// $Id: modify_post.php,v 1.3 2005/06/21 09:11:44 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -51,12 +51,12 @@ HTMLArea.loadPlugin("TableOperations");
 function initEditor() {
 	var editor = new HTMLArea("short");
 	editor.registerPlugin(ContextMenu);
-	editor.config.pageStyle = "body { <?php echo stripslashes(WYSIWYG_STYLE); ?> }";
+	editor.config.pageStyle = "body { <?php echo $admin->stripslashes(WYSIWYG_STYLE); ?> }";
 	editor.generate();
 	var editor = new HTMLArea("long");
 	editor.registerPlugin(ContextMenu);
 	editor.registerPlugin(TableOperations);
-	editor.config.pageStyle = "body { <?php echo stripslashes(WYSIWYG_STYLE); ?> }";
+	editor.config.pageStyle = "body { <?php echo $admin->stripslashes(WYSIWYG_STYLE); ?> }";
 	editor.generate();
 }
 </script>
@@ -72,7 +72,7 @@ function initEditor() {
 <tr>
 	<td width="80"><?php echo $TEXT['TITLE']; ?>:</td>
 	<td>
-		<input type="text" name="title" value="<?php echo stripslashes(htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
+		<input type="text" name="title" value="<?php echo $admin->stripslashes(htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
 	</td>
 </tr>
 <tr>
@@ -121,13 +121,13 @@ function initEditor() {
 <tr>
 	<td valign="top"><?php echo $TEXT['SHORT']; ?>:</td>
 	<td>
-		<textarea name="short" id="short" style="width: 100%; height: 135px;"><?php echo htmlspecialchars(stripslashes($fetch_content['short'])); ?></textarea>
+		<textarea name="short" id="short" style="width: 100%; height: 135px;"><?php echo htmlspecialchars($admin->stripslashes($fetch_content['short'])); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td valign="top"><?php echo $TEXT['LONG']; ?>:</td>
 	<td>
-		<textarea name="long" id="long" style="width: 100%; height: 300px;"><?php echo htmlspecialchars(stripslashes($fetch_content['long'])); ?></textarea>
+		<textarea name="long" id="long" style="width: 100%; height: 300px;"><?php echo htmlspecialchars($admin->stripslashes($fetch_content['long'])); ?></textarea>
 	</td>
 </tr>
 </table>

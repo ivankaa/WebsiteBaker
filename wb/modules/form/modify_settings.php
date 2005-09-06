@@ -1,6 +1,6 @@
 <?php
 
-// $Id: modify_settings.php,v 1.4 2005/03/28 11:58:04 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -58,25 +58,25 @@ $friendly = array('&lt;', '&gt;');
 <tr>
 	<td class="setting_name" width="220"><?php echo $TEXT['HEADER']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="header" style="width: 100%; height: 80px;"><?php echo stripslashes($setting['header']); ?></textarea>
+		<textarea name="header" style="width: 100%; height: 80px;"><?php echo $admin->stripslashes($setting['header']); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['FIELD'].' '.$TEXT['LOOP']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="field_loop" style="width: 100%; height: 60px;"><?php echo stripslashes($setting['field_loop']); ?></textarea>
+		<textarea name="field_loop" style="width: 100%; height: 60px;"><?php echo $admin->stripslashes($setting['field_loop']); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['FOOTER']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="footer" style="width: 100%; height: 80px;"><?php echo str_replace($raw, $friendly, stripslashes($setting['footer'])); ?></textarea>
+		<textarea name="footer" style="width: 100%; height: 80px;"><?php echo str_replace($raw, $friendly, $admin->stripslashes($setting['footer'])); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['TO']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="email_to" style="width: 100%; height: 30px;"><?php echo str_replace($raw, $friendly, stripslashes($setting['email_to'])); ?></textarea>
+		<textarea name="email_to" style="width: 100%; height: 30px;"><?php echo str_replace($raw, $friendly, $admin->stripslashes($setting['email_to'])); ?></textarea>
 	</td>
 </tr>
 <tr>
@@ -85,7 +85,7 @@ $friendly = array('&lt;', '&gt;');
 		<select name="email_from_field" style="width: 100%;">
 			<option value="" onclick="javascript: document.getElementById('email_from').style.display = 'block';"><?php echo $TEXT['CUSTOM']; ?>:</option>
 			<?php
-			$email_from_value = str_replace($raw, $friendly, stripslashes($setting['email_from']));
+			$email_from_value = str_replace($raw, $friendly, $admin->stripslashes($setting['email_from']));
 			$query_email_fields = $database->query("SELECT field_id,title FROM ".TABLE_PREFIX."mod_form_fields ORDER BY position ASC");
 			if($query_email_fields->numRows() > 0) {
 				while($field = $query_email_fields->fetchRow()) {
@@ -104,25 +104,25 @@ $friendly = array('&lt;', '&gt;');
 <tr>
 	<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['SUBJECT']; ?>:</td>
 	<td class="setting_name">
-		<input type="text" name="email_subject" style="width: 100%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, stripslashes($setting['email_subject'])); ?>" />
+		<input type="text" name="email_subject" style="width: 100%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, $admin->stripslashes($setting['email_subject'])); ?>" />
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['SUCCESS'].' '.$TEXT['MESSAGE']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="success_message" style="width: 100%; height: 80px;"><?php echo str_replace($raw, $friendly, stripslashes($setting['success_message'])); ?></textarea>
+		<textarea name="success_message" style="width: 100%; height: 80px;"><?php echo str_replace($raw, $friendly, $admin->stripslashes($setting['success_message'])); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['MAX_SUBMISSIONS_PER_HOUR']; ?>:</td>
 	<td class="setting_name">
-		<input type="text" name="max_submissions" style="width: 100%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, stripslashes($setting['max_submissions'])); ?>" />
+		<input type="text" name="max_submissions" style="width: 100%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, $admin->stripslashes($setting['max_submissions'])); ?>" />
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['SUBMISSIONS_STORED_IN_DATABASE']; ?>:</td>
 	<td class="setting_name">
-		<input type="text" name="stored_submissions" style="width: 100%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, stripslashes($setting['stored_submissions'])); ?>" />
+		<input type="text" name="stored_submissions" style="width: 100%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, $admin->stripslashes($setting['stored_submissions'])); ?>" />
 	</td>
 </tr>
 </table>

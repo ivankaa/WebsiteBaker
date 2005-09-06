@@ -79,10 +79,10 @@ $template->set_file('page', 'settings.html');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var(array(
 								'PAGE_ID' => $results_array['page_id'],
-								'PAGE_TITLE' => stripslashes($results_array['page_title']),
-								'MENU_TITLE' => stripslashes($results_array['menu_title']),
-								'DESCRIPTION' => stripslashes($results_array['description']),
-								'KEYWORDS' => stripslashes($results_array['keywords']),
+								'PAGE_TITLE' => $admin->stripslashes($results_array['page_title']),
+								'MENU_TITLE' => $admin->stripslashes($results_array['menu_title']),
+								'DESCRIPTION' => $admin->stripslashes($results_array['description']),
+								'KEYWORDS' => $admin->stripslashes($results_array['keywords']),
 								'MODIFIED_BY' => $user['display_name'],
 								'MODIFIED_BY_USERNAME' => $user['username'],
 								'MODIFIED_WHEN' => $modified_ts,
@@ -251,7 +251,7 @@ function parent_list($parent) {
 			for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - '; }
 				$template->set_var(array(
 												'ID' => $page['page_id'],
-												'TITLE' => stripslashes($title_prefix.$page['page_title'])
+												'TITLE' => $admin->stripslashes($title_prefix.$page['page_title'])
 												)
 										);
 				if($results_array['parent'] == $page['page_id']) {

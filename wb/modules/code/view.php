@@ -1,6 +1,6 @@
 <?php
 
-// $Id: view.php,v 1.1.1.1 2005/01/30 10:32:22 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -26,7 +26,7 @@
 // Get content
 $get_content = $database->query("SELECT content FROM ".TABLE_PREFIX."mod_code WHERE section_id = '$section_id'");
 $fetch_content = $get_content->fetchRow();
-$content = stripslashes($fetch_content['content']);
+$content = $this->stripslashes($fetch_content['content']);
 eval($content);
 
 ?>

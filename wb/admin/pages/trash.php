@@ -1,6 +1,6 @@
 <?php
 
-// $Id: trash.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -141,15 +141,15 @@ function make_list($parent, $editable_pages) {
 				</td>
 				<?php if($admin->get_permission('pages_modify') == true AND $can_modify == true AND $page['visibility'] != 'heading') { ?>
 				<td>
-					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo stripslashes($page['page_title']); ?></a>
+					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo $admin->stripslashes($page['page_title']); ?></a>
 				</td>
 				<?php } else { ?>
 				<td>
 					<?php
 					if($page['visibility'] != 'heading') {
-						echo stripslashes($page['page_title']);
+						echo $admin->stripslashes($page['page_title']);
 					} else {
-						echo '<b>'.stripslashes($page['page_title']).'</b>';
+						echo '<b>'.$admin->stripslashes($page['page_title']).'</b>';
 					}
 					?>
 				</td>

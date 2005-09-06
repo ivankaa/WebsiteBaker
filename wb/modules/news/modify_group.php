@@ -1,6 +1,6 @@
 <?php
 
-// $Id: modify_group.php,v 1.2 2005/06/21 09:13:12 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -51,7 +51,7 @@ $fetch_content = $query_content->fetchRow();
 <tr>
 	<td width="80"><?php echo $TEXT['TITLE']; ?>:</td>
 	<td>
-		<input type="text" name="title" value="<?php echo stripslashes(htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
+		<input type="text" name="title" value="<?php echo $admin->stripslashes(htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
 	</td>
 </tr>
 <tr>

@@ -1,6 +1,6 @@
 <?php
 
-// $Id: view.php,v 1.7 2005/04/08 07:36:58 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -113,9 +113,9 @@ if($_POST == array()) {
 $query_settings = $database->query("SELECT header,field_loop,footer FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 if($query_settings->numRows() > 0) {
 	$fetch_settings = $query_settings->fetchRow();
-	$header = stripslashes($fetch_settings['header']);
-	$field_loop = stripslashes($fetch_settings['field_loop']);
-	$footer = stripslashes($fetch_settings['footer']);
+	$header = $this->stripslashes($fetch_settings['header']);
+	$field_loop = $this->stripslashes($fetch_settings['field_loop']);
+	$footer = $this->stripslashes($fetch_settings['footer']);
 } else {
 	$header = '';
 	$field_loop = '';
@@ -136,7 +136,7 @@ if($query_fields->numRows() > 0) {
 	while($field = $query_fields->fetchRow()) {
 		// Set field values
 		$field_id = $field['field_id'];
-		$value = stripslashes($field['value']);
+		$value = $this->stripslashes($field['value']);
 		// Print field_loop after replacing vars with values
 		$vars = array('{TITLE}', '{REQUIRED}');
 		$values = array($field['title']);
@@ -198,16 +198,16 @@ echo $footer;
 	$query_settings = $database->query("SELECT email_to,email_from,email_subject,success_message,max_submissions,stored_submissions FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 	if($query_settings->numRows() > 0) {
 		$fetch_settings = $query_settings->fetchRow();
-		$email_to = stripslashes($fetch_settings['email_to']);
-		$email_from = stripslashes($fetch_settings['email_from']);
+		$email_to = $this->stripslashes($fetch_settings['email_to']);
+		$email_from = $this->stripslashes($fetch_settings['email_from']);
 		if(substr($email_from, 0, 5) == 'field') {
 			// Set the email from field to what the user entered in the specified field
 			$email_from = addslashes($_POST[$email_from]);
 		}
-		$email_subject = stripslashes($fetch_settings['email_subject']);
-		$success_message = stripslashes($fetch_settings['success_message']);
-		$max_submissions = stripslashes($fetch_settings['max_submissions']);
-		$stored_submissions = stripslashes($fetch_settings['stored_submissions']);
+		$email_subject = $this->stripslashes($fetch_settings['email_subject']);
+		$success_message = $this->stripslashes($fetch_settings['success_message']);
+		$max_submissions = $this->stripslashes($fetch_settings['max_submissions']);
+		$stored_submissions = $this->stripslashes($fetch_settings['stored_submissions']);
 	} else {
 		exit($TEXT['UNDER_CONSTRUCTION']);
 	}
@@ -231,11 +231,11 @@ echo $footer;
 					} elseif (!is_array($_POST['field'.$field['field_id']])) {
 					$email_body .= '
 					
-	'.stripslashes($field['title']).': '.$_POST['field'.$field['field_id']].'\n';
+	'.$this->stripslashes($field['title']).': '.$_POST['field'.$field['field_id']].'\n';
 					} else {
 						$email_body .= '
 					
-	'.stripslashes($field['title']).': \n';
+	'.$this->stripslashes($field['title']).': \n';
 						foreach ($_POST['field'.$field['field_id']] as $k=>$v) {
 							$email_body .= '
 					
@@ -243,7 +243,7 @@ echo $footer;
 						}
 					}
 				} elseif($field['required'] == 1) {
-				$required[] = stripslashes($field['title']);
+				$required[] = $this->stripslashes($field['title']);
 				}
 			}
 		}

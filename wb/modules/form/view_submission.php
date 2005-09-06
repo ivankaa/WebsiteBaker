@@ -1,6 +1,6 @@
 <?php
 
-// $Id: view_submission.php,v 1.1 2005/03/28 04:35:39 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -75,7 +75,7 @@ if($get_user->numRows() != 0) {
 </tr>
 <tr>
 	<td colspan="2">
-		<?php echo stripslashes(str_replace('\n', '<br />', $submission['body'])); ?>
+		<?php echo $admin->stripslashes(str_replace('\n', '<br />', $submission['body'])); ?>
 	</td>
 </tr>
 </table>

@@ -1,6 +1,6 @@
 <?php
 
-// $Id: modify.php,v 1.1.1.1 2005/01/30 10:32:15 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -32,7 +32,7 @@ $template->set_block('page', 'main_block', 'main');
 $query_info = "SELECT link,target FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'";
 $get_info = $database->query($query_info);
 $fetch_info = $get_info->fetchRow();
-$link = stripslashes($fetch_info['link']);
+$link = $admin->stripslashes($fetch_info['link']);
 $target = $fetch_info['target'];
 
 // Insert vars
