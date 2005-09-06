@@ -25,6 +25,7 @@
 
 // Include WB files
 require_once('../../config.php');
+require_once(WB_PATH.'/framework/class.database.php');
 require_once(WB_PATH.'/framework/class.frontend.php');
 $database = new database();
 $wb->get_page_details();
@@ -68,10 +69,10 @@ if(isset($group_id)) {
 } else {
 	$query = "SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE page_id=".$page_id." AND active=1 ORDER BY posted_when DESC";	
 }
-$result = mysql_query($query);
+$result = $database->query($query);
 
 //Generating the news items
-while($item = mysql_fetch_array($result)){
+while($item = $result->fetchRow($result)){
 
     echo "<item>";
     echo "<title>".$item["title"]."</title>";
