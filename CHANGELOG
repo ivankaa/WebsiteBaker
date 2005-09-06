@@ -16,6 +16,8 @@ Legend:
 #	Reworked page visibility and menu item visibility code (frontend login problem).
 #	Pages in link list in htmlarea popup are now correctly ordered.
 #	Fixed bug where group with existing name can be added.
+04-Sep-2005 Ryan Djurovich
++	Added and RSS newsfeed script to the News module
 04-Sep-2005 Stefan Braunewell
 !	Rewrote menu function. Parameters are now given as attributes to frontend class.
 #	Fixed some occurrences of potential direct access path disclosure
