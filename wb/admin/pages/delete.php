@@ -1,6 +1,6 @@
 <?php
 
-// $Id: delete.php,v 1.7 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -39,18 +39,11 @@ $admin = new admin('Pages', 'pages_delete');
 require_once(WB_PATH.'/framework/functions.php');
 
 // Get perms
-$database = new database();
 $results = $database->query("SELECT admin_groups,admin_users FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'");
 $results_array = $results->fetchRow();
-$old_admin_groups = explode(',', str_replace('_', '', $results_array['admin_groups']));
-$old_admin_users = explode(',', str_replace('_', '', $results_array['admin_users']));
-if(!is_numeric(array_search($admin->get_group_id(), $old_admin_groups)) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
-	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
-}
 
 // Find out more about the page
-$database = new database();
-$query = "SELECT page_id,menu_title,page_title,level,link,parent,modified_by,modified_when,visibility FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'";
+$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'";
 $results = $database->query($query);
 if($database->is_error()) {
 	$admin->print_error($database->get_error());
@@ -59,39 +52,20 @@ if($results->numRows() == 0) {
 	$admin->print_error($MESSAGE['PAGES']['NOT_FOUND']);
 }
 $results_array = $results->fetchRow();
-$parent = $results_array['parent'];
-$level = $results_array['level'];
-$link = $results_array['link'];
-$visibility = $results_array['visibility'];
-$page_title = stripslashes($results_array['page_title']);
-$menu_title = stripslashes($results_array['menu_title']);
-
-// Check if we should delete it or just set the visibility to 'deleted'
-if(PAGE_TRASH != 'disabled') {
-	if($visibility == 'deleted') {
-		$delete_method = 'actual';
-	} else {
-		$delete_method = 'visibility';
-	}
-} else {
-	$delete_method = 'actual';
+$old_admin_groups = explode(',', str_replace('_', '', $results_array['admin_groups']));
+$old_admin_users = explode(',', str_replace('_', '', $results_array['admin_users']));
+if(!is_numeric(array_search($admin->get_group_id(), $old_admin_groups)) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
+	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
 }
 
-if($delete_method == 'actual') {
-	
-	// Delete page subs
-	$sub_pages = get_subs($page_id, array());
-	foreach($sub_pages AS $sub_page_id) {
-		delete_page($sub_page_id);
-	}
-	// Delete page
-	delete_page($page_id);
-	
-} else {
-	
+$visibility = $results_array['visibility'];
+
+// Check if we should delete it or just set the visibility to 'deleted'
+if(PAGE_TRASH != 'disabled' AND $visibility != 'deleted') {
+	// Page trash is enabled and page has not yet been deleted
 	// Function to change all child pages visibility to deleted
 	function trash_subs($parent = 0) {
-		global $database, $admin, $page_id, $page_trail, $private_sql, $private_where_sql;
+		global $database;
 		// Query pages
 		$query_menu = $database->query("SELECT page_id FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' ORDER BY position ASC");
 		// Check if there are any pages to show
@@ -111,8 +85,16 @@ if($delete_method == 'actual') {
 	
 	// Run trash subs for this page
 	trash_subs($page_id);
-	
-}
+} else {
+	// Really dump the page
+	// Delete page subs
+	$sub_pages = get_subs($page_id, array());
+	foreach($sub_pages AS $sub_page_id) {
+		delete_page($sub_page_id);
+	}
+	// Delete page
+	delete_page($page_id);
+}	
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {
