@@ -87,7 +87,7 @@ while($item = mysql_fetch_array($result)){
 }
 
 // Writing footer information
-echo "</channel>"
+echo "</channel>";
 echo "</rss>";
 
 ?>
