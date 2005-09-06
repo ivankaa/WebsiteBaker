@@ -28,6 +28,7 @@ require_once('../../config.php');
 require_once(WB_PATH.'/framework/class.database.php');
 require_once(WB_PATH.'/framework/class.frontend.php');
 $database = new database();
+$wb = new frontend();
 $wb->get_page_details();
 $wb->get_website_settings();
 
