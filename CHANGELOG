@@ -11,6 +11,16 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.0 -------------------------------------
+05-Sep-2005 Stefan Braunewell
+#	Fixed bug concerning direct access of preferences page.
+#	Reworked page visibility and menu item visibility code (frontend login problem).
+#	Pages in link list in htmlarea popup are now correctly ordered.
+#	Fixed bug where group with existing name can be added.
+04-Sep-2005 Stefan Braunewell
+!	Rewrote menu function. Parameters are now given as attributes to frontend class.
+#	Fixed some occurrences of potential direct access path disclosure
+#	Added directory check to browse.php to prevent xss exploit by trusted users.
+!	Updated code to reflect move to Subversion repository system.
 27-Aug-2005 Stefan Braunewell
 #	Fixed bugs 4,5,6,8,9 in bug tracker
 !	Removed 'USER_LANGUAGE' and 'GET_LANGUAGE' constants.
