@@ -1,6 +1,6 @@
 <?php
 
-// $Id: settings2.php,v 1.12 2005/06/23 05:46:06 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -39,10 +39,10 @@ $admin = new admin('Pages', 'pages_settings');
 require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
-$page_title = addslashes($admin->get_post('page_title'));
-$menu_title = addslashes($admin->get_post('menu_title'));
-$description = addslashes($admin->get_post('description'));
-$keywords = addslashes($admin->get_post('keywords'));
+$page_title = $admin->add_slashes($admin->get_post('page_title'));
+$menu_title = $admin->add_slashes($admin->get_post('menu_title'));
+$description = $admin->add_slashes($admin->get_post('description'));
+$keywords = $admin->add_slashes($admin->get_post('keywords'));
 $parent = $admin->get_post('parent');
 $visibility = $admin->get_post('visibility');
 $template = $admin->get_post('template');

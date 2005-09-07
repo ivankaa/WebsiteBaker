@@ -1,6 +1,6 @@
 <?php
 
-// $Id: details.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -29,7 +29,7 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Preferences');
 
 // Get entered values
-$display_name = addslashes($admin->get_post('display_name'));
+$display_name = $admin->add_slashes($admin->get_post('display_name'));
 $language = $admin->get_post('language');
 $timezone = $admin->get_post('timezone')*60*60;
 $date_format = $admin->get_post('date_format');

@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save_field.php,v 1.5 2005/03/28 11:58:04 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -46,7 +46,7 @@ require(WB_PATH.'/modules/admin.php');
 if($admin->get_post('title') == '' OR $admin->get_post('type') == '') {
 	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
 } else {
-	$title = addslashes($admin->get_post('title'));
+	$title = $admin($admin->get_post('title'));
 	$type = $admin->get_post('type');
 	$required = $admin->get_post('required');
 }
@@ -77,7 +77,7 @@ if($admin->get_post('type') == 'textfield') {
 } elseif($admin->get_post('type') == 'heading') {
 	$extra = $admin->get_post('template');
 	if(trim($extra) == '') $extra = '<tr><td class="field_heading" colspan="2">{TITLE}{FIELD}</td></tr>';
-	$extra = addslashes($extra);
+	$extra = $admin($extra);
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '', extra = '$extra' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'select') {
 	$extra = $admin->get_post('size').','.$admin->get_post('multiselect');

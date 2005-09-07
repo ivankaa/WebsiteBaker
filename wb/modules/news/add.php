@@ -1,6 +1,6 @@
 <?php
 
-// $Id: add.php,v 1.2 2005/04/01 07:52:58 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -51,7 +51,7 @@ $footer = '</table>
 <td width="35%" align="right">[NEXT_PAGE_LINK]</td>
 </tr>
 </table>';
-$post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" width="100%">
+$post_header = $admin->add_slashes('<table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 <td height="30"><h1>[TITLE]</h1></td>
 <td rowspan="3" style="display: [DISPLAY_IMAGE]"><img src="[GROUP_IMAGE]" alt="[GROUP_TITLE]" /></td>
@@ -66,7 +66,7 @@ $post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" wid
 <p style="text-align: justify;">');
 $post_footer = '</p>
 <a href=\"[BACK]\">Back</a>';
-$comments_header = addslashes('<br /><br />
+$comments_header = $admin->add_slashes('<br /><br />
 <style type="text/css">
 .comment_title { font-weight: bold; }
 .comment_text { font-weight: bold; background-color: #FDFDFD; border-bottom: 1px solid #DDDDDD; padding-bottom: 15px; }
@@ -76,7 +76,7 @@ $comments_header = addslashes('<br /><br />
 </style>
 <h2>Comments</h2>
 <table cellpadding="2" cellspacing="0" border="0" width="100%">');
-$comments_loop = addslashes('<tr>
+$comments_loop = $admin->add_slashes('<tr>
 <td class="comment_title">[TITLE]</td>
 <td class="comment_info">By [DISPLAY_NAME] on [DATE] at [TIME]</td>
 </tr>

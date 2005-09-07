@@ -30,10 +30,6 @@ wb class
 This class is the basis for admin and frontend classes.
 
 */
-if(!defined('WB_URL')) {
-	header('Location: ../index.php');
-}
-
 
 class wb
 {
@@ -74,16 +70,17 @@ class wb
 	}
 
 	// Modified addslashes function which takes into account magic_quotes
-	function addslashes($input) {
+	function add_slashes($input) {
+		return addslashes($input);		
 		if ( get_magic_quotes_gpc() || ( !is_string($input) ) ) {
 			return $input;
 		}
-		$output = stripslashes($input);
+		$output = addslashes($input);
 		return $output;
 	}
 
 	// Ditto for stripslashes
-	function stripslashes($input) {
+	function strip_slashes($input) {
 		if ( !get_magic_quotes_gpc() || ( !is_string($input) ) ) {
 			return $input;
 		}
@@ -154,7 +151,7 @@ class wb
 
 	// Get the current users display name
 	function get_display_name() {
-		return $this->stripslashes($_SESSION['DISPLAY_NAME']);
+		return $this->strip_slashes($_SESSION['DISPLAY_NAME']);
 	}
 
 	// Get the current users email address

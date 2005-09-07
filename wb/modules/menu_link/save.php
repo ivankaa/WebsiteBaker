@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save.php,v 1.2 2005/04/02 06:25:56 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -34,7 +34,7 @@ $database = new database();
 // Update the mod_menu_links table with the link
 if(isset($_POST['link'])) {
 	// Update link and target
-	$link = addslashes($_POST['link']);
+	$link = $admin->add_slashes($_POST['link']);
 	$target = $_POST['target'];
 	$query = "UPDATE ".TABLE_PREFIX."pages SET link = '$link', target = '$target' WHERE page_id = '$page_id'";
 	$database->query($query);

@@ -93,7 +93,7 @@ class admin extends wb {
 													'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
 													'INTERFACE_DIR' => ADMIN_URL.'/interface',
 													'BODY_TAGS' => $body_tags,
-													'WEBSITE_TITLE' => $this->stripslashes($title['value']),
+													'WEBSITE_TITLE' => $this->strip_slashes($title['value']),
 													'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
 													'VERSION' => VERSION
 													)

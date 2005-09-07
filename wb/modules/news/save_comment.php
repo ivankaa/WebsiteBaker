@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save_comment.php,v 1.1.1.1 2005/01/30 10:32:21 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -40,8 +40,8 @@ require(WB_PATH.'/modules/admin.php');
 if($admin->get_post('title') == '' AND $admin->get_post('comment') == '') {
 	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/modify_comment.php?page_id='.$page_id.'&section_id='.$section_id.'comment_id='.$id);
 } else {
-	$title = addslashes($admin->get_post('title'));
-	$comment = addslashes($admin->get_post('comment'));
+	$title = $admin->add_slashes($admin->get_post('title'));
+	$comment = $admin->add_slashes($admin->get_post('comment'));
 	$post_id = $admin->get_post('post_id');
 }
 

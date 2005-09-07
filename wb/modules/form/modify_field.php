@@ -63,7 +63,7 @@ $friendly = array('&lt;', '&gt;');
 <tr>
 	<td width="80"><?php echo $TEXT['TITLE']; ?>:</td>
 	<td>
-		<input type="text" name="title" value="<?php echo htmlspecialchars($admin->stripslashes($form['title'])); ?>" style="width: 100%;" maxlength="255" />
+		<input type="text" name="title" value="<?php echo htmlspecialchars($admin->strip_slashes($form['title'])); ?>" style="width: 100%;" maxlength="255" />
 	</td>
 </tr>
 <tr>
@@ -86,7 +86,7 @@ $friendly = array('&lt;', '&gt;');
 	<tr>
 		<td valign="top"><?php echo $TEXT['TEMPLATE']; ?>:</td>
 		<td>
-		<textarea name="template" style="width: 100%; height: 20px;"><?php echo htmlspecialchars($admin->stripslashes($form['extra'])); ?></textarea>
+		<textarea name="template" style="width: 100%; height: 20px;"><?php echo htmlspecialchars($admin->strip_slashes($form['extra'])); ?></textarea>
 		</td>
 	</tr>
 	<?php } elseif($type == 'textfield') { ?>

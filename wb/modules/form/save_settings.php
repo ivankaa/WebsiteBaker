@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save_settings.php,v 1.3 2005/03/28 04:34:45 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -37,17 +37,17 @@ require(WB_PATH.'/modules/admin.php');
 // This code removes any <?php tags and adds slashes
 $friendly = array('&lt;', '&gt;', '?php');
 $raw = array('<', '>', '');
-$header = addslashes($_POST['header']);
-$field_loop = addslashes($_POST['field_loop']);
-$footer = addslashes($_POST['footer']);
-$email_to = addslashes($_POST['email_to']);
+$header = $admin->add_slashes($_POST['header']);
+$field_loop = $admin->add_slashes($_POST['field_loop']);
+$footer = $admin->add_slashes($_POST['footer']);
+$email_to = $admin->add_slashes($_POST['email_to']);
 if($_POST['email_from_field'] == '') {
-	$email_from = addslashes($_POST['email_from']);
+	$email_from = $admin->add_slashes($_POST['email_from']);
 } else {
-	$email_from = addslashes($_POST['email_from_field']);
+	$email_from = $admin->add_slashes($_POST['email_from_field']);
 }
-$email_subject = addslashes($_POST['email_subject']);
-$success_message = addslashes($_POST['success_message']);
+$email_subject = $admin->add_slashes($_POST['email_subject']);
+$success_message = $admin->add_slashes($_POST['success_message']);
 if(!is_numeric($_POST['max_submissions'])) {
 	$max_submissions = 50;
 } else {

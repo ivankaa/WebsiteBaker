@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save_post.php,v 1.8 2005/06/21 09:13:55 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -41,9 +41,9 @@ require(WB_PATH.'/modules/admin.php');
 if($admin->get_post('title') == '' AND $admin->get_post('url') == '') {
 	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$id);
 } else {
-	$title = addslashes($admin->get_post('title'));
-	$short = addslashes($admin->get_post('short'));
-	$long = addslashes($admin->get_post('long'));
+	$title = $admin->add_slashes($admin->get_post('title'));
+	$short = $admin->add_slashes($admin->get_post('short'));
+	$long = $admin->add_slashes($admin->get_post('long'));
 	$commenting = $admin->get_post('commenting');
 	$active = $admin->get_post('active');
 	$old_link = $admin->get_post('link');

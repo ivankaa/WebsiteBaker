@@ -1,6 +1,6 @@
 <?php
 
-// $Id: index.php,v 1.4 2005/06/22 05:30:35 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -42,7 +42,7 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 	$email = $_POST['email'];
 	
 	// Check if the email exists in the database
-	$query = "SELECT user_id,username,display_name,email,last_reset FROM ".TABLE_PREFIX."users WHERE email = '".addslashes($_POST['email'])."'";
+	$query = "SELECT user_id,username,display_name,email,last_reset FROM ".TABLE_PREFIX."users WHERE email = '".$admin->add_slashes($_POST['email'])."'";
 	$results = $database->query($query);
 	if($results->numRows() > 0) {
 

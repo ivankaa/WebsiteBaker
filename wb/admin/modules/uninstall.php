@@ -1,6 +1,6 @@
 <?php
 
-// $Id: uninstall.php,v 1.4 2005/04/25 11:53:12 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -44,7 +44,7 @@ if(!is_dir(WB_PATH.'/modules/'.$file)) {
 }
 
 // Check if the module is in use
-$query_modules = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE module = '".addslashes($_POST['file'])."' LIMIT 1");
+$query_modules = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE module = '".$admin->add_slashes($_POST['file'])."' LIMIT 1");
 if($query_modules->numRows() > 0) {
 	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE']);
 }

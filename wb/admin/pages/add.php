@@ -1,6 +1,6 @@
 <?php
 
-// $Id: add.php,v 1.12 2005/04/08 07:36:58 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -32,7 +32,7 @@ $admin = new admin('Pages', 'pages_add');
 require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
-$title = addslashes($admin->get_post('title'));
+$title = $admin->add_slashes($admin->get_post('title'));
 $module = $admin->get_post('type');
 $parent = $admin->get_post('parent');
 $visibility = $admin->get_post('visibility');

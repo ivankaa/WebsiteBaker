@@ -1,6 +1,6 @@
 <?php
 
-// $Id: sections_save.php,v 1.6 2005/04/08 07:36:58 rdjurovich Exp $
+// $Id$
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -83,7 +83,7 @@ if($query_sections->numRows() > 0) {
 				$section_id = $section['section_id'];
 				$sql = '';
 				if(isset($_POST['block'.$section_id]) AND $_POST['block'.$section_id] != '') {
-					$sql = "block = '".addslashes($_POST['block'.$section_id])."'";
+					$sql = "block = '".$admin->add_slashes($_POST['block'.$section_id])."'";
 					$query = "UPDATE ".TABLE_PREFIX."sections SET $sql WHERE section_id = '$section_id' LIMIT 1";
 					if($sql != '') {
 						$database->query($query);

@@ -32,7 +32,7 @@ $template->set_block('page', 'main_block', 'main');
 $query = "SELECT url,height FROM ".TABLE_PREFIX."mod_wrapper WHERE section_id = '$section_id'";
 $get_settings = $database->query($query);
 $settings = $get_settings->fetchRow();
-$url = $admin->stripslashes($settings['url']);
+$url = $admin->strip_slashes($settings['url']);
 $height = $settings['height'];
 
 // Insert vars

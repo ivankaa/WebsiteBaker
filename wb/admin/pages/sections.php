@@ -134,7 +134,7 @@ if(!isset($block[1]) OR $block[1] == '') {
 	</td>
 	<td align="right">
 		<?php echo $TEXT['CURRENT_PAGE']; ?>: 
-		<b><?php echo $admin->stripslashes($results_array['page_title']); ?></b>
+		<b><?php echo $admin->strip_slashes($results_array['page_title']); ?></b>
 		-
 		<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>"><?php echo $HEADING['MODIFY_PAGE']; ?></a>
 		-

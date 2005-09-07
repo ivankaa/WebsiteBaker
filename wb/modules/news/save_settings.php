@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save_settings.php,v 1.2 2005/04/01 07:52:58 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -32,15 +32,15 @@ require(WB_PATH.'/modules/admin.php');
 // This code removes any <?php tags and adds slashes
 $friendly = array('&lt;', '&gt;', '?php');
 $raw = array('<', '>', '');
-$header = addslashes(str_replace($friendly, $raw, $_POST['header']));
-$post_loop = addslashes(str_replace($friendly, $raw, $_POST['post_loop']));
-$footer = addslashes(str_replace($friendly, $raw, $_POST['footer']));
-$post_header = addslashes(str_replace($friendly, $raw, $_POST['post_header']));
-$post_footer = addslashes(str_replace($friendly, $raw, $_POST['post_footer']));
-$comments_header = addslashes(str_replace($friendly, $raw, $_POST['comments_header']));
-$comments_loop = addslashes(str_replace($friendly, $raw, $_POST['comments_loop']));
-$comments_footer = addslashes(str_replace($friendly, $raw, $_POST['comments_footer']));
-$comments_page = addslashes(str_replace($friendly, $raw, $_POST['comments_page']));
+$header = $admin->add_slashes(str_replace($friendly, $raw, $_POST['header']));
+$post_loop = $admin->add_slashes(str_replace($friendly, $raw, $_POST['post_loop']));
+$footer = $admin->add_slashes(str_replace($friendly, $raw, $_POST['footer']));
+$post_header = $admin->add_slashes(str_replace($friendly, $raw, $_POST['post_header']));
+$post_footer = $admin->add_slashes(str_replace($friendly, $raw, $_POST['post_footer']));
+$comments_header = $admin->add_slashes(str_replace($friendly, $raw, $_POST['comments_header']));
+$comments_loop = $admin->add_slashes(str_replace($friendly, $raw, $_POST['comments_loop']));
+$comments_footer = $admin->add_slashes(str_replace($friendly, $raw, $_POST['comments_footer']));
+$comments_page = $admin->add_slashes(str_replace($friendly, $raw, $_POST['comments_page']));
 $commenting = $_POST['commenting'];
 $posts_per_page = $_POST['posts_per_page'];
 if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) {

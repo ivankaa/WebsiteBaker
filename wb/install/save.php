@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save.php,v 1.15 2005/04/25 11:53:12 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -106,154 +106,156 @@ function default_dir_mode($temp_dir) {
 	return $default_dir_mode;
 }
 
+require_once('../framework/class.wb.php');
+
 // Begin check to see if form was even submitted
-	// Set error if no post vars found
-	if(!isset($_POST['website_title'])) {
-		set_error('Please fill-in the form below');
-	}
+// Set error if no post vars found
+if(!isset($_POST['website_title'])) {
+	set_error('Please fill-in the form below');
+}
 // End check to see if form was even submitted
 
 // Begin path and timezone details code
-	// Check if user has entered the installation path
-	if(!isset($_POST['wb_path']) OR $_POST['wb_path'] == '') {
-		set_error('Please enter an absolute path');
-	} else {
-		$wb_path = $_POST['wb_path'];
-	}
-	// Check if user has entered the installation url
-	if(!isset($_POST['wb_url']) OR $_POST['wb_url'] == '') {
-		set_error('Please enter an absolute URL');
-	} else {
-		$wb_url = $_POST['wb_url'];
-	}
-	// Remove any slashes at the end of the URL and path
-	if(substr($wb_url, strlen($wb_url)-1, 1) == "/") {
-		$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
-	}
-	if(substr($wb_path, strlen($wb_path)-1, 1) == "/") {
-		$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
-	}
-	if(substr($wb_url, strlen($wb_url)-1, 1) == "\\") {
-		$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
-	}
-	if(substr($wb_path, strlen($wb_path)-1, 1) == "\\") {
-		$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
-	}
-	if(substr($wb_url, strlen($wb_url)-1, 1) == "/") {
-		$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
-	}
-	if(substr($wb_path, strlen($wb_path)-1, 1) == "/") {
-		$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
-	}
-	if(substr($wb_url, strlen($wb_url)-1, 1) == "\\") {
-		$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
-	}
-	if(substr($wb_path, strlen($wb_path)-1, 1) == "\\") {
-		$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
-	}
-	// Get the default time zone
-	if(!isset($_POST['default_timezone']) OR !is_numeric($_POST['default_timezone'])) {
-		set_error('Please select a valid default timezone');
-	} else {
-		$default_timezone = $_POST['default_timezone']*60*60;
-	}
+// Check if user has entered the installation path
+if(!isset($_POST['wb_path']) OR $_POST['wb_path'] == '') {
+	set_error('Please enter an absolute path');
+} else {
+	$wb_path = $_POST['wb_path'];
+}
+// Check if user has entered the installation url
+if(!isset($_POST['wb_url']) OR $_POST['wb_url'] == '') {
+	set_error('Please enter an absolute URL');
+} else {
+	$wb_url = $_POST['wb_url'];
+}
+// Remove any slashes at the end of the URL and path
+if(substr($wb_url, strlen($wb_url)-1, 1) == "/") {
+	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
+}
+if(substr($wb_path, strlen($wb_path)-1, 1) == "/") {
+	$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
+}
+if(substr($wb_url, strlen($wb_url)-1, 1) == "\\") {
+	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
+}
+if(substr($wb_path, strlen($wb_path)-1, 1) == "\\") {
+	$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
+}
+if(substr($wb_url, strlen($wb_url)-1, 1) == "/") {
+	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
+}
+if(substr($wb_path, strlen($wb_path)-1, 1) == "/") {
+	$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
+}
+if(substr($wb_url, strlen($wb_url)-1, 1) == "\\") {
+	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
+}
+if(substr($wb_path, strlen($wb_path)-1, 1) == "\\") {
+	$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
+}
+// Get the default time zone
+if(!isset($_POST['default_timezone']) OR !is_numeric($_POST['default_timezone'])) {
+	set_error('Please select a valid default timezone');
+} else {
+	$default_timezone = $_POST['default_timezone']*60*60;
+}
 // End path and timezone details code
 
 // Begin operating system specific code
-	// Get operating system
-	if(!isset($_POST['operating_system']) OR $_POST['operating_system'] != 'linux' AND $_POST['operating_system'] != 'windows') {
-		set_error('Please select a valid operating system');
-	} else {
-		$operating_system = $_POST['operating_system'];
-	}
-	// Work-out file permissions
-	if($operating_system == 'windows') {
-		$file_mode = '0777';
-		$dir_mode = '0777';
-	} elseif(isset($_POST['world_writeable']) AND $_POST['world_writeable'] == 'true') {
-		$file_mode = '0777';
-		$dir_mode = '0777';
-	} else {
-		$file_mode = default_file_mode('../temp');
-		$dir_mode = default_dir_mode('../temp');
-	}
+// Get operating system
+if(!isset($_POST['operating_system']) OR $_POST['operating_system'] != 'linux' AND $_POST['operating_system'] != 'windows') {
+	set_error('Please select a valid operating system');
+} else {
+	$operating_system = $_POST['operating_system'];
+}
+// Work-out file permissions
+if($operating_system == 'windows') {
+	$file_mode = '0777';
+	$dir_mode = '0777';
+} elseif(isset($_POST['world_writeable']) AND $_POST['world_writeable'] == 'true') {
+	$file_mode = '0777';
+	$dir_mode = '0777';
+} else {
+	$file_mode = default_file_mode('../temp');
+	$dir_mode = default_dir_mode('../temp');
+}
 // End operating system specific code
 
 // Begin database details code
-	// Check if user has entered a database host
-	if(!isset($_POST['database_host']) OR $_POST['database_host'] == '') {
-		set_error('Please enter a database host name');
-	} else {
-		$database_host = $_POST['database_host'];
-	}
-	// Check if user has entered a database username
-	if(!isset($_POST['database_username']) OR $_POST['database_username'] == '') {
-		set_error('Please enter a database username');
-	} else {
-		$database_username = $_POST['database_username'];
-	}
-	// Check if user has entered a database password
-	if(!isset($_POST['database_password'])) {
-		set_error('Please enter a database password');
-	} else {
-		$database_password = $_POST['database_password'];
-	}
-	// Check if user has entered a database name
-	if(!isset($_POST['database_name']) OR $_POST['database_name'] == '') {
-		set_error('Please enter a database name');
-	} else {
-		$database_name = $_POST['database_name'];
-	}
-	// Get table prefix
-	$table_prefix = $_POST['table_prefix'];
-	// Find out if the user wants to install tables and data
-	if(isset($_POST['install_tables']) AND $_POST['install_tables'] == 'true') {
-		$install_tables = true;
-	} else {
-		$install_tables = false;
-	}
+// Check if user has entered a database host
+if(!isset($_POST['database_host']) OR $_POST['database_host'] == '') {
+	set_error('Please enter a database host name');
+} else {
+	$database_host = $_POST['database_host'];
+}
+// Check if user has entered a database username
+if(!isset($_POST['database_username']) OR $_POST['database_username'] == '') {
+	set_error('Please enter a database username');
+} else {
+	$database_username = $_POST['database_username'];
+}
+// Check if user has entered a database password
+if(!isset($_POST['database_password'])) {
+	set_error('Please enter a database password');
+} else {
+	$database_password = $_POST['database_password'];
+}
+// Check if user has entered a database name
+if(!isset($_POST['database_name']) OR $_POST['database_name'] == '') {
+	set_error('Please enter a database name');
+} else {
+	$database_name = $_POST['database_name'];
+}
+// Get table prefix
+$table_prefix = $_POST['table_prefix'];
+// Find out if the user wants to install tables and data
+if(isset($_POST['install_tables']) AND $_POST['install_tables'] == 'true') {
+	$install_tables = true;
+} else {
+	$install_tables = false;
+}
 // End database details code
 
 // Begin website title code
-	// Get website title
-	if(!isset($_POST['website_title']) OR $_POST['website_title'] == '') {
-		set_error('Please enter a website title');
-	} else {
-		$website_title = addslashes($_POST['website_title']);
-	}
+// Get website title
+if(!isset($_POST['website_title']) OR $_POST['website_title'] == '') {
+	set_error('Please enter a website title');
+} else {
+	$website_title = wb::addslashes($_POST['website_title']);
+}
 // End website title code
 
 // Begin admin user details code
-	// Get admin username
-	if(!isset($_POST['admin_username']) OR $_POST['admin_username'] == '') {
-		set_error('Please enter a username for the Administrator account');
+// Get admin username
+if(!isset($_POST['admin_username']) OR $_POST['admin_username'] == '') {
+	set_error('Please enter a username for the Administrator account');
+} else {
+	$admin_username = $_POST['admin_username'];
+}
+// Get admin email and validate it
+if(!isset($_POST['admin_email']) OR $_POST['admin_email'] == '') {
+	set_error('Please enter an email for the Administrator account');
+} else {
+	if(eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $_POST['admin_email'])) {
+		$admin_email = $_POST['admin_email'];
 	} else {
-		$admin_username = $_POST['admin_username'];
+		set_error('Please enter a valid email address for the Administrator account');
 	}
-	// Get admin email and validate it
-	if(!isset($_POST['admin_email']) OR $_POST['admin_email'] == '') {
-		set_error('Please enter an email for the Administrator account');
-	} else {
-		if(eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $_POST['admin_email'])) {
-			$admin_email = $_POST['admin_email'];
-		} else {
-			set_error('Please enter a valid email address for the Administrator account');
-		}
-	}
-	// Get the two admin passwords entered, and check that they match
-	if(!isset($_POST['admin_password']) OR $_POST['admin_password'] == '') {
-		set_error('Please enter a password for the Administrator account');
-	} else {
-		$admin_password = $_POST['admin_password'];
-	}
-	if(!isset($_POST['admin_repassword']) OR $_POST['admin_repassword'] == '') {
-		set_error('Please make sure you re-enter the password for the Administrator account');
-	} else {
-		$admin_repassword = $_POST['admin_repassword'];
-	}
-	if($admin_password != $admin_repassword) {
-		set_error('Sorry, the two Administrator account passwords you entered do not match');
-	}
+}
+// Get the two admin passwords entered, and check that they match
+if(!isset($_POST['admin_password']) OR $_POST['admin_password'] == '') {
+	set_error('Please enter a password for the Administrator account');
+} else {
+	$admin_password = $_POST['admin_password'];
+}
+if(!isset($_POST['admin_repassword']) OR $_POST['admin_repassword'] == '') {
+	set_error('Please make sure you re-enter the password for the Administrator account');
+} else {
+	$admin_repassword = $_POST['admin_repassword'];
+}
+if($admin_password != $admin_repassword) {
+	set_error('Sorry, the two Administrator account passwords you entered do not match');
+}
 // End admin user details code
 
 // Try and write settings to config file
@@ -362,7 +364,7 @@ mysql_query('CREATE DATABASE '.$database_name);
 mysql_close();
 
 // Re-connect to the database, this time using in-build database class
-require(WB_PATH.'/framework/class.admin.php');
+require_once(WB_PATH.'/framework/class.admin.php');
 $database = new database();
 
 // Check if we should install tables
@@ -498,27 +500,27 @@ if($install_tables == true) {
 	$insert_website_footer = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'footer', '')";
 	$database->query($insert_website_footer);
 	// Search header
-	$search_header = addslashes('
+	$search_header = wb::addslashes('
 <h1>Search</h1>
 
 <form name="search" action="[WB_URL]/search/index[PAGE_EXTENSION]" method="post">
 <table cellpadding="3" cellspacing="0" border="0" width="500">
 <tr>
 <td>
-	<input type="text" name="string" value="[SEARCH_STRING]" style="width: 100%;" />
+<input type="text" name="string" value="[SEARCH_STRING]" style="width: 100%;" />
 </td>
 <td width="150">
-	<input type="submit" value="[TEXT_SEARCH]" style="width: 100%;" />
+<input type="submit" value="[TEXT_SEARCH]" style="width: 100%;" />
 </td>
 </tr>
 <tr>
 <td colspan="2">
-	<input type="radio" name="match" id="match_all" value="all"[ALL_CHECKED] />
-	<a href="javascript: toggle_radio(\'match_all\');">[TEXT_ALL_WORDS]</a>
-	<input type="radio" name="match" id="match_any" value="any"[ANY_CHECKED] />
-	<a href="javascript: toggle_radio(\'match_any\');">[TEXT_ANY_WORDS]</a>
-	<input type="radio" name="match" id="match_exact" value="exact"[EXACT_CHECKED] />
-	<a href="javascript: toggle_radio(\'match_exact\');">[TEXT_EXACT_MATCH]</a>
+<input type="radio" name="match" id="match_all" value="all"[ALL_CHECKED] />
+<a href="javascript: toggle_radio(\'match_all\');">[TEXT_ALL_WORDS]</a>
+<input type="radio" name="match" id="match_any" value="any"[ANY_CHECKED] />
+<a href="javascript: toggle_radio(\'match_any\');">[TEXT_ANY_WORDS]</a>
+<input type="radio" name="match" id="match_exact" value="exact"[EXACT_CHECKED] />
+<a href="javascript: toggle_radio(\'match_exact\');">[TEXT_EXACT_MATCH]</a>
 </td>
 </tr>
 </table>
@@ -530,30 +532,30 @@ if($install_tables == true) {
 	$insert_search_header = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'header', '$search_header', '')";
 	$database->query($insert_search_header);
 	// Search footer
-	$search_footer = addslashes('');
+	$search_footer = wb::addslashes('');
 	$insert_search_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'footer', '$search_footer', '')";
 	$database->query($insert_search_footer);
 	// Search results header
-	$search_results_header = addslashes(''.
+	$search_results_header = wb::addslashes(''.
 '[TEXT_RESULTS_FOR] \'<b>[SEARCH_STRING]</b>\':
 <table cellpadding="2" cellspacing="0" border="0" width="100%" style="padding-top: 10px;">');
 	$insert_search_results_header = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_header', '$search_results_header', '')";
 	$database->query($insert_search_results_header);
 	// Search results loop
-	$search_results_loop = addslashes(''.
+	$search_results_loop = wb::addslashes(''.
 '<tr style="background-color: #F0F0F0;">
 <td><a href="[LINK]">[TITLE]</a></td>
 <td align="right">[TEXT_LAST_UPDATED_BY] [DISPLAY_NAME] ([USERNAME]) [TEXT_ON] [DATE]</td>
 </tr>
 <tr><td colspan="2" style="text-align: justify; padding-bottom: 10px;">[DESCRIPTION]</td></tr>');
-	$insert_search_results_loop = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_loop', '$search_results_loop', '')";
-	$database->query($insert_search_results_loop);
-	// Search results footer
-	$search_results_footer = addslashes("</table>");
-	$insert_search_results_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_footer', '$search_results_footer', '')";
-	$database->query($insert_search_results_footer);
-	// Search no results
-	$search_no_results = addslashes('<br />No results found');
+$insert_search_results_loop = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_loop', '$search_results_loop', '')";
+$database->query($insert_search_results_loop);
+// Search results footer
+$search_results_footer = wb::addslashes("</table>");
+$insert_search_results_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_footer', '$search_results_footer', '')";
+$database->query($insert_search_results_footer);
+// Search no results
+$search_no_results = wb::add_slashes('<br />No results found');
 	$insert_search_no_results = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'no_results', '$search_no_results', '')";
 	$database->query($insert_search_no_results);
 	// Search template

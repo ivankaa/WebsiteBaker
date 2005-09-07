@@ -1,6 +1,6 @@
 <?php
 
-// $Id: add.php,v 1.5 2005/04/02 06:25:53 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -71,7 +71,7 @@ if($results->numRows() > 0) {
 }
 
 // Check if the email already exists
-$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".addslashes($_POST['email'])."'");
+$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".$admin->add_slashes($_POST['email'])."'");
 if($results->numRows() > 0) {
 	if(isset($MESSAGE['USERS']['EMAIL_TAKEN'])) {
 		$admin->print_error($MESSAGE['USERS']['EMAIL_TAKEN'], $js_back);

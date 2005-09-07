@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save.php,v 1.2 2005/04/02 06:25:57 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -31,7 +31,7 @@ require(WB_PATH.'/modules/admin.php');
 
 // Update the mod_wrapper table with the contents
 if(isset($_POST['url'])) {
-	$url = addslashes($_POST['url']);
+	$url = $admin->add_slashes($_POST['url']);
 	$height = $_POST['height'];
 	if(!is_numeric($height)) {
 		$height = 400;

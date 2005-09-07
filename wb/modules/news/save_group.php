@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save_group.php,v 1.3 2005/03/27 05:25:32 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -43,7 +43,7 @@ require(WB_PATH.'/framework/functions.php');
 if($admin->get_post('title') == '') {
 	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/news/modify_group.php?page_id='.$page_id.'&section_id='.$section_id.'&group_id='.$group_id);
 } else {
-	$title = addslashes($admin->get_post('title'));
+	$title = $admin->add_slashes($admin->get_post('title'));
 	$active = $admin->get_post('active');
 }
 

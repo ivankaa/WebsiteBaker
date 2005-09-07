@@ -36,7 +36,7 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 	$email = $_POST['email'];
 	
 	// Check if the email exists in the database
-	$query = "SELECT user_id,username,display_name,email FROM ".TABLE_PREFIX."users WHERE email = '".addslashes($_POST['email'])."'";
+	$query = "SELECT user_id,username,display_name,email FROM ".TABLE_PREFIX."users WHERE email = '".$this->add_slashes($_POST['email'])."'";
 	$results = $database->query($query);
 	if($results->numRows() > 0) {
 		// Get the id, username, and email from the above db query

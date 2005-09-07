@@ -29,7 +29,7 @@
 $query = "SELECT content FROM ".TABLE_PREFIX."mod_wysiwyg WHERE section_id = '$section_id'";
 $get_content = $database->query($query);
 $content = $get_content->fetchRow();
-$content = $admin->stripslashes(htmlspecialchars($content['content']));
+$content = $admin->strip_slashes(htmlspecialchars($content['content']));
 
 // Load HTMLArea
 if(!isset($loaded_htmlarea)) {
@@ -55,7 +55,7 @@ function initEditor() {';
 		echo 'var editor = new HTMLArea("content'.$wysiwyg_section["section_id"].'");'
 			. 'editor.registerPlugin(ContextMenu);'
 			. 'editor.registerPlugin(TableOperations);'
-			. 'editor.config.pageStyle = "body { '.$admin->stripslashes(WYSIWYG_STYLE).' }";'
+			. 'editor.config.pageStyle = "body { '.$admin->strip_slashes(WYSIWYG_STYLE).' }";'
 			. 'editor.generate();';
 		}
 	}

@@ -1,6 +1,6 @@
 <?php
 
-// $Id: uninstall.php,v 1.2 2005/04/02 06:25:53 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -47,7 +47,7 @@ if(!is_dir(WB_PATH.'/templates/'.$file)) {
 if($_POST['file'] == DEFAULT_TEMPLATE) {
 	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE']);
 } else {
-	$query_templates = $database->query("SELECT page_id FROM ".TABLE_PREFIX."pages WHERE template = '".addslashes($_POST['file'])."' LIMIT 1");
+	$query_templates = $database->query("SELECT page_id FROM ".TABLE_PREFIX."pages WHERE template = '".$admin->add_slashes($_POST['file'])."' LIMIT 1");
 	if($query_templates->numRows() > 0) {
 		$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE']);
 	}

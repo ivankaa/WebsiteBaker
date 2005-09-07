@@ -1,6 +1,6 @@
 <?php
 
-// $Id: submit_comment.php,v 1.3 2005/03/28 11:58:04 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -42,8 +42,8 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	$page_id = $_GET['page_id'];
 	$section_id = $_GET['section_id'];
 	$post_id = $_GET['post_id'];
-	$title = addslashes(strip_tags($_POST['title']));
-	$comment = addslashes(strip_tags($_POST['comment']));
+	$title = $admin->add_slashes(strip_tags($_POST['title']));
+	$comment = $admin->add_slashes(strip_tags($_POST['comment']));
 	$commented_when = mktime();
 	if(isset($admin) AND $admin->is_authenticated() == true) {
 		$commented_by = $admin->get_user_id();

@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save.php,v 1.14 2005/06/23 05:56:33 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -45,7 +45,7 @@ $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
-	$value = addslashes($value);
+	$value = $admin->add_slashes($value);
 	$database->query("UPDATE ".TABLE_PREFIX."settings SET value = '$value' WHERE name = '$setting_name'");
 }
 
@@ -56,7 +56,7 @@ while($search_setting = $results->fetchRow()) {
 	$setting_name = $search_setting['name'];
 	$post_name = 'search_'.$search_setting['name'];
 	$value = $admin->get_post($post_name);
-	$value = addslashes($value);
+	$value = $admin->add_slashes($value);
 	$database->query("UPDATE ".TABLE_PREFIX."search SET value = '$value' WHERE name = '$setting_name'");
 }
 
@@ -199,7 +199,7 @@ if($database->is_error()) {
 	"define('HOMEPAGE_REDIRECTION', ".str_replace(';', '', $_POST['homepage_redirection']).");\n".
 	"define('PAGE_LANGUAGES', ".str_replace(';', '', $_POST['page_languages']).");\n".
 	"\n".
-	"define('WYSIWYG_STYLE', '".addslashes($_POST['wysiwyg_style'])."');\n".
+	"define('WYSIWYG_STYLE', '".$admin->add_slashes($_POST['wysiwyg_style'])."');\n".
 	"\n".
 	"define('MANAGE_SECTIONS', ".str_replace(';', '', $_POST['manage_sections']).");\n".
 	"define('SECTION_BLOCKS', ".str_replace(';', '', $_POST['section_blocks']).");\n".

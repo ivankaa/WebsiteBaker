@@ -32,7 +32,7 @@ $template->set_block('page', 'main_block', 'main');
 $query = "SELECT content FROM ".TABLE_PREFIX."mod_code WHERE section_id = '$section_id'";
 $get_content = $database->query($query);
 $content = $get_content->fetchRow();
-$content = $admin->stripslashes(htmlspecialchars($content['content']));
+$content = $admin->strip_slashes(htmlspecialchars($content['content']));
 
 // Insert vars
 $template->set_var(array(

@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save.php,v 1.2 2005/04/02 06:25:55 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -33,7 +33,7 @@ require(WB_PATH.'/modules/admin.php');
 if(isset($_POST['content'])) {
 	$tags = array('<?php', '?>', '<?');
 	$blanks = array('','','');
-	$content = addslashes(str_replace($tags, $blanks, $_POST['content']));
+	$content = $admin->add_slashes(str_replace($tags, $blanks, $_POST['content']));
 	$database = new database();
 	$query = "UPDATE ".TABLE_PREFIX."mod_code SET content = '$content' WHERE section_id = '$section_id'";
 	$database->query($query);	

@@ -26,7 +26,7 @@
 // Get content
 $get_content = $database->query("SELECT content FROM ".TABLE_PREFIX."mod_wysiwyg WHERE section_id = '$section_id'");
 $fetch_content = $get_content->fetchRow();
-$content = $this->stripslashes($fetch_content['content']);
+$content = $this->strip_slashes($fetch_content['content']);
 
 $this->preprocess($content);
 

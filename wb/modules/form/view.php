@@ -113,9 +113,9 @@ if($_POST == array()) {
 $query_settings = $database->query("SELECT header,field_loop,footer FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 if($query_settings->numRows() > 0) {
 	$fetch_settings = $query_settings->fetchRow();
-	$header = $this->stripslashes($fetch_settings['header']);
-	$field_loop = $this->stripslashes($fetch_settings['field_loop']);
-	$footer = $this->stripslashes($fetch_settings['footer']);
+	$header = $this->strip_slashes($fetch_settings['header']);
+	$field_loop = $this->strip_slashes($fetch_settings['field_loop']);
+	$footer = $this->strip_slashes($fetch_settings['footer']);
 } else {
 	$header = '';
 	$field_loop = '';
@@ -136,7 +136,7 @@ if($query_fields->numRows() > 0) {
 	while($field = $query_fields->fetchRow()) {
 		// Set field values
 		$field_id = $field['field_id'];
-		$value = $this->stripslashes($field['value']);
+		$value = $this->strip_slashes($field['value']);
 		// Print field_loop after replacing vars with values
 		$vars = array('{TITLE}', '{REQUIRED}');
 		$values = array($field['title']);
@@ -198,16 +198,16 @@ echo $footer;
 	$query_settings = $database->query("SELECT email_to,email_from,email_subject,success_message,max_submissions,stored_submissions FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 	if($query_settings->numRows() > 0) {
 		$fetch_settings = $query_settings->fetchRow();
-		$email_to = $this->stripslashes($fetch_settings['email_to']);
-		$email_from = $this->stripslashes($fetch_settings['email_from']);
+		$email_to = $this->strip_slashes($fetch_settings['email_to']);
+		$email_from = $this->strip_slashes($fetch_settings['email_from']);
 		if(substr($email_from, 0, 5) == 'field') {
 			// Set the email from field to what the user entered in the specified field
-			$email_from = addslashes($_POST[$email_from]);
+			$email_from = $this->add_slashes($_POST[$email_from]);
 		}
-		$email_subject = $this->stripslashes($fetch_settings['email_subject']);
-		$success_message = $this->stripslashes($fetch_settings['success_message']);
-		$max_submissions = $this->stripslashes($fetch_settings['max_submissions']);
-		$stored_submissions = $this->stripslashes($fetch_settings['stored_submissions']);
+		$email_subject = $this->strip_slashes($fetch_settings['email_subject']);
+		$success_message = $this->strip_slashes($fetch_settings['success_message']);
+		$max_submissions = $this->strip_slashes($fetch_settings['max_submissions']);
+		$stored_submissions = $this->strip_slashes($fetch_settings['stored_submissions']);
 	} else {
 		exit($TEXT['UNDER_CONSTRUCTION']);
 	}
@@ -231,11 +231,11 @@ echo $footer;
 					} elseif (!is_array($_POST['field'.$field['field_id']])) {
 					$email_body .= '
 					
-	'.$this->stripslashes($field['title']).': '.$_POST['field'.$field['field_id']].'\n';
+	'.$this->strip_slashes($field['title']).': '.$_POST['field'.$field['field_id']]."\n";
 					} else {
 						$email_body .= '
 					
-	'.$this->stripslashes($field['title']).': \n';
+	'.$this->strip_slashes($field['title']).": \n";
 						foreach ($_POST['field'.$field['field_id']] as $k=>$v) {
 							$email_body .= '
 					
@@ -243,14 +243,14 @@ echo $footer;
 						}
 					}
 				} elseif($field['required'] == 1) {
-				$required[] = $this->stripslashes($field['title']);
+				$required[] = $this->strip_slashes($field['title']);
 				}
 			}
 		}
 	}
 	
-	// Addslashes to email body
-	$email_body = addslashes($email_body);
+	// Addslashes to email body - proposed by Icheb in topic=1170.0
+	// $email_body = $this->add_slashes($email_body);
 	
 	// Check if the user forgot to enter values into all the required fields
 	if($required != array()) {
@@ -288,6 +288,7 @@ echo $footer;
 			} else {
 				$submitted_by = 0;
 			}
+			$email_body = $this->add_slashes($email_body);
 			$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_submissions (page_id,section_id,submitted_when,submitted_by,body) VALUES ('".PAGE_ID."','$section_id','".mktime()."','$submitted_by','$email_body')");
 			// Make sure submissions table isn't too full
 			$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions ORDER BY submitted_when");

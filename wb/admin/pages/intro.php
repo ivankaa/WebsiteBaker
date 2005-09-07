@@ -43,7 +43,7 @@ $template = new Template(ADMIN_PATH.'/pages');
 $template->set_file('page', 'intro.html');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var(array(
-								'CONTENT' => $admin->stripslashes($content),
+								'CONTENT' => $admin->strip_slashes($content),
 								'WB_URL' => WB_URL,
 								'ADMIN_URL' => ADMIN_URL,
 								'TEXT_SAVE' => $TEXT['SAVE'],
