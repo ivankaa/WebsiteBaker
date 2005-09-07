@@ -77,11 +77,14 @@ if($parent == '0') {
 $database = new database();
 $get_same_page = $database->query("SELECT page_id FROM ".TABLE_PREFIX."pages WHERE link = '$link'");
 if($get_same_page->numRows() > 0) {
-	$admin->print_error($MESSAGE['PAGES']['PAGE_EXISTS']);
+	$admin->print_error("database");
+//	$admin->print_error($MESSAGE['PAGES']['PAGE_EXISTS']);
 } elseif(file_exists(WB_PATH.PAGES_DIRECTORY.$link.'.php')) {
-	$admin->print_error($MESSAGE['PAGES']['PAGE_EXISTS']);
+	$admin->print_error(WB_PATH.PAGES_DIRECTORY.$link.'.php');
+//	$admin->print_error($MESSAGE['PAGES']['PAGE_EXISTS']);
 } elseif(file_exists(WB_PATH.PAGES_DIRECTORY.$link.'/')) {
-	$admin->print_error($MESSAGE['PAGES']['PAGE_EXISTS']);
+	$admin->print_error("dir");
+//	$admin->print_error($MESSAGE['PAGES']['PAGE_EXISTS']);
 }
 
 // Include the ordering class

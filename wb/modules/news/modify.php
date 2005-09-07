@@ -65,7 +65,7 @@ if($query_posts->numRows() > 0) {
 			</td>
 			<td>
 				<a href="<?php echo WB_URL; ?>/modules/news/modify_post.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&post_id=<?php echo $post['post_id']; ?>">
-					<?php echo $admin->strip_slashes($post['title']); ?>
+					<?php echo $admin->strip_slashes_dummy($post['title']); ?>
 				</a>
 			</td>
 			<td width="180">
@@ -74,7 +74,7 @@ if($query_posts->numRows() > 0) {
 				$query_title = $database->query("SELECT title FROM ".TABLE_PREFIX."mod_news_groups WHERE group_id = '".$post['group_id']."'");
 				if($query_title->numRows() > 0) {
 					$fetch_title = $query_title->fetchRow();
-					echo $admin->strip_slashes($fetch_title['title']);
+					echo $admin->strip_slashes_dummy($fetch_title['title']);
 				} else {
 					echo $TEXT['NONE'];
 				}

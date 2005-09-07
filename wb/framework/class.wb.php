@@ -71,7 +71,6 @@ class wb
 
 	// Modified addslashes function which takes into account magic_quotes
 	function add_slashes($input) {
-		return addslashes($input);		
 		if ( get_magic_quotes_gpc() || ( !is_string($input) ) ) {
 			return $input;
 		}
@@ -88,9 +87,13 @@ class wb
 		return $output;
 	}
 
+	function strip_slashes_dummy($input) {
+		return $input;
+	}
+
 	// Escape backslashes for use with mySQL LIKE strings
 	function escape_backslashes($input) {
-		return str_replace("\\","\\\\",$output);
+		return str_replace("\\","\\\\",$input);
 	}
 
 	// Get POST data
@@ -151,7 +154,7 @@ class wb
 
 	// Get the current users display name
 	function get_display_name() {
-		return $this->strip_slashes($_SESSION['DISPLAY_NAME']);
+		return $this->strip_slashes_dummy($_SESSION['DISPLAY_NAME']);
 	}
 
 	// Get the current users email address

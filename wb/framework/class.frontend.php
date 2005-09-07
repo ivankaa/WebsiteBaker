@@ -72,7 +72,7 @@ class frontend extends wb {
 				$content = fread($handle, filesize($filename));
 				fclose($handle);
 				$this->preprocess($content);
-				echo $this->strip_slashes($content);
+				echo $this->strip_slashes_dummy($content);
 				return false;
 			}
 		}
@@ -140,10 +140,10 @@ class frontend extends wb {
 			define('PAGE_ID', $this->page['page_id']);
 			$this->page_id=$this->page['page_id'];
 			// Page Title
-			define('PAGE_TITLE', $this->strip_slashes($this->page['page_title']));
+			define('PAGE_TITLE', $this->strip_slashes_dummy($this->page['page_title']));
 			$this->page_title=PAGE_TITLE;
 			// Menu Title
-			$menu_title = $this->strip_slashes($this->page['menu_title']);
+			$menu_title = $this->strip_slashes_dummy($this->page['menu_title']);
 			if($menu_title != '') {
 				define('MENU_TITLE', $menu_title);
 			} else {
@@ -252,31 +252,31 @@ class frontend extends wb {
 		while($setting = $get_settings->fetchRow()) {
 			switch($setting['name']) {
 				case 'title':
-					define('WEBSITE_TITLE', $this->strip_slashes($setting['value']));
+					define('WEBSITE_TITLE', $this->strip_slashes_dummy($setting['value']));
 					$this->website_title=WEBSITE_TITLE;
 				break;
 				case 'description':
 					if($page_description != '') {
 						define('WEBSITE_DESCRIPTION', $page_description);
 					} else {
-						define('WEBSITE_DESCRIPTION', $this->strip_slashes($setting['value']));
+						define('WEBSITE_DESCRIPTION', $this->strip_slashes_dummy($setting['value']));
 					}
 					$this->website_description=WEBSITE_DESCRIPTION;
 				break;
 				case 'keywords':
 					if($page_keywords != '') {
-						define('WEBSITE_KEYWORDS', $this->strip_slashes($setting['value']).' '.$page_keywords);
+						define('WEBSITE_KEYWORDS', $this->strip_slashes_dummy($setting['value']).' '.$page_keywords);
 					} else {
-						define('WEBSITE_KEYWORDS', $this->strip_slashes($setting['value']));
+						define('WEBSITE_KEYWORDS', $this->strip_slashes_dummy($setting['value']));
 					}
 					$this->website_keywords=WEBSITE_KEYWORDS;
 				break;
 				case 'header':
-					define('WEBSITE_HEADER', $this->strip_slashes($setting['value']));
+					define('WEBSITE_HEADER', $this->strip_slashes_dummy($setting['value']));
 					$this->website_header=WEBSITE_HEADER;
 				break;
 				case 'footer':
-					define('WEBSITE_FOOTER', $this->strip_slashes($setting['value']));
+					define('WEBSITE_FOOTER', $this->strip_slashes_dummy($setting['value']));
 					$this->website_footer=WEBSITE_FOOTER;
 				break;
 			}
@@ -390,7 +390,7 @@ class frontend extends wb {
 	            $link = $this->page_link($page['link']);
 	         }
 	         // Create values
-	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', $this->strip_slashes($page['menu_title']), $this->strip_slashes($page['page_title']));
+	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', $this->strip_slashes_dummy($page['menu_title']), $this->strip_slashes_dummy($page['page_title']));
 	         // Replace vars with value and print
 	         echo "\n".str_replace($vars, $values, $this->menu_item_template);
 	         // Generate sub-menu

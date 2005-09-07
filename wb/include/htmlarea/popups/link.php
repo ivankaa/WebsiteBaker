@@ -75,7 +75,7 @@ function gen_page_list($parent) {
 	global $template, $database;
 	$get_pages = $database->query("SELECT page_id,menu_title,link,level FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' AND visibility!='deleted' ORDER BY position ASC");
 	while($page = $get_pages->fetchRow()) {
-		$title = $admin->strip_slashes($page['menu_title']);
+		$title = $admin->strip_slashes_dummy($page['menu_title']);
 		// Add leading -'s so we can tell what level a page is at
 		$leading_dashes = '';
 		for($i = 0; $i < $page['level']; $i++) {
@@ -99,7 +99,7 @@ if($get_pages > 0) {
 	$template->parse('page_list', 'page_list_block', true);
 	// Loop through pages
 	while($page = $get_pages->fetchRow()) {
-		$title = $admin->strip_slashes($page['menu_title']);
+		$title = $admin->strip_slashes_dummy($page['menu_title']);
 		$template->set_var('TITLE', $title);
 		$template->set_var('LINK', '[wblink'.$page['page_id'].']');
 		$template->parse('page_list', 'page_list_block', true);

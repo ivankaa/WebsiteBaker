@@ -32,7 +32,7 @@ $template->set_block('page', 'main_block', 'main');
 $query_info = "SELECT link,target FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'";
 $get_info = $database->query($query_info);
 $fetch_info = $get_info->fetchRow();
-$link = $admin->strip_slashes($fetch_info['link']);
+$link = $admin->strip_slashes_dummy($fetch_info['link']);
 $target = $fetch_info['target'];
 
 // Insert vars

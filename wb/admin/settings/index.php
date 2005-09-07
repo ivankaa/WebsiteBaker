@@ -45,7 +45,7 @@ $query = "SELECT * FROM ".TABLE_PREFIX."settings";
 $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
-	$setting_value = htmlspecialchars($admin->strip_slashes($setting['value']));
+	$setting_value = htmlspecialchars($admin->strip_slashes_dummy($setting['value']));
 	switch($setting_name) {
 		// Website title
 		case 'title':
@@ -79,7 +79,7 @@ $query = "SELECT * FROM ".TABLE_PREFIX."search WHERE extra = ''";
 $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
-	$setting_value = htmlspecialchars($admin->strip_slashes($setting['value']));
+	$setting_value = htmlspecialchars($admin->strip_slashes_dummy($setting['value']));
 	switch($setting_name) {
 		// Search header
 		case 'header':
@@ -463,7 +463,7 @@ if(extract_permission(STRING_DIR_MODE, 'o', 'e')) {
 }
 
 // Insert WYSIWYG style value into template
-$template->set_var('WYSIWYG_STYLE', $admin->strip_slashes(WYSIWYG_STYLE));
+$template->set_var('WYSIWYG_STYLE', $admin->strip_slashes_dummy(WYSIWYG_STYLE));
 
 // Insert Server Email value into template
 $template->set_var('SERVER_EMAIL', SERVER_EMAIL);

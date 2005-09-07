@@ -53,31 +53,31 @@ $friendly = array('&lt;', '&gt;');
 <tr>
 	<td class="setting_name" width="100"><?php echo $TEXT['HEADER']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="header" style="width: 100%; height: 80px;"><?php echo $admin->strip_slashes($fetch_content['header']); ?></textarea>
+		<textarea name="header" style="width: 100%; height: 80px;"><?php echo $admin->strip_slashes_dummy($fetch_content['header']); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['POST'].' '.$TEXT['LOOP']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="post_loop" style="width: 100%; height: 60px;"><?php echo $admin->strip_slashes($fetch_content['post_loop']); ?></textarea>
+		<textarea name="post_loop" style="width: 100%; height: 60px;"><?php echo $admin->strip_slashes_dummy($fetch_content['post_loop']); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['FOOTER']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="footer" style="width: 100%; height: 80px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes($fetch_content['footer'])); ?></textarea>
+		<textarea name="footer" style="width: 100%; height: 80px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes_dummy($fetch_content['footer'])); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['POST_HEADER']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="post_header" style="width: 100%; height: 60px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes($fetch_content['post_header'])); ?></textarea>
+		<textarea name="post_header" style="width: 100%; height: 60px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes_dummy($fetch_content['post_header'])); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['POST_FOOTER']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="post_footer" style="width: 100%; height: 60px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes($fetch_content['post_footer'])); ?></textarea>
+		<textarea name="post_footer" style="width: 100%; height: 60px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes_dummy($fetch_content['post_footer'])); ?></textarea>
 	</td>
 </tr>
 <tr>
@@ -130,25 +130,25 @@ $friendly = array('&lt;', '&gt;');
 <tr>
 	<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['HEADER']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="comments_header" style="width: 100%; height: 60px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes($fetch_content['comments_header'])); ?></textarea>
+		<textarea name="comments_header" style="width: 100%; height: 60px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes_dummy($fetch_content['comments_header'])); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['LOOP']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="comments_loop" style="width: 100%; height: 60px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes($fetch_content['comments_loop'])); ?></textarea>
+		<textarea name="comments_loop" style="width: 100%; height: 60px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes_dummy($fetch_content['comments_loop'])); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['FOOTER']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="comments_footer" style="width: 100%; height: 60px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes($fetch_content['comments_footer'])); ?></textarea>
+		<textarea name="comments_footer" style="width: 100%; height: 60px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes_dummy($fetch_content['comments_footer'])); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['PAGE']; ?>:</td>
 	<td class="setting_name">
-		<textarea name="comments_page" style="width: 100%; height: 80px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes($fetch_content['comments_page'])); ?></textarea>
+		<textarea name="comments_page" style="width: 100%; height: 80px;"><?php echo str_replace($raw, $friendly, $admin->strip_slashes_dummy($fetch_content['comments_page'])); ?></textarea>
 	</td>
 </tr>
 </table>
