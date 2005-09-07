@@ -31,7 +31,7 @@ require(WB_PATH.'/modules/admin.php');
 
 // Update the mod_wysiwygs table with the contents
 if(isset($_POST['content'.$section_id])) {
-	$content = $admin->add_slashes($_POST['content']);
+	$content = $admin->add_slashes($_POST['content'.$section_id]);
 	$text = strip_tags($content);
 	$database = new database();
 	$query = "UPDATE ".TABLE_PREFIX."mod_wysiwyg SET content = '$content', text = '$text' WHERE section_id = '$section_id'";
