@@ -254,6 +254,16 @@ function change_page_trash(type) {
 	</td>
 </tr>
 <tr>
+	<td class="setting_name">{TEXT_EDITOR}:</td>
+	<td class="setting_value" colspan="2">
+		<select name="editor">
+		<!-- BEGIN editor_list_block -->
+			<option value="{FILE}"{SELECTED}>{NAME}</option>
+		<!-- END editor_list_block -->
+		</select>
+	</td>
+</tr>
+<tr>
 	<td>&nbsp;</td>
 	<td>
 		<input type="submit" name="submit" value="{TEXT_SAVE}" class="save" />

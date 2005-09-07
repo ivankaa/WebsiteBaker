@@ -30,7 +30,7 @@ $update_when_modified = true; // Tells script to update when this page was last 
 require(WB_PATH.'/modules/admin.php');
 
 // Update the mod_wysiwygs table with the contents
-if(isset($_POST['content'])) {
+if(isset($_POST['content'.$section_id])) {
 	$content = $admin->add_slashes($_POST['content']);
 	$text = strip_tags($content);
 	$database = new database();

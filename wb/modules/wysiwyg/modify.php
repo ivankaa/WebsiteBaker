@@ -31,39 +31,53 @@ $get_content = $database->query($query);
 $content = $get_content->fetchRow();
 $content = $admin->strip_slashes_dummy(htmlspecialchars($content['content']));
 
-// Load HTMLArea
-if(!isset($loaded_htmlarea)) {
+if(!isset($wysiwyg_editor_loaded)) {
+	$wysiwyg_editor_loaded=true;
+
+	if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="htmlarea" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
 	
-	// Workout how many WYSIWYG sections are used on this page
-	$query_wysiwyg_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg' ORDER BY position ASC");
-	$num_wysiwyg_sections = $query_wysiwyg_sections->numRows();
+		// Workout how many WYSIWYG sections are used on this page
+		$query_wysiwyg_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg' ORDER BY position ASC");
+		$num_wysiwyg_sections = $query_wysiwyg_sections->numRows();
 	
-	echo '<script type="text/javascript">'
-		. '  _editor_url = "'.WB_URL.'/include/htmlarea/";'
-		. '  _editor_lang = "en";'
-		. '</script>'
-		. '<script type="text/javascript" src="'.WB_URL.'/include/htmlarea/htmlarea.js"></script>'
-		. '<script type="text/javascript">
+		echo '<script type="text/javascript">'
+			. '  _editor_url = "'.WB_URL.'/include/htmlarea/";'
+			. '  _editor_lang = "en";'
+			. '</script>'
+			. '<script type="text/javascript" src="'.WB_URL.'/include/htmlarea/htmlarea.js"></script>'
+			. '<script type="text/javascript">
 HTMLArea.loadPlugin("ContextMenu");
 HTMLArea.loadPlugin("TableOperations");
 function initEditor() {';
 		
 	
-	$query_wysiwyg = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg'");
-	if($query_wysiwyg->numRows() > 0) {
-		while($wysiwyg_section = $query_wysiwyg->fetchRow()) {
-		echo 'var editor = new HTMLArea("content'.$wysiwyg_section["section_id"].'");'
-			. 'editor.registerPlugin(ContextMenu);'
-			. 'editor.registerPlugin(TableOperations);'
-			. 'editor.config.pageStyle = "body { '.$admin->strip_slashes_dummy(WYSIWYG_STYLE).' }";'
-			. 'editor.generate();';
+		$query_wysiwyg = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg'");
+		if($query_wysiwyg->numRows() > 0) {
+			while($wysiwyg_section = $query_wysiwyg->fetchRow()) {
+			echo 'var editor = new HTMLArea("content'.$wysiwyg_section["section_id"].'");'
+				. 'editor.registerPlugin(ContextMenu);'
+				. 'editor.registerPlugin(TableOperations);'
+				. 'editor.config.pageStyle = "body { '.stripslashes(WYSIWYG_STYLE).' }";'
+				. 'editor.generate();';
+			}
+		}
+
+		echo '} </script>';
+		function show_wysiwyg_editor($name,$id,$content,$width,$height) {
+			echo '<textarea name="'.$name.'" id="'.$id.'" style="width: '.$width.'; height: '.$height.';">'.$content.'</textarea>';
+		}
+
+	} else {
+		$id_list=array();
+		$query_wysiwyg = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg'");
+		if($query_wysiwyg->numRows() > 0) {
+			while($wysiwyg_section = $query_wysiwyg->fetchRow()) {
+				$entry='content'.$wysiwyg_section['section_id'];
+				array_push($id_list,$entry);
+			}
+			require(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
 		}
 	}
-	
-	echo '} </script>';
-	
-	$loaded_htmlarea = true;
-	
 }
 
 ?>
@@ -72,7 +86,9 @@ function initEditor() {';
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
 
-<textarea id="content<?php echo $section_id; ?>" name="content" style="width: 725px; height: 350px;"><?php echo $content; ?></textarea>
+<?php
+show_wysiwyg_editor('content'.$section_id,'content'.$section_id,$content,'725px','350px');
+?>
 
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="padding-bottom: 10px;">
 <tr>

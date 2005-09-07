@@ -39,6 +39,7 @@ require(WB_PATH.'/modules/admin.php');
 $query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");
 $fetch_content = $query_content->fetchRow();
 
+if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="htmlarea" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
 ?>
 <script type="text/javascript">
 _editor_url = "<?php echo WB_URL; ?>/include/htmlarea/";
@@ -60,7 +61,16 @@ function initEditor() {
 	editor.generate();
 }
 </script>
+<?php
+	function show_wysiwyg_editor($name,$id,$content,$width,$height) {
+		echo '<textarea name="'.$name.'" id="'.$id.'" style="width: '.$width.'; height: '.$height.';">'.$content.'</textarea>';
+	}
+} else {
+	$id_list=array("short","long");
+			require(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
+}
 
+?>
 <form name="modify" action="<?php echo WB_URL; ?>/modules/news/save_post.php" method="post" style="margin: 0;">
 
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
@@ -121,13 +131,17 @@ function initEditor() {
 <tr>
 	<td valign="top"><?php echo $TEXT['SHORT']; ?>:</td>
 	<td>
-		<textarea name="short" id="short" style="width: 100%; height: 135px;"><?php echo htmlspecialchars($admin->strip_slashes_dummy($fetch_content['short'])); ?></textarea>
+	<?php
+	show_wysiwyg_editor("short","short",$fetch_content['short'],"100%","135px");
+	?>
 	</td>
 </tr>
 <tr>
 	<td valign="top"><?php echo $TEXT['LONG']; ?>:</td>
 	<td>
-		<textarea name="long" id="long" style="width: 100%; height: 300px;"><?php echo htmlspecialchars($admin->strip_slashes_dummy($fetch_content['long'])); ?></textarea>
+	<?php
+	show_wysiwyg_editor("long","long",$fetch_content['long'],"100%","300px");
+	?>
 	</td>
 </tr>
 </table>

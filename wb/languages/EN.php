@@ -374,6 +374,9 @@ $TEXT['PAGE_LANGUAGES'] = 'Page Languages';
 $TEXT['HIDDEN'] = 'Hidden';
 $TEXT['MAIN'] = 'Main';
 
+//Stefans WYSIWYGmod
+$TEXT['EDITOR'] = "WYSIWYG Editor";
+
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, you do not have permissions to view this page';
 

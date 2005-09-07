@@ -201,6 +201,8 @@ if($database->is_error()) {
 	"\n".
 	"define('WYSIWYG_STYLE', '".$admin->add_slashes($_POST['wysiwyg_style'])."');\n".
 	"\n".
+	"define('WYSIWYG_EDITOR', '".addslashes($_POST['editor'])."');\n".
+	"\n".
 	"define('MANAGE_SECTIONS', ".str_replace(';', '', $_POST['manage_sections']).");\n".
 	"define('SECTION_BLOCKS', ".str_replace(';', '', $_POST['section_blocks']).");\n".
 	"\n".
