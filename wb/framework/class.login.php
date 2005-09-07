@@ -61,6 +61,7 @@ class login extends admin {
 		$this->forgotten_details_app = $config_array['FORGOTTEN_DETAILS_APP'];
 		$this->max_username_len = $config_array['MAX_USERNAME_LEN'];
 		$this->max_password_len = $config_array['MAX_PASSWORD_LEN'];
+		$this->redirect_url = $config_array['REDIRECT_URL'];
 		// Get the supplied username and password
 		if ($this->get_post('username_fieldname') != ''){
 			$username_fieldname = $this->get_post('username_fieldname');
@@ -84,10 +85,12 @@ class login extends admin {
 		}
 		// If the url is blank, set it to the default url
 		$this->url = $this->get_post('url');
+		if ($this->redirect_url!='') {
+			$this->url = $this->redirect_url;
+		}		
 		if(strlen($this->url) < 2) {
 			$this->url = $config_array['DEFAULT_URL'];
 		}
-		// Login the user
 		if($this->is_authenticated() == true) {
 			// User already logged-in, so redirect to default url
 			header('Location: '.$this->url);
@@ -134,6 +137,7 @@ class login extends admin {
 			$this->password = md5($this->password);
 			if($this->authenticate()) {
 				// Authentication successful
+				//echo $this->url;exit();
 				header("Location: ".$this->url);
 			} else {
 				$this->message = $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'];

@@ -62,14 +62,15 @@ $thisApp = new Login(
 									"MIN_PASSWORD_LEN" => "2",
 									"MAX_USERNAME_LEN" => "30",
 									"MAX_PASSWORD_LEN" => "30",
-									"LOGIN_URL" => WB_URL."/account/login".PAGE_EXTENSION,
+									"LOGIN_URL" => WB_URL."/account/login".PAGE_EXTENSION.'?redirect='.$_REQUEST['redirect'],
 									"DEFAULT_URL" => WB_URL.PAGES_DIRECTORY."/index".PAGE_EXTENSION,
 									"TEMPLATE_DIR" => ADMIN_PATH."/login",
 									"TEMPLATE_FILE" => "template.html",
 									"FRONTEND" => true,
 									"FORGOTTEN_DETAILS_APP" => WB_URL."/account/forgot.php".PAGE_EXTENSION,
 									"USERS_TABLE" => TABLE_PREFIX."users",
-									"GROUPS_TABLE" => TABLE_PREFIX."groups"
+									"GROUPS_TABLE" => TABLE_PREFIX."groups",
+									"REDIRECT_URL" => $_REQUEST['redirect']
 							)
 					);
 

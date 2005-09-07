@@ -220,7 +220,7 @@ class frontend extends wb {
 			// Check if the user is authenticated
 			if($this->is_authenticated() == false) {
 				// User needs to login first
-				header("Location: ".WB_URL."/account/login".PAGE_EXTENSION);
+				header("Location: ".WB_URL."/account/login".PAGE_EXTENSION.'?redirect='.$this->link);
 			}
 			// Check if we should show this page
 			if($this->show_page($this->page) == false) {

@@ -71,6 +71,7 @@ function toggle_checkbox(checkbox_id) {
 <form name="login" action="<?php echo WB_URL.'/account/login'.PAGE_EXTENSION; ?>" method="post">
 <input type="hidden" name="username_fieldname" value="<?php echo $username_fieldname; ?>" />
 <input type="hidden" name="password_fieldname" value="<?php echo $password_fieldname; ?>" />
+<input type="hidden" name="redirect" value="<?php echo $thisApp->redirect_url;?>" />
 
 <table cellpadding="5" cellspacing="0" border="0" width="90%">
 <tr>
