@@ -37,8 +37,6 @@ if(!defined('WB_URL')) {
 
 class wb
 {
-	function wb() {
-	}
 
 	// Check whether we should show a page or not (for front-end)
 	function show_page($page) {
@@ -73,12 +71,27 @@ class wb
 		}
 	}
 
+	// Modified addslashes function which takes into account magic_quotes
+	function addslashes($input) {
+		if ( get_magic_quotes_gpc() || ( !is_string($input) ) ) {
+			return $input;
+		}
+		$output = stripslashes($input);
+		return $output;
+	}
+
+	// Ditto for stripslashes
 	function stripslashes($input) {
 		if ( !get_magic_quotes_gpc() || ( !is_string($input) ) ) {
 			return $input;
 		}
 		$output = stripslashes($input);
 		return $output;
+	}
+
+	// Escape backslashes for use with mySQL LIKE strings
+	function escape_backslashes($input) {
+		return str_replace("\\","\\\\",$output);
 	}
 
 	// Get POST data

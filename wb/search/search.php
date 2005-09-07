@@ -35,9 +35,16 @@ if(SHOW_SEARCH != true) {
 	$items_listed = array();
 
 	// Get search string
-	if(isset($_POST['string'])) {
-		$string = addslashes(addslashes(str_replace(',', '', $_POST['string'])));
-		$search_string = htmlspecialchars($this->stripslashes(str_replace(',', '', $_POST['string'])),ENT_QUOTES);
+	if(isset($_REQUEST['string'])) {
+		if ($_REQUEST['match']!='exact') {
+			$string=str_replace(',', '', $_REQUEST['string']);
+		}
+		// reverse potential magic_quotes action
+		$original_string=$this->stripslashes($string);
+		// Double backslashes (mySQL needs doubly escaped backslashes in LIKE comparisons)
+		$string = addslashes($this->escape_backslashes($original_string));
+		// then escape for mySQL query
+		$search_string = htmlspecialchars($original_string,ENT_QUOTES);
 	} else {
 		$string = '';
 		$search_string = '';
@@ -47,21 +54,7 @@ if(SHOW_SEARCH != true) {
 	$all_checked = '';
 	$any_checked = '';
 	$exact_checked = '';
-	if(!isset($_POST['match'])) {
-		$match = 'all';
-		$operator = 'LIKE';
-		$wildcard = '%';
-		$all_checked = ' checked';
-	} elseif($_POST['match'] == 'all') {
-		$match = 'all';
-		$operator = 'LIKE';
-		$wildcard = '%';
-		$all_checked = ' checked';
-	} elseif($_POST['match'] == 'any') {
-		$match = 'any';
-		$operator = 'LIKE';
-		$wildcard = '%';
-		$any_checked = ' checked';
+	if($_REQUEST['match'] == 'any' OR $_REQUEST['match'] == 'all') {
 		// Split string into array with explode() function
 		$exploded_string = explode(' ', $string);
 		// Make sure there is no blank values in the array
@@ -71,18 +64,19 @@ if(SHOW_SEARCH != true) {
 				$string[] = $each_exploded_string;
 			}
 		}
-	} elseif($_POST['match'] == 'exact') {
-		$match = 'exact';
-		$operator = '=';
-		$wildcard = '';
-		$exact_checked = ' checked';
+		if ($_REQUEST['match'] == 'any') {
+			$any_checked = ' checked';
+			$logical_operator = ' OR';
+		} else {
+			$all_checked = ' checked';
+			$logical_operator = ' AND';
+		}
 	} else {
-		$match = 'all';
-		$operator = 'LIKE';
-		$wildcard = '%';
-		$all_checked = ' checked';
-	}
-	
+		$exact_checked = ' checked';
+		$exact_string=$string;
+		$string=array();
+		$string[]=$exact_string;
+	}	
 	// Get list of usernames and display names
 	$query_users = $database->query("SELECT user_id,username,display_name FROM ".TABLE_PREFIX."users");
 	$users = array('0' => array('display_name' => $TEXT['UNKNOWN'], 'username' => strtolower($TEXT['UNKNOWN'])));
@@ -139,25 +133,17 @@ if(SHOW_SEARCH != true) {
 		// Show search results_header
 		echo $search_results_header;
 		// Search page details only, such as description, keywords, etc.
-		if($match == 'all' OR $match == 'exact') {
-			$query_pages = $database->query("SELECT page_id, page_title, menu_title, link, description, modified_when, modified_by FROM ".TABLE_PREFIX."pages".
-			" WHERE visibility != 'none' AND visibility != 'deleted' AND page_title $operator '$wildcard$string$wildcard' AND searching = '1' ".
-			" OR visibility != 'none' AND visibility != 'deleted' AND menu_title $operator '$wildcard$string$wildcard' AND searching = '1'".
-			" OR visibility != 'none' AND visibility != 'deleted' AND description $operator '$wildcard$string$wildcard' AND searching = '1'".
-			" OR visibility != 'none' AND visibility != 'deleted' AND keywords $operator '$wildcard$string$wildcard' AND searching = '1'");
-		} elseif($match == 'any') {
 			$query_pages = "SELECT page_id, page_title, menu_title, link, description, modified_when, modified_by FROM ".TABLE_PREFIX."pages WHERE ";
 			$count = 0;
 			foreach($string AS $each_string) {
-				if($count != 0) { $query_pages .= ' OR'; }
-				$query_pages .= " visibility != 'none' AND page_title $operator '$wildcard$each_string$wildcard' AND searching = '1'".
-				" OR visibility != 'none' AND visibility != 'deleted' AND menu_title $operator '$wildcard$each_string$wildcard' AND searching = '1'".
-				" OR visibility != 'none' AND visibility != 'deleted' AND description $operator '$wildcard$each_string$wildcard' AND searching = '1'".
-				" OR visibility != 'none' AND visibility != 'deleted' AND keywords $operator '$wildcard$each_string$wildcard' AND searching = '1'";
+				if($count != 0) { $query_pages .= $logical_operator; }
+				$query_pages .= " visibility != 'none' AND page_title LIKE '%$each_string%' AND searching = '1'".
+				" OR visibility != 'none' AND visibility != 'deleted' AND menu_title LIKE '%$each_string%' AND searching = '1'".
+				" OR visibility != 'none' AND visibility != 'deleted' AND description LIKE '%$each_string%' AND searching = '1'".
+				" OR visibility != 'none' AND visibility != 'deleted' AND keywords LIKE '%$each_string%' AND searching = '1'";
 				$count = $count+1;
 			}
 			$query_pages = $database->query($query_pages);
-		}
 		// Loop through pages
 		if($query_pages->numRows() > 0) {
 			while($page = $query_pages->fetchRow()) {
@@ -212,22 +198,16 @@ if(SHOW_SEARCH != true) {
 							// Fetch query start
 							$fetch_query_body = $get_query_body->fetchRow();
 							// Prepare query body for execution by replacing {STRING} with the correct one
-							$query_body = str_replace(array('[TP]','[O]','[W]'), array(TABLE_PREFIX,$operator,$wildcard), $this->stripslashes($fetch_query_body['value']));
-							// If we need to match any of the words, loop through the body for each one then combine with start and end, otherwise just combine without looping
-							if($match == 'any') {
-								// Loop through query body for each string, then combine with start and end
-								$prepared_query = $query_start;
-								$count = 0;
-								foreach($string AS $each_string) {
-									if($count != 0) { $prepared_query .= 'OR'; }
-									$prepared_query .= str_replace('[STRING]', $each_string, $query_body);
-									$count = $count+1;
-								}
-								$prepared_query .= $query_end;
-							} else {
-								// Replace {STRING} with $string, then combine with start and end
-								$prepared_query = $query_start.str_replace('[STRING]', $string, $query_body).$query_end;
+							$query_body = str_replace(array('[TP]','[O]','[W]'), array(TABLE_PREFIX,'LIKE','%'), $this->stripslashes($fetch_query_body['value']));
+							// Loop through query body for each string, then combine with start and end
+							$prepared_query = $query_start;
+							$count = 0;
+							foreach($string AS $each_string) {
+								if($count != 0) { $prepared_query .= $logical_operator; }
+								$prepared_query .= str_replace('[STRING]', $each_string, $query_body);
+								$count = $count+1;
 							}
+							$prepared_query .= $query_end;
 							// Execute query
 							$query = $database->query($prepared_query);
 							// Loop though queried items
