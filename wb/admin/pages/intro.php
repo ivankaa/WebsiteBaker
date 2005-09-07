@@ -38,24 +38,64 @@ if(file_exists($filename)) {
 	$content = '';
 }
 
-// Create new template object, insert vars, then parse template oject
-$template = new Template(ADMIN_PATH.'/pages');
-$template->set_file('page', 'intro.html');
-$template->set_block('page', 'main_block', 'main');
-$template->set_var(array(
-								'CONTENT' => $admin->strip_slashes_dummy($content),
-								'WB_URL' => WB_URL,
-								'ADMIN_URL' => ADMIN_URL,
-								'TEXT_SAVE' => $TEXT['SAVE'],
-								'TEXT_CANCEL' => $TEXT['CANCEL']
-								)
-						);
 if(!isset($_GET['wysiwyg']) OR $_GET['wysiwyg'] != 'no') {
-	$template->set_var('WYSIWYG_FIELD', 'content');
-}
-$template->parse('main', 'main_block', false);
-$template->pparse('output', 'page');
+	if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="htmlarea" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
+?>
+<script type="text/javascript">
+  _editor_url = "<?php echo WB_URL;?>/include/htmlarea/";
+  _editor_lang = "en";
+</script>
+<script type="text/javascript" src="<?php echo WB_URL;?>/include/htmlarea/htmlarea.js"></script>
+<script type="text/javascript">
+HTMLArea.loadPlugin("FullPage");
+HTMLArea.loadPlugin("ContextMenu");
+HTMLArea.loadPlugin("TableOperations");
+function initEditor() {
 
+  var editor = new HTMLArea("content");
+  editor.registerPlugin(FullPage);
+  editor.registerPlugin(ContextMenu);
+  editor.registerPlugin(TableOperations);
+  editor.generate();
+}
+</script>
+<?php
+
+	function show_wysiwyg_editor($name,$id,$content,$width,$height) {
+		echo '<textarea name="'.$name.'" id="'.$id.'" style="width: '.$width.'; height: '.$height.';">'.$content.'</textarea>';
+	}
+
+
+	} else {
+		$id_list=array('content');
+		require(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
+	}
+}
+?>
+
+
+<form action="intro2.php" method="post">
+
+<input type="hidden" name="page_id" value="{PAGE_ID}" />
+
+<?php
+show_wysiwyg_editor('content','content',$content,'100%','500px');
+?>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+	<td align="left">
+		<input type="submit" value="<?php echo $TEXT['SAVE'];?>" style="width: 100px; margin-top: 5px;" />
+	</td>
+	<td align="right">
+		</form>
+		<input type="button" value="<?php echo $TEXT['CANCEL'];?>" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
+	</td>
+</tr>
+</table>
+
+</form>
+<?php
 // Print admin footer
 $admin->print_footer();
 
