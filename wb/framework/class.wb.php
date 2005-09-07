@@ -37,6 +37,8 @@ if(!defined('WB_URL')) {
 
 class wb
 {
+	function wb() {
+	}
 
 	// Check whether we should show a page or not (for front-end)
 	function show_page($page) {
