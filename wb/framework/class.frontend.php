@@ -418,7 +418,7 @@ class frontend extends wb {
 		// Make sure block is numeric
 		if(!is_numeric($block)) { $block = 1; }
 		// Include page content
-		if(!defined('PAGE_CONTENT')) {
+		if(!defined('PAGE_CONTENT') OR block!=1) {
 			// First get all sections for this page
 			$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '".PAGE_ID."' AND block = '$block' ORDER BY position");
 			if($query_sections->numRows() > 0) {
@@ -430,9 +430,7 @@ class frontend extends wb {
 				}
 			}
 		} else {
-			if($block == 1) {
-				require(PAGE_CONTENT);
-			}
+			require(PAGE_CONTENT);
 		}
 	}
 
