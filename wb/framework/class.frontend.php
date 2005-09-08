@@ -38,7 +38,10 @@ require_once(WB_PATH.'/framework/class.wb.php');
 
 class frontend extends wb {
 	// defaults
-	var	$default_link,$default_page_id;
+	var $default_link,$default_page_id;
+	// when multiple blocks are used, show home page blocks on 
+	// pages where no content is defined (search, login, ...)
+	var $no_default_content=false;
 
 	// page details
 	// page database row
@@ -90,7 +93,7 @@ class frontend extends wb {
 			if($default_num_rows > 0) {
 				$fetch_default = $get_default->fetchRow();
 				$this->default_link = $fetch_default['link'];
-				$default_page_id = $fetch_default['page_id'];
+				$this->default_page_id = $fetch_default['page_id'];
 				// Check if we should redirect or include page inline
 				if(HOMEPAGE_REDIRECTION) {
 					// Redirect to page
@@ -98,7 +101,7 @@ class frontend extends wb {
 					exit();
 				} else {
 					// Include page inline
-					$this->page_id = $default_page_id;
+					$this->page_id = $this->default_page_id;
 				}
 			} else {
 		   		// No pages have been added, so print under construction page
@@ -112,6 +115,7 @@ class frontend extends wb {
 		if(!isset($fetch_default)) {
 		  	$fetch_default = $get_default->fetchRow();
 	 		$this->default_link = $fetch_default['link'];
+			$this->default_page_id = $fetch_default['page_id'];
 		}
 		return true;
 	}
@@ -419,8 +423,16 @@ class frontend extends wb {
 		if(!is_numeric($block)) { $block = 1; }
 		// Include page content
 		if(!defined('PAGE_CONTENT') OR $block!=1) {
+			if ($this->page_id==0) {
+				if ($block != 1 AND $this->no_default_content==true) {
+					return;
+				}
+				$page_id=$this->default_page_id;
+			} else {
+				$page_id=$this->page_id;
+			}
 			// First get all sections for this page
-			$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '".PAGE_ID."' AND block = '$block' ORDER BY position");
+			$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '".$page_id."' AND block = '$block' ORDER BY position");
 			if($query_sections->numRows() > 0) {
 				// Loop through them and include there modules file
 				while($section = $query_sections->fetchRow()) {
@@ -430,7 +442,9 @@ class frontend extends wb {
 				}
 			}
 		} else {
-			require(PAGE_CONTENT);
+			if($block == 1) {
+				require(PAGE_CONTENT);
+			}
 		}
 	}
 
