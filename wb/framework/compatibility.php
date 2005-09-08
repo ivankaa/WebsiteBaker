@@ -33,7 +33,7 @@ if(!defined('WB_URL')) {
 
 function page_link($link) {
 	global $wb;
-	$wb->page_link($link);
+	return $wb->page_link($link);
 }
 
 
