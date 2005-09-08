@@ -1,6 +1,6 @@
 <?php
 
-// $Id: intro2.php,v 1.7 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -27,7 +27,7 @@
 if(!isset($_POST['content'])) {
 	header("Location: intro.php");
 } else {
-	$content = $_POST['content'];
+	$content = htmlspecialchars($_POST['content']);
 }
 
 // Create new admin object
