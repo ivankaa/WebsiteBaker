@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.6.0 -------------------------------------
 09-Sep-2005 Stefan Braunewell
+-/!	Removed initialize.php again, initialization now takes place in
+	class wb constructor.
 #	Fixed bug when changing a page's parent
 !	Changed the way blocks are treated. Added new frontend class attribute
 	default_block_content that controls what is shown on pages such as
