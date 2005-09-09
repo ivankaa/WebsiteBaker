@@ -39,7 +39,7 @@ function page_link($link) {
 
 function page_content($block=1) {
 	global $wb;
-	$wb->page_content($block);
+	$wb->content($block);
 }
 
 // Old menu call invokes new menu function

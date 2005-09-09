@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.6.0 -------------------------------------
 09-Sep-2005 Stefan Braunewell
++	Added breadcrumbs code. Call using $wb->breadcrumbs().
 +	Added utf-8 character encoding meta tag into all stock templates.
 -/!	Removed initialize.php again, initialization now takes place in
 	class wb constructor.

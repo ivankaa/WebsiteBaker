@@ -410,7 +410,7 @@ class frontend extends wb {
 	   }
 	}
 
-	function page_content($block = 1) {
+	function content($block = 1) {
 		// Get outside objects
 		global $TEXT,$MENU,$HEADING,$MESSAGE;
 		global $globals;
@@ -449,6 +449,32 @@ class frontend extends wb {
 			}
 		} else {
 			require(PAGE_CONTENT);
+		}
+	}
+
+	function breadcrumbs($sep=' > ',$tier=1,$links=true) {
+		$page_id=&$this->page_id;
+		if ($page_id!=0)
+		{
+	 		global $database;
+			$bca=&$this->page_trail;
+			if (sizeof($bca)==0)
+			        create_breadcrumbs($page_id);
+			$counter=0;
+			foreach ($bca as $temp)
+			{
+		        if ($counter>=(tier-1));
+		        {
+					if ($counter>=$tier) echo $sep;
+					$query_menu=$database->query("SELECT menu_title,link FROM ".TABLE_PREFIX."pages WHERE page_id=$temp");
+					$page=$query_menu->fetchRow();
+					if ($links==true AND $temp!=$page_id)
+						echo '<a href="'.page_link($page['link']).'">'.$page['menu_title'].'</a>';
+					else
+					        echo stripslashes($page['menu_title']);
+		        }
+                $counter++;
+			}
 		}
 	}
 
