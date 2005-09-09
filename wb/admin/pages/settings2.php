@@ -172,42 +172,21 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 		}
 		// Update any pages that had the old link with the new one
 		$old_link_len = strlen($old_link);
-		$query_subs = $database->query("SELECT page_id,link,level FROM ".TABLE_PREFIX."pages WHERE link LIKE '%$old_link/%'");
+		$query_subs = $database->query("SELECT page_id,link,level FROM ".TABLE_PREFIX."pages WHERE link LIKE '%$old_link/%' ORDER BY LEVEL ASC");
 		if($query_subs->numRows() > 0) {
 			while($sub = $query_subs->fetchRow()) {
 				// Double-check to see if it contains old link
 				if(substr($sub['link'], 0, $old_link_len) == $old_link) {
 					// Get new link
 					$replace_this = $old_link;
-					$with_this = $link;
-					$old_value = $sub['link'];
-					$new_value = '';
-					$explode = explode('/',$old_value);
-					$replaced = false;
-					foreach($explode AS $exploded) {
-						if($exploded != '') {
-							$exploded_value = '/'.$exploded;
-							if($replaced != true AND strstr($exploded_value,$replace_this) != '') {
-								$new_value .= str_replace($replace_this,$with_this,$exploded_value);
-								$replaced = true;
-							} else {
-								$new_value .= $exploded_value;
-							}
-						}
-					}
-					$new_sub_link = $new_value;
+					$old_sub_link_len =strlen($sub['link']);
+					$new_sub_link = $link.'/'.substr($sub['link'],$old_link_len+1,$old_sub_link_len);
 					// Work out level
 					$new_sub_level = level_count($sub['page_id']);
-					// If level has changed update level as well as link
-					if($new_sub_level != $sub['level']) {
-						// Update level and link
-						$database->query("UPDATE ".TABLE_PREFIX."pages SET link = '$new_sub_link', level = '$new_sub_level' WHERE page_id = '".$sub['page_id']."' LIMIT 1");
-					} else {
-						// Update link
-						$database->query("UPDATE ".TABLE_PREFIX."pages SET link = '$new_sub_link' WHERE page_id = '".$sub['page_id']."' LIMIT 1");
-					}
+					// Update level and link
+					$database->query("UPDATE ".TABLE_PREFIX."pages SET link = '$new_sub_link', level = '$new_sub_level' WHERE page_id = '".$sub['page_id']."' LIMIT 1");
 					// Re-write the access file for this page
-					$old_subpage_file = WB_PATH.PAGES_DIRECTORY.$sub['link'].'.php';
+					$old_subpage_file = WB_PATH.PAGES_DIRECTORY.$new_sub_link.'.php';
 					if(file_exists($old_subpage_file)) {
 						unlink($old_subpage_file);
 					}
