@@ -1,6 +1,6 @@
 <?php
 
-// $Id: upload.php,v 1.11 2005/04/25 11:53:12 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -53,6 +53,16 @@ if($admin->get_post('overwrite') != '') {
 	$overwrite = false;
 }
 
+// Get list of file types to which we're supposed to append 'txt'
+$get_result=$database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name='rename_files_on_upload' LIMIT 1");
+$file_extension_string='';
+if ($get_result->numRows()>0) {
+	$fetch_result=$get_result->fetchRow();
+	$file_extension_string=$fetch_result['value'];
+}
+$file_extensions=explode(",",$file_extension_string);
+
+
 // Loop through the files
 $good_uploads = 0;
 for($count = 1; $count <= 10; $count++) {
@@ -62,6 +72,13 @@ for($count = 1; $count <= 10; $count++) {
 		$filename = media_filename($_FILES["file$count"]['name']);
 		// Check if there is still a filename left
 		if($filename != '') {
+			// Check for potentially malicious files and append 'txt' to their name
+			foreach($file_extensions as $file_ext) {
+				$file_ext_len=strlen($file_ext);
+				if (substr($filename,-$file_ext_len)==$file_ext) {
+					$filename.='.txt';
+				}
+			}		
 			// Move to relative path (in media folder)
 			if(file_exists($relative.$filename) AND $overwrite == true) {			
 				if(move_uploaded_file($_FILES["file$count"]['tmp_name'], $relative.$filename)) {

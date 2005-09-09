@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.6.0 -------------------------------------
 09-Sep-2005 Stefan Braunewell
++	Added new advanced setting "Rename Files On Upload". File extensions can be
+	given so that respective files will have a ".txt" appended on media upload.
 #	Fixed "None found" message bug when user has no top level page edit
 	rights.
 #	Fixed missing parent option 'none' - ticket #12 - and a minor scope bug.

@@ -32,6 +32,16 @@ require_once(WB_PATH.'/framework/functions.php');
 // Include the basic header file
 require(ADMIN_PATH.'/media/basic_header.html');
 
+// Get list of file types to which we're supposed to append 'txt'
+$get_result=$database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name='rename_files_on_upload' LIMIT 1");
+$file_extension_string='';
+if ($get_result->numRows()>0) {
+	$fetch_result=$get_result->fetchRow();
+	$file_extension_string=$fetch_result['value'];
+}
+$file_extensions=explode(",",$file_extension_string);
+
+
 // Get the current dir
 $directory = $admin->get_post('dir');
 if($directory == '/') {
@@ -128,6 +138,15 @@ if($name == 'index.php') {
 if($name == '') {
 	$admin->print_error($MESSAGE['MEDIA']['BLANK_NAME'], "rename.php?dir=$directory&id=$file_id", false);
 }
+
+// Check for potentially malicious files and append 'txt' to their name
+foreach($file_extensions as $file_ext) {
+	$file_ext_len=strlen($file_ext);
+	if (substr($name,-$file_ext_len)==$file_ext) {
+		$name.='.txt';
+	}
+}		
+
 
 // Check if we should overwrite or not
 if($admin->get_post('overwrite') != 'yes' AND file_exists(WB_PATH.MEDIA_DIRECTORY.$directory.'/'.$name) == true) {

@@ -291,8 +291,6 @@ $config_content = "" .
 "define('HOMEPAGE_REDIRECTION', false);\n".
 "define('PAGE_LANGUAGES', false);\n".
 "\n".
-"define('WYSIWYG_STYLE', 'font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;');\n".
-"\n".
 "define('MANAGE_SECTIONS', true);\n".
 "define('SECTION_BLOCKS', false);\n".
 "\n".
@@ -499,6 +497,11 @@ if($install_tables == true) {
 	$database->query($insert_website_header);
 	$insert_website_footer = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'footer', '')";
 	$database->query($insert_website_footer);
+	$insert_wysiwyg_style = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'wysiwyg_style', 'font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;')";
+	$database->query($insert_wysiwyg_style);
+	$insert_rename_files_on_upload = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'rename_files_on_upload', 'php,asp,phpx,aspx')";
+	$database->query($insert_rename_files_on_upload);
+	
 	// Search header
 	$search_header = addslashes('
 <h1>Search</h1>

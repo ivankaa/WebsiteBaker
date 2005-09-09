@@ -31,9 +31,6 @@ if(isset($_GET['advanced']) AND $_GET['advanced'] == 'yes') {
 	$admin = new admin('Settings', 'settings_basic');
 }
 
-// Create new database object
-$database = new database();
-
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
@@ -72,6 +69,13 @@ while($setting = $results->fetchRow()) {
 		// Website footer
 		case 'footer':
 			$template->set_var('FOOTER', $setting_value);
+		break;
+		// WYSIWYG style
+		case 'wysiwyg_style':
+			$template->set_var('WYSIWYG_STYLE', $setting_value);
+		break;
+		case 'rename_files_on_upload':
+			$template->set_var('RENAME_FILES_ON_UPLOAD', $setting_value);
 		break;
 	}
 }
@@ -489,9 +493,6 @@ if(extract_permission(STRING_DIR_MODE, 'o', 'e')) {
 	$template->set_var('DIR_O_E_CHECKED', 'checked');
 }
 
-// Insert WYSIWYG style value into template
-$template->set_var('WYSIWYG_STYLE', $admin->strip_slashes_dummy(WYSIWYG_STYLE));
-
 // Insert Server Email value into template
 $template->set_var('SERVER_EMAIL', SERVER_EMAIL);
 
@@ -533,6 +534,7 @@ $template->set_var(array(
 								'TEXT_PHP_ERROR_LEVEL' => $TEXT['PHP_ERROR_LEVEL'],
 								'TEXT_PAGE_EXTENSION' => $TEXT['PAGE_EXTENSION'],
 								'TEXT_PAGE_SPACER' => $TEXT['PAGE_SPACER'],
+								'TEXT_RENAME_FILES_ON_UPLOAD' => $TEXT['RENAME_FILES_ON_UPLOAD'],
 								'TEXT_SERVER_OPERATING_SYSTEM' => $TEXT['SERVER_OPERATING_SYSTEM'],
 								'TEXT_LINUX_UNIX_BASED' => $TEXT['LINUX_UNIX_BASED'],
 								'TEXT_WINDOWS' => $TEXT['WINDOWS'],

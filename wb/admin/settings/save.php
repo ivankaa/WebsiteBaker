@@ -199,8 +199,6 @@ if($database->is_error()) {
 	"define('HOMEPAGE_REDIRECTION', ".str_replace(';', '', $_POST['homepage_redirection']).");\n".
 	"define('PAGE_LANGUAGES', ".str_replace(';', '', $_POST['page_languages']).");\n".
 	"\n".
-	"define('WYSIWYG_STYLE', '".$admin->add_slashes($_POST['wysiwyg_style'])."');\n".
-	"\n".
 	"define('WYSIWYG_EDITOR', '".addslashes($_POST['wysiwyg_editor'])."');\n".
 	"\n".
 	"define('MANAGE_SECTIONS', ".str_replace(';', '', $_POST['manage_sections']).");\n".
