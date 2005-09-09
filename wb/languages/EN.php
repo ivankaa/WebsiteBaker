@@ -366,6 +366,7 @@ $TEXT['LAST_UPDATED_BY'] = 'Last Updated By';
 $TEXT['RESULTS_FOR'] = 'Results For';
 $TEXT['TIME'] = 'Time';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Style';
+$TEXT['WYSIWYG_EDITOR'] = "WYSIWYG Editor";
 $TEXT['SERVER_EMAIL'] = 'Server Email';
 $TEXT['MENU'] = 'Menu';
 $TEXT['MANAGE_GROUPS'] = 'Manage Groups';
@@ -374,8 +375,6 @@ $TEXT['PAGE_LANGUAGES'] = 'Page Languages';
 $TEXT['HIDDEN'] = 'Hidden';
 $TEXT['MAIN'] = 'Main';
 
-//Stefans WYSIWYGmod
-$TEXT['EDITOR'] = "WYSIWYG Editor";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, you do not have permissions to view this page';
