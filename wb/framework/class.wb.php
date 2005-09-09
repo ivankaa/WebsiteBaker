@@ -30,6 +30,8 @@ wb class
 This class is the basis for admin and frontend classes.
 
 */
+require_once(WB_PATH.'/framework/class.database.php');
+		
 
 class wb
 {	
@@ -39,7 +41,6 @@ class wb
 		// set global database variable
 		global $database;
 		// Create database class
-		require_once(WB_PATH.'/framework/class.database.php');
 		$database = new database();
 		$this->database = $database;
 

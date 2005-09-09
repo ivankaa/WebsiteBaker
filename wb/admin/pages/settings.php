@@ -249,29 +249,29 @@ function parent_list($parent) {
 			// Title -'s prefix
 			$title_prefix = '';
 			for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - '; }
-				$template->set_var(array(
-												'ID' => $page['page_id'],
-												'TITLE' => $admin->strip_slashes_dummy($title_prefix.$page['page_title'])
-												)
-										);
-				if($results_array['parent'] == $page['page_id']) {
-					$template->set_var('SELECTED', ' selected');
-				} elseif($results_array['page_id'] == $page['page_id']) {
-					$template->set_var('SELECTED', ' disabled');
-					$list_next_level=false;
-				} elseif($can_modify != true) {
-					$template->set_var('SELECTED', ' disabled');
-				} else {
-					$template->set_var('SELECTED', '');
-				}
-				$template->parse('page_list2', 'page_list_block2', true);
+			$template->set_var(array(
+											'ID' => $page['page_id'],
+											'TITLE' => $admin->strip_slashes_dummy($title_prefix.$page['page_title'])
+											)
+									);
+			if($results_array['parent'] == $page['page_id']) {
+				$template->set_var('SELECTED', ' selected');
+			} elseif($results_array['page_id'] == $page['page_id']) {
+				$template->set_var('SELECTED', ' disabled');
+				$list_next_level=false;
+			} elseif($can_modify != true) {
+				$template->set_var('SELECTED', ' disabled');
+			} else {
+				$template->set_var('SELECTED', '');
 			}
+			$template->parse('page_list2', 'page_list_block2', true);
+		}
 		if ($list_next_level)
 			parent_list($page['page_id']);
 	}
 }
 $template->set_block('main_block', 'page_list_block2', 'page_list2');
-if($admin->get_permission('pages_add_l0') == true) {
+if($admin->get_permission('pages_add_l0') == true OR $results_array['level'] == 0) {
 	if($results_array['parent'] == 0) { $selected = ' selected'; } else { $selected = ''; }
 	$template->set_var(array(
 									'ID' => '0',
