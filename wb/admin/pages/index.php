@@ -230,7 +230,7 @@ function make_list($parent, $editable_pages) {
 							
 			<?php
 			// Get subs
-			make_list($page['page_id'], $editable_pages);
+			$editable_pages=make_list($page['page_id'], $editable_pages);
 		}
 
 	}

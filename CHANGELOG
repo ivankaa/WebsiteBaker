@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.6.0 -------------------------------------
 09-Sep-2005 Stefan Braunewell
+#	Fixed "None found" message bug when user has no top level page edit
+	rights.
 #	Fixed missing parent option 'none' - ticket #12 - and a minor scope bug.
 +	Added breadcrumbs code. Call using $wb->breadcrumbs().
 +	Added utf-8 character encoding meta tag into all stock templates.
