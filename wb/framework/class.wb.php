@@ -32,8 +32,74 @@ This class is the basis for admin and frontend classes.
 */
 
 class wb
-{
+{	
+	// General initialization function 
+	// performed when frontend or backend is loaded.
 	function wb() {
+		// set global database variable
+		global $database;
+		// Create database class
+		require_once(WB_PATH.'/framework/class.database.php');
+		$database = new database();
+		$this->database = $database;
+
+		// Start a session
+		if(!defined('SESSION_STARTED')) {
+			session_name(APP_NAME.'_session_id');
+			session_start();
+			define('SESSION_STARTED', true);
+		}
+		
+		// Get users language
+		if(isset($_GET['lang']) AND $_GET['lang'] != '' AND !is_numeric($_GET['lang']) AND strlen($_GET['lang']) == 2) {
+		  	define('LANGUAGE', strtoupper($_GET['lang']));
+			$_SESSION['LANGUAGE']=LANGUAGE;
+		} else {
+			if(isset($_SESSION['LANGUAGE']) AND $_SESSION['LANGUAGE'] != '') {
+				define('LANGUAGE', $_SESSION['LANGUAGE']);
+			} else {
+				define('LANGUAGE', DEFAULT_LANGUAGE);
+			}
+		}
+
+		// make language variables globally accessible
+		global $language_code, $language_name, $language_author, $language_version, $language_designed_for;
+		global $MENU, $OVERVIEW, $TEXT, $HEADING, $MESSAGE;
+		// Load Language file
+		if(!defined('LANGUAGE_LOADED')) {
+			if(!file_exists(WB_PATH.'/languages/'.LANGUAGE.'.php')) {
+				exit('Error loading language file '.LANGUAGE.', please check configuration');
+			} else {
+				require_once(WB_PATH.'/languages/'.LANGUAGE.'.php');
+			}
+		}
+		
+		// Get users timezone
+		if(!defined('TIMEZONE')) {
+			if(isset($_SESSION['TIMEZONE'])) {
+				define('TIMEZONE', $_SESSION['TIMEZONE']);
+			} else {
+				define('TIMEZONE', DEFAULT_TIMEZONE);
+			}
+		}
+		// Get users date format
+		if(!defined('DATE_FORMAT')) {
+			if(isset($_SESSION['DATE_FORMAT'])) {
+				define('DATE_FORMAT', $_SESSION['DATE_FORMAT']);
+			} else {
+				define('DATE_FORMAT', DEFAULT_DATE_FORMAT);
+			}
+		}
+		// Get users time format
+		if(!defined('TIME_FORMAT')) {
+			if(isset($_SESSION['TIME_FORMAT'])) {
+				define('TIME_FORMAT', $_SESSION['TIME_FORMAT']);
+			} else {
+				define('TIME_FORMAT', DEFAULT_TIME_FORMAT);
+			}
+		}
+		
+		set_magic_quotes_runtime(0);
 	}
 
 	// Check whether we should show a page or not (for front-end)

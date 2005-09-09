@@ -11,9 +11,22 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.0 -------------------------------------
+09-Sep-2005 Stefan Braunewell
+#	Fixed bug when changing a page's parent
+!	Changed the way blocks are treated. Added new frontend class attribute
+	default_block_content that controls what is shown on pages such as
+	search, login, etc. (Ticket #16)
++	Added support for WYSIWYG editor modules (wysiwygmod)
++	When trying to access a registered page, user is automatically redirected
+	there on successful login.
+#	Fixed various issues with system search (mainly related to stripslashes()
+#	Removed stripslashes() in many places in the code. Added check for
+	magic_quotes_gpc to new wb class method add_slashes(). Now database contest
+	is independent of magic_quotes setting..
 05-Sep-2005 Stefan Braunewell
 #	Fixed bug concerning direct access of preferences page.
-#	Reworked page visibility and menu item visibility code (frontend login problem).
+#	Reworked page visibility and menu item visibility code (frontend login
+	problem).
 #	Pages in link list in htmlarea popup are now correctly ordered.
 #	Fixed bug where group with existing name can be added.
 04-Sep-2005 Ryan Djurovich

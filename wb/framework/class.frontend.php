@@ -41,7 +41,7 @@ class frontend extends wb {
 	var $default_link,$default_page_id;
 	// when multiple blocks are used, show home page blocks on 
 	// pages where no content is defined (search, login, ...)
-	var $no_default_content=false;
+	var $no_default_block_content=false;
 
 	// page details
 	// page database row
@@ -64,7 +64,7 @@ class frontend extends wb {
 	
 	function page_select() {
 		global $page_id,$no_intro;
-		global $database;
+		$database=& $this->database;
 		// We have no page id and are supposed to show the intro page
 		if((INTRO_PAGE AND !isset($no_intro)) AND (!isset($page_id) OR !is_numeric($page_id))) {
 			// Since we have no page id check if we should go to intro page or default page
@@ -121,7 +121,7 @@ class frontend extends wb {
 	}
 
 	function get_page_details() {
-		global $database;
+		$database = & $this->database;
 	    if($this->page_id != 0) {
 			// Query page details
 			$query_page = "SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = '{$this->page_id}'";
@@ -249,7 +249,7 @@ class frontend extends wb {
 	}
 
 	function get_website_settings() {
-		global $database;
+		$database = & $this->database;
 		// Get website settings (title, keywords, description, header, and footer)
 		$query_settings = "SELECT name,value FROM ".TABLE_PREFIX."settings";
 		$get_settings = $database->query($query_settings);
@@ -297,7 +297,7 @@ class frontend extends wb {
 	}
 	
 	function preprocess(&$content) {
-		global $database;
+		$database = & $this->database;
 		// Replace [wblink--PAGE_ID--] with real link
 		$pattern = '/\[wblink(.+?)\]/s';
 		preg_match_all($pattern,$content,$ids);
@@ -360,7 +360,7 @@ class frontend extends wb {
 	}
 	
 	function show_menu() {
-	   global $database;
+	   $database = & $this->database;
 	   if ($this->menu_recurse==0)
 	       return;
 	   // Check if we should add menu number check to query
@@ -412,8 +412,10 @@ class frontend extends wb {
 
 	function page_content($block = 1) {
 		// Get outside objects
-		global $database,$admin,$TEXT,$MENU,$HEADING,$MESSAGE;
+		global $TEXT,$MENU,$HEADING,$MESSAGE;
 		global $globals;
+		$database = & $this->database;
+		$admin = & $this;
 		if ($this->page_access_denied==true) {
             echo $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'];
 			exit();
@@ -424,10 +426,14 @@ class frontend extends wb {
 		// Include page content
 		if(!defined('PAGE_CONTENT') OR $block!=1) {
 			if ($this->page_id==0) {
-				if ($block != 1 AND $this->no_default_content==true) {
+				if ($this->default_block_content=='none') {
 					return;
 				}
-				$page_id=$this->default_page_id;
+				if (is_numeric($this->default_block_content)) {
+					$page_id=$this->default_block_content;
+				} else {
+					$page_id=$this->default_page-id;
+				}				
 			} else {
 				$page_id=$this->page_id;
 			}
@@ -442,9 +448,7 @@ class frontend extends wb {
 				}
 			}
 		} else {
-			if($block == 1) {
-				require(PAGE_CONTENT);
-			}
+			require(PAGE_CONTENT);
 		}
 	}
 

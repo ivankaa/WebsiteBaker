@@ -36,10 +36,9 @@ if(!defined('WB_URL')) {
 	header('Location: ../index.php');
 }
 
-
 require_once(WB_PATH.'/framework/class.wb.php');
 
-require_once(WB_PATH.'/framework/initialize.php');
+//require_once(WB_PATH.'/framework/initialize.php');
 
 // Include PHPLIB template class
 require_once(WB_PATH."/include/phplib/template.inc");
@@ -52,9 +51,11 @@ require_once(ADMIN_PATH.'/interface/version.php');
 Begin user changeable settings
 */
 
+
 class admin extends wb {
 	// Authenticate user then auto print the header
 	function admin($section_name, $section_permission = 'start', $auto_header = true, $auto_auth = true) {
+		$this->wb();
 		global $MESSAGE;
 		// Specify the current applications name
 		$this->section_name = $section_name;
@@ -83,7 +84,7 @@ class admin extends wb {
 		global $MESSAGE;
 		global $TEXT;
 		// Connect to database and get website title
-		$database = new database();
+		$database = & $this->database;
 		$get_title = $database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name = 'title'");
 		$title = $get_title->fetchRow();
 		$header_template = new Template(ADMIN_PATH."/interface");
