@@ -26,7 +26,7 @@
 $starttime=microtime();
 
 // Include config file
-require_once('config.php');
+require_once(dirname(__FILE__).'/config.php');
 
 // Check if the config file has been set-up
 if(!defined('WB_PATH')) {

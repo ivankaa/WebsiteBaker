@@ -25,7 +25,6 @@
 
 // Include WB files
 require_once('../../config.php');
-require_once(WB_PATH.'/framework/class.database.php');
 require_once(WB_PATH.'/framework/class.frontend.php');
 $database = new database();
 $wb = new frontend();
