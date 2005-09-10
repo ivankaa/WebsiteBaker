@@ -31,9 +31,8 @@ require(WB_PATH.'/modules/admin.php');
 
 // Update the mod_wysiwygs table with the contents
 if(isset($_POST['content'])) {
-	$tags = array('<?php', '?>', '<?');
-	$blanks = array('','','');
-	$content = $admin->add_slashes(str_replace($tags, $blanks, $_POST['content']));
+	$tags = array('<?php', '?>', '<?'.'DB_URL');
+	$content = $admin->add_slashes(str_replace($tags, '', $_POST['content']));
 	$database = new database();
 	$query = "UPDATE ".TABLE_PREFIX."mod_code SET content = '$content' WHERE section_id = '$section_id'";
 	$database->query($query);	
