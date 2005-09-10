@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.0 -------------------------------------
+10-Sep-2005 Ryan Djurovich
+!	Added protection against the use of DB_URL in Code module
 09-Sep-2005 Stefan Braunewell
 +	Added new advanced setting "Rename Files On Upload". File extensions can be
 	given so that respective files will have a ".txt" appended on media upload.
