@@ -39,29 +39,7 @@ require(WB_PATH.'/modules/admin.php');
 $query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");
 $fetch_content = $query_content->fetchRow();
 
-if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="htmlarea" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
-?>
-<script type="text/javascript">
-_editor_url = "<?php echo WB_URL; ?>/include/htmlarea/";
-_editor_lang = "en";
-</script>
-<script type="text/javascript" src="<?php echo WB_URL; ?>/include/htmlarea/htmlarea.js"></script>
-<script type="text/javascript">
-HTMLArea.loadPlugin("ContextMenu");
-HTMLArea.loadPlugin("TableOperations");
-function initEditor() {
-	var editor = new HTMLArea("short");
-	editor.registerPlugin(ContextMenu);
-	editor.config.pageStyle = "body { <?php echo $admin->strip_slashes_dummy(WYSIWYG_STYLE); ?> }";
-	editor.generate();
-	var editor = new HTMLArea("long");
-	editor.registerPlugin(ContextMenu);
-	editor.registerPlugin(TableOperations);
-	editor.config.pageStyle = "body { <?php echo $admin->strip_slashes_dummy(WYSIWYG_STYLE); ?> }";
-	editor.generate();
-}
-</script>
-<?php
+if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
 	function show_wysiwyg_editor($name,$id,$content,$width,$height) {
 		echo '<textarea name="'.$name.'" id="'.$id.'" style="width: '.$width.'; height: '.$height.';">'.$content.'</textarea>';
 	}

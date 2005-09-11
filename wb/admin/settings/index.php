@@ -271,8 +271,8 @@ if($handle = opendir(WB_PATH.'/templates/')) {
 
 // Insert templates
 $template->set_block('main_block', 'editor_list_block', 'editor_list');
-$file='htmlarea';
-$module_name='HTMLArea';
+$file='none';
+$module_name='None';
 $template->set_var('FILE', $file);
 $template->set_var('NAME', $module_name);
 if((!defined('WYSIWYG_EDITOR') OR $file == WYSIWYG_EDITOR) ? $selected = ' selected' : $selected = '');
@@ -280,7 +280,7 @@ $template->set_var('SELECTED', $selected);
 $template->parse('editor_list', 'editor_list_block', true);
 if($handle = opendir(WB_PATH.'/modules/')) {
 	while (false !== ($file = readdir($handle))) {
-		if($file != "." AND $file != ".." AND $file != "CVS" AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
+		if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
 			include(WB_PATH."/modules/$file/info.php");
 			if ($module_type == 'WYSIWYG') {
 				$template->set_var('FILE', $file);

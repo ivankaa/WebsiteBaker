@@ -34,39 +34,10 @@ $content = $admin->strip_slashes_dummy(htmlspecialchars($content['content']));
 if(!isset($wysiwyg_editor_loaded)) {
 	$wysiwyg_editor_loaded=true;
 
-	if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="htmlarea" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
-	
-		// Workout how many WYSIWYG sections are used on this page
-		$query_wysiwyg_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg' ORDER BY position ASC");
-		$num_wysiwyg_sections = $query_wysiwyg_sections->numRows();
-	
-		echo '<script type="text/javascript">'
-			. '  _editor_url = "'.WB_URL.'/include/htmlarea/";'
-			. '  _editor_lang = "en";'
-			. '</script>'
-			. '<script type="text/javascript" src="'.WB_URL.'/include/htmlarea/htmlarea.js"></script>'
-			. '<script type="text/javascript">
-HTMLArea.loadPlugin("ContextMenu");
-HTMLArea.loadPlugin("TableOperations");
-function initEditor() {';
-		
-	
-		$query_wysiwyg = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg'");
-		if($query_wysiwyg->numRows() > 0) {
-			while($wysiwyg_section = $query_wysiwyg->fetchRow()) {
-			echo 'var editor = new HTMLArea("content'.$wysiwyg_section["section_id"].'");'
-				. 'editor.registerPlugin(ContextMenu);'
-				. 'editor.registerPlugin(TableOperations);'
-				. 'editor.config.pageStyle = "body { '.stripslashes(WYSIWYG_STYLE).' }";'
-				. 'editor.generate();';
-			}
-		}
-
-		echo '} </script>';
+	if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
 		function show_wysiwyg_editor($name,$id,$content,$width,$height) {
 			echo '<textarea name="'.$name.'" id="'.$id.'" style="width: '.$width.'; height: '.$height.';">'.$content.'</textarea>';
 		}
-
 	} else {
 		$id_list=array();
 		$query_wysiwyg = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'wysiwyg'");
@@ -81,6 +52,7 @@ function initEditor() {';
 }
 
 ?>
+
 <form name="wysiwyg<?php echo $section_id; ?>" action="<?php echo WB_URL; ?>/modules/wysiwyg/save.php" method="post">
 
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
