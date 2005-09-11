@@ -30,6 +30,7 @@ wb class
 This class is the basis for admin and frontend classes.
 
 */
+if (file_exists(WB_PATH.'/framework/class.database.php'))
 require_once(WB_PATH.'/framework/class.database.php');
 		
 

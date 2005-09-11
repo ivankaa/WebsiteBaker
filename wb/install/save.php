@@ -106,7 +106,13 @@ function default_dir_mode($temp_dir) {
 	return $default_dir_mode;
 }
 
-require_once('../framework/class.wb.php');
+function add_slashes($input) {
+		if ( get_magic_quotes_gpc() || ( !is_string($input) ) ) {
+			return $input;
+		}
+		$output = addslashes($input);
+		return $output;
+	}
 
 // Begin check to see if form was even submitted
 // Set error if no post vars found
@@ -221,7 +227,7 @@ if(isset($_POST['install_tables']) AND $_POST['install_tables'] == 'true') {
 if(!isset($_POST['website_title']) OR $_POST['website_title'] == '') {
 	set_error('Please enter a website title');
 } else {
-	$website_title = wb::add_slashes($_POST['website_title']);
+	$website_title = add_slashes($_POST['website_title']);
 }
 // End website title code
 
@@ -290,6 +296,7 @@ $config_content = "" .
 "define('PAGE_TRASH', 'disabled');\n".
 "define('HOMEPAGE_REDIRECTION', false);\n".
 "define('PAGE_LANGUAGES', false);\n".
+"define('WYSIWYG_EDITOR', 'htmlarea');\n".
 "\n".
 "define('MANAGE_SECTIONS', true);\n".
 "define('SECTION_BLOCKS', false);\n".
