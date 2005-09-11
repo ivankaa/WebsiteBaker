@@ -492,6 +492,7 @@ $MESSAGE['GENERIC']['NOT_INSTALLED'] = 'Not installed';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL'] = 'Cannot uninstall';
 $MESSAGE['GENERIC']['CANNOT_UNZIP'] = 'Cannot unzip file';
 $MESSAGE['GENERIC']['INSTALLED'] = 'Installed successfully';
+$MESSAGE['GENERIC']['INSTALLED'] = 'Upgraded successfully';
 $MESSAGE['GENERIC']['UNINSTALLED'] = 'Uninstalled successfully';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Unable to write to the target directory';
 $MESSAGE['GENERIC']['INVALID'] = 'The file you uploaded is invalid';

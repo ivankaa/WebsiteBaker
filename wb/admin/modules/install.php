@@ -70,6 +70,7 @@ if(!isset($module_directory)) {
 // Check if this module is already installed
 // and compare versions if so
 $new_module_version=$module_version;
+$action="install";
 if(is_dir(WB_PATH.'/modules/'.$module_directory)) {
 	if(file_exists(WB_PATH.'/modules/'.$module_directory.'/info.php')) {
 		require(WB_PATH.'/modules/'.$module_directory.'/info.php');
@@ -79,11 +80,8 @@ if(is_dir(WB_PATH.'/modules/'.$module_directory)) {
 			$admin->print_error($MESSAGE['GENERIC']['ALREADY_INSTALLED']);
 		}
 		$action="upgrade";
-	} else {
-		$action="install";
-	}
+	} 
 }
-
 
 // Check if module dir is writable
 if(!is_writable(WB_PATH.'/modules/')) {
@@ -122,7 +120,12 @@ if(file_exists(WB_PATH.'/modules/'.$module_directory.'/'.$action.'.php')) {
 }
 
 // Print success message
-$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
+if ($action="install") {
+	$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
+} else if ($action="upgrade") {
+	$admin->print_success($MESSAGE['GENERIC']['UPGRADED']);
+}	
+
 
 // Print admin footer
 $admin->print_footer();
