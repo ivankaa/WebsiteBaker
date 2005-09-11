@@ -1,6 +1,6 @@
 <?php
 
-// $Id: install.php,v 1.6 2005/04/02 08:21:46 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -35,8 +35,8 @@ if(defined('WB_URL')) {
 					 . '`position` INT NOT NULL,'
 					 . '`title` VARCHAR(255) NOT NULL,'
 					 . '`link` TEXT NOT NULL,'
-					 . '`short` TEXT NOT NULL,'
-					 . '`long` TEXT NOT NULL,'
+					 . '`content_short` TEXT NOT NULL,'
+					 . '`content_long` TEXT NOT NULL,'
 					 . '`commenting` VARCHAR(7) NOT NULL,'
 		   	    . '`posted_when` INT NOT NULL ,'
 					 . '`posted_by` INT NOT NULL ,'
@@ -107,8 +107,8 @@ if(defined('WB_URL')) {
 	// Query body
 	$query_body_code = "
 	[TP]pages.page_id = [TP]mod_news_posts.page_id AND [TP]mod_news_posts.title LIKE \'%[STRING]%\'
-	OR [TP]pages.page_id = [TP]mod_news_posts.page_id AND [TP]mod_news_posts.short LIKE \'%[STRING]%\'
-	OR [TP]pages.page_id = [TP]mod_news_posts.page_id AND [TP]mod_news_posts.long LIKE \'%[STRING]%\'
+	OR [TP]pages.page_id = [TP]mod_news_posts.page_id AND [TP]mod_news_posts.content_short LIKE \'%[STRING]%\'
+	OR [TP]pages.page_id = [TP]mod_news_posts.page_id AND [TP]mod_news_posts.content_long LIKE \'%[STRING]%\'
 	OR [TP]pages.page_id = [TP]mod_news_comments.page_id AND [TP]mod_news_comments.title LIKE \'%[STRING]%\'
 	OR [TP]pages.page_id = [TP]mod_news_comments.page_id AND [TP]mod_news_comments.comment LIKE \'%[STRING]%\'
 	OR [TP]pages.page_id = [TP]mod_news_settings.page_id AND [TP]mod_news_settings.header LIKE \'%[STRING]%\'

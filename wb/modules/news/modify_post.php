@@ -132,7 +132,7 @@ function initEditor() {
 	<td valign="top"><?php echo $TEXT['SHORT']; ?>:</td>
 	<td>
 	<?php
-	show_wysiwyg_editor("short","short",$fetch_content['short'],"100%","135px");
+	show_wysiwyg_editor("short","short",$fetch_content['content_short'],"100%","135px");
 	?>
 	</td>
 </tr>
@@ -140,7 +140,7 @@ function initEditor() {
 	<td valign="top"><?php echo $TEXT['LONG']; ?>:</td>
 	<td>
 	<?php
-	show_wysiwyg_editor("long","long",$fetch_content['long'],"100%","300px");
+	show_wysiwyg_editor("long","long",$fetch_content['content_long'],"100%","300px");
 	?>
 	</td>
 </tr>

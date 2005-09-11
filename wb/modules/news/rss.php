@@ -77,7 +77,7 @@ while($item = $result->fetchRow($result)){
     echo "<item>";
     echo "<title>".$item["title"]."</title>";
     // Stripping HTML Tags for text-only visibility
-    echo "<description>".strip_tags($item["short"])."</description>";
+    echo "<description>".strip_tags($item["content_short"])."</description>";
     echo "<link>".WB_URL."/pages".$item["link"].PAGE_EXTENSION."</link>";
     /* Add further (non required) information here like ie.
     echo "<author>".$item["posted_by"]."</author>");

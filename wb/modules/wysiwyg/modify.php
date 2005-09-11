@@ -23,7 +23,7 @@
 
 */
 
-
+if(!defined('WB_PATH')) exit('Direct access to this file is not allowed');
 
 // Get page content
 $query = "SELECT content FROM ".TABLE_PREFIX."mod_wysiwyg WHERE section_id = '$section_id'";

@@ -105,7 +105,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	}
 	
 	// Query posts (for this page)
-	$query_posts = $database->query("SELECT group_id,post_id,title,link,short,posted_by,posted_when FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id' AND active = '1' AND title != ''$query_extra ORDER BY position DESC".$limit_sql);
+	$query_posts = $database->query("SELECT group_id,post_id,title,link,content_short,posted_by,posted_when FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id' AND active = '1' AND title != ''$query_extra ORDER BY position DESC".$limit_sql);
 	$num_posts = $query_posts->numRows();
 	
 	// Create previous and next links
@@ -185,7 +185,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				if($group_image == '') { $display_image = 'none'; } else { $display_image = ''; }
 				if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
 				// Replace [wblink--PAGE_ID--] with real link
-				$short = $this->strip_slashes_dummy($post['short']);
+				$short = $this->strip_slashes_dummy($post['content_short']);
 				$this->preprocess($short);
 				// Replace vars with values
 				$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[LINK]', '[DATE]', '[TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]');
@@ -258,11 +258,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
 			$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[BACK]', '[DATE]', '[TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]');
 			if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $this->strip_slashes_dummy($post['title']), $this->strip_slashes_dummy($post['short']), $page_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
+				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $this->strip_slashes_dummy($post['title']), $this->strip_slashes_dummy($post['content_short']), $page_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
 			} else {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $this->strip_slashes_dummy($post['title']), $this->strip_slashes_dummy($post['short']), $page_link, $post_date, $post_time, '', '', '', '');
+				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $this->strip_slashes_dummy($post['title']), $this->strip_slashes_dummy($post['content_short']), $page_link, $post_date, $post_time, '', '', '', '');
 			}
-			$post_long = $this->strip_slashes_dummy($post['long']);
+			$post_long = $this->strip_slashes_dummy($post['content_long']);
 		}
 	} else {
 		header('Location: '.WB_URL.'/pages/');

@@ -1,6 +1,6 @@
 <?php
 
-// $Id: info.php,v 1.3 2005/04/08 09:58:31 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -29,6 +29,6 @@ $module_type = 'page';
 $module_version = '2.5';
 $module_designed_for = '2.x';
 $module_author = 'Ryan Djurovich';
-$module_description = 'This module allows you to edit the contents of a page using the MENU_LINK htmlArea program';
+$module_description = 'This module allows you to insert a link into the menu.';
 
 ?>

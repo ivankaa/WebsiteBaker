@@ -100,7 +100,7 @@ require(WB_PATH."/index.php");
 }
 
 // Update row
-$database->query("UPDATE ".TABLE_PREFIX."mod_news_posts SET group_id = '$group_id', title = '$title', link = '$post_link', short = '$short', `long` = '$long', commenting = '$commenting', active = '$active', posted_when = '".mktime()."', posted_by = '".$admin->get_user_id()."' WHERE post_id = '$post_id'");
+$database->query("UPDATE ".TABLE_PREFIX."mod_news_posts SET group_id = '$group_id', title = '$title', link = '$post_link', content_short = '$short', content_long = '$long', commenting = '$commenting', active = '$active', posted_when = '".mktime()."', posted_by = '".$admin->get_user_id()."' WHERE post_id = '$post_id'");
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {
