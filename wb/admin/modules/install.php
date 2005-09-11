@@ -1,6 +1,6 @@
 <?php
 
-// $Id: install.php,v 1.8 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -67,11 +67,23 @@ if(!isset($module_directory)) {
 	$admin->print_error($MESSAGE['GENERIC']['INVALID']);
 }
 
-// Check if a module with the same name already exists
+// Check if this module is already installed
+// and compare versions if so
+$new_module_version=$module_version;
 if(is_dir(WB_PATH.'/modules/'.$module_directory)) {
-	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
-	$admin->print_error($MESSAGE['GENERIC']['ALREADY_INSTALLED']);
+	if(file_exists(WB_PATH.'/modules/'.$module_directory.'/info.php')) {
+		require(WB_PATH.'/modules/'.$module_directory.'/info.php');
+		// Version to be installed is older than currently installed version
+		if ($module_version>$new_module_version) {
+			if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
+			$admin->print_error($MESSAGE['GENERIC']['ALREADY_INSTALLED']);
+		}
+		$action="upgrade";
+	} else {
+		$action="install";
+	}
 }
+
 
 // Check if module dir is writable
 if(!is_writable(WB_PATH.'/modules/')) {
@@ -104,9 +116,9 @@ while (false !== $entry = $dir->read()) {
 	}
 }
 
-// Run the modules install script if there is one
-if(file_exists(WB_PATH.'/modules/'.$module_directory.'/install.php')) {
-	require(WB_PATH.'/modules/'.$module_directory.'/install.php');
+// Run the modules install // upgrade script if there is one
+if(file_exists(WB_PATH.'/modules/'.$module_directory.'/'.$action.'.php')) {
+	require(WB_PATH.'/modules/'.$module_directory.'/'.$action.'.php');
 }
 
 // Print success message
