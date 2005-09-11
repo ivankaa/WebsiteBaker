@@ -31,7 +31,7 @@ require(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify', false);
 
 // Setup the template
-$template = new Template(WB_PATH.'/include/htmlarea/popups');
+$template = new Template(WB_PATH.'/modules/htmlarea/htmlarea/popups');
 $template->set_file('page', 'link.html');
 $template->set_block('page', 'main_block', 'main');
 
