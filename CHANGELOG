@@ -11,6 +11,16 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.0 -------------------------------------
+11-Sep-2005 Stefan Braunewell
+!	HTMLArea is now a module instead of a core component. Files moved
+	from "include" to "modules".
++	Implemented Installation of modules on top of an older version. This is 
+	done via checking $module_version. Instead of install.php, upgrade.php
+	is then called if it exists in the module package. 
+	For module developers: $module_version and $new_module_version are 
+	accessible in upgrade.php to find out what upgrade steps need to be taken.
+!	Changed column names in mod_news_posts from short,long to content_short,
+	content_long.
 09-Sep-2005 Stefan Braunewell
 +	Added new advanced setting "Rename Files On Upload". File extensions can be
 	given so that respective files will have a ".txt" appended on media upload.
