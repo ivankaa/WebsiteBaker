@@ -268,62 +268,15 @@ if($admin_password != $admin_repassword) {
 $config_content = "" .
 "<?php\n".
 "\n".
-"define('ER_LEVEL', '');\n".
-"\n".
-"define('DEFAULT_LANGUAGE', 'EN');\n".
-"\n".
-"define('APP_NAME', 'wb');\n".
-"\n".
 "define('DB_TYPE', 'mysql');\n".
 "define('DB_HOST', '$database_host');\n".
 "define('DB_USERNAME', '$database_username');\n".
 "define('DB_PASSWORD', '$database_password');\n".
 "define('DB_NAME', '$database_name');\n".
-"\n".
 "define('TABLE_PREFIX', '$table_prefix');\n".
-"\n".
-"define('DEFAULT_TIMEZONE', '$default_timezone');\n".
-"define('DEFAULT_DATE_FORMAT', 'M d Y');\n".
-"define('DEFAULT_TIME_FORMAT', 'g:i A');\n".
-"\n".
-"define('HOME_FOLDERS', true);\n".
-"\n".
-"define('DEFAULT_TEMPLATE', 'round');\n".
-"define('MULTIPLE_MENUS', false);\n".
-"\n".
-"define('PAGE_LEVEL_LIMIT', '4');\n".
-"define('INTRO_PAGE', false);\n".
-"define('PAGE_TRASH', 'disabled');\n".
-"define('HOMEPAGE_REDIRECTION', false);\n".
-"define('PAGE_LANGUAGES', false);\n".
-"define('WYSIWYG_EDITOR', 'htmlarea');\n".
-"\n".
-"define('MANAGE_SECTIONS', true);\n".
-"define('SECTION_BLOCKS', false);\n".
-"\n".
-"define('SMART_LOGIN', false);\n".
-"define('FRONTEND_LOGIN', false);\n".
-"define('FRONTEND_SIGNUP', '');\n".
-"\n".
-"define('SERVER_EMAIL', '".$admin_email."');\n".
-"\n".
-"define('SEARCH', 'public');\n".
-"\n".
-"define('PAGE_EXTENSION', '.php');\n".
-"define('PAGE_SPACER', '-');\n".
-"\n".
-"define('PAGES_DIRECTORY', '/pages');\n".
-"define('MEDIA_DIRECTORY', '/media');\n".
-"\n".
-"define('OPERATING_SYSTEM', '$operating_system');\n".
-"define('OCTAL_FILE_MODE', $file_mode);\n".
-"define('STRING_FILE_MODE', '$file_mode');\n".
-"define('OCTAL_DIR_MODE', $dir_mode);\n".
-"define('STRING_DIR_MODE', '$dir_mode');\n".
 "\n".
 "define('WB_PATH', '$wb_path');\n".
 "define('WB_URL', '$wb_url');\n".
-"\n".
 "define('ADMIN_PATH', '$wb_path/admin');\n".
 "define('ADMIN_URL', '$wb_url/admin');\n".
 "\n".
@@ -354,9 +307,6 @@ if(!file_exists(WB_PATH.'/framework/class.admin.php')) {
 	set_error('It appears the Absolute path that you entered is incorrect');
 }
 
-// Include WB functions file
-require_once(WB_PATH.'/framework/functions.php');
-
 // Try connecting to database	
 if(!mysql_connect(DB_HOST, DB_USERNAME, DB_PASSWORD)) {
 	set_error('Database host name, username and/or password incorrect. MySQL Error:<br />'.mysql_error());
@@ -368,9 +318,12 @@ mysql_query('CREATE DATABASE '.$database_name);
 // Close the mysql connection
 mysql_close();
 
+// Include WB functions file
+require_once(WB_PATH.'/framework/functions.php');
+
 // Re-connect to the database, this time using in-build database class
-require_once(WB_PATH.'/framework/class.admin.php');
-$database = new database();
+require_once(WB_PATH.'/framework/class.login.php');
+$database=new database();
 
 // Check if we should install tables
 if($install_tables == true) {
@@ -396,6 +349,8 @@ if($install_tables == true) {
 	$search = "DROP TABLE IF EXISTS `".TABLE_PREFIX."search`";
 	$database->query($search);
 			
+
+
 	// Try installing tables
 	
 	// Pages table
@@ -437,12 +392,51 @@ if($install_tables == true) {
 	$database->query($pages);
 	
 	// Settings table
-	$settings = 'CREATE TABLE `'.TABLE_PREFIX.'settings` ( `setting_id` INT NOT NULL auto_increment,'
-	          . ' `name` VARCHAR( 255 ) NOT NULL ,'
-	          . ' `value` TEXT NOT NULL ,'
-	          . ' PRIMARY KEY ( `setting_id` ) )'
-	          . ' ';
+	$settings="CREATE TABLE `".TABLE_PREFIX."settings` ( `setting_id` INT NOT NULL auto_increment,
+		`name` VARCHAR( 255 ) NOT NULL ,
+		`value` TEXT NOT NULL ,
+		PRIMARY KEY ( `setting_id` ) )";
 	$database->query($settings);
+	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'website_title', '$website_title'),"
+	." ('', 'website_description', ''),"
+	." ('', 'website_keywords', ''),"
+	." ('', 'website_header', ''),"
+	." ('', 'website_footer', ''),"
+	." ('', 'wysiwyg_style', 'font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;'),"
+	." ('', 'rename_files_on_upload', 'php,asp,phpx,aspx'),"
+	." ('', 'er_level', ''),"
+	." ('', 'default_language', 'en'),"
+	." ('', 'app_name', 'wb'),"
+	." ('', 'default_timezone', '0'),"
+	." ('', 'default_date_format', 'M d Y'),"
+	." ('', 'default_time_format', 'g:i A'),"
+	." ('', 'home_folders', '1'),"
+	." ('', 'default_template', 'round'),"
+	." ('', 'multiple_menus', 'false'),"
+	." ('', 'page_level_limit', '4'),"
+	." ('', 'intro_page', 'false'),"
+	." ('', 'page_trash', 'disabled'),"
+	." ('', 'homepage_redirection', 'false'),"
+	." ('', 'page_languages', 'false'),"
+	." ('', 'wysiwyg_editor', 'htmlarea'),"
+	." ('', 'manage_sections', '1'),"
+	." ('', 'section_blocks', 'false'),"
+	." ('', 'smart_login', 'false'),"
+	." ('', 'frontend_login', 'false'),"
+	." ('', 'frontend_signup', 'false'),"
+	." ('', 'server_email', '$admin_email'),"
+	." ('', 'search', 'public'),"
+	." ('', 'page_extension', '.php'),"
+	." ('', 'page_spacer', '-'),"
+	." ('', 'pages_directory', '/pages'),"
+	." ('', 'media_directory', '/media'),"
+	." ('', 'operating_system', '$operating_system'),"
+	." ('', 'octal_file_mode', '$file_mode'),"
+	." ('', 'string_file_mode', '$file_mode'),"
+	." ('', 'octal_dir_mode', '$dir_mode'),"
+	." ('', 'string_dir_mode', '$dir_mode');";
+	$database->query($settings_rows);
+	
 	
 	// Users table
 	$users = 'CREATE TABLE `'.TABLE_PREFIX.'users` ( `user_id` INT NOT NULL auto_increment,'
@@ -493,21 +487,6 @@ if($install_tables == true) {
 	// Admin user
 	$insert_admin_user = "INSERT INTO `".TABLE_PREFIX."users` (user_id,group_id,active,username,password,email,display_name) VALUES ('1','1','1','$admin_username','".md5($admin_password)."','$admin_email','Administrator')";
 	$database->query($insert_admin_user);
-	// Default settings
-	$insert_website_title = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'title', '".$website_title."')";
-	$database->query($insert_website_title);
-	$insert_website_description = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'description', '')";
-	$database->query($insert_website_description);
-	$insert_website_keywords = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'keywords', '')";
-	$database->query($insert_website_keywords);
-	$insert_website_header = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'header', '')";
-	$database->query($insert_website_header);
-	$insert_website_footer = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'footer', '')";
-	$database->query($insert_website_footer);
-	$insert_wysiwyg_style = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'wysiwyg_style', 'font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;')";
-	$database->query($insert_wysiwyg_style);
-	$insert_rename_files_on_upload = "INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'rename_files_on_upload', 'php,asp,phpx,aspx')";
-	$database->query($insert_rename_files_on_upload);
 	
 	// Search header
 	$search_header = addslashes('
@@ -571,6 +550,8 @@ $search_no_results = addslashes('<br />No results found');
 	// Search template
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` (name) VALUES ('template')");
 	
+	$wb=new wb();
+	
 	// Include the pre-installed module install scripts
 	require(WB_PATH.'/modules/wysiwyg/install.php');
 	require(WB_PATH.'/modules/code/install.php');
@@ -586,7 +567,6 @@ $search_no_results = addslashes('<br />No results found');
 }
 
 // Log the user in and go to Website Baker Administration
-require(WB_PATH.'/framework/class.login.php');
 $thisApp = new Login(
 							array(
 									"MAX_ATTEMPS" => "50",

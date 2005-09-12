@@ -74,7 +74,7 @@ class database {
 	
 	// Disconnect from the database
 	function disconnect() {
-		if(isset($this->Database)) {
+		if($this->connected==true) {
 			mysql_close();
 			return true;
 		} else {

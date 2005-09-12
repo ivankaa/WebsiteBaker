@@ -31,19 +31,19 @@ This class is the basis for admin and frontend classes.
 
 */
 if (file_exists(WB_PATH.'/framework/class.database.php'))
-require_once(WB_PATH.'/framework/class.database.php');
+	require_once(WB_PATH.'/framework/class.database.php');
 		
 
 class wb
-{	
+{
 	// General initialization function 
 	// performed when frontend or backend is loaded.
 	function wb() {
 		// set global database variable
 		global $database;
 		// Create database class
-		$database = new database();
-		$this->database = $database;
+		$this->database = new database();
+		$database=$this->database;
 
 		// Start a session
 		if(!defined('SESSION_STARTED')) {
@@ -51,6 +51,25 @@ class wb
 			session_start();
 			define('SESSION_STARTED', true);
 		}
+
+		set_magic_quotes_runtime(0);
+		
+		// Get website settings (title, keywords, description, header, and footer)
+		$query_settings = "SELECT name,value FROM ".TABLE_PREFIX."settings";
+		$get_settings = $database->query($query_settings);
+		while($setting = $get_settings->fetchRow()) {
+			$setting_name=strtoupper($setting['name']);
+			$setting_value=$setting['value'];
+			if ($setting_value=='false')
+				$setting_value=false;
+			if ($setting_value=='true')
+				$setting_value=true;
+			define($setting_name,$setting_value);
+		}
+		$string_file_mode = STRING_FILE_MODE;
+		define('OCTAL_FILE_MODE',(int) $string_file_mode);
+		$string_dir_mode = STRING_DIR_MODE;
+		define('OCTAL_DIR_MODE',(int) $string_dir_mode);
 		
 		// Get users language
 		if(isset($_GET['lang']) AND $_GET['lang'] != '' AND !is_numeric($_GET['lang']) AND strlen($_GET['lang']) == 2) {
@@ -77,31 +96,23 @@ class wb
 		}
 		
 		// Get users timezone
-		if(!defined('TIMEZONE')) {
-			if(isset($_SESSION['TIMEZONE'])) {
-				define('TIMEZONE', $_SESSION['TIMEZONE']);
-			} else {
-				define('TIMEZONE', DEFAULT_TIMEZONE);
-			}
+		if(isset($_SESSION['TIMEZONE'])) {
+			define('TIMEZONE', $_SESSION['TIMEZONE']);
+		} else {
+			define('TIMEZONE', DEFAULT_TIMEZONE);
 		}
 		// Get users date format
-		if(!defined('DATE_FORMAT')) {
-			if(isset($_SESSION['DATE_FORMAT'])) {
-				define('DATE_FORMAT', $_SESSION['DATE_FORMAT']);
-			} else {
-				define('DATE_FORMAT', DEFAULT_DATE_FORMAT);
-			}
+		if(isset($_SESSION['DATE_FORMAT'])) {
+			define('DATE_FORMAT', $_SESSION['DATE_FORMAT']);
+		} else {
+			define('DATE_FORMAT', DEFAULT_DATE_FORMAT);
 		}
 		// Get users time format
-		if(!defined('TIME_FORMAT')) {
-			if(isset($_SESSION['TIME_FORMAT'])) {
-				define('TIME_FORMAT', $_SESSION['TIME_FORMAT']);
-			} else {
-				define('TIME_FORMAT', DEFAULT_TIME_FORMAT);
-			}
+		if(isset($_SESSION['TIME_FORMAT'])) {
+			define('TIME_FORMAT', $_SESSION['TIME_FORMAT']);
+		} else {
+			define('TIME_FORMAT', DEFAULT_TIME_FORMAT);
 		}
-		
-		set_magic_quotes_runtime(0);
 	}
 
 	// Check whether we should show a page or not (for front-end)

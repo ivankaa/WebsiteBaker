@@ -1,6 +1,6 @@
 <?php
 
-// $Id: timezones.php,v 1.1.1.1 2005/01/30 10:30:19 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -30,11 +30,6 @@ Timezone list file
 This file is used to generate a list of timezones for the user to select
 
 */
-
-// Define that this file is loaded
-if(!defined('TIMEZONES_LOADED')) {
-	define('TIMEZONES_LOADED', true);
-}
 
 // Create array
 $TIMEZONES = array();

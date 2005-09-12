@@ -44,40 +44,13 @@ $query = "SELECT * FROM ".TABLE_PREFIX."settings";
 $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
-	$setting_value = htmlspecialchars($admin->strip_slashes_dummy($setting['value']));
-	switch($setting_name) {
-		// Website title
-		case 'title':
-			$template->set_var('TITLE', $setting_value);
-		break;
-		// Website description
-		case 'description':
-			$template->set_var('DESCRIPTION', $setting_value);
-		break;
-		// Website keywords
-		case 'keywords':
-			$template->set_var('KEYWORDS', $setting_value);
-		break;
-		// Website header
-		case 'header':
-			$template->set_var('HEADER', $setting_value);
-		break;
-		// Website header
-		case 'header':
-			$template->set_var('HEADER', $setting_value);
-		break;
-		// Website footer
-		case 'footer':
-			$template->set_var('FOOTER', $setting_value);
-		break;
-		// WYSIWYG style
-		case 'wysiwyg_style':
-			$template->set_var('WYSIWYG_STYLE', $setting_value);
-		break;
-		case 'rename_files_on_upload':
-			$template->set_var('RENAME_FILES_ON_UPLOAD', $setting_value);
-		break;
-	}
+	$setting_value = htmlspecialchars($setting['value']);
+	/*if ($setting_value=='false')
+		$setting_value=false;
+	if ($setting_value=='true')
+		$setting_value=true;*/
+	echo strtoupper($setting_name).'-'.$setting_value.'-'.($setting_value=="false").'<br />';
+	$template->set_var(strtoupper($setting_name),$setting_value);
 }
 
 // Query current settings in the db, then loop through them and print them

@@ -87,7 +87,7 @@ function change_page_trash(type) {
 <tr>
 	<td class="setting_name">{TEXT_WEBSITE_TITLE}:</td>
 	<td class="setting_value" colspan="2">
-		<input type="text" name="title" value="{TITLE}" />
+		<input type="text" name="website_title" value="{WEBSITE_TITLE}" />
 	</td>
 	<script language="javascript" type="text/javascript">
 	document.settings.title.focus();
@@ -96,25 +96,25 @@ function change_page_trash(type) {
 <tr>
 	<td class="setting_name">{TEXT_WEBSITE_DESCRIPTION}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="description">{DESCRIPTION}</textarea>
+		<textarea name="website_description">{WEBSITE_DESCRIPTION}</textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name">{TEXT_WEBSITE_KEYWORDS}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="keywords">{KEYWORDS}</textarea>
+		<textarea name="website_keywords">{WEBSITE_KEYWORDS}</textarea>
 	</td>
 </tr>
 <tr class="advanced">
 	<td class="setting_name">{TEXT_WEBSITE_HEADER}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="header">{HEADER}</textarea>
+		<textarea name="website_header">{WEBSITE_HEADER}</textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name">{TEXT_WEBSITE_FOOTER}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="footer">{FOOTER}</textarea>
+		<textarea name="website_footer">{WEBSITE_FOOTER}</textarea>
 	</td>
 </tr>
 <tr>
@@ -281,7 +281,7 @@ function change_page_trash(type) {
 <tr>
 	<td class="setting_name">{TEXT_LANGUAGE}:</td>
 	<td class="setting_value" colspan="2">
-		<select name="language">
+		<select name="default_language">
 			<!-- BEGIN language_list_block -->
 			<option value="{CODE}"{SELECTED}>{NAME} ({CODE})</option>
 			<!-- END language_list_block -->
@@ -291,7 +291,7 @@ function change_page_trash(type) {
 <tr>
 	<td class="setting_name">{TEXT_TIMEZONE}:</td>
 	<td class="setting_value" colspan="2">
-		<select name="timezone">
+		<select name="default_timezone">
 			<option value="0">{TEXT_PLEASE_SELECT}...</option>
 			<!-- BEGIN timezone_list_block -->
 				<option value="{VALUE}" {SELECTED}>{NAME}</option>
@@ -302,7 +302,7 @@ function change_page_trash(type) {
 <tr>
 	<td class="setting_name">{TEXT_DATE_FORMAT}:</td>
 	<td class="setting_value" colspan="2">
-		<select name="date_format">
+		<select name="default_date_format">
 			<option value="M d Y">{TEXT_PLEASE_SELECT}...</option>
 			<!-- BEGIN date_format_list_block -->
 				<option value="{VALUE}" {SELECTED}>{NAME}</option>
@@ -313,7 +313,7 @@ function change_page_trash(type) {
 <tr>
 	<td class="setting_name">{TEXT_TIME_FORMAT}:</td>
 	<td class="setting_value" colspan="2">
-		<select name="time_format">
+		<select name="default_time_format">
 			<option value="g:i A">{TEXT_PLEASE_SELECT}...</option>
 			<!-- BEGIN time_format_list_block -->
 				<option value="{VALUE}" {SELECTED}>{NAME}</option>
@@ -324,7 +324,7 @@ function change_page_trash(type) {
 <tr>
 	<td class="setting_name">{TEXT_TEMPLATE}:</td>
 	<td class="setting_value" colspan="2">
-		<select name="template">
+		<select name="default_template">
 		<!-- BEGIN template_list_block -->
 			<option value="{FILE}"{SELECTED}>{NAME}</option>
 		<!-- END template_list_block -->

@@ -168,65 +168,15 @@ if($database->is_error()) {
 	$config_filename = $WB_PATH.'/config.php';
 	$config_content = "" .
 	"<?php \n".
-	"\n".
-	"define('ER_LEVEL', '$er_level');\n".
-	$er_level_code.
-	"\n".
-	"define('DEFAULT_LANGUAGE', '".str_replace(';', '', $_POST['language'])."');\n".
-	"\n".
-	"define('APP_NAME', 'wb');\n".
-	"\n".
 	"define('DB_TYPE', '".DB_TYPE."');\n".
 	"define('DB_HOST', '".DB_HOST."');\n".
 	"define('DB_USERNAME', '".DB_USERNAME."');\n".
 	"define('DB_PASSWORD', '".DB_PASSWORD."');\n".
 	"define('DB_NAME', '".DB_NAME."');\n".
-	"\n".
 	"define('TABLE_PREFIX', '".TABLE_PREFIX."');\n".
-	"\n".
-	"define('DEFAULT_TIMEZONE', '".$timezone_offset."');\n".
-	"define('DEFAULT_DATE_FORMAT', '".str_replace(';', '', $_POST['date_format'])."');\n".
-	"define('DEFAULT_TIME_FORMAT', '".str_replace(';', '', $_POST['time_format'])."');\n".
-	"\n".
-	"define('HOME_FOLDERS', ".$_POST['home_folders'].");\n".
-	"\n".
-	"define('DEFAULT_TEMPLATE', '".$_POST['template']."');\n".
-	"define('MULTIPLE_MENUS', ".str_replace(';', '', $_POST['multiple_menus']).");\n".
-	"\n".
-	"define('INTRO_PAGE', ".str_replace(';', '', $_POST['intro_page']).");\n".
-	"define('PAGE_TRASH', '".str_replace(';', '', $_POST['page_trash'])."');\n".
-	"define('PAGE_LEVEL_LIMIT', '".str_replace(';', '', $_POST['page_level_limit'])."');\n".
-	"define('HOMEPAGE_REDIRECTION', ".str_replace(';', '', $_POST['homepage_redirection']).");\n".
-	"define('PAGE_LANGUAGES', ".str_replace(';', '', $_POST['page_languages']).");\n".
-	"\n".
-	"define('WYSIWYG_EDITOR', '".addslashes($_POST['wysiwyg_editor'])."');\n".
-	"\n".
-	"define('MANAGE_SECTIONS', ".str_replace(';', '', $_POST['manage_sections']).");\n".
-	"define('SECTION_BLOCKS', ".str_replace(';', '', $_POST['section_blocks']).");\n".
-	"\n".
-	"define('SMART_LOGIN', ".str_replace(';', '', $_POST['smart_login']).");\n".
-	"define('FRONTEND_LOGIN', ".str_replace(';', '', $_POST['frontend_login']).");\n".
-	"define('FRONTEND_SIGNUP', ".str_replace(';', '', $_POST['frontend_signup']).");\n".
-	"\n".
-	"define('SERVER_EMAIL', '".$_POST['server_email']."');\n".
-	"\n".
-	"define('SEARCH', '".$admin->get_post('search')."');\n".
-	"\n".
-	"define('PAGE_EXTENSION', '".str_replace(';', '', $_POST['page_extension'])."');\n".
-	"define('PAGE_SPACER', '".str_replace(';', '', $_POST['page_spacer'])."');\n".
-	"\n".
-	"define('PAGES_DIRECTORY', '".PAGES_DIRECTORY."');\n".
-	"define('MEDIA_DIRECTORY', '".MEDIA_DIRECTORY."');\n".
-	"\n".
-	"define('OPERATING_SYSTEM', '".str_replace(';', '', $_POST['operating_system'])."');\n".
-	"define('OCTAL_FILE_MODE', ".$file_mode.");\n".
-	"define('STRING_FILE_MODE', '".$file_mode."');\n".
-	"define('OCTAL_DIR_MODE', ".$dir_mode.");\n".
-	"define('STRING_DIR_MODE', '".$dir_mode."');\n".
 	"\n".
 	"define('WB_PATH', '".$WB_PATH."');\n".
 	"define('WB_URL', '".WB_URL."');\n".
-	"\n".
 	"define('ADMIN_PATH', '".$ADMIN_PATH."');\n".
 	"define('ADMIN_URL', '".ADMIN_URL."');\n".
 	"\n".

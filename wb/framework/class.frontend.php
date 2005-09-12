@@ -47,7 +47,7 @@ class frontend extends wb {
 	// page database row
 	var $page;
 	var $page_id,$page_title,$menu_title,$parent,$root_parent,$level,$visibility;
-	var $page_description,$page_keywords,$page_link_original,$page_link;
+	var $page_description,$page_keywords,$page_link;
 	var $page_trail=array();
 	
 	var $page_access_denied;
@@ -64,7 +64,7 @@ class frontend extends wb {
 	
 	function page_select() {
 		global $page_id,$no_intro;
-		$database=& $this->database;
+		global $database;
 		// We have no page id and are supposed to show the intro page
 		if((INTRO_PAGE AND !isset($no_intro)) AND (!isset($page_id) OR !is_numeric($page_id))) {
 			// Since we have no page id check if we should go to intro page or default page
@@ -121,7 +121,7 @@ class frontend extends wb {
 	}
 
 	function get_page_details() {
-		$database = & $this->database;
+		global $database;
 	    if($this->page_id != 0) {
 			// Query page details
 			$query_page = "SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = '{$this->page_id}'";
@@ -142,7 +142,6 @@ class frontend extends wb {
 			// Begin code to set details as either variables of constants
 			// Page ID
 			define('PAGE_ID', $this->page['page_id']);
-			$this->page_id=$this->page['page_id'];
 			// Page Title
 			define('PAGE_TITLE', $this->strip_slashes_dummy($this->page['page_title']));
 			$this->page_title=PAGE_TITLE;
@@ -180,6 +179,55 @@ class frontend extends wb {
 		// End code to set details as either variables of constants
 		}
 
+		// Figure out what template to use
+		if(!defined('TEMPLATE')) {
+			if(isset($this->page['template']) AND $this->page['template'] != '') {
+				if(file_exists(WB_PATH.'/templates/'.$this->page['template'].'/index.php')) {
+					define('TEMPLATE', $this->page['template']);
+				} else {
+					define('TEMPLATE', DEFAULT_TEMPLATE);
+				}
+			} else {
+				define('TEMPLATE', DEFAULT_TEMPLATE);
+			}
+		}
+		// Set the template dir
+		define('TEMPLATE_DIR', WB_URL.'/templates/'.TEMPLATE);
+
+		// Check if user is allowed to view this page
+		if(VISIBILITY == 'private' OR VISIBILITY == 'registered') {
+			// Check if the user is authenticated
+			if($this->is_authenticated() == false) {
+				// User needs to login first
+				header("Location: ".WB_URL."/account/login".PAGE_EXTENSION.'?redirect='.$this->link);
+			}
+			// Check if we should show this page
+			if($this->show_page($this->page) == false) {
+				$this->page_access_denied=true;
+			}
+		} elseif(VISIBILITY == 'deleted' OR VISIBILITY == 'none') {
+			// User isnt allowed on this page so tell them
+			$this->page_access_denied=true;
+		}
+	}
+
+	function get_website_settings() {
+		global $database;
+
+		// set visibility SQL code
+		// never show no-vis, hidden or deleted pages
+		$this->extra_where_sql = "visibility != 'none' AND visibility != 'hidden' AND visibility != 'deleted'";
+		// Set extra private sql code
+		if($this->is_authenticated()==false) {
+			// if user is not authenticated, don't show private pages either
+			$this->extra_where_sql .= " AND visibility != 'private'";
+			// and 'registered' without frontend login doesn't make much sense!
+			if (FRONTEND_LOGIN==false) {
+				$this->extra_where_sql .= " AND visibility != 'registered'";
+			}
+		}
+		$this->extra_where_sql .= $this->sql_where_language;
+
 		// Work-out if any possible in-line search boxes should be shown
 		if(SEARCH == 'public') {
 			define('SHOW_SEARCH', true);
@@ -203,88 +251,6 @@ class frontend extends wb {
 			define('PREFERENCES_URL', WB_URL.'/account/preferences'.PAGE_EXTENSION);
 			define('SIGNUP_URL', WB_URL.'/account/signup'.PAGE_EXTENSION);
 		}
-
-		// Figure out what template to use
-		if(!defined('TEMPLATE')) {
-			if(isset($this->page['template']) AND $this->page['template'] != '') {
-				if(file_exists(WB_PATH.'/templates/'.$this->page['template'].'/index.php')) {
-					define('TEMPLATE', $this->page['template']);
-				} else {
-					define('TEMPLATE', DEFAULT_TEMPLATE);
-				}
-			} else {
-				define('TEMPLATE', DEFAULT_TEMPLATE);
-			}
-		}
-		// Set the template dir
-		define('TEMPLATE_DIR', WB_URL.'/templates/'.TEMPLATE);
-
-		// Check if user is allow to view this page
-		if(VISIBILITY == 'private' OR VISIBILITY == 'registered') {
-			// Check if the user is authenticated
-			if($this->is_authenticated() == false) {
-				// User needs to login first
-				header("Location: ".WB_URL."/account/login".PAGE_EXTENSION.'?redirect='.$this->link);
-			}
-			// Check if we should show this page
-			if($this->show_page($this->page) == false) {
-				$this->page_access_denied=true;
-			}
-		} elseif(VISIBILITY == 'deleted' OR VISIBILITY == 'none') {
-			// User isnt allowed on this page so tell them
-			$this->page_access_denied=true;
-		}
-		// never show no-vis, hidden or deleted pages
-		$this->extra_where_sql = "visibility != 'none' AND visibility != 'hidden' AND visibility != 'deleted'";
-		// Set extra private sql code
-		if($this->is_authenticated()==false) {
-			// if user is not authenticated, don't show private pages either
-			$this->extra_where_sql .= " AND visibility != 'private'";
-			// and 'registered' without frontend login doesn't make much sense!
-			if (FRONTEND_LOGIN==false) {
-				$this->extra_where_sql .= " AND visibility != 'registered'";
-			}
-		}
-		$this->extra_where_sql .= $this->sql_where_language;
-	}
-
-	function get_website_settings() {
-		$database = & $this->database;
-		// Get website settings (title, keywords, description, header, and footer)
-		$query_settings = "SELECT name,value FROM ".TABLE_PREFIX."settings";
-		$get_settings = $database->query($query_settings);
-		while($setting = $get_settings->fetchRow()) {
-			switch($setting['name']) {
-				case 'title':
-					define('WEBSITE_TITLE', $this->strip_slashes_dummy($setting['value']));
-					$this->website_title=WEBSITE_TITLE;
-				break;
-				case 'description':
-					if($page_description != '') {
-						define('WEBSITE_DESCRIPTION', $page_description);
-					} else {
-						define('WEBSITE_DESCRIPTION', $this->strip_slashes_dummy($setting['value']));
-					}
-					$this->website_description=WEBSITE_DESCRIPTION;
-				break;
-				case 'keywords':
-					if($page_keywords != '') {
-						define('WEBSITE_KEYWORDS', $this->strip_slashes_dummy($setting['value']).' '.$page_keywords);
-					} else {
-						define('WEBSITE_KEYWORDS', $this->strip_slashes_dummy($setting['value']));
-					}
-					$this->website_keywords=WEBSITE_KEYWORDS;
-				break;
-				case 'header':
-					define('WEBSITE_HEADER', $this->strip_slashes_dummy($setting['value']));
-					$this->website_header=WEBSITE_HEADER;
-				break;
-				case 'footer':
-					define('WEBSITE_FOOTER', $this->strip_slashes_dummy($setting['value']));
-					$this->website_footer=WEBSITE_FOOTER;
-				break;
-			}
-		}
 	}
 	
 	function page_link($link){
@@ -297,7 +263,7 @@ class frontend extends wb {
 	}
 	
 	function preprocess(&$content) {
-		$database = & $this->database;
+		global $database;
 		// Replace [wblink--PAGE_ID--] with real link
 		$pattern = '/\[wblink(.+?)\]/s';
 		preg_match_all($pattern,$content,$ids);
@@ -360,7 +326,7 @@ class frontend extends wb {
 	}
 	
 	function show_menu() {
-	   $database = & $this->database;
+	   global $database;
 	   if ($this->menu_recurse==0)
 	       return;
 	   // Check if we should add menu number check to query
@@ -414,7 +380,7 @@ class frontend extends wb {
 		// Get outside objects
 		global $TEXT,$MENU,$HEADING,$MESSAGE;
 		global $globals;
-		$database = & $this->database;
+		global $database;
 		$admin = & $this;
 		if ($this->page_access_denied==true) {
             echo $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'];

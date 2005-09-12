@@ -1,6 +1,6 @@
 <?php
 
-// $Id: index.php,v 1.2 2005/03/28 11:58:03 rdjurovich Exp $
+// $Id$
 
 /*
 

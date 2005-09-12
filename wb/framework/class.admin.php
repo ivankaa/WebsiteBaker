@@ -84,7 +84,7 @@ class admin extends wb {
 		global $MESSAGE;
 		global $TEXT;
 		// Connect to database and get website title
-		$database = & $this->database;
+		global $database;
 		$get_title = $database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name = 'title'");
 		$title = $get_title->fetchRow();
 		$header_template = new Template(ADMIN_PATH."/interface");
