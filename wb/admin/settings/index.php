@@ -45,11 +45,6 @@ $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
 	$setting_value = htmlspecialchars($setting['value']);
-	/*if ($setting_value=='false')
-		$setting_value=false;
-	if ($setting_value=='true')
-		$setting_value=true;*/
-	echo strtoupper($setting_name).'-'.$setting_value.'<br />';
 	$template->set_var(strtoupper($setting_name),$setting_value);
 }
 
