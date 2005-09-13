@@ -55,7 +55,7 @@ if($_POST['file'] == DEFAULT_TEMPLATE) {
 
 // Check if we have permissions on the directory
 if(!is_writable(WB_PATH.'/templates/'.$file)) {
-	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL']);
+	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL'].WB_PATH.'/templates/'.$file);
 }
 
 // Try to delete the template dir

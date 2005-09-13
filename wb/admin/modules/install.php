@@ -55,7 +55,7 @@ unset($module_directory);
 // Setup the PclZip object
 $archive = new PclZip($temp_file);
 // Unzip the files to the temp unzip folder
-$list = $archive->extract(PCLZIP_OPT_PATH, $temp_unzip, PCLZIP_OPT_REMOVE_ALL_PATH);
+$list = $archive->extract(PCLZIP_OPT_PATH, $temp_unzip);
 // Include the modules info file
 require($temp_unzip.'info.php');
 // Delete the temp unzip directory
@@ -80,7 +80,7 @@ if(is_dir(WB_PATH.'/modules/'.$module_directory)) {
 			$admin->print_error($MESSAGE['GENERIC']['ALREADY_INSTALLED']);
 		}
 		$action="upgrade";
-	} 
+	}
 }
 
 // Check if module dir is writable
@@ -120,9 +120,9 @@ if(file_exists(WB_PATH.'/modules/'.$module_directory.'/'.$action.'.php')) {
 }
 
 // Print success message
-if ($action="install") {
+if ($action=="install") {
 	$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
-} else if ($action="upgrade") {
+} else if ($action=="upgrade") {
 	$admin->print_success($MESSAGE['GENERIC']['UPGRADED']);
 }	
 

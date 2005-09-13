@@ -1,6 +1,6 @@
 <?php
 
-// $Id: install.php,v 1.5 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -68,16 +68,8 @@ if(!move_uploaded_file($_FILES['userfile']['tmp_name'], $temp_file)) {
 unset($language_code);
 
 // Read the temp file and look for a language code
-$file_contents = file_get_contents($temp_file);
-$search_for_code = strstr($file_contents, '$language_code');
-if($search_for_code != '') {
-	if(strstr($search_for_code, "'")) {
-		$search_for_code2 = strstr($search_for_code, "'");
-	} else {
-		$search_for_code2 = strstr($search_for_code, '"');
-	}
-	$language_code = substr($search_for_code2, 1, 2);
-}
+require($temp_file);
+$new_language_version=$language_version;
 
 // Check if the file is valid
 if(!isset($language_code)) {
@@ -91,6 +83,14 @@ if(!isset($language_code)) {
 $language_file = WB_PATH.'/languages/'.$language_code.'.php';
 
 // Move to new location
+if (file_exists($language_file)) {
+	require($language_file);
+	if ($language_version>$new_language_version) {
+		$admin->print_error($MESSAGE['GENERIC']['ALREADY_INSTALLED']);
+	}
+	unlink($language_file);
+}
+
 rename($temp_file, $language_file);
 
 // Chmod the file

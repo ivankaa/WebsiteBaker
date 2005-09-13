@@ -1,6 +1,6 @@
 <?php
 
-// $Id: install.php,v 1.8 2005/04/02 06:25:53 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -55,7 +55,7 @@ unset($template_directory);
 // Setup the PclZip object
 $archive = new PclZip($temp_file);
 // Unzip the files to the temp unzip folder
-$list = $archive->extract(PCLZIP_OPT_PATH, $temp_unzip, PCLZIP_OPT_REMOVE_ALL_PATH);
+$list = $archive->extract(PCLZIP_OPT_PATH, $temp_unzip);
 // Include the templates info file
 require($temp_unzip.'info.php');
 // Delete the temp unzip directory
@@ -67,10 +67,21 @@ if(!isset($template_directory)) {
 	$admin->print_error($MESSAGE['GENERIC']['INVALID']);
 }
 
-// Check if a template with the same name already exists
+// Check if this module is already installed
+// and compare versions if so
+$new_template_version=$template_version;
 if(is_dir(WB_PATH.'/templates/'.$template_directory)) {
-	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
-	$admin->print_error($MESSAGE['GENERIC']['ALREADY_INSTALLED']);
+	if(file_exists(WB_PATH.'/templates/'.$template_directory.'/info.php')) {
+		require(WB_PATH.'/templates/'.$template_directory.'/info.php');
+		// Version to be installed is older than currently installed version
+		if ($template_version>$new_template_version) {
+			if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
+			$admin->print_error($MESSAGE['GENERIC']['ALREADY_INSTALLED']);
+		}
+	} 
+	$success_message=$MESSAGE['GENERIC']['UPGRADED'];
+} else {
+	$success_message=$MESSAGE['GENERIC']['INSTALLED'];
 }
 
 // Check if template dir is writable
@@ -90,7 +101,7 @@ if(!file_exists($template_dir)) {
 }
 
 // Unzip template to the template dir
-$list = $archive->extract(PCLZIP_OPT_PATH, $template_dir, PCLZIP_OPT_REMOVE_ALL_PATH);
+$list = $archive->extract(PCLZIP_OPT_PATH, $template_dir);
 if(!$list) {
 	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNZIP']);
 }
@@ -109,7 +120,7 @@ while (false !== $entry = $dir->read()) {
 }
 
 // Print success message
-$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
+$admin->print_success($success_message);
 
 // Print admin footer
 $admin->print_footer();
