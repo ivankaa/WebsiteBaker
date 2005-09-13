@@ -107,6 +107,8 @@ if(isset($_GET['advanced']) AND $_GET['advanced'] == 'yes') {
 }
 
 $template->set_var(array(	
+									'PAGES_DIRECTORY' => PAGES_DIRECTORY,
+									'MEDIA_DIRECTORY' => MEDIA_DIRECTORY,
 									'PAGE_EXTENSION' => PAGE_EXTENSION,
 									'PAGE_SPACER' => PAGE_SPACER,
 									'WB_PATH' => WB_PATH,
@@ -500,6 +502,8 @@ $template->set_var(array(
 								'TEXT_LOGIN' => $TEXT['LOGIN'],
 								'TEXT_SIGNUP' => $TEXT['SIGNUP'],
 								'TEXT_PHP_ERROR_LEVEL' => $TEXT['PHP_ERROR_LEVEL'],
+								'TEXT_PAGES_DIRECTORY' => $TEXT['PAGES_DIRECTORY'],
+								'TEXT_MEDIA_DIRECTORY' => $TEXT['MEDIA_DIRECTORY'],
 								'TEXT_PAGE_EXTENSION' => $TEXT['PAGE_EXTENSION'],
 								'TEXT_PAGE_SPACER' => $TEXT['PAGE_SPACER'],
 								'TEXT_RENAME_FILES_ON_UPLOAD' => $TEXT['RENAME_FILES_ON_UPLOAD'],

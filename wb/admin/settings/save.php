@@ -36,6 +36,8 @@ if($advanced == '') {
 	$admin = new admin('Settings', 'settings_advanced');
 }
 
+//print_r($_POST);
+
 // Work-out file mode
 if($advanced == '') {
 	// Check if should be set to 777 or left alone
@@ -134,6 +136,7 @@ while($setting = $results->fetchRow()) {
 			$value=$file_mode;
 			break;
 	}
+	//echo $setting_name.':'.$value."<br />";
 	$database->query("UPDATE ".TABLE_PREFIX."settings SET value = '$value' WHERE name = '$setting_name'");
 }
 
@@ -155,6 +158,7 @@ if($database->is_error()) {
 	exit();
 }
 
+$admin->print_success($MESSAGE['SETTINGS']['SAVED'], ADMIN_URL.'/settings/index.php'.$advanced);
 $admin->print_footer();
 
 ?>
