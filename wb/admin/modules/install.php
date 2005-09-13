@@ -96,7 +96,7 @@ $module_dir = WB_PATH.'/modules/'.$module_directory;
 make_dir($module_dir);
 
 // Unzip module to the module dir
-$list = $archive->extract(PCLZIP_OPT_PATH, $module_dir, PCLZIP_OPT_REMOVE_ALL_PATH);
+$list = $archive->extract(PCLZIP_OPT_PATH, $module_dir);
 if(!$list) {
 	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNZIP']);
 }
