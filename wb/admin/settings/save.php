@@ -155,64 +155,6 @@ if($database->is_error()) {
 	exit();
 }
 
-// Get timezone offset
-$timezone_offset = $_POST['timezone']*60*60;
-// Work out what code to put in for error reporting
-if($_POST['er_level'] == '') {
-	$er_level = '';
-	$er_level_code = '';
-} else {
-	$er_level = $_POST['er_level'];
-	$er_level_code = "error_reporting('".$_POST['er_level']."');\n";
-}
-// Work-out database type, and whether or not to use PEAR
-$database_type = $admin->get_post('database_type');
-
-// Rewrite WB_PATH and ADMIN_PATH if on Windows
-if($_POST['operating_system']=='windows') {
-	$WB_PATH = str_replace('/','\\', WB_PATH);
-	$WB_PATH = str_replace('\\','\\\\', $WB_PATH);
-	$ADMIN_PATH = str_replace('/','\\', ADMIN_PATH);
-	$ADMIN_PATH = str_replace('\\','\\\\', $ADMIN_PATH);
-} else {
-	$WB_PATH = WB_PATH;
-	$ADMIN_PATH = ADMIN_PATH;
-}
-// Write the remaining settings to the config file
-$config_filename = $WB_PATH.'/config.php';
-$config_content = "" .
-"<?php \n".
-"define('DB_TYPE', '".DB_TYPE."');\n".
-"define('DB_HOST', '".DB_HOST."');\n".
-"define('DB_USERNAME', '".DB_USERNAME."');\n".
-"define('DB_PASSWORD', '".DB_PASSWORD."');\n".
-"define('DB_NAME', '".DB_NAME."');\n".
-"define('TABLE_PREFIX', '".TABLE_PREFIX."');\n".
-"\n".
-"define('WB_PATH', '".$WB_PATH."');\n".
-"define('WB_URL', '".WB_URL."');\n".
-"define('ADMIN_PATH', '".$ADMIN_PATH."');\n".
-"define('ADMIN_URL', '".ADMIN_URL."');\n".
-"\n".
-"?>";
-
-// Check if file is writable first
-if(!is_writable($config_filename)) {
-	$admin->print_error($MESSAGE['SETTINGS']['UNABLE_WRITE_CONFIG'], ADMIN_URL.'/settings/index.php'.$advanced);
-} else {
-	// Try and open the config file
-	if (!$handle = fopen($config_filename, 'w')) {
-		$admin->print_error($MESSAGE['SETTINGS']['UNABLE_OPEN_CONFIG'], ADMIN_URL.'/settings/index.php'.$advanced);	
-	} else {
-		// Try and write to the config file
-		if (fwrite($handle, $config_content) === FALSE) {
-			$admin->print_error($MESSAGE['SETTINGS']['UNABLE_WRITE_CONFIG'], ADMIN_URL.'/settings/index.php'.$advanced);
-		} else {
-			$admin->print_success($MESSAGE['SETTINGS']['SAVED'], ADMIN_URL.'/settings/index.php'.$advanced);
-		}
-	}
-}
-
 $admin->print_footer();
 
 ?>
