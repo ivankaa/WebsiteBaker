@@ -36,6 +36,83 @@ if($advanced == '') {
 	$admin = new admin('Settings', 'settings_advanced');
 }
 
+// Work-out file mode
+if($advanced == '') {
+	// Check if should be set to 777 or left alone
+	if(isset($_POST['world_writeable']) AND $_POST['world_writeable'] == 'true') {
+		$file_mode = '0777';
+		$dir_mode = '0777';
+	} else {
+		$file_mode = STRING_FILE_MODE;
+		$dir_mode = STRING_DIR_MODE;
+	}
+} else {
+	// Work-out the octal value for file mode
+	$u = 0;
+	if(isset($_POST['file_u_r']) AND $_POST['file_u_r'] == 'true') {
+		$u = $u+4;
+	}
+	if(isset($_POST['file_u_w']) AND $_POST['file_u_w'] == 'true') {
+		$u = $u+2;
+	}
+	if(isset($_POST['file_u_e']) AND $_POST['file_u_e'] == 'true') {
+		$u = $u+1;
+	}
+	$g = 0;
+	if(isset($_POST['file_g_r']) AND $_POST['file_g_r'] == 'true') {
+		$g = $g+4;
+	}
+	if(isset($_POST['file_g_w']) AND $_POST['file_g_w'] == 'true') {
+		$g = $g+2;
+	}
+	if(isset($_POST['file_g_e']) AND $_POST['file_g_e'] == 'true') {
+		$g = $g+1;
+	}
+	$o = 0;
+	if(isset($_POST['file_o_r']) AND $_POST['file_o_r'] == 'true') {
+		$o = $o+4;
+	}
+	if(isset($_POST['file_o_w']) AND $_POST['file_o_w'] == 'true') {
+		$o = $o+2;
+	}
+	if(isset($_POST['file_o_e']) AND $_POST['file_o_e'] == 'true') {
+		$o = $o+1;
+	}
+	$file_mode = "0".$u.$g.$o;
+	// Work-out the octal value for dir mode
+	$u = 0;
+	if(isset($_POST['dir_u_r']) AND $_POST['dir_u_r'] == 'true') {
+		$u = $u+4;
+	}
+	if(isset($_POST['dir_u_w']) AND $_POST['dir_u_w'] == 'true') {
+		$u = $u+2;
+	}
+	if(isset($_POST['dir_u_e']) AND $_POST['dir_u_e'] == 'true') {
+		$u = $u+1;
+	}
+	$g = 0;
+	if(isset($_POST['dir_g_r']) AND $_POST['dir_g_r'] == 'true') {
+		$g = $g+4;
+	}
+	if(isset($_POST['dir_g_w']) AND $_POST['dir_g_w'] == 'true') {
+		$g = $g+2;
+	}
+	if(isset($_POST['dir_g_e']) AND $_POST['dir_g_e'] == 'true') {
+		$g = $g+1;
+	}
+	$o = 0;
+	if(isset($_POST['dir_o_r']) AND $_POST['dir_o_r'] == 'true') {
+		$o = $o+4;
+	}
+	if(isset($_POST['dir_o_w']) AND $_POST['dir_o_w'] == 'true') {
+		$o = $o+2;
+	}
+	if(isset($_POST['dir_o_e']) AND $_POST['dir_o_e'] == 'true') {
+		$o = $o+1;
+	}
+	$dir_mode = "0".$u.$g.$o;
+}
+
 // Create new database object
 $database = new database();
 
@@ -46,6 +123,17 @@ while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
 	$value = $admin->add_slashes($value);
+	switch ($setting_name) {
+		case 'default_timezone':
+			$value=$value*60*60;
+			break;
+		case 'string_dir_mode':
+			$value=$dir_mode;
+			break;
+		case 'string_file_mode':
+			$value=$file_mode;
+			break;
+	}
 	$database->query("UPDATE ".TABLE_PREFIX."settings SET value = '$value' WHERE name = '$setting_name'");
 }
 
@@ -63,142 +151,66 @@ while($search_setting = $results->fetchRow()) {
 // Check if there was an error updating the db
 if($database->is_error()) {
 	$admin->print_error($database->get_error, ADMIN_URL.'/settings/index.php'.$advanced);
+	$admin->print_footer();
+	exit();
+}
+
+// Get timezone offset
+$timezone_offset = $_POST['timezone']*60*60;
+// Work out what code to put in for error reporting
+if($_POST['er_level'] == '') {
+	$er_level = '';
+	$er_level_code = '';
 } else {
-	// Get timezone offset
-	$timezone_offset = $_POST['timezone']*60*60;
-	// Work out what code to put in for error reporting
-	if($_POST['er_level'] == '') {
-		$er_level = '';
-		$er_level_code = '';
+	$er_level = $_POST['er_level'];
+	$er_level_code = "error_reporting('".$_POST['er_level']."');\n";
+}
+// Work-out database type, and whether or not to use PEAR
+$database_type = $admin->get_post('database_type');
+
+// Rewrite WB_PATH and ADMIN_PATH if on Windows
+if($_POST['operating_system']=='windows') {
+	$WB_PATH = str_replace('/','\\', WB_PATH);
+	$WB_PATH = str_replace('\\','\\\\', $WB_PATH);
+	$ADMIN_PATH = str_replace('/','\\', ADMIN_PATH);
+	$ADMIN_PATH = str_replace('\\','\\\\', $ADMIN_PATH);
+} else {
+	$WB_PATH = WB_PATH;
+	$ADMIN_PATH = ADMIN_PATH;
+}
+// Write the remaining settings to the config file
+$config_filename = $WB_PATH.'/config.php';
+$config_content = "" .
+"<?php \n".
+"define('DB_TYPE', '".DB_TYPE."');\n".
+"define('DB_HOST', '".DB_HOST."');\n".
+"define('DB_USERNAME', '".DB_USERNAME."');\n".
+"define('DB_PASSWORD', '".DB_PASSWORD."');\n".
+"define('DB_NAME', '".DB_NAME."');\n".
+"define('TABLE_PREFIX', '".TABLE_PREFIX."');\n".
+"\n".
+"define('WB_PATH', '".$WB_PATH."');\n".
+"define('WB_URL', '".WB_URL."');\n".
+"define('ADMIN_PATH', '".$ADMIN_PATH."');\n".
+"define('ADMIN_URL', '".ADMIN_URL."');\n".
+"\n".
+"?>";
+
+// Check if file is writable first
+if(!is_writable($config_filename)) {
+	$admin->print_error($MESSAGE['SETTINGS']['UNABLE_WRITE_CONFIG'], ADMIN_URL.'/settings/index.php'.$advanced);
+} else {
+	// Try and open the config file
+	if (!$handle = fopen($config_filename, 'w')) {
+		$admin->print_error($MESSAGE['SETTINGS']['UNABLE_OPEN_CONFIG'], ADMIN_URL.'/settings/index.php'.$advanced);	
 	} else {
-		$er_level = $_POST['er_level'];
-		$er_level_code = "error_reporting('".$_POST['er_level']."');\n";
-	}
-	// Work-out database type, and whether or not to use PEAR
-	$database_type = $admin->get_post('database_type');
-	
-	// Work-out file mode
-	if($advanced == '') {
-		// Check if should be set to 777 or left alone
-		if(isset($_POST['world_writeable']) AND $_POST['world_writeable'] == 'true') {
-			$file_mode = '0777';
-			$dir_mode = '0777';
+		// Try and write to the config file
+		if (fwrite($handle, $config_content) === FALSE) {
+			$admin->print_error($MESSAGE['SETTINGS']['UNABLE_WRITE_CONFIG'], ADMIN_URL.'/settings/index.php'.$advanced);
 		} else {
-			$file_mode = STRING_FILE_MODE;
-			$dir_mode = STRING_DIR_MODE;
-		}
-	} else {
-		// Work-out the octal value for file mode
-		$u = 0;
-		if(isset($_POST['file_u_r']) AND $_POST['file_u_r'] == 'true') {
-			$u = $u+4;
-		}
-		if(isset($_POST['file_u_w']) AND $_POST['file_u_w'] == 'true') {
-			$u = $u+2;
-		}
-		if(isset($_POST['file_u_e']) AND $_POST['file_u_e'] == 'true') {
-			$u = $u+1;
-		}
-		$g = 0;
-		if(isset($_POST['file_g_r']) AND $_POST['file_g_r'] == 'true') {
-			$g = $g+4;
-		}
-		if(isset($_POST['file_g_w']) AND $_POST['file_g_w'] == 'true') {
-			$g = $g+2;
-		}
-		if(isset($_POST['file_g_e']) AND $_POST['file_g_e'] == 'true') {
-			$g = $g+1;
-		}
-		$o = 0;
-		if(isset($_POST['file_o_r']) AND $_POST['file_o_r'] == 'true') {
-			$o = $o+4;
-		}
-		if(isset($_POST['file_o_w']) AND $_POST['file_o_w'] == 'true') {
-			$o = $o+2;
-		}
-		if(isset($_POST['file_o_e']) AND $_POST['file_o_e'] == 'true') {
-			$o = $o+1;
-		}
-		$file_mode = "0".$u.$g.$o;
-		// Work-out the octal value for dir mode
-		$u = 0;
-		if(isset($_POST['dir_u_r']) AND $_POST['dir_u_r'] == 'true') {
-			$u = $u+4;
-		}
-		if(isset($_POST['dir_u_w']) AND $_POST['dir_u_w'] == 'true') {
-			$u = $u+2;
-		}
-		if(isset($_POST['dir_u_e']) AND $_POST['dir_u_e'] == 'true') {
-			$u = $u+1;
-		}
-		$g = 0;
-		if(isset($_POST['dir_g_r']) AND $_POST['dir_g_r'] == 'true') {
-			$g = $g+4;
-		}
-		if(isset($_POST['dir_g_w']) AND $_POST['dir_g_w'] == 'true') {
-			$g = $g+2;
-		}
-		if(isset($_POST['dir_g_e']) AND $_POST['dir_g_e'] == 'true') {
-			$g = $g+1;
-		}
-		$o = 0;
-		if(isset($_POST['dir_o_r']) AND $_POST['dir_o_r'] == 'true') {
-			$o = $o+4;
-		}
-		if(isset($_POST['dir_o_w']) AND $_POST['dir_o_w'] == 'true') {
-			$o = $o+2;
-		}
-		if(isset($_POST['dir_o_e']) AND $_POST['dir_o_e'] == 'true') {
-			$o = $o+1;
-		}
-		$dir_mode = "0".$u.$g.$o;
-	}
-	
-	// Rewrite WB_PATH and ADMIN_PATH if on Windows
-	if($_POST['operating_system']=='windows') {
-		$WB_PATH = str_replace('/','\\', WB_PATH);
-		$WB_PATH = str_replace('\\','\\\\', $WB_PATH);
-		$ADMIN_PATH = str_replace('/','\\', ADMIN_PATH);
-		$ADMIN_PATH = str_replace('\\','\\\\', $ADMIN_PATH);
-	} else {
-		$WB_PATH = WB_PATH;
-		$ADMIN_PATH = ADMIN_PATH;
-	}
-	// Write the remaining settings to the config file
-	$config_filename = $WB_PATH.'/config.php';
-	$config_content = "" .
-	"<?php \n".
-	"define('DB_TYPE', '".DB_TYPE."');\n".
-	"define('DB_HOST', '".DB_HOST."');\n".
-	"define('DB_USERNAME', '".DB_USERNAME."');\n".
-	"define('DB_PASSWORD', '".DB_PASSWORD."');\n".
-	"define('DB_NAME', '".DB_NAME."');\n".
-	"define('TABLE_PREFIX', '".TABLE_PREFIX."');\n".
-	"\n".
-	"define('WB_PATH', '".$WB_PATH."');\n".
-	"define('WB_URL', '".WB_URL."');\n".
-	"define('ADMIN_PATH', '".$ADMIN_PATH."');\n".
-	"define('ADMIN_URL', '".ADMIN_URL."');\n".
-	"\n".
-	"?>";
-	
-	// Check if file is writable first
-	if(!is_writable($config_filename)) {
-		$admin->print_error($MESSAGE['SETTINGS']['UNABLE_WRITE_CONFIG'], ADMIN_URL.'/settings/index.php'.$advanced);
-	} else {
-		// Try and open the config file
-		if (!$handle = fopen($config_filename, 'w')) {
-			$admin->print_error($MESSAGE['SETTINGS']['UNABLE_OPEN_CONFIG'], ADMIN_URL.'/settings/index.php'.$advanced);	
-		} else {
-			// Try and write to the config file
-			if (fwrite($handle, $config_content) === FALSE) {
-				$admin->print_error($MESSAGE['SETTINGS']['UNABLE_WRITE_CONFIG'], ADMIN_URL.'/settings/index.php'.$advanced);
-			} else {
-				$admin->print_success($MESSAGE['SETTINGS']['SAVED'], ADMIN_URL.'/settings/index.php'.$advanced);
-			}
+			$admin->print_success($MESSAGE['SETTINGS']['SAVED'], ADMIN_URL.'/settings/index.php'.$advanced);
 		}
 	}
-	
 }
 
 $admin->print_footer();

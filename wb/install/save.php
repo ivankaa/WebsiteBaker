@@ -431,9 +431,7 @@ if($install_tables == true) {
 	." ('', 'pages_directory', '/pages'),"
 	." ('', 'media_directory', '/media'),"
 	." ('', 'operating_system', '$operating_system'),"
-	." ('', 'octal_file_mode', '$file_mode'),"
 	." ('', 'string_file_mode', '$file_mode'),"
-	." ('', 'octal_dir_mode', '$dir_mode'),"
 	." ('', 'string_dir_mode', '$dir_mode');";
 	$database->query($settings_rows);
 	

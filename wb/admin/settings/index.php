@@ -49,7 +49,7 @@ while($setting = $results->fetchRow()) {
 		$setting_value=false;
 	if ($setting_value=='true')
 		$setting_value=true;*/
-	echo strtoupper($setting_name).'-'.$setting_value.'-'.($setting_value=="false").'<br />';
+	echo strtoupper($setting_name).'-'.$setting_value.'<br />';
 	$template->set_var(strtoupper($setting_name),$setting_value);
 }
 
