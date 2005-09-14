@@ -375,6 +375,7 @@ $TEXT['PAGE_LANGUAGES'] = 'Page Languages';
 $TEXT['HIDDEN'] = 'Hidden';
 $TEXT['MAIN'] = 'Main';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Rename Files On Upload';
+$TEXT['APP_NAME'] = 'Session Identifier';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, you do not have permissions to view this page';
