@@ -403,13 +403,17 @@ if($install_tables == true) {
 	       . ' ';
 	$database->query($pages);
 	
+	require(WB_PATH.'/admin/interface/version.php');
+	
 	// Settings table
 	$settings="CREATE TABLE `".TABLE_PREFIX."settings` ( `setting_id` INT NOT NULL auto_increment,
 		`name` VARCHAR( 255 ) NOT NULL ,
 		`value` TEXT NOT NULL ,
 		PRIMARY KEY ( `setting_id` ) )";
 	$database->query($settings);
-	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` VALUES ('', 'website_title', '$website_title'),"
+	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` VALUES "
+	." ('', 'wb_version', '".VERSION."'),"
+	." ('', 'website_title', '$website_title'),"
 	." ('', 'website_description', ''),"
 	." ('', 'website_keywords', ''),"
 	." ('', 'website_header', ''),"

@@ -124,20 +124,22 @@ $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
-	$value = $admin->add_slashes($value);
-	switch ($setting_name) {
-		case 'default_timezone':
-			$value=$value*60*60;
-			break;
-		case 'string_dir_mode':
-			$value=$dir_mode;
-			break;
-		case 'string_file_mode':
-			$value=$file_mode;
-			break;
+	if ($value!=null) {
+		$value = $admin->add_slashes($value);
+		switch ($setting_name) {
+			case 'default_timezone':
+				$value=$value*60*60;
+				break;
+			case 'string_dir_mode':
+				$value=$dir_mode;
+				break;
+			case 'string_file_mode':
+				$value=$file_mode;
+				break;
+		}
+		//echo $setting_name.':'.$value."<br />";
+		$database->query("UPDATE ".TABLE_PREFIX."settings SET value = '$value' WHERE name = '$setting_name'");
 	}
-	//echo $setting_name.':'.$value."<br />";
-	$database->query("UPDATE ".TABLE_PREFIX."settings SET value = '$value' WHERE name = '$setting_name'");
 }
 
 // Query current search settings in the db, then loop through them and update the db with the new value
