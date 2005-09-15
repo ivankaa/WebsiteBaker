@@ -23,7 +23,7 @@
 
 */
 
-$starttime=microtime();
+$starttime = array_sum(explode(" ",microtime()));
 
 // Include config file
 require_once(dirname(__FILE__).'/config.php');
