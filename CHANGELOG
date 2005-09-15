@@ -11,6 +11,15 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.0 -------------------------------------
+15-Sep-2005 Stefan Braunewell
++	Added table module with columns 'name','type' and 'directory' as an
+	index.
++	Added entry to settings table 'wb_version' which holds the version
+	number and can be utilized in future upgrade scripts.
+!	Added upgrade functionality also for templates and languages.
+#/!	Template/modules installation now respects paths.
+!	Moved updates from config.php to database.
+	Created initialize.php (required by config.php) to read settings.
 11-Sep-2005 Stefan Braunewell
 !	HTMLArea is now a module instead of a core component. Files moved
 	from "include" to "modules".
@@ -29,8 +38,6 @@ Legend:
 #	Fixed missing parent option 'none' - ticket #12 - and a minor scope bug.
 +	Added breadcrumbs code. Call using $wb->breadcrumbs().
 +	Added utf-8 character encoding meta tag into all stock templates.
--/!	Removed initialize.php again, initialization now takes place in
-	class wb constructor.
 #	Fixed bug when changing a page's parent
 !	Changed the way blocks are treated. Added new frontend class attribute
 	default_block_content that controls what is shown on pages such as
@@ -60,8 +67,8 @@ Legend:
 !	Removed 'USER_LANGUAGE' and 'GET_LANGUAGE' constants.
 	A GET['lang'] now sets the session language variable.
 26-Aug-2005 Stefan Braunewell
-!	Moved redundant code to files 'initialize.php' and into the new class
-	functions. Created 'compatibility.php' for backward compatibility with
+!	Moved redundant code into the new class functions. Created 
+	'compatibility.php' for backward compatibility with
 	modules and templates. Variables and functions can still be accessed
 	in the old way.
 !/+	Reorganized core frontend files, added new base class 'wb' from
