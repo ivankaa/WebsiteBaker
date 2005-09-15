@@ -25,9 +25,6 @@
 
 // Include the config file
 require('../config.php');
-require_once(WB_PATH."/framework/class.frontend.php");
-$wb = new frontend();
-
 
 // Required page details
 $page_id = 0;
@@ -42,10 +39,6 @@ define('MENU_TITLE', 'Search');
 define('MODULE', '');
 define('VISIBILITY', 'public');
 define('PAGE_CONTENT', 'search.php');
-
-
-// Include database class file
-require_once(WB_PATH.'/framework/class.database.php');
 
 // Find out what the search template is
 $database = new database();

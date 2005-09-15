@@ -58,10 +58,6 @@ class frontend extends wb {
 	// ugly database stuff
 	var $extra_where_sql;
 
-	function frontend() {
-		$this->wb();
-	}
-	
 	function page_select() {
 		global $page_id,$no_intro;
 		global $database;

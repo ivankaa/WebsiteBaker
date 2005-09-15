@@ -35,8 +35,7 @@ if(!defined('WB_PATH')) {
 
 require_once(WB_PATH.'/framework/class.frontend.php');
 // Create new frontend object
-// Perform general initializations
-if (!isset($wb)) $wb = new frontend();
+$wb = new frontend();
 
 // Figure out which page to display
 // Stop processing if intro page was shown
