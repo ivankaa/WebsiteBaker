@@ -360,9 +360,10 @@ if($install_tables == true) {
 	// Search table
 	$search = "DROP TABLE IF EXISTS `".TABLE_PREFIX."search`";
 	$database->query($search);
-			
-
-
+	// Modules table
+	$modules = "DROP TABLE IF EXISTS `".TABLE_PREFIX."modules`";
+	$database->query($modules);
+				
 	// Try installing tables
 	
 	// Pages table
@@ -492,6 +493,24 @@ if($install_tables == true) {
 	        . ' ';
 	$database->query($search);
 	
+	// Modules table
+	$modules = 'CREATE TABLE `'.TABLE_PREFIX.'modules` ( '
+	.'`id` INT NOT NULL auto_increment ,'
+	.'`name` VARCHAR( 255 ) NOT NULL ,'
+	.'`type` VARCHAR( 255 ) NOT NULL ,'
+	.'`directory` VARCHAR( 255 ) NOT NULL ,'
+	.' PRIMARY KEY ( `id` ) ); ';
+	
+	$database->query($modules);
+
+	$search = 'CREATE TABLE `'.TABLE_PREFIX.'modules` ( '
+	        . ' `name` VARCHAR( 255 ) NOT NULL ,'
+	        . ' `type` VARCHAR( 255 ) NOT NULL ,'
+	        . ' PRIMARY KEY ( `name` ) )'
+	        . ' ';
+	$database->query($search);
+
+
 	// Insert default data
 	
 	// Admin group
