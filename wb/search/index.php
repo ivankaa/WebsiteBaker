@@ -1,6 +1,6 @@
 <?php
 
-// $Id: index.php,v 1.3 2005/04/02 06:27:52 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -23,6 +23,12 @@
 
 */
 
+// Include the config file
+require('../config.php');
+require_once(WB_PATH."/framework/class.frontend.php");
+$wb = new frontend();
+
+
 // Required page details
 $page_id = 0;
 $page_description = '';
@@ -37,8 +43,6 @@ define('MODULE', '');
 define('VISIBILITY', 'public');
 define('PAGE_CONTENT', 'search.php');
 
-// Include the config file
-require('../config.php');
 
 // Include database class file
 require_once(WB_PATH.'/framework/class.database.php');

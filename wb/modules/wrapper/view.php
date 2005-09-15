@@ -26,7 +26,7 @@
 // Get url
 $get_settings = $database->query("SELECT url,height FROM ".TABLE_PREFIX."mod_wrapper WHERE section_id = '$section_id'");
 $fetch_settings = $get_settings->fetchRow();
-$url = $this->strip_slashes_dummy($fetch_settings['url']);
+$url = ($fetch_settings['url']);
 
 ?>
 <iframe src="<?php echo $url; ?>" width="100%" height="<?php echo $fetch_settings['height']; ?>px" frameborder="0" scrolling="auto">

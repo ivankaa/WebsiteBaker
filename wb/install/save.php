@@ -280,6 +280,7 @@ $config_content = "" .
 "define('ADMIN_PATH', '$wb_path/admin');\n".
 "define('ADMIN_URL', '$wb_url/admin');\n".
 "\n".
+"require_once(WB_PATH.'/framework/initialize.php');\n".
 "?>";
 
 $config_filename = '../config.php';
@@ -300,7 +301,18 @@ if(file_exists($config_filename) AND is_writable($config_filename)) {
 }
 
 // Include configuration file
-require('../config.php');
+define('DB_TYPE', 'mysql');
+define('DB_HOST', $database_host);
+define('DB_USERNAME', $database_username);
+define('DB_PASSWORD', $database_password);
+define('DB_NAME', $database_name);
+define('TABLE_PREFIX', $table_prefix);
+define('WB_PATH', $wb_path);
+define('WB_URL', $wb_url);
+define('ADMIN_PATH', $wb_path.'/admin');
+define('ADMIN_URL', $wb_url.'/admin');
+
+//require('../config.php');
 
 // Check if the user has entered a correct path
 if(!file_exists(WB_PATH.'/framework/class.admin.php')) {
@@ -548,7 +560,8 @@ $search_no_results = addslashes('<br />No results found');
 	// Search template
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` (name) VALUES ('template')");
 	
-	$wb=new wb();
+	require_once(WB_PATH.'/framework/initialize.php');
+	$wb = new wb();
 	
 	// Include the pre-installed module install scripts
 	require(WB_PATH.'/modules/wysiwyg/install.php');

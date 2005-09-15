@@ -75,7 +75,7 @@ class frontend extends wb {
 				$content = fread($handle, filesize($filename));
 				fclose($handle);
 				$this->preprocess($content);
-				echo $this->strip_slashes_dummy($content);
+				echo ($content);
 				return false;
 			}
 		}
@@ -143,10 +143,10 @@ class frontend extends wb {
 			// Page ID
 			define('PAGE_ID', $this->page['page_id']);
 			// Page Title
-			define('PAGE_TITLE', $this->strip_slashes_dummy($this->page['page_title']));
+			define('PAGE_TITLE', ($this->page['page_title']));
 			$this->page_title=PAGE_TITLE;
 			// Menu Title
-			$menu_title = $this->strip_slashes_dummy($this->page['menu_title']);
+			$menu_title = ($this->page['menu_title']);
 			if($menu_title != '') {
 				define('MENU_TITLE', $menu_title);
 			} else {
@@ -278,47 +278,48 @@ class frontend extends wb {
 	}
 	
 	function menu() {
-	   if (!isset($this->menu_number)) {
-	   	$this->menu_number = 1;
+		global $wb;
+	   if (!isset($wb->menu_number)) {
+	   	$wb->menu_number = 1;
 	   }
-	   if (!isset($this->menu_start_level)) {
-	   	$this->menu_start_level = 0;
+	   if (!isset($wb->menu_start_level)) {
+	   	$wb->menu_start_level = 0;
 	   }
-	   if (!isset($this->menu_recurse)) {
-	   	$this->menu_recurse = -1;
+	   if (!isset($wb->menu_recurse)) {
+	   	$wb->menu_recurse = -1;
 	   }
-	   if (!isset($this->menu_collapse)) {
-	   	$this->menu_collapse = true;
+	   if (!isset($wb->menu_collapse)) {
+	   	$wb->menu_collapse = true;
 	   }
-	   if (!isset($this->menu_item_template)) {
-	   	$this->menu_item_template = '<li><span[class]>[a][menu_title][/a]</span>';
+	   if (!isset($wb->menu_item_template)) {
+	   	$wb->menu_item_template = '<li><span[class]>[a][menu_title][/a]</span>';
 	   }
-	   if (!isset($this->menu_item_footer)) {
-	   	$this->menu_item_footer = '</li>';
+	   if (!isset($wb->menu_item_footer)) {
+	   	$wb->menu_item_footer = '</li>';
 	   }
-	   if (!isset($this->menu_header)) {
-	   	$this->menu_header = '<ul>';
+	   if (!isset($wb->menu_header)) {
+	   	$wb->menu_header = '<ul>';
 	   }
-	   if (!isset($this->menu_footer)) {
-	   	$this->menu_footer = '<ul>';
+	   if (!isset($wb->menu_footer)) {
+	   	$wb->menu_footer = '<ul>';
 	   }
-	   if (!isset($this->menu_default_class)) {
-	   	$this->menu_default_class = ' class="menu_default"';
+	   if (!isset($wb->menu_default_class)) {
+	   	$wb->menu_default_class = ' class="menu_default"';
 	   }
-	   if (!isset($this->menu_current_class)) {
-	   	$this->menu_current_class = ' class="menu_current"';
+	   if (!isset($wb->menu_current_class)) {
+	   	$wb->menu_current_class = ' class="menu_current"';
 	   }
-       if (!isset($this->menu_parent)) {
-     	$this->menu_parent = 0;
+       if (!isset($wb->menu_parent)) {
+     	$wb->menu_parent = 0;
 	   }
-	   $this->show_menu();
+	   $wb->show_menu();
 	   if ($start_level>0) {
-	       $key_array=array_keys($this->page_trail);
+	       $key_array=array_keys($wb->page_trail);
 	       $real_start=$key_array[$start_level-1];
 	       if (isset($real_start))
 	       {
-	       		$this->menu_parent=$real_start;
-	          $this->show_menu();
+	       	$wb->menu_parent=$real_start;
+	        $wb->show_menu();
 	       }
 	       return;
 	   }
@@ -327,21 +328,22 @@ class frontend extends wb {
 	
 	function show_menu() {
 	   global $database;
-	   if ($this->menu_recurse==0)
+	   global $wb;
+	   if ($wb->menu_recurse==0)
 	       return;
 	   // Check if we should add menu number check to query
 	   if($menu_parent == 0) {
-	       $menu_number = "menu = '$this->menu_number'";
+	       $menu_number = "menu = '$wb->menu_number'";
 	   } else {
 	      $menu_number = '1';
 	   }
 	   // Query pages
 	   $query_menu = $database->query("SELECT page_id,menu_title,page_title,link,target,level,visibility FROM ".
-	TABLE_PREFIX."pages WHERE parent = '$this->menu_parent' AND $menu_number AND $this->extra_where_sql ORDER BY position ASC");
+	TABLE_PREFIX."pages WHERE parent = '$wb->menu_parent' AND $menu_number AND $wb->extra_where_sql ORDER BY position ASC");
 	   // Check if there are any pages to show
 	   if($query_menu->numRows() > 0) {
 	   	  // Print menu header
-	   	  echo "\n".$this->menu_header;
+	   	  echo "\n".$wb->menu_header;
 	      // Loop through pages
 	      while($page = $query_menu->fetchRow()) {
 	      	 // Check if this page should be shown
@@ -349,129 +351,33 @@ class frontend extends wb {
 	         $vars = array('[class]','[a]', '[/a]', '[menu_title]', '[page_title]');
 	         // Work-out class
 	         if($page['page_id'] == PAGE_ID) {
-	            $class = $this->menu_current_class;
+	            $class = $wb->menu_current_class;
 	         } else {
-	            $class = $this->menu_default_class;
+	            $class = $wb->menu_default_class;
 	         }
 	         // Check if link is same as first page link, and if so change to WB URL
-	         if($page['link'] == $this->default_link AND !INTRO_PAGE) {
+	         if($page['link'] == $wb->default_link AND !INTRO_PAGE) {
 	            $link = WB_URL;
 	         } else {
-	            $link = $this->page_link($page['link']);
+	            $link = $wb->page_link($page['link']);
 	         }
 	         // Create values
-	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', $this->strip_slashes_dummy($page['menu_title']), $this->strip_slashes_dummy($page['page_title']));
+	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', ($page['menu_title']), ($page['page_title']));
 	         // Replace vars with value and print
-	         echo "\n".str_replace($vars, $values, $this->menu_item_template);
+	         echo "\n".str_replace($vars, $values, $wb->menu_item_template);
 	         // Generate sub-menu
-	         if($this->menu_collapse==false OR ($this->menu_collapse==true AND isset($this->page_trail[$page['page_id']]))) {
-	            $this->menu_recurse--;
-	            $this->menu_parent=$page['page_id'];
-	            $this->show_menu();
+	         if($wb->menu_collapse==false OR ($wb->menu_collapse==true AND isset($wb->page_trail[$page['page_id']]))) {
+	            $wb->menu_recurse--;
+	            $wb->menu_parent=$page['page_id'];
+	            $wb->show_menu();
 	         }
-	         echo "\n".$this->menu_item_footer;
+	         echo "\n".$wb->menu_item_footer;
 	      }
 	      // Print menu footer
-	      echo "\n".$this->menu_footer;
+	      echo "\n".$wb->menu_footer;
 	   }
 	}
 
-	function content($block = 1) {
-		// Get outside objects
-		global $TEXT,$MENU,$HEADING,$MESSAGE;
-		global $globals;
-		global $database;
-		$admin = & $this;
-		if ($this->page_access_denied==true) {
-            echo $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'];
-			exit();
-		}
-		if(isset($globals) AND is_array($globals)) { foreach($globals AS $global_name) { global $$global_name; } }
-		// Make sure block is numeric
-		if(!is_numeric($block)) { $block = 1; }
-		// Include page content
-		if(!defined('PAGE_CONTENT') OR $block!=1) {
-			if ($this->page_id==0) {
-				if ($this->default_block_content=='none') {
-					return;
-				}
-				if (is_numeric($this->default_block_content)) {
-					$page_id=$this->default_block_content;
-				} else {
-					$page_id=$this->default_page-id;
-				}				
-			} else {
-				$page_id=$this->page_id;
-			}
-			// First get all sections for this page
-			$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '".$page_id."' AND block = '$block' ORDER BY position");
-			if($query_sections->numRows() > 0) {
-				// Loop through them and include there modules file
-				while($section = $query_sections->fetchRow()) {
-					$section_id = $section['section_id'];
-					$module = $section['module'];
-					require(WB_PATH.'/modules/'.$module.'/view.php');
-				}
-			}
-		} else {
-			require(PAGE_CONTENT);
-		}
-	}
-
-	function breadcrumbs($sep=' > ',$tier=1,$links=true) {
-		$page_id=&$this->page_id;
-		if ($page_id!=0)
-		{
-	 		global $database;
-			$bca=&$this->page_trail;
-			if (sizeof($bca)==0)
-			        create_breadcrumbs($page_id);
-			$counter=0;
-			foreach ($bca as $temp)
-			{
-		        if ($counter>=(tier-1));
-		        {
-					if ($counter>=$tier) echo $sep;
-					$query_menu=$database->query("SELECT menu_title,link FROM ".TABLE_PREFIX."pages WHERE page_id=$temp");
-					$page=$query_menu->fetchRow();
-					if ($links==true AND $temp!=$page_id)
-						echo '<a href="'.page_link($page['link']).'">'.$page['menu_title'].'</a>';
-					else
-					        echo stripslashes($page['menu_title']);
-		        }
-                $counter++;
-			}
-		}
-	}
-
-	// Function for page title
-	function page_title($spacer = ' - ', $template = '[WEBSITE_TITLE][SPACER][PAGE_TITLE]') {
-		$vars = array('[WEBSITE_TITLE]', '[PAGE_TITLE]', '[MENU_TITLE]', '[SPACER]');
-		$values = array(WEBSITE_TITLE, PAGE_TITLE, MENU_TITLE, $spacer);
-		echo str_replace($vars, $values, $template);
-	}
-
-	// Function for page description
-	function page_description() {
-		echo WEBSITE_DESCRIPTION;
-	}
-	// Function for page keywords
-	function page_keywords() {
-		echo WEBSITE_KEYWORDS;
-	}
-	// Function for page header
-	function page_header($date_format = 'Y') {
-		echo WEBSITE_HEADER;
-	}
-
-	// Function for page footer
-	function page_footer($date_format = 'Y') {
-		global $starttime;
-   		$vars = array('[YEAR]', '[PROCESSTIME]');
-   		$processtime=(microtime()>$starttime)?microtime()-$starttime:microtime()-$starttime+1;
-		$values = array(date($date_format),$processtime);
-		echo str_replace($vars, $values, WEBSITE_FOOTER);
-	}
 
 	// Function to show the "Under Construction" page
 	function print_under_construction() {

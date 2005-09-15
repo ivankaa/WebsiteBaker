@@ -75,7 +75,7 @@ if($results->numRows() > 0) {
 }
 
 // Check if the email already exists
-$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".$this->add_slashes($_POST['email'])."'");
+$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($_POST['email'])."'");
 if($results->numRows() > 0) {
 	if(isset($MESSAGE['USERS']['EMAIL_TAKEN'])) {
 		$admin->print_error($MESSAGE['USERS']['EMAIL_TAKEN'], $js_back);

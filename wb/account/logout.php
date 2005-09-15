@@ -1,6 +1,6 @@
 <?php
 
-// $Id: logout.php,v 1.4 2005/04/16 01:12:40 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -24,13 +24,6 @@
 */
 
 require("../config.php");
-
-// Start a session
-if(!defined('SESSION_STARTED')) {
-	session_name(APP_NAME.'_session_id');
-	session_start();
-	define('SESSION_STARTED', true);
-}
 
 $_SESSION['USER_ID'] = null;
 $_SESSION['GROUP_ID'] = null;

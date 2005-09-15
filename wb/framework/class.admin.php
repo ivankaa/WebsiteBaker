@@ -38,8 +38,6 @@ if(!defined('WB_URL')) {
 
 require_once(WB_PATH.'/framework/class.wb.php');
 
-//require_once(WB_PATH.'/framework/initialize.php');
-
 // Include PHPLIB template class
 require_once(WB_PATH."/include/phplib/template.inc");
 
@@ -94,7 +92,7 @@ class admin extends wb {
 													'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
 													'INTERFACE_DIR' => ADMIN_URL.'/interface',
 													'BODY_TAGS' => $body_tags,
-													'WEBSITE_TITLE' => $this->strip_slashes_dummy($title['value']),
+													'WEBSITE_TITLE' => ($title['value']),
 													'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
 													'VERSION' => VERSION
 													)

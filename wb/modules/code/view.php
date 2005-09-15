@@ -26,7 +26,7 @@
 // Get content
 $get_content = $database->query("SELECT content FROM ".TABLE_PREFIX."mod_code WHERE section_id = '$section_id'");
 $fetch_content = $get_content->fetchRow();
-$content = $this->strip_slashes_dummy($fetch_content['content']);
+$content = $fetch_content['content'];
 eval($content);
 
 ?>

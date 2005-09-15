@@ -35,7 +35,7 @@ if($query_settings->numRows() == 0) {
 	// Print comments page
 	$vars = array('[POST_TITLE]', '[ACTION_URL]');
 	$values = array(POST_TITLE, WB_URL.'/modules/news/submit_comment.php?page_id='.PAGE_ID.'&section_id='.SECTION_ID.'&post_id='.POST_ID);
-	echo str_replace($vars, $values, $this->strip_slashes_dummy($settings['comments_page']));
+	echo str_replace($vars, $values, ($settings['comments_page']));
 }
 
 ?>

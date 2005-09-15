@@ -36,7 +36,7 @@ if(!defined('WB_PATH')) {
 require_once(WB_PATH.'/framework/class.frontend.php');
 // Create new frontend object
 // Perform general initializations
-$wb = & new frontend();
+if (!isset($wb)) $wb = new frontend();
 
 // Figure out which page to display
 // Stop processing if intro page was shown
@@ -49,8 +49,9 @@ $wb->get_page_details();
 // Collect general website settings
 $wb->get_website_settings();
 
-// Load some ugly compatibility code
-require(WB_PATH.'/framework/compatibility.php');
+// Load functions available to templates, modules and code sections
+// also, set some aliases for backward compatibility
+require(WB_PATH.'/framework/frontend.functions.php');
 
 // Display the template
 require(WB_PATH.'/templates/'.TEMPLATE.'/index.php');
