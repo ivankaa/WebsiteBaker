@@ -1,6 +1,6 @@
 <?php
 
-// $Id: index.php,v 1.2 2005/04/01 07:52:57 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -27,13 +27,6 @@ require("../../config.php");
 
 if(isset($_COOKIE['REMEMBER_KEY'])) {
 	setcookie('REMEMBER_KEY', '', time()+60*60*24*30, '/');
-}
-
-// Start a session
-if(!defined('SESSION_STARTED')) {
-	session_name(APP_NAME.'_session_id');
-	session_start();
-	define('SESSION_STARTED', true);
 }
 
 $_SESSION['USER_ID'] = null;

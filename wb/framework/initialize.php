@@ -31,13 +31,6 @@ if (file_exists(WB_PATH.'/framework/class.database.php'))
 	// Create database class
 	$database = new database();
 	
-	// Start a session
-	if(!defined('SESSION_STARTED')) {
-		session_name(APP_NAME.'_session_id');
-		session_start();
-		define('SESSION_STARTED', true);
-	}
-	
 	set_magic_quotes_runtime(0);
 	
 	// Get website settings (title, keywords, description, header, and footer)
@@ -56,6 +49,13 @@ if (file_exists(WB_PATH.'/framework/class.database.php'))
 	define('OCTAL_FILE_MODE',(int) $string_file_mode);
 	$string_dir_mode = STRING_DIR_MODE;
 	define('OCTAL_DIR_MODE',(int) $string_dir_mode);
+	
+	// Start a session
+	if(!defined('SESSION_STARTED')) {
+		session_name(APP_NAME.'_session_id');
+		session_start();
+		define('SESSION_STARTED', true);
+	}
 	
 	// Get users language
 	if(isset($_GET['lang']) AND $_GET['lang'] != '' AND !is_numeric($_GET['lang']) AND strlen($_GET['lang']) == 2) {
