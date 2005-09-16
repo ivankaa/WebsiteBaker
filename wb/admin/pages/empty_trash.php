@@ -1,6 +1,6 @@
 <?php
 
-// $Id: empty_trash.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -32,7 +32,7 @@ require_once(WB_PATH.'/framework/functions.php');
 
 // Get page list from database
 $database = new database();
-$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' AND visibility = 'deleted' ORDER BY position ASC";
+$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE visibility = 'deleted' ORDER BY level DESC";
 $get_pages = $database->query($query);
 
 // Insert values into main page list
