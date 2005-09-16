@@ -40,7 +40,7 @@ if($admin->get_post('advanced') != 'yes') {
 		$system_permissions['media_rename'] = $system_permissions['media'];
 		$system_permissions['media_delete'] = $system_permissions['media'];
 		$system_permissions['media_create'] = $system_permissions['media'];
-	if($admin->get_post('modules') != '' AND $admin->get_post('templates') != '' AND $admin->get_post('languages') != '') {
+	if($admin->get_post('modules') != '' OR $admin->get_post('templates') != '' OR $admin->get_post('languages') != '') {
 		$system_permissions['addons'] = 1;
 	} else {
 		$system_permissions['addons'] = 0;
