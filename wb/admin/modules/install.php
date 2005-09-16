@@ -123,10 +123,10 @@ if(file_exists(WB_PATH.'/modules/'.$module_directory.'/'.$action.'.php')) {
 
 // Print success message
 if ($action=="install") {
-	$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
 	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."modules` VALUES "
-	." ('', '".$module_name."', '".$module_type."', '".$module_directory."');";
+	." ('', '$module_name', '$module_type', '$module_directory' );";
 	$database->query($settings_rows);
+	$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
 } else if ($action=="upgrade") {
 	$admin->print_success($MESSAGE['GENERIC']['UPGRADED']);
 }	

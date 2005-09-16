@@ -54,6 +54,9 @@ if(!is_writable(WB_PATH.'/modules/'.$file)) {
 	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL']);
 }
 
+$database->query("DELETE FROM ".TABLE_PREFIX."modules WHERE directory =
+'$file'"); 
+
 // Run the modules uninstall script if there is one
 if(file_exists(WB_PATH.'/modules/'.$file.'/uninstall.php')) {
 	require(WB_PATH.'/modules/'.$file.'/uninstall.php');

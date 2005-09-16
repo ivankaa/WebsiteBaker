@@ -8,7 +8,7 @@ if(defined('WB_URL')) {
 	// Setup the PclZip object
 	$editor_archive = new PclZip($editor_file);
 
-	// Unzip FCKeditor to the module dir
+	// Unzip to module dir
 	$list = $editor_archive->extract(PCLZIP_OPT_PATH, $module_dir);
 	if(!$list) {
 		$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNZIP']);
