@@ -123,7 +123,11 @@ function make_list($parent, $editable_pages) {
 			}
 						
 			// Work out if we should show a plus or not
-			$get_page_subs = $database->query("SELECT page_id,admin_groups,admin_users FROM ".TABLE_PREFIX."pages WHERE parent = '".$page['page_id']."'");
+			if(PAGE_TRASH != 'inline') {
+				$get_page_subs = $database->query("SELECT page_id,admin_groups,admin_users FROM ".TABLE_PREFIX."pages WHERE parent = '".$page['page_id']."' AND visibility!='deleted'");
+			} else {
+				$get_page_subs = $database->query("SELECT page_id,admin_groups,admin_users FROM ".TABLE_PREFIX."pages WHERE parent = '".$page['page_id']."'");
+			}
 			if($get_page_subs->numRows() > 0) {
 				$display_plus = true;
 			} else {
@@ -428,7 +432,7 @@ if($editable_pages == 0) {
 $database = new database();
 function parent_list($parent) {
 	global $admin, $database, $template;
-	$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' ORDER BY position ASC";
+	$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' AND visibility!='deleted' ORDER BY position ASC";
 	$get_pages = $database->query($query);
 	while($page = $get_pages->fetchRow()) {
 		// Stop users from adding pages with a level of more than the set page level limit
