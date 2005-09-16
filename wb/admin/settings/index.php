@@ -53,7 +53,7 @@ $query = "SELECT * FROM ".TABLE_PREFIX."search WHERE extra = ''";
 $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
-	$setting_value = htmlspecialchars($admin->strip_slashes_dummy($setting['value']));
+	$setting_value = htmlspecialchars(($setting['value']));
 	switch($setting_name) {
 		// Search header
 		case 'header':

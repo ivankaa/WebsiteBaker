@@ -630,8 +630,8 @@ function delete_page($page_id) {
 	$parent = $results_array['parent'];
 	$level = $results_array['level'];
 	$link = $results_array['link'];
-	$page_title = $admin->strip_slashes_dummy($results_array['page_title']);
-	$menu_title = $admin->strip_slashes_dummy($results_array['menu_title']);
+	$page_title = ($results_array['page_title']);
+	$menu_title = ($results_array['menu_title']);
 	
 	// Get the sections that belong to the page
 	$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id'");

@@ -60,7 +60,7 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 <tr>
 	<td width="80"><?php echo $TEXT['TITLE']; ?>:</td>
 	<td>
-		<input type="text" name="title" value="<?php echo $admin->strip_slashes_dummy(htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
+		<input type="text" name="title" value="<?php echo (htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
 	</td>
 </tr>
 <tr>

@@ -75,7 +75,7 @@ if($get_user->numRows() != 0) {
 </tr>
 <tr>
 	<td colspan="2">
-		<?php echo $admin->strip_slashes_dummy(str_replace('\n', '<br />', $submission['body'])); ?>
+		<?php echo (str_replace('\n', '<br />', $submission['body'])); ?>
 	</td>
 </tr>
 </table>

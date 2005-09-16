@@ -29,7 +29,7 @@ if(!defined('WB_PATH')) exit('Direct access to this file is not allowed');
 $query = "SELECT content FROM ".TABLE_PREFIX."mod_wysiwyg WHERE section_id = '$section_id'";
 $get_content = $database->query($query);
 $content = $get_content->fetchRow();
-$content = $admin->strip_slashes_dummy(htmlspecialchars($content['content']));
+$content = (htmlspecialchars($content['content']));
 
 if(!isset($wysiwyg_editor_loaded)) {
 	$wysiwyg_editor_loaded=true;

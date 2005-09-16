@@ -91,10 +91,6 @@ class wb
 		return $output;
 	}
 
-	function strip_slashes_dummy($input) {
-		return $input;
-	}
-
 	// Escape backslashes for use with mySQL LIKE strings
 	function escape_backslashes($input) {
 		return str_replace("\\","\\\\",$input);

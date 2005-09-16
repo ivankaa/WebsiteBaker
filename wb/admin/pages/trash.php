@@ -141,15 +141,15 @@ function make_list($parent, $editable_pages) {
 				</td>
 				<?php if($admin->get_permission('pages_modify') == true AND $can_modify == true AND $page['visibility'] != 'heading') { ?>
 				<td>
-					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo $admin->strip_slashes_dummy($page['page_title']); ?></a>
+					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo ($page['page_title']); ?></a>
 				</td>
 				<?php } else { ?>
 				<td>
 					<?php
 					if($page['visibility'] != 'heading') {
-						echo $admin->strip_slashes_dummy($page['page_title']);
+						echo ($page['page_title']);
 					} else {
-						echo '<b>'.$admin->strip_slashes_dummy($page['page_title']).'</b>';
+						echo '<b>'.($page['page_title']).'</b>';
 					}
 					?>
 				</td>

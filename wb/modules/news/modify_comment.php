@@ -52,13 +52,13 @@ $fetch_content = $query_content->fetchRow();
 <tr>
 	<td width="80"><?php echo $TEXT['TITLE']; ?>:</td>
 	<td>
-		<input type="text" name="title" value="<?php echo $admin->strip_slashes_dummy(htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
+		<input type="text" name="title" value="<?php echo (htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
 	</td>
 </tr>
 <tr>
 	<td valign="top"><?php echo $TEXT['COMMENT']; ?>:</td>
 	<td>
-		<textarea name="comment" style="width: 100%; height: 150px;"><?php echo $admin->strip_slashes_dummy(htmlspecialchars($fetch_content['comment'])); ?></textarea>
+		<textarea name="comment" style="width: 100%; height: 150px;"><?php echo (htmlspecialchars($fetch_content['comment'])); ?></textarea>
 	</td>
 </tr>
 </table>
