@@ -124,24 +124,18 @@ $template->set_var(array(
 						 );
 
 // Insert groups into signup list
-$template->set_block('main_block', 'group_list_block', 'group_list');
-$results = $database->query("SELECT group_id, name FROM ".TABLE_PREFIX."groups WHERE group_id != '1'");
+$template->set_block('main_block', 'tool_list_block', 'tool_list');
+$results = $database->query("SELECT * FROM ".TABLE_PREFIX."modules WHERE type = 'tool'");
+$tool_list_empty=true;
 if($results->numRows() > 0) {
-	while($group = $results->fetchRow()) {
-		$template->set_var('ID', $group['group_id']);
-		$template->set_var('NAME', $group['name']);
-		if(FRONTEND_SIGNUP == $group['group_id']) {
-			$template->set_var('SELECTED', 'selected');
-		} else {
-			$template->set_var('SELECTED', '');
-		}
-		$template->parse('group_list', 'group_list_block', true);
+	while($tool = $results->fetchRow()) {
+		$template->set_var('LINK', '<a href="'.ADMIN_URL.'/settings/tool.php?tool='.$tool['directory'].'">'.$tool['name'].'</a>');
 	}
 } else {
-	$template->set_var('ID', 'disabled');
-	$template->set_var('NAME', $MESSAGE['GROUPS']['NO_GROUPS_FOUND']);
-	$template->parse('group_list', 'group_list_block', true);
+	$template->set_var('LINK', $TEXT['NONE_FOUND']);
 }
+$template->parse('tool_list', 'tool_list_block', true);
+
 
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
@@ -466,12 +460,33 @@ if(extract_permission(STRING_DIR_MODE, 'o', 'e')) {
 // Insert Server Email value into template
 $template->set_var('SERVER_EMAIL', SERVER_EMAIL);
 
+// Insert groups into signup list
+$template->set_block('main_block', 'tool_list_block', 'tool_list');
+$results = $database->query("SELECT group_id, name FROM ".TABLE_PREFIX."groups WHERE group_id != '1'");
+if($results->numRows() > 0) {
+	while($group = $results->fetchRow()) {
+		$template->set_var('ID', $group['group_id']);
+		$template->set_var('NAME', $group['name']);
+		if(FRONTEND_SIGNUP == $group['group_id']) {
+			$template->set_var('SELECTED', 'selected');
+		} else {
+			$template->set_var('SELECTED', '');
+		}
+		$template->parse('group_list', 'group_list_block', true);
+	}
+} else {
+	$template->set_var('ID', 'disabled');
+	$template->set_var('NAME', $MESSAGE['GROUPS']['NO_GROUPS_FOUND']);
+	$template->parse('group_list', 'group_list_block', true);
+}
+
 // Insert language headings
 $template->set_var(array(
 								'HEADING_GENERAL_SETTINGS' => $HEADING['GENERAL_SETTINGS'],
 								'HEADING_DEFAULT_SETTINGS' => $HEADING['DEFAULT_SETTINGS'],
 								'HEADING_SEARCH_SETTINGS' => $HEADING['SEARCH_SETTINGS'],
-								'HEADING_FILESYSTEM_SETTINGS' => $HEADING['FILESYSTEM_SETTINGS']
+								'HEADING_SERVER_SETTINGS' => $HEADING['SERVER_SETTINGS'],
+								'HEADING_ADMINISTRATION_TOOLS' => $HEADING['ADMINISTRATION_TOOLS']
 								)
 						);
 // Insert language text and messages

@@ -103,6 +103,8 @@ $HEADING['GENERAL_SETTINGS'] = 'General Settings';
 $HEADING['DEFAULT_SETTINGS'] = 'Default Settings';
 $HEADING['SEARCH_SETTINGS'] = 'Search Settings';
 $HEADING['FILESYSTEM_SETTINGS'] = 'Filesystem Settings';
+$HEADING['SERVER_SETTINGS'] = 'Server Settings';
+$HEADING['ADMINISTRATION_TOOLS'] = 'Administration Tools';
 
 $HEADING['MODIFY_DELETE_USER'] = 'Modify/Delete User';
 $HEADING['ADD_USER'] = 'Add User';

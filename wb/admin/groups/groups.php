@@ -90,14 +90,16 @@ if($_POST['action'] == 'modify') {
 			if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
 				// Include the modules info file
 				require(WB_PATH.'/modules/'.$file.'/info.php');
-				$template->set_var('VALUE', $file);
-				$template->set_var('NAME', $module_name);
-				if(!is_numeric(array_search($file, $module_permissions))) {
-					$template->set_var('CHECKED', 'checked');
-				} else {
-					$template->set_var('CHECKED', '');
+				if ($module_type=='page') {
+					$template->set_var('VALUE', $file);
+					$template->set_var('NAME', $module_name);
+					if(!is_numeric(array_search($file, $module_permissions))) {
+						$template->set_var('CHECKED', 'checked');
+					} else {
+						$template->set_var('CHECKED', '');
+					}
+					$template->parse('module_list', 'module_list_block', true);
 				}
-				$template->parse('module_list', 'module_list_block', true);
 			}
 		}
 	}

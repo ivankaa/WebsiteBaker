@@ -125,9 +125,11 @@ if($handle = opendir(WB_PATH.'/modules/')) {
 		if($file != '.' AND $file != '..' AND $file != '.svn' AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
 			// Include the modules info file
 			require(WB_PATH.'/modules/'.$file.'/info.php');
-			$template->set_var('VALUE', $file);
-			$template->set_var('NAME', $module_name);
-			$template->parse('module_list', 'module_list_block', true);
+			if ($module_type=='page') {
+				$template->set_var('VALUE', $file);
+				$template->set_var('NAME', $module_name);
+				$template->parse('module_list', 'module_list_block', true);
+			}
 		}
 	}
 }
