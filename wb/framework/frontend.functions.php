@@ -46,7 +46,7 @@ $page_link=&$wb->link;
 $extra_sql=&$wb->extra_sql;
 $extra_where_sql=&$wb->extra_where_sql;
 
-$query="SELECT directory FROM ".TABLE_PREFIX."modules";
+$query="SELECT directory FROM ".TABLE_PREFIX."modules WHERE type='snippet'";
 $query_result=$database->query($query);
 if ($query_result->numRows()>0) {
 	while ($row = $query_result->fetchRow()) {
