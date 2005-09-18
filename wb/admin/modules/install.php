@@ -124,7 +124,7 @@ if(file_exists(WB_PATH.'/modules/'.$module_directory.'/'.$action.'.php')) {
 // Print success message
 if ($action=="install") {
 	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."addons` (directory,name,description,type,function,version,platform,author,license) VALUES "
-	." ('$module_directory', '$module_name', '$module_description', '$module_type', '$module_function', '$module_version', '$module_platform', '$module_author', '$module_license');";
+	." ('$module_directory', '$module_name', '$module_description', 'module', '$module_function', '$module_version', '$module_platform', '$module_author', '$module_license');";
 	$database->query($settings_rows);
 	$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
 } else if ($action=="upgrade") {
