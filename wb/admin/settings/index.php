@@ -133,7 +133,7 @@ if($results->numRows() > 0) {
 		$template->set_var('TOOL_DIR', $tool['directory']);
 	}
 } else {
-	$template->set_var('LINK', $TEXT['NONE_FOUND']);
+	$template->set_var('tool_list', $TEXT['NONE_FOUND']);
 	
 }
 $template->parse('tool_list', 'tool_list_block', true);
