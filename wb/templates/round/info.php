@@ -25,9 +25,10 @@
 
 $template_directory = 'round';
 $template_name = 'Round';
-$template_version = '2.5';
-$template_designed_for = '2.x';
-$template_author = 'Ryan Djurovich';
 $template_description = 'Default template for Website Baker 2.2.x. Simular to the box template, but with rounded edges.';
+$template_version = '2.6';
+$template_platform = '2.6.x';
+$template_author = 'Ryan Djurovich';
+$template_license = 'GNU General Public License';
 
 ?>
