@@ -29,6 +29,7 @@ $module_function = 'page';
 $module_version = '2.6';
 $module_platform = '2.6.x';
 $module_author = 'Ryan Djurovich';
+$module_license = 'GNU General Public License';
 $module_description = 'This module allows you to edit the contents of a page using the WYSIWYG htmlArea program';
 
 ?>
