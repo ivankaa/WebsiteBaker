@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.6.0 -------------------------------------
 19-Sep-2005 Ryan Djurovich
+!	Fixed some links, including the "Help" button in Admin
 #	Used nl2br to display body correctly when viewing form-submissions
 15-Sep-2005 Stefan Braunewell
 +	Added table module with columns 'name','type' and 'directory' as an
