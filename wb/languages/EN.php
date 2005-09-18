@@ -31,9 +31,10 @@ if(!defined('LANGUAGE_LOADED')) {
 // Set the language information
 $language_code = 'EN';
 $language_name = 'English';
+$language_version = '2.6';
+$language_platform = '2.6.x';
 $language_author = 'Ryan Djurovich';
-$language_version = '2.5';
-$language_designed_for = '2.5.x';
+$language_license = 'GNU General Public License';
 
 // Menu titles
 $MENU['START'] = 'Start';
