@@ -26,8 +26,8 @@
 $module_directory = 'menu_link';
 $module_name = 'Menu Link';
 $module_type = 'page';
-$module_version = '2.5';
-$module_designed_for = '2.x';
+$module_version = '2.6';
+$module_platform = '2.6.x';
 $module_author = 'Ryan Djurovich';
 $module_description = 'This module allows you to insert a link into the menu.';
 

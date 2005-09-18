@@ -26,8 +26,8 @@
 $module_directory = 'news';
 $module_name = 'News';
 $module_type = 'page';
-$module_version = '2.5';
-$module_designed_for = '2.x';
+$module_version = '2.6';
+$module_platform = '2.6.x';
 $module_author = 'Ryan Djurovich';
 $module_description = 'This page type is designed for making a news page.';
 
