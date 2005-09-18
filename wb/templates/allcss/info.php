@@ -25,10 +25,10 @@
 
 $template_directory = 'allcss';
 $template_name = 'All CSS';
-$template_description = 'This template is designed with one goal in mind: to completely control lay-out with css. In case you were wondering, that is where the name came from.';
 $template_version = '2.6';
 $template_platform = '2.6.x';
 $template_author = 'Ryan Djurovich';
 $template_license = 'GNU General Public License';
+$template_description = 'This template is designed with one goal in mind: to completely control lay-out with css. In case you were wondering, that is where the name came from.';
 
 ?>

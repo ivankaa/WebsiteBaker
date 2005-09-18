@@ -25,10 +25,10 @@
 
 $template_directory = 'simple';
 $template_name = 'Simple';
-$template_description = 'This template is designed for developers to learn how to make templates easily. Please note this template only supports 2 page levels.';
 $template_version = '2.6';
 $template_platform = '2.6.x';
 $template_author = 'Ryan Djurovich';
 $template_license = 'GNU General Public License';
+$template_description = 'This template is designed for developers to learn how to make templates easily. Please note this template only supports 2 page levels.';
 
 ?>
