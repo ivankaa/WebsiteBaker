@@ -494,7 +494,7 @@ if($install_tables == true) {
 	$database->query($search);
 	
 	// Addons table
-	$modules = 'CREATE TABLE `'.TABLE_PREFIX.'addons` ( '
+	$addons = 'CREATE TABLE `'.TABLE_PREFIX.'addons` ( '
 	.'`addon_id` INT NOT NULL auto_increment ,'
 	.'`directory` VARCHAR( 255 ) NOT NULL ,'
 	.'`name` VARCHAR( 255 ) NOT NULL ,'
@@ -506,7 +506,7 @@ if($install_tables == true) {
 	.'`author` VARCHAR( 255 ) NOT NULL ,'
 	.'`license` VARCHAR( 255 ) NOT NULL ,'
 	.' PRIMARY KEY ( `addon_id` ) ); ';
-	$database->query($modules);
+	$database->query($addons);
 
 	$search = 'CREATE TABLE `'.TABLE_PREFIX.'modules` ( '
 	        . ' `name` VARCHAR( 255 ) NOT NULL ,'
