@@ -129,10 +129,12 @@ $results = $database->query("SELECT * FROM ".TABLE_PREFIX."modules WHERE type = 
 $tool_list_empty=true;
 if($results->numRows() > 0) {
 	while($tool = $results->fetchRow()) {
-		$template->set_var('LINK', '<a href="'.ADMIN_URL.'/settings/tool.php?tool='.$tool['directory'].'">'.$tool['name'].'</a>');
+		$template->set_var('TOOL_NAME', $tool['name']);
+		$template->set_var('TOOL_DIR', $tool['directory']);
 	}
 } else {
 	$template->set_var('LINK', $TEXT['NONE_FOUND']);
+	
 }
 $template->parse('tool_list', 'tool_list_block', true);
 
