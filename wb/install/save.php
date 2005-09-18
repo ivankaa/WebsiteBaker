@@ -493,14 +493,19 @@ if($install_tables == true) {
 	        . ' ';
 	$database->query($search);
 	
-	// Modules table
-	$modules = 'CREATE TABLE `'.TABLE_PREFIX.'modules` ( '
-	.'`id` INT NOT NULL auto_increment ,'
-	.'`name` VARCHAR( 255 ) NOT NULL ,'
-	.'`type` VARCHAR( 255 ) NOT NULL ,'
+	// Addons table
+	$modules = 'CREATE TABLE `'.TABLE_PREFIX.'addons` ( '
+	.'`addon_id` INT NOT NULL auto_increment ,'
 	.'`directory` VARCHAR( 255 ) NOT NULL ,'
-	.' PRIMARY KEY ( `id` ) ); ';
-	
+	.'`name` VARCHAR( 255 ) NOT NULL ,'
+	.'`description` TEXT NOT NULL ,'
+	.'`type` VARCHAR( 255 ) NOT NULL ,'
+	.'`function` VARCHAR( 255 ) NOT NULL ,'
+	.'`version` VARCHAR( 255 ) NOT NULL ,'
+	.'`designed_for` VARCHAR( 255 ) NOT NULL ,'
+	.'`author` VARCHAR( 255 ) NOT NULL ,'
+	.'`license` VARCHAR( 255 ) NOT NULL ,'
+	.' PRIMARY KEY ( `addon_id` ) ); ';
 	$database->query($modules);
 
 	$search = 'CREATE TABLE `'.TABLE_PREFIX.'modules` ( '
