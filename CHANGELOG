@@ -12,6 +12,9 @@ Legend:
 
 ------------------------------------- 2.6.0 -------------------------------------
 19-Sep-2005 Ryan Djurovich
++	Added _license field for all add-ons to specify a license
+!	Renamed _designed_for variables (for all addons) to _platform
++	Created addons table for faster internal referencing of installed addons
 !	Fixed some links, including the "Help" button in Admin
 #	Used nl2br to display body correctly when viewing form-submissions
 15-Sep-2005 Stefan Braunewell
