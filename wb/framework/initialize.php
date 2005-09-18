@@ -2,7 +2,6 @@
 
 // $Id$
 
-
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -96,7 +95,7 @@ if (file_exists(WB_PATH.'/framework/class.database.php'))
 	} else {
 		define('TIME_FORMAT', DEFAULT_TIME_FORMAT);
 	}
-	
-	
+		
 }
+
 ?>
