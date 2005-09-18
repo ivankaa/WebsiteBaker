@@ -502,7 +502,7 @@ if($install_tables == true) {
 	.'`type` VARCHAR( 255 ) NOT NULL ,'
 	.'`function` VARCHAR( 255 ) NOT NULL ,'
 	.'`version` VARCHAR( 255 ) NOT NULL ,'
-	.'`designed_for` VARCHAR( 255 ) NOT NULL ,'
+	.'`platform` VARCHAR( 255 ) NOT NULL ,'
 	.'`author` VARCHAR( 255 ) NOT NULL ,'
 	.'`license` VARCHAR( 255 ) NOT NULL ,'
 	.' PRIMARY KEY ( `addon_id` ) ); ';
