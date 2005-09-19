@@ -380,8 +380,6 @@ $TEXT['MAIN'] = 'Main';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Rename Files On Upload';
 $TEXT['APP_NAME'] = '<b><font color="red">THIS IS NOW CALLED SESSION_IDENTIFIER</font></b>';
 $TEXT['SESSION_IDENTIFIER'] = 'Session Identifier';
-$TEXT['CAPTCHA'] = 'Captcha';
-$TEXT['USE_CAPTCHA'] = 'Use Captcha';
 
 
 // Success/error messages
@@ -510,5 +508,6 @@ $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Please check back soon...';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'You must enter details for the following fields';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sorry, this form has been submitted too many times so far this hour. Please retry in the next hour.';
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'The verification number (also known as Captcha) that you entered is incorrect. If you are having problems reading the Captcha, please email: '.SERVER_EMAIL;
 
 ?>
