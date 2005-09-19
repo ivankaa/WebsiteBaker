@@ -378,7 +378,11 @@ $TEXT['PAGE_LANGUAGES'] = 'Page Languages';
 $TEXT['HIDDEN'] = 'Hidden';
 $TEXT['MAIN'] = 'Main';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Rename Files On Upload';
-$TEXT['APP_NAME'] = 'Session Identifier';
+$TEXT['APP_NAME'] = '<b><font color="red">THIS IS NOW CALLED SESSION_IDENTIFIER</font></b>';
+$TEXT['SESSION_IDENTIFIER'] = 'Session Identifier';
+$TEXT['CAPTCHA'] = 'Captcha';
+$TEXT['USE_CAPTCHA'] = 'Use Captcha';
+
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, you do not have permissions to view this page';
