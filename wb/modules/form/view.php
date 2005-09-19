@@ -251,7 +251,7 @@ echo $footer;
 	
 	// Captcha
 	if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
-		if(isset($_POST['captcha']) AND is_numeric($_POST['captcha']) AND strlen($_POST['captcha']) == 5) {
+		if(isset($_POST['captcha'])) {
 			// User-supplied captcha
 			$user_captcha = $_POST['captcha'];
 			// Computer generated
@@ -260,7 +260,7 @@ echo $footer;
 			}
 			// Check for a mismatch
 			if($user_captcha != $system_captcha) {
-				exit('Captcha mismatch');
+				$captcha_error = $MESSAGE['INCORRECT_CAPTCHA'];
 			} else {
 				unset($_SESSION['captcha']);
 			}
@@ -281,9 +281,16 @@ echo $footer;
 		foreach($required AS $field_title) {
 			echo '<li>'.$field_title;
 		}
+		if(isset($captcha_error)) { echo '<li>'.$captcha_error.'</li>'; }
 		echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
 		
 	} else {
+		
+		if(isset($captcha_error)) {
+			echo '<br /><ul>';
+			echo '<li>'.$captcha_error.'</li>';
+			echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
+		} else {
 		
 		// Check how many times form has been submitted in last hour
 		$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions WHERE submitted_when >= '3600'");
@@ -333,7 +340,8 @@ echo $footer;
 		} else {
 			echo $TEXT['ERROR'];
 		}
-	
+		
+		}
 	}
 	
 }
