@@ -55,8 +55,9 @@ if(defined('WB_URL')) {
 	                 . ' `email_from` VARCHAR(255) NOT NULL ,'
 	                 . ' `email_subject` VARCHAR(255) NOT NULL ,'
 	                 . ' `success_message` TEXT NOT NULL ,'
-						  . ' `stored_submissions` INT NOT NULL,'
-						  . ' `max_submissions` INT NOT NULL,'
+					 . ' `stored_submissions` INT NOT NULL,'
+					 . ' `max_submissions` INT NOT NULL,'
+					 . ' `use_captcha` INT NOT NULL,'
 	                 . ' PRIMARY KEY ( `section_id` ) )'
 	                 . ' ';
 	$database->query($mod_form);
