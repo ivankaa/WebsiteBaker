@@ -125,7 +125,7 @@ $template->set_var(array(
 
 // Insert groups into signup list
 $template->set_block('main_block', 'tool_list_block', 'tool_list');
-$results = $database->query("SELECT * FROM ".TABLE_PREFIX."modules WHERE type = 'tool'");
+$results = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool'");
 $tool_list_empty=true;
 if($results->numRows() > 0) {
 	while($tool = $results->fetchRow()) {
