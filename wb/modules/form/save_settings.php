@@ -62,19 +62,9 @@ if(!is_numeric($_POST['stored_submissions'])) {
 if($max_submissions < $stored_submissions) {
 	$max_submissions = $stored_submissions;
 }
-// Use Captcha
-if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
-	if(isset($_POST['use_captcha']) AND $_POST['use_captcha'] == "true") {
-		$use_captcha = true;
-	} else {
-		$use_captcha = false;
-	}
-} else {
-	$use_captcha = false;
-}
 
 // Update settings
-$database->query("UPDATE ".TABLE_PREFIX."mod_form_settings SET header = '$header', field_loop = '$field_loop', footer = '$footer', email_to = '$email_to', email_from = '$email_from', email_subject = '$email_subject', success_message = '$success_message', max_submissions = '$max_submissions', stored_submissions = '$stored_submissions', use_captcha = '$use_captcha' WHERE section_id = '$section_id'");
+$database->query("UPDATE ".TABLE_PREFIX."mod_form_settings SET header = '$header', field_loop = '$field_loop', footer = '$footer', email_to = '$email_to', email_from = '$email_from', email_subject = '$email_subject', success_message = '$success_message', max_submissions = '$max_submissions', stored_submissions = '$stored_submissions' WHERE section_id = '$section_id'");
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {

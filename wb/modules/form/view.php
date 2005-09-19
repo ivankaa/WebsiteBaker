@@ -113,9 +113,9 @@ if($_POST == array()) {
 $query_settings = $database->query("SELECT header,field_loop,footer FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 if($query_settings->numRows() > 0) {
 	$fetch_settings = $query_settings->fetchRow();
-	$header = $fetch_settings['header'];
+	$header = str_replace('{WB_URL}',WB_URL,$fetch_settings['header']);
 	$field_loop = $fetch_settings['field_loop'];
-	$footer = $fetch_settings['footer'];
+	$footer = str_replace('{WB_URL}',WB_URL,$fetch_settings['footer']);
 } else {
 	$header = '';
 	$field_loop = '';
@@ -245,6 +245,24 @@ echo $footer;
 				} elseif($field['required'] == 1) {
 				$required[] = $field['title'];
 				}
+			}
+		}
+	}
+	
+	// Captcha
+	if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
+		if(isset($_POST['captcha']) AND is_numeric($_POST['captcha']) AND strlen($_POST['captcha']) == 5) {
+			// User-supplied captcha
+			$user_captcha = $_POST['captcha'];
+			// Computer generated
+			if(isset($_SESSION['captcha'])) {
+				$system_captcha = $_SESSION['captcha'];
+			}
+			// Check for a mismatch
+			if($user_captcha != $system_captcha) {
+				exit('Captcha mismatch');
+			} else {
+				unset($_SESSION['captcha']);
 			}
 		}
 	}

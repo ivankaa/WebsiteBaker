@@ -125,17 +125,6 @@ $friendly = array('&lt;', '&gt;');
 		<input type="text" name="stored_submissions" style="width: 100%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['stored_submissions'])); ?>" />
 	</td>
 </tr>
-<?php if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */ ?>
-<tr>
-	<td class="setting_name"><?php echo $TEXT['USE_CAPTCHA']; ?>:</td>
-	<td class="setting_name">
-		<input type="radio" name="use_captcha" id="use_captcha_true" value="true"<?php if($setting['use_captcha'] == true) { echo ' checked'; } ?> />
-		<label for="use_captcha_true"><?php echo $TEXT['YES']; ?></label>
-		<input type="radio" name="use_captcha" id="use_captcha_false" value="false"<?php if($setting['use_captcha'] == false) { echo ' checked'; } ?> />
-		<label for="use_captcha_false"><?php echo $TEXT['NO']; ?></label>
-	</td>
-</tr>
-<?php } ?>
 </table>
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
