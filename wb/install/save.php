@@ -527,7 +527,7 @@ if($install_tables == true) {
 	$database->query($insert_admin_user);
 	
 	// Search header
-	$search_header = addslashes('
+	$search_header = add_slashes('
 <h1>Search</h1>
 
 <form name="search" action="[WB_URL]/search/index[PAGE_EXTENSION]" method="post">
@@ -559,17 +559,17 @@ if($install_tables == true) {
 	$insert_search_header = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'header', '$search_header', '')";
 	$database->query($insert_search_header);
 	// Search footer
-	$search_footer = addslashes('');
+	$search_footer = add_slashes('');
 	$insert_search_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'footer', '$search_footer', '')";
 	$database->query($insert_search_footer);
 	// Search results header
-	$search_results_header = addslashes(''.
+	$search_results_header = add_slashes(''.
 '[TEXT_RESULTS_FOR] \'<b>[SEARCH_STRING]</b>\':
 <table cellpadding="2" cellspacing="0" border="0" width="100%" style="padding-top: 10px;">');
 	$insert_search_results_header = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_header', '$search_results_header', '')";
 	$database->query($insert_search_results_header);
 	// Search results loop
-	$search_results_loop = addslashes(''.
+	$search_results_loop = add_slashes(''.
 '<tr style="background-color: #F0F0F0;">
 <td><a href="[LINK]">[TITLE]</a></td>
 <td align="right">[TEXT_LAST_UPDATED_BY] [DISPLAY_NAME] ([USERNAME]) [TEXT_ON] [DATE]</td>
@@ -578,11 +578,11 @@ if($install_tables == true) {
 $insert_search_results_loop = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_loop', '$search_results_loop', '')";
 $database->query($insert_search_results_loop);
 // Search results footer
-$search_results_footer = addslashes("</table>");
+$search_results_footer = add_slashes("</table>");
 $insert_search_results_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_footer', '$search_results_footer', '')";
 $database->query($insert_search_results_footer);
 // Search no results
-$search_no_results = addslashes('<br />No results found');
+$search_no_results = add_slashes('<br />No results found');
 	$insert_search_no_results = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'no_results', '$search_no_results', '')";
 	$database->query($insert_search_no_results);
 	// Search template
