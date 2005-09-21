@@ -103,7 +103,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 			$temp_id++;
 			$template->set_var(array(
 											'NAME' => $name,
-											'NAME_SLASHED' => $admin->add_slashes($name),
+											'NAME_SLASHED' => addslashes($name),
 											'TEMP_ID' => $temp_id,
 											'LINK' => "browse.php?dir=$directory/$link_name",
 											'LINK_TARGET' => '',
@@ -125,7 +125,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 			$temp_id++;
 			$template->set_var(array(
 											'NAME' => $name,
-											'NAME_SLASHED' => $admin->add_slashes($name),
+											'NAME_SLASHED' => addslashes($name),
 											'TEMP_ID' => $temp_id,
 											'LINK' => WB_URL.MEDIA_DIRECTORY.$directory.'/'.$name,
 											'LINK_TARGET' => '_blank',
