@@ -77,8 +77,8 @@ if($query_sections->numRows() > 0) {
 		$module_path = WB_PATH.'/modules/'.$section['module'].'/info.php';
 		if(file_exists($module_path)) {
 			require($module_path);
-			if(!isset($module_type)) { $module_type = 'unknown'; }
-			if(!is_numeric(array_search($section['module'], $module_permissions)) AND $module_type == 'page') {
+			if(!isset($module_function)) { $module_function = 'unknown'; }
+			if(!is_numeric(array_search($section['module'], $module_permissions)) AND $module_function == 'page') {
 				// Update the section record with properties
 				$section_id = $section['section_id'];
 				$sql = '';
@@ -90,7 +90,7 @@ if($query_sections->numRows() > 0) {
 					}
 				}
 			}
-			if(isset($module_type)) { unset($module_type); } // Unset module type
+			if(isset($module_function)) { unset($module_function); } // Unset module type
 		}
 	}
 }

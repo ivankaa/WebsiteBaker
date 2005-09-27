@@ -35,18 +35,13 @@ $template->set_block('page', 'main_block', 'main');
 
 // Insert values into language list
 $template->set_block('main_block', 'language_list_block', 'language_list');
-if ($handle = opendir(WB_PATH.'/languages/')) {
-	while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != '.svn' AND $file != 'index.php') {
-			// Include the languages info file
-			require(WB_PATH.'/languages/'.$file);
-			$template->set_var('VALUE', $language_code);
-			$template->set_var('NAME', $language_name.' ('.$language_code.')');
-			$template->parse('language_list', 'language_list_block', true);
-		}
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language'");
+if($result->numRows() > 0) {
+	while ($addon = $result->fetchRow()) {
+		$template->set_var('VALUE', $addon['directory']);
+		$template->set_var('NAME', $addon['name'].' ('.$addon['directory'].')');
+		$template->parse('language_list', 'language_list_block', true);
 	}
-	// Restore language to original file
-	require(WB_PATH.'/languages/'.LANGUAGE.'.php');
 }
 
 // Insert permissions values

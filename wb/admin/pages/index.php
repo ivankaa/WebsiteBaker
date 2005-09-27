@@ -480,25 +480,22 @@ parent_list(0);
 $module_permissions = $_SESSION['MODULE_PERMISSIONS'];
 // Modules list
 $template->set_block('main_block', 'module_list_block', 'module_list');
-if($handle = opendir(WB_PATH.'/modules/')) {
-	while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != '.svn' AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
-			// Include the modules info file
-			require(WB_PATH.'/modules/'.$file.'/info.php');
-			// Check if user is allowed to use this module
-			if(!isset($module_type)) { $module_type = 'unknown'; }
-			if(!is_numeric(array_search($file, $module_permissions)) AND $module_type == 'page') {
-				$template->set_var('VALUE', $file);
-				$template->set_var('NAME', $module_name);
-				if($file == 'wysiwyg') {
-					$template->set_var('SELECTED', ' selected');
-				} else {
-					$template->set_var('SELECTED', '');
-				}
-				$template->parse('module_list', 'module_list_block', true);
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page'");
+if($result->numRows() > 0) {
+	while ($module = $result->fetchRow()) {
+		// Check if user is allowed to use this module
+		if(!isset($module['function'])) { $module['function'] = 'unknown'; }
+		if(!is_numeric(array_search($module['directory'], $module_permissions))) {
+			$template->set_var('VALUE', $module['directory']);
+			$template->set_var('NAME', $module['name']);
+			if($module['directory'] == 'wysiwyg') {
+				$template->set_var('SELECTED', ' selected');
+			} else {
+				$template->set_var('SELECTED', '');
 			}
-			if(isset($module_type)) { unset($module_type); } // Unset module type
+			$template->parse('module_list', 'module_list_block', true);
 		}
+		if(isset($module_function)) { unset($module_function); } // Unset module type
 	}
 }
 

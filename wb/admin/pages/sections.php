@@ -164,8 +164,8 @@ if($query_sections->numRows() > 0) {
 		$module_path = WB_PATH.'/modules/'.$section['module'].'/info.php';
 		if(file_exists($module_path)) {
 			require($module_path);
-			if(!isset($module_type)) { $module_type = 'unknown'; }
-			if(!is_numeric(array_search($section['module'], $module_permissions)) AND $module_type == 'page') {
+			if(!isset($module_function)) { $module_function = 'unknown'; }
+			if(!is_numeric(array_search($section['module'], $module_permissions)) AND $module_function == 'page') {
 			?>
 			<tr>
 				<td style="width: 250px;"><a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>#<?php echo $section['section_id']; ?>"><?php echo $module_name; ?></a></td>
@@ -204,7 +204,7 @@ if($query_sections->numRows() > 0) {
 			</tr>
 			<?php
 			}
-			if(isset($module_type)) { unset($module_type); } // Unset module type
+			if(isset($module_function)) { unset($module_function); } // Unset module type
 		}
 	}
 	?>
@@ -236,20 +236,14 @@ if($query_sections->numRows() == 0) {
 			<select name="module" style="width: 100%;">
 			<?php
 			// Insert module list
-			if($handle = opendir(WB_PATH.'/modules/')) {
-				while (false !== ($file = readdir($handle))) {
-					if($file != '.' AND $file != '..' AND $file != '.svn' AND $file != 'menu_link' AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
-						// Include the modules info file
-						require(WB_PATH.'/modules/'.$file.'/info.php');
-						// Check if user is allowed to use this module
-						if(!isset($module_type)) { $module_type = 'unknown'; }
-						if(!is_numeric(array_search($file, $module_permissions)) AND $module_type == 'page') {
-							?>
-							<option value="<?php echo $file; ?>"<?php if($file == 'wysiwyg') { echo 'selected'; } ?>><?php echo $module_name; ?></option>
-							<?php
-						}
-						if(isset($module_type)) { unset($module_type); } // Unset module type
-			
+			$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page' AND directory != 'menu_link'");
+			if($result->numRows() > 0) {
+				while($module = $result->fetchRow()) {
+					// Check if user is allowed to use this module
+					if(!is_numeric(array_search($module['directory'], $module_permissions))) {
+						?>
+						<option value="<?php echo $module['directory']; ?>"<?php if($module['directory'] == 'wysiwyg') { echo 'selected'; } ?>><?php echo $module['name']; ?></option>
+						<?php
 					}
 				}
 			}
