@@ -122,42 +122,25 @@ if(!isset($_POST['website_title'])) {
 // End check to see if form was even submitted
 
 // Begin path and timezone details code
-// Check if user has entered the installation path
-if(!isset($_POST['wb_path']) OR $_POST['wb_path'] == '') {
-	set_error('Please enter an absolute path');
-} else {
-	$wb_path = $_POST['wb_path'];
-}
+
 // Check if user has entered the installation url
 if(!isset($_POST['wb_url']) OR $_POST['wb_url'] == '') {
 	set_error('Please enter an absolute URL');
 } else {
 	$wb_url = $_POST['wb_url'];
 }
-// Remove any slashes at the end of the URL and path
+// Remove any slashes at the end of the URL
 if(substr($wb_url, strlen($wb_url)-1, 1) == "/") {
 	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
-}
-if(substr($wb_path, strlen($wb_path)-1, 1) == "/") {
-	$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
 }
 if(substr($wb_url, strlen($wb_url)-1, 1) == "\\") {
 	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
 }
-if(substr($wb_path, strlen($wb_path)-1, 1) == "\\") {
-	$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
-}
 if(substr($wb_url, strlen($wb_url)-1, 1) == "/") {
 	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
 }
-if(substr($wb_path, strlen($wb_path)-1, 1) == "/") {
-	$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
-}
 if(substr($wb_url, strlen($wb_url)-1, 1) == "\\") {
 	$wb_url = substr($wb_url, 0, strlen($wb_url)-1);
-}
-if(substr($wb_path, strlen($wb_path)-1, 1) == "\\") {
-	$wb_path = substr($wb_path, 0, strlen($wb_path)-1);
 }
 // Get the default time zone
 if(!isset($_POST['default_timezone']) OR !is_numeric($_POST['default_timezone'])) {
@@ -275,12 +258,13 @@ $config_content = "" .
 "define('DB_NAME', '$database_name');\n".
 "define('TABLE_PREFIX', '$table_prefix');\n".
 "\n".
-"define('WB_PATH', '$wb_path');\n".
+"define('WB_PATH', dirname(__FILE__));\n".
 "define('WB_URL', '$wb_url');\n".
-"define('ADMIN_PATH', '$wb_path/admin');\n".
+"define('ADMIN_PATH', WB_PATH.'/admin');\n".
 "define('ADMIN_URL', '$wb_url/admin');\n".
 "\n".
 "require_once(WB_PATH.'/framework/initialize.php');\n".
+"\n".
 "?>";
 
 $config_filename = '../config.php';
@@ -300,19 +284,17 @@ if(file_exists($config_filename) AND is_writable($config_filename)) {
 	set_error("The configuration file $config_filename is not writable. Change its permissions so it is, then re-run step 4.");
 }
 
-// Include configuration file
+// Define configuration vars
 define('DB_TYPE', 'mysql');
 define('DB_HOST', $database_host);
 define('DB_USERNAME', $database_username);
 define('DB_PASSWORD', $database_password);
 define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
-define('WB_PATH', $wb_path);
+define('WB_PATH', str_replace('/install','',dirname(__FILE__)));
 define('WB_URL', $wb_url);
-define('ADMIN_PATH', $wb_path.'/admin');
+define('ADMIN_PATH', WB_PATH.'/admin');
 define('ADMIN_URL', $wb_url.'/admin');
-
-//require('../config.php');
 
 // Check if the user has entered a correct path
 if(!file_exists(WB_PATH.'/framework/class.admin.php')) {
@@ -591,12 +573,16 @@ $search_no_results = add_slashes('<br />No results found');
 	require_once(WB_PATH.'/framework/initialize.php');
 	$wb = new wb();
 	
-	// Include the pre-installed module install scripts
+	// Install add-ons
+	if(!file_exists(WB_PATH.'/install/addons')) {
 	require(WB_PATH.'/modules/wysiwyg/install.php');
 	require(WB_PATH.'/modules/code/install.php');
 	require(WB_PATH.'/modules/news/install.php');
 	require(WB_PATH.'/modules/form/install.php');
 	require(WB_PATH.'/modules/wrapper/install.php');
+	} else {
+		
+	}
 	
 	// Check if there was a database error
 	if($database->is_error()) {

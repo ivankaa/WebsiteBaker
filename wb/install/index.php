@@ -1,6 +1,6 @@
 <?php
 
-// $Id: index.php,v 1.10 2005/06/21 09:14:24 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -179,24 +179,6 @@ function change_os(type) {
 				$guessed_url = rtrim(dirname($guessed_url), 'install');
 				?>
 				<input type="text" tabindex="1" name="wb_url" style="width: 99%;" value="<?php if(isset($_SESSION['wb_url'])) { echo $_SESSION['wb_url']; } else { echo $guessed_url; } ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td style="color: #666666;">
-				Absolute Path:
-			</td>
-			<td>
-				<?php
-				// Try to guess installation path
-				if(isset($_SERVER['SCRIPT_FILENAME']) AND $_SERVER['SCRIPT_FILENAME'] != "") { // This usually works on linux systems
-					$guessed_path = rtrim(dirname($_SERVER['SCRIPT_FILENAME']), 'install');
-				} elseif(isset($_SERVER['PATH_TRANSLATED']) AND $_SERVER['PATH_TRANSLATED'] != "") { // This usually works on windows systems
-					$guessed_path = rtrim(dirname($_SERVER['PATH_TRANSLATED']), 'install');
-				} else {
-					$guessed_path = "";
-				}
-				?>
-				<input type="text" tabindex="2" name="wb_path" style="width: 99%;" value="<?php if(isset($_SESSION['wb_path'])) { echo $_SESSION['wb_path']; } else { echo $guessed_path; } ?>" />
 			</td>
 		</tr>
 		<tr>
