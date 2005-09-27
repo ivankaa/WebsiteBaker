@@ -25,24 +25,32 @@
 
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
-
 require_once(WB_PATH.'/framework/functions.php');
 
-
 if(!isset($_GET['tool'])) {
-	header("Location: index.php");
+	header("Location: index.php?advanced=yes");
 }
 
-// check if tool is installed
-$query_result=$database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND name = '{$_GET['tool']}'");
-if ($query_result->numRows()==0) {
-	header("Location: index.php");
+// Check if tool is installed
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND directory = '".$_GET['tool']."'");
+if($result->numRows() == 0) {
+	header("Location: index.php?advanced=yes");
 }
-$tool=$query_result->fetchRow();
+$tool = $result->fetchRow();
 
-$admin = new admin("Tool: {$tool['name']}",'settings_advanced');
+$admin = new admin('Settings', 'settings_advanced');
 
+?>
+<h4 style="margin: 0; border-bottom: 1px solid #DDD; padding-bottom: 5px;">
+	<a href="<?php echo ADMIN_URL; ?>/settings/index.php?advanced=yes"><?php echo $MENU['SETTINGS']; ?></a>
+	->
+	<a href="<?php echo ADMIN_URL; ?>/settings/index.php?advanced=yes#administration_tools"><?php echo $HEADING['ADMINISTRATION_TOOLS']; ?></a>
+	->
+	<?php echo $tool['name']; ?>
+</h4>
+<?php
 require(WB_PATH.'/modules/'.$tool['directory'].'/tool.php');
 
 $admin->print_footer();
+
 ?>
