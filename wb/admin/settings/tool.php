@@ -42,7 +42,7 @@ $tool=$query_result->fetchRow();
 
 $admin = new admin("Tool: {$tool['name']}",'settings_advanced');
 
-require(WB_PATH.'/modules/'.$tool['directory'].'/include.php');
+require(WB_PATH.'/modules/'.$tool['directory'].'/tool.php');
 
 $admin->print_footer();
 ?>
