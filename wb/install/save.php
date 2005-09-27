@@ -291,7 +291,7 @@ define('DB_USERNAME', $database_username);
 define('DB_PASSWORD', $database_password);
 define('DB_NAME', $database_name);
 define('TABLE_PREFIX', $table_prefix);
-define('WB_PATH', str_replace('/install','',dirname(__FILE__)));
+define('WB_PATH', str_replace(array('/install','\install'), '',dirname(__FILE__)));
 define('WB_URL', $wb_url);
 define('ADMIN_PATH', WB_PATH.'/admin');
 define('ADMIN_URL', $wb_url.'/admin');
