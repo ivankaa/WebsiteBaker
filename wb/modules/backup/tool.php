@@ -24,6 +24,6 @@
 */
 
 // Direct access prevention
-define('WB_PATH') OR die(header('Location: ../index.php'));
+defined('WB_PATH') OR die(header('Location: ../index.php'));
 
 ?>

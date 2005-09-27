@@ -24,7 +24,7 @@
 */
 
 $module_directory = 'reload';
-$module_name = 'Reload Add-ons Database';
+$module_name = 'Reload Add-ons';
 $module_function = 'tool';
 $module_version = '2.6';
 $module_platform = '2.6.x';
