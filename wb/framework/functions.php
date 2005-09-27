@@ -682,68 +682,74 @@ function delete_page($page_id) {
 	
 }
 
-// Load addons into DB
-function load_addons($search_dir, $install_modules = false) {
+// Load module into DB
+function load_module($directory, $install = false) {
 	global $database;
-	if($handle = opendir($search_dir)) {
-		while(false !== ($file = readdir($handle))) {
-			if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'admin.php' AND $file != 'index.php') {
-				// Load info file
-				if(file_exists($search_dir.'/'.$file.'/info.php')) {
-					require($search_dir.'/'.$file.'/info.php');
-				} else {
-					require($search_dir.'/'.$file);
-				}
-				// Get addon type
-				if(isset($module_name)) {
-					if(!isset($module_license)) { $module_license = 'GNU General Public License'; }
-					if(!isset($module_platform) AND isset($module_designed_for)) { $module_platform = $module_designed_for; }
-					// Check that it doesn't already exist
-					$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$module_directory."' LIMIT 0,1");
-					if($result->numRows() == 0) {
-						// Load into DB
-						$query = "INSERT INTO ".TABLE_PREFIX."addons ".
-						"(directory,name,description,type,function,version,platform,author,license) ".
-						"VALUES ('$module_directory','$module_name','".addslashes($module_description)."','module',".
-						"'$module_function','$module_version','$module_platform','$module_author','$module_license')";
-						$database->query($query);
-						// Run installation script
-						if($install_modules == true) {
-							require($search_dir.'/'.$file.'/install.php');
-						}
-					}
-				} elseif(isset($template_name)) {
-					if(!isset($template_license)) { $template_license = 'GNU General Public License'; }
-					if(!isset($template_platform) AND isset($template_designed_for)) { $template_platform = $template_designed_for; }
-					// Check that it doesn't already exist
-					$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$template_directory."' LIMIT 0,1");
-					if($result->numRows() == 0) {
-						// Load into DB
-						$query = "INSERT INTO ".TABLE_PREFIX."addons ".
-						"(directory,name,description,type,version,platform,author,license) ".
-						"VALUES ('$template_directory','$template_name','".addslashes($template_description)."','template',".
-						"'$template_version','$template_platform','$template_author','$template_license')";
-						$database->query($query);
-					}
-				} elseif(isset($language_name)) {
-					if(!isset($language_license)) { $language_license = 'GNU General Public License'; }
-					if(!isset($language_platform) AND isset($language_designed_for)) { $language_platform = $language_designed_for; }
-					// Check that it doesn't already exist
-					$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$language_code."' LIMIT 0,1");
-					if($result->numRows() == 0) {
-						// Load into DB
-						$query = "INSERT INTO ".TABLE_PREFIX."addons ".
-						"(directory,name,type,version,platform,author,license) ".
-						"VALUES ('$language_code','$language_name','language',".
-						"'$language_version','$language_platform','$language_author','$language_license')";
-						$database->query($query);
-					}
+	if(file_exists($directory.'/info.php')) {
+		require($directory.'/info.php');
+		if(isset($module_name)) {
+			if(!isset($module_license)) { $module_license = 'GNU General Public License'; }
+			if(!isset($module_platform) AND isset($module_designed_for)) { $module_platform = $module_designed_for; }
+			if(!isset($module_function) AND isset($module_type)) { $module_function = $module_type; }
+			// Check that it doesn't already exist
+			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$module_directory."' LIMIT 0,1");
+			if($result->numRows() == 0) {
+				// Load into DB
+				$query = "INSERT INTO ".TABLE_PREFIX."addons ".
+				"(directory,name,description,type,function,version,platform,author,license) ".
+				"VALUES ('$module_directory','$module_name','".addslashes($module_description)."','module',".
+				"'$module_function','$module_version','$module_platform','$module_author','$module_license')";
+				$database->query($query);
+				// Run installation script
+				if($install == true) {
+					require($directory.'/install.php');
 				}
 			}
 		}
-		closedir($handle);
-	} else {
-		echo 'Can\'t open '.$search_dir;
+	}
+}
+
+// Load template into DB
+function load_template($directory) {
+	global $database;
+	if(file_exists($directory.'/info.php')) {
+		require($directory.'/info.php');
+		if(isset($template_name)) {
+			if(!isset($template_license)) { $template_license = 'GNU General Public License'; }
+			if(!isset($template_platform) AND isset($template_designed_for)) { $template_platform = $template_designed_for; }
+			// Check that it doesn't already exist
+			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$template_directory."' LIMIT 0,1");
+			if($result->numRows() == 0) {
+				// Load into DB
+				$query = "INSERT INTO ".TABLE_PREFIX."addons ".
+				"(directory,name,description,type,version,platform,author,license) ".
+				"VALUES ('$template_directory','$template_name','".addslashes($template_description)."','template',".
+				"'$template_version','$template_platform','$template_author','$template_license')";
+				$database->query($query);
+			}
+		}
+	}
+}
+
+// Load language into DB
+function load_language($file) {
+	global $database;
+	if(file_exists($file)) {
+		require($file);
+		if(isset($language_name)) {
+			if(!isset($language_license)) { $language_license = 'GNU General Public License'; }
+			if(!isset($language_platform) AND isset($language_designed_for)) { $language_platform = $language_designed_for; }
+			// Check that it doesn't already exist
+			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$language_code."' LIMIT 0,1");
+			if($result->numRows() == 0) {
+				// Load into DB
+				$query = "INSERT INTO ".TABLE_PREFIX."addons ".
+				"(directory,name,type,version,platform,author,license) ".
+				"VALUES ('$language_code','$language_name','language',".
+				"'$language_version','$language_platform','$language_author','$language_license')";
+	 		$database->query($query);
+			}
+		}
 	}
 }
 
