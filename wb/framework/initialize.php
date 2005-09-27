@@ -35,6 +35,8 @@ if (file_exists(WB_PATH.'/framework/class.database.php'))
 	// Get website settings (title, keywords, description, header, and footer)
 	$query_settings = "SELECT name,value FROM ".TABLE_PREFIX."settings";
 	$get_settings = $database->query($query_settings);
+	if($database->is_error()) { die($database->get_error()); }
+	if($get_settings->numRows() == 0) { die("Settings not found"); }
 	while($setting = $get_settings->fetchRow()) {
 		$setting_name=strtoupper($setting['name']);
 		$setting_value=$setting['value'];
