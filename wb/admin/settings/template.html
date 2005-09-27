@@ -1,43 +1,15 @@
 </div><!-- BEGIN main_block -->
 
 <script language="javascript" type="text/javascript">
-function toggle_radio(group_name, set_value) {
-	if(set_value == true) {
-		document.getElementById(group_name + "_true").checked = true;
-		document.getElementById(group_name + "_false").checked = false;
-	} else {
-		document.getElementById(group_name + "_true").checked = false;
-		document.getElementById(group_name + "_false").checked = true;
-	}
-}
 function change_os(type) {
 	if(type == 'linux') {
-		document.getElementById('operating_system_linux').checked = true;
-		document.getElementById('operating_system_windows').checked = false;
 		document.getElementById('file_perms_box1').style.display = 'block';
 		document.getElementById('file_perms_box2').style.display = 'block';
 		document.getElementById('file_perms_box3').style.display = 'block';
 	} else if(type == 'windows') {
-		document.getElementById('operating_system_linux').checked = false;
-		document.getElementById('operating_system_windows').checked = true;
 		document.getElementById('file_perms_box1').style.display = 'none';
 		document.getElementById('file_perms_box2').style.display = 'none';
 		document.getElementById('file_perms_box3').style.display = 'none';
-	}
-}
-function change_page_trash(type) {
-	if(type == 'inline') {
-		document.getElementById("page_trash_disabled").checked = false;
-		document.getElementById("page_trash_inline").checked = true;
-		document.getElementById("page_trash_separate").checked = false;
-	} else if(type == 'separate') {
-		document.getElementById("page_trash_disabled").checked = false;
-		document.getElementById("page_trash_inline").checked = false;
-		document.getElementById("page_trash_separate").checked = true;
-	} else {
-		document.getElementById("page_trash_disabled").checked = true;
-		document.getElementById("page_trash_inline").checked = false;
-		document.getElementById("page_trash_separate").checked = false;
 	}
 }
 </script>
@@ -54,7 +26,7 @@ function change_page_trash(type) {
 	width: 100%;
 }
 .setting_value textarea {
-	height: 65px;
+	height: 50px;
 }
 #file_mode input {
 	width: 12px;
@@ -117,7 +89,7 @@ function change_page_trash(type) {
 		<textarea name="website_footer">{WEBSITE_FOOTER}</textarea>
 	</td>
 </tr>
-<tr>
+<tr class="advanced">
 	<td class="setting_name">{TEXT_PAGE_LEVEL_LIMIT}:</td>
 	<td class="setting_value" colspan="2">
 		<select name="page_level_limit">
@@ -131,11 +103,11 @@ function change_page_trash(type) {
 	<td class="setting_name">{TEXT_PAGE_TRASH}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="page_trash" id="page_trash_disabled" style="width: 14px; height: 14px;" value="disabled"{PAGE_TRASH_DISABLED} />
-		<font style="cursor: pointer;" onclick="javascript: change_page_trash('disabled');">{TEXT_DISABLED}</font>
+		<label for="page_trash_disabled">{TEXT_DISABLED}</label>
 		<input type="radio" name="page_trash" id="page_trash_inline" style="width: 14px; height: 14px;" value="inline"{PAGE_TRASH_INLINE} />
-		<font style="cursor: pointer;" onclick="javascript: change_page_trash('inline');">{TEXT_INLINE}</font>
+		<label for="page_trash_inline">{TEXT_INLINE}</label>
 		<input type="radio" name="page_trash" id="page_trash_separate" style="width: 14px; height: 14px;" value="separate"{PAGE_TRASH_SEPARATE} />
-		<font style="cursor: pointer;" onclick="javascript: change_page_trash('separate');">{TEXT_SEPARATE}</font>
+		<label for="page_trash_separate">{TEXT_SEPARATE}</label>
 	</td>
 </tr>
 <input type="hidden" name="page_languages" value="{PAGE_LANGUAGES}" />
@@ -143,76 +115,76 @@ function change_page_trash(type) {
 	<td class="setting_name">{TEXT_MULTIPLE_MENUS}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="multiple_menus" id="multiple_menus_true" style="width: 14px; height: 14px;" value="true"{MULTIPLE_MENUS_ENABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('multiple_menus', true);">{TEXT_ENABLED}</font>
+		<label for="multiple_menus_true">{TEXT_ENABLED}</label>
 		<input type="radio" name="multiple_menus" id="multiple_menus_false" style="width: 14px; height: 14px;" value="false"{MULTIPLE_MENUS_DISABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('multiple_menus', false);">{TEXT_DISABLED}</font>
+		<label for="multiple_menus_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name">{TEXT_HOME_FOLDERS}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="home_folders" id="home_folders_true" style="width: 14px; height: 14px;" value="true"{HOME_FOLDERS_ENABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('home_folders', true);">{TEXT_ENABLED}</font>
+		<label for="home_folders_true">{TEXT_ENABLED}</label>
 		<input type="radio" name="home_folders" id="home_folders_false" style="width: 14px; height: 14px;" value="false"{HOME_FOLDERS_DISABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('home_folders', false);">{TEXT_DISABLED}</font>
+		<label for="home_folders_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
 <tr class="advanced">
 	<td class="setting_name">{TEXT_MANAGE_SECTIONS}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="manage_sections" id="manage_sections_true" style="width: 14px; height: 14px;" value="true"{MANAGE_SECTIONS_ENABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('manage_sections', true);">{TEXT_ENABLED}</font>
+		<label for="manage_sections_true">{TEXT_ENABLED}</label>
 		<input type="radio" name="manage_sections" id="manage_sections_false" style="width: 14px; height: 14px;" value="false"{MANAGE_SECTIONS_DISABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('manage_sections', false);">{TEXT_DISABLED}</font>
+		<label for="manage_sections_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
 <tr class="advanced">
 	<td class="setting_name">{TEXT_SECTION_BLOCKS}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="section_blocks" id="section_blocks_true" style="width: 14px; height: 14px;" value="true"{SECTION_BLOCKS_ENABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('section_blocks', true);">{TEXT_ENABLED}</font>
+		<label for="section_blocks_true">{TEXT_ENABLED}</label>
 		<input type="radio" name="section_blocks" id="section_blocks_false" style="width: 14px; height: 14px;" value="false"{SECTION_BLOCKS_DISABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('section_blocks', false);">{TEXT_DISABLED}</font>
+		<label for="section_blocks_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name">{TEXT_INTRO_PAGE}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="intro_page" id="intro_page_true" style="width: 14px; height: 14px;" value="true"{INTRO_PAGE_ENABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('intro_page', true);">{TEXT_ENABLED}</font>
+		<label for="intro_page_true">{TEXT_ENABLED}</label>
 		<input type="radio" name="intro_page" id="intro_page_false" style="width: 14px; height: 14px;" value="false"{INTRO_PAGE_DISABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('intro_page', false);">{TEXT_DISABLED}</font>
+		<label for="intro_page_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
 <tr class="advanced">
 	<td class="setting_name">{TEXT_HOMEPAGE_REDIRECTION}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="homepage_redirection" id="homepage_redirection_true" style="width: 14px; height: 14px;" value="true"{HOMEPAGE_REDIRECTION_ENABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('homepage_redirection', true);">{TEXT_ENABLED}</font>
+		<label for="homepage_redirection_true">{TEXT_ENABLED}</label>
 		<input type="radio" name="homepage_redirection" id="homepage_redirection_false" style="width: 14px; height: 14px;" value="false"{HOMEPAGE_REDIRECTION_DISABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('homepage_redirection', false);">{TEXT_DISABLED}</font>
+		<label for="homepage_redirection_false">{TEXT_DISABLED}</font>
 	</td>
 </tr>
 <tr class="advanced">
 	<td class="setting_name">{TEXT_SMART_LOGIN}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="smart_login" id="smart_login_true" style="width: 14px; height: 14px;" value="true"{SMART_LOGIN_ENABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('smart_login', true);">{TEXT_ENABLED}</font>
+		<label for="smart_login_true">{TEXT_ENABLED}</label>
 		<input type="radio" name="smart_login" id="smart_login_false" style="width: 14px; height: 14px;" value="false"{SMART_LOGIN_DISABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('smart_login', false);">{TEXT_DISABLED}</font>
+		<label for="smart_login_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name">{TEXT_LOGIN}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="frontend_login" id="frontend_login_true" style="width: 14px; height: 14px;" value="true"{PRIVATE_ENABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('frontend_login', true);">{TEXT_ENABLED}</font>
+		<label for="frontend_login_true">{TEXT_ENABLED}</label>
 		<input type="radio" name="frontend_login" id="frontend_login_false" style="width: 14px; height: 14px;" value="false"{PRIVATE_DISABLED} />
-		<font style="cursor: pointer;" onclick="javascript: toggle_radio('frontend_login', false);">{TEXT_DISABLED}</font>
+		<label for="frontend_login_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
 <tr>
-	<td class="setting_name">{TEXT_SIGNUP}:</td>
+	<td class="settfonting_name">{TEXT_SIGNUP}:</td>
 	<td class="setting_value" colspan="2">
 		<select name="frontend_signup">
 			<option value="false">{TEXT_DISABLED}</option>
@@ -233,7 +205,7 @@ function change_page_trash(type) {
 		</select>
 	</td>
 </tr>
-<tr class="advanced">
+<tr class="advancedfont">
 	<td class="setting_name">{TEXT_WYSIWYG_STYLE}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="wysiwyg_style" value="{WYSIWYG_STYLE}" />
@@ -245,8 +217,8 @@ function change_page_trash(type) {
 		<input type="text" name="server_email" value="{SERVER_EMAIL}" />
 	</td>
 </tr>
-<tr>
-	<td class="setting_name">{TEXT_EDITOR}:</td>
+<tr class="advanced">
+	<td class="setting_name">{TEXT_WYSIWYG_EDITOR}:</td>
 	<td class="setting_value" colspan="2">
 		<select name="wysiwyg_editor">
 		<!-- BEGIN editor_list_block -->
@@ -414,9 +386,9 @@ function change_page_trash(type) {
 	<td class="setting_name">{TEXT_SERVER_OPERATING_SYSTEM}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="operating_system" id="operating_system_linux" onclick="javascript: change_os('linux');" style="width: 14px; height: 14px;" value="linux"{LINUX_SELECTED} />
-		<font style="cursor: pointer;" onclick="javascript: change_os('linux');">{TEXT_LINUX_UNIX_BASED}</font>
+		<label for="operating_system_linux" onclick="javascript: change_os('linux');">{TEXT_LINUX_UNIX_BASED}</label>
 		<input type="radio" name="operating_system" id="operating_system_windows" onclick="javascript: change_os('windows');"" style="width: 14px; height: 14px;" value="windows"{WINDOWS_SELECTED} />
-		<font style="cursor: pointer;" onclick="javascript: change_os('windows');">{TEXT_WINDOWS}</font>
+		<label for="operating_system_windows" onclick="javascript: change_os('windows');">{TEXT_WINDOWS}</label>
 	</td>
 </tr>
 <tr>
@@ -424,7 +396,7 @@ function change_page_trash(type) {
 	<td class="setting_value" colspan="3">
 		<div id="{BASIC_FILE_PERMS_ID}2" style="margin: 0; padding: 0;">
 			<input type="checkbox" name="world_writeable" id="world_writeable" style="width: 14px; height: 14px;" value="true"{WORLD_WRITEABLE_SELECTED} />
-			<font style="cursor: pointer;" onclick="javascript: toggle_checkbox('world_writeable');">
+			<label for="world_writeable">
 				{TEXT_WORLD_WRITEABLE_FILE_PERMISSIONS} (777)
 			</font>
 			<br />
@@ -450,33 +422,33 @@ function change_page_trash(type) {
 		<tr>
 			<td>
 				<input type="checkbox" name="file_u_r" id="file_u_r" value="true"{FILE_U_R_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('file_u_r');" style="cursor: default;">{TEXT_READ}</font>
+				<label for="file_u_r">{TEXT_READ}</label>
 				<br />
 				<input type="checkbox" name="file_u_w" id="file_u_w" value="true"{FILE_U_W_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('file_u_w');" style="cursor: default;">{TEXT_WRITE}</font>
+				<label for="file_u_w">{TEXT_WRITE}</label>
 				<br />
 				<input type="checkbox" name="file_u_e" id="file_u_e" value="true"{FILE_U_E_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('file_u_e');" style="cursor: default;">{TEXT_EXECUTE}</font>
+				<label for="file_u_e">{TEXT_EXECUTE}</label>
 			</td>
 			<td>
 				<input type="checkbox" name="file_g_r" id="file_g_r" value="true"{FILE_G_R_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('file_g_r');" style="cursor: default;">{TEXT_READ}</font>
+				<label for="file_g_r">{TEXT_READ}</label>
 				<br />
 				<input type="checkbox" name="file_g_w" id="file_g_w" value="true"{FILE_G_W_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('file_g_w');" style="cursor: default;">{TEXT_WRITE}</font>
+				<label for="file_g_w">{TEXT_WRITE}</label>
 				<br />
 				<input type="checkbox" name="file_g_e" id="file_g_e" value="true"{FILE_G_E_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('file_g_e');" style="cursor: default;">{TEXT_EXECUTE}</font>
+				<label for="file_g_e">{TEXT_EXECUTE}</label>
 			</td>
 			<td>
 				<input type="checkbox" name="file_o_r" id="file_o_r" value="true"{FILE_O_R_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('file_o_r');" style="cursor: default;">{TEXT_READ}</font>
+				<label for="file_o_r">{TEXT_READ}</label>
 				<br />
 				<input type="checkbox" name="file_o_w" id="file_o_w" value="true"{FILE_O_W_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('file_o_w');" style="cursor: default;">{TEXT_WRITE}</font>
+				<label for="file_o_w">{TEXT_WRITE}</label>
 				<br />
 				<input type="checkbox" name="file_o_e" id="file_o_e" value="true"{FILE_O_E_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('file_o_e');" style="cursor: default;">{TEXT_EXECUTE}</font>
+				<label for="file_o_e">{TEXT_EXECUTE}</label>
 			</td>
 		</tr>
 		</table>
@@ -496,33 +468,33 @@ function change_page_trash(type) {
 		<tr>
 			<td>
 				<input type="checkbox" name="dir_u_r" id="dir_u_r" value="true"{DIR_U_R_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('dir_u_r');" style="cursor: default;">{TEXT_READ}</font>
+				<label for="dir_u_r">{TEXT_READ}</label>
 				<br />
 				<input type="checkbox" name="dir_u_w" id="dir_u_w" value="true"{DIR_U_W_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('dir_u_w');" style="cursor: default;">{TEXT_WRITE}</font>
+				<label for="dir_u_w">{TEXT_WRITE}</label>
 				<br />
 				<input type="checkbox" name="dir_u_e" id="dir_u_e" value="true"{DIR_U_E_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('dir_u_e');" style="cursor: default;">{TEXT_EXECUTE}</font>
+				<label for="dir_u_e">{TEXT_EXECUTE}</label>
 			</td>
 			<td>
 				<input type="checkbox" name="dir_g_r" id="dir_g_r" value="true"{DIR_G_R_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('dir_g_r');" style="cursor: default;">{TEXT_READ}</font>
+				<label for="dir_g_r">{TEXT_READ}</label>
 				<br />
 				<input type="checkbox" name="dir_g_w" id="dir_g_w" value="true"{DIR_G_W_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('dir_g_w');" style="cursor: default;">{TEXT_WRITE}</font>
+				<label for="dir_g_w">{TEXT_WRITE}</label>
 				<br />
 				<input type="checkbox" name="dir_g_e" id="dir_g_e" value="true"{DIR_G_E_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('dir_g_e');" style="cursor: default;">{TEXT_EXECUTE}</font>
+				<label for="dir_g_e">{TEXT_EXECUTE}</label>
 			</td>
 			<td>
 				<input type="checkbox" name="dir_o_r" id="dir_o_r" value="true"{DIR_O_R_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('dir_o_r');" style="cursor: default;">{TEXT_READ}</font>
+				<label for="dir_o_r">{TEXT_READ}</label>
 				<br />
 				<input type="checkbox" name="dir_o_w" id="dir_o_w" value="true"{DIR_O_W_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('dir_o_w');" style="cursor: default;">{TEXT_WRITE}</font>
+				<label for="dir_o_w">{TEXT_WRITE}</label>
 				<br />
 				<input type="checkbox" name="dir_o_e" id="dir_o_e" value="true"{DIR_O_E_CHECKED} />
-				<font onclick="javascript: toggle_checkbox('dir_o_e');" style="cursor: default;">{TEXT_EXECUTE}</font>
+				<label for="dir_o_e">{TEXT_EXECUTE}</label>
 			</td>
 		</tr>
 		</table>

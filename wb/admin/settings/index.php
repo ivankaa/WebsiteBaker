@@ -512,7 +512,7 @@ $template->set_var(array(
 								'TEXT_DATE_FORMAT' => $TEXT['DATE_FORMAT'],
 								'TEXT_TIME_FORMAT' => $TEXT['TIME_FORMAT'],
 								'TEXT_TEMPLATE' => $TEXT['TEMPLATE'],
-								'TEXT_EDITOR' => $TEXT['WYSIWYG_EDITOR'],
+								'TEXT_WYSIWYG_EDITOR' => $TEXT['WYSIWYG_EDITOR'],
 								'TEXT_PAGE_LEVEL_LIMIT' => $TEXT['PAGE_LEVEL_LIMIT'],
 								'TEXT_INTRO_PAGE' => $TEXT['INTRO_PAGE'],
 								'TEXT_FRONTEND' => $TEXT['FRONTEND'],
