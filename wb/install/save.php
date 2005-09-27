@@ -478,10 +478,10 @@ if($install_tables == true) {
 	// Addons table
 	$addons = 'CREATE TABLE `'.TABLE_PREFIX.'addons` ( '
 	.'`addon_id` INT NOT NULL auto_increment ,'
+	.'`type` VARCHAR( 255 ) NOT NULL ,'
 	.'`directory` VARCHAR( 255 ) NOT NULL ,'
 	.'`name` VARCHAR( 255 ) NOT NULL ,'
 	.'`description` TEXT NOT NULL ,'
-	.'`type` VARCHAR( 255 ) NOT NULL ,'
 	.'`function` VARCHAR( 255 ) NOT NULL ,'
 	.'`version` VARCHAR( 255 ) NOT NULL ,'
 	.'`platform` VARCHAR( 255 ) NOT NULL ,'
@@ -574,14 +574,38 @@ $search_no_results = add_slashes('<br />No results found');
 	$wb = new wb();
 	
 	// Install add-ons
-	if(!file_exists(WB_PATH.'/install/addons')) {
-	require(WB_PATH.'/modules/wysiwyg/install.php');
-	require(WB_PATH.'/modules/code/install.php');
-	require(WB_PATH.'/modules/news/install.php');
-	require(WB_PATH.'/modules/form/install.php');
-	require(WB_PATH.'/modules/wrapper/install.php');
-	} else {
+	if(file_exists(WB_PATH.'/install/modules')) {
+		// Unpack pre-packaged modules
 		
+	}
+	if(file_exists(WB_PATH.'/install/templates')) {
+		// Unpack pre-packaged templates
+		
+	}
+	if(file_exists(WB_PATH.'/install/languages')) {
+		// Unpack pre-packaged languages
+		
+	}
+	// Load addons into DB
+	$dirs['modules'] = WB_PATH.'/modules/';
+	$dirs['templates'] = WB_PATH.'/templates/';
+	$dirs['language'] = WB_PATH.'/languages/';
+	foreach($dirs AS $type => $dir) {
+		if($handle = opendir($dir)) {
+			while(false !== ($file = readdir($handle))) {
+				if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'admin.php' AND $file != 'index.php') {
+					// Get addon type
+					if($type == 'module') {
+						load_module($dir.'/'.$file, true);
+					} elseif($type == 'templates') {
+						load_template($dir.'/'.$file);
+					} elseif($type == 'language') {
+						load_language($dir.'/'.$file);
+					}
+				}
+			}
+		closedir($handle);
+		}
 	}
 	
 	// Check if there was a database error
