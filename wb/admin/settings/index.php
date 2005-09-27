@@ -318,9 +318,9 @@ if(defined('MULTIPLE_MENUS') AND MULTIPLE_MENUS == true) {
 
 // Work-out if page languages feature is enabled
 if(defined('PAGE_LANGUAGES') AND PAGE_LANGUAGES == true) {
-	$template->set_var('PAGE_LANGUAGES_ENABLED', ' checked');
+	$template->set_var('PAGE_LANGUAGES', ' true');
 } else {
-	$template->set_var('PAGE_LANGUAGES_DISABLED', ' checked');
+	$template->set_var('PAGE_LANGUAGES', ' false');
 }
 
 // Work-out if smart login feature is enabled
@@ -525,6 +525,7 @@ $template->set_var(array(
 								'TEXT_PAGE_SPACER' => $TEXT['PAGE_SPACER'],
 								'TEXT_RENAME_FILES_ON_UPLOAD' => $TEXT['RENAME_FILES_ON_UPLOAD'],
 								'TEXT_APP_NAME' => $TEXT['APP_NAME'],
+								'TEXT_SESSION_IDENTIFIER' => $TEXT['SESSION_IDENTIFIER'],
 								'TEXT_SERVER_OPERATING_SYSTEM' => $TEXT['SERVER_OPERATING_SYSTEM'],
 								'TEXT_LINUX_UNIX_BASED' => $TEXT['LINUX_UNIX_BASED'],
 								'TEXT_WINDOWS' => $TEXT['WINDOWS'],
@@ -560,7 +561,6 @@ $template->set_var(array(
 								'TEXT_SMART_LOGIN' => $TEXT['SMART_LOGIN'],
 								'TEXT_MULTIPLE_MENUS' => $TEXT['MULTIPLE_MENUS'],
 								'TEXT_HOMEPAGE_REDIRECTION' => $TEXT['HOMEPAGE_REDIRECTION'],
-								'TEXT_PAGE_LANGUAGES' => $TEXT['PAGE_LANGUAGES'],
 								'TEXT_SECTION_BLOCKS' => $TEXT['SECTION_BLOCKS'],
 								'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
 								'TEXT_PAGE_TRASH' => $TEXT['PAGE_TRASH'],
