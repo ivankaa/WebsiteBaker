@@ -184,7 +184,7 @@ function change_os(type) {
 	</td>
 </tr>
 <tr>
-	<td class="settfonting_name">{TEXT_SIGNUP}:</td>
+	<td class="setting_name">{TEXT_SIGNUP}:</td>
 	<td class="setting_value" colspan="2">
 		<select name="frontend_signup">
 			<option value="false">{TEXT_DISABLED}</option>
@@ -542,10 +542,15 @@ function change_os(type) {
 	</td>
 </tr>
 <tr class="advanced">
-	<td>
+	<td colspan="3">
+		<ul style="margin: 0; padding: 0; margin-left: 20px; margin-bottom: 10px;">
 		<!-- BEGIN tool_list_block -->
-			<a href="{ADMIN_URL}/settings/tool.php?tool={TOOL_DIR}">{TOOL_NAME}</a>
+		<li style="padding-bottom: 5px;">
+		<a href="{ADMIN_URL}/settings/tool.php?tool={TOOL_DIR}">{TOOL_NAME}</a>
+		<br />{TOOL_DESCRIPTION}
+		</li>
 		<!-- END tool_list_block -->
+		</ul>
 		{TOOL_LIST}
 	</td>
 	<td>

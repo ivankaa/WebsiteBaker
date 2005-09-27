@@ -123,21 +123,19 @@ $template->set_var(array(
 								 )
 						 );
 
-// Insert groups into signup list
+// Insert tools into tool list
 $template->set_block('main_block', 'tool_list_block', 'tool_list');
 $results = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool'");
-$tool_list_empty=true;
 if($results->numRows() > 0) {
 	while($tool = $results->fetchRow()) {
 		$template->set_var('TOOL_NAME', $tool['name']);
 		$template->set_var('TOOL_DIR', $tool['directory']);
+		$template->set_var('TOOL_DESCRIPTION', $tool['description']);
+		$template->parse('tool_list', 'tool_list_block', true);
 	}
 } else {
-	$template->set_var('tool_list', $TEXT['NONE_FOUND']);
-	
+	$template->set_var('TOOL_LIST', $TEXT['NONE_FOUND']);	
 }
-$template->parse('tool_list', 'tool_list_block', true);
-
 
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
@@ -455,7 +453,7 @@ if(extract_permission(STRING_DIR_MODE, 'o', 'e')) {
 $template->set_var('SERVER_EMAIL', SERVER_EMAIL);
 
 // Insert groups into signup list
-$template->set_block('main_block', 'tool_list_block', 'tool_list');
+$template->set_block('main_block', 'group_list_block', 'group_list');
 $results = $database->query("SELECT group_id, name FROM ".TABLE_PREFIX."groups WHERE group_id != '1'");
 if($results->numRows() > 0) {
 	while($group = $results->fetchRow()) {
