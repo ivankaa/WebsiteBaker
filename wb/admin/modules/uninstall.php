@@ -54,8 +54,7 @@ if(!is_writable(WB_PATH.'/modules/'.$file)) {
 	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL']);
 }
 
-$database->query("DELETE FROM ".TABLE_PREFIX."modules WHERE directory =
-'$file'"); 
+$database->query("DELETE FROM ".TABLE_PREFIX."modules WHERE directory = '$file'"); 
 
 // Run the modules uninstall script if there is one
 if(file_exists(WB_PATH.'/modules/'.$file.'/uninstall.php')) {
@@ -65,6 +64,9 @@ if(file_exists(WB_PATH.'/modules/'.$file.'/uninstall.php')) {
 // Try to delete the module dir
 if(!rm_full_dir(WB_PATH.'/modules/'.$file)) {
 	$admin->print_error($MESSAGE['MODULES']['CANNOT_UNINSTALL']);
+} else {
+	// Remove entry from DB
+	$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE directory = '".$file."' AND type = 'module' LIMIT 0,1");
 }
 
 // Print success message

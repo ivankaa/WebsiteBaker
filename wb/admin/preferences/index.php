@@ -45,28 +45,22 @@ $template->set_var('EMAIL', $details['email']);
 
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
-if($handle = opendir(WB_PATH.'/languages/')) {
-   while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND !is_dir($file) AND $file != 'index.php') {
-			// Get language name
-			require(WB_PATH.'/languages/'.$file);
-			// Insert code and name
-			$template->set_var(array(
-											'CODE' => $language_code,
-											'NAME' => $language_name
-											)
-									);
-			// Check if it is selected
-			if(LANGUAGE == $language_code) {
-				$template->set_var('SELECTED', ' selected');
-			} else {
-				$template->set_var('SELECTED', '');
-			}
-			$template->parse('language_list', 'language_list_block', true);
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language'");
+if($result->numRows() > 0) {
+	while($addon = $result->fetchRow()) {
+		// Insert code and name
+		$template->set_var(array(
+								'CODE' => $addon['directory'],
+								'NAME' => $addon['name']
+								));
+		// Check if it is selected
+		if(LANGUAGE == $addon['directory']) {
+			$template->set_var('SELECTED', ' selected');
+		} else {
+			$template->set_var('SELECTED', '');
 		}
+		$template->parse('language_list', 'language_list_block', true);
 	}
-	// Restore language to original file
-	require(WB_PATH.'/languages/'.LANGUAGE.'.php');
 }
 
 // Insert default timezone values

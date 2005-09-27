@@ -37,7 +37,7 @@ $template->set_block('page', 'main_block', 'main');
 $template->set_block('main_block', 'language_list_block', 'language_list');
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language'");
 if($result->numRows() > 0) {
-	while ($addon = $result->fetchRow()) {
+	while($addon = $result->fetchRow()) {
 		$template->set_var('VALUE', $addon['directory']);
 		$template->set_var('NAME', $addon['name'].' ('.$addon['directory'].')');
 		$template->parse('language_list', 'language_list_block', true);

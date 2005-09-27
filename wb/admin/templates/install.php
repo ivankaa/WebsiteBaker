@@ -119,6 +119,9 @@ while (false !== $entry = $dir->read()) {
 	}
 }
 
+// Load template info into DB
+load_module(WB_PATH.'/templates/'.$template_directory);
+
 // Print success message
 $admin->print_success($success_message);
 

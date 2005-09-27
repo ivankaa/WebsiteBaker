@@ -141,28 +141,22 @@ $template->parse('tool_list', 'tool_list_block', true);
 
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
-if($handle = opendir(WB_PATH.'/languages/')) {
-   while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND !is_dir($file) AND $file != 'index.php') {
-			// Get language name
-			require(WB_PATH.'/languages/'.$file);
-			// Insert code and name
-			$template->set_var(array(
-											'CODE' => $language_code,
-											'NAME' => $language_name
-											)
-									);
-			// Check if it is selected
-			if(DEFAULT_LANGUAGE == $language_code) {
-				$template->set_var('SELECTED', ' selected');
-			} else {
-				$template->set_var('SELECTED', '');
-			}
-			$template->parse('language_list', 'language_list_block', true);
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language'");
+if($result->numRows() > 0) {
+	while ($addon = $result->fetchRow()) {
+		// Insert code and name
+		$template->set_var(array(
+								'CODE' => $addon['directory'],
+								'NAME' => $addon['name']
+								));
+		// Check if it is selected
+		if(DEFAULT_LANGUAGE == $addon['directory']) {
+			$template->set_var('SELECTED', ' selected');
+		} else {
+			$template->set_var('SELECTED', '');
 		}
+		$template->parse('language_list', 'language_list_block', true);
 	}
-	// Restore language to original file
-	require(WB_PATH.'/languages/'.LANGUAGE.'.php');
 }
 
 // Insert default timezone values
@@ -222,16 +216,14 @@ foreach($TIME_FORMATS AS $format => $title) {
 
 // Insert templates
 $template->set_block('main_block', 'template_list_block', 'template_list');
-if($handle = opendir(WB_PATH.'/templates/')) {
-	while (false !== ($file = readdir($handle))) {
-		if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
-			include(WB_PATH."/templates/$file/info.php");
-			$template->set_var('FILE', $file);
-			$template->set_var('NAME', $template_name);
-			if($file == DEFAULT_TEMPLATE ? $selected = ' selected' : $selected = '');
-			$template->set_var('SELECTED', $selected);
-			$template->parse('template_list', 'template_list_block', true);
-		}
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+if($result->numRows() > 0) {
+	while($addon = $result->fetchRow()) {
+		$template->set_var('FILE', $addon['directory']);
+		$template->set_var('NAME', $addon['name']);
+		if($file == DEFAULT_TEMPLATE ? $selected = ' selected' : $selected = '');
+		$template->set_var('SELECTED', $selected);
+		$template->parse('template_list', 'template_list_block', true);
 	}
 }
 

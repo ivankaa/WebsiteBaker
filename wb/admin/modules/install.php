@@ -114,7 +114,8 @@ while (false !== $entry = $dir->read()) {
 	}
 }
 
-
+// Load module info into DB
+load_module(WB_PATH.'/modules/'.$module_directory, false);
 
 // Run the modules install // upgrade script if there is one
 if(file_exists(WB_PATH.'/modules/'.$module_directory.'/'.$action.'.php')) {
@@ -130,7 +131,6 @@ if ($action=="install") {
 } else if ($action=="upgrade") {
 	$admin->print_success($MESSAGE['GENERIC']['UPGRADED']);
 }	
-
 
 // Print admin footer
 $admin->print_footer();

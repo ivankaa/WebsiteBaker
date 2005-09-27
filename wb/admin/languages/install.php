@@ -96,6 +96,9 @@ rename($temp_file, $language_file);
 // Chmod the file
 change_mode($language_file, 'file');
 
+// Load language info into DB
+load_module(WB_PATH.'/languages/'.$language_file);
+
 // Restore to correct language
 require(WB_PATH.'/languages/'.LANGUAGE.'.php');
 
