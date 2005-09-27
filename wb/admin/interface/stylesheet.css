@@ -40,6 +40,9 @@ a:hover {
 	color: #666666;
 	font-size: 10px;
 }
+label {
+	cursor: pointer;
+}
 .menu {
 	margin: 0;
 	padding: 0;
