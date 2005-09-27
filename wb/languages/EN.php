@@ -378,7 +378,7 @@ $TEXT['PAGE_LANGUAGES'] = 'Page Languages';
 $TEXT['HIDDEN'] = 'Hidden';
 $TEXT['MAIN'] = 'Main';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Rename Files On Upload';
-$TEXT['APP_NAME'] = '<b><font color="red">THIS IS NOW CALLED SESSION_IDENTIFIER</font></b>';
+$TEXT['APP_NAME'] = 'Application Name';
 $TEXT['SESSION_IDENTIFIER'] = 'Session Identifier';
 
 
