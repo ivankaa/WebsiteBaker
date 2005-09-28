@@ -702,7 +702,9 @@ function load_module($directory, $install = false) {
 				$database->query($query);
 				// Run installation script
 				if($install == true) {
-					require($directory.'/install.php');
+					if(file_exists($directory.'/install.php')) {
+						require($directory.'/install.php');
+					}
 				}
 			}
 		}
