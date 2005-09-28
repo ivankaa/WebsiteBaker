@@ -26,8 +26,20 @@
 // Check if user clicked on the backup button
 if(!isset($_POST['backup'])){ header('Location: ../'); }
 
-// Temporary backup file
-$temp_file = WB_PATH.'/temp/WB-backup-'.date('ymd-His').'.sql';
+// Include config
+require_once('../../config.php');
+
+// Create new admin object
+require(WB_PATH.'/framework/class.admin.php');
+$admin = new admin('Settings', 'settings_advanced', false);
+
+// Begin output var
+$output = "\n".
+"#".
+"# Website Baker ".WB_VERSION." Backup (SQL)\n".
+"# Date: ".gmdate(TIME_FORMAT, mktime()+TIMEZONE)."  Time: ".gmdate(TIME_FORMAT, mktime()+TIMEZONE)."\n".
+"#".
+"\n";
 
 // Get table names
 $result = $database->query("SHOW TABLE STATUS");
@@ -57,12 +69,14 @@ while($row = $result->fetchRow())   {
 		}
 		$sql_code = substr($sql_code, 0, -1);
 		$sql_code.= ";\r\n";
+		$output .= $sql_backup.$sql_code;
 	}
 }
 
 // Output file
 header('Content-Type: application/octet-stream');
-header('Content-Disposition: attachment; filename="'.str_replace(WB_PATH.'/temp', '', $temp_file).'"');
-echo $sql_code;
+header('Content-Disposition: attachment');
+header('Filename: "'.str_replace(WB_PATH.'/temp', '', $temp_file).'"');
+echo $output;
 
 ?>
