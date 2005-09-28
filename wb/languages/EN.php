@@ -380,6 +380,12 @@ $TEXT['MAIN'] = 'Main';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Rename Files On Upload';
 $TEXT['APP_NAME'] = 'Application Name';
 $TEXT['SESSION_IDENTIFIER'] = 'Session Identifier';
+$TEXT['BACKUP'] = 'Backup';
+$TEXT['RESTORE'] = 'Restore';
+$TEXT['BACKUP_DATABASE'] = 'Backup Database';
+$TEXT['RESTORE_DATABASE'] = 'Restore Database';
+$TEXT['BACKUP_MEDIA'] = 'Backup Media';
+$TEXT['RESTORE_MEDIA'] = 'Restore Media';
 
 
 // Success/error messages
@@ -505,9 +511,15 @@ $MESSAGE['GENERIC']['INVALID'] = 'The file you uploaded is invalid';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Cannot Uninstall: the selected file is in use';
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Please check back soon...';
+$MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'You must enter details for the following fields';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sorry, this form has been submitted too many times so far this hour. Please retry in the next hour.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'The verification number (also known as Captcha) that you entered is incorrect. If you are having problems reading the Captcha, please email: '.SERVER_EMAIL;
+
+$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you would like to have reloaded';
+$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully';
+$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully';
+$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully';
 
 ?>
