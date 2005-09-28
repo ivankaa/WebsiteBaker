@@ -35,9 +35,9 @@ $admin = new admin('Settings', 'settings_advanced', false);
 
 // Begin output var
 $output = "\n".
-"#".
+"#\n".
 "# Website Baker ".WB_VERSION." Backup (SQL)\n".
-"# Date: ".gmdate(TIME_FORMAT, mktime()+TIMEZONE)."  Time: ".gmdate(TIME_FORMAT, mktime()+TIMEZONE)."\n".
+"# ".gmdate(TIME_FORMAT, mktime()+TIMEZONE)." ".gmdate(TIME_FORMAT, mktime()+TIMEZONE)."\n".
 "#".
 "\n";
 
