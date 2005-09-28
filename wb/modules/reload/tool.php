@@ -38,23 +38,75 @@ if(isset($_POST['submit']) AND $_POST['submit'] != '') {
 		if($handle = opendir(WB_PATH.'/modules/')) {
 			while(false !== ($file = readdir($handle))) {
 				if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'admin.php' AND $file != 'index.php') {
-					load_module(WB_PATH.'/modules/'.$file, true);
+					load_module(WB_PATH.'/modules/'.$file);
 				}
 			}
 		closedir($handle);
 		}
-		echo $TEXT['MODULES_RELOADED'];
+		echo '<br />'.$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'];
 	}
 	if(isset($_POST['reload_templates'])) {
-		
-		echo $TEXT['TEMPLATES_RELOADED'];
+		// Remove all templates
+		$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+		// Load all templates
+		if($handle = opendir(WB_PATH.'/templates/')) {
+			while(false !== ($file = readdir($handle))) {
+				if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'index.php') {
+					load_template(WB_PATH.'/templates/'.$file);
+				}
+			}
+		closedir($handle);
+		}
+		echo '<br />'.$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'];
 	}
 	if(isset($_POST['reload_languages'])) {
-		
-		echo $TEXT['LANGAUGES_RELOADED'];
+		// Remove all languages
+		$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE type = 'language'");
+		// Load all languages
+		if($handle = opendir(WB_PATH.'/languages/')) {
+			while(false !== ($file = readdir($handle))) {
+				if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'index.php') {
+					load_language(WB_PATH.'/languages/'.$file);
+				}
+			}
+		closedir($handle);
+		}
+		echo '<br />'.$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'];
 	}
+	?>
+	<br /><br />
+	<a href="<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo $TEXT['BACK']; ?></a>
+	<?php
 } else {
-	// Display confirmation
+	// Display form
+	?>
+	<br />
+	<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+	<table cellpadding="4" cellspacing="0" border="0">
+	<tr>
+		<td colspan="2"><?php echo $MESSAGE['MOD_RELOAD']['PLEASE_SELECT']; ?>:</td>
+	</tr>
+	<tr>
+		<td width="20"><input type="checkbox" name="reload_modules" id="reload_modules" value="true" /></td>
+		<td><label for="reload_modules"><?php echo $MENU['MODULES']; ?></label></td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="reload_templates" id="reload_templates" value="true" /></td>
+		<td><label for="reload_templates"><?php echo $MENU['TEMPLATES']; ?></label></td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="reload_languages" id="reload_languages" value="true" /></td>
+		<td><label for="reload_languages"><?php echo $MENU['LANGUAGES']; ?></label></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+			<input type="submit" name="submit" value="<?php echo $TEXT['RELOAD']; ?>" onClick="javascript: if(!confirm('<?php echo $TEXT['ARE_YOU_SURE']; ?>')) { return false; }" />
+		</td>
+	</tr>
+	</table>
+	</form>
+	<?php
 }
 
 ?>
