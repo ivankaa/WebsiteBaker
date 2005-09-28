@@ -26,4 +26,9 @@
 // Direct access prevention
 defined('WB_PATH') OR die(header('Location: ../index.php'));
 
+// Show form
 ?>
+<br />
+<form name="prompt" method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<input type="submit" name="backup" value="<?php echo $TEXT['BACKUP_DATABASE']; ?>" onClick="javascript: if(!confirm('<?php echo $MESSAGE['GENERIC']['PLEASE_BE_PATIENT']; ?>')) { return false; }" />
+</form>
