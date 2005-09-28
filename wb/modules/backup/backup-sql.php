@@ -46,32 +46,33 @@ $output = "".
 $result = $database->query("SHOW TABLE STATUS");
 
 // Loop through tables
-while($row = $result->fetchRow())   {
-	$query = $database->query("SHOW CREATE TABLE ".$row['Name']);
-	$sql_backup = "\r\n# Create table ".$row['Name']."\r\n\r\n";
+while($row = $result->fetchRow()) { 
+	//show sql query to rebuild the query
+	$sql = 'SHOW CREATE TABLE '.$row['Name'].''; 
+	$query2 = $database->query($sql); 
 	// Start creating sql-backup
-	$out = $query->fetchRow();
-	$sql_backup .= $out['Create Table'].";\r\n\r\n";
-	$sql_backup .= "# Dump data for ".$row['Name']."\r\n\r\n";
-	$sql = "SELECT * FROM ".$row['Name'];
-	// SQL code to select everything
-	$out = $database->query($sql);
+	$sql_backup ="\r\n# Create table ".$row['Name']."\r\n\r\n";
+	$out = $query2->fetchRow();
+	$sql_backup.=$out['Create Table'].";\r\n\r\n"; 
+	$sql_backup.="# Dump data for ".$row['Name']."\r\n\r\n";
+	// Select everything
+	$out = $database->query('SELECT * FROM '.$row['Name']); 
 	$sql_code = '';
-	while($code = $out->fetchRow())  {
-		// Loop trough all collumns
-		$sql_code .= "INSERT INTO ".$row['Name']." SET ";
+	// Loop through all collumns
+	while($code = $out->fetchRow()) { 
+		$sql_code .= "INSERT INTO ".$row['Name']." SET "; 
 		$numeral = 0;
-		foreach($code as $insert => $value)   {
+		foreach($code as $insert => $value) {
+			// Loosing the numerals in array -> mysql_fetch_array($result, MYSQL_ASSOC) WB hasn't? 
 			if($numeral==1) {
-					// Loosing the numerals in array -> mysql_fetch_array($result, MYSQL_ASSOC) WB hasn't?
-				$sql_code.= $insert." = '".addslashes($value)."',";
+				$sql_code.=$insert ."='".addslashes($value)."',";
 			}
 			$numeral = 1 - $numeral;
 		}
 		$sql_code = substr($sql_code, 0, -1);
 		$sql_code.= ";\r\n";
-		$output .= $sql_backup.$sql_code;
 	}
+	$output .= $sql_backup.$sql_code; 
 }
 
 // Output file
