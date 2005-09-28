@@ -587,7 +587,7 @@ $search_no_results = add_slashes('<br />No results found');
 			while(false !== ($file = readdir($handle))) {
 				if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'admin.php' AND $file != 'index.php') {
 					// Get addon type
-					if($type == 'module') {
+					if($type == 'modules') {
 						load_module($dir.'/'.$file, true);
 					} elseif($type == 'templates') {
 						load_template($dir.'/'.$file);
