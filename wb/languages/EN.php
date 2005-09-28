@@ -512,6 +512,7 @@ $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Cannot Uninstall: the selected
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Please check back soon...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.';
+$MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Error opening file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'You must enter details for the following fields';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sorry, this form has been submitted too many times so far this hour. Please retry in the next hour.';
