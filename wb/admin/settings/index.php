@@ -365,10 +365,13 @@ if(FRONTEND_LOGIN) {
 // Work-out if page trash feature is disabled, in-line, or separate
 if(PAGE_TRASH == 'disabled') {
 	$template->set_var('PAGE_TRASH_DISABLED', ' checked');
+	$template->set_var('DISPLAY_PAGE_TRASH_SEPARATE', ' display: none;');
 } elseif(PAGE_TRASH == 'inline') {
 	$template->set_var('PAGE_TRASH_INLINE', ' checked');
+	$template->set_var('DISPLAY_PAGE_TRASH_SEPARATE', ' display: none;');
 } elseif(PAGE_TRASH == 'separate') {
 	$template->set_var('PAGE_TRASH_SEPARATE', ' checked');
+	$template->set_var('DISPLAY_PAGE_TRASH_SEPARATE', ' display: inline;');
 }
 
 // Work-out if media home folde feature is enabled

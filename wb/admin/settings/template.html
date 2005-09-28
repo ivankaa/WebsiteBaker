@@ -106,8 +106,10 @@ function change_os(type) {
 		<label for="page_trash_disabled">{TEXT_DISABLED}</label>
 		<input type="radio" name="page_trash" id="page_trash_inline" style="width: 14px; height: 14px;" value="inline"{PAGE_TRASH_INLINE} />
 		<label for="page_trash_inline">{TEXT_INLINE}</label>
-		<input type="radio" name="page_trash" id="page_trash_separate" style="width: 14px; height: 14px;" value="separate"{PAGE_TRASH_SEPARATE} />
-		<label for="page_trash_separate">{TEXT_SEPARATE}</label>
+		<div style="margin: 0; padding: 0;{DISPLAY_PAGE_TRASH_SEPARATE}">
+			<input type="radio" name="page_trash" id="page_trash_separate" style="width: 14px; height: 14px;" value="separate"{PAGE_TRASH_SEPARATE} />
+			<label for="page_trash_separate">{TEXT_SEPARATE}</label>
+		</div>
 	</td>
 </tr>
 <input type="hidden" name="page_languages" value="{PAGE_LANGUAGES}" />
