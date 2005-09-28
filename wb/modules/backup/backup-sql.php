@@ -34,10 +34,11 @@ require(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Settings', 'settings_advanced', false);
 
 // Begin output var
-$output = "\n".
+$output = "".
 "#\n".
-"# Website Baker ".WB_VERSION." Backup (SQL)\n".
-"# ".gmdate(TIME_FORMAT, mktime()+TIMEZONE)." ".gmdate(TIME_FORMAT, mktime()+TIMEZONE)."\n".
+"# Website Baker ".WB_VERSION." Database Backup\n".
+"# ".WB_URL."\n".
+"# ".gmdate(DATE_FORMAT, mktime()+TIMEZONE)." ".gmdate(TIME_FORMAT, mktime()+TIMEZONE)."\n".
 "#".
 "\n";
 
@@ -51,7 +52,7 @@ while($row = $result->fetchRow())   {
 	// Start creating sql-backup
 	$out = $query->fetchRow();
 	$sql_backup .= $out['Create Table'].";\r\n\r\n";
-	$sql_backup .= "# Dump data\r\n\r\n";
+	$sql_backup .= "# Dump data for ".$row['Name']."\r\n\r\n";
 	$sql = "SELECT * FROM ".$row['Name'];
 	// SQL code to select everything
 	$out = $database->query($sql);
