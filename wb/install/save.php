@@ -342,9 +342,9 @@ if($install_tables == true) {
 	// Search table
 	$search = "DROP TABLE IF EXISTS `".TABLE_PREFIX."search`";
 	$database->query($search);
-	// Modules table
-	$modules = "DROP TABLE IF EXISTS `".TABLE_PREFIX."modules`";
-	$database->query($modules);
+	// Addons table
+	$addons = "DROP TABLE IF EXISTS `".TABLE_PREFIX."addons`";
+	$database->query($addons);
 				
 	// Try installing tables
 	
@@ -477,26 +477,18 @@ if($install_tables == true) {
 	
 	// Addons table
 	$addons = 'CREATE TABLE `'.TABLE_PREFIX.'addons` ( '
-	.'`addon_id` INT NOT NULL auto_increment ,'
-	.'`type` VARCHAR( 255 ) NOT NULL ,'
-	.'`directory` VARCHAR( 255 ) NOT NULL ,'
-	.'`name` VARCHAR( 255 ) NOT NULL ,'
-	.'`description` TEXT NOT NULL ,'
-	.'`function` VARCHAR( 255 ) NOT NULL ,'
-	.'`version` VARCHAR( 255 ) NOT NULL ,'
-	.'`platform` VARCHAR( 255 ) NOT NULL ,'
-	.'`author` VARCHAR( 255 ) NOT NULL ,'
-	.'`license` VARCHAR( 255 ) NOT NULL ,'
-	.' PRIMARY KEY ( `addon_id` ) ); ';
+			.'`addon_id` INT NOT NULL auto_increment ,'
+			.'`type` VARCHAR( 255 ) NOT NULL ,'
+			.'`directory` VARCHAR( 255 ) NOT NULL ,'
+			.'`name` VARCHAR( 255 ) NOT NULL ,'
+			.'`description` TEXT NOT NULL ,'
+			.'`function` VARCHAR( 255 ) NOT NULL ,'
+			.'`version` VARCHAR( 255 ) NOT NULL ,'
+			.'`platform` VARCHAR( 255 ) NOT NULL ,'
+			.'`author` VARCHAR( 255 ) NOT NULL ,'
+			.'`license` VARCHAR( 255 ) NOT NULL ,'
+			.' PRIMARY KEY ( `addon_id` ) ); ';
 	$database->query($addons);
-
-	$search = 'CREATE TABLE `'.TABLE_PREFIX.'modules` ( '
-	        . ' `name` VARCHAR( 255 ) NOT NULL ,'
-	        . ' `type` VARCHAR( 255 ) NOT NULL ,'
-	        . ' PRIMARY KEY ( `name` ) )'
-	        . ' ';
-	$database->query($search);
-
 
 	// Insert default data
 	
