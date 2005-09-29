@@ -120,31 +120,23 @@ if($admin->get_permission('groups_add') != true) {
 
 // Insert values into module list
 $template->set_block('main_block', 'module_list_block', 'module_list');
-if($handle = opendir(WB_PATH.'/modules/')) {
-	while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != '.svn' AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
-			// Include the modules info file
-			require(WB_PATH.'/modules/'.$file.'/info.php');
-			if ($module_type=='page') {
-				$template->set_var('VALUE', $file);
-				$template->set_var('NAME', $module_name);
-				$template->parse('module_list', 'module_list_block', true);
-			}
-		}
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page'");
+if($result->numRows() > 0) {
+	while($addon = $result->fetchRow()) {
+		$template->set_var('VALUE', $addon['directory']);
+		$template->set_var('NAME', $addon['name']);
+		$template->parse('module_list', 'module_list_block', true);
 	}
 }
 
 // Insert values into template list
 $template->set_block('main_block', 'template_list_block', 'template_list');
-if($handle = opendir(WB_PATH.'/templates/')) {
-	while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != '.svn' AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
-			// Include the modules info file
-			require(WB_PATH.'/templates/'.$file.'/info.php');
-			$template->set_var('VALUE', $file);
-			$template->set_var('NAME', $template_name);
-			$template->parse('template_list', 'template_list_block', true);
-		}
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+if($result->numRows() > 0) {
+	while($addon = $result->fetchRow()) {
+		$template->set_var('VALUE', $addon['directory']);
+		$template->set_var('NAME', $addon['name']);
+		$template->parse('template_list', 'template_list_block', true);
 	}
 }
 

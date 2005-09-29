@@ -85,44 +85,36 @@ if($_POST['action'] == 'modify') {
 	
 	// Insert values into module list
 	$template->set_block('main_block', 'module_list_block', 'module_list');
-	if ($handle = opendir(WB_PATH.'/modules/')) {
-		while (false !== ($file = readdir($handle))) {
-			if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
-				// Include the modules info file
-				require(WB_PATH.'/modules/'.$file.'/info.php');
-				if ($module_type=='page') {
-					$template->set_var('VALUE', $file);
-					$template->set_var('NAME', $module_name);
-					if(!is_numeric(array_search($file, $module_permissions))) {
-						$template->set_var('CHECKED', 'checked');
-					} else {
-						$template->set_var('CHECKED', '');
-					}
-					$template->parse('module_list', 'module_list_block', true);
-				}
+	$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page'");
+	if($result->numRows() > 0) {
+		while($addon = $result->fetchRow()) {
+			$template->set_var('VALUE', $addon['directory']);
+			$template->set_var('NAME', $addon['name']);
+			if(!is_numeric(array_search($addon['directory'], $module_permissions))) {
+				$template->set_var('CHECKED', 'checked');
+			} else {
+				$template->set_var('CHECKED', '');
 			}
+			$template->parse('module_list', 'module_list_block', true);
 		}
 	}
 	
 	// Insert values into template list
 	$template->set_block('main_block', 'template_list_block', 'template_list');
-	if ($handle = opendir(WB_PATH.'/templates/')) {
-		while (false !== ($file = readdir($handle))) {
-			if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
-				// Include the modules info file
-				require(WB_PATH.'/templates/'.$file.'/info.php');
-				$template->set_var('VALUE', $file);
-				$template->set_var('NAME', $template_name);
-				if(!is_numeric(array_search($file, $template_permissions))) {
-					$template->set_var('CHECKED', 'checked');
-				} else {
-					$template->set_var('CHECKED', '');
-				}
-				$template->parse('template_list', 'template_list_block', true);
+	$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+	if($result->numRows() > 0) {
+		while($addon = $result->fetchRow()) {
+			$template->set_var('VALUE', $addon['directory']);
+			$template->set_var('NAME', $addon['name']);
+			if(!is_numeric(array_search($addon['directory'], $template_permissions))) {
+				$template->set_var('CHECKED', 'checked');
+			} else {
+				$template->set_var('CHECKED', '');
 			}
+			$template->parse('template_list', 'template_list_block', true);
 		}
 	}
-	
+		
 	// Insert language text and messages
 	$template->set_var(array(
 									'TEXT_RESET' => $TEXT['RESET'],
