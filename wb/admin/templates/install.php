@@ -111,7 +111,7 @@ if(file_exists($temp_file)) { unlink($temp_file); }
 
 // Chmod all the uploaded files
 $dir = dir($template_dir);
-while (false !== $entry = $dir->read()) {
+while(false !== $entry = $dir->read()) {
 	// Skip pointers
 	if(substr($entry, 0, 1) != '.' AND $entry != '.svn' AND !is_dir($template_dir.'/'.$entry)) {
 		// Chmod file
@@ -120,7 +120,7 @@ while (false !== $entry = $dir->read()) {
 }
 
 // Load template info into DB
-load_module(WB_PATH.'/templates/'.$template_directory);
+load_module($template_dir);
 
 // Print success message
 $admin->print_success($success_message);
