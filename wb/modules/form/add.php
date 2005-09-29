@@ -53,6 +53,6 @@ $email_subject = 'Results from form on website...';
 $success_message = 'Thank-you.';
 $max_submissions = 50;
 $stored_submissions = 100;
-$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_settings (page_id,section_id,header,field_loop,footer,email_to,email_from,email_subject,success_message,max_submissions,stored_submissions,use_captcha) VALUES ('$page_id','$section_id','$header','$field_loop','$footer','$email_to','$email_from','$email_subject','$success_message','$max_submissions','$stored_submissions','$use_captcha')");
+$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_settings (page_id,section_id,header,field_loop,footer,email_to,email_from,email_subject,success_message,max_submissions,stored_submissions) VALUES ('$page_id','$section_id','$header','$field_loop','$footer','$email_to','$email_from','$email_subject','$success_message','$max_submissions','$stored_submissions')");
 
 ?>
