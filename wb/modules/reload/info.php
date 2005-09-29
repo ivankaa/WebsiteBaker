@@ -30,6 +30,6 @@ $module_version = '2.6';
 $module_platform = '2.6.x';
 $module_author = 'Ryan Djurovich';
 $module_license = 'GNU General Public License';
-$module_description = 'This module allows you to reload add-on information stored in the addons table, and optionally completely re-install modules.';
+$module_description = 'This module allows you to reload add-on information stored in the addons table.';
 
 ?>
