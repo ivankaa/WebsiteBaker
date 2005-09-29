@@ -11,6 +11,14 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.0 -------------------------------------
+29-Sep-2005 Ryan Djurovich
+!	Cleaned up form buttons in Settings
+!	Moved some options into Advanced Settings
+#	Semi-disabled "separate" page trash option
++	Created a backup module/tool for backing-up the database
+	(thanks to John (pcwacht) for the original code)
++	Created new "blank template", which can be used in case where you don't
+	want anything wrapping page-content.
 19-Sep-2005 Ryan Djurovich
 +	Added _license field for all add-ons to specify a license
 !	Renamed _designed_for variables (for all addons) to _platform
