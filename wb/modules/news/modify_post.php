@@ -59,7 +59,7 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 <table cellpadding="4" cellspacing="0" border="0" width="100%">
 <tr>
 	<td width="80"><?php echo $TEXT['TITLE']; ?>:</td>
-	<td>
+	<td width="100%">
 		<input type="text" name="title" value="<?php echo (htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
 	</td>
 </tr>
