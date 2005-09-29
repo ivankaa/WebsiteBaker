@@ -219,52 +219,38 @@ if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('FILE', $addon['directory']);
 		$template->set_var('NAME', $addon['name']);
-		if($file == DEFAULT_TEMPLATE ? $selected = ' selected' : $selected = '');
+		if(($addon['directory'] == DEFAULT_TEMPLATE) ? $selected = ' selected' : $selected = '');
 		$template->set_var('SELECTED', $selected);
 		$template->parse('template_list', 'template_list_block', true);
 	}
 }
 
-// Insert templates
+// Insert WYSIWYG modules
 $template->set_block('main_block', 'editor_list_block', 'editor_list');
-$file='none';
-$module_name='None';
-$template->set_var('FILE', $file);
-$template->set_var('NAME', $module_name);
-if((!defined('WYSIWYG_EDITOR') OR $file == WYSIWYG_EDITOR) ? $selected = ' selected' : $selected = '');
-$template->set_var('SELECTED', $selected);
-$template->parse('editor_list', 'editor_list_block', true);
-if($handle = opendir(WB_PATH.'/modules/')) {
-	while (false !== ($file = readdir($handle))) {
-		if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/modules/$file") AND file_exists(WB_PATH."/modules/$file/info.php")) {
-			include(WB_PATH."/modules/$file/info.php");
-			if ($module_type == 'WYSIWYG') {
-				$template->set_var('FILE', $file);
-				$template->set_var('NAME', $module_name);
-				if((defined('WYSIWYG_EDITOR') AND $file == WYSIWYG_EDITOR) ? $selected = ' selected' : $selected = '');
-				$template->set_var('SELECTED', $selected);
-				$template->parse('editor_list', 'editor_list_block', true);
-			}
-		}
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'wysiwyg'");
+if($result->numRows() > 0) {
+	while($addon = $result->fetchRow()) {
+		$template->set_var('FILE', $addon['directory']);
+		$template->set_var('NAME', $addon['name']);
+		if((defined('WYSIWYG_EDITOR') AND $addon['directory'] == WYSIWYG_EDITOR) ? $selected = ' selected' : $selected = '');
+		$template->set_var('SELECTED', $selected);
+		$template->parse('editor_list', 'editor_list_block', true);
 	}
 }
-
 
 // Insert templates for search settings
 $template->set_block('main_block', 'search_template_list_block', 'search_template_list');
 if($search_template == '') { $selected = ' selected'; } else { $selected = ''; }
 $template->set_var(array('FILE' => '', 'NAME' => $TEXT['SYSTEM_DEFAULT'], 'SELECTED' => $selected));
 $template->parse('search_template_list', 'search_template_list_block', true);
-if($handle = opendir(WB_PATH.'/templates/')) {
-	while (false !== ($file = readdir($handle))) {
-		if($file != "." AND $file != ".." AND $file != ".svn" AND is_dir(WB_PATH."/templates/$file") AND file_exists(WB_PATH."/templates/$file/info.php")) {
-			include(WB_PATH."/templates/$file/info.php");
-			$template->set_var('FILE', $file);
-			$template->set_var('NAME', $template_name);
-			if($file == $search_template ? $selected = ' selected' : $selected = '');
-			$template->set_var('SELECTED', $selected);
-			$template->parse('search_template_list', 'search_template_list_block', true);
-		}
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+if($result->numRows() > 0) {
+	while($addon = $result->fetchRow()) {
+		$template->set_var('FILE', $addon['directory']);
+		$template->set_var('NAME', $addon['name']);
+		if($addon['directory'] == $search_template ? $selected = ' selected' : $selected = '');
+		$template->set_var('SELECTED', $selected);
+		$template->parse('search_template_list', 'search_template_list_block', true);
 	}
 }
 
