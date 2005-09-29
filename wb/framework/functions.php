@@ -691,6 +691,7 @@ function load_module($directory, $install = false) {
 			if(!isset($module_license)) { $module_license = 'GNU General Public License'; }
 			if(!isset($module_platform) AND isset($module_designed_for)) { $module_platform = $module_designed_for; }
 			if(!isset($module_function) AND isset($module_type)) { $module_function = $module_type; }
+			$module_function = strtolower($module_function);
 			// Check that it doesn't already exist
 			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$module_directory."' LIMIT 0,1");
 			if($result->numRows() == 0) {
