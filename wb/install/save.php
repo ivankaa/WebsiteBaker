@@ -591,7 +591,7 @@ $search_no_results = add_slashes('<br />No results found');
 						load_module($dir.'/'.$file, true);
 					} elseif($type == 'templates') {
 						load_template($dir.'/'.$file);
-					} elseif($type == 'language') {
+					} elseif($type == 'languages') {
 						load_language($dir.'/'.$file);
 					}
 				}
