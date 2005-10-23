@@ -66,7 +66,7 @@ if(!rm_full_dir(WB_PATH.'/modules/'.$file)) {
 	$admin->print_error($MESSAGE['MODULES']['CANNOT_UNINSTALL']);
 } else {
 	// Remove entry from DB
-	$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE directory = '".$file."' AND type = 'module' LIMIT 0,1");
+	$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE directory = '".$file."' AND type = 'module'");
 }
 
 // Print success message
