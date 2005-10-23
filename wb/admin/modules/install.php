@@ -114,9 +114,6 @@ while (false !== $entry = $dir->read()) {
 	}
 }
 
-// Load module info into DB
-load_module(WB_PATH.'/modules/'.$module_directory, false);
-
 // Run the modules install // upgrade script if there is one
 if(file_exists(WB_PATH.'/modules/'.$module_directory.'/'.$action.'.php')) {
 	require(WB_PATH.'/modules/'.$module_directory.'/'.$action.'.php');
@@ -124,9 +121,8 @@ if(file_exists(WB_PATH.'/modules/'.$module_directory.'/'.$action.'.php')) {
 
 // Print success message
 if ($action=="install") {
-	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."addons` (directory,name,description,type,function,version,platform,author,license) VALUES "
-	." ('$module_directory', '$module_name', '$module_description', 'module', '$module_function', '$module_version', '$module_platform', '$module_author', '$module_license');";
-	$database->query($settings_rows);
+	// Load module info into DB
+	load_module(WB_PATH.'/modules/'.$module_directory, false);
 	$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
 } else if ($action=="upgrade") {
 	$admin->print_success($MESSAGE['GENERIC']['UPGRADED']);
