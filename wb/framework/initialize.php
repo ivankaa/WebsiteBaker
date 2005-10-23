@@ -47,9 +47,9 @@ if (file_exists(WB_PATH.'/framework/class.database.php'))
 		define($setting_name,$setting_value);
 	}
 	$string_file_mode = STRING_FILE_MODE;
-	define('OCTAL_FILE_MODE',(int) $string_file_mode);
+	define('OCTAL_FILE_MODE',(int) octdec($string_file_mode));
 	$string_dir_mode = STRING_DIR_MODE;
-	define('OCTAL_DIR_MODE',(int) $string_dir_mode);
+	define('OCTAL_DIR_MODE',(int) octdec($string_dir_mode));
 	
 	// Start a session
 	if(!defined('SESSION_STARTED')) {
