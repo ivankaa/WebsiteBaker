@@ -63,7 +63,7 @@ if(!rm_full_dir(WB_PATH.'/templates/'.$file)) {
 	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL']);
 } else {
 	// Remove entry from DB
-	$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE directory = '".$file."' AND type = 'template' LIMIT 0,1");
+	$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE directory = '".$file."' AND type = 'template'");
 }
 
 // Update pages that use this template with default template

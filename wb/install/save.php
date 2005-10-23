@@ -581,7 +581,7 @@ $search_no_results = add_slashes('<br />No results found');
 	// Load addons into DB
 	$dirs['modules'] = WB_PATH.'/modules/';
 	$dirs['templates'] = WB_PATH.'/templates/';
-	$dirs['language'] = WB_PATH.'/languages/';
+	$dirs['languages'] = WB_PATH.'/languages/';
 	foreach($dirs AS $type => $dir) {
 		if($handle = opendir($dir)) {
 			while(false !== ($file = readdir($handle))) {

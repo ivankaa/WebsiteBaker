@@ -120,7 +120,7 @@ while(false !== $entry = $dir->read()) {
 }
 
 // Load template info into DB
-load_module($template_dir);
+load_template($template_dir);
 
 // Print success message
 $admin->print_success($success_message);

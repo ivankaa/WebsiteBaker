@@ -56,7 +56,7 @@ if(!unlink(WB_PATH.'/languages/'.$_POST['code'].'.php')) {
 	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL']);
 } else {
 	// Remove entry from DB
-	$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE directory = '".$_POST['code']."' AND type = 'language' LIMIT 0,1");
+	$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE directory = '".$_POST['code']."' AND type = 'language'");
 }
 
 // Print success message
