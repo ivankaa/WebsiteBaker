@@ -1,6 +1,6 @@
 <?php
 
-// $Id: time_formats.php,v 1.1.1.1 2005/01/30 10:30:20 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -43,7 +43,7 @@ $TIME_FORMATS = array();
 if(isset($user_time) AND $user_time == true) {
 	$mktime = mktime()+TIMEZONE;
 } else {
-	$mktime = mktime();
+	$mktime = mktime()+DEFAULT_TIMEZONE;
 }
 
 // Add values to list
