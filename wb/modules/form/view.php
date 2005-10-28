@@ -251,7 +251,7 @@ echo $footer;
 	
 	// Captcha
 	if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
-		if(isset($_POST['captcha'])) {
+		if(isset($_POST['captcha']) AND $_POST['CAPTCHA']!=''){
 			// User-supplied captcha
 			$user_captcha = $_POST['captcha'];
 			// Computer generated
@@ -260,10 +260,12 @@ echo $footer;
 			}
 			// Check for a mismatch
 			if($user_captcha != $system_captcha) {
-				$captcha_error = $MESSAGE['INCORRECT_CAPTCHA'];
+				$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 			} else {
 				unset($_SESSION['captcha']);
 			}
+		} else {
+			$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 		}
 	}
 	
