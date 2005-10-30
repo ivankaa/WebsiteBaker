@@ -171,13 +171,24 @@ if (!function_exists('page_title')) {
 // Function for page description
 if (!function_exists('page_description')) {
 	function page_description() {
-		echo WEBSITE_DESCRIPTION;
+		global $wb;
+		if ($wb->page_description!='') {
+			echo $wb->page_description;
+		} else {
+			echo PAGE_DESCRIPTION;
+		}
 	}
 }
+
 // Function for page keywords
 if (!function_exists('page_keywords')) {
 	function page_keywords() {
-		echo WEBSITE_KEYWORDS;
+		global $wb;
+		if ($wb->page_keywords!='') {
+			echo $wb->page_keywords;
+		} else {
+			echo WEBSITE_KEYWORDS;
+		}
 	}
 }
 // Function for page header
