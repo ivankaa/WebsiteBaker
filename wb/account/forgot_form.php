@@ -73,7 +73,7 @@ Password: '.$new_pass.'
 Your password has been reset to the one above.
 This means that your old password will no longer work.
 
-If you have recieved this message in error, please delete it immediatly.';
+If you have received this message in error, please delete it immediatly.';
 			// Try sending the email
 			if(mail($mail_to, $mail_subject, $mail_message)) {
 				$message = $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'];
