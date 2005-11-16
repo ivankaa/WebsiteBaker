@@ -297,7 +297,7 @@ class frontend extends wb {
 	   	$wb->menu_header = '<ul>';
 	   }
 	   if (!isset($wb->menu_footer)) {
-	   	$wb->menu_footer = '<ul>';
+	   	$wb->menu_footer = '</ul>';
 	   }
 	   if (!isset($wb->menu_default_class)) {
 	   	$wb->menu_default_class = ' class="menu_default"';
