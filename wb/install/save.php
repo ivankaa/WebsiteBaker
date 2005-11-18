@@ -487,7 +487,7 @@ if($install_tables == true) {
 			.'`platform` VARCHAR( 255 ) NOT NULL ,'
 			.'`author` VARCHAR( 255 ) NOT NULL ,'
 			.'`license` VARCHAR( 255 ) NOT NULL ,'
-			.' PRIMARY KEY ( `addon_id` ) ); ';
+			.' PRIMARY KEY ( `addon_id` ) )';
 	$database->query($addons);
 
 	// Insert default data
