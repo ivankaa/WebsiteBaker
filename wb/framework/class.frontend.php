@@ -305,41 +305,39 @@ class frontend extends wb {
 	   if (!isset($wb->menu_current_class)) {
 	   	$wb->menu_current_class = ' class="menu_current"';
 	   }
-       if (!isset($wb->menu_parent)) {
-     	$wb->menu_parent = 0;
+	   if (!isset($wb->menu_parent)) {
+	   	$wb->menu_parent = 0;
 	   }
 	   $wb->show_menu();
-	   if ($start_level>0) {
-	       $key_array=array_keys($wb->page_trail);
-	       $real_start=$key_array[$start_level-1];
-	       if (isset($real_start))
-	       {
-	       	$wb->menu_parent=$real_start;
-	        $wb->show_menu();
-	       }
-	       return;
-	   }
-
 	}
 	
 	function show_menu() {
 	   global $database;
-	   global $wb;
-	   if ($wb->menu_recurse==0)
+	   if ($this->menu_start_level>0) {
+	       $key_array=array_keys($this->page_trail);
+	       $real_start=$key_array[$this->menu_start_level-1];
+	       if (isset($real_start)) {
+	       	$this->menu_parent=$real_start;
+		$this->menu_start_level=0;
+	       } else {
+	       	 return;
+	       }
+	   }
+	   if ($this->menu_recurse==0)
 	       return;
 	   // Check if we should add menu number check to query
-	   if($menu_parent == 0) {
-	       $menu_number = "menu = '$wb->menu_number'";
+	   if($this->menu_parent == 0) {
+	       $menu_number = "menu = '$this->menu_number'";
 	   } else {
 	      $menu_number = '1';
 	   }
 	   // Query pages
 	   $query_menu = $database->query("SELECT page_id,menu_title,page_title,link,target,level,visibility FROM ".
-	TABLE_PREFIX."pages WHERE parent = '$wb->menu_parent' AND $menu_number AND $wb->extra_where_sql ORDER BY position ASC");
+	TABLE_PREFIX."pages WHERE parent = '$this->menu_parent' AND $menu_number AND $this->extra_where_sql ORDER BY position ASC");
 	   // Check if there are any pages to show
 	   if($query_menu->numRows() > 0) {
 	   	  // Print menu header
-	   	  echo "\n".$wb->menu_header;
+	   	  echo "\n".$this->menu_header;
 	      // Loop through pages
 	      while($page = $query_menu->fetchRow()) {
 	      	 // Check if this page should be shown
@@ -347,30 +345,30 @@ class frontend extends wb {
 	         $vars = array('[class]','[a]', '[/a]', '[menu_title]', '[page_title]');
 	         // Work-out class
 	         if($page['page_id'] == PAGE_ID) {
-	            $class = $wb->menu_current_class;
+	            $class = $this->menu_current_class;
 	         } else {
-	            $class = $wb->menu_default_class;
+	            $class = $this->menu_default_class;
 	         }
 	         // Check if link is same as first page link, and if so change to WB URL
-	         if($page['link'] == $wb->default_link AND !INTRO_PAGE) {
+	         if($page['link'] == $this->default_link AND !INTRO_PAGE) {
 	            $link = WB_URL;
 	         } else {
-	            $link = $wb->page_link($page['link']);
+	            $link = $this->page_link($page['link']);
 	         }
 	         // Create values
 	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', ($page['menu_title']), ($page['page_title']));
 	         // Replace vars with value and print
-	         echo "\n".str_replace($vars, $values, $wb->menu_item_template);
+	         echo "\n".str_replace($vars, $values, $this->menu_item_template);
 	         // Generate sub-menu
-	         if($wb->menu_collapse==false OR ($wb->menu_collapse==true AND isset($wb->page_trail[$page['page_id']]))) {
-	            $wb->menu_recurse--;
-	            $wb->menu_parent=$page['page_id'];
-	            $wb->show_menu();
+	         if($this->menu_collapse==false OR ($this->menu_collapse==true AND isset($this->page_trail[$page['page_id']]))) {
+	            $this->menu_recurse--;
+	            $this->menu_parent=$page['page_id'];
+	            $this->show_menu();
 	         }
-	         echo "\n".$wb->menu_item_footer;
+	         echo "\n".$this->menu_item_footer;
 	      }
 	      // Print menu footer
-	      echo "\n".$wb->menu_footer;
+	      echo "\n".$this->menu_footer;
 	   }
 	}
 

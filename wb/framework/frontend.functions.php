@@ -67,10 +67,11 @@ if (!function_exists('page_link')) {
 
 // Old menu call invokes new menu function
 if (!function_exists('page_menu')) {
-	function page_menu($parent = 0, $menu_number = 1, $item_template = '<li><span[class]>[a][menu_title][/a]</span>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $recurse = LEVEL) {
+	function page_menu($parent = 0, $menu_number = 1, $item_template = '<li[class]>[a][menu_title][/a]</li>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $recurse = LEVEL) {
 		global $wb;
 		$wb->menu_number=$menu_number;
 		$wb->menu_item_template=$item_template;
+		$wb->menu_item_footer='';
 		$wb->menu_parent = $parent;
 		$wb->menu_header = $menu_header; 
 		$wb->menu_footer = $menu_footer;
@@ -78,6 +79,49 @@ if (!function_exists('page_menu')) {
 		$wb->menu_current_class = $current_class;
 		$wb->menu_recurse = $recurse+2; 	
 		$wb->menu();
+		unset($wb->menu_parent);
+		unset($wb->menu_number);
+		unset($wb->menu_item_template);
+		unset($wb->menu_item_footer);
+		unset($wb->menu_header);
+		unset($wb->menu_footer);
+		unset($wb->menu_default_class);
+		unset($wb->menu_current_class);
+		unset($wb->menu_start_level);
+		unset($wb->menu_collapse);
+		unset($wb->menu_recurse);
+	}
+}
+
+if (!function_exists('show_menu')) {
+	function show_menu($menu_number = NULL, $start_level=NULL, $recurse = NULL, $collapse = NULL, $item_template = NULL, $item_footer = NULL, $menu_header = NULL, $menu_footer = NULL, $default_class = NULL, $current_class = NULL, $parent = NULL) {
+		global $wb;
+		if (isset($menu_number))
+			$wb->menu_number=$menu_number;
+		if (isset($start_level))
+			$wb->menu_start_level=$start_level;
+		if (isset($recurse))
+			$wb->menu_recurse=$recurse;
+		if (isset($collapse))
+			$wb->menu_collapse=$collapse;
+		if (isset($item_template))
+			$wb->menu_item_template=$item_template;
+		if (isset($item_footer))
+			$wb->menu_item_footer=$item_footer;
+		if (isset($menu_header))
+			$wb->menu_header=$menu_header;
+		if (isset($menu_footer))
+			$wb->menu_footer=$menu_footer;
+		if (isset($default_class))
+			$wb->menu_default_class=$default_class;
+		if (isset($current_class))
+			$wb->menu_current_class=$current_class;
+		if (isset($parent))
+			$wb->menu_parent=$parent;
+		$wb->menu();
+		unset($wb->menu_recurse);
+		unset($wb->menu_parent);
+		unset($wb->menu_start_level);
 	}
 }
 
