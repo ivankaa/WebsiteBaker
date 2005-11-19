@@ -36,8 +36,6 @@ if($advanced == '') {
 	$admin = new admin('Settings', 'settings_advanced');
 }
 
-//print_r($_POST);
-
 // Work-out file mode
 if($advanced == '') {
 	// Check if should be set to 777 or left alone
@@ -124,7 +122,7 @@ $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
-	if ($value!=null) {
+	if ($value!=null || $setting_name=='default_timezone' || $setting_name=='string_dir_mode' || $setting_name=='string_file_mode') {
 		$value = $admin->add_slashes($value);
 		switch ($setting_name) {
 			case 'default_timezone':
@@ -137,7 +135,6 @@ while($setting = $results->fetchRow()) {
 				$value=$file_mode;
 				break;
 		}
-		//echo $setting_name.':'.$value."<br />";
 		$database->query("UPDATE ".TABLE_PREFIX."settings SET value = '$value' WHERE name = '$setting_name'");
 	}
 }
