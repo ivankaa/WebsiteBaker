@@ -27,13 +27,15 @@
 if(!isset($_POST['content'])) {
 	header("Location: intro.php");
 } else {
-	$content = htmlspecialchars($_POST['content']);
+	$content = $_POST['content'];
 }
 
 // Create new admin object
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_intro');
+
+$content=htmlspecialchars($admin->strip_slashes($content));
 
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
