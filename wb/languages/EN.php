@@ -386,6 +386,7 @@ $TEXT['BACKUP_DATABASE'] = 'Backup Database';
 $TEXT['RESTORE_DATABASE'] = 'Restore Database';
 $TEXT['BACKUP_MEDIA'] = 'Backup Media';
 $TEXT['RESTORE_MEDIA'] = 'Restore Media';
+$TEXT['ADMINISTRATION_TOOL'] = 'Administration tool';
 
 
 // Success/error messages

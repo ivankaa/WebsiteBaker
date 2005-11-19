@@ -1,6 +1,6 @@
 <?php
 
-// $Id: details.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -48,27 +48,40 @@ $template->set_file('page', 'details.html');
 $template->set_block('page', 'main_block', 'main');
 
 // Insert values
-require(WB_PATH.'/modules/'.$file.'/info.php');
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND directory = '$file'");
+if($result->numRows() > 0) {
+	$module = $result->fetchRow();
+}
+
 $template->set_var(array(
-								'NAME' => $module_name,
-								'AUTHOR' => $module_author,
-								'DESCRIPTION' => $module_description,
-								'VERSION' => $module_version,
-								'DESIGNED_FOR' => $module_designed_for
+								'NAME' => $module['name'],
+								'AUTHOR' => $module['author'],
+								'DESCRIPTION' => $module['description'],
+								'VERSION' => $module['version'],
+								'DESIGNED_FOR' => $module['platform']
 								)
 						);
-if(!isset($module_type)) {
-	$type_name = $TEXT['UNKNOWN'];
-} elseif($module_type == 'page') {
-	$type_name = $TEXT['PAGE'];
-} elseif($module_type == 'admin') {
-	$type_name = $TEXT['ADMIN'];
-} elseif($module_type == 'administration') {
-	$type_name = $TEXT['ADMINISTRATION'];
-} elseif($module_type == 'block') {
-	$type_name = $TEXT['BLOCK'];
-} else {
-	$type_name = $TEXT['UNKNOWN'];
+						
+switch ($module['function']) {
+	case NULL:
+		$type_name = $TEXT['UNKNOWN'];
+	break;
+	case 'page':
+		$type_name = $TEXT['PAGE'];
+	break;
+	case 'wysiwyg':
+		$type_name = $TEXT['WYSIWYG_EDITOR'];
+	break;
+	case 'tool':
+		$type_name = $TEXT['ADMINISTRATION_TOOL'];
+	break;
+	case 'admin':
+		$type_name = $TEXT['ADMIN'];
+	break;
+	case 'administration':
+		$type_name = $TEXT['ADMINISTRATION'];
+	break;
+	$type_name = $TEXT['unknown'];
 }
 $template->set_var('TYPE', $type_name);
 

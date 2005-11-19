@@ -1,6 +1,6 @@
 <?php
 
-// $Id: details.php,v 1.2 2005/04/02 06:25:53 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -48,13 +48,17 @@ $template->set_file('page', 'details.html');
 $template->set_block('page', 'main_block', 'main');
 
 // Insert values
-require(WB_PATH.'/templates/'.$file.'/info.php');
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' AND directory = '$file'");
+if($result->numRows() > 0) {
+	$row = $result->fetchRow();
+}
+
 $template->set_var(array(
-								'NAME' => $template_name,
-								'AUTHOR' => $template_author,
-								'DESCRIPTION' => $template_description,
-								'VERSION' => $template_version,
-								'DESIGNED_FOR' => $template_designed_for
+								'NAME' => $row['name'],
+								'AUTHOR' => $row['author'],
+								'DESCRIPTION' => $row['description'],
+								'VERSION' => $row['version'],
+								'DESIGNED_FOR' => $row['platform']
 								)
 						);
 
