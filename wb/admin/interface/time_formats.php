@@ -31,6 +31,10 @@ This file is used to generate a list of time formats for the user to select
 
 */
 
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
+
 // Define that this file is loaded
 if(!defined('TIME_FORMATS_LOADED')) {
 	define('TIME_FORMATS_LOADED', true);

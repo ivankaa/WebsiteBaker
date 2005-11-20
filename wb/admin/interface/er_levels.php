@@ -1,6 +1,6 @@
 <?php
 
-// $Id: er_levels.php,v 1.1.1.1 2005/01/30 10:30:21 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -31,6 +31,10 @@ This file is used to generate a list of PHP
 Error Reporting Level's for the user to select
 
 */
+
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+}
 
 // Define that this file is loaded
 if(!defined('ERROR_REPORTING_LEVELS_LOADED')) {

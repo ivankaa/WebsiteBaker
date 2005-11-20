@@ -22,6 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
+
 if(!defined('WB_PATH')) { exit('Direct access to this file is not allowed'); }
 
 // Get system permissions
