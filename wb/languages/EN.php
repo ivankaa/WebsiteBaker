@@ -387,6 +387,7 @@ $TEXT['RESTORE_DATABASE'] = 'Restore Database';
 $TEXT['BACKUP_MEDIA'] = 'Backup Media';
 $TEXT['RESTORE_MEDIA'] = 'Restore Media';
 $TEXT['ADMINISTRATION_TOOL'] = 'Administration tool';
+$TEXT['CAPTCHA_VERIFICATION'] = 'Captcha Verification';
 
 
 // Success/error messages

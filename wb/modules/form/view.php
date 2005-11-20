@@ -110,12 +110,13 @@ if($_POST == array()) {
 <?php
 
 // Get settings
-$query_settings = $database->query("SELECT header,field_loop,footer FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
+$query_settings = $database->query("SELECT header,field_loop,footer,use_captcha FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 if($query_settings->numRows() > 0) {
 	$fetch_settings = $query_settings->fetchRow();
 	$header = str_replace('{WB_URL}',WB_URL,$fetch_settings['header']);
 	$field_loop = $fetch_settings['field_loop'];
 	$footer = str_replace('{WB_URL}',WB_URL,$fetch_settings['footer']);
+	$use_captcha = $fetch_settings['use_captcha'];
 } else {
 	$header = '';
 	$field_loop = '';
@@ -181,6 +182,21 @@ if($query_fields->numRows() > 0) {
 		}
 		if (isset($tmp_field_loop)) $field_loop = $tmp_field_loop;
 	}
+}
+
+// Captcha
+if($use_captcha) {
+	$_SESSION['captcha'] = '';
+	for($i = 0; $i < 5; $i++) {
+		$_SESSION['captcha'] .= rand(0,9);
+	}
+	?><tr><td class="field_title">Verification:</td><td>
+	<table cellpadding="2" cellspacing="0" border="0">
+	<tr><td><img src="<?php echo WB_URL; ?>/include/captcha.php" alt="Captcha" /></td>
+	<td><input type="text" name="captcha" maxlength="5" /></td>
+	</tr></table>
+	</td></tr>
+	<?php
 }
 
 // Print footer
@@ -251,23 +267,16 @@ echo $footer;
 	
 	// Captcha
 	if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
-		if(isset($_POST['captcha']) AND $_POST['CAPTCHA']!=''){
-			// User-supplied captcha
-			$user_captcha = $_POST['captcha'];
-			// Computer generated
-			if(isset($_SESSION['captcha'])) {
-				$system_captcha = $_SESSION['captcha'];
-			}
+		if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
 			// Check for a mismatch
-			if($user_captcha != $system_captcha) {
+			if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR !$_POST['captcha'] == $_SESSION['captcha']) {
 				$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
-			} else {
-				unset($_SESSION['captcha']);
 			}
 		} else {
 			$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 		}
 	}
+	if(isset($_SESSION['catpcha'])) { unset($_SESSION['captcha']); }
 	
 	// Addslashes to email body - proposed by Icheb in topic=1170.0
 	// $email_body = $wb->add_slashes($email_body);
