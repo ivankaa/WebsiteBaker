@@ -36,34 +36,45 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 	$email = $_POST['email'];
 	
 	// Check if the email exists in the database
-	$query = "SELECT user_id,username,display_name,email FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($_POST['email'])."'";
+	$query = "SELECT user_id,username,display_name,email,last_reset FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($_POST['email'])."'";
 	$results = $database->query($query);
 	if($results->numRows() > 0) {
 		// Get the id, username, and email from the above db query
 		$results_array = $results->fetchRow();
 		
-		// Generate a random password then update the database with it
-		$new_pass = '';
-		$salt = "abchefghjkmnpqrstuvwxyz0123456789";
-		srand((double)microtime()*1000000);
-		$i = 0;
-		while ($i <= 7) {
-			$num = rand() % 33;
-			$tmp = substr($salt, $num, 1);
-			$new_pass = $new_pass . $tmp;
-			$i++;
-		}
-		
-		$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".md5($new_pass)."' WHERE user_id = '".$results_array['user_id']."'");
-		
-		if($database->is_error()) {
-			// Error updating database
-			$message = $database->get_error();
+		// Check if the password has been reset in the last 2 hours
+		$last_reset = $results_array['last_reset'];
+		$time_diff = mktime()-$last_reset; // Time since last reset in seconds
+		$time_diff = $time_diff/60/60; // Time since last reset in hours
+		if($time_diff < 2) {
+			
+			// Tell the user that their password cannot be reset more than once per hour
+			$message = $MESSAGE['FORGOT_PASS']['ALREADY_RESET'];
+			
 		} else {
-			// Setup email to send
-			$mail_subject = 'Your login details...';
-			$mail_to = $email;
-			$mail_message = ''.
+		
+			// Generate a random password then update the database with it
+			$new_pass = '';
+			$salt = "abchefghjkmnpqrstuvwxyz0123456789";
+			srand((double)microtime()*1000000);
+			$i = 0;
+			while ($i <= 7) {
+				$num = rand() % 33;
+				$tmp = substr($salt, $num, 1);
+				$new_pass = $new_pass . $tmp;
+				$i++;
+			}
+			
+			$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".md5($new_pass)."' WHERE user_id = '".$results_array['user_id']."'");
+			
+			if($database->is_error()) {
+				// Error updating database
+				$message = $database->get_error();
+			} else {
+				// Setup email to send
+				$mail_subject = 'Your login details...';
+				$mail_to = $email;
+				$mail_message = ''.
 'Hello '.$results_array["display_name"].', 
 
 Your '.WEBSITE_TITLE.' administration login details are:
@@ -74,15 +85,15 @@ Your password has been reset to the one above.
 This means that your old password will no longer work.
 
 If you have received this message in error, please delete it immediatly.';
-			// Try sending the email
-			if(mail($mail_to, $mail_subject, $mail_message)) {
-				$message = $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'];
-				$display_form = false;
-			} else {
-				$message = $MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'];
+				// Try sending the email
+				if(mail($mail_to, $mail_subject, $mail_message)) {
+					$message = $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'];
+					$display_form = false;
+				} else {
+					$message = $MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'];
+				}
 			}
-		}
-			
+		}	
 	} else {
 		// Email doesn't exist, so tell the user
 		$message = $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'];
