@@ -21,16 +21,16 @@ Please refer to the INSTALL file for instructions on installation.
 
 Usage
 =====
-Before using Website Baker please note: you must not remove/change
-the license footer of the Administration. Also, it is much
-appreciated if you leave a link somewhere on your website, which
-links to the Website Baker website. (http://www.websitebaker.org/) 
+Before using Website Baker please note: you must not remove/change any
+copyright notices in the any code contained in this package.
+Also, it is appreciated if you leave a link somewhere on your website,
+which links to the Website Baker website. (http://www.websitebaker.org/) 
 
 
 Support
 =======
 For information about finding help:
-http://www.websitebaker.org/2/help/
+http://www.websitebaker.org/2/help
 
 
 Bugs
@@ -42,5 +42,5 @@ http://www.websitebaker.org/2/bugs
 Contribute
 ==========
 For information about how to contribute (donating, etc):
-http://www.websitebaker.org/2/contribute/
+http://www.websitebaker.org/2/contribute
 
