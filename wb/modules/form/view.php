@@ -190,7 +190,7 @@ if($use_captcha) {
 	for($i = 0; $i < 5; $i++) {
 		$_SESSION['captcha'] .= rand(0,9);
 	}
-	?><tr><td class="field_title">Verification:</td><td>
+	?><tr><td class="field_title"><?php echo $TEXT['VERIFICATION']; ?>:</td><td>
 	<table cellpadding="2" cellspacing="0" border="0">
 	<tr><td><img src="<?php echo WB_URL; ?>/include/captcha.php" alt="Captcha" /></td>
 	<td><input type="text" name="captcha" maxlength="5" /></td>
@@ -313,9 +313,9 @@ echo $footer;
 			// Now send the email
 			if($email_to != '') {
 				if($email_from != '') {
-					if(mail($email_to,$email_subject,str_replace('\n', '', $email_body),"From: ".$email_from)) { $success = true; }
+					if(mail($email_to,$email_subject,str_replace("\n", '', $email_body),"From: ".$email_from)) { $success = true; }
 				} else {
-					if(mail($email_to,$email_subject,str_replace('\n', '', $email_body))) { $success = true; }
+					if(mail($email_to,$email_subject,str_replace("\n", '', $email_body))) { $success = true; }
 				}
 			}				
 			// Write submission to database

@@ -11,6 +11,12 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.0 -------------------------------------
+20-Nov-2005 Ryan Djurovich
+!	News mod now hides read more link if no need for it (see ticket #56)
++	Added support for mailto: links in the menu link mod
+#	Added direct-access redirection on some files (see ticket #37)
++	Added extra characters to convert.php (see ticket #64)
+#	Fixed ticket #65 (last_reset check in account/forgot_form.php)
 29-Sep-2005 Ryan Djurovich
 !	Cleaned up form buttons in Settings
 !	Moved some options into Advanced Settings
