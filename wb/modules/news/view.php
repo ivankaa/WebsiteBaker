@@ -105,7 +105,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	}
 	
 	// Query posts (for this page)
-	$query_posts = $database->query("SELECT group_id,post_id,title,link,content_short,posted_by,posted_when FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id' AND active = '1' AND title != ''$query_extra ORDER BY position DESC".$limit_sql);
+	$query_posts = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id' AND active = '1' AND title != ''$query_extra ORDER BY position DESC".$limit_sql);
 	$num_posts = $query_posts->numRows();
 	
 	// Create previous and next links
@@ -188,11 +188,20 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				$short = ($post['content_short']);
 				$wb->preprocess($short);
 				// Replace vars with values
+				$post_long_len = strlen($post['long']);
 				$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[LINK]', '[DATE]', '[TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]');
 				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-					$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, ($post['title']), $short, $post_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $TEXT['READ_MORE']);
+					if($post_long_len < 9) {
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), stripslashes($post['short']), $post_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], '');
+					} else {
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), stripslashes($post['short']), $post_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $TEXT['READ_MORE']);
+					}
 				} else {
-					$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, ($post['title']), $short, $post_link, $post_date, $post_time, '', '', '', '', $TEXT['READ_MORE']);
+					if($post_long_len < 9) {
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), stripslashes($post['short']), $post_link, $post_date, $post_time, '', '', '', '', '');
+					} else {
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), stripslashes($post['short']), $post_link, $post_date, $post_time, '', '', '', '', $TEXT['READ_MORE']);
+					}
 				}
 				echo str_replace($vars, $values, $setting_post_loop);
 			}
