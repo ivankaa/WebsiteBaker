@@ -31,17 +31,7 @@ for his contributions to this module - adding extra field types
 // Insert an extra rows into the database
 $header = '<table cellpadding=\"2\" cellspacing=\"0\" border=\"0\" width=\"100%\">';
 $field_loop = '<tr><td class=\"field_title\">{TITLE}{REQUIRED}:</td><td>{FIELD}</td></tr>';
-$footer = '';
-if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
-$footer .= '<tr><td class=\"field_title\">Verification:</td><td>
-<table cellpadding=\"2\" cellspacing=\"0\" border=\"0\">
-<tr><td><img src=\"{WB_URL}/include/captcha.php\" alt=\"Captcha\" /></td>
-<td><input type=\"text\" name=\"captcha\" maxlength=\"5\" /></td>
-</tr></table>
-</td></tr>
-';
-}
-$footer .= '<tr><td>&nbsp;</td>
+$footer = '<tr><td>&nbsp;</td>
 <td>
 <input type=\"submit\" name=\"submit\" value=\"Submit Form\" />
 </td>
