@@ -1,6 +1,6 @@
 <?php
 
-// $Id: delete.php,v 1.5 2005/04/04 00:56:30 rdjurovich Exp $
+// $Id$
 
 /*
 

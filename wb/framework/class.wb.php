@@ -72,7 +72,6 @@ class wb
 			return false;
 		}
 	}
-
 	// Modified addslashes function which takes into account magic_quotes
 	function add_slashes($input) {
 		if ( get_magic_quotes_gpc() || ( !is_string($input) ) ) {

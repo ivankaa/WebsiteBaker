@@ -1,6 +1,6 @@
 <?php
 
-// $Id: rename.php,v 1.4 2005/04/04 00:56:30 rdjurovich Exp $
+// $Id$
 
 /*
 

@@ -1,6 +1,7 @@
 <?php
 
-// $Id$
+// $Id$
+
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -94,7 +95,6 @@ if($query_sections->numRows() > 0) {
 		}
 	}
 }
-
 // Check for error or print success message
 if($database->is_error()) {
 	$admin->print_error($database->get_error(), ADMIN_URL.'/pages/sections.php?page_id='.$page_id);
