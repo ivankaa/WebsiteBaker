@@ -52,12 +52,19 @@ if(!isset($_GET['sessions_checked']) OR $_GET['sessions_checked'] != 'true') {
 <title>Website Baker Installation Wizard</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css">
 <script language="javascript" type="text/javascript">
+
 function toggle_checkbox(checkbox_id) {
+
 	if(document.getElementById(checkbox_id).checked == true) {
+
 		document.getElementById(checkbox_id).checked = false;
+
 	} else {
+
 		document.getElementById(checkbox_id).checked = true;
+
 	}
+
 }
 function confirm_link(message, url) {
 	if(confirm(message)) location.href = url;
@@ -73,6 +80,7 @@ function change_os(type) {
 		document.getElementById('file_perms_box').style.display = 'none';
 	}
 }
+
 </script>
 </head>
 <body>

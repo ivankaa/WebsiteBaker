@@ -93,7 +93,7 @@ class frontend extends wb {
 				// Check if we should redirect or include page inline
 				if(HOMEPAGE_REDIRECTION) {
 					// Redirect to page
-					header("Location: ".page_link($this->default_link));
+					header("Location: ".$this->page_link($this->default_link));
 					exit();
 				} else {
 					// Include page inline
@@ -132,7 +132,7 @@ class frontend extends wb {
 			// Check if the page language is also the selected language. If not, send headers again.
 			if ($this->page['language']!=LANGUAGE) {
 				require_once(WB_PATH.'/framework/functions.php');
-				header('Location: '.page_link($this->page['link']).'?lang='.$this->page['language']);
+				header('Location: '.$this->page_link($this->page['link']).'?lang='.$this->page['language']);
 				exit();
 			}
 			// Begin code to set details as either variables of constants
@@ -268,7 +268,7 @@ class frontend extends wb {
 			// Get page link
 			$get_link = $database->query("SELECT link FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id' LIMIT 1");
 			$fetch_link = $get_link->fetchRow();
-			$link = page_link($fetch_link['link']);
+			$link = $this->page_link($fetch_link['link']);
 			$content = preg_replace($pattern,$link,$content);
 		}
 	}
