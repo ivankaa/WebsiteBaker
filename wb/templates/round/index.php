@@ -95,7 +95,7 @@
 		<?php } ?>
 		
 		<?php
-		if(FRONTEND_LOGIN AND !$admin->is_authenticated()) {
+		if(FRONTEND_LOGIN AND !$wb->is_authenticated()) {
 		?>
 		<form name="login" action="<?php echo LOGIN_URL; ?>" method="post">
 			
@@ -152,7 +152,7 @@
 		
 		</form>
 		<?php
-		} elseif(FRONTEND_LOGIN AND $admin->is_authenticated()) {
+		} elseif(FRONTEND_LOGIN AND $wb->is_authenticated()) {
 		?>
 		<form name="logout" action="<?php echo LOGOUT_URL; ?>" method="post">
 			
@@ -169,7 +169,7 @@
 			</tr>
 			<tr>
 				<td class="login" style="padding-top: 15px; padding-bottom: 15px;">
-					<?php echo $TEXT['WELCOME_BACK']; ?>, <?php echo $admin->get_display_name(); ?>
+					<?php echo $TEXT['WELCOME_BACK']; ?>, <?php echo $wb->get_display_name(); ?>
 				</td>
 			</tr>
 			<tr>

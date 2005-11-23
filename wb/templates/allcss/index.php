@@ -60,7 +60,7 @@
 		<?php page_menu(0, 1, '<li class="menu_main"[class]>[a][menu_title][/a]</li>', '<ul>', '</ul>', '', ' style="font-weight: bold;"'); ?>
 		
 		<?php
-		if(FRONTEND_LOGIN == 'enabled' AND VISIBILITY != 'private' AND $admin->get_session('USER_ID') == '') {
+		if(FRONTEND_LOGIN == 'enabled' AND VISIBILITY != 'private' AND $wb->get_session('USER_ID') == '') {
 		?>
 		<form name="login" action="<?php echo LOGIN_URL; ?>" method="post" class="login_table">
 			<h1><?php echo $TEXT['LOGIN']; ?></h1>
@@ -75,11 +75,11 @@
 				<?php } ?>
 		</form>
 		<?php
-		} elseif(FRONTEND_LOGIN == 'enabled' AND is_numeric($admin->get_session('USER_ID'))) {
+		} elseif(FRONTEND_LOGIN == 'enabled' AND is_numeric($wb->get_session('USER_ID'))) {
 		?>
 		<form name="logout" action="<?php echo LOGOUT_URL; ?>" method="post" class="login_table">
 			<h1><?php echo $TEXT['LOGGED_IN']; ?></h1>
-			<?php echo $TEXT['WELCOME_BACK']; ?>, <?php echo $admin->get_display_name(); ?>
+			<?php echo $TEXT['WELCOME_BACK']; ?>, <?php echo $wb->get_display_name(); ?>
 			<br />
 			<input type="submit" name="submit" value="<?php echo $MENU['LOGOUT']; ?>" />
 			<br />
