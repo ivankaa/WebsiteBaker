@@ -564,7 +564,7 @@ if($install_tables == true) {
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` (name) VALUES ('template')");
 		
 	require_once(WB_PATH.'/framework/initialize.php');
-	$admin = new admin('dummy');
+//	$admin = new admin('dummy');
 	
 	// Include the PclZip class file (thanks to 
 	require_once(WB_PATH.'/include/pclzip/pclzip.lib.php');
