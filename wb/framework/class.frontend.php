@@ -131,7 +131,6 @@ class frontend extends wb {
 			$this->page = $get_page->fetchRow();
 			// Check if the page language is also the selected language. If not, send headers again.
 			if ($this->page['language']!=LANGUAGE) {
-				require_once(WB_PATH.'/framework/functions.php');
 				header('Location: '.$this->page_link($this->page['link']).'?lang='.$this->page['language']);
 				exit();
 			}
@@ -246,15 +245,6 @@ class frontend extends wb {
 			define('FORGOT_URL', WB_URL.'/account/forgot'.PAGE_EXTENSION);
 			define('PREFERENCES_URL', WB_URL.'/account/preferences'.PAGE_EXTENSION);
 			define('SIGNUP_URL', WB_URL.'/account/signup'.PAGE_EXTENSION);
-		}
-	}
-	
-	function page_link($link){
-		// Check for :// in the link (used in URL's) as well as mailto:
-		if(strstr($link, '://') == '' AND substr($link, 0, 7) != 'mailto:') {
-			return WB_URL.PAGES_DIRECTORY.$link.PAGE_EXTENSION;
-		} else {
-			return $link;
 		}
 	}
 	

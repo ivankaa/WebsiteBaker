@@ -223,7 +223,7 @@ function make_list($parent, $editable_pages) {
 				</td>
 				<td width="20">
 					<?php if($page['visibility'] != 'deleted' AND $page['visibility'] != 'none') { ?>
-					<a href="<?php echo page_link($page['link']); ?>" target="_blank">
+					<a href="<?php echo $admin->page_link($page['link']); ?>" target="_blank">
 						<img src="<?php echo ADMIN_URL; ?>/images/view_16.png" border="0" alt="<?php echo $TEXT['VIEW']; ?>" />
 					</a>
 					<?php } ?>

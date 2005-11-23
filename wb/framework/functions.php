@@ -405,12 +405,8 @@ function media_filename($string) {
 // Function to work out a page link
 if(!function_exists('page_link')) {
 	function page_link($link) {
-		// Check for :// in the link (used in URL's) as well as mailto:
-		if(strstr($link, '://') == '' AND substr($link, 0, 7) != 'mailto:') {
-			return WB_URL.PAGES_DIRECTORY.$link.PAGE_EXTENSION;
-		} else {
-			return $link;
-		}
+		global $admin;
+		return $admin->page_link($link);
 	}
 }
 

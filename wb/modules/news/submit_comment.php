@@ -26,15 +26,6 @@
 // Include config file
 require('../../config.php');
 
-// Include admin class
-require_once(WB_PATH.'/framework/class.admin.php');
-$admin = new admin('Start', 'start', false, false);
-
-// Include WB functions file
-if(!defined('FUNCTIONS_CLASS_LOADED')) {
-	require(WB_PATH.'/framework/functions.php');
-}
-
 // Check if we should show the form or add a comment
 if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_GET['post_id']) AND is_numeric($_GET['post_id']) AND isset($_POST['comment']) AND $_POST['comment'] != '') {
 	
@@ -42,11 +33,11 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	$page_id = $_GET['page_id'];
 	$section_id = $_GET['section_id'];
 	$post_id = $_GET['post_id'];
-	$title = $admin->add_slashes(strip_tags($_POST['title']));
-	$comment = $admin->add_slashes(strip_tags($_POST['comment']));
+	$title = $wb->add_slashes(strip_tags($_POST['title']));
+	$comment = $wb->add_slashes(strip_tags($_POST['comment']));
 	$commented_when = mktime();
-	if(isset($admin) AND $admin->is_authenticated() == true) {
-		$commented_by = $admin->get_user_id();
+	if($wb->is_authenticated() == true) {
+		$commented_by = $wb->get_user_id();
 	} else {
 		$commented_by = '';
 	}
@@ -54,7 +45,7 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	// Get page link
 	$query_page = $database->query("SELECT link FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");
 	$page = $query_page->fetchRow();
-	header('Location: '.page_link($page['link']).'?id='.$post_id);
+	header('Location: '.$wb->page_link($page['link']).'?id='.$post_id);
 	
 } else {
 	header('Location: '.WB_URL.'/pages/');
