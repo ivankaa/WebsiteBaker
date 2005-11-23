@@ -31,37 +31,37 @@ h3 {
 		<tr>
 			<td>
 				<input type="checkbox" name="pages" id="pages" value="1" {pages_checked} />
-				<a href="javascript: toggle_checkbox('pages');">{SECTION_PAGES}</a>
+				<label for="pages">{SECTION_PAGES}</label>
 			</td>
 			<td>
 				<input type="checkbox" name="media" id="media" value="1" {media_checked} />
-				<a href="javascript: toggle_checkbox('media');">{SECTION_MEDIA}</a>
+				<label for="media">{SECTION_MEDIA}</label>
 			</td>
 			<td>
 				<input type="checkbox" name="modules" id="modules" value="1" {modules_checked} />
-				<a href="javascript: toggle_checkbox('modules');">{SECTION_MODULES}</a>
+				<label for="modules">{SECTION_MODULES}</label>
 			</td>
 			<td>
 				<input type="checkbox" name="templates" id="templates" value="1" {templates_checked} />
-				<a href="javascript: toggle_checkbox('templates');">{SECTION_TEMPLATES}</a>
+				<label for="templates">{SECTION_TEMPLATES}</label>
 			</td>
 		</tr>
 		<tr>
 			<td>
 				<input type="checkbox" name="languages" id="languages" value="1" {languages_checked} />
-				<a href="javascript: toggle_checkbox('languages');">{SECTION_LANGUAGES}</a>
+				<label for="languages">{SECTION_LANGUAGES}</label>
 			</td>
 			<td>		
 				<input type="checkbox" name="settings" id="settings" value="1" {settings_checked} />
-				<a href="javascript: toggle_checkbox('settings');">{SECTION_SETTINGS}</a>
+				<label for="settings">{SECTION_SETTINGS}</label>
 			</td>
 			<td>
 				<input type="checkbox" name="users" id="users" value="1" {users_checked} />
-				<a href="javascript: toggle_checkbox('users');">{SECTION_USERS}</a>
+				<label for="users">{SECTION_USERS}</label>
 			</td>
 			<td>
 				<input type="checkbox" name="groups" id="groups" value="1" {groups_checked} />
-				<a href="javascript: toggle_checkbox('groups');">{SECTION_GROUPS}</a>
+				<label for="groups">{SECTION_GROUPS}</label>
 			</td>
 		</tr>
 		</table>
@@ -83,26 +83,26 @@ h3 {
 </tr>
 <tr>
 	<td><input name="pages_view" id="pages_view" type="checkbox" value="1" {pages_view_checked}></td>
-	<td><a href="javascript: toggle_checkbox('pages_view');">{TEXT_VIEW}</a></td>
+	<td><label for="pages_view">{TEXT_VIEW}</label></td>
 	<td><input name="pages_add" id="pages_add" type="checkbox" value="1" {pages_add_checked}></td>
 	<td>
-		<a href="javascript: toggle_checkbox('pages_add');">{TEXT_ADD}</a>
+		<label for="pages_add">{TEXT_ADD}</label>
 		&nbsp;
 		(<input name="pages_add_l0" id="pages_add_l0" type="checkbox" value="1" {pages_add_l0_checked}>
-		<a href="javascript: toggle_checkbox('pages_add_l0');">{TEXT_LEVEL} 0</a>)
+		<label for="pages_add_l0">{TEXT_LEVEL} 0</label>)
 	</td>
 </tr>
 <tr>
 	<td><input name="pages_settings" id="pages_settings" type="checkbox" value="1" {pages_settings_checked}></td>
-	<td><a href="javascript: toggle_checkbox('pages_settings');">{TEXT_MODIFY_SETTINGS}</a></td>
+	<td><label for="pages_settings">{TEXT_MODIFY_SETTINGS}</label></td>
 	<td><input name="pages_modify" id="pages_modify" type="checkbox" value="1" {pages_modify_checked}></td>
-	<td><a href="javascript: toggle_checkbox('pages_modify');">{TEXT_MODIFY_CONTENT}</a></td>
+	<td><label for="pages_modify">{TEXT_MODIFY_CONTENT}</label></td>
 </tr>
 <tr>
 	<td><input name="pages_intro" id="pages_intro" type="checkbox" value="1" {pages_intro_checked}></td>
-	<td><a href="javascript: toggle_checkbox('pages_intro');">{HEADING_MODIFY_INTRO_PAGE}</a></td>
+	<td><label for="pages_intro">{HEADING_MODIFY_INTRO_PAGE}</label></td>
 	<td><input name="pages_delete" id="pages_delete" type="checkbox" value="1" {pages_delete_checked}></td>
-	<td><a href="javascript: toggle_checkbox('pages_delete');">{TEXT_DELETE}</a></td>
+	<td><label for="pages_delete">{TEXT_DELETE}</label></td>
 </tr>
 <tr>
 	<td colspan="4">
@@ -111,19 +111,19 @@ h3 {
 </tr>
 <tr>
 	<td><input name="media_view" id="media_view" type="checkbox" value="1" {media_view_checked}></td>
-	<td><a href="javascript: toggle_checkbox('media_view');">{TEXT_VIEW}</a></td>
+	<td><label for="media_view">{TEXT_VIEW}</label></td>
 	<td><input name="media_upload" id="media_upload" type="checkbox" value="1" {media_upload_checked}></td>
-	<td><a href="javascript: toggle_checkbox('media_upload');">{TEXT_UPLOAD_FILES}</a></td>
+	<td><label for="media_upload">{TEXT_UPLOAD_FILES}</label></td>
 </tr>
 <tr>
 	<td><input name="media_rename" id="media_rename" type="checkbox" value="1" {media_rename_checked}></td>
-	<td><a href="javascript: toggle_checkbox('media_rename');">{TEXT_RENAME}</a></td>
+	<td><label for="media_rename">{TEXT_RENAME}</label></td>
 	<td><input name="media_delete" id="media_delete" type="checkbox" value="1" {media_delete_checked}></td>
-	<td><a href="javascript: toggle_checkbox('media_delete');">{TEXT_DELETE}</a></td>
+	<td><label for="media_delete">{TEXT_DELETE}</label></td>
 </tr>
 <tr>
 	<td><input name="media_create" id="media_create" type="checkbox" value="1" {media_create_checked}></td>
-	<td><a href="javascript: toggle_checkbox('media_create');">{TEXT_CREATE_FOLDER}</a></td>
+	<td><label for="media_create">{TEXT_CREATE_FOLDER}</label></td>
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
 </tr>
@@ -134,13 +134,13 @@ h3 {
 </tr>
 <tr>
 	<td><input name="modules_view" id="modules_view" type="checkbox" value="1" {modules_view_checked}></td>
-	<td><a href="javascript: toggle_checkbox('modules_view');">{TEXT_VIEW}</a></td>
+	<td><label for="modules_view">{TEXT_VIEW}</label></td>
 	<td><input name="modules_install" id="modules_install" type="checkbox" value="1" {modules_install_checked}></td>
-	<td><a href="javascript: toggle_checkbox('modules_install');">{TEXT_ADD}</a></td>
+	<td><label for="modules_install">{TEXT_ADD}</label></td>
 </tr>
 <tr>
 	<td><input name="modules_uninstall" id="modules_uninstall" type="checkbox" value="1" {modules_uninstall_checked}></td>
-	<td><a href="javascript: toggle_checkbox('modules_uninstall');">{TEXT_DELETE}</a></td>
+	<td><label for="modules_uninstall">{TEXT_DELETE}</label></td>
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
 </tr>
@@ -151,13 +151,13 @@ h3 {
 </tr>
 <tr>
 	<td><input name="templates_view" id="templates_view" type="checkbox" value="1" {templates_view_checked}></td>
-	<td><a href="javascript: toggle_checkbox('templates_view');">{TEXT_VIEW}</a></td>
+	<td><label for="templates_view">{TEXT_VIEW}</label></td>
 	<td><input name="templates_install" id="templates_install" type="checkbox" value="1" {templates_install_checked}></td>
-	<td><a href="javascript: toggle_checkbox('templates_install');">{TEXT_ADD}</a></td>
+	<td><label for="templates_install">{TEXT_ADD}</label></td>
 </tr>
 <tr>
 	<td><input name="templates_uninstall" id="templates_uninstall" type="checkbox" value="1" {templates_uninstall_checked}></td>
-	<td><a href="javascript: toggle_checkbox('templates_uninstall');">{TEXT_DELETE}</a></td>
+	<td><label for="templates_uninstall">{TEXT_DELETE}</label></td>
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
 </tr>
@@ -168,13 +168,13 @@ h3 {
 </tr>
 <tr>
 	<td><input name="languages_view" id="languages_view" type="checkbox" value="1" {languages_view_checked}></td>
-	<td><a href="javascript: toggle_checkbox('languages_view');">{TEXT_VIEW}</a></td>
+	<td><label for="languages_view">{TEXT_VIEW}</label></td>
 	<td><input name="languages_install" id="languages_install" type="checkbox" value="1" {languages_install_checked}></td>
-	<td><a href="javascript: toggle_checkbox('languages_install');">{TEXT_ADD}</a></td>
+	<td><label for="languages_install">{TEXT_ADD}</label></td>
 </tr>
 <tr>
 	<td><input name="languages_uninstall" id="languages_uninstall" type="checkbox" value="1" {languages_uninstall_checked}></td>
-	<td><a href="javascript: toggle_checkbox('languages_uninstall');">{TEXT_DELETE}</a></td>
+	<td><label for="languages_uninstall">{TEXT_DELETE}</label></td>
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
 </tr>
@@ -185,9 +185,9 @@ h3 {
 </tr>
 <tr>
 	<td><input name="settings_basic" id="settings_basic" type="checkbox" value="1" {settings_basic_checked}></td>
-	<td><a href="javascript: toggle_checkbox('settings_basic');">{TEXT_BASIC}</a></td>
+	<td><label for="settings_basic">{TEXT_BASIC}</label></td>
 	<td><input name="settings_advanced" id="settings_advanced" type="checkbox" value="1" {settings_advanced_checked}></td>
-	<td><a href="javascript: toggle_checkbox('settings_advanced');">{TEXT_ADVANCED}</a></td>
+	<td><label for="settings_advanced">{TEXT_ADVANCED}</label></td>
 </tr>
 <tr>
 	<td colspan="4">
@@ -196,15 +196,15 @@ h3 {
 </tr>
 <tr>
 	<td><input name="users_view" id="users_view" type="checkbox" value="1" {users_view_checked}></td>
-	<td><a href="javascript: toggle_checkbox('users_view');">{TEXT_VIEW}</a></td>
+	<td><label for="users_view">{TEXT_VIEW}</label></td>
 	<td><input name="users_add" id="users_add" type="checkbox" value="1" {users_add_checked}></td>
-	<td><a href="javascript: toggle_checkbox('users_add');">{TEXT_ADD}</a></td>
+	<td><label for="users_add">{TEXT_ADD}</label></td>
 </tr>
 <tr>
 	<td><input name="users_modify" id="users_modify" type="checkbox" value="1" {users_modify_checked}></td>
-	<td><a href="javascript: toggle_checkbox('users_modify');">{TEXT_MODIFY}</a></td>
+	<td><label for="users_modify">{TEXT_MODIFY}</label></td>
 	<td><input name="users_delete" id="users_delete" type="checkbox" value="1" {users_delete_checked}></td>
-	<td><a href="javascript: toggle_checkbox('users_delete');">{TEXT_DELETE}</a></td>
+	<td><label for="users_delete">{TEXT_DELETE}</label></td>
 </tr>
 <tr>
 	<td colspan="4">
@@ -213,15 +213,15 @@ h3 {
 </tr>
 <tr>
 	<td><input name="groups_view" id="groups_view" type="checkbox" value="1" {groups_view_checked}></td>
-	<td><a href="javascript: toggle_checkbox('groups_view');">{TEXT_VIEW}</a></td>
+	<td><label for="groups_view">{TEXT_VIEW}</label></td>
 	<td><input name="groups_add" id="groups_add" type="checkbox" value="1" {groups_add_checked}></td>
-	<td><a href="javascript: toggle_checkbox('groups_add');">{TEXT_ADD}</a></td>
+	<td><label for="groups_add">{TEXT_ADD}</label></td>
 </tr>
 <tr>
 	<td><input name="groups_modify" id="groups_modify" type="checkbox" value="1" {groups_modify_checked}></td>
-	<td><a href="javascript: toggle_checkbox('groups_modify');">{TEXT_MODIFY}</a></td>
+	<td><label for="groups_modify">{TEXT_MODIFY}</label></td>
 	<td><input name="groups_delete" id="groups_delete" type="checkbox" value="1" {groups_delete_checked}></td>
-	<td><a href="javascript: toggle_checkbox('groups_delete');">{TEXT_DELETE}</a></td>
+	<td><label for="groups_delete">{TEXT_DELETE}</label></td>
 </tr>
 </table>
 
@@ -240,7 +240,7 @@ h3 {
 			<!-- BEGIN module_list_block -->
 			<li>
 				<input type="checkbox" name="module_permissions[]" id="m_{VALUE}" value="{VALUE}" {CHECKED} />
-				<a href="javascript: toggle_checkbox('m_{VALUE}');">{NAME}</a>
+				<label for="m_{VALUE}">{NAME}</label>
 			</li>
 			<!-- END module_list_block -->
 		</ul>
@@ -253,7 +253,7 @@ h3 {
 			<!-- BEGIN template_list_block -->
 			<li>
 				<input type="checkbox" name="template_permissions[]" id="t_{VALUE}" value="{VALUE}" {CHECKED} />
-				<a href="javascript: toggle_checkbox('t_{VALUE}');">{NAME}</a>
+				<label for="t_{VALUE}">{NAME}</label>
 			</li>
 			<!-- END template_list_block -->
 		</ul>

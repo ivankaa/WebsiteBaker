@@ -61,7 +61,7 @@ $fetch_content = $query_content->fetchRow();
 		<a href="<?php echo WB_URL.MEDIA_DIRECTORY; ?>/.news/image<?php echo $group_id; ?>.jpg" target="_blank">View</a>
 		&nbsp;
 		<input type="checkbox" name="delete_image" id="delete_image" value="true" />
-		<a href="javascript: toggle_checkbox('delete_image');">Delete</a>
+		<label for="delete_image">Delete</label>
 	</td>
 	<?php } else { ?>
 	<td>

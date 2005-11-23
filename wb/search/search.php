@@ -113,19 +113,6 @@ if(SHOW_SEARCH != true) {
 	$values = array($search_string, WB_URL, PAGE_EXTENSION, $TEXT['SEARCH'], $TEXT['ALL_WORDS'], $TEXT['ANY_WORDS'], $TEXT['EXACT_MATCH'], $TEXT['MATCH'], $TEXT['MATCHING'], $all_checked, $any_checked, $exact_checked);
 	$search_header = str_replace($vars, $values, ($fetch_header['value']));
 	
-	// Insert js code
-	?>
-	<script language="javascript" type="text/javascript">
-	function toggle_radio(checkbox_id) {
-		if(document.getElementById(checkbox_id).checked == true) {
-			document.getElementById(checkbox_id).checked = false;
-		} else {
-			document.getElementById(checkbox_id).checked = true;
-		}
-	}
-	</script>
-	<?php
-	
 	// Show search header
 	echo $search_header;
 	

@@ -53,19 +53,6 @@ if(!isset($_GET['sessions_checked']) OR $_GET['sessions_checked'] != 'true') {
 <link href="stylesheet.css" rel="stylesheet" type="text/css">
 <script language="javascript" type="text/javascript">
 
-function toggle_checkbox(checkbox_id) {
-
-	if(document.getElementById(checkbox_id).checked == true) {
-
-		document.getElementById(checkbox_id).checked = false;
-
-	} else {
-
-		document.getElementById(checkbox_id).checked = true;
-
-	}
-
-}
 function confirm_link(message, url) {
 	if(confirm(message)) location.href = url;
 }
@@ -256,9 +243,9 @@ function change_os(type) {
 			<td>
 				<div name="file_perms_box" id="file_perms_box" style="margin: 0; padding: 0; display: <?php if(isset($_SESSION['operating_system']) AND $_SESSION['operating_system'] == 'windows') { echo 'none'; } else { echo 'block'; } ?>;">
 					<input type="checkbox" tabindex="6" name="world_writeable" id="world_writeable" value="true"<?php if(isset($_SESSION['world_writeable']) AND $_SESSION['world_writeable'] == true) { echo 'checked'; } ?> />
-					<font style="cursor: pointer;" onclick="javascript: toggle_checkbox('world_writeable');">
+					<label for="world_writeable">
 						World-writeable file permissions (777)
-					</font>
+					</label>
 					<br />
 					<font class="note">(Please note: this is only recommended for testing environments)</font>
 				</div>
@@ -299,9 +286,9 @@ function change_os(type) {
 			<td>&nbsp;</td>
 			<td colspan="2">
 				<input type="checkbox" tabindex="12" name="install_tables" id="install_tables" value="true"<?php if(!isset($_SESSION['install_tables'])) { echo ' checked'; } elseif($_SESSION['install_tables'] == 'true') { echo ' checked'; } ?> />
-				<font style="cursor: pointer; color: #666666;" onclick="javascript: toggle_checkbox('install_tables');">Install Tables</font>
+				<label for="install_tables" style="color: #666666;">Install Tables</label>
 				<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<font style="font-size: 10px; color: #666666;">(Please note: May remove existing tables and data)</font></td>		
+				<span style="font-size: 10px; color: #666666;">(Please note: May remove existing tables and data)</span></td>		
 			</td>
 		</tr>
 		<tr>

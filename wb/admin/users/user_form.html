@@ -81,9 +81,9 @@ function toggle_radio(radio_on, radio_off) {
 	<td>&nbsp;</td>
 	<td>
 		<input type="radio" name="active[]" id="active" value="1" {ACTIVE_CHECKED} />
-		<a href="javascript: toggle_radio('disabled', 'active');">{TEXT_ACTIVE}</a>
+		<label for="active">{TEXT_ACTIVE}</label>
 		<input type="radio" name="active[]" id="disabled" value="0" {DISABLED_CHECKED} />
-		<a href="javascript: toggle_radio('active', 'disabled');">{TEXT_DISABLED}</a>
+		<label for="disabled">{TEXT_DISABLED}</label>
 	</td>
 </tr>
 <tr>

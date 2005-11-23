@@ -53,16 +53,6 @@ if(defined('SMART_LOGIN') AND SMART_LOGIN == 'enabled') {
 }
 </style>
 
-<script language="javascript" type="text/javascript">
-function toggle_checkbox(checkbox_id) {
-	if(document.getElementById(checkbox_id).checked == true) {
-		document.getElementById(checkbox_id).checked = false;
-	} else {
-		document.getElementById(checkbox_id).checked = true;
-	}
-}
-</script>
-
 <h1>&nbsp;Login</h1>
 &nbsp;<?php echo $thisApp->message; ?>
 <br />
@@ -94,9 +84,9 @@ function toggle_checkbox(checkbox_id) {
 	<td>&nbsp;</td>
 	<td>
 		<input type="checkbox" name="remember" id="remember" value="true" />
-		<font onclick="javascript: toggle_checkbox('remember');" style="cursor: pointer;">
+		<label for="remember">
 			<?php echo $TEXT['REMEMBER_ME']; ?>
-		</font>
+		</label>
 	</td>
 </tr>
 <?php } ?>

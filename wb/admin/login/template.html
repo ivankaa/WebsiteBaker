@@ -4,15 +4,6 @@
 <head>
 <title>{TEXT_LOGIN}</title>
 <link href="{INTERFACE_DIR_URL}/stylesheet.css" rel="stylesheet" type="text/css">
-<script language="javascript" type="text/javascript">
-function toggle_checkbox(checkbox_id) {
-	if(document.getElementById(checkbox_id).checked == true) {
-		document.getElementById(checkbox_id).checked = false;
-	} else {
-		document.getElementById(checkbox_id).checked = true;
-	}
-}
-</script>
 </head>
 <body onload="document.login.{USERNAME_FIELDNAME}.focus();">
 
@@ -56,9 +47,9 @@ function toggle_checkbox(checkbox_id) {
 			<td>&nbsp;</td>
 			<td>
 				<input type="checkbox" name="remember" id="remember" value="true" />
-				<font onclick="javascript: toggle_checkbox('remember');" style="cursor: pointer;">
+				<label for="remember">
 					{TEXT_REMEMBER_ME}
-				</font>
+				</label>
 			</td>
 		</tr>
 		<tr height="30">

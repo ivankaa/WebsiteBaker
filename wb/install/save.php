@@ -517,11 +517,11 @@ if($install_tables == true) {
 <tr>
 <td colspan="2">
 <input type="radio" name="match" id="match_all" value="all"[ALL_CHECKED] />
-<a href="javascript: toggle_radio(\'match_all\');">[TEXT_ALL_WORDS]</a>
+<label for="match_all">[TEXT_ALL_WORDS]</label>
 <input type="radio" name="match" id="match_any" value="any"[ANY_CHECKED] />
-<a href="javascript: toggle_radio(\'match_any\');">[TEXT_ANY_WORDS]</a>
+<label for="match_any">[TEXT_ANY_WORDS]</label>
 <input type="radio" name="match" id="match_exact" value="exact"[EXACT_CHECKED] />
-<a href="javascript: toggle_radio(\'match_exact\');">[TEXT_EXACT_MATCH]</a>
+<label for="match_exact">[TEXT_EXACT_MATCH]</label>
 </td>
 </tr>
 </table>
