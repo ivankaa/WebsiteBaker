@@ -41,7 +41,7 @@ class frontend extends wb {
 	var $default_link,$default_page_id;
 	// when multiple blocks are used, show home page blocks on 
 	// pages where no content is defined (search, login, ...)
-	var $no_default_block_content=false;
+	var $default_block_content=true;
 
 	// page details
 	// page database row

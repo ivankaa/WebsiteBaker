@@ -142,27 +142,30 @@ if (!function_exists('page_content')) {
 		if(!is_numeric($block)) { $block = 1; }
 		// Include page content
 		if(!defined('PAGE_CONTENT') OR $block!=1) {
-			if ($wb->page_id==0) {
+			$page_id=$wb->page_id;
+			// First get all sections for this page
+			$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '".$page_id."' AND block = '$block' ORDER BY position");
+			// If none were found, check if default content is supposed to be shown
+			if($query_sections->numRows() == 0) {
 				if ($wb->default_block_content=='none') {
 					return;
 				}
 				if (is_numeric($wb->default_block_content)) {
 					$page_id=$wb->default_block_content;
 				} else {
-					$page_id=$wb->default_page-id;
+					$page_id=$wb->default_page_id;
 				}				
-			} else {
-				$page_id=$wb->page_id;
-			}
-			// First get all sections for this page
-			$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '".$page_id."' AND block = '$block' ORDER BY position");
-			if($query_sections->numRows() > 0) {
-				// Loop through them and include there modules file
-				while($section = $query_sections->fetchRow()) {
-					$section_id = $section['section_id'];
-					$module = $section['module'];
-					require(WB_PATH.'/modules/'.$module.'/view.php');
+				$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '".$page_id."' AND block = '$block' ORDER BY position");
+				// Still no cotent found? Give it up, there's just nothing to show!
+				if($query_sections->numRows() == 0) {
+					return;
 				}
+			}
+			// Loop through them and include their module file
+			while($section = $query_sections->fetchRow()) {
+				$section_id = $section['section_id'];
+				$module = $section['module'];
+				require(WB_PATH.'/modules/'.$module.'/view.php');
 			}
 		} else {
 			require(PAGE_CONTENT);
