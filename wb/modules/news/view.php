@@ -192,15 +192,15 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[LINK]', '[DATE]', '[TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]');
 				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
 					if($post_long_len < 9) {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), stripslashes($post['short']), $post_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], '');
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], '');
 					} else {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), stripslashes($post['short']), $post_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $TEXT['READ_MORE']);
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $TEXT['READ_MORE']);
 					}
 				} else {
 					if($post_long_len < 9) {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), stripslashes($post['short']), $post_link, $post_date, $post_time, '', '', '', '', '');
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, '', '', '', '', '');
 					} else {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, stripslashes($post['title']), stripslashes($post['short']), $post_link, $post_date, $post_time, '', '', '', '', $TEXT['READ_MORE']);
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, '', '', '', '', $TEXT['READ_MORE']);
 					}
 				}
 				echo str_replace($vars, $values, $setting_post_loop);
@@ -266,10 +266,12 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			if($group_image == '') { $display_image = 'none'; } else { $display_image = ''; }
 			if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
 			$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[BACK]', '[DATE]', '[TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]');
+			$post_short=$post['content_short'];
+			$wb->preprocess($post_short);
 			if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, ($post['title']), ($post['content_short']), $page_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
+				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $post_date, $post_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
 			} else {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, ($post['title']), ($post['content_short']), $page_link, $post_date, $post_time, '', '', '', '');
+				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $post_date, $post_time, '', '', '', '');
 			}
 			$post_long = ($post['content_long']);
 		}
@@ -281,7 +283,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	echo str_replace($vars, $values, $setting_post_header);
 	
 	// Replace [wblink--PAGE_ID--] with real link
-  	$wb->preprocess($postlong);
+  	$wb->preprocess($post_long);
 	// Print long
 	echo $post_long;
 	
