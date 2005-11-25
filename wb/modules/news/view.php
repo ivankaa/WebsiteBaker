@@ -188,7 +188,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				$short = ($post['content_short']);
 				$wb->preprocess($short);
 				// Replace vars with values
-				$post_long_len = strlen($post['long']);
+				$post_long_len = strlen($post['content_long']);
 				$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[LINK]', '[DATE]', '[TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]');
 				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
 					if($post_long_len < 9) {
