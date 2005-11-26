@@ -680,7 +680,7 @@ function delete_page($page_id) {
 
 // Load module into DB
 function load_module($directory, $install = false) {
-	global $database;
+	global $database,$admin,$MESSAGE;
 	if(file_exists($directory.'/info.php')) {
 		require($directory.'/info.php');
 		if(isset($module_name)) {

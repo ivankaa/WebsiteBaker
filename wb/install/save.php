@@ -74,6 +74,16 @@ function set_error($message) {
 	}
 }
 
+// Dummy class to allow modules' install scripts to call $admin->print_error
+class admin_dummy
+{
+	var $error='';
+	function print_error($message)
+	{
+		$this->error=$message;
+	}
+}
+
 // Function to workout what the default permissions are for files created by the webserver
 function default_file_mode($temp_dir) {
 	$v = explode(".",PHP_VERSION);
@@ -564,7 +574,6 @@ if($install_tables == true) {
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` (name) VALUES ('template')");
 		
 	require_once(WB_PATH.'/framework/initialize.php');
-//	$admin = new admin('dummy');
 	
 	// Include the PclZip class file (thanks to 
 	require_once(WB_PATH.'/include/pclzip/pclzip.lib.php');
@@ -582,6 +591,8 @@ if($install_tables == true) {
 		// Unpack pre-packaged languages
 		
 	}
+	
+	$admin=new admin_dummy();
 	// Load addons into DB
 	$dirs['modules'] = WB_PATH.'/modules/';
 	$dirs['templates'] = WB_PATH.'/templates/';
@@ -593,6 +604,11 @@ if($install_tables == true) {
 					// Get addon type
 					if($type == 'modules') {
 						load_module($dir.'/'.$file, true);
+						// Pretty ugly hack to let modules run $admin->set_error
+						// See dummy class definition admin_dummy above
+						if ($admin->error!='') {
+							set_error($admin->error);
+						}
 					} elseif($type == 'templates') {
 						load_template($dir.'/'.$file);
 					} elseif($type == 'languages') {
