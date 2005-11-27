@@ -431,6 +431,7 @@ if($install_tables == true) {
 	." ('', 'manage_sections', 'true'),"
 	." ('', 'section_blocks', 'false'),"
 	." ('', 'smart_login', 'false'),"
+	." ('', 'captcha_verification', 'true'),"
 	." ('', 'frontend_login', 'false'),"
 	." ('', 'frontend_signup', 'false'),"
 	." ('', 'server_email', '$admin_email'),"
