@@ -27,6 +27,9 @@ if(!defined('WB_URL')) {
 	header('Location: ../pages/index.php');
 }
 
+require_once(WB_PATH.'/framework/class.admin.php');
+$admin = new admin('Start', 'start', false, false);
+
 // Create new database object
 $database = new database();
 
@@ -54,6 +57,18 @@ if($email != "") {
 } else {
 	$admin->print_error($MESSAGE['SIGNUP']['NO_EMAIL'], $js_back);
 }
+// Captcha
+if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
+	if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
+		// Check for a mismatch
+		if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
+			$admin->print_error($MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'], $js_back);
+		}
+	} else {
+		$admin->print_error($MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'], $js_back);
+	}
+}
+if(isset($_SESSION['catpcha'])) { unset($_SESSION['captcha']); }
 
 // Generate a random password then update the database with it
 $new_pass = '';

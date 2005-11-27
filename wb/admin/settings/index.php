@@ -319,6 +319,11 @@ if(defined('CAPTCHA_VERIFICATION') AND CAPTCHA_VERIFICATION == true) {
 } else {
 	$template->set_var('CAPTCHA_VERIFICATION_DISABLED', ' checked');
 }
+if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
+	$template->set_var('GD_EXTENSION_ENABLED', '');
+} else {
+	$template->set_var('GD_EXTENSION_ENABLED', 'none');
+}
 
 // Work-out if section blocks feature is enabled
 if(defined('SECTION_BLOCKS') AND SECTION_BLOCKS == true) {

@@ -1,6 +1,6 @@
 <?php
 
-// $Id: signup_form.php,v 1.2 2005/04/08 07:36:57 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -58,6 +58,24 @@ if(!defined('WB_URL')) {
 		<input type="text" name="email" maxlength="255" />
 	</td>
 </tr>
+<?php
+// Captcha
+if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
+	if(CAPTCHA_VERIFICATION == true) {
+		$_SESSION['captcha'] = '';
+		for($i = 0; $i < 5; $i++) {
+			$_SESSION['captcha'] .= rand(0,9);
+		}
+		?><tr><td class="field_title"><?php echo $TEXT['VERIFICATION']; ?>:</td><td>
+		<table cellpadding="2" cellspacing="0" border="0">
+		<tr><td><img src="<?php echo WB_URL; ?>/include/captcha.php" alt="Captcha" /></td>
+		<td><input type="text" name="captcha" maxlength="5" /></td>
+		</tr></table>
+		</td></tr>
+		<?php
+	}
+}
+?>
 <tr>
 	<td>&nbsp;</td>
 	<td>
