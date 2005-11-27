@@ -87,19 +87,9 @@ $comments_footer = '</table>
 <br /><a href=\"[ADD_COMMENT_URL]\">Add Comment</a>';
 $comments_page = '<h1>Comment</h1>
 <h2>[POST_TITLE]</h2>
-<br />
-<form name=\"comment\" action=\"[ACTION_URL]\" method=\"post\">
-Title:
-<br />
-<input type=\"text\" name=\"title\" maxlength=\"255\" style=\"width: 90%;\" />
-<br /><br />
-Comment:
-<br />
-<textarea name=\"comment\" style=\"width: 90%; height: 150px;\"></textarea>
-<br /><br />
-<input type=\"submit\" name=\"submit\" value=\"Add Comment\" />';
+<br />';
 $commenting = 'none';
-
-$database->query("INSERT INTO ".TABLE_PREFIX."mod_news_settings (section_id,page_id,header,post_loop,footer,post_header,post_footer,comments_header,comments_loop,comments_footer,comments_page,commenting) VALUES ('$section_id','$page_id','$header','$post_loop','$footer','$post_header','$post_footer','$comments_header','$comments_loop','$comments_footer','$comments_page','$commenting')");
+$use_captcha = true;
+$database->query("INSERT INTO ".TABLE_PREFIX."mod_news_settings (section_id,page_id,header,post_loop,footer,post_header,post_footer,comments_header,comments_loop,comments_footer,comments_page,commenting,use_captcha) VALUES ('$section_id','$page_id','$header','$post_loop','$footer','$post_header','$post_footer','$comments_header','$comments_loop','$comments_footer','$comments_page','$commenting','$use_captcha')");
 
 ?>

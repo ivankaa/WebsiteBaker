@@ -45,12 +45,14 @@ $commenting = $_POST['commenting'];
 $posts_per_page = $_POST['posts_per_page'];
 if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) {
 	$resize = $_POST['resize'];
+	$use_captcha = $_POST['use_captcha'];
 } else {
 	$resize = '';
+	$use_captcha = false;
 }
 
 // Update settings
-$database->query("UPDATE ".TABLE_PREFIX."mod_news_settings SET header = '$header', post_loop = '$post_loop', footer = '$footer', posts_per_page = '$posts_per_page', post_header = '$post_header', post_footer = '$post_footer', comments_header = '$comments_header', comments_loop = '$comments_loop', comments_footer = '$comments_footer', comments_page = '$comments_page', commenting = '$commenting', resize = '$resize' WHERE section_id = '$section_id'");
+$database->query("UPDATE ".TABLE_PREFIX."mod_news_settings SET header = '$header', post_loop = '$post_loop', footer = '$footer', posts_per_page = '$posts_per_page', post_header = '$post_header', post_footer = '$post_footer', comments_header = '$comments_header', comments_loop = '$comments_loop', comments_footer = '$comments_footer', comments_page = '$comments_page', commenting = '$commenting', resize = '$resize', use_captcha = '$use_captcha' WHERE section_id = '$section_id'");
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {

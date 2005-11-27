@@ -27,15 +27,48 @@
 if(!defined('WB_URL')) { header('Location: ../index.php'); }
 	
 // Get comments page template details from db
-$query_settings = $database->query("SELECT comments_page FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
+$query_settings = $database->query("SELECT comments_page,use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
 if($query_settings->numRows() == 0) {
 	header('Location: '.WB_URL.'/pages/');
 } else {
 	$settings = $query_settings->fetchRow();
 	// Print comments page
-	$vars = array('[POST_TITLE]', '[ACTION_URL]');
-	$values = array(POST_TITLE, WB_URL.'/modules/news/submit_comment.php?page_id='.PAGE_ID.'&section_id='.SECTION_ID.'&post_id='.POST_ID);
-	echo str_replace($vars, $values, ($settings['comments_page']));
+	echo str_replace('[POST_TITLE]', POST_TITLE, ($settings['comments_page']));
+	?>
+	<form name="comment" action="<?php echo WB_URL.'/modules/news/submit_comment.php?page_id='.PAGE_ID.'&section_id='.SECTION_ID.'&post_id='.POST_ID; ?>" method="post">
+	<?php echo $TEXT['TITLE']; ?>:
+	<br />
+	<input type="text" name="title" maxlength="255" style="width: 90%;"<?php if(isset($_SESSION['comment_title'])) { echo ' value="'.$_SESSION['comment_title'].'"'; unset($_SESSION['comment_title']); } ?> />
+	<br /><br />
+	<?php echo $TEXT['COMMENT']; ?>:
+	<br />
+	<textarea name="comment" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
+	<br /><br />
+	<?php
+	if(isset($_SESSION['captcha_error'])) {
+		echo '<font color="#FF0000">'.$_SESSION['captcha_error'].'</font><br />';
+		unset($_SESSION['captcha_error']);
+	}
+	// Captcha
+	if($settings['use_captcha']) {
+	$_SESSION['captcha'] = '';
+	for($i = 0; $i < 5; $i++) {
+		$_SESSION['captcha'] .= rand(0,9);
+	}
+	?>
+	<table cellpadding="2" cellspacing="0" border="0">
+	<tr>
+	<td><?php echo $TEXT['VERIFICATION']; ?>:</td>
+	<td><img src="<?php echo WB_URL; ?>/include/captcha.php" alt="Captcha" /></td>
+	<td><input type="text" name="captcha" maxlength="5" /></td>
+	</tr></table>
+	<br />
+	<?php
+	}
+	?>
+	<input type="submit" name="submit" value="<?php echo $TEXT['ADD']; ?> <?php echo $TEXT['COMMENT']; ?>" />
+	</form>	
+	<?php
 }
 
 ?>

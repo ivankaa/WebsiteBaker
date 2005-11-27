@@ -23,8 +23,8 @@
 
 */
  
-if (file_exists(WB_PATH.'/framework/class.database.php'))
-{
+if (file_exists(WB_PATH.'/framework/class.database.php')) {
+	
 	require_once(WB_PATH.'/framework/class.database.php');
 		
 	// Create database class

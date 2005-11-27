@@ -41,7 +41,11 @@ $header = $admin->add_slashes($_POST['header']);
 $field_loop = $admin->add_slashes($_POST['field_loop']);
 $footer = $admin->add_slashes($_POST['footer']);
 $email_to = $admin->add_slashes($_POST['email_to']);
-$use_captcha = $_POST['use_captcha'];
+if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) {
+	$use_captcha = $_POST['use_captcha'];
+} else {
+	$use_captcha = false;
+}
 if($_POST['email_from_field'] == '') {
 	$email_from = $admin->add_slashes($_POST['email_from']);
 } else {

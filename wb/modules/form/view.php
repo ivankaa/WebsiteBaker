@@ -269,7 +269,7 @@ echo $footer;
 	if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
 		if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
 			// Check for a mismatch
-			if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR !$_POST['captcha'] == $_SESSION['captcha']) {
+			if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
 				$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 			}
 		} else {

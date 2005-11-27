@@ -38,7 +38,7 @@ if(defined('WB_URL')) {
 					 . '`content_short` TEXT NOT NULL,'
 					 . '`content_long` TEXT NOT NULL,'
 					 . '`commenting` VARCHAR(7) NOT NULL,'
-		   	    . '`posted_when` INT NOT NULL ,'
+		   	    	 . '`posted_when` INT NOT NULL ,'
 					 . '`posted_by` INT NOT NULL ,'
 					 . 'PRIMARY KEY (post_id)'
                 . ' )';
@@ -86,6 +86,7 @@ if(defined('WB_URL')) {
 					 . '`comments_page` TEXT NOT NULL,'
 					 . '`commenting` VARCHAR(7) NOT NULL,'
 					 . '`resize` INT NOT NULL,'
+					 . ' `use_captcha` INT NOT NULL,'
 					 . 'PRIMARY KEY (section_id)'
                 . ' )';
 	$database->query($mod_news);

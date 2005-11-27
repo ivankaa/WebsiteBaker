@@ -26,8 +26,30 @@
 // Include config file
 require('../../config.php');
 
+require_once(WB_PATH.'/framework/class.wb.php');
+$wb = new wb;
+
 // Check if we should show the form or add a comment
 if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_GET['post_id']) AND is_numeric($_GET['post_id']) AND isset($_POST['comment']) AND $_POST['comment'] != '') {
+	
+	// Check captcha
+	if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
+		if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
+			// Check for a mismatch
+			if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
+				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
+				$_SESSION['comment_title'] = $_POST['title'];
+				$_SESSION['comment_body'] = $_POST['comment'];
+				exit(header('Location: '.WB_URL.'/modules/news/comment.php?id='.$_GET['post_id']));
+			}
+		} else {
+			$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
+			$_SESSION['comment_title'] = $_POST['title'];
+			$_SESSION['comment_body'] = $_POST['comment'];
+			exit(header('Location: '.WB_URL.'/modules/news/comment.php?id='.$_GET['post_id']));
+		}
+	}
+	if(isset($_SESSION['catpcha'])) { unset($_SESSION['captcha']); }
 	
 	// Insert the comment into db
 	$page_id = $_GET['page_id'];
