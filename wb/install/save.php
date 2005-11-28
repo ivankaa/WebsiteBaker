@@ -421,6 +421,7 @@ if($install_tables == true) {
 	." ('', 'default_time_format', 'g:i A'),"
 	." ('', 'home_folders', 'true'),"
 	." ('', 'default_template', 'round'),"
+	." ('', 'default_charset', 'utf-8'),"
 	." ('', 'multiple_menus', 'false'),"
 	." ('', 'page_level_limit', '4'),"
 	." ('', 'intro_page', 'false'),"

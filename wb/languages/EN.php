@@ -389,6 +389,8 @@ $TEXT['RESTORE_MEDIA'] = 'Restore Media';
 $TEXT['ADMINISTRATION_TOOL'] = 'Administration tool';
 $TEXT['CAPTCHA_VERIFICATION'] = 'Captcha Verification';
 $TEXT['VERIFICATION'] = 'Verification';
+$TEXT['DEFAULT_CHARSET'] = 'Default Charset';
+$TEXT['CHARSET'] = 'Charset';
 
 
 // Success/error messages

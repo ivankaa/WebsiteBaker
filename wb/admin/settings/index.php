@@ -174,6 +174,20 @@ foreach($TIMEZONES AS $hour_offset => $title) {
 	}
 }
 
+// Insert default charset values
+require(ADMIN_PATH.'/interface/charsets.php');
+$template->set_block('main_block', 'charset_list_block', 'charset_list');
+foreach($CHARSETS AS $code => $title) {
+	$template->set_var('VALUE', $code);
+	$template->set_var('NAME', $title);
+	if(DEFAULT_CHARSET == $code) {
+		$template->set_var('SELECTED', 'selected');
+	} else {
+		$template->set_var('SELECTED', '');
+	}
+	$template->parse('charset_list', 'charset_list_block', true);
+}
+
 // Insert date format list
 require(ADMIN_PATH.'/interface/date_formats.php');
 $template->set_block('main_block', 'date_format_list_block', 'date_format_list');
@@ -507,6 +521,7 @@ $template->set_var(array(
 								'TEXT_DEFAULT' => $TEXT['DEFAULT'],
 								'TEXT_LANGUAGE' => $TEXT['LANGUAGE'],
 								'TEXT_TIMEZONE' => $TEXT['TIMEZONE'],
+								'TEXT_CHARSET' => $TEXT['CHARSET'],
 								'TEXT_DATE_FORMAT' => $TEXT['DATE_FORMAT'],
 								'TEXT_TIME_FORMAT' => $TEXT['TIME_FORMAT'],
 								'TEXT_TEMPLATE' => $TEXT['TEMPLATE'],

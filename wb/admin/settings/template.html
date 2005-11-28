@@ -263,6 +263,17 @@ function change_os(type) {
 		</select>
 	</td>
 </tr>
+<tr class="advanced">
+	<td class="setting_name">{TEXT_CHARSET}:</td>
+	<td class="setting_value" colspan="2">
+		<select name="default_charset">
+			<option value="">{TEXT_PLEASE_SELECT}...</option>
+			<!-- BEGIN charset_list_block -->
+				<option value="{VALUE}" {SELECTED}>{NAME}</option>
+			<!-- END charset_list_block -->
+		</select>
+	</td>
+</tr>
 <tr>
 	<td class="setting_name">{TEXT_TIMEZONE}:</td>
 	<td class="setting_value" colspan="2">
