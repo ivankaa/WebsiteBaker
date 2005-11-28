@@ -29,6 +29,7 @@ require('../../../config.php');
 require(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
 // Include the database class file and initiate an object
 require(WB_PATH.'/framework/class.admin.php');
+$admin = new admin('Start', 'start', false, false);
 $database = new database();
 
 // Get the website title
