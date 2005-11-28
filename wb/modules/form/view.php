@@ -241,25 +241,18 @@ echo $footer;
 			if($field['type'] != '') {
 				if(!empty($_POST['field'.$field['field_id']])) {
 					if($field['type'] == 'heading') {
-					$email_body .= '
-					
-	'.$_POST['field'.$field['field_id']];
+						$email_body .= $_POST['field'.$field['field_id']]."\n\n";
 					} elseif (!is_array($_POST['field'.$field['field_id']])) {
-					$email_body .= '
-					
-	'.$field['title'].': '.$_POST['field'.$field['field_id']]."\n";
+						$email_body .= $field['title'].': '.$_POST['field'.$field['field_id']]."\n\n";
 					} else {
-						$email_body .= '
-					
-	'.$field['title'].": \n";
+						$email_body .= $field['title'].": \n";
 						foreach ($_POST['field'.$field['field_id']] as $k=>$v) {
-							$email_body .= '
-					
-	'.$v;
+							$email_body .= $v."\n";
 						}
+						$email_body .= "\n";
 					}
 				} elseif($field['required'] == 1) {
-				$required[] = $field['title'];
+					$required[] = $field['title'];
 				}
 			}
 		}
