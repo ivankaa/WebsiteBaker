@@ -11,6 +11,15 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.0 -------------------------------------
+28-Nov-2005 Ryan Djurovich
++	Added default charset option to (advanced) settings
+#	Form module email fields now have email address validation
+#	Fixed spacing in form submissions
+27-Nov-2005 Ryan Djurovich
++	Added captcha verification to sign-up form
++	Added Captcha to News module
+24-Nov-2005 Stefan Braunewell
+!	Applied aportale's patch to use label instead of javascript toggle code
 20-Nov-2005 Ryan Djurovich
 !	News mod now hides read more link if no need for it (see ticket #56)
 +	Added support for mailto: links in the menu link mod
