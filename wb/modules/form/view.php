@@ -240,6 +240,9 @@ echo $footer;
 			// Add to message body
 			if($field['type'] != '') {
 				if(!empty($_POST['field'.$field['field_id']])) {
+					if($field['type'] == 'email' AND $admin->validate_email($_POST['field'.$field['field_id']]) == false) {
+						$email_error = $MESSAGE['USERS']['INVALID_EMAIL'];
+					}
 					if($field['type'] == 'heading') {
 						$email_body .= $_POST['field'.$field['field_id']]."\n\n";
 					} elseif (!is_array($_POST['field'.$field['field_id']])) {
@@ -285,12 +288,17 @@ echo $footer;
 		foreach($required AS $field_title) {
 			echo '<li>'.$field_title;
 		}
+		if(isset($email_error)) { echo '<li>'.$email_error.'</li>'; }
 		if(isset($captcha_error)) { echo '<li>'.$captcha_error.'</li>'; }
 		echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
 		
 	} else {
 		
-		if(isset($captcha_error)) {
+		if(isset($email_error)) {
+			echo '<br /><ul>';
+			echo '<li>'.$email_error.'</li>';
+			echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
+		} elseif(isset($captcha_error)) {
 			echo '<br /><ul>';
 			echo '<li>'.$captcha_error.'</li>';
 			echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
