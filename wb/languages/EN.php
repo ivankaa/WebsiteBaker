@@ -398,7 +398,7 @@ $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, you do not have p
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Insufficient privelliges to be here';
 
-$MESSAGE['LOGIN']['BOTH_BLANK'] = 'Please enter you username and password below';
+$MESSAGE['LOGIN']['BOTH_BLANK'] = 'Please enter your username and password below';
 $MESSAGE['LOGIN']['USERNAME_BLANK'] = 'Please enter a username';
 $MESSAGE['LOGIN']['PASSWORD_BLANK'] = 'Please enter a password';
 $MESSAGE['LOGIN']['USERNAME_TOO_SHORT'] = 'Supplied username to short';
