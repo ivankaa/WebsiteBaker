@@ -211,7 +211,7 @@ echo $footer;
 	
 	// Submit form data
 	// First start message settings
-	$query_settings = $database->query("SELECT email_to,email_from,email_subject,success_message,max_submissions,stored_submissions FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
+	$query_settings = $database->query("SELECT email_to,email_from,email_subject,success_message,max_submissions,stored_submissions,use_captcha FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 	if($query_settings->numRows() > 0) {
 		$fetch_settings = $query_settings->fetchRow();
 		$email_to = $fetch_settings['email_to'];
@@ -224,6 +224,7 @@ echo $footer;
 		$success_message = $fetch_settings['success_message'];
 		$max_submissions = $fetch_settings['max_submissions'];
 		$stored_submissions = $fetch_settings['stored_submissions'];
+		$use_captcha = $fetch_settings['use_captcha'];
 	} else {
 		exit($TEXT['UNDER_CONSTRUCTION']);
 	}
@@ -263,13 +264,15 @@ echo $footer;
 	
 	// Captcha
 	if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
-		if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
-			// Check for a mismatch
-			if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
+		if($use_captcha) {
+			if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
+				// Check for a mismatch
+				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
+					$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
+				}
+			} else {
 				$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 			}
-		} else {
-			$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 		}
 	}
 	if(isset($_SESSION['catpcha'])) { unset($_SESSION['captcha']); }
