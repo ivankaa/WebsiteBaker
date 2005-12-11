@@ -70,7 +70,7 @@ class login extends admin {
 			$username_fieldname = 'username';
 			$password_fieldname = 'password';
 		}
-		$this->username = strtolower($this->get_post($username_fieldname));
+		$this->username = $this->addslashes(strtolower($this->get_post($username_fieldname)));
 		$this->password = $this->get_post($password_fieldname);
 		// Figure out if the "remember me" option has been checked
 		if($this->get_post('remember') == 'true') {
