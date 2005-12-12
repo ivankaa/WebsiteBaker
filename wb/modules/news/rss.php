@@ -23,23 +23,26 @@
 
 */
 
-// Include WB files
-require_once('../../config.php');
-require_once(WB_PATH.'/framework/class.frontend.php');
-$database = new database();
-$wb = new frontend();
-$wb->get_page_details();
-$wb->get_website_settings();
-
 // Check that GET values have been supplied
 if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])) {
 	$page_id = $_GET['page_id'];
+	define('PAGE_ID', $page_id);
 } else {
 	header('Location: '.WB_URL);
 }
 if(isset($_GET['group_id']) AND is_numeric($_GET['group_id'])) {
 	$group_id = $_GET['group_id'];
+	define('GROUP_ID', $group_id);
 }
+
+// Include WB files
+require_once('../../config.php');
+require_once(WB_PATH.'/framework/class.frontend.php');
+$database = new database();
+$wb = new frontend();
+$wb->page_id = $page_id;
+$wb->get_page_details();
+$wb->get_website_settings();
 
 // Sending XML header
 header("Content-type: text/xml");
