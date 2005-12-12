@@ -28,6 +28,11 @@ if(!isset($_POST['code']) OR $_POST['code'] == "") {
 	header("Location: index.php");
 }
 
+// Extra protection
+if(trim($_POST['code']) == '') {
+	header("Location: index.php");
+}
+
 // Setup admin object
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
