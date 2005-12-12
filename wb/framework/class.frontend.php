@@ -166,6 +166,11 @@ class frontend extends wb {
 			}
 			// Page description
 			$this->page_description=$this->page['description'];
+			if($this->page_description != '') {
+				define('PAGE_DESCRIPTION', $this->page_description);
+			} else {
+				define('PAGE_DESCRIPTION', WEBSITE_DESCRIPTION);
+			}
 			// Page keywords
 			$this->page_keywords=$this->page['keywords'];
 			// Page link
