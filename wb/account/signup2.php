@@ -58,7 +58,7 @@ if($email != "") {
 	$admin->print_error($MESSAGE['SIGNUP']['NO_EMAIL'], $js_back);
 }
 // Captcha
-if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
+if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND CAPTCHA_VERIFICATION) { /* Make's sure GD library is installed */
 	if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
 		// Check for a mismatch
 		if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {

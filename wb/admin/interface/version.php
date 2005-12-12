@@ -35,6 +35,6 @@ if(!defined('WB_URL')) {
 	header('Location: ../index.php');
 }
 
-define('VERSION', '2.6.0');
+define('VERSION', '2.6.1');
 
 ?>

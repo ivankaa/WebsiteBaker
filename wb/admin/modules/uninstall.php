@@ -30,6 +30,11 @@ if(!isset($_POST['file']) OR $_POST['file'] == "") {
 	$file = $_POST['file'];
 }
 
+// Extra protection
+if(trim($file) == '') {
+	header("Location: index.php");
+}
+
 // Setup admin object
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
