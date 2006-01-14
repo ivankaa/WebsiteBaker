@@ -27,8 +27,8 @@ if(!defined('WB_URL')) {
 	header('Location: ../pages/index.php');
 }
 
-require_once(WB_PATH.'/framework/class.admin.php');
-$admin = new admin('Start', 'start', false, false);
+require_once(WB_PATH.'/framework/class.wb.php');
+$wb = new wb('Start', 'start', false, false);
 
 // Create new database object
 $database = new database();
@@ -36,36 +36,36 @@ $database = new database();
 // Get details entered
 $group_id = FRONTEND_SIGNUP;
 $active = 1;
-$username = strtolower($admin->get_post('username'));
-$display_name = $admin->get_post('display_name');
-$email = $admin->get_post('email');
+$username = strtolower($wb->get_post('username'));
+$display_name = $wb->get_post('display_name');
+$email = $wb->get_post('email');
 
 // Create a javascript back link
 $js_back = "javascript: history.go(-1);";
 
 // Check values
 if($group_id == "") {
-	$admin->print_error($MESSAGE['USERS']['NO_GROUP'], $js_back);
+	$wb->print_error($MESSAGE['USERS']['NO_GROUP'], $js_back, false);
 }
 if(strlen($username) < 3) {
-	$admin->print_error($MESSAGE['USERS']['USERNAME_TOO_SHORT'], $js_back);
+	$wb->print_error($MESSAGE['USERS']['USERNAME_TOO_SHORT'], $js_back, false);
 }
 if($email != "") {
-	if($admin->validate_email($email) == false) {
-		$admin->print_error($MESSAGE['USERS']['INVALID_EMAIL'], $js_back);
+	if($wb->validate_email($email) == false) {
+		$wb->print_error($MESSAGE['USERS']['INVALID_EMAIL'], $js_back, false);
 	}
 } else {
-	$admin->print_error($MESSAGE['SIGNUP']['NO_EMAIL'], $js_back);
+	$wb->print_error($MESSAGE['SIGNUP']['NO_EMAIL'], $js_back, false);
 }
 // Captcha
 if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND CAPTCHA_VERIFICATION) { /* Make's sure GD library is installed */
 	if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
 		// Check for a mismatch
 		if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
-			$admin->print_error($MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'], $js_back);
+			$wb->print_error($MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'], $js_back, false);
 		}
 	} else {
-		$admin->print_error($MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'], $js_back);
+		$wb->print_error($MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'], $js_back, false);
 	}
 }
 if(isset($_SESSION['catpcha'])) { unset($_SESSION['captcha']); }
@@ -86,16 +86,16 @@ $md5_password = md5($new_pass);
 // Check if username already exists
 $results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE username = '$username'");
 if($results->numRows() > 0) {
-	$admin->print_error($MESSAGE['USERS']['USERNAME_TAKEN'], $js_back);
+	$wb->print_error($MESSAGE['USERS']['USERNAME_TAKEN'], $js_back, false);
 }
 
 // Check if the email already exists
 $results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($_POST['email'])."'");
 if($results->numRows() > 0) {
 	if(isset($MESSAGE['USERS']['EMAIL_TAKEN'])) {
-		$admin->print_error($MESSAGE['USERS']['EMAIL_TAKEN'], $js_back);
+		$wb->print_error($MESSAGE['USERS']['EMAIL_TAKEN'], $js_back, false);
 	} else {
-		$admin->print_error($MESSAGE['USERS']['INVALID_EMAIL'], $js_back);
+		$wb->print_error($MESSAGE['USERS']['INVALID_EMAIL'], $js_back, false);
 	}
 }
 
@@ -126,10 +126,10 @@ If you have recieved this message in error, please delete it immediatly.';
 
 	// Try sending the email
 	if(mail($mail_to, $mail_subject, $mail_message, 'From: '.SERVER_EMAIL)) {
-		$admin->print_success($MESSAGE['FORGOT_PASS']['PASSWORD_RESET'], WB_URL.'/account/login'.PAGE_EXTENSION);
+		$wb->print_success($MESSAGE['FORGOT_PASS']['PASSWORD_RESET'], WB_URL.'/account/login'.PAGE_EXTENSION);
 		$display_form = false;
 	} else {
-		$admin->print_error($MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'], $js_back);
+		$wb->print_error($MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'], $js_back, false);
 	}
 }
 

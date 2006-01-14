@@ -31,6 +31,9 @@ This class is the basis for admin and frontend classes.
 
 */
 
+// Include PHPLIB template class
+require_once(WB_PATH."/include/phplib/template.inc");
+
 require_once(WB_PATH.'/framework/class.database.php');
 
 class wb
@@ -193,6 +196,35 @@ class wb
 		}
 	}
 
+	// Print a success message which then automatically redirects the user to another page
+	function print_success($message, $redirect = 'index.php') {
+		global $TEXT;
+		$success_template = new Template(ADMIN_PATH.'/interface');
+		$success_template->set_file('page', 'success.html');
+		$success_template->set_block('page', 'main_block', 'main');
+		$success_template->set_var('MESSAGE', $message);
+		$success_template->set_var('REDIRECT', $redirect);
+		$success_template->set_var('NEXT', $TEXT['NEXT']);
+		$success_template->parse('main', 'main_block', false);
+		$success_template->pparse('output', 'page');
+	}
 	
+	// Print an error message
+	function print_error($message, $link = 'index.php', $auto_footer = true) {
+		global $TEXT;
+		$success_template = new Template(ADMIN_PATH.'/interface');
+		$success_template->set_file('page', 'error.html');
+		$success_template->set_block('page', 'main_block', 'main');
+		$success_template->set_var('MESSAGE', $message);
+		$success_template->set_var('LINK', $link);
+		$success_template->set_var('BACK', $TEXT['BACK']);
+		$success_template->parse('main', 'main_block', false);
+		$success_template->pparse('output', 'page');
+		if($auto_footer == true) {
+			$this->print_footer();
+		}
+		exit();
+	}
+
 }
 ?>

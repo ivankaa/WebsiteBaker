@@ -28,23 +28,23 @@ if(!defined('WB_URL')) {
 }
 
 // Get entered values
-$display_name = $admin->get_post('display_name');
-$language = $admin->get_post('language');
-$timezone = $admin->get_post('timezone')*60*60;
-$date_format = $admin->get_post('date_format');
-$time_format = $admin->get_post('time_format');
+$display_name = $wb->get_post('display_name');
+$language = $wb->get_post('language');
+$timezone = $wb->get_post('timezone')*60*60;
+$date_format = $wb->get_post('date_format');
+$time_format = $wb->get_post('time_format');
 
 // Create a javascript back link
 $js_back = "javascript: history.go(-1);";
 
 // Update the database
 $database = new database();
-$query = "UPDATE ".TABLE_PREFIX."users SET display_name = '$display_name', language = '$language', timezone = '$timezone', date_format = '$date_format', time_format = '$time_format' WHERE user_id = '".$admin->get_user_id()."'";
+$query = "UPDATE ".TABLE_PREFIX."users SET display_name = '$display_name', language = '$language', timezone = '$timezone', date_format = '$date_format', time_format = '$time_format' WHERE user_id = '".$wb->get_user_id()."'";
 $database->query($query);
 if($database->is_error()) {
-	$admin->print_error($database->get_error);
+	$wb->print_error($database->get_error,'index.php',false);
 } else {
-	$admin->print_success($MESSAGE['PREFERENCES']['DETAILS_SAVED'], WB_URL.'/account/preferences'.PAGE_EXTENSION);
+	$wb->print_success($MESSAGE['PREFERENCES']['DETAILS_SAVED'], WB_URL.'/account/preferences'.PAGE_EXTENSION);
 	$_SESSION['DISPLAY_NAME'] = $display_name;
 	$_SESSION['LANGUAGE'] = $language;
 	$_SESSION['TIMEZONE'] = $timezone;
