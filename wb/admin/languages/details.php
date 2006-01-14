@@ -1,6 +1,6 @@
 <?php
 
-// $Id: details.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -73,7 +73,8 @@ $template->set_var(array(
 								'TEXT_TYPE' => $TEXT['TYPE'],
 								'TEXT_AUTHOR' => $TEXT['AUTHOR'],
 								'TEXT_VERSION' => $TEXT['VERSION'],
-								'TEXT_DESIGNED_FOR' => $TEXT['DESIGNED_FOR']
+								'TEXT_DESIGNED_FOR' => $TEXT['DESIGNED_FOR'],
+								'TEXT_BACK' => $TEXT['BACK']
 								)
 						);
 

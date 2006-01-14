@@ -97,7 +97,8 @@ $template->set_var(array(
 								'TEXT_AUTHOR' => $TEXT['AUTHOR'],
 								'TEXT_VERSION' => $TEXT['VERSION'],
 								'TEXT_DESIGNED_FOR' => $TEXT['DESIGNED_FOR'],
-								'TEXT_DESCRIPTION' => $TEXT['DESCRIPTION']
+								'TEXT_DESCRIPTION' => $TEXT['DESCRIPTION'],
+								'TEXT_BACK' => $TEXT['BACK']
 								)
 						);
 
