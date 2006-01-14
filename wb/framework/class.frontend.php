@@ -56,7 +56,7 @@ class frontend extends wb {
 	var $website_title,$website_description,$website_keywords,$website_header,$website_footer;
 
 	// ugly database stuff
-	var $extra_where_sql;
+	var $extra_where_sql, $sql_where_language;
 
 	function page_select() {
 		global $page_id,$no_intro;

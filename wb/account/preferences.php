@@ -23,7 +23,7 @@
 
 */
 
-require('../config.php');
+require_once('../config.php');
 
 if(!FRONTEND_LOGIN) {
 	if(INTRO_PAGE) {

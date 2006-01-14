@@ -23,7 +23,7 @@
 
 */
 
-require('../config.php');
+require_once('../config.php');
 
 if(!is_numeric(FRONTEND_SIGNUP)) {
 	if(INTRO_PAGE) {

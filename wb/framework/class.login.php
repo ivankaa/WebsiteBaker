@@ -61,7 +61,10 @@ class login extends admin {
 		$this->forgotten_details_app = $config_array['FORGOTTEN_DETAILS_APP'];
 		$this->max_username_len = $config_array['MAX_USERNAME_LEN'];
 		$this->max_password_len = $config_array['MAX_PASSWORD_LEN'];
-		$this->redirect_url = $config_array['REDIRECT_URL'];
+		if (array_key_exists('REDIRECT_URL',$config_array))
+			$this->redirect_url = $config_array['REDIRECT_URL'];
+		else
+			$this->redirect_url = '';
 		// Get the supplied username and password
 		if ($this->get_post('username_fieldname') != ''){
 			$username_fieldname = $this->get_post('username_fieldname');

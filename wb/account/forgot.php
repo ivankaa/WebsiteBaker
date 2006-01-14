@@ -23,7 +23,7 @@
 
 */
 
-require('../config.php');
+require_once('../config.php');
 
 // Required page details
 $page_id = 0;
