@@ -373,11 +373,11 @@ class frontend extends wb {
 		global $MESSAGE;
 		require_once(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
 		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-		<head><title>'.$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'].'</title>
+		<head><title>'.$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'].'</title>
 		<style type="text/css"><!-- body { font-family: Verdana, Arial, Helvetica, sans-serif;
 		font-size: 12px; color: #000000;	background-color: #FFFFFF;	margin: 20px; text-align: center; }
 		h1 { margin: 0; padding: 0; }--></style></head><body>
-		<h1>'.$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'];'.</h1><br />
+		<h1>'.$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'];'.</h1><br />
 		'.$MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'].'</body></html>';
 	}
 }
