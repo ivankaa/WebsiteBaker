@@ -377,7 +377,7 @@ class frontend extends wb {
 		<style type="text/css"><!-- body { font-family: Verdana, Arial, Helvetica, sans-serif;
 		font-size: 12px; color: #000000;	background-color: #FFFFFF;	margin: 20px; text-align: center; }
 		h1 { margin: 0; padding: 0; }--></style></head><body>
-		<h1>'.$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'];'.</h1><br />
+		<h1>'.$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'].'</h1><br />
 		'.$MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'].'</body></html>';
 	}
 }
