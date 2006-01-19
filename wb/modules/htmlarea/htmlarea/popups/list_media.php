@@ -44,11 +44,11 @@ if($popup == 'image') {
 // Get the directory to browse
 $directory = $admin->get_get('folder');
 if($directory == '') {
-	$directory = '/media';
+	$directory = MEDIA_DIRECTORY;
 }
 // If the directory contains ../ then set it to /media
 if(strstr($directory, '../')) {
-	$directory = '/media';
+	$directory = MEDIA_DIRECTORY;
 }
 
 // Insert files into the file list

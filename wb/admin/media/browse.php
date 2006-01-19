@@ -48,7 +48,7 @@ if(strstr($directory, '../')) {
 	$admin->print_error($MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH']);
 }
 
-if(!file_exists(WB_PATH.'/media'.$directory)) {
+if(!file_exists(WB_PATH.MEDIA_DIRECTORY.$directory)) {
 	$admin->print_header();
 	$admin->print_error($MESSAGE['MEDIA']['DIR_DOES_NOT_EXIST']);
 }

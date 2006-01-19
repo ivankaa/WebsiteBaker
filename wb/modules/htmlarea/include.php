@@ -23,7 +23,7 @@
 
 */
 
-$WB_DIRECTORY = substr(WB_PATH, strlen($_SERVER['DOCUMENT_ROOT'])).'/media/';
+$WB_DIRECTORY = substr(WB_PATH, strlen($_SERVER['DOCUMENT_ROOT'])).MEDIA_DIRECTORY.'/';
 
 ?>
 

@@ -38,11 +38,11 @@ $template->set_block('page', 'main_block', 'main');
 // Get the directory to browse
 $directory = $admin->get_post('folder');
 if($directory == '') {
-	$directory = '/media';
+	$directory = MEDIA_DIRECTORY;
 }
 // If the directory contains ../ then set it to /media
 if(strstr($directory, '../')) {
-	$directory = '/media';
+	$directory = MEDIA_DIRECTORY;
 }
 
 // Include the WB functions file
