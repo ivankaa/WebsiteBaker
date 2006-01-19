@@ -68,7 +68,7 @@ if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND CAPTCHA
 		$wb->print_error($MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'], $js_back, false);
 	}
 }
-if(isset($_SESSION['catpcha'])) { unset($_SESSION['captcha']); }
+if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 
 // Generate a random password then update the database with it
 $new_pass = '';

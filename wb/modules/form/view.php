@@ -275,7 +275,7 @@ echo $footer;
 			}
 		}
 	}
-	if(isset($_SESSION['catpcha'])) { unset($_SESSION['captcha']); }
+	if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 	
 	// Addslashes to email body - proposed by Icheb in topic=1170.0
 	// $email_body = $wb->add_slashes($email_body);

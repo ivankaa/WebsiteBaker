@@ -49,7 +49,7 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 			exit(header('Location: '.WB_URL.'/modules/news/comment.php?id='.$_GET['post_id']));
 		}
 	}
-	if(isset($_SESSION['catpcha'])) { unset($_SESSION['captcha']); }
+	if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 	
 	// Insert the comment into db
 	$page_id = $_GET['page_id'];
