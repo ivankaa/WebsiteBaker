@@ -35,6 +35,7 @@ which contains a special order field (type must be integer)
 // Stop this file from being accessed directly
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 define('ORDERING_CLASS_LOADED', true);

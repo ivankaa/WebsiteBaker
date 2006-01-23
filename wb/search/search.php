@@ -23,7 +23,10 @@
 
 */
 
-if(!defined('WB_URL')) { header('Location: index.php'); }
+if(!defined('WB_URL')) { 
+	header('Location: index.php');
+	exit(0);
+}
 
 // Check if search is enabled
 if(SHOW_SEARCH != true) {

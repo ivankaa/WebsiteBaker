@@ -31,6 +31,7 @@ require_once(dirname(__FILE__).'/config.php');
 // Check if the config file has been set-up
 if(!defined('WB_PATH')) {
 	header("Location: install/index.php");
+	exit(0);
 }
 
 require_once(WB_PATH.'/framework/class.frontend.php');

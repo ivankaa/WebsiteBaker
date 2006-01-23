@@ -29,6 +29,7 @@ require('../../config.php');
 // Get module name
 if(!isset($_POST['file']) OR $_POST['file'] == "") {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$file = $_POST['file'];
 }
@@ -36,6 +37,7 @@ if(!isset($_POST['file']) OR $_POST['file'] == "") {
 // Check if the module exists
 if(!file_exists(WB_PATH.'/modules/'.$file)) {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Print admin header

@@ -34,6 +34,7 @@ This class will be used to with the login application
 // Stop this file from being accessed directly
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 define('LOGIN_CLASS_LOADED', true);
@@ -110,6 +111,7 @@ class login extends admin {
 			if($this->authenticate()) {
 				// Authentication successful
 				header("Location: ".$this->url);
+				exit(0);
 			} else {
 				$this->message = $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'];
 				$this->increase_attemps();
@@ -142,6 +144,7 @@ class login extends admin {
 				// Authentication successful
 				//echo $this->url;exit();
 				header("Location: ".$this->url);
+				exit(0);
 			} else {
 				$this->message = $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'];
 				$this->increase_attemps();
@@ -362,6 +365,7 @@ class login extends admin {
 	// Warn user that they have had to many login attemps
 	function warn() {
 		header('Location: '.$this->warning_url);
+		exit(0);
 	}
 	
 }

@@ -24,12 +24,16 @@
 */
 
 // Make sure page cannot be accessed directly
-if(!defined('WB_URL')) { header('Location: ../index.php'); }
+if(!defined('WB_URL')) { 
+	header('Location: ../index.php');
+	exit(0);
+}
 	
 // Get comments page template details from db
 $query_settings = $database->query("SELECT comments_page,use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
 if($query_settings->numRows() == 0) {
 	header('Location: '.WB_URL.'/pages/');
+	exit(0);
 } else {
 	$settings = $query_settings->fetchRow();
 	// Print comments page

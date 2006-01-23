@@ -35,6 +35,7 @@ and the Website Baker code
 // Stop this file from being accessed directly
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 if(!defined('DB_URL')) {

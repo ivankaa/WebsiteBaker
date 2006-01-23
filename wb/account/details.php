@@ -25,6 +25,7 @@
 
 if(!defined('WB_URL')) {
 	header('Location: ../pages/index.php');
+	exit(0);
 }
 
 // Get entered values

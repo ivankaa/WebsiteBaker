@@ -35,6 +35,7 @@ from Website Baker Administration to take advantage of the interface.
 // Stop this file being access directly
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 // Get page id
@@ -43,6 +44,7 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 		if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 			if(!isset($_POST['page_id']) OR !is_numeric($_POST['page_id'])) {
 				header("Location: index.php");
+				exit(0);
 			} else {
 				$page_id = $_POST['page_id'];
 			}
@@ -67,6 +69,7 @@ if(isset($_GET['section_id']) AND is_numeric($_GET['section_id'])) {
 		$section_id = 0;
 	} else {
 		header("Location: $section_required");
+		exit(0);
 	}
 }
 

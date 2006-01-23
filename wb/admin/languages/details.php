@@ -29,6 +29,7 @@ require('../../config.php');
 // Get language name
 if(!isset($_POST['code']) OR $_POST['code'] == "") {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$code = $_POST['code'];
 }
@@ -36,6 +37,7 @@ if(!isset($_POST['code']) OR $_POST['code'] == "") {
 // Check if the language exists
 if(!file_exists(WB_PATH.'/languages/'.$code.'.php')) {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Print admin header

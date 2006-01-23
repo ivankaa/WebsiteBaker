@@ -28,6 +28,7 @@ require('../../config.php');
 // Get id
 if(!isset($_GET['comment_id']) OR !is_numeric($_GET['comment_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
+	exit(0);
 } else {
 	$comment_id = $_GET['comment_id'];
 }
@@ -35,6 +36,7 @@ if(!isset($_GET['comment_id']) OR !is_numeric($_GET['comment_id'])) {
 // Get post id
 if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
+	exit(0);
 } else {
 	$post_id = $_GET['post_id'];
 }

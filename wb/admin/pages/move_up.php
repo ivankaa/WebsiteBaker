@@ -1,6 +1,6 @@
 <?php
 
-// $Id: move_up.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -41,6 +41,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])) {
 	}
 } else {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Create new admin object and print admin header

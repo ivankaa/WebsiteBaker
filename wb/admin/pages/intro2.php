@@ -26,6 +26,7 @@
 // Get posted content
 if(!isset($_POST['content'])) {
 	header("Location: intro.php");
+	exit(0);
 } else {
 	$content = $_POST['content'];
 }

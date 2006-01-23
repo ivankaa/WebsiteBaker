@@ -29,6 +29,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])) {
 	define('PAGE_ID', $page_id);
 } else {
 	header('Location: '.WB_URL);
+	exit(0);
 }
 if(isset($_GET['group_id']) AND is_numeric($_GET['group_id'])) {
 	$group_id = $_GET['group_id'];

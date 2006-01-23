@@ -29,8 +29,10 @@ require_once("../config.php");
 if(!FRONTEND_LOGIN) {
 	if(INTRO_PAGE) {
 		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index'.PAGE_EXTENSION);
+		exit(0);
 	} else {
 		header('Location: '.WB_URL.'/index'.PAGE_EXTENSION);
+		exit(0);
 	}
 }
 

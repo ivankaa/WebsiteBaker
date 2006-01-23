@@ -26,6 +26,7 @@
 // Get page id
 if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$page_id = $_GET['page_id'];
 }

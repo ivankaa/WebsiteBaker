@@ -33,6 +33,7 @@ require('../../config.php');
 // Get id
 if(!isset($_POST['field_id']) OR !is_numeric($_POST['field_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
+	exit(0);
 } else {
 	$field_id = $_POST['field_id'];
 	$field_id = $field_id;

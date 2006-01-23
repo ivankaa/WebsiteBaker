@@ -30,6 +30,7 @@ require('../../config.php');
 if(!isset($_GET['id']) OR !is_numeric($_GET['id'])) {
 	if(!isset($_POST['post_id']) OR !is_numeric($_POST['post_id'])) {
 		header('Location: '.WB_URL.'/pages/');
+		exit(0);
 	} else {
 		$post_id = $_POST['post_id'];
 	}
@@ -45,6 +46,7 @@ $database = new database();
 $query_post = $database->query("SELECT post_id,title,section_id,page_id FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");
 if($query_post->numRows() == 0) {
 	header('Location: '.WB_URL.'/pages/');
+	exit(0);
 } else {
 	$fetch_post = $query_post->fetchRow();
 	$page_id = $fetch_post['page_id'];
@@ -58,6 +60,7 @@ if($query_post->numRows() == 0) {
 	$query_page = $database->query("SELECT parent,page_title,menu_title,keywords,description,visibility FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'");
 	if($query_page->numRows() == 0) {
 		header('Location: '.WB_URL.'/pages/');
+		exit(0);
 	} else {
 		$page = $query_page->fetchRow();
 		// Required page details

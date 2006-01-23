@@ -26,6 +26,7 @@
 // Check if user uploaded a file
 if(!isset($_FILES['userfile'])) {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Setup admin object

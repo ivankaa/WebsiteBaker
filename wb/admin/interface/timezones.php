@@ -33,6 +33,7 @@ This file is used to generate a list of timezones for the user to select
 
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 // Create array

@@ -25,6 +25,7 @@
 
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 ?>

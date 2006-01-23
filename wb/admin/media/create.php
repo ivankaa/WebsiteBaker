@@ -1,6 +1,6 @@
 <?php
 
-// $Id: create.php,v 1.10 2005/04/25 11:53:12 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -26,11 +26,13 @@
 // Get dir name and target location
 if(!isset($_POST['name']) OR $_POST['name'] == '') {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$name = $_POST['name'];
 }
 if(!isset($_POST['target']) OR $_POST['target'] == '') {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$target = $_POST['target'];
 }

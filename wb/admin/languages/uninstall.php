@@ -26,11 +26,13 @@
 // Check if user selected language
 if(!isset($_POST['code']) OR $_POST['code'] == "") {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Extra protection
 if(trim($_POST['code']) == '') {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Setup admin object

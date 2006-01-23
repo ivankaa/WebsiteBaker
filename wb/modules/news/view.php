@@ -277,6 +277,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		}
 	} else {
 		header('Location: '.WB_URL.'/pages/');
+		exit(0);
 	}
 	
 	// Print post header

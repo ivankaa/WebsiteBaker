@@ -57,6 +57,7 @@ if(!file_exists(WB_PATH.MEDIA_DIRECTORY.$directory)) {
 if($admin->get_get('up') == 1) {
 	$parent_directory = dirname($directory);
 	header("Location: browse.php?dir=$parent_directory");	
+	exit(0);
 }
 
 // Workout the parent dir link

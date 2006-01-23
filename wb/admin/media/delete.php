@@ -48,6 +48,7 @@ if(strstr($directory, '../')) {
 // Get the temp id
 if(!is_numeric($admin->get_get('id'))) {
 	header("Location: browse.php?dir=$directory");
+	exit(0);
 } else {
 	$file_id = $admin->get_get('id');
 }

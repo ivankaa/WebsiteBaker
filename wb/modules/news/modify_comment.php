@@ -28,6 +28,7 @@ require('../../config.php');
 // Get id
 if(!isset($_GET['comment_id']) OR !is_numeric($_GET['comment_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
+	exit(0);
 } else {
 	$comment_id = $_GET['comment_id'];
 }

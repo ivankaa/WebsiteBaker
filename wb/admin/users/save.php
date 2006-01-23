@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save.php,v 1.4 2005/04/02 06:25:53 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -34,6 +34,7 @@ $database = new database();
 // Check if user id is a valid number and doesnt equal 1
 if(!isset($_POST['user_id']) OR !is_numeric($_POST['user_id']) OR $_POST['user_id'] == 1) {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$user_id = $_POST['user_id'];
 }

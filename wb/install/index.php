@@ -32,10 +32,11 @@ if(!defined('SESSION_STARTED')) {
 
 // Check if the page has been reloaded
 if(!isset($_GET['sessions_checked']) OR $_GET['sessions_checked'] != 'true') {
-   // Set session variable
-   $_SESSION['session_support'] = '<font class="good">Enabled</font>';
-   // Reload page
-   header('Location: index.php?sessions_checked=true');
+	// Set session variable
+	$_SESSION['session_support'] = '<font class="good">Enabled</font>';
+	// Reload page
+	header('Location: index.php?sessions_checked=true');
+	exit(0);
 } else {
    // Check if session variable has been saved after reload
    if(isset($_SESSION['session_support'])) {

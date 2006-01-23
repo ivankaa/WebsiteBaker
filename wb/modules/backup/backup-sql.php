@@ -27,7 +27,10 @@
 $filename = $_SERVER['HTTP_HOST'].'-backup-'.gmdate('Y-m-d', mktime()+TIMEZONE).'.sql';
 
 // Check if user clicked on the backup button
-if(!isset($_POST['backup'])){ header('Location: ../'); }
+if(!isset($_POST['backup'])){ 
+	header('Location: ../');
+	exit(0);
+}
 
 // Include config
 require_once('../../config.php');

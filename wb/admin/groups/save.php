@@ -1,6 +1,6 @@
 <?php
 
-// $Id: save.php,v 1.4 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
@@ -34,6 +34,7 @@ $database = new database();
 // Check if group group_id is a valid number and doesnt equal 1
 if(!isset($_POST['group_id']) OR !is_numeric($_POST['group_id']) OR $_POST['group_id'] == 1) {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$group_id = $_POST['group_id'];
 }

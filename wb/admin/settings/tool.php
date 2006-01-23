@@ -29,12 +29,14 @@ require_once(WB_PATH.'/framework/functions.php');
 
 if(!isset($_GET['tool'])) {
 	header("Location: index.php?advanced=yes");
+	exit(0);
 }
 
 // Check if tool is installed
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND directory = '".$_GET['tool']."'");
 if($result->numRows() == 0) {
 	header("Location: index.php?advanced=yes");
+	exit(0);
 }
 $tool = $result->fetchRow();
 

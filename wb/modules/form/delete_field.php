@@ -33,6 +33,7 @@ require('../../config.php');
 // Get id
 if(!isset($_GET['field_id']) OR !is_numeric($_GET['field_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
+	exit(0);
 } else {
 	$field_id = $_GET['field_id'];
 }

@@ -28,6 +28,7 @@ require('../../config.php');
 // Get id
 if(!isset($_POST['group_id']) OR !is_numeric($_POST['group_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
+	exit(0);
 } else {
 	$group_id = $_POST['group_id'];
 }

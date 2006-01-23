@@ -29,11 +29,13 @@ require('../../config.php');
 // Make sure people are allowed to access this page
 if(MANAGE_SECTIONS != 'enabled') {
 	header('Location: '.ADMIN_URL.'/pages/index.php');
+	exit(0);
 }
 
 // Get page id
 if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$page_id = $_GET['page_id'];
 }

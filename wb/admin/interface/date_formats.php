@@ -33,6 +33,7 @@ This file is used to generate a list of date formats for the user to select
 
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 // Define that this file is loaded

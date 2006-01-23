@@ -28,6 +28,7 @@ require('../../config.php');
 // Get id
 if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
+	exit(0);
 } else {
 	$post_id = $_GET['post_id'];
 }

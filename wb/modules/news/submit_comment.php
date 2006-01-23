@@ -68,7 +68,6 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	$query_page = $database->query("SELECT link FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");
 	$page = $query_page->fetchRow();
 	header('Location: '.$wb->page_link($page['link']).'?id='.$post_id);
-	
 } else {
 	header('Location: '.WB_URL.'/pages/');
 }

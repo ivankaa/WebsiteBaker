@@ -26,6 +26,7 @@
 // Target location
 if(!isset($_POST['target']) OR $_POST['target'] == '') {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$target = $_POST['target'];
 }

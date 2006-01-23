@@ -33,6 +33,7 @@ This file is where the WB release version is stored.
 
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 define('VERSION', '2.6.1');

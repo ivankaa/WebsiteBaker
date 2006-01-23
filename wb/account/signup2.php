@@ -25,6 +25,7 @@
 
 if(!defined('WB_URL')) {
 	header('Location: ../pages/index.php');
+	exit(0);
 }
 
 require_once(WB_PATH.'/framework/class.wb.php');

@@ -33,6 +33,7 @@ This file is used to generate a list of charsets for the user to select
 
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 // Create array

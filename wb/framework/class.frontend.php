@@ -31,6 +31,7 @@ Frontend class
 
 if(!defined('WB_PATH')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 
@@ -200,6 +201,7 @@ class frontend extends wb {
 			if($this->is_authenticated() == false) {
 				// User needs to login first
 				header("Location: ".WB_URL."/account/login".PAGE_EXTENSION.'?redirect='.$this->link);
+				exit(0);
 			}
 			// Check if we should show this page
 			if($this->show_page($this->page) == false) {

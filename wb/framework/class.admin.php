@@ -34,6 +34,7 @@ in the administration section of Website Baker.
 
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 require_once(WB_PATH.'/framework/class.wb.php');
@@ -63,6 +64,7 @@ class admin extends wb {
 			// First check if the user is logged-in
 			if($this->is_authenticated() == false) {
 				header('Location: '.ADMIN_URL.'/login/index.php');
+				exit(0);
 			}
 			// Now check if they are allowed in this section
 			if($this->get_permission($section_permission) == false) {

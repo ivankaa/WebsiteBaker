@@ -26,6 +26,7 @@
 // Check if user selected module
 if(!isset($_POST['file']) OR $_POST['file'] == "") {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$file = $_POST['file'];
 }
@@ -33,6 +34,7 @@ if(!isset($_POST['file']) OR $_POST['file'] == "") {
 // Extra protection
 if(trim($file) == '') {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Setup admin object

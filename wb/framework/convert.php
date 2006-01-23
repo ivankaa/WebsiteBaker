@@ -30,6 +30,7 @@ characters to equivalent non-error-causing ones
 */
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 $conversion_array = array(
