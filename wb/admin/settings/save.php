@@ -122,7 +122,7 @@ $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
-	if ($value!=null || $setting_name=='default_timezone' || $setting_name=='string_dir_mode' || $setting_name=='string_file_mode') {
+	if ($setting_name!='wb_version') {
 		$value = $admin->add_slashes($value);
 		switch ($setting_name) {
 			case 'default_timezone':
