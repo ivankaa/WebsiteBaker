@@ -191,7 +191,7 @@ if (!function_exists('show_breadcrumbs')) {
 			$counter=0;
 			foreach ($bca as $temp)
 			{
-		        if ($counter>=($tier-1));
+		        if ($counter>=($tier-1))
 		        {
 					if ($counter>=$tier) echo $sep;
 					$query_menu=$database->query("SELECT menu_title,link FROM ".TABLE_PREFIX."pages WHERE page_id=$temp");
