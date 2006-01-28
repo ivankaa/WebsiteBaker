@@ -228,6 +228,13 @@ if($results_array['visibility'] == 'private') {
 } else {
 	$template->set_var('DISPLAY_PRIVATE', 'none');
 }
+
+if($results_array['visibility'] == 'registered') {
+	$template->set_var('DISPLAY_REGISTERED', '');
+} else {
+	$template->set_var('DISPLAY_REGISTERED', 'none');
+}
+
 // Parent page list
 $database = new database();
 function parent_list($parent) {

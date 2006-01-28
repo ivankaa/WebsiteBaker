@@ -10,7 +10,7 @@ function toggle_viewers() {
 		document.getElementById('registered_viewers').style.display = 'block';
 	} else {
 		document.getElementById('private_viewers').style.display = 'none';
-		document.getElementById('private_viewers').style.display = 'none';
+		document.getElementById('registered_viewers').style.display = 'none';
 	}
 }
 </script>
@@ -70,7 +70,7 @@ function toggle_viewers() {
 		</div>
 	</td>
 	<td rowspan="10" valign="top" style="padding-left: 20px; padding-top: 8px;">
-		<div id="registered_viewers" style="display: {DISPLAY_PRIVATE};">
+		<div id="registered_viewers" style="display: {DISPLAY_REGISTERED};">
 			{TEXT_REGISTERED_VIEWERS}:
 			<ul style="list-style-type: none; margin: 0; padding: 0;">
 				<!-- BEGIN group_list_block2 -->
