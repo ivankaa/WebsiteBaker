@@ -37,7 +37,7 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 	$email = $_POST['email'];
 	
 	// Check if the email exists in the database
-	$query = "SELECT user_id,username,display_name,email,last_reset FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($_POST['email'])."'";
+	$query = "SELECT user_id,username,display_name,email,last_reset,password FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($_POST['email'])."'";
 	$results = $database->query($query);
 	if($results->numRows() > 0) {
 		// Get the id, username, and email from the above db query
@@ -65,7 +65,7 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 				$new_pass = $new_pass . $tmp;
 				$i++;
 			}
-			
+			$old_pass = $results_array['password'];
 			$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".md5($new_pass)."' WHERE user_id = '".$results_array['user_id']."'");
 			
 			if($database->is_error()) {
@@ -91,6 +91,7 @@ If you have received this message in error, please delete it immediatly.';
 					$message = $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'];
 					$display_form = false;
 				} else {
+  					$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".$old_pass."' WHERE user_id = '".$results_array['user_id']."'");
 					$message = $MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'];
 				}
 			}

@@ -43,7 +43,7 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 	$email = $_POST['email'];
 	
 	// Check if the email exists in the database
-	$query = "SELECT user_id,username,display_name,email,last_reset FROM ".TABLE_PREFIX."users WHERE email = '".$admin->add_slashes($_POST['email'])."'";
+	$query = "SELECT user_id,username,display_name,email,last_reset,password FROM ".TABLE_PREFIX."users WHERE email = '".$admin->add_slashes($_POST['email'])."'";
 	$results = $database->query($query);
 	if($results->numRows() > 0) {
 
@@ -60,6 +60,8 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 			$message = $MESSAGE['FORGOT_PASS']['ALREADY_RESET'];
 			
 		} else {
+			
+			$old_pass = $results_array['password'];
 			
 			// Generate a random password then update the database with it
 			$new_pass = '';
@@ -98,6 +100,7 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 					$message = $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'];
 					$display_form = false;
 				} else {
+					$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".$old_pass."' WHERE user_id = '".$results_array['user_id']."'");
 					$message = $MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'];
 				}
 			}
