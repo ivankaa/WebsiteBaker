@@ -90,12 +90,18 @@ class admin extends wb {
 		$header_template = new Template(ADMIN_PATH."/interface");
 		$header_template->set_file('page', 'header.html');
 		$header_template->set_block('page', 'header_block', 'header');
+		if(defined('DEFAULT_CHARSET')) {
+			$charset=DEFAULT_CHARSET;
+		} else {
+			$charset='utf-8';
+		}
 		$header_template->set_var(	array(
 													'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
 													'INTERFACE_DIR' => ADMIN_URL.'/interface',
 													'BODY_TAGS' => $body_tags,
 													'WEBSITE_TITLE' => ($title['value']),
 													'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
+													'CHARSET' => $charset,
 													'VERSION' => VERSION
 													)
 											);
