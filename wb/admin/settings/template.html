@@ -112,7 +112,15 @@ function change_os(type) {
 		</div>
 	</td>
 </tr>
-<input type="hidden" name="page_languages" value="{PAGE_LANGUAGES}" />
+<tr class="advanced">
+        <td class="setting_name">{TEXT_PAGE_LANGUAGES}:</td>
+        <td class="setting_value" colspan="2">
+                <input type="radio" name="page_languages" id="page_languages_true" style="width: 14px; height: 14px;" value="true"{PAGE_LANGUAGES_ENABLED} />
+                <label for="page_languages_true">{TEXT_ENABLED}</font>
+                <input type="radio" name="page_languages" id="page_languages_false" style="width: 14px; height: 14px;" value="false"{PAGE_LANGUAGES_DISABLED} />
+                <label for="page_languages_false">{TEXT_DISABLED}</font>
+		</td>
+</tr>
 <tr class="advanced">
 	<td class="setting_name">{TEXT_MULTIPLE_MENUS}:</td>
 	<td class="setting_value" colspan="2">
