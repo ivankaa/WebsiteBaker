@@ -33,20 +33,26 @@ $wb = new wb;
 if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_GET['post_id']) AND is_numeric($_GET['post_id']) AND isset($_POST['comment']) AND $_POST['comment'] != '') {
 	
 	// Check captcha
-	if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
-		if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
-			// Check for a mismatch
-			if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
+	$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
+	if($query_settings->numRows() == 0) { 
+		exit(header('Location: '.WB_URL.'/pages/'));
+	} else {
+		$settings = $query_settings->fetchRow();
+		if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND $settings['use_captcha']) { /* Make's sure GD library is installed */
+			if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
+				// Check for a mismatch
+				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
+					$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
+					$_SESSION['comment_title'] = $_POST['title'];
+					$_SESSION['comment_body'] = $_POST['comment'];
+					exit(header('Location: '.WB_URL.'/modules/news/comment.php?id='.$_GET['post_id']));
+				}
+			} else {
 				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 				$_SESSION['comment_title'] = $_POST['title'];
 				$_SESSION['comment_body'] = $_POST['comment'];
 				exit(header('Location: '.WB_URL.'/modules/news/comment.php?id='.$_GET['post_id']));
 			}
-		} else {
-			$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
-			$_SESSION['comment_title'] = $_POST['title'];
-			$_SESSION['comment_body'] = $_POST['comment'];
-			exit(header('Location: '.WB_URL.'/modules/news/comment.php?id='.$_GET['post_id']));
 		}
 	}
 	if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }

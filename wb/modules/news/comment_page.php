@@ -63,7 +63,7 @@ if($query_settings->numRows() == 0) {
 	<table cellpadding="2" cellspacing="0" border="0">
 	<tr>
 	<td><?php echo $TEXT['VERIFICATION']; ?>:</td>
-	<td><img src="<?php echo WB_URL; ?>/include/captcha.php" alt="Captcha" /></td>
+	<td><img src="<?php echo WB_URL; ?>/include/captcha.php?t=<?php echo time(); ?>" alt="Captcha" /></td>
 	<td><input type="text" name="captcha" maxlength="5" /></td>
 	</tr></table>
 	<br />
