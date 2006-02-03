@@ -10,6 +10,45 @@ Legend:
 # = Bugfix
 ! = Update/Change
 
+------------------------------------- 2.6.2 -------------------------------------
+03-Feb-2006 Stefan Braunewell (very big special thanks to John and Alex)
+#	Cookie REMEMBER_KEY wasn't cleared in account/logout 
+	and expiration date is now set to time in the past.
+#	Smart login not working.
+!	Changed mail calls to new function $wb->mail.
+#	Form: ticket 124 added captcha settings check 
+#	Ticket 118 added formfield type to check for email/text 
+#	Ticket 115 changed comparision /modules/form/view.php 
+#	Added correct timecheck in form submissions
+!	Changed captcha.php call to include timestamp
+!	Changed the e-mail validation code and added a mail function to class wb.
+!	Forgotten password: if sending of e-mail fails, restore old password.
+	Ticket #110
+!	Added more charset options. Ticket #102 - thanks to ruebenwurzel!
+!	Character encoding setting also affects admin backend.
+	Mentioned in ticket #102.
+!	Reintroduced page languages setting. If switched to off, page
+	languages are only used to determine the language file for the
+	universal texts. If on, displayed page and menu are affected by
+	the language session variable.
+#	Fixed bugs in show_breadcrumbs code and added parameter "depth"
+	to set the number of levels to be show.
+#	Fixed a bug where access settings of registered and private pages
+	were displayed incorrectly.
+#	Fixed captcha being cached.
+#	Added an exit call after every heading("Location:...")
+	redirector to prevent unwanted execution of code.
+#	Bug #122. Replaced empty field check by check that setting name is
+	not "wb_version".
+#	Replaced all remaining occurrences of '/media' by MEDIA_DIRECTORY - bug #108.
+#	Fixed bug #99 and two additional instances of typo 
+	catpcha instead of captcha.
+#	Fixed some typos
+#	Fixed some notices and warnings.
+#	Fixed bug #105 - back buttons in addon detail pages not editable.
+!	Replace 'admin' by 'wb' in all account pages. 
+!/#	Moved print_success and print_error code to class.wb.php.
+	Added correct parameters to these functions in account pages. 
 ------------------------------------- 2.6.1 -------------------------------------
 12-Dec-2005 Ryan Djurovich
 #	Fixed security vulnerability in class.login.php
