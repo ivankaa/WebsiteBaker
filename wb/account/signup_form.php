@@ -69,7 +69,7 @@ if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make'
 		}
 		?><tr><td class="field_title"><?php echo $TEXT['VERIFICATION']; ?>:</td><td>
 		<table cellpadding="2" cellspacing="0" border="0">
-		<tr><td><img src="<?php echo WB_URL; ?>/include/captcha.php" alt="Captcha" /></td>
+		<tr><td><img src="<?php echo WB_URL; ?>/include/captcha.php?t=<?php echo time(); ?>" alt="Captcha" /></td>
 		<td><input type="text" name="captcha" maxlength="5" /></td>
 		</tr></table>
 		</td></tr>
