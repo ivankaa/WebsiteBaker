@@ -26,7 +26,7 @@
 require("../../config.php");
 
 if(isset($_COOKIE['REMEMBER_KEY'])) {
-	setcookie('REMEMBER_KEY', '', time()+60*60*24*30, '/');
+	setcookie('REMEMBER_KEY', '', time()-3600, '/');
 }
 
 $_SESSION['USER_ID'] = null;
