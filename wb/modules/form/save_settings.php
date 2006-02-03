@@ -63,8 +63,8 @@ if(!is_numeric($_POST['stored_submissions'])) {
 } else {
 	$stored_submissions = $_POST['stored_submissions'];
 }
-// Make sure max submissions is not smaller than stored submissions
-if($max_submissions < $stored_submissions) {
+// Make sure max submissions is not greater than stored submissions
+if($max_submissions > $stored_submissions) {
 	$max_submissions = $stored_submissions;
 }
 
