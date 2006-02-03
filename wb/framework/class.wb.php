@@ -233,8 +233,8 @@ class wb
 		if ($fromaddress=='') {
 			$fromaddress = SERVER_EMAIL;
 		}
-		if(defined('CHARSET')) { 
-			$charset = DEAFULT_CHARSET; 
+		if(defined('DEFAULT_CHARSET')) { 
+			$charset = DEFAULT_CHARSET; 
 		} else {
 			$charset='utf-8';
 		}
