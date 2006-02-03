@@ -189,7 +189,7 @@ class wb
 
 	// Validate supplied email address
 	function validate_email($email) {
-		if(eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email)) {
+		if(eregi("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$", $email)) {
 			return true;
 		} else {
 			return false;
@@ -224,6 +224,38 @@ class wb
 			$this->print_footer();
 		}
 		exit();
+	}
+	// Validate send email
+	function mail($fromaddress, $toaddress, $subject, $message) {
+		$fromaddress = preg_replace('/[\r\n]/', '', $fromaddress);
+		$toaddress = preg_replace('/[\r\n]/', '', $toaddress);
+		$subject = preg_replace('/[\r\n]/', '', $subject);
+		if ($fromaddress=='') {
+			$fromaddress = SERVER_EMAIL;
+		}
+		if(defined('CHARSET')) { 
+			$charset = DEAFULT_CHARSET; 
+		} else {
+			$charset='utf-8';
+		}
+		$headers  = "MIME-Version: 1.0\n";
+		$headers .= "Content-type: text/plain; charset=".$charset."\n";
+		$headers .= "X-Priority: 3\n";
+		$headers .= "X-MSMail-Priority: Normal\n";
+		$headers .= "X-Mailer: Website Baker\n";
+		$headers .= "From: ".$fromaddress."\n";
+		$headers .= "Return-Path: ".$fromaddress."\n";
+		$headers .= "Reply-To: ".$fromaddress."\n";
+		$headers .= "\n"; // extra empty line needed??
+		if (OPERATING_SYSTEM=='windows') {
+			str_replace("\n","\r\n",$headers);
+			str_replace("\n","\r\n",$message);
+		}	
+		if(mail($toaddress, $subject, $message, $headers, "-f $fromaddress")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
