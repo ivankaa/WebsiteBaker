@@ -181,7 +181,7 @@ if (!function_exists('show_content')) {
 }
 
 if (!function_exists('show_breadcrumbs')) {
-	function show_breadcrumbs($sep=' > ',$tier=1,$links=true) {
+	function show_breadcrumbs($sep=' > ',$tier=1,$links=true,$depth=-1) {
 		global $wb;
 		$page_id=$wb->page_id;
 		if ($page_id!=0)
@@ -191,7 +191,7 @@ if (!function_exists('show_breadcrumbs')) {
 			$counter=0;
 			foreach ($bca as $temp)
 			{
-		        if ($counter>=($tier-1))
+		        if ($counter>=($tier-1) AND ($depth<0 OR $tier+$depth>$counter))
 		        {
 					if ($counter>=$tier) echo $sep;
 					$query_menu=$database->query("SELECT menu_title,link FROM ".TABLE_PREFIX."pages WHERE page_id=$temp");
