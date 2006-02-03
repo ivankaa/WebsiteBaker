@@ -99,7 +99,7 @@ class login extends admin {
 			// User already logged-in, so redirect to default url
 			header('Location: '.$this->url);
 			exit();
-		} elseif(!isset($username_fieldname) AND $this->is_remembered() == true) {
+		} elseif($this->is_remembered() == true) {
 			// User has been "remembered"
 			// Get the users password
 			$database = new database();
