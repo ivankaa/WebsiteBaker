@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.6.2 -------------------------------------
 03-Feb-2006 Stefan Braunewell (very big special thanks to John and Alex)
+#	Fixed ticket #104 - commas in form field descriptions not allowed.
 #	Cookie REMEMBER_KEY wasn't cleared in account/logout 
 	and expiration date is now set to time in the past.
 #	Smart login not working.
