@@ -61,7 +61,7 @@ if(is_numeric($list_count)) {
 	$values = array();
 	for($i = 1; $i <= $list_count; $i++) {
 		if($admin->get_post('value'.$i) != '') {
-			$values[] = $admin->get_post('value'.$i);
+			$values[] = str_replace(",","&#44;",$admin->get_post('value'.$i));
 		}
 	}
 	$value = implode(',', $values);

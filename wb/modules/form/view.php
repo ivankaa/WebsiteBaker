@@ -318,7 +318,7 @@ echo $footer;
 			// Now send the email
 			if($email_to != '') {
 				if($email_from != '') {
-					if($wb->wb_mail($email_from,$email_to,$email_subject,$email_body)) { $success = true; }
+					if($wb->mail($email_from,$email_to,$email_subject,$email_body)) { $success = true; }
 				}
 			}				
 			// Write submission to database
