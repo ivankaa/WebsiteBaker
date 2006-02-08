@@ -30,7 +30,7 @@ if(defined('WB_URL')) {
 	$mod_code = 'CREATE TABLE `'.TABLE_PREFIX.'mod_code` ('
 						  . ' `section_id` INT NOT NULL,'
 						  . ' `page_id` INT NOT NULL,'
-	                 . ' `content` TEXT NOT NULL ,'
+	                 . ' `content` TEXT NOT NULL DEFAULT \'\' ,'
 	                 . ' PRIMARY KEY ( `section_id` ) )'
 	                 . ' ';
 	$database->query($mod_code);

@@ -33,11 +33,11 @@ if(defined('WB_URL')) {
 					 . '`group_id` INT NOT NULL,'
 					 . '`active` INT NOT NULL,'
 					 . '`position` INT NOT NULL,'
-					 . '`title` VARCHAR(255) NOT NULL,'
-					 . '`link` TEXT NOT NULL,'
-					 . '`content_short` TEXT NOT NULL,'
-					 . '`content_long` TEXT NOT NULL,'
-					 . '`commenting` VARCHAR(7) NOT NULL,'
+					 . '`title` VARCHAR(255) NOT NULL DEFAULT \'\','
+					 . '`link` TEXT NOT NULL DEFAULT \'\','
+					 . '`content_short` TEXT NOT NULL DEFAULT \'\','
+					 . '`content_long` TEXT NOT NULL DEFAULT \'\','
+					 . '`commenting` VARCHAR(7) NOT NULL DEFAULT \'\','
 		   	    	 . '`posted_when` INT NOT NULL ,'
 					 . '`posted_by` INT NOT NULL ,'
 					 . 'PRIMARY KEY (post_id)'
@@ -51,7 +51,7 @@ if(defined('WB_URL')) {
 					 . '`page_id` INT NOT NULL,'
 					 . '`active` INT NOT NULL,'
 					 . '`position` INT NOT NULL,'
-					 . '`title` VARCHAR(255) NOT NULL,'
+					 . '`title` VARCHAR(255) NOT NULL DEFAULT \'\','
 					 . 'PRIMARY KEY (group_id)'
                 . ' )';
 	$database->query($mod_news);
@@ -62,8 +62,8 @@ if(defined('WB_URL')) {
 					 . '`section_id` INT NOT NULL,'
 					 . '`page_id` INT NOT NULL,'
 					 . '`post_id` INT NOT NULL,'
-					 . '`title` VARCHAR(255) NOT NULL,'
-					 . '`comment` TEXT NOT NULL,'
+					 . '`title` VARCHAR(255) NOT NULL DEFAULT \'\','
+					 . '`comment` TEXT NOT NULL DEFAULT \'\','
 		   	    . '`commented_when` INT NOT NULL ,'
 					 . '`commented_by` INT NOT NULL ,'
 					 . 'PRIMARY KEY (comment_id)'
@@ -74,17 +74,17 @@ if(defined('WB_URL')) {
 	$mod_news = 'CREATE TABLE `'.TABLE_PREFIX.'mod_news_settings` ( '
 					 . '`section_id` INT NOT NULL,'
 					 . '`page_id` INT NOT NULL,'
-					 . '`header` TEXT NOT NULL,'
-					 . '`post_loop` TEXT NOT NULL,'
-					 . '`footer` TEXT NOT NULL,'
+					 . '`header` TEXT NOT NULL DEFAULT \'\','
+					 . '`post_loop` TEXT NOT NULL DEFAULT \'\','
+					 . '`footer` TEXT NOT NULL DEFAULT \'\','
 					 . '`posts_per_page` INT NOT NULL,'
-					 . '`post_header` TEXT NOT NULL,'
-					 . '`post_footer` TEXT NOT NULL,'
-					 . '`comments_header` TEXT NOT NULL,'
-					 . '`comments_loop` TEXT NOT NULL,'
-					 . '`comments_footer` TEXT NOT NULL,'
-					 . '`comments_page` TEXT NOT NULL,'
-					 . '`commenting` VARCHAR(7) NOT NULL,'
+					 . '`post_header` TEXT NOT NULL DEFAULT \'\','
+					 . '`post_footer` TEXT NOT NULL DEFAULT \'\','
+					 . '`comments_header` TEXT NOT NULL DEFAULT \'\','
+					 . '`comments_loop` TEXT NOT NULL DEFAULT \'\','
+					 . '`comments_footer` TEXT NOT NULL DEFAULT \'\','
+					 . '`comments_page` TEXT NOT NULL DEFAULT \'\','
+					 . '`commenting` VARCHAR(7) NOT NULL DEFAULT \'\','
 					 . '`resize` INT NOT NULL,'
 					 . ' `use_captcha` INT NOT NULL,'
 					 . 'PRIMARY KEY (section_id)'
@@ -131,7 +131,8 @@ if(defined('WB_URL')) {
 	$database->query("INSERT INTO ".TABLE_PREFIX."mod_news_settings (section_id,page_id) VALUES ('0', '0')");
 	
 	// Make news post access files dir
-	make_dir(WB_PATH.PAGES_DIRECTORY.'/posts/');	
+	make_dir(WB_PATH.PAGES_DIRECTORY.'/posts/');
+	
 }
 
 ?>

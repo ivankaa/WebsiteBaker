@@ -30,7 +30,7 @@ if(defined('WB_URL')) {
 	$mod_wrapper = 'CREATE TABLE `'.TABLE_PREFIX.'mod_wrapper` ('
 						  . ' `section_id` INT NOT NULL,'
 						  . ' `page_id` INT NOT NULL,'
-	                 . ' `url` TEXT NOT NULL ,'
+	                 . ' `url` TEXT NOT NULL DEFAULT \'\','
 						  . ' `height` INT NOT NULL,'
 	                 . ' PRIMARY KEY ( `section_id` ) )'
 	                 . ' ';

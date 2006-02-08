@@ -30,8 +30,8 @@ if(defined('WB_URL')) {
 	$mod_wysiwyg = 'CREATE TABLE `'.TABLE_PREFIX.'mod_wysiwyg` ( '
 						  . ' `section_id` INT NOT NULL,'
 						  . ' `page_id` INT NOT NULL,'
-	                 . ' `content` TEXT NOT NULL ,'
-	                 . ' `text` TEXT NOT NULL ,'
+	                 . ' `content` TEXT NOT NULL DEFAULT \'\','
+	                 . ' `text` TEXT NOT NULL DEFAULT \'\','
 	                 . ' PRIMARY KEY ( `section_id` ) )'
 	                 . ' ';
 	$database->query($mod_wysiwyg);
