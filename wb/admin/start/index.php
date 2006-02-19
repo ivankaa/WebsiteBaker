@@ -38,7 +38,8 @@ $template->set_var(array(
 								'CURRENT_USER' => $MESSAGE['START']['CURRENT_USER'],
 								'DISPLAY_NAME' => $admin->get_display_name(),
 								'ADMIN_URL' => ADMIN_URL,
-								'WB_URL' => WB_URL
+								'WB_URL' => WB_URL,
+								'WB_VERSION' => WB_VERSION
 								)
 						);
 
