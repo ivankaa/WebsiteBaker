@@ -59,7 +59,6 @@ Legend:
 !	Added extra code to check for selection of addon upon uninstalling
 #	Fixed bugs in RSS news feeder
 #	Fixed bug with PAGE_DESCRIPTION not being set on any page
-
 ------------------------------------- 2.6.0 -------------------------------------
 28-Nov-2005 Ryan Djurovich
 +	Added default charset option to (advanced) settings
