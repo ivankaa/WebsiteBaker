@@ -249,10 +249,10 @@ if (!function_exists('page_header')) {
 // Function for page footer
 if (!function_exists('page_footer')) {
 	function page_footer($date_format = 'Y') {
-		global $starttime;
-		$vars = array('[YEAR]', '[PROCESSTIME]');
+		global $starttime,$startmemory;
+		$vars = array('[YEAR]', '[PROCESS_TIME]', '[MEMORY_USAGE]');
 		$processtime=array_sum(explode(" ",microtime()))-$starttime;
-		$values = array(date($date_format),$processtime);
+		$values = array(date($date_format),$processtime,memory_get_usage()-$startmemory);
 		echo str_replace($vars, $values, WEBSITE_FOOTER);
 	}
 }

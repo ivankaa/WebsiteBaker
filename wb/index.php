@@ -24,6 +24,7 @@
 */
 
 $starttime = array_sum(explode(" ",microtime()));
+$startmemory = memory_get_usage();
 
 // Include config file
 require_once(dirname(__FILE__).'/config.php');
