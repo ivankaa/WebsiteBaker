@@ -10,6 +10,12 @@ Legend:
 # = Bugfix
 ! = Update/Change
 
+------------------------------------- 2.6.3 -------------------------------------
+01-Mar-2006 Stefan Braunewell
+#	Fixed ticket #136 - mailing forgotten password in admin login screen leads 
+	to fatal error.
++	Added support for tag [MEMORY_USAGE] in page footer.
+!	Renamed tag [PROCESSTIME] to [PROCESS_TIME]
 ------------------------------------- 2.6.2 -------------------------------------
 03-Feb-2006 Stefan Braunewell (very big special thanks to John and Alex)
 #	Fixed ticket #104 - commas in form field descriptions not allowed.

@@ -89,7 +89,8 @@ if($query_fields->numRows() > 0) {
 				}
 				?>
 			</td>
-			<td width="95">					<?php 
+			<td width="95">		
+			<?php 
 			if ($field['type'] != 'group_begin') {
 				echo $TEXT['REQUIRED'].': '; if($field['required'] == 1) { echo $TEXT['YES']; } else { echo $TEXT['NO']; }
 			}
