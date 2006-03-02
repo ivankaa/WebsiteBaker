@@ -37,38 +37,16 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify');
 
 // Get perms
-$database = new database();
-$results = $database->query("SELECT admin_groups,admin_users FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'");
-$results_array = $results->fetchRow();
-$old_admin_groups = explode(',', str_replace('_', '', $results_array['admin_groups']));
-$old_admin_users = explode(',', str_replace('_', '', $results_array['admin_users']));
-if(!is_numeric(array_search($admin->get_group_id(), $old_admin_groups)) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
+if(!$admin->get_page_permission($page_id,'admin')) {
 	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
 }
 
 // Get page details
-$database = new database();
-$query = "SELECT page_id,page_title,modified_by,modified_when FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'";
-$results = $database->query($query);
-if($database->is_error()) {
-	$admin->print_header();
-	$admin->print_error($database->get_error());
-}
-if($results->numRows() == 0) {
-	$admin->print_header();
-	$admin->print_error($MESSAGE['PAGES']['NOT_FOUND']);
-}
-$results_array = $results->fetchRow();
+$results_array=$admin->get_page_details($page_id);
 
 // Get display name of person who last modified the page
-$query_user = "SELECT username,display_name FROM ".TABLE_PREFIX."users WHERE user_id = '".$results_array['modified_by']."'";
-$get_user = $database->query($query_user);
-if($get_user->numRows() != 0) {
-	$user = $get_user->fetchRow();
-} else {
-	$user['display_name'] = 'Unknown';
-	$user['username'] = 'unknown';
-}
+$user=$admin->get_user_details($results_array['modified_by']);
+
 // Convert the unix ts for modified_when to human a readable form
 if($results_array['modified_when'] != 0) {
 	$modified_ts = gmdate(TIME_FORMAT.', '.DATE_FORMAT, $results_array['modified_when']+TIMEZONE);

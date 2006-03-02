@@ -59,14 +59,8 @@ if($results->numRows() == 0) {
 $results_array = $results->fetchRow();
 
 // Get display name of person who last modified the page
-$query_user = "SELECT username,display_name FROM ".TABLE_PREFIX."users WHERE user_id = '".$results_array['modified_by']."'";
-$get_user = $database->query($query_user);
-if($get_user->numRows() != 0) {
-	$user = $get_user->fetchRow();
-} else {
-	$user['display_name'] = 'Unknown';
-	$user['username'] = 'unknown';
-}
+$user=$admin->get_user_details($results_array['modified_by']);
+
 // Convert the unix ts for modified_when to human a readable form
 if($results_array['modified_when'] != 0) {
 	$modified_ts = gmdate(TIME_FORMAT.', '.DATE_FORMAT, $results_array['modified_when']+TIMEZONE);
