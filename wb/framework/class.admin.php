@@ -198,6 +198,7 @@ class admin extends wb {
 	}	
 	
 	function get_page_details($page_id) {
+		global $database;
 		$query = "SELECT page_id,page_title,modified_by,modified_when FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'";
 		$results = $database->query($query);
 		if($database->is_error()) {
@@ -225,7 +226,7 @@ class admin extends wb {
 				$users=$page[$action_users];
 		} else {				
 			global $database;
-			$results = $database->query("SELECT $action_groups,$action_users FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'");
+			$results = $database->query("SELECT $action_groups,$action_users FROM ".TABLE_PREFIX."pages WHERE page_id = '$page'");
 			$result = $results->fetchRow();
 			$groups = explode(',', str_replace('_', '', $result[$action_groups]));
 			$users = explode(',', str_replace('_', '', $result[$action_users]));
