@@ -12,9 +12,9 @@ Legend:
 
 ------------------------------------- 2.6.3 -------------------------------------
 01-Mar-2006 Stefan Braunewell
+#	Fixed ticket #68 - Safari problem with displaying all parents.
 #	Fixed ticket #136 - mailing forgotten password in admin login screen leads 
 	to fatal error.
-+	Added support for tag [MEMORY_USAGE] in page footer.
 !	Renamed tag [PROCESSTIME] to [PROCESS_TIME]
 ------------------------------------- 2.6.2 -------------------------------------
 03-Feb-2006 Stefan Braunewell (very big special thanks to John and Alex)
