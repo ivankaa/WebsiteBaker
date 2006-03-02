@@ -183,6 +183,59 @@ class admin extends wb {
 			}
 		}
 	}
+		
+	function get_user_details($user_id) {
+		global $database;
+		$query_user = "SELECT username,display_name FROM ".TABLE_PREFIX."users WHERE user_id = '$user_id'";
+		$get_user = $database->query($query_user);
+		if($get_user->numRows() != 0) {
+			$user = $get_user->fetchRow();
+		} else {
+			$user['display_name'] = 'Unknown';
+			$user['username'] = 'unknown';
+		}
+		return $user;
+	}	
+	
+	function get_page_details($page_id) {
+		$query = "SELECT page_id,page_title,modified_by,modified_when FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'";
+		$results = $database->query($query);
+		if($database->is_error()) {
+			$this->print_header();
+			$this->print_error($database->get_error());
+		}
+		if($results->numRows() == 0) {
+			$this->print_header();
+			$this->print_error($MESSAGE['PAGES']['NOT_FOUND']);
+		}
+		$results_array = $results->fetchRow();
+		return $results_array;
+	}	
+	
+	/** Function get_page_permission takes either a numerical page_id,
+	 * upon which it looks up the permissions in the database,
+	 * or an array with keys admin_groups and admin_users  
+	 */
+	function get_page_permission($page,$action='admin') {
+		if ($action!='viewing') $action='admin';
+		$action_groups=$action.'_groups';
+		$action_users=$action.'_users';
+		if (is_array($page)) {
+				$groups=$page[$action_groups];
+				$users=$page[$action_users];
+		} else {				
+			global $database;
+			$results = $database->query("SELECT $action_groups,$action_users FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'");
+			$result = $results->fetchRow();
+			$groups = explode(',', str_replace('_', '', $result[$action_groups]));
+			$users = explode(',', str_replace('_', '', $result[$action_users]));
+		}
+		if(!is_numeric(array_search($this->get_group_id(), $groups)) AND !is_numeric(array_search($this->get_user_id(), $users))) {
+			return false;
+		}
+		return true;
+	}
+		
 
 	// Returns a system permission for a menu link
 	function get_link_permission($title) {
