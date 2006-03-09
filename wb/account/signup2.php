@@ -131,6 +131,7 @@ If you have recieved this message in error, please delete it immediatly.';
 		$display_form = false;
 	} else {
 		$wb->print_error($MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'], $js_back, false);
+		$database->query("DELETE FROM ".TABLE_PREFIX."users WHERE username = '$username'");
 	}
 }
 
