@@ -37,7 +37,7 @@ $template->set_file('page', 'browse.html');
 $template->set_block('page', 'main_block', 'main');
 
 // Get the current dir
-$directory = $admin->get_get('dir');
+$directory = $admin->strip_slashes($admin->get_get('dir'));
 if($directory == '/' OR $directory == '\\') {
 	$directory = '';
 }
