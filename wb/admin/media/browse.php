@@ -38,7 +38,7 @@ $template->set_block('page', 'main_block', 'main');
 
 // Get the current dir
 $directory = $admin->get_get('dir');
-if($directory == '/') {
+if($directory == '/' OR $directory == '\\') {
 	$directory = '';
 }
 
