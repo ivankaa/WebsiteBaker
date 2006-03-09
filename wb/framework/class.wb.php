@@ -251,7 +251,7 @@ class wb
 			str_replace("\n","\r\n",$headers);
 			str_replace("\n","\r\n",$message);
 		}	
-		if(mail($toaddress, $subject, $message, $headers, "-f $fromaddress")) {
+		if(mail($toaddress, $subject, $message, $headers)) {
 			return true;
 		} else {
 			return false;
