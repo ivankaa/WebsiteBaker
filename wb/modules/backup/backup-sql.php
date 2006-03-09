@@ -49,24 +49,24 @@ $output = "".
 "\n";
 
 // Get table names
-$result = $database->query("SHOW TABLE STATUS");
+$result = $database->query("SHOW TABLES");
 
 // Loop through tables
 while($row = $result->fetchRow()) { 
 	//show sql query to rebuild the query
-	$sql = 'SHOW CREATE TABLE '.$row['Name'].''; 
+	$sql = 'SHOW CREATE TABLE '.$row[0].''; 
 	$query2 = $database->query($sql); 
 	// Start creating sql-backup
-	$sql_backup ="\r\n# Create table ".$row['Name']."\r\n\r\n";
+	$sql_backup ="\r\n# Create table ".$row[0]."\r\n\r\n";
 	$out = $query2->fetchRow();
 	$sql_backup.=$out['Create Table'].";\r\n\r\n"; 
-	$sql_backup.="# Dump data for ".$row['Name']."\r\n\r\n";
+	$sql_backup.="# Dump data for ".$row[0]."\r\n\r\n";
 	// Select everything
-	$out = $database->query('SELECT * FROM '.$row['Name']); 
+	$out = $database->query('SELECT * FROM '.$row[0]); 
 	$sql_code = '';
 	// Loop through all collumns
 	while($code = $out->fetchRow()) { 
-		$sql_code .= "INSERT INTO ".$row['Name']." SET "; 
+		$sql_code .= "INSERT INTO ".$row[0]." SET "; 
 		$numeral = 0;
 		foreach($code as $insert => $value) {
 			// Loosing the numerals in array -> mysql_fetch_array($result, MYSQL_ASSOC) WB hasn't? 
