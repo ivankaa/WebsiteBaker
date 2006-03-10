@@ -399,10 +399,10 @@ if($install_tables == true) {
 	require(WB_PATH.'/admin/interface/version.php');
 	
 	// Settings table
-	$settings="CREATE TABLE `".TABLE_PREFIX."settings` ( `setting_id` INT NOT NULL auto_increment,
-		`name` VARCHAR( 255 ) NOT NULL DEFAULT '' ,
-		`value` TEXT NOT NULL DEFAULT '' ,
-		PRIMARY KEY ( `setting_id` ) )";
+	$settings="CREATE TABLE `".TABLE_PREFIX."settings` ( `setting_id` INT NOT NULL auto_increment,"
+		. " `name` VARCHAR( 255 ) NOT NULL DEFAULT '' ,"
+		. " `value` TEXT NOT NULL DEFAULT '' ,"
+		. " PRIMARY KEY ( `setting_id` ) )";
 	$database->query($settings);
 
 	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` VALUES "
