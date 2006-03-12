@@ -30,8 +30,8 @@ $filename = $_SERVER['HTTP_HOST'].'-backup-'.gmdate('Y-m-d', mktime()+TIMEZONE).
 if(!isset($_POST['backup'])){ 
 	header('Location: ../');
 	exit(0);
-}
-
+} 
+	 
 // Include config
 require_once('../../config.php');
 
@@ -49,7 +49,16 @@ $output = "".
 "\n";
 
 // Get table names
-$result = $database->query("SHOW TABLES");
+// Use this one for ALL tables in DB
+$query  = "SHOW TABLES";
+
+if ($_POST['tables']=='WB') {
+	// Or use this to get ONLY wb tables
+	$prefix=str_replace('_','\_',TABLE_PREFIX);
+	$query = "SHOW TABLES LIKE '".$prefix."%'";
+}
+
+$result = $database->query($query);
 
 // Loop through tables
 while($row = $result->fetchRow()) { 

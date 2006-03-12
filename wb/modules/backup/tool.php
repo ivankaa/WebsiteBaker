@@ -30,5 +30,7 @@ defined('WB_PATH') OR die(header('Location: ../index.php'));
 ?>
 <br />
 <form name="prompt" method="post" action="<?php echo WB_URL; ?>/modules/backup/backup-sql.php">
+		<input type="radio" checked="checked" name="tables" value="ALL"><?php echo $TEXT['BACKUP_ALL_TABLES']; ?><br>
+		<input type="radio" name="tables" value="WB"><?php echo $TEXT['BACKUP_WB_SPECIFIC']; ?><br><br> 
 	<input type="submit" name="backup" value="<?php echo $TEXT['BACKUP_DATABASE']; ?>" onClick="javascript: if(!confirm('<?php echo $MESSAGE['GENERIC']['PLEASE_BE_PATIENT']; ?>')) { return false; }" />
 </form>
