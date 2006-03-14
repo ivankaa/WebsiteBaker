@@ -357,6 +357,15 @@ class login extends admin {
 											'SECTION_LOGIN' => $MENU['LOGIN']
 											)
 									);
+			if(defined('DEFAULT_CHARSET')) {
+				$charset=DEFAULT_CHARSET;
+			} else {
+				$charset='utf-8';
+			}
+			
+			$template->set_var('CHARSET', $charset);	
+									
+									
 			$template->parse('main', 'mainBlock', false);
 			$template->pparse('output', 'page');
 		}

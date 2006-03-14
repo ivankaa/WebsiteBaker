@@ -158,6 +158,14 @@ if(defined('FRONTEND')) {
 }
 $template->set_var('INTERFACE_URL', ADMIN_URL.'/interface');	
 
+if(defined('DEFAULT_CHARSET')) {
+	$charset=DEFAULT_CHARSET;
+} else {
+	$charset='utf-8';
+}
+
+$template->set_var('CHARSET', $charset);	
+
 $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
