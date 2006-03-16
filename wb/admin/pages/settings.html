@@ -129,9 +129,9 @@ function toggle_viewers() {
 	</td>
 	<td>
 		<select name="target" style="WIDTH: 100%;" value="{TARGET}" />
-			<option value="_top">{TEXT_PLEASE_SELECT}...</option>
 			<option value="_blank"{BLANK_SELECTED}>{TEXT_NEW_WINDOW}</option>
-			<option value="_top"{TOP_SELECTED}>{TEXT_SAME_WINDOW}</option>
+			<option value="_self"{SELF_SELECTED}>{TEXT_SAME_WINDOW}</option>
+			<option value="_top"{TOP_SELECTED}>{TEXT_TOP_FRAME}</option>
 		</select>
 	</td>
 </tr>

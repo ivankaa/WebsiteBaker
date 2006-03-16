@@ -364,11 +364,18 @@ if($results_array['searching'] == 0) {
 	$template->set_var('SEARCHING_DISABLED', ' selected');
 }
 // Select what the page target is
-if($results_array['target'] == '_top') {
-	$template->set_var('TOP_SELECTED', ' selected');
-} elseif($results_array['target'] == '_blank') {
-	$template->set_var('BLANK_SELECTED', ' selected');
+switch ($results_array['target']) {
+	case '_top':
+		$template->set_var('TOP_SELECTED', ' selected');
+		break;
+	case '_self':
+		$template->set_var('SELF_SELECTED', ' selected');
+		break;
+	case '_blank':
+		$template->set_var('BLANK_SELECTED', ' selected');
+		break;
 }
+	
 
 // Insert language text
 $template->set_var(array(
@@ -394,6 +401,7 @@ $template->set_var(array(
 								'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
 								'TEXT_NEW_WINDOW' => $TEXT['NEW_WINDOW'],
 								'TEXT_SAME_WINDOW' => $TEXT['SAME_WINDOW'],
+								'TEXT_TOP_FRAME' => $TEXT['TOP_FRAME'],
 								'TEXT_ADMINISTRATORS' => $TEXT['ADMINISTRATORS'],
 								'TEXT_PRIVATE_VIEWERS' => $TEXT['PRIVATE_VIEWERS'],
 								'TEXT_REGISTERED_VIEWERS' => $TEXT['REGISTERED_VIEWERS'],

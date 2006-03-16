@@ -44,17 +44,24 @@ $template->set_var(array(
 								'TEXT_TARGET' => $TEXT['TARGET'],
 								'TEXT_NEW_WINDOW' => $TEXT['NEW_WINDOW'],
 								'TEXT_SAME_WINDOW' => $TEXT['SAME_WINDOW'],
+								'TEXT_TOP_FRAME' => $TEXT['TOP_FRAME'],
 								'TEXT_SAVE' => $TEXT['SAVE'],
 								'TEXT_CANCEL' => $TEXT['CANCEL'],
 								'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT']
 								)
 						);
 
-// Select target
-if($target == '_blank') {
-	$template->set_var('BLANK_SELECTED', ' selected');
-} elseif($target == '_top') {
-	$template->set_var('TOP_SELECTED', ' selected');
+// Select what the page target is
+switch ($target) {
+	case '_top':
+		$template->set_var('TOP_SELECTED', ' selected');
+		break;
+	case '_self':
+		$template->set_var('SELF_SELECTED', ' selected');
+		break;
+	case '_blank':
+		$template->set_var('BLANK_SELECTED', ' selected');
+		break;
 }
 
 // Parse template object

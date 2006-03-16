@@ -224,6 +224,7 @@ $TEXT['LINK'] = 'Link';
 $TEXT['TARGET'] = 'Target';
 $TEXT['NEW_WINDOW'] = 'New Window';
 $TEXT['SAME_WINDOW'] = 'Same Window';
+$TEXT['TOP_FRAME'] = 'Top Frame';
 $TEXT['PAGE_LEVEL_LIMIT'] = 'Page Level Limit';
 $TEXT['SUCCESS'] = 'Success';
 $TEXT['ERROR'] = 'Error';
