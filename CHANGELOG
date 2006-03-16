@@ -11,6 +11,24 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.3 -------------------------------------
+16-Mar-2006 Stefan Braunewell
+!	Changed link target selection. Now self, top and new. (Ticket #145)
+#	Fixed ticket #143. Charset setting is now used in admin login and forgot
+	password pages.
+#	Some changes to the SQL code in the install script for improved 
+	compatibility with new MySQL versions
+#	Fixed ticket #134 - error on browsing media.
++	Improved backup module: new choice between full database or WB-related
+	backup.
+#	Fixed ticket #141 - admin now sees all folders in media
+#	Fixed e-mail sending problems due to additional parameter in mail call.
+#	Applied fix regarding ticket #138: new users now get deleted if
+	sending e-mail fails.
+#	Fixed ticket #137: Last Reset timer not reset in frontend forgotten 
+	password process
+#	Removed duplicate expression from modules/news/install.php which caused
+	problems in installation
+
 01-Mar-2006 Stefan Braunewell
 #	Fixed ticket #68 - Safari problem with displaying all parents.
 #	Fixed ticket #136 - mailing forgotten password in admin login screen leads 
