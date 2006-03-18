@@ -36,6 +36,6 @@ if(!defined('WB_URL')) {
 	exit(0);
 }
 
-define('VERSION', '2.6.2');
+define('VERSION', '2.6.3');
 
 ?>
