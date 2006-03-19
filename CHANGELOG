@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.3 -------------------------------------
+19-Mar-2006 Stefan Braunewell
+#	Fixed ticket #146: problems removing groups from viewers list of a page
 16-Mar-2006 Stefan Braunewell
 !	Changed link target selection. Now self, top and new. (Ticket #145)
 #	Fixed ticket #143. Charset setting is now used in admin login and forgot

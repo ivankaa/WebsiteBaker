@@ -217,16 +217,10 @@ if($results_array['visibility'] == 'public') {
 		$template->parse('group_list2', 'group_list_block2', true);
 	}
 // Show private viewers
-if($results_array['visibility'] == 'private') {
-	$template->set_var('DISPLAY_PRIVATE', '');
+if($results_array['visibility'] == 'private' OR $results_array['visibility'] == 'registered') {
+	$template->set_var('DISPLAY_VIEWERS', '');
 } else {
-	$template->set_var('DISPLAY_PRIVATE', 'none');
-}
-
-if($results_array['visibility'] == 'registered') {
-	$template->set_var('DISPLAY_REGISTERED', '');
-} else {
-	$template->set_var('DISPLAY_REGISTERED', 'none');
+	$template->set_var('DISPLAY_VIEWERS', 'none');
 }
 
 // Parent page list
@@ -403,8 +397,7 @@ $template->set_var(array(
 								'TEXT_SAME_WINDOW' => $TEXT['SAME_WINDOW'],
 								'TEXT_TOP_FRAME' => $TEXT['TOP_FRAME'],
 								'TEXT_ADMINISTRATORS' => $TEXT['ADMINISTRATORS'],
-								'TEXT_PRIVATE_VIEWERS' => $TEXT['PRIVATE_VIEWERS'],
-								'TEXT_REGISTERED_VIEWERS' => $TEXT['REGISTERED_VIEWERS'],
+								'TEXT_ALLOWED_VIEWERS' => $TEXT['ALLOWED_VIEWERS'],
 								'TEXT_DESCRIPTION' => $TEXT['DESCRIPTION'],
 								'TEXT_KEYWORDS' => $TEXT['KEYWORDS'],
 								'TEXT_SEARCHING' => $TEXT['SEARCHING'],

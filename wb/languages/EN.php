@@ -332,6 +332,7 @@ $TEXT['REGISTERED'] = 'Registered';
 $TEXT['START'] = 'Start';
 $TEXT['SECTION_BLOCKS'] = 'Section Blocks';
 $TEXT['REGISTERED_VIEWERS'] = 'Registered Viewers';
+$TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers';
 $TEXT['SUBMISSION_ID'] = 'Submission ID';
 $TEXT['SUBMISSIONS'] = 'Submissions';
 $TEXT['SUBMITTED'] = 'Submitted';
