@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 // Get posted content
 if(!isset($_POST['content'])) {
 	header("Location: intro.php");
+	exit(0);
 } else {
 	$content = $_POST['content'];
 }

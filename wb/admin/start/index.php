@@ -1,11 +1,11 @@
 <?php
 
-// $Id: index.php,v 1.3 2005/04/02 06:25:38 rdjurovich Exp $
+// $Id$
 
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -38,7 +38,8 @@ $template->set_var(array(
 								'CURRENT_USER' => $MESSAGE['START']['CURRENT_USER'],
 								'DISPLAY_NAME' => $admin->get_display_name(),
 								'ADMIN_URL' => ADMIN_URL,
-								'WB_URL' => WB_URL
+								'WB_URL' => WB_URL,
+								'WB_VERSION' => WB_VERSION
 								)
 						);
 

@@ -1,11 +1,11 @@
 <?php
 
-// $Id: create.php,v 1.10 2005/04/25 11:53:12 rdjurovich Exp $
+// $Id$
 
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -26,11 +26,13 @@
 // Get dir name and target location
 if(!isset($_POST['name']) OR $_POST['name'] == '') {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$name = $_POST['name'];
 }
 if(!isset($_POST['target']) OR $_POST['target'] == '') {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$target = $_POST['target'];
 }

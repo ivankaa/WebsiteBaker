@@ -39,6 +39,13 @@ $visibility = $admin->get_post('visibility');
 $admin_groups = $admin->get_post('admin_groups');
 $viewing_groups = $admin->get_post('viewing_groups');
 
+if ($parent!=0) {
+	if (!$admin->get_page_permission($parent,'admin'))
+		$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
+} elseif (!$admin->get_permission('pages_add_l0','system')) {
+	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
+}	
+
 // Validate data
 if($title == '') {
 	$admin->print_error($MESSAGE['PAGES']['BLANK_TITLE']);
@@ -74,7 +81,6 @@ if($parent == '0') {
 }
 
 // Check if a page with same page filename exists
-$database = new database();
 $get_same_page = $database->query("SELECT page_id FROM ".TABLE_PREFIX."pages WHERE link = '$link'");
 if($get_same_page->numRows() > 0 OR file_exists(WB_PATH.PAGES_DIRECTORY.$link.'.php') OR file_exists(WB_PATH.PAGES_DIRECTORY.$link.'/')) {
 	$admin->print_error($MESSAGE['PAGES']['PAGE_EXISTS']);
@@ -99,7 +105,6 @@ if($query_parent->numRows() > 0) {
 
 // Insert page into pages table
 $query = "INSERT INTO ".TABLE_PREFIX."pages (page_title,menu_title,parent,template,target,position,visibility,searching,menu,language,admin_groups,viewing_groups,modified_when,modified_by) VALUES ('$title','$title','$parent','$template','_top','$position','$visibility','1','1','".DEFAULT_LANGUAGE."','$admin_groups','$viewing_groups','".mktime()."','".$admin->get_user_id()."')";
-$database = new database();
 $database->query($query);
 if($database->is_error()) {
 	$admin->print_error($database->get_error());

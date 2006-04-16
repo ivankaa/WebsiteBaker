@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -32,11 +32,13 @@ $database = new database();
 
 if(!isset($_POST['action']) OR $_POST['action'] != "modify" AND $_POST['action'] != "delete") {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Check if group group_id is a valid number and doesnt equal 1
 if(!isset($_POST['group_id']) OR !is_numeric($_POST['group_id']) OR $_POST['group_id'] == 1) {
 	header("Location: index.php");
+	exit(0);
 }
 
 if($_POST['action'] == 'modify') {

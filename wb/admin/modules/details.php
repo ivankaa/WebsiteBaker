@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@ require('../../config.php');
 // Get module name
 if(!isset($_POST['file']) OR $_POST['file'] == "") {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$file = $_POST['file'];
 }
@@ -36,6 +37,7 @@ if(!isset($_POST['file']) OR $_POST['file'] == "") {
 // Check if the module exists
 if(!file_exists(WB_PATH.'/modules/'.$file)) {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Print admin header
@@ -97,7 +99,8 @@ $template->set_var(array(
 								'TEXT_AUTHOR' => $TEXT['AUTHOR'],
 								'TEXT_VERSION' => $TEXT['VERSION'],
 								'TEXT_DESIGNED_FOR' => $TEXT['DESIGNED_FOR'],
-								'TEXT_DESCRIPTION' => $TEXT['DESCRIPTION']
+								'TEXT_DESCRIPTION' => $TEXT['DESCRIPTION'],
+								'TEXT_BACK' => $TEXT['BACK']
 								)
 						);
 

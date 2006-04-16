@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -32,10 +32,11 @@ if(!defined('SESSION_STARTED')) {
 
 // Check if the page has been reloaded
 if(!isset($_GET['sessions_checked']) OR $_GET['sessions_checked'] != 'true') {
-   // Set session variable
-   $_SESSION['session_support'] = '<font class="good">Enabled</font>';
-   // Reload page
-   header('Location: index.php?sessions_checked=true');
+	// Set session variable
+	$_SESSION['session_support'] = '<font class="good">Enabled</font>';
+	// Reload page
+	header('Location: index.php?sessions_checked=true');
+	exit(0);
 } else {
    // Check if session variable has been saved after reload
    if(isset($_SESSION['session_support'])) {

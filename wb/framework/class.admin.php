@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -34,6 +34,7 @@ in the administration section of Website Baker.
 
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 require_once(WB_PATH.'/framework/class.wb.php');
@@ -63,6 +64,7 @@ class admin extends wb {
 			// First check if the user is logged-in
 			if($this->is_authenticated() == false) {
 				header('Location: '.ADMIN_URL.'/login/index.php');
+				exit(0);
 			}
 			// Now check if they are allowed in this section
 			if($this->get_permission($section_permission) == false) {
@@ -88,12 +90,18 @@ class admin extends wb {
 		$header_template = new Template(ADMIN_PATH."/interface");
 		$header_template->set_file('page', 'header.html');
 		$header_template->set_block('page', 'header_block', 'header');
+		if(defined('DEFAULT_CHARSET')) {
+			$charset=DEFAULT_CHARSET;
+		} else {
+			$charset='utf-8';
+		}
 		$header_template->set_var(	array(
 													'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
 													'INTERFACE_DIR' => ADMIN_URL.'/interface',
 													'BODY_TAGS' => $body_tags,
 													'WEBSITE_TITLE' => ($title['value']),
 													'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
+													'CHARSET' => $charset,
 													'VERSION' => VERSION
 													)
 											);
@@ -106,7 +114,7 @@ class admin extends wb {
 					array(ADMIN_URL.'/preferences/index.php', '', $MENU['PREFERENCES'], 'preferences', 0),
 					array(ADMIN_URL.'/settings/index.php', '', $MENU['SETTINGS'], 'settings', 1),
 					array(ADMIN_URL.'/access/index.php', '', $MENU['ACCESS'], 'access', 1),
-					array('http://www.websitebaker.org/2/help/', '_blank', $MENU['HELP'], 'help', 0),
+					array('http://www.websitebaker.org/permalink/help?version='.WB_VERSION, '_blank', $MENU['HELP'], 'help', 0),
 					array(WB_URL.'/', '_blank', $MENU['VIEW'], 'view', 0),
 					array(ADMIN_URL.'/logout/index.php', '', $MENU['LOGOUT'], 'logout', 0)
 					);
@@ -145,36 +153,6 @@ class admin extends wb {
 		$footer_template->pparse('output', 'page');
 	}
 	
-	// Print a success message which then automatically redirects the user to another page
-	function print_success($message, $redirect = 'index.php') {
-		global $TEXT;
-		$success_template = new Template(ADMIN_PATH.'/interface');
-		$success_template->set_file('page', 'success.html');
-		$success_template->set_block('page', 'main_block', 'main');
-		$success_template->set_var('MESSAGE', $message);
-		$success_template->set_var('REDIRECT', $redirect);
-		$success_template->set_var('NEXT', $TEXT['NEXT']);
-		$success_template->parse('main', 'main_block', false);
-		$success_template->pparse('output', 'page');
-	}
-	
-	// Print a error message
-	function print_error($message, $link = 'index.php', $auto_footer = true) {
-		global $TEXT;
-		$success_template = new Template(ADMIN_PATH.'/interface');
-		$success_template->set_file('page', 'error.html');
-		$success_template->set_block('page', 'main_block', 'main');
-		$success_template->set_var('MESSAGE', $message);
-		$success_template->set_var('LINK', $link);
-		$success_template->set_var('BACK', $TEXT['BACK']);
-		$success_template->parse('main', 'main_block', false);
-		$success_template->pparse('output', 'page');
-		if($auto_footer == true) {
-			$this->print_footer();
-		}
-		exit();
-	}
-
 	// Return a system permission
 	function get_permission($name, $type = 'system') {
 		// Append to permission type
@@ -205,6 +183,60 @@ class admin extends wb {
 			}
 		}
 	}
+		
+	function get_user_details($user_id) {
+		global $database;
+		$query_user = "SELECT username,display_name FROM ".TABLE_PREFIX."users WHERE user_id = '$user_id'";
+		$get_user = $database->query($query_user);
+		if($get_user->numRows() != 0) {
+			$user = $get_user->fetchRow();
+		} else {
+			$user['display_name'] = 'Unknown';
+			$user['username'] = 'unknown';
+		}
+		return $user;
+	}	
+	
+	function get_page_details($page_id) {
+		global $database;
+		$query = "SELECT page_id,page_title,modified_by,modified_when FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'";
+		$results = $database->query($query);
+		if($database->is_error()) {
+			$this->print_header();
+			$this->print_error($database->get_error());
+		}
+		if($results->numRows() == 0) {
+			$this->print_header();
+			$this->print_error($MESSAGE['PAGES']['NOT_FOUND']);
+		}
+		$results_array = $results->fetchRow();
+		return $results_array;
+	}	
+	
+	/** Function get_page_permission takes either a numerical page_id,
+	 * upon which it looks up the permissions in the database,
+	 * or an array with keys admin_groups and admin_users  
+	 */
+	function get_page_permission($page,$action='admin') {
+		if ($action!='viewing') $action='admin';
+		$action_groups=$action.'_groups';
+		$action_users=$action.'_users';
+		if (is_array($page)) {
+				$groups=$page[$action_groups];
+				$users=$page[$action_users];
+		} else {				
+			global $database;
+			$results = $database->query("SELECT $action_groups,$action_users FROM ".TABLE_PREFIX."pages WHERE page_id = '$page'");
+			$result = $results->fetchRow();
+			$groups = explode(',', str_replace('_', '', $result[$action_groups]));
+			$users = explode(',', str_replace('_', '', $result[$action_users]));
+		}
+		if(!is_numeric(array_search($this->get_group_id(), $groups)) AND !is_numeric(array_search($this->get_user_id(), $users))) {
+			return false;
+		}
+		return true;
+	}
+		
 
 	// Returns a system permission for a menu link
 	function get_link_permission($title) {

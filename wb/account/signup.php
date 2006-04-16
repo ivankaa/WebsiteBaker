@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -23,13 +23,15 @@
 
 */
 
-require('../config.php');
+require_once('../config.php');
 
 if(!is_numeric(FRONTEND_SIGNUP)) {
 	if(INTRO_PAGE) {
 		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index'.PAGE_EXTENSION);
+		exit(0);
 	} else {
 		header('Location: '.WB_URL.'/index'.PAGE_EXTENSION);
+		exit(0);
 	}
 }
 

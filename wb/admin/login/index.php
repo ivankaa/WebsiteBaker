@@ -1,11 +1,11 @@
 <?php
 
-// $Id: index.php,v 1.3 2005/03/27 06:54:28 rdjurovich Exp $
+// $Id$
 
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

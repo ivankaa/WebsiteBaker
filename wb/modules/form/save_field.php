@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@ require('../../config.php');
 // Get id
 if(!isset($_POST['field_id']) OR !is_numeric($_POST['field_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
+	exit(0);
 } else {
 	$field_id = $_POST['field_id'];
 	$field_id = $field_id;
@@ -60,7 +61,7 @@ if(is_numeric($list_count)) {
 	$values = array();
 	for($i = 1; $i <= $list_count; $i++) {
 		if($admin->get_post('value'.$i) != '') {
-			$values[] = $admin->get_post('value'.$i);
+			$values[] = str_replace(",","&#44;",$admin->get_post('value'.$i));
 		}
 	}
 	$value = implode(',', $values);

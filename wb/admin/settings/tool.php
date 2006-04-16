@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -29,12 +29,14 @@ require_once(WB_PATH.'/framework/functions.php');
 
 if(!isset($_GET['tool'])) {
 	header("Location: index.php?advanced=yes");
+	exit(0);
 }
 
 // Check if tool is installed
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND directory = '".$_GET['tool']."'");
 if($result->numRows() == 0) {
 	header("Location: index.php?advanced=yes");
+	exit(0);
 }
 $tool = $result->fetchRow();
 

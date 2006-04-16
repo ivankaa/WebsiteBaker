@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -38,11 +38,11 @@ $template->set_block('page', 'main_block', 'main');
 // Get the directory to browse
 $directory = $admin->get_post('folder');
 if($directory == '') {
-	$directory = '/media';
+	$directory = MEDIA_DIRECTORY;
 }
 // If the directory contains ../ then set it to /media
 if(strstr($directory, '../')) {
-	$directory = '/media';
+	$directory = MEDIA_DIRECTORY;
 }
 
 // Include the WB functions file

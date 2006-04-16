@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -63,8 +63,8 @@ if(!is_numeric($_POST['stored_submissions'])) {
 } else {
 	$stored_submissions = $_POST['stored_submissions'];
 }
-// Make sure max submissions is not smaller than stored submissions
-if($max_submissions < $stored_submissions) {
+// Make sure max submissions is not greater than stored submissions
+if($max_submissions > $stored_submissions) {
 	$max_submissions = $stored_submissions;
 }
 

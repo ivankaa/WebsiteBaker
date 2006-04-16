@@ -1,11 +1,11 @@
 <?php
 
-// $Id: save.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -26,11 +26,13 @@
 // Get page & section id
 if(!isset($_POST['page_id']) OR !is_numeric($_POST['page_id'])) {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$page_id = $_POST['page_id'];
 }
 if(!isset($_POST['section_id']) OR !is_numeric($_POST['section_id'])) {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$section_id = $_POST['section_id'];
 }

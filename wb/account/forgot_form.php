@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@
 
 if(!defined('WB_URL')) {
 	header('Location: ../pages/index.php');
+	exit(0);
 }
 
 // Create new database object
@@ -36,10 +37,11 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 	$email = $_POST['email'];
 	
 	// Check if the email exists in the database
-	$query = "SELECT user_id,username,display_name,email,last_reset FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($_POST['email'])."'";
+	$query = "SELECT user_id,username,display_name,email,last_reset,password FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($_POST['email'])."'";
 	$results = $database->query($query);
 	if($results->numRows() > 0) {
-		// Get the id, username, and email from the above db query
+	
+		// Get the id, username, email, and last_reset from the above db query
 		$results_array = $results->fetchRow();
 		
 		// Check if the password has been reset in the last 2 hours
@@ -53,6 +55,8 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 			
 		} else {
 		
+			$old_pass = $results_array['password'];
+
 			// Generate a random password then update the database with it
 			$new_pass = '';
 			$salt = "abchefghjkmnpqrstuvwxyz0123456789";
@@ -64,8 +68,7 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 				$new_pass = $new_pass . $tmp;
 				$i++;
 			}
-			
-			$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".md5($new_pass)."' WHERE user_id = '".$results_array['user_id']."'");
+			$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".md5($new_pass)."', last_reset = '".mktime()."' WHERE user_id = '".$results_array['user_id']."'");
 			
 			if($database->is_error()) {
 				// Error updating database
@@ -86,14 +89,17 @@ This means that your old password will no longer work.
 
 If you have received this message in error, please delete it immediatly.';
 				// Try sending the email
-				if(mail($mail_to, $mail_subject, $mail_message)) {
+				if($wb->mail('From: '.SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
 					$message = $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'];
 					$display_form = false;
 				} else {
+					$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".$old_pass."' WHERE user_id = '".$results_array['user_id']."'");
 					$message = $MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'];
 				}
 			}
-		}	
+		
+		}
+
 	} else {
 		// Email doesn't exist, so tell the user
 		$message = $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'];

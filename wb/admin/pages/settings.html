@@ -2,15 +2,10 @@
 
 <script type="text/javascript" language="javascript">
 function toggle_viewers() {
-	if(document.settings.visibility.value == 'private') {
-		document.getElementById('private_viewers').style.display = 'block';
-		document.getElementById('registered_viewers').style.display = 'none';
-	} else if(document.settings.visibility.value == 'registered') {
-		document.getElementById('private_viewers').style.display = 'none';
-		document.getElementById('registered_viewers').style.display = 'block';
+	if(document.settings.visibility.value == 'private' || document.settings.visibility.value == 'registered') {
+		document.getElementById('allowed_viewers').style.display = 'block';
 	} else {
-		document.getElementById('private_viewers').style.display = 'none';
-		document.getElementById('private_viewers').style.display = 'none';
+		document.getElementById('allowed_viewers').style.display = 'none';
 	}
 }
 </script>
@@ -57,21 +52,8 @@ function toggle_viewers() {
 		</ul>
 	</td>
 	<td rowspan="10" valign="top" style="padding-left: 20px; padding-top: 8px;">
-		<div id="private_viewers" style="display: {DISPLAY_PRIVATE};">
-			{TEXT_PRIVATE_VIEWERS}:
-			<ul style="list-style-type: none; margin: 0; padding: 0;">
-				<!-- BEGIN group_list_block2 -->
-				<li>
-				<input type="checkbox" name="viewing_groups[]" id="viewing_group_{ID}" value="{ID}"{CHECKED}{DISABLED} />
-				<label for="viewing_group_{TOGGLE}">{NAME}</label>
-				</li>
-				<!-- END group_list_block2 -->
-			</ul>
-		</div>
-	</td>
-	<td rowspan="10" valign="top" style="padding-left: 20px; padding-top: 8px;">
-		<div id="registered_viewers" style="display: {DISPLAY_PRIVATE};">
-			{TEXT_REGISTERED_VIEWERS}:
+		<div id="allowed_viewers" style="display: {DISPLAY_VIEWERS};">
+			{TEXT_ALLOWED_VIEWERS}:
 			<ul style="list-style-type: none; margin: 0; padding: 0;">
 				<!-- BEGIN group_list_block2 -->
 				<li>
@@ -129,9 +111,9 @@ function toggle_viewers() {
 	</td>
 	<td>
 		<select name="target" style="WIDTH: 100%;" value="{TARGET}" />
-			<option value="_top">{TEXT_PLEASE_SELECT}...</option>
 			<option value="_blank"{BLANK_SELECTED}>{TEXT_NEW_WINDOW}</option>
-			<option value="_top"{TOP_SELECTED}>{TEXT_SAME_WINDOW}</option>
+			<option value="_self"{SELF_SELECTED}>{TEXT_SAME_WINDOW}</option>
+			<option value="_top"{TOP_SELECTED}>{TEXT_TOP_FRAME}</option>
 		</select>
 	</td>
 </tr>

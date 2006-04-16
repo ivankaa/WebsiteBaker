@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -315,9 +315,9 @@ if(defined('MULTIPLE_MENUS') AND MULTIPLE_MENUS == true) {
 
 // Work-out if page languages feature is enabled
 if(defined('PAGE_LANGUAGES') AND PAGE_LANGUAGES == true) {
-	$template->set_var('PAGE_LANGUAGES', ' true');
+        $template->set_var('PAGE_LANGUAGES_ENABLED', ' checked');
 } else {
-	$template->set_var('PAGE_LANGUAGES', ' false');
+        $template->set_var('PAGE_LANGUAGES_DISABLED', ' checked');
 }
 
 // Work-out if smart login feature is enabled
@@ -578,6 +578,7 @@ $template->set_var(array(
 								'TEXT_SECTION_BLOCKS' => $TEXT['SECTION_BLOCKS'],
 								'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
 								'TEXT_PAGE_TRASH' => $TEXT['PAGE_TRASH'],
+								'TEXT_PAGE_LANGUAGES' => $TEXT['PAGE_LANGUAGES'],
 								'TEXT_INLINE' => $TEXT['INLINE'],
 								'TEXT_SEPARATE' => $TEXT['SEPARATE'],
 								'TEXT_HOME_FOLDERS' => $TEXT['HOME_FOLDERS'],

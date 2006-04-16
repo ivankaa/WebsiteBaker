@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -89,7 +89,8 @@ if($query_fields->numRows() > 0) {
 				}
 				?>
 			</td>
-			<td width="95">					<?php 
+			<td width="95">		
+			<?php 
 			if ($field['type'] != 'group_begin') {
 				echo $TEXT['REQUIRED'].': '; if($field['required'] == 1) { echo $TEXT['YES']; } else { echo $TEXT['NO']; }
 			}

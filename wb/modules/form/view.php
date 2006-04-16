@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -192,7 +192,7 @@ if($use_captcha) {
 	}
 	?><tr><td class="field_title"><?php echo $TEXT['VERIFICATION']; ?>:</td><td>
 	<table cellpadding="2" cellspacing="0" border="0">
-	<tr><td><img src="<?php echo WB_URL; ?>/include/captcha.php" alt="Captcha" /></td>
+	<tr><td><img src="<?php echo WB_URL; ?>/include/captcha.php?t=<?php echo time(); ?>" alt="Captcha" /></td>
 	<td><input type="text" name="captcha" maxlength="5" /></td>
 	</tr></table>
 	</td></tr>
@@ -275,7 +275,7 @@ echo $footer;
 			}
 		}
 	}
-	if(isset($_SESSION['catpcha'])) { unset($_SESSION['captcha']); }
+	if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 	
 	// Addslashes to email body - proposed by Icheb in topic=1170.0
 	// $email_body = $wb->add_slashes($email_body);
@@ -308,7 +308,8 @@ echo $footer;
 		} else {
 		
 		// Check how many times form has been submitted in last hour
-		$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions WHERE submitted_when >= '3600'");
+		$last_hour = time()-3600;
+		$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions WHERE submitted_when >= '$last_hour'");
 		if($query_submissions->numRows() > $max_submissions) {
 			// Too many submissions so far this hour
 			echo $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'];
@@ -317,9 +318,7 @@ echo $footer;
 			// Now send the email
 			if($email_to != '') {
 				if($email_from != '') {
-					if(mail($email_to,$email_subject,str_replace("\n", '', $email_body),"From: ".$email_from)) { $success = true; }
-				} else {
-					if(mail($email_to,$email_subject,str_replace("\n", '', $email_body))) { $success = true; }
+					if($wb->mail($email_from,$email_to,$email_subject,$email_body)) { $success = true; }
 				}
 			}				
 			// Write submission to database

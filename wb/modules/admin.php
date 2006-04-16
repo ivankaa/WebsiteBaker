@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@ from Website Baker Administration to take advantage of the interface.
 // Stop this file being access directly
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 // Get page id
@@ -43,6 +44,7 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 		if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 			if(!isset($_POST['page_id']) OR !is_numeric($_POST['page_id'])) {
 				header("Location: index.php");
+				exit(0);
 			} else {
 				$page_id = $_POST['page_id'];
 			}
@@ -67,6 +69,7 @@ if(isset($_GET['section_id']) AND is_numeric($_GET['section_id'])) {
 		$section_id = 0;
 	} else {
 		header("Location: $section_required");
+		exit(0);
 	}
 }
 
@@ -105,14 +108,8 @@ if($results->numRows() == 0) {
 $results_array = $results->fetchRow();
 
 // Get display name of person who last modified the page
-$query_user = "SELECT username,display_name FROM ".TABLE_PREFIX."users WHERE user_id = '".$results_array['modified_by']."'";
-$get_user = $database->query($query_user);
-if($get_user->numRows() != 0) {
-	$user = $get_user->fetchRow();
-} else {
-	$user['display_name'] = 'Unknown';
-	$user['username'] = 'unknown';
-}
+$user=$admin->get_user_details($results_array['modified_by']);
+
 // Convert the unix ts for modified_when to human a readable form
 if($results_array['modified_when'] != 0) {
 	$modified_ts = gmdate(TIME_FORMAT.', '.DATE_FORMAT, $results_array['modified_when']+TIMEZONE);

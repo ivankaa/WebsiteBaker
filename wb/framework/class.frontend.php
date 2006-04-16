@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@ Frontend class
 
 if(!defined('WB_PATH')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 
@@ -56,7 +57,7 @@ class frontend extends wb {
 	var $website_title,$website_description,$website_keywords,$website_header,$website_footer;
 
 	// ugly database stuff
-	var $extra_where_sql;
+	var $extra_where_sql, $sql_where_language;
 
 	function page_select() {
 		global $page_id,$no_intro;
@@ -200,6 +201,7 @@ class frontend extends wb {
 			if($this->is_authenticated() == false) {
 				// User needs to login first
 				header("Location: ".WB_URL."/account/login".PAGE_EXTENSION.'?redirect='.$this->link);
+				exit(0);
 			}
 			// Check if we should show this page
 			if($this->show_page($this->page) == false) {
@@ -373,11 +375,11 @@ class frontend extends wb {
 		global $MESSAGE;
 		require_once(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
 		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-		<head><title>'.$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'].'</title>
+		<head><title>'.$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'].'</title>
 		<style type="text/css"><!-- body { font-family: Verdana, Arial, Helvetica, sans-serif;
 		font-size: 12px; color: #000000;	background-color: #FFFFFF;	margin: 20px; text-align: center; }
 		h1 { margin: 0; padding: 0; }--></style></head><body>
-		<h1>'.$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'];'.</h1><br />
+		<h1>'.$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'].'</h1><br />
 		'.$MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'].'</body></html>';
 	}
 }

@@ -1,11 +1,11 @@
 <?php
 
-// $Id: details.php,v 1.2 2005/04/02 06:25:37 rdjurovich Exp $
+// $Id$
 
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@ require('../../config.php');
 // Get language name
 if(!isset($_POST['code']) OR $_POST['code'] == "") {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$code = $_POST['code'];
 }
@@ -36,6 +37,7 @@ if(!isset($_POST['code']) OR $_POST['code'] == "") {
 // Check if the language exists
 if(!file_exists(WB_PATH.'/languages/'.$code.'.php')) {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Print admin header
@@ -73,7 +75,8 @@ $template->set_var(array(
 								'TEXT_TYPE' => $TEXT['TYPE'],
 								'TEXT_AUTHOR' => $TEXT['AUTHOR'],
 								'TEXT_VERSION' => $TEXT['VERSION'],
-								'TEXT_DESIGNED_FOR' => $TEXT['DESIGNED_FOR']
+								'TEXT_DESIGNED_FOR' => $TEXT['DESIGNED_FOR'],
+								'TEXT_BACK' => $TEXT['BACK']
 								)
 						);
 

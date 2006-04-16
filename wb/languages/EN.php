@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -224,6 +224,7 @@ $TEXT['LINK'] = 'Link';
 $TEXT['TARGET'] = 'Target';
 $TEXT['NEW_WINDOW'] = 'New Window';
 $TEXT['SAME_WINDOW'] = 'Same Window';
+$TEXT['TOP_FRAME'] = 'Top Frame';
 $TEXT['PAGE_LEVEL_LIMIT'] = 'Page Level Limit';
 $TEXT['SUCCESS'] = 'Success';
 $TEXT['ERROR'] = 'Error';
@@ -318,7 +319,7 @@ $TEXT['CHECKBOX_GROUP'] = 'Checkbox Group';
 $TEXT['RADIO_BUTTON_GROUP'] = 'Radio Button Group';
 $TEXT['SIZE'] = 'Size';
 $TEXT['DEFAULT_TEXT'] = 'Default Text';
-$TEXT['SEPERATOR'] = 'Seperator';
+$TEXT['SEPERATOR'] = 'Separator';
 $TEXT['BACK'] = 'Back';
 $TEXT['UNDER_CONSTRUCTION'] = 'Under Construction';
 $TEXT['MULTISELECT'] = 'Multi-select';
@@ -326,11 +327,12 @@ $TEXT['SHORT_TEXT'] = 'Short Text';
 $TEXT['LONG_TEXT'] = 'Long Text';
 $TEXT['HOMEPAGE_REDIRECTION'] = 'Homepage Redirection';
 $TEXT['HEADING'] = 'Heading';
-$TEXT['MULTIPLE_MENUS'] = 'Multiple Menu\'s';
+$TEXT['MULTIPLE_MENUS'] = 'Multiple Menus';
 $TEXT['REGISTERED'] = 'Registered';
 $TEXT['START'] = 'Start';
 $TEXT['SECTION_BLOCKS'] = 'Section Blocks';
 $TEXT['REGISTERED_VIEWERS'] = 'Registered Viewers';
+$TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers';
 $TEXT['SUBMISSION_ID'] = 'Submission ID';
 $TEXT['SUBMISSIONS'] = 'Submissions';
 $TEXT['SUBMITTED'] = 'Submitted';
@@ -384,6 +386,8 @@ $TEXT['BACKUP'] = 'Backup';
 $TEXT['RESTORE'] = 'Restore';
 $TEXT['BACKUP_DATABASE'] = 'Backup Database';
 $TEXT['RESTORE_DATABASE'] = 'Restore Database';
+$TEXT['BACKUP_ALL_TABLES'] = 'Backup all tables in database';
+$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup only WB-specific tables';
 $TEXT['BACKUP_MEDIA'] = 'Backup Media';
 $TEXT['RESTORE_MEDIA'] = 'Restore Media';
 $TEXT['ADMINISTRATION_TOOL'] = 'Administration tool';
@@ -514,7 +518,7 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Uninstalled successfully';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Unable to write to the target directory';
 $MESSAGE['GENERIC']['INVALID'] = 'The file you uploaded is invalid';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Cannot Uninstall: the selected file is in use';
-$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'] = 'Website Under Construction';
+$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Please check back soon...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Error opening file.';

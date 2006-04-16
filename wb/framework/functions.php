@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@ This file contains general functions used in Website Baker
 // Stop this file from being accessed directly
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 // Define that this file has been loaded
@@ -154,7 +155,8 @@ function get_home_folders() {
 	global $database, $admin;
 	$home_folders = array();
 	// Only return home folders is this feature is enabled
-	if(HOME_FOLDERS) {
+	// and user is not admin
+	if(HOME_FOLDERS AND ($_SESSION['GROUP_ID']!='1')) {
 		$query_home_folders = $database->query("SELECT home_folder FROM ".TABLE_PREFIX."users WHERE home_folder != '".$admin->get_home_folder()."'");
 		if($query_home_folders->numRows() > 0) {
 			while($folder = $query_home_folders->fetchRow()) {

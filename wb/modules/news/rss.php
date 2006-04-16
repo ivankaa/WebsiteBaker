@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])) {
 	define('PAGE_ID', $page_id);
 } else {
 	header('Location: '.WB_URL);
+	exit(0);
 }
 if(isset($_GET['group_id']) AND is_numeric($_GET['group_id'])) {
 	$group_id = $_GET['group_id'];

@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -26,11 +26,13 @@
 // Check if user selected language
 if(!isset($_POST['code']) OR $_POST['code'] == "") {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Extra protection
 if(trim($_POST['code']) == '') {
 	header("Location: index.php");
+	exit(0);
 }
 
 // Setup admin object

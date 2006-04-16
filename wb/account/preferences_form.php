@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@
 
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 ?>
@@ -35,10 +36,9 @@ if(!defined('WB_URL')) {
 <input type="hidden" name="user_id" value="{USER_ID}" />
 
 <table cellpadding="5" cellspacing="0" border="0" width="97%">
-<tr>
 	<td width="140"><?php echo $TEXT['DISPLAY_NAME']; ?>:</td>
 	<td class="value_input">
-		<input type="text" name="display_name" style="width: 380px;" maxlength="255" value="<?php echo $admin->get_display_name(); ?>" />
+		<input type="text" name="display_name" style="width: 380px;" maxlength="255" value="<?php echo $wb->get_display_name(); ?>" />
 	</td>
 </tr>
 <tr>
@@ -80,7 +80,7 @@ if(!defined('WB_URL')) {
 			// Insert default timezone values
 			require_once(ADMIN_PATH.'/interface/timezones.php');
 			foreach($TIMEZONES AS $hour_offset => $title) {
-				if($admin->get_timezone() == $hour_offset*60*60) {
+				if($wb->get_timezone() == $hour_offset*60*60) {
 					?>
 					<option value="<?php echo $hour_offset; ?>" selected><?php echo $title; ?></option>
 					<?php
@@ -179,7 +179,7 @@ if(!defined('WB_URL')) {
 <tr>
 	<td><?php echo $TEXT['EMAIL']; ?>:</td>
 	<td class="value_input">
-		<input type="text" name="email" style="width: 380px;" maxlength="255" value="<?php echo $admin->get_email(); ?>" />
+		<input type="text" name="email" style="width: 380px;" maxlength="255" value="<?php echo $wb->get_email(); ?>" />
 	</td>
 </tr>
 <tr>

@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -34,6 +34,7 @@ This class will be used to with the login application
 // Stop this file from being accessed directly
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 define('LOGIN_CLASS_LOADED', true);
@@ -61,7 +62,10 @@ class login extends admin {
 		$this->forgotten_details_app = $config_array['FORGOTTEN_DETAILS_APP'];
 		$this->max_username_len = $config_array['MAX_USERNAME_LEN'];
 		$this->max_password_len = $config_array['MAX_PASSWORD_LEN'];
-		$this->redirect_url = $config_array['REDIRECT_URL'];
+		if (array_key_exists('REDIRECT_URL',$config_array))
+			$this->redirect_url = $config_array['REDIRECT_URL'];
+		else
+			$this->redirect_url = '';
 		// Get the supplied username and password
 		if ($this->get_post('username_fieldname') != ''){
 			$username_fieldname = $this->get_post('username_fieldname');
@@ -95,7 +99,7 @@ class login extends admin {
 			// User already logged-in, so redirect to default url
 			header('Location: '.$this->url);
 			exit();
-		} elseif(!isset($username_fieldname) AND $this->is_remembered() == true) {
+		} elseif($this->is_remembered() == true) {
 			// User has been "remembered"
 			// Get the users password
 			$database = new database();
@@ -107,6 +111,7 @@ class login extends admin {
 			if($this->authenticate()) {
 				// Authentication successful
 				header("Location: ".$this->url);
+				exit(0);
 			} else {
 				$this->message = $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'];
 				$this->increase_attemps();
@@ -139,6 +144,7 @@ class login extends admin {
 				// Authentication successful
 				//echo $this->url;exit();
 				header("Location: ".$this->url);
+				exit(0);
 			} else {
 				$this->message = $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'];
 				$this->increase_attemps();
@@ -351,6 +357,15 @@ class login extends admin {
 											'SECTION_LOGIN' => $MENU['LOGIN']
 											)
 									);
+			if(defined('DEFAULT_CHARSET')) {
+				$charset=DEFAULT_CHARSET;
+			} else {
+				$charset='utf-8';
+			}
+			
+			$template->set_var('CHARSET', $charset);	
+									
+									
 			$template->parse('main', 'mainBlock', false);
 			$template->pparse('output', 'page');
 		}
@@ -359,6 +374,7 @@ class login extends admin {
 	// Warn user that they have had to many login attemps
 	function warn() {
 		header('Location: '.$this->warning_url);
+		exit(0);
 	}
 	
 }

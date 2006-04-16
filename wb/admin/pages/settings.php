@@ -3,7 +3,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 // Get page id
 if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 	header("Location: index.php");
+	exit(0);
 } else {
 	$page_id = $_GET['page_id'];
 }
@@ -58,14 +59,8 @@ if($results->numRows() == 0) {
 $results_array = $results->fetchRow();
 
 // Get display name of person who last modified the page
-$query_user = "SELECT username,display_name FROM ".TABLE_PREFIX."users WHERE user_id = '".$results_array['modified_by']."'";
-$get_user = $database->query($query_user);
-if($get_user->numRows() != 0) {
-	$user = $get_user->fetchRow();
-} else {
-	$user['display_name'] = 'Unknown';
-	$user['username'] = 'unknown';
-}
+$user=$admin->get_user_details($results_array['modified_by']);
+
 // Convert the unix ts for modified_when to human a readable form
 if($results_array['modified_when'] != 0) {
 	$modified_ts = gmdate(TIME_FORMAT.', '.DATE_FORMAT, $results_array['modified_when']+TIMEZONE);
@@ -222,11 +217,12 @@ if($results_array['visibility'] == 'public') {
 		$template->parse('group_list2', 'group_list_block2', true);
 	}
 // Show private viewers
-if($results_array['visibility'] == 'private') {
-	$template->set_var('DISPLAY_PRIVATE', '');
+if($results_array['visibility'] == 'private' OR $results_array['visibility'] == 'registered') {
+	$template->set_var('DISPLAY_VIEWERS', '');
 } else {
-	$template->set_var('DISPLAY_PRIVATE', 'none');
+	$template->set_var('DISPLAY_VIEWERS', 'none');
 }
+
 // Parent page list
 $database = new database();
 function parent_list($parent) {
@@ -362,11 +358,18 @@ if($results_array['searching'] == 0) {
 	$template->set_var('SEARCHING_DISABLED', ' selected');
 }
 // Select what the page target is
-if($results_array['target'] == '_top') {
-	$template->set_var('TOP_SELECTED', ' selected');
-} elseif($results_array['target'] == '_blank') {
-	$template->set_var('BLANK_SELECTED', ' selected');
+switch ($results_array['target']) {
+	case '_top':
+		$template->set_var('TOP_SELECTED', ' selected');
+		break;
+	case '_self':
+		$template->set_var('SELF_SELECTED', ' selected');
+		break;
+	case '_blank':
+		$template->set_var('BLANK_SELECTED', ' selected');
+		break;
 }
+	
 
 // Insert language text
 $template->set_var(array(
@@ -392,9 +395,9 @@ $template->set_var(array(
 								'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
 								'TEXT_NEW_WINDOW' => $TEXT['NEW_WINDOW'],
 								'TEXT_SAME_WINDOW' => $TEXT['SAME_WINDOW'],
+								'TEXT_TOP_FRAME' => $TEXT['TOP_FRAME'],
 								'TEXT_ADMINISTRATORS' => $TEXT['ADMINISTRATORS'],
-								'TEXT_PRIVATE_VIEWERS' => $TEXT['PRIVATE_VIEWERS'],
-								'TEXT_REGISTERED_VIEWERS' => $TEXT['REGISTERED_VIEWERS'],
+								'TEXT_ALLOWED_VIEWERS' => $TEXT['ALLOWED_VIEWERS'],
 								'TEXT_DESCRIPTION' => $TEXT['DESCRIPTION'],
 								'TEXT_KEYWORDS' => $TEXT['KEYWORDS'],
 								'TEXT_SEARCHING' => $TEXT['SEARCHING'],

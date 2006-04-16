@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -36,11 +36,11 @@ if(defined('WB_URL')) {
 	                 . ' `section_id` INT NOT NULL ,'
 	                 . ' `page_id` INT NOT NULL ,'
 	                 . ' `position` INT NOT NULL ,'
-	                 . ' `title` VARCHAR(255) NOT NULL ,'
-	                 . ' `type` VARCHAR(255) NOT NULL ,'
+	                 . ' `title` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
+	                 . ' `type` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
 	                 . ' `required` INT NOT NULL ,'
-	                 . ' `value` TEXT NOT NULL ,'
-	                 . ' `extra` TEXT NOT NULL ,'
+	                 . ' `value` TEXT NOT NULL DEFAULT \'\' ,'
+	                 . ' `extra` TEXT NOT NULL DEFAULT \'\' ,'
 	                 . ' PRIMARY KEY ( `field_id` ) )'
 	                 . ' ';
 	$database->query($mod_form);
@@ -48,13 +48,13 @@ if(defined('WB_URL')) {
 	$mod_form = 'CREATE TABLE `'.TABLE_PREFIX.'mod_form_settings` ('
 						  . ' `section_id` INT NOT NULL,'
 						  . ' `page_id` INT NOT NULL,'
-	                 . ' `header` TEXT NOT NULL ,'
-	                 . ' `field_loop` TEXT NOT NULL ,'
-	                 . ' `footer` TEXT NOT NULL ,'
-	                 . ' `email_to` TEXT NOT NULL ,'
-	                 . ' `email_from` VARCHAR(255) NOT NULL ,'
-	                 . ' `email_subject` VARCHAR(255) NOT NULL ,'
-	                 . ' `success_message` TEXT NOT NULL ,'
+	                 . ' `header` TEXT NOT NULL DEFAULT \'\' ,'
+	                 . ' `field_loop` TEXT NOT NULL DEFAULT \'\' ,'
+	                 . ' `footer` TEXT NOT NULL DEFAULT \'\' ,'
+	                 . ' `email_to` TEXT NOT NULL DEFAULT \'\' ,'
+	                 . ' `email_from` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
+	                 . ' `email_subject` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
+	                 . ' `success_message` TEXT NOT NULL DEFAULT \'\' ,'
 					 . ' `stored_submissions` INT NOT NULL,'
 					 . ' `max_submissions` INT NOT NULL,'
 					 . ' `use_captcha` INT NOT NULL,'
@@ -67,7 +67,7 @@ if(defined('WB_URL')) {
 						  . ' `page_id` INT NOT NULL,'
 						  . ' `submitted_when` INT NOT NULL,'
 						  . ' `submitted_by` INT NOT NULL,'
-	                 . ' `body` TEXT NOT NULL ,'
+	                 . ' `body` TEXT NOT NULL DEFAULT \'\' ,'
 	                 . ' PRIMARY KEY ( `submission_id` ) )'
 	                 . ' ';
 	$database->query($mod_form);

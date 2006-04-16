@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -24,12 +24,16 @@
 */
 
 // Make sure page cannot be accessed directly
-if(!defined('WB_URL')) { header('Location: ../index.php'); }
+if(!defined('WB_URL')) { 
+	header('Location: ../index.php');
+	exit(0);
+}
 	
 // Get comments page template details from db
 $query_settings = $database->query("SELECT comments_page,use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
 if($query_settings->numRows() == 0) {
 	header('Location: '.WB_URL.'/pages/');
+	exit(0);
 } else {
 	$settings = $query_settings->fetchRow();
 	// Print comments page
@@ -59,7 +63,7 @@ if($query_settings->numRows() == 0) {
 	<table cellpadding="2" cellspacing="0" border="0">
 	<tr>
 	<td><?php echo $TEXT['VERIFICATION']; ?>:</td>
-	<td><img src="<?php echo WB_URL; ?>/include/captcha.php" alt="Captcha" /></td>
+	<td><img src="<?php echo WB_URL; ?>/include/captcha.php?t=<?php echo time(); ?>" alt="Captcha" /></td>
 	<td><input type="text" name="captcha" maxlength="5" /></td>
 	</tr></table>
 	<br />

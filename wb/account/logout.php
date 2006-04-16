@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -24,6 +24,10 @@
 */
 
 require("../config.php");
+
+if(isset($_COOKIE['REMEMBER_KEY'])) {
+	setcookie('REMEMBER_KEY', '', time()-3600, '/');
+}
 
 $_SESSION['USER_ID'] = null;
 $_SESSION['GROUP_ID'] = null;

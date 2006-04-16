@@ -1,11 +1,11 @@
 <?php
 
-// $Id: password.php,v 1.2 2005/03/28 11:58:03 rdjurovich Exp $
+// $Id$
 
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@
 
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 // Get the values entered
@@ -37,18 +38,18 @@ $js_back = "javascript: history.go(-1);";
 
 // Get existing password
 $database = new database();
-$query = "SELECT user_id FROM ".TABLE_PREFIX."users WHERE user_id = '".$admin->get_user_id()."' AND password = '".md5($current_password)."'";
+$query = "SELECT user_id FROM ".TABLE_PREFIX."users WHERE user_id = '".$wb->get_user_id()."' AND password = '".md5($current_password)."'";
 $results = $database->query($query);
 
 // Validate values
 if($results->numRows() == 0) {
-	$admin->print_error($MESSAGE['PREFERENCES']['CURRENT_PASSWORD_INCORRECT'], $js_back);
+	$wb->print_error($MESSAGE['PREFERENCES']['CURRENT_PASSWORD_INCORRECT'], $js_back, false);
 }
 if(strlen($new_password) < 3) {
-	$admin->print_error($MESSAGE['USERS']['PASSWORD_TOO_SHORT'], $js_back);
+	$wb->print_error($MESSAGE['USERS']['PASSWORD_TOO_SHORT'], $js_back, false);
 }
 if($new_password != $new_password2) {
-	$admin->print_error($MESSAGE['USERS']['PASSWORD_MISMATCH'], $js_back);
+	$wb->print_error($MESSAGE['USERS']['PASSWORD_MISMATCH'], $js_back, false);
 }
 
 // MD5 the password
@@ -56,12 +57,12 @@ $md5_password = md5($new_password);
 
 // Update the database
 $database = new database();
-$query = "UPDATE ".TABLE_PREFIX."users SET password = '$md5_password' WHERE user_id = '".$admin->get_user_id()."'";
+$query = "UPDATE ".TABLE_PREFIX."users SET password = '$md5_password' WHERE user_id = '".$wb->get_user_id()."'";
 $database->query($query);
 if($database->is_error()) {
-	$admin->print_error($database->get_error);
+	$wb->print_error($database->get_error, 'index.php', false);
 } else {
-	$admin->print_success($MESSAGE['PREFERENCES']['PASSWORD_CHANGED'], WB_URL.'/account/preferences'.PAGE_EXTENSION);
+	$wb->print_success($MESSAGE['PREFERENCES']['PASSWORD_CHANGED'], WB_URL.'/account/preferences'.PAGE_EXTENSION);
 }
 
 

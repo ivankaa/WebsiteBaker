@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 */
 if(!defined('WB_URL')) {
 	header('Location: ../index.php');
+	exit(0);
 }
 
 // references to objects and variables that changed their names
@@ -180,7 +181,7 @@ if (!function_exists('show_content')) {
 }
 
 if (!function_exists('show_breadcrumbs')) {
-	function show_breadcrumbs($sep=' > ',$tier=1,$links=true) {
+	function show_breadcrumbs($sep=' > ',$tier=1,$links=true,$depth=-1) {
 		global $wb;
 		$page_id=$wb->page_id;
 		if ($page_id!=0)
@@ -190,7 +191,7 @@ if (!function_exists('show_breadcrumbs')) {
 			$counter=0;
 			foreach ($bca as $temp)
 			{
-		        if ($counter>=($tier-1));
+		        if ($counter>=($tier-1) AND ($depth<0 OR $tier+$depth>$counter))
 		        {
 					if ($counter>=$tier) echo $sep;
 					$query_menu=$database->query("SELECT menu_title,link FROM ".TABLE_PREFIX."pages WHERE page_id=$temp");
@@ -249,7 +250,7 @@ if (!function_exists('page_header')) {
 if (!function_exists('page_footer')) {
 	function page_footer($date_format = 'Y') {
 		global $starttime;
-		$vars = array('[YEAR]', '[PROCESSTIME]');
+		$vars = array('[YEAR]', '[PROCESS_TIME]');
 		$processtime=array_sum(explode(" ",microtime()))-$starttime;
 		$values = array(date($date_format),$processtime);
 		echo str_replace($vars, $values, WEBSITE_FOOTER);

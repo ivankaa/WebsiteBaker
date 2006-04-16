@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -30,6 +30,9 @@ wb class
 This class is the basis for admin and frontend classes.
 
 */
+
+// Include PHPLIB template class
+require_once(WB_PATH."/include/phplib/template.inc");
 
 require_once(WB_PATH.'/framework/class.database.php');
 
@@ -186,13 +189,74 @@ class wb
 
 	// Validate supplied email address
 	function validate_email($email) {
-		if(eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email)) {
+		if(eregi("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$", $email)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
+	// Print a success message which then automatically redirects the user to another page
+	function print_success($message, $redirect = 'index.php') {
+		global $TEXT;
+		$success_template = new Template(ADMIN_PATH.'/interface');
+		$success_template->set_file('page', 'success.html');
+		$success_template->set_block('page', 'main_block', 'main');
+		$success_template->set_var('MESSAGE', $message);
+		$success_template->set_var('REDIRECT', $redirect);
+		$success_template->set_var('NEXT', $TEXT['NEXT']);
+		$success_template->parse('main', 'main_block', false);
+		$success_template->pparse('output', 'page');
+	}
 	
+	// Print an error message
+	function print_error($message, $link = 'index.php', $auto_footer = true) {
+		global $TEXT;
+		$success_template = new Template(ADMIN_PATH.'/interface');
+		$success_template->set_file('page', 'error.html');
+		$success_template->set_block('page', 'main_block', 'main');
+		$success_template->set_var('MESSAGE', $message);
+		$success_template->set_var('LINK', $link);
+		$success_template->set_var('BACK', $TEXT['BACK']);
+		$success_template->parse('main', 'main_block', false);
+		$success_template->pparse('output', 'page');
+		if($auto_footer == true) {
+			$this->print_footer();
+		}
+		exit();
+	}
+	// Validate send email
+	function mail($fromaddress, $toaddress, $subject, $message) {
+		$fromaddress = preg_replace('/[\r\n]/', '', $fromaddress);
+		$toaddress = preg_replace('/[\r\n]/', '', $toaddress);
+		$subject = preg_replace('/[\r\n]/', '', $subject);
+		if ($fromaddress=='') {
+			$fromaddress = SERVER_EMAIL;
+		}
+		if(defined('DEFAULT_CHARSET')) { 
+			$charset = DEFAULT_CHARSET; 
+		} else {
+			$charset='utf-8';
+		}
+		$headers  = "MIME-Version: 1.0\n";
+		$headers .= "Content-type: text/plain; charset=".$charset."\n";
+		$headers .= "X-Priority: 3\n";
+		$headers .= "X-MSMail-Priority: Normal\n";
+		$headers .= "X-Mailer: Website Baker\n";
+		$headers .= "From: ".$fromaddress."\n";
+		$headers .= "Return-Path: ".$fromaddress."\n";
+		$headers .= "Reply-To: ".$fromaddress."\n";
+		$headers .= "\n"; // extra empty line needed??
+		if (OPERATING_SYSTEM=='windows') {
+			str_replace("\n","\r\n",$headers);
+			str_replace("\n","\r\n",$message);
+		}	
+		if(mail($toaddress, $subject, $message, $headers)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
 ?>

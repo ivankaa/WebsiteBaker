@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -27,8 +27,11 @@
 $filename = $_SERVER['HTTP_HOST'].'-backup-'.gmdate('Y-m-d', mktime()+TIMEZONE).'.sql';
 
 // Check if user clicked on the backup button
-if(!isset($_POST['backup'])){ header('Location: ../'); }
-
+if(!isset($_POST['backup'])){ 
+	header('Location: ../');
+	exit(0);
+} 
+	 
 // Include config
 require_once('../../config.php');
 
@@ -46,24 +49,33 @@ $output = "".
 "\n";
 
 // Get table names
-$result = $database->query("SHOW TABLE STATUS");
+// Use this one for ALL tables in DB
+$query  = "SHOW TABLES";
+
+if ($_POST['tables']=='WB') {
+	// Or use this to get ONLY wb tables
+	$prefix=str_replace('_','\_',TABLE_PREFIX);
+	$query = "SHOW TABLES LIKE '".$prefix."%'";
+}
+
+$result = $database->query($query);
 
 // Loop through tables
 while($row = $result->fetchRow()) { 
 	//show sql query to rebuild the query
-	$sql = 'SHOW CREATE TABLE '.$row['Name'].''; 
+	$sql = 'SHOW CREATE TABLE '.$row[0].''; 
 	$query2 = $database->query($sql); 
 	// Start creating sql-backup
-	$sql_backup ="\r\n# Create table ".$row['Name']."\r\n\r\n";
+	$sql_backup ="\r\n# Create table ".$row[0]."\r\n\r\n";
 	$out = $query2->fetchRow();
 	$sql_backup.=$out['Create Table'].";\r\n\r\n"; 
-	$sql_backup.="# Dump data for ".$row['Name']."\r\n\r\n";
+	$sql_backup.="# Dump data for ".$row[0]."\r\n\r\n";
 	// Select everything
-	$out = $database->query('SELECT * FROM '.$row['Name']); 
+	$out = $database->query('SELECT * FROM '.$row[0]); 
 	$sql_code = '';
 	// Loop through all collumns
 	while($code = $out->fetchRow()) { 
-		$sql_code .= "INSERT INTO ".$row['Name']." SET "; 
+		$sql_code .= "INSERT INTO ".$row[0]." SET "; 
 		$numeral = 0;
 		foreach($code as $insert => $value) {
 			// Loosing the numerals in array -> mysql_fetch_array($result, MYSQL_ASSOC) WB hasn't? 

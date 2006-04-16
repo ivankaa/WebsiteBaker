@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -122,7 +122,7 @@ $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
-	if ($value!=null || $setting_name=='default_timezone' || $setting_name=='string_dir_mode' || $setting_name=='string_file_mode') {
+	if ($setting_name!='wb_version') {
 		$value = $admin->add_slashes($value);
 		switch ($setting_name) {
 			case 'default_timezone':

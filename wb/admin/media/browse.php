@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -37,8 +37,8 @@ $template->set_file('page', 'browse.html');
 $template->set_block('page', 'main_block', 'main');
 
 // Get the current dir
-$directory = $admin->get_get('dir');
-if($directory == '/') {
+$directory = $admin->strip_slashes($admin->get_get('dir'));
+if($directory == '/' OR $directory == '\\') {
 	$directory = '';
 }
 
@@ -48,7 +48,7 @@ if(strstr($directory, '../')) {
 	$admin->print_error($MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH']);
 }
 
-if(!file_exists(WB_PATH.'/media'.$directory)) {
+if(!file_exists(WB_PATH.MEDIA_DIRECTORY.$directory)) {
 	$admin->print_header();
 	$admin->print_error($MESSAGE['MEDIA']['DIR_DOES_NOT_EXIST']);
 }
@@ -57,6 +57,7 @@ if(!file_exists(WB_PATH.'/media'.$directory)) {
 if($admin->get_get('up') == 1) {
 	$parent_directory = dirname($directory);
 	header("Location: browse.php?dir=$parent_directory");	
+	exit(0);
 }
 
 // Workout the parent dir link

@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -363,23 +363,23 @@ if($install_tables == true) {
 	       . ' `parent` INT NOT NULL ,'
 	       . ' `root_parent` INT NOT NULL ,'
 	       . ' `level` INT NOT NULL ,'
-	       . ' `link` TEXT NOT NULL ,'
-	       . ' `target` VARCHAR( 7 ) NOT NULL ,'
-	       . ' `page_title` VARCHAR( 255 ) NOT NULL ,'
-	       . ' `menu_title` VARCHAR( 255 ) NOT NULL ,'
-	       . ' `description` TEXT NOT NULL ,'
-	       . ' `keywords` TEXT NOT NULL ,'
-	       . ' `page_trail` TEXT NOT NULL ,'
-	       . ' `template` VARCHAR( 255 ) NOT NULL ,'
-	       . ' `visibility` VARCHAR( 255 ) NOT NULL ,'
+	       . ' `link` TEXT NOT NULL DEFAULT \'\' ,'
+	       . ' `target` VARCHAR( 7 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `page_title` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `menu_title` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `description` TEXT NOT NULL DEFAULT \'\' ,'
+	       . ' `keywords` TEXT NOT NULL DEFAULT \'\' ,'
+	       . ' `page_trail` TEXT NOT NULL DEFAULT \'\' ,'
+	       . ' `template` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `visibility` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `position` INT NOT NULL ,'
 	       . ' `menu` INT NOT NULL ,'
-	       . ' `language` VARCHAR( 5 ) NOT NULL ,'
+	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `searching` INT NOT NULL ,'
-	       . ' `admin_groups` TEXT NOT NULL ,'
-	       . ' `admin_users` TEXT NOT NULL ,'
-	       . ' `viewing_groups` TEXT NOT NULL ,'
-	       . ' `viewing_users` TEXT NOT NULL ,'
+	       . ' `admin_groups` TEXT NOT NULL DEFAULT \'\' ,'
+	       . ' `admin_users` TEXT NOT NULL DEFAULT \'\' ,'
+	       . ' `viewing_groups` TEXT NOT NULL DEFAULT \'\' ,'
+	       . ' `viewing_users` TEXT NOT NULL DEFAULT \'\' ,'
 	       . ' `modified_when` INT NOT NULL ,'
 	       . ' `modified_by` INT NOT NULL ,'
 	       . ' PRIMARY KEY ( `page_id` ) )'
@@ -390,8 +390,8 @@ if($install_tables == true) {
 	$pages = 'CREATE TABLE `'.TABLE_PREFIX.'sections` ( `section_id` INT NOT NULL auto_increment,'
 	       . ' `page_id` INT NOT NULL ,'
 	       . ' `position` INT NOT NULL ,'
-	       . ' `module` VARCHAR( 255 ) NOT NULL ,'
-	       . ' `block` VARCHAR( 255 ) NOT NULL ,'
+	       . ' `module` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `block` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' PRIMARY KEY ( `section_id` ) )'
 	       . ' ';
 	$database->query($pages);
@@ -399,51 +399,53 @@ if($install_tables == true) {
 	require(WB_PATH.'/admin/interface/version.php');
 	
 	// Settings table
-	$settings="CREATE TABLE `".TABLE_PREFIX."settings` ( `setting_id` INT NOT NULL auto_increment,
-		`name` VARCHAR( 255 ) NOT NULL ,
-		`value` TEXT NOT NULL ,
-		PRIMARY KEY ( `setting_id` ) )";
+	$settings="CREATE TABLE `".TABLE_PREFIX."settings` ( `setting_id` INT NOT NULL auto_increment,"
+		. " `name` VARCHAR( 255 ) NOT NULL DEFAULT '' ,"
+		. " `value` TEXT NOT NULL DEFAULT '' ,"
+		. " PRIMARY KEY ( `setting_id` ) )";
 	$database->query($settings);
-	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` VALUES "
-	." ('', 'wb_version', '".VERSION."'),"
-	." ('', 'website_title', '$website_title'),"
-	." ('', 'website_description', ''),"
-	." ('', 'website_keywords', ''),"
-	." ('', 'website_header', ''),"
-	." ('', 'website_footer', ''),"
-	." ('', 'wysiwyg_style', 'font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;'),"
-	." ('', 'rename_files_on_upload', 'php,asp,phpx,aspx'),"
-	." ('', 'er_level', ''),"
-	." ('', 'default_language', 'EN'),"
-	." ('', 'app_name', 'wb'),"
-	." ('', 'default_timezone', '$default_timezone'),"
-	." ('', 'default_date_format', 'M d Y'),"
-	." ('', 'default_time_format', 'g:i A'),"
-	." ('', 'home_folders', 'true'),"
-	." ('', 'default_template', 'round'),"
-	." ('', 'default_charset', 'utf-8'),"
-	." ('', 'multiple_menus', 'false'),"
-	." ('', 'page_level_limit', '4'),"
-	." ('', 'intro_page', 'false'),"
-	." ('', 'page_trash', 'disabled'),"
-	." ('', 'homepage_redirection', 'false'),"
-	." ('', 'page_languages', 'false'),"
-	." ('', 'wysiwyg_editor', 'htmlarea'),"
-	." ('', 'manage_sections', 'true'),"
-	." ('', 'section_blocks', 'false'),"
-	." ('', 'smart_login', 'false'),"
-	." ('', 'captcha_verification', 'true'),"
-	." ('', 'frontend_login', 'false'),"
-	." ('', 'frontend_signup', 'false'),"
-	." ('', 'server_email', '$admin_email'),"
-	." ('', 'search', 'public'),"
-	." ('', 'page_extension', '.php'),"
-	." ('', 'page_spacer', '-'),"
-	." ('', 'pages_directory', '/pages'),"
-	." ('', 'media_directory', '/media'),"
-	." ('', 'operating_system', '$operating_system'),"
-	." ('', 'string_file_mode', '$file_mode'),"
-	." ('', 'string_dir_mode', '$dir_mode');";
+
+	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` "
+	." (name, value) VALUES "
+	." ('wb_version', '".VERSION."'),"
+	." ('website_title', '$website_title'),"
+	." ('website_description', ''),"
+	." ('website_keywords', ''),"
+	." ('website_header', ''),"
+	." ('website_footer', ''),"
+	." ('wysiwyg_style', 'font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;'),"
+	." ('rename_files_on_upload', 'php,asp,phpx,aspx'),"
+	." ('er_level', ''),"
+	." ('default_language', 'EN'),"
+	." ('app_name', 'wb'),"
+	." ('default_timezone', '$default_timezone'),"
+	." ('default_date_format', 'M d Y'),"
+	." ('default_time_format', 'g:i A'),"
+	." ('home_folders', 'true'),"
+	." ('default_template', 'round'),"
+	." ('default_charset', 'utf-8'),"
+	." ('multiple_menus', 'false'),"
+	." ('page_level_limit', '4'),"
+	." ('intro_page', 'false'),"
+	." ('page_trash', 'disabled'),"
+	." ('homepage_redirection', 'false'),"
+	." ('page_languages', 'false'),"
+	." ('wysiwyg_editor', 'htmlarea'),"
+	." ('manage_sections', 'true'),"
+	." ('section_blocks', 'false'),"
+	." ('smart_login', 'false'),"
+	." ('captcha_verification', 'true'),"
+	." ('frontend_login', 'false'),"
+	." ('frontend_signup', 'false'),"
+	." ('server_email', '$admin_email'),"
+	." ('search', 'public'),"
+	." ('page_extension', '.php'),"
+	." ('page_spacer', '-'),"
+	." ('pages_directory', '/pages'),"
+	." ('media_directory', '/media'),"
+	." ('operating_system', '$operating_system'),"
+	." ('string_file_mode', '$file_mode'),"
+	." ('string_dir_mode', '$dir_mode')";
 	$database->query($settings_rows);
 	
 	
@@ -451,38 +453,38 @@ if($install_tables == true) {
 	$users = 'CREATE TABLE `'.TABLE_PREFIX.'users` ( `user_id` INT NOT NULL auto_increment,'
 	       . ' `group_id` INT NOT NULL ,'
 	       . ' `active` INT NOT NULL ,'
-	       . ' `username` VARCHAR( 255 ) NOT NULL ,'
-	       . ' `password` VARCHAR( 255 ) NOT NULL ,'
-	       . ' `remember_key` VARCHAR( 255 ) NOT NULL ,'
+	       . ' `username` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `password` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `remember_key` VARCHAR( 255 ) NOT NULL DEFAULT \'\','
 	       . ' `last_reset` INT NOT NULL ,'
-	       . ' `display_name` VARCHAR( 255 ) NOT NULL ,'
-	       . ' `email` TEXT NOT NULL ,'
+	       . ' `display_name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `email` TEXT NOT NULL DEFAULT \'\' ,'
 	       . ' `timezone` INT NOT NULL ,'
-	       . ' `date_format` VARCHAR( 255 ) NOT NULL ,'
-	       . ' `time_format` VARCHAR( 255 ) NOT NULL ,'
-	       . ' `language` VARCHAR( 5 ) NOT NULL ,'
-	       . ' `home_folder` TEXT NOT NULL ,'
+	       . ' `date_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `time_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `home_folder` TEXT NOT NULL DEFAULT \'\' ,'
 	       . ' `login_when` INT NOT NULL ,'
-	       . ' `login_ip` VARCHAR( 15 ) NOT NULL ,'
+	       . ' `login_ip` VARCHAR( 15 ) NOT NULL DEFAULT \'\' ,'
 	       . ' PRIMARY KEY ( `user_id` ) )'
 	       . ' ';
 	$database->query($users);
 	
 	// Groups table
 	$groups = 'CREATE TABLE `'.TABLE_PREFIX.'groups` ( `group_id` INT NOT NULL auto_increment,'
-	        . ' `name` VARCHAR( 255 ) NOT NULL ,'
-	        . ' `system_permissions` TEXT NOT NULL ,'
-	        . ' `module_permissions` TEXT NOT NULL ,'
-	        . ' `template_permissions` TEXT NOT NULL ,'
+	        . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	        . ' `system_permissions` TEXT NOT NULL DEFAULT \'\' ,'
+	        . ' `module_permissions` TEXT NOT NULL DEFAULT \'\' ,'
+	        . ' `template_permissions` TEXT NOT NULL DEFAULT \'\' ,'
 	        . ' PRIMARY KEY ( `group_id` ) )'
 	        . ' ';
 	$database->query($groups);
 	
 	// Search settings table
 	$search = 'CREATE TABLE `'.TABLE_PREFIX.'search` ( `search_id` INT NOT NULL auto_increment,'
-	        . ' `name` VARCHAR( 255 ) NOT NULL ,'
-	        . ' `value` TEXT NOT NULL ,'
-	        . ' `extra` TEXT NOT NULL ,'
+	        . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	        . ' `value` TEXT NOT NULL DEFAULT \'\' ,'
+	        . ' `extra` TEXT NOT NULL DEFAULT \'\' ,'
 	        . ' PRIMARY KEY ( `search_id` ) )'
 	        . ' ';
 	$database->query($search);
@@ -490,15 +492,15 @@ if($install_tables == true) {
 	// Addons table
 	$addons = 'CREATE TABLE `'.TABLE_PREFIX.'addons` ( '
 			.'`addon_id` INT NOT NULL auto_increment ,'
-			.'`type` VARCHAR( 255 ) NOT NULL ,'
-			.'`directory` VARCHAR( 255 ) NOT NULL ,'
-			.'`name` VARCHAR( 255 ) NOT NULL ,'
-			.'`description` TEXT NOT NULL ,'
-			.'`function` VARCHAR( 255 ) NOT NULL ,'
-			.'`version` VARCHAR( 255 ) NOT NULL ,'
-			.'`platform` VARCHAR( 255 ) NOT NULL ,'
-			.'`author` VARCHAR( 255 ) NOT NULL ,'
-			.'`license` VARCHAR( 255 ) NOT NULL ,'
+			.'`type` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+			.'`directory` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+			.'`name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+			.'`description` TEXT NOT NULL DEFAULT \'\' ,'
+			.'`function` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+			.'`version` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+			.'`platform` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+			.'`author` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+			.'`license` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.' PRIMARY KEY ( `addon_id` ) ) ';
 	$database->query($addons);
 

@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2005, Ryan Djurovich
+ Copyright (C) 2004-2006, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -59,10 +59,24 @@ if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND isset($
 		imagestring($image, $fnt, $x, $y, substr($_SESSION['captcha'], $i, 1), $darkgray); 
 	}
 	
-	header('Content-type: image/png');
+	// start buffering for size determination
+	ob_start();
+	// add no cache headers
+	header("Expires: Mon, 1 Jan 1990 05:00:00 GMT");
+	header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+	header("Cache-Control: no-store, no-cache, must-revalidate");
+	header("Cache-Control: post-check=0, pre-check=0", false);
+	header("Pragma: no-cache");
+	header("Content-type: image/png");
+	// Make image
 	imagepng($image);
+	// Fetch length
+	header("Content-Length: " . ob_get_length());
+	// send image and turn off buffering
+	ob_end_flush();
+	// clear memory
 	imagedestroy($image);
-	
+
 }
 
 ?>
