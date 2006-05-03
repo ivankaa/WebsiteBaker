@@ -10,6 +10,14 @@ Legend:
 # = Bugfix
 ! = Update/Change
 
+------------------------------------- 2.6.4 -------------------------------------
+03-May-2006 Stefan Braunewell
+#	Fixed e-mail bug caused by From: headers in internal mail function calls
+	(#189)
+#	E-mail validation  in install script now accepts new top-level domains
+	(#162)
+#	Error status is now overwritten by next database query (#182)
+#	Fixed obscure problem in htmlarea install script
 ------------------------------------- 2.6.3 -------------------------------------
 19-Mar-2006 Stefan Braunewell
 #	Fixed ticket #146: problems removing groups from viewers list of a page
