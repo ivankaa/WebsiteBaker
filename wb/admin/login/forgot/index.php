@@ -96,7 +96,7 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 	
 	If you have received this message in error, please delete it immediatly.';
 				// Try sending the email
-				if($admin->mail('From: '.SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
+				if($admin->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
 					$message = $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'];
 					$display_form = false;
 				} else {

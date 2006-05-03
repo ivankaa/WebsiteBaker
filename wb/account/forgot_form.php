@@ -89,7 +89,7 @@ This means that your old password will no longer work.
 
 If you have received this message in error, please delete it immediatly.';
 				// Try sending the email
-				if($wb->mail('From: '.SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
+				if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
 					$message = $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'];
 					$display_form = false;
 				} else {

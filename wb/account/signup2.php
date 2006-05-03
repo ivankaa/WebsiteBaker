@@ -126,7 +126,7 @@ Your password has been set to the one above.
 If you have recieved this message in error, please delete it immediatly.';
 
 	// Try sending the email
-	if($wb->mail('From: '.SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
+	if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
 		$wb->print_success($MESSAGE['FORGOT_PASS']['PASSWORD_RESET'], WB_URL.'/account/login'.PAGE_EXTENSION);
 		$display_form = false;
 	} else {
