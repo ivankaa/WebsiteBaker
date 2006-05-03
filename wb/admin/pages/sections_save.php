@@ -76,24 +76,17 @@ $query_sections = $database->query("SELECT section_id,module,position FROM ".TAB
 if($query_sections->numRows() > 0) {
 	$num_sections = $query_sections->numRows();
 	while($section = $query_sections->fetchRow()) {
-		// Get the modules real name
-		$module_path = WB_PATH.'/modules/'.$section['module'].'/info.php';
-		if(file_exists($module_path)) {
-			require($module_path);
-			if(!isset($module_function)) { $module_function = 'unknown'; }
-			if(!is_numeric(array_search($section['module'], $module_permissions)) AND $module_function == 'page') {
-				// Update the section record with properties
-				$section_id = $section['section_id'];
-				$sql = '';
-				if(isset($_POST['block'.$section_id]) AND $_POST['block'.$section_id] != '') {
-					$sql = "block = '".$admin->add_slashes($_POST['block'.$section_id])."'";
-					$query = "UPDATE ".TABLE_PREFIX."sections SET $sql WHERE section_id = '$section_id' LIMIT 1";
-					if($sql != '') {
-						$database->query($query);
-					}
+		if(!is_numeric(array_search($section['module'], $module_permissions))) {
+			// Update the section record with properties
+			$section_id = $section['section_id'];
+			$sql = '';
+			if(isset($_POST['block'.$section_id]) AND $_POST['block'.$section_id] != '') {
+				$sql = "block = '".$admin->add_slashes($_POST['block'.$section_id])."'";
+				$query = "UPDATE ".TABLE_PREFIX."sections SET $sql WHERE section_id = '$section_id' LIMIT 1";
+				if($sql != '') {
+					$database->query($query);
 				}
 			}
-			if(isset($module_function)) { unset($module_function); } // Unset module type
 		}
 	}
 }
