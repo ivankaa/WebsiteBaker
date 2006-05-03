@@ -12,7 +12,7 @@ Legend:
 
 ------------------------------------- 2.6.4 -------------------------------------
 03-May-2006 Stefan Braunewell
-#	Fixed problem with pre-2.6.0 modules not appearing in section list
+#	Fixed problems with pre-2.6.0 modules in section list
 #	Fixed e-mail bug caused by From: headers in internal mail function calls
 	(#189)
 #	E-mail validation  in install script now accepts new top-level domains
