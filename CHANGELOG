@@ -11,11 +11,14 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.4 -------------------------------------
+19-May-2006 Ryan Djurovich
+#	Fixed problem in forgotten login form where email field is too short (#207)
+#	Fixed typo in forgotten login details email (#190)
 03-May-2006 Stefan Braunewell
 #	Fixed problems with pre-2.6.0 modules in section list
 #	Fixed e-mail bug caused by From: headers in internal mail function calls
 	(#189)
-#	E-mail validation  in install script now accepts new top-level domains
+#	E-mail validation in install script now accepts new top-level domains
 	(#162)
 #	Error status is now overwritten by next database query (#182)
 #	Fixed obscure problem in htmlarea install script
