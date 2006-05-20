@@ -48,7 +48,7 @@ if(!$admin->validate_email($email)) {
 	$admin->print_error($MESSAGE['USERS']['INVALID_EMAIL']);
 }
 
-$email = $wb->add_slashes($email);
+$email = $admin->add_slashes($email);
 
 // Update the database
 $database = new database();

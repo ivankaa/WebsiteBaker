@@ -29,7 +29,7 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Preferences');
 
 // Get entered values
-$display_name = $wb->add_slashes(strip_tags($admin->get_post('display_name')));
+$display_name = $admin->add_slashes(strip_tags($admin->get_post('display_name')));
 $language = $admin->get_post('language');
 $timezone = $admin->get_post('timezone')*60*60;
 $date_format = $admin->get_post('date_format');
