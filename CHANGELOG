@@ -16,6 +16,8 @@ Legend:
 #	Fixed typo in news save comment page (#282)
 #	Fixed typo in news delete post page (#283)
 !	Added multi-submission protection to form module (#119)
+#	Added notice for when PHP Session Support appears to be disabled in installer,
+	even if it is enabled and the problem actually lies in the users browser (#154)
 19-May-2006 Ryan Djurovich
 #	Fixed problem in forgotten login form where email field is too short (#207)
 #	Fixed typo in forgotten login details email (#190)
