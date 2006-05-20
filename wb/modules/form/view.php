@@ -59,23 +59,26 @@ function make_radio(&$n, $idx, $params) {
 	$n = '<input class="field_radio" type="radio" id="'.$n.'" name="field'.$field_id.'" value="'.$n.'">'.'<font class="radio_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = true;">'.$n.'</font>'.$seperator;
 }
 
+// Generate temp submission id
+function new_submission_id() {
+	$submission_id = '';
+	$salt = "abchefghjkmnpqrstuvwxyz0123456789";
+	srand((double)microtime()*1000000);
+	$i = 0;
+	while ($i <= 7) {
+		$num = rand() % 33;
+		$tmp = substr($salt, $num, 1);
+		$submission_id = $submission_id . $tmp;
+		$i++;
+	}
+	return $submission_id;
+}
+
 // Work-out if the form has been submitted or not
 if($_POST == array()) {
 
-// Generate temp submission id
-$submission_id = '';
-$salt = "abchefghjkmnpqrstuvwxyz0123456789";
-srand((double)microtime()*1000000);
-$i = 0;
-while ($i <= 7) {
-	$num = rand() % 33;
-	$tmp = substr($salt, $num, 1);
-	$submission_id = $submission_id . $tmp;
-	$i++;
-}
-
-// Set submission ID in session
-$_SESSION['form_submission_id'] = $submission_id;
+// Set new submission ID in session
+$_SESSION['form_submission_id'] = new_submission_id();
 
 ?>
 <style type="text/css">
@@ -141,7 +144,7 @@ if($query_settings->numRows() > 0) {
 // Add form starter code
 ?>
 <form name="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-<input type="hidden" name="submission_id" value="<?php echo $submission_id; ?>" />
+<input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" />
 <?php
 
 // Print header
@@ -227,6 +230,9 @@ echo $footer;
 	
 	// Check that submission ID matches
 	if(isset($_SESSION['form_submission_id']) AND isset($_POST['submission_id']) AND $_SESSION['form_submission_id'] == $_POST['submission_id']) {
+		
+		// Set new submission ID in session
+		$_SESSION['form_submission_id'] = new_submission_id();
 		
 		// Submit form data
 		// First start message settings
@@ -325,58 +331,56 @@ echo $footer;
 				echo '<li>'.$captcha_error.'</li>';
 				echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
 			} else {
-			
-			// Check how many times form has been submitted in last hour
-			$last_hour = time()-3600;
-			$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions WHERE submitted_when >= '$last_hour'");
-			if($query_submissions->numRows() > $max_submissions) {
-				// Too many submissions so far this hour
-				echo $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'];
-				$success = false;
-			} else {
-				// Now send the email
-				if($email_to != '') {
-					if($email_from != '') {
-						if($wb->mail($email_from,$email_to,$email_subject,$email_body)) { $success = true; }
-					}
-				}				
-				// Write submission to database
-				if(isset($admin) AND $admin->get_user_id() > 0) {
-					$admin->get_user_id();
+				
+				// Check how many times form has been submitted in last hour
+				$last_hour = time()-3600;
+				$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions WHERE submitted_when >= '$last_hour'");
+				if($query_submissions->numRows() > $max_submissions) {
+					// Too many submissions so far this hour
+					echo $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'];
+					$success = false;
 				} else {
-					$submitted_by = 0;
-				}
-				$email_body = $wb->add_slashes($email_body);
-				$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_submissions (page_id,section_id,submitted_when,submitted_by,body) VALUES ('".PAGE_ID."','$section_id','".mktime()."','$submitted_by','$email_body')");
-				// Make sure submissions table isn't too full
-				$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions ORDER BY submitted_when");
-				$num_submissions = $query_submissions->numRows();
-				if($num_submissions > $stored_submissions) {
-					// Remove excess submission
-					$num_to_remove = $num_submissions-$stored_submissions;
-					while($submission = $query_submissions->fetchRow()) {
-						if($num_to_remove > 0) {
-							$submission_id = $submission['submission_id'];
-							$database->query("DELETE FROM ".TABLE_PREFIX."mod_form_submissions WHERE submission_id = '$submission_id'");
-							$num_to_remove = $num_to_remove-1;
+					// Now send the email
+					if($email_to != '') {
+						if($email_from != '') {
+							if($wb->mail($email_from,$email_to,$email_subject,$email_body)) { $success = true; }
+						}
+					}				
+					// Write submission to database
+					if(isset($admin) AND $admin->get_user_id() > 0) {
+						$admin->get_user_id();
+					} else {
+						$submitted_by = 0;
+					}
+					$email_body = $wb->add_slashes($email_body);
+					$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_submissions (page_id,section_id,submitted_when,submitted_by,body) VALUES ('".PAGE_ID."','$section_id','".mktime()."','$submitted_by','$email_body')");
+					// Make sure submissions table isn't too full
+					$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions ORDER BY submitted_when");
+					$num_submissions = $query_submissions->numRows();
+					if($num_submissions > $stored_submissions) {
+						// Remove excess submission
+						$num_to_remove = $num_submissions-$stored_submissions;
+						while($submission = $query_submissions->fetchRow()) {
+							if($num_to_remove > 0) {
+								$submission_id = $submission['submission_id'];
+								$database->query("DELETE FROM ".TABLE_PREFIX."mod_form_submissions WHERE submission_id = '$submission_id'");
+								$num_to_remove = $num_to_remove-1;
+							}
 						}
 					}
+					if(!$database->is_error()) {
+						$success = true;
+					}
 				}
-				if(!$database->is_error()) {
-					$success = true;
-				}
-			}
-		
+			}	
 		}
-		
-		// Now check if the email was sent successfully
-		if(isset($success) AND $success == true) {
-			echo $success_message;
-		} else {
-			echo $TEXT['ERROR'];
-		}
-		
-		}
+	}
+	
+	// Now check if the email was sent successfully
+	if(isset($success) AND $success == true) {
+		echo $success_message;
+	} else {
+		echo $TEXT['ERROR'];
 	}
 	
 }
