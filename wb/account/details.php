@@ -29,7 +29,7 @@ if(!defined('WB_URL')) {
 }
 
 // Get entered values
-$display_name = $wb->get_post('display_name');
+$display_name = $wb->add_slashes(strip_tags($wb->get_post('display_name')));
 $language = $wb->get_post('language');
 $timezone = $wb->get_post('timezone')*60*60;
 $date_format = $wb->get_post('date_format');
