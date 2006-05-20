@@ -484,7 +484,6 @@ $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'm
 if($result->numRows() > 0) {
 	while ($module = $result->fetchRow()) {
 		// Check if user is allowed to use this module
-		if(!isset($module['function'])) { $module['function'] = 'unknown'; }
 		if(!is_numeric(array_search($module['directory'], $module_permissions))) {
 			$template->set_var('VALUE', $module['directory']);
 			$template->set_var('NAME', $module['name']);
@@ -495,7 +494,6 @@ if($result->numRows() > 0) {
 			}
 			$template->parse('module_list', 'module_list_block', true);
 		}
-		if(isset($module_function)) { unset($module_function); } // Unset module type
 	}
 }
 

@@ -10,6 +10,27 @@ Legend:
 # = Bugfix
 ! = Update/Change
 
+------------------------------------- 2.6.4 -------------------------------------
+20-May-2006 Ryan Djurovich
+#	Fixed security issues related to #237
+#	Fixed typo in news save comment page (#282)
+#	Fixed typo in news delete post page (#283)
+!	Added multi-submission protection to form module (#119)
+#	Added notice for when PHP Session Support appears to be disabled in installer,
+	even if it is enabled and the problem actually lies in the users browser (#154)
+19-May-2006 Ryan Djurovich
+#	Fixed problem in forgotten login form where email field is too short (#207)
+#	Fixed typo in forgotten login details email (#190)
+15-May-2006 Stefan Braunewell
+#	Fixed security issues (#237)
+03-May-2006 Stefan Braunewell
+#	Fixed problems with pre-2.6.0 modules in section list
+#	Fixed e-mail bug caused by From: headers in internal mail function calls
+	(#189)
+#	E-mail validation in install script now accepts new top-level domains
+	(#162)
+#	Error status is now overwritten by next database query (#182)
+#	Fixed obscure problem in htmlarea install script
 ------------------------------------- 2.6.3 -------------------------------------
 19-Mar-2006 Stefan Braunewell
 #	Fixed ticket #146: problems removing groups from viewers list of a page

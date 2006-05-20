@@ -48,6 +48,8 @@ if(!$admin->validate_email($email)) {
 	$admin->print_error($MESSAGE['USERS']['INVALID_EMAIL']);
 }
 
+$email = $admin->add_slashes($email);
+
 // Update the database
 $database = new database();
 $query = "UPDATE ".TABLE_PREFIX."users SET email = '$email' WHERE user_id = '".$admin->get_user_id()."'";

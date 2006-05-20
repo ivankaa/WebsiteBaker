@@ -109,6 +109,11 @@ function change_os(type) {
 		<tr>
 			<td colspan="8"><h1>Step 1</h1>Please check the following requirements are met before continuing...</td>
 		</tr>
+		<?php if($session_support != '<font class="good">Enabled</font>') { ?>
+		<tr>
+			<td colspan="8" style="font-size: 10px;" class="bad">Please note: PHP Session Support may appear disabled if your browser does not support cookies.</td>
+		</tr>
+		<?php } ?>
 		<tr>
 			<td width="140" style="color: #666666;">PHP Version > 4.1.0</td>
 			<td width="35">

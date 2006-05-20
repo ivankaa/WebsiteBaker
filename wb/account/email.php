@@ -49,6 +49,8 @@ if(!$wb->validate_email($email)) {
 	$wb->print_error($MESSAGE['USERS']['INVALID_EMAIL'], $js_back, false);
 }
 
+$email = $wb->add_slashes($email);
+
 // Update the database
 $database = new database();
 $query = "UPDATE ".TABLE_PREFIX."users SET email = '$email' WHERE user_id = '".$wb->get_user_id()."' AND password = '".md5($current_password)."'";

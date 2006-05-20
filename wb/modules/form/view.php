@@ -59,8 +59,26 @@ function make_radio(&$n, $idx, $params) {
 	$n = '<input class="field_radio" type="radio" id="'.$n.'" name="field'.$field_id.'" value="'.$n.'">'.'<font class="radio_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = true;">'.$n.'</font>'.$seperator;
 }
 
+// Generate temp submission id
+function new_submission_id() {
+	$submission_id = '';
+	$salt = "abchefghjkmnpqrstuvwxyz0123456789";
+	srand((double)microtime()*1000000);
+	$i = 0;
+	while ($i <= 7) {
+		$num = rand() % 33;
+		$tmp = substr($salt, $num, 1);
+		$submission_id = $submission_id . $tmp;
+		$i++;
+	}
+	return $submission_id;
+}
+
 // Work-out if the form has been submitted or not
 if($_POST == array()) {
+
+// Set new submission ID in session
+$_SESSION['form_submission_id'] = new_submission_id();
 
 ?>
 <style type="text/css">
@@ -126,6 +144,7 @@ if($query_settings->numRows() > 0) {
 // Add form starter code
 ?>
 <form name="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" />
 <?php
 
 // Print header
@@ -209,153 +228,159 @@ echo $footer;
 
 } else {
 	
-	// Submit form data
-	// First start message settings
-	$query_settings = $database->query("SELECT email_to,email_from,email_subject,success_message,max_submissions,stored_submissions,use_captcha FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
-	if($query_settings->numRows() > 0) {
-		$fetch_settings = $query_settings->fetchRow();
-		$email_to = $fetch_settings['email_to'];
-		$email_from = $fetch_settings['email_from'];
-		if(substr($email_from, 0, 5) == 'field') {
-			// Set the email from field to what the user entered in the specified field
-			$email_from = $wb->add_slashes($_POST[$email_from]);
+	// Check that submission ID matches
+	if(isset($_SESSION['form_submission_id']) AND isset($_POST['submission_id']) AND $_SESSION['form_submission_id'] == $_POST['submission_id']) {
+		
+		// Set new submission ID in session
+		$_SESSION['form_submission_id'] = new_submission_id();
+		
+		// Submit form data
+		// First start message settings
+		$query_settings = $database->query("SELECT email_to,email_from,email_subject,success_message,max_submissions,stored_submissions,use_captcha FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
+		if($query_settings->numRows() > 0) {
+			$fetch_settings = $query_settings->fetchRow();
+			$email_to = $fetch_settings['email_to'];
+			$email_from = $fetch_settings['email_from'];
+			if(substr($email_from, 0, 5) == 'field') {
+				// Set the email from field to what the user entered in the specified field
+				$email_from = $wb->add_slashes($_POST[$email_from]);
+			}
+			$email_subject = $fetch_settings['email_subject'];
+			$success_message = $fetch_settings['success_message'];
+			$max_submissions = $fetch_settings['max_submissions'];
+			$stored_submissions = $fetch_settings['stored_submissions'];
+			$use_captcha = $fetch_settings['use_captcha'];
+		} else {
+			exit($TEXT['UNDER_CONSTRUCTION']);
 		}
-		$email_subject = $fetch_settings['email_subject'];
-		$success_message = $fetch_settings['success_message'];
-		$max_submissions = $fetch_settings['max_submissions'];
-		$stored_submissions = $fetch_settings['stored_submissions'];
-		$use_captcha = $fetch_settings['use_captcha'];
-	} else {
-		exit($TEXT['UNDER_CONSTRUCTION']);
-	}
-	$email_body = '';
-	
-	// Create blank "required" array
-	$required = array();
-	
-	// Loop through fields and add to message body
-	// Get list of fields
-	$query_fields = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_fields WHERE section_id = '$section_id' ORDER BY position ASC");
-	if($query_fields->numRows() > 0) {
-		while($field = $query_fields->fetchRow()) {
-			// Add to message body
-			if($field['type'] != '') {
-				if(!empty($_POST['field'.$field['field_id']])) {
-					if($field['type'] == 'email' AND $admin->validate_email($_POST['field'.$field['field_id']]) == false) {
-						$email_error = $MESSAGE['USERS']['INVALID_EMAIL'];
-					}
-					if($field['type'] == 'heading') {
-						$email_body .= $_POST['field'.$field['field_id']]."\n\n";
-					} elseif (!is_array($_POST['field'.$field['field_id']])) {
-						$email_body .= $field['title'].': '.$_POST['field'.$field['field_id']]."\n\n";
-					} else {
-						$email_body .= $field['title'].": \n";
-						foreach ($_POST['field'.$field['field_id']] as $k=>$v) {
-							$email_body .= $v."\n";
+		$email_body = '';
+		
+		// Create blank "required" array
+		$required = array();
+		
+		// Loop through fields and add to message body
+		// Get list of fields
+		$query_fields = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_fields WHERE section_id = '$section_id' ORDER BY position ASC");
+		if($query_fields->numRows() > 0) {
+			while($field = $query_fields->fetchRow()) {
+				// Add to message body
+				if($field['type'] != '') {
+					if(!empty($_POST['field'.$field['field_id']])) {
+						if($field['type'] == 'email' AND $admin->validate_email($_POST['field'.$field['field_id']]) == false) {
+							$email_error = $MESSAGE['USERS']['INVALID_EMAIL'];
 						}
-						$email_body .= "\n";
+						if($field['type'] == 'heading') {
+							$email_body .= $_POST['field'.$field['field_id']]."\n\n";
+						} elseif (!is_array($_POST['field'.$field['field_id']])) {
+							$email_body .= $field['title'].': '.$_POST['field'.$field['field_id']]."\n\n";
+						} else {
+							$email_body .= $field['title'].": \n";
+							foreach ($_POST['field'.$field['field_id']] as $k=>$v) {
+								$email_body .= $v."\n";
+							}
+							$email_body .= "\n";
+						}
+					} elseif($field['required'] == 1) {
+						$required[] = $field['title'];
 					}
-				} elseif($field['required'] == 1) {
-					$required[] = $field['title'];
 				}
 			}
 		}
-	}
-	
-	// Captcha
-	if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
-		if($use_captcha) {
-			if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
-				// Check for a mismatch
-				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
+		
+		// Captcha
+		if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
+			if($use_captcha) {
+				if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
+					// Check for a mismatch
+					if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
+						$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
+					}
+				} else {
 					$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 				}
-			} else {
-				$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 			}
 		}
-	}
-	if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
-	
-	// Addslashes to email body - proposed by Icheb in topic=1170.0
-	// $email_body = $wb->add_slashes($email_body);
-	
-	// Check if the user forgot to enter values into all the required fields
-	if($required != array()) {
-		if(!isset($MESSAGE['MOD_FORM']['REQUIRED_FIELDS'])) {
-			echo 'You must enter details for the following fields';
-		} else {
-			echo $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'];
-		}
-		echo ':<br /><ul>';
-		foreach($required AS $field_title) {
-			echo '<li>'.$field_title;
-		}
-		if(isset($email_error)) { echo '<li>'.$email_error.'</li>'; }
-		if(isset($captcha_error)) { echo '<li>'.$captcha_error.'</li>'; }
-		echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
+		if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
 		
-	} else {
+		// Addslashes to email body - proposed by Icheb in topic=1170.0
+		// $email_body = $wb->add_slashes($email_body);
 		
-		if(isset($email_error)) {
-			echo '<br /><ul>';
-			echo '<li>'.$email_error.'</li>';
-			echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
-		} elseif(isset($captcha_error)) {
-			echo '<br /><ul>';
-			echo '<li>'.$captcha_error.'</li>';
-			echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
-		} else {
-		
-		// Check how many times form has been submitted in last hour
-		$last_hour = time()-3600;
-		$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions WHERE submitted_when >= '$last_hour'");
-		if($query_submissions->numRows() > $max_submissions) {
-			// Too many submissions so far this hour
-			echo $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'];
-			$success = false;
-		} else {
-			// Now send the email
-			if($email_to != '') {
-				if($email_from != '') {
-					if($wb->mail($email_from,$email_to,$email_subject,$email_body)) { $success = true; }
-				}
-			}				
-			// Write submission to database
-			if(isset($admin) AND $admin->get_user_id() > 0) {
-				$admin->get_user_id();
+		// Check if the user forgot to enter values into all the required fields
+		if($required != array()) {
+			if(!isset($MESSAGE['MOD_FORM']['REQUIRED_FIELDS'])) {
+				echo 'You must enter details for the following fields';
 			} else {
-				$submitted_by = 0;
+				echo $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'];
 			}
-			$email_body = $wb->add_slashes($email_body);
-			$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_submissions (page_id,section_id,submitted_when,submitted_by,body) VALUES ('".PAGE_ID."','$section_id','".mktime()."','$submitted_by','$email_body')");
-			// Make sure submissions table isn't too full
-			$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions ORDER BY submitted_when");
-			$num_submissions = $query_submissions->numRows();
-			if($num_submissions > $stored_submissions) {
-				// Remove excess submission
-				$num_to_remove = $num_submissions-$stored_submissions;
-				while($submission = $query_submissions->fetchRow()) {
-					if($num_to_remove > 0) {
-						$submission_id = $submission['submission_id'];
-						$database->query("DELETE FROM ".TABLE_PREFIX."mod_form_submissions WHERE submission_id = '$submission_id'");
-						$num_to_remove = $num_to_remove-1;
+			echo ':<br /><ul>';
+			foreach($required AS $field_title) {
+				echo '<li>'.$field_title;
+			}
+			if(isset($email_error)) { echo '<li>'.$email_error.'</li>'; }
+			if(isset($captcha_error)) { echo '<li>'.$captcha_error.'</li>'; }
+			echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
+			
+		} else {
+			
+			if(isset($email_error)) {
+				echo '<br /><ul>';
+				echo '<li>'.$email_error.'</li>';
+				echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
+			} elseif(isset($captcha_error)) {
+				echo '<br /><ul>';
+				echo '<li>'.$captcha_error.'</li>';
+				echo '</ul><a href="javascript: history.go(-1);">'.$TEXT['BACK'].'</a>';
+			} else {
+				
+				// Check how many times form has been submitted in last hour
+				$last_hour = time()-3600;
+				$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions WHERE submitted_when >= '$last_hour'");
+				if($query_submissions->numRows() > $max_submissions) {
+					// Too many submissions so far this hour
+					echo $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'];
+					$success = false;
+				} else {
+					// Now send the email
+					if($email_to != '') {
+						if($email_from != '') {
+							if($wb->mail($email_from,$email_to,$email_subject,$email_body)) { $success = true; }
+						}
+					}				
+					// Write submission to database
+					if(isset($admin) AND $admin->get_user_id() > 0) {
+						$admin->get_user_id();
+					} else {
+						$submitted_by = 0;
+					}
+					$email_body = $wb->add_slashes($email_body);
+					$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_submissions (page_id,section_id,submitted_when,submitted_by,body) VALUES ('".PAGE_ID."','$section_id','".mktime()."','$submitted_by','$email_body')");
+					// Make sure submissions table isn't too full
+					$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions ORDER BY submitted_when");
+					$num_submissions = $query_submissions->numRows();
+					if($num_submissions > $stored_submissions) {
+						// Remove excess submission
+						$num_to_remove = $num_submissions-$stored_submissions;
+						while($submission = $query_submissions->fetchRow()) {
+							if($num_to_remove > 0) {
+								$submission_id = $submission['submission_id'];
+								$database->query("DELETE FROM ".TABLE_PREFIX."mod_form_submissions WHERE submission_id = '$submission_id'");
+								$num_to_remove = $num_to_remove-1;
+							}
+						}
+					}
+					if(!$database->is_error()) {
+						$success = true;
 					}
 				}
-			}
-			if(!$database->is_error()) {
-				$success = true;
-			}
+			}	
 		}
-		
-		// Now check if the email was sent successfully
-		if(isset($success) AND $success == true) {
-			echo $success_message;
-		} else {
-			echo $TEXT['ERROR'];
-		}
-		
-		}
+	}
+	
+	// Now check if the email was sent successfully
+	if(isset($success) AND $success == true) {
+		echo $success_message;
+	} else {
+		echo $TEXT['ERROR'];
 	}
 	
 }

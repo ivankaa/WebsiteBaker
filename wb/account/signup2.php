@@ -37,8 +37,8 @@ $database = new database();
 // Get details entered
 $group_id = FRONTEND_SIGNUP;
 $active = 1;
-$username = strtolower($wb->get_post('username'));
-$display_name = $wb->get_post('display_name');
+$username = strtolower($wb->add_slashes(strip_tags($wb->get_post('username'))));
+$display_name = $wb->add_slashes(strip_tags($wb->get_post('display_name')));
 $email = $wb->get_post('email');
 
 // Create a javascript back link
@@ -58,6 +58,9 @@ if($email != "") {
 } else {
 	$wb->print_error($MESSAGE['SIGNUP']['NO_EMAIL'], $js_back, false);
 }
+
+$email = $wb->add_slashes($email);
+
 // Captcha
 if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND CAPTCHA_VERIFICATION) { /* Make's sure GD library is installed */
 	if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
@@ -91,7 +94,7 @@ if($results->numRows() > 0) {
 }
 
 // Check if the email already exists
-$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($_POST['email'])."'");
+$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '$email'");
 if($results->numRows() > 0) {
 	if(isset($MESSAGE['USERS']['EMAIL_TAKEN'])) {
 		$wb->print_error($MESSAGE['USERS']['EMAIL_TAKEN'], $js_back, false);
@@ -126,7 +129,7 @@ Your password has been set to the one above.
 If you have recieved this message in error, please delete it immediatly.';
 
 	// Try sending the email
-	if($wb->mail('From: '.SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
+	if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
 		$wb->print_success($MESSAGE['FORGOT_PASS']['PASSWORD_RESET'], WB_URL.'/account/login'.PAGE_EXTENSION);
 		$display_form = false;
 	} else {

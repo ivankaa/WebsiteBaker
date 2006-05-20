@@ -235,7 +235,7 @@ if(!isset($_POST['admin_username']) OR $_POST['admin_username'] == '') {
 if(!isset($_POST['admin_email']) OR $_POST['admin_email'] == '') {
 	set_error('Please enter an email for the Administrator account');
 } else {
-	if(eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $_POST['admin_email'])) {
+	if(eregi("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$", $_POST['admin_email'])) {
 		$admin_email = $_POST['admin_email'];
 	} else {
 		set_error('Please enter a valid email address for the Administrator account');

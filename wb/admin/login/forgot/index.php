@@ -94,9 +94,9 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 	Your password has been reset to the one above.
 	This means that your old password will no longer work.
 	
-	If you have received this message in error, please delete it immediatly.';
+	If you have received this message in error, please delete it immediately.';
 				// Try sending the email
-				if($admin->mail('From: '.SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
+				if($admin->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
 					$message = $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'];
 					$display_form = false;
 				} else {

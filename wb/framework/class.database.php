@@ -87,8 +87,8 @@ class database {
 	function query($statement) {
 		$mysql = new mysql();
 		$mysql->query($statement);
+		$this->set_error($mysql->error());
 		if($mysql->error()) {
-			$this->set_error($mysql->error());
 			return null;
 		} else {
 			return $mysql;
@@ -99,8 +99,8 @@ class database {
 	function get_one($statement) {
 		$fetch_row = mysql_fetch_row(mysql_query($statement));
 		$result = $fetch_row[0];
+		$this->set_error(mysql_error());
 		if(mysql_error()) {
-			$this->set_error(mysql_error());
 			return null;
 		} else {
 			return $result;

@@ -163,11 +163,8 @@ if($query_sections->numRows() > 0) {
 	$num_sections = $query_sections->numRows();
 	while($section = $query_sections->fetchRow()) {
 		// Get the modules real name
-		$module_path = WB_PATH.'/modules/'.$section['module'].'/info.php';
-		if(file_exists($module_path)) {
-			require($module_path);
-			if(!isset($module_function)) { $module_function = 'unknown'; }
-			if(!is_numeric(array_search($section['module'], $module_permissions)) AND $module_function == 'page') {
+		$module_name=$database->get_one("SELECT name FROM ".TABLE_PREFIX."addons WHERE directory='".$section['module']."'");
+		if(!is_numeric(array_search($section['module'], $module_permissions))) {
 			?>
 			<tr>
 				<td style="width: 250px;"><a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>#<?php echo $section['section_id']; ?>"><?php echo $module_name; ?></a></td>
@@ -206,8 +203,6 @@ if($query_sections->numRows() > 0) {
 			</tr>
 			<?php
 			}
-			if(isset($module_function)) { unset($module_function); } // Unset module type
-		}
 	}
 	?>
 	<tr>
