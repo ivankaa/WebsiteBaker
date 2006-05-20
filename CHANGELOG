@@ -14,6 +14,7 @@ Legend:
 20-May-2006 Ryan Djurovich
 #	Fixed security issues related to #237
 #	Fixed typo in news save comment page (#282)
+#	Fixed typo in news delete post page (#283)
 19-May-2006 Ryan Djurovich
 #	Fixed problem in forgotten login form where email field is too short (#207)
 #	Fixed typo in forgotten login details email (#190)
