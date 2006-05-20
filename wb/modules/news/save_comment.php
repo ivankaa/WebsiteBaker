@@ -39,7 +39,7 @@ require(WB_PATH.'/modules/admin.php');
 
 // Validate all fields
 if($admin->get_post('title') == '' AND $admin->get_post('comment') == '') {
-	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/modify_comment.php?page_id='.$page_id.'&section_id='.$section_id.'comment_id='.$id);
+	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/news/modify_comment.php?page_id='.$page_id.'&section_id='.$section_id.'comment_id='.$id);
 } else {
 	$title = $admin->add_slashes($admin->get_post('title'));
 	$comment = $admin->add_slashes($admin->get_post('comment'));
