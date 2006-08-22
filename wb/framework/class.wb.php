@@ -116,6 +116,12 @@ class wb
 		}
 	}
 
+	// Get POST data and escape it
+	function get_post_escaped($field) {
+		$result = $this->get_post($field);
+		return (is_null($result)) ? null : $this->add_slashes($result);
+	}
+	
 	// Get GET data
 	function get_get($field) {
 		if(isset($_GET[$field])) {
