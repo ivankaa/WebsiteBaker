@@ -73,7 +73,7 @@ if($admin->get_post('type') == 'textfield') {
 	$value = $admin->get_post_escaped('value');
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '$length' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'textarea') {
-	$value = $admin->get_post_escaped('value'));
+	$value = $admin->get_post_escaped('value');
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'heading') {
 	$extra = $admin->get_post('template');
