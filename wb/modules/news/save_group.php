@@ -57,10 +57,18 @@ if(isset($_FILES['image']['tmp_name']) AND $_FILES['image']['tmp_name'] != '') {
 	$filename = $_FILES['image']['name'];
 	$new_filename = WB_PATH.MEDIA_DIRECTORY.'/.news/image'.$group_id.'.jpg';
 	// Make sure the image is a jpg file
-	if(substr($filename, -3, 3) != 'jpg') {
-		$admin->print_error($MESSAGE['GENERIC']['FILE_TYPE'].' JPG (JPEG)');
-	} elseif(mime_content_type($_FILES['image']['tmp_name']) != 'image/jpeg' AND mime_content_type($_FILES['image']['tmp_name']) != 'image/jpg') {
-		$admin->print_error($MESSAGE['GENERIC']['FILE_TYPE'].' JPG (JPEG)');
+	$file3=substr($filename, -3, 3);
+	$file4=substr($filename, -4, 4);
+	//echo $file3;
+	//echo $file4;
+	if(($file4 != '.jpg')and($file4 != '.JPG')and($file4 != '.png')and($file4 != '.PNG') and ($file4 !='.jpeg') and ($file4 != '.JPEG')) {
+		$admin->print_error($MESSAGE['GENERIC']['FILE_TYPE'].' JPG (JPEG) or PNG a');
+	} elseif(
+	(($_FILES['image']['type']) != 'image/jpeg' AND mime_content_type($_FILES['image']['tmp_name']) != 'image/jpg') 
+	and
+	(($_FILES['image']['type']) != 'image/png' AND mime_content_type($_FILES['image']['tmp_name']) != 'image/png') 
+	){
+		$admin->print_error($MESSAGE['GENERIC']['FILE_TYPE'].' JPG (JPEG) or PNG b');
 	}
 	// Make sure the target directory exists
 	make_dir(WB_PATH.MEDIA_DIRECTORY.'/.news');
