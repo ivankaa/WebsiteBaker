@@ -42,6 +42,15 @@ if(!isset($_GET['id']) OR !is_numeric($_GET['id'])) {
 require_once(WB_PATH.'/framework/class.database.php');
 $database = new database();
 
+$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
+$use_captcha=$query_settings['use_captcha'];
+if($use_captcha) {
+	$_SESSION['captcha'] = '';
+	for($i = 0; $i < 5; $i++) {
+		$_SESSION['captcha'] .= rand(0,9);
+	}
+}
+
 // Query post for page id
 $query_post = $database->query("SELECT post_id,title,section_id,page_id FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");
 if($query_post->numRows() == 0) {
