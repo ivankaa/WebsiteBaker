@@ -126,6 +126,7 @@ if ($action=="install") {
 	load_module(WB_PATH.'/modules/'.$module_directory, false);
 	$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
 } else if ($action=="upgrade") {
+	upgrade_module($module_directory, false);
 	$admin->print_success($MESSAGE['GENERIC']['UPGRADED']);
 }	
 

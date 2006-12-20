@@ -754,4 +754,38 @@ function load_language($file) {
 	}
 }
 
+// Upgrade module info in DB, optionally start upgrade script
+function upgrade_module($directory, $upgrade = false) {
+	global $database, $admin, $MESSAGE;
+	$directory = WB_PATH . "/modules/$directory";
+	if(file_exists($directory.'/info.php')) {
+		require($directory.'/info.php');
+		if(isset($module_name)) {
+			if(!isset($module_license)) { $module_license = 'GNU General Public License'; }
+			if(!isset($module_platform) AND isset($module_designed_for)) { $module_platform = $module_designed_for; }
+			if(!isset($module_function) AND isset($module_type)) { $module_function = $module_type; }
+			$module_function = strtolower($module_function);
+			// Check that it does already exist
+			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$module_directory."' LIMIT 0,1");
+			if($result->numRows() > 0) {
+				// Update in DB
+				$query = "UPDATE " . TABLE_PREFIX . "addons SET " .
+					"version = '$module_version', " .
+					"description = '" . addslashes($module_description) . "', " .
+					"platform = '$module_platform', " .
+					"author = '$module_author', " .
+					"license = '$module_license'" .
+					"WHERE directory = '$module_directory'";
+				$database->query($query);
+				// Run upgrade script
+				if($upgrade == true) {
+					if(file_exists($directory.'/upgrade.php')) {
+						require($directory.'/upgrade.php');
+					}
+				}
+			}
+		}
+	}
+}
+
 ?>
