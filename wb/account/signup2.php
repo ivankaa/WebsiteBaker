@@ -126,7 +126,7 @@ Password: '.$new_pass.'
 
 Your password has been set to the one above.
 
-If you have recieved this message in error, please delete it immediatly.';
+If you have received this message in error, please delete it immediately.';
 
 	// Try sending the email
 	if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
