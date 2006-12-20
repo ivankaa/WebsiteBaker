@@ -43,8 +43,8 @@ require_once(WB_PATH.'/framework/class.database.php');
 $database = new database();
 
 $query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
-$use_captcha=$query_settings['use_captcha'];
-if($use_captcha) {
+$use_captcha = $query_settings->fetchRow();
+if($use_captcha['use_captcha']) {
 	$_SESSION['captcha'] = '';
 	for($i = 0; $i < 5; $i++) {
 		$_SESSION['captcha'] .= rand(0,9);
