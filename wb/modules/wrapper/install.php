@@ -28,12 +28,12 @@ if(defined('WB_URL')) {
 	// Create table
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_wrapper`");
 	$mod_wrapper = 'CREATE TABLE `'.TABLE_PREFIX.'mod_wrapper` ('
-						  . ' `section_id` INT NOT NULL,'
-						  . ' `page_id` INT NOT NULL,'
-	                 . ' `url` TEXT NOT NULL DEFAULT \'\','
-						  . ' `height` INT NOT NULL,'
-	                 . ' PRIMARY KEY ( `section_id` ) )'
-	                 . ' ';
+		. ' `section_id` INT NOT NULL DEFAULT \'0\','
+		. ' `page_id` INT NOT NULL DEFAULT \'0\','
+		. ' `url` TEXT NOT NULL,'
+		. ' `height` INT NOT NULL DEFAULT \'0\','
+		. ' PRIMARY KEY ( `section_id` ) '
+		. ' )';
 	$database->query($mod_wrapper);
 	
 }

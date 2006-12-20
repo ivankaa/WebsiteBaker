@@ -27,68 +27,68 @@ if(defined('WB_URL')) {
 	
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_news_posts`");
 	$mod_news = 'CREATE TABLE `'.TABLE_PREFIX.'mod_news_posts` ( '
-					 . '`post_id` INT NOT NULL AUTO_INCREMENT,'
-					 . '`section_id` INT NOT NULL,'
-					 . '`page_id` INT NOT NULL,'
-					 . '`group_id` INT NOT NULL,'
-					 . '`active` INT NOT NULL,'
-					 . '`position` INT NOT NULL,'
-					 . '`title` VARCHAR(255) NOT NULL DEFAULT \'\','
-					 . '`link` TEXT NOT NULL DEFAULT \'\','
-					 . '`content_short` TEXT NOT NULL DEFAULT \'\','
-					 . '`content_long` TEXT NOT NULL DEFAULT \'\','
-					 . '`commenting` VARCHAR(7) NOT NULL DEFAULT \'\','
-		   	    	 . '`posted_when` INT NOT NULL ,'
-					 . '`posted_by` INT NOT NULL ,'
-					 . 'PRIMARY KEY (post_id)'
-                . ' )';
+		. '`post_id` INT NOT NULL AUTO_INCREMENT,'
+		. '`section_id` INT NOT NULL DEFAULT \'0\' ,'
+		. '`page_id` INT NOT NULL DEFAULT \'0\' ,'
+		. '`group_id` INT NOT NULL DEFAULT \'0\' ,'
+		. '`active` INT NOT NULL DEFAULT \'0\' ,'
+		. '`position` INT NOT NULL DEFAULT \'0\','
+		. '`title` VARCHAR(255) NOT NULL DEFAULT \'\','
+		. '`link` TEXT NOT NULL ,'
+		. '`content_short` TEXT NOT NULL ,'
+		. '`content_long` TEXT NOT NULL ,'
+		. '`commenting` VARCHAR(7) NOT NULL DEFAULT \'\','
+		. '`posted_when` INT NOT NULL DEFAULT \'0\' ,'
+		. '`posted_by` INT NOT NULL DEFAULT \'0\','
+		. 'PRIMARY KEY (post_id)'
+		. ' )';
 	$database->query($mod_news);
 	
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_news_groups`");
 	$mod_news = 'CREATE TABLE `'.TABLE_PREFIX.'mod_news_groups` ( '
-					 . '`group_id` INT NOT NULL AUTO_INCREMENT,'
-					 . '`section_id` INT NOT NULL,'
-					 . '`page_id` INT NOT NULL,'
-					 . '`active` INT NOT NULL,'
-					 . '`position` INT NOT NULL,'
-					 . '`title` VARCHAR(255) NOT NULL DEFAULT \'\','
-					 . 'PRIMARY KEY (group_id)'
-                . ' )';
+		. '`group_id` INT NOT NULL AUTO_INCREMENT,'
+		. '`section_id` INT NOT NULL DEFAULT \'0\' ,'
+		. '`page_id` INT NOT NULL DEFAULT \'0\','
+		. '`active` INT NOT NULL DEFAULT \'0\','
+		. '`position` INT NOT NULL DEFAULT \'0\','
+		. '`title` VARCHAR(255) NOT NULL DEFAULT \'\','
+		. 'PRIMARY KEY (group_id)'
+		. ' )';
 	$database->query($mod_news);
 	
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_news_comments`");
 	$mod_news = 'CREATE TABLE `'.TABLE_PREFIX.'mod_news_comments` ( '
-					 . '`comment_id` INT NOT NULL AUTO_INCREMENT,'
-					 . '`section_id` INT NOT NULL,'
-					 . '`page_id` INT NOT NULL,'
-					 . '`post_id` INT NOT NULL,'
-					 . '`title` VARCHAR(255) NOT NULL DEFAULT \'\','
-					 . '`comment` TEXT NOT NULL DEFAULT \'\','
-		   	    . '`commented_when` INT NOT NULL ,'
-					 . '`commented_by` INT NOT NULL ,'
-					 . 'PRIMARY KEY (comment_id)'
-                . ' )';
+		. '`comment_id` INT NOT NULL AUTO_INCREMENT,'
+		. '`section_id` INT NOT NULL DEFAULT \'0\' ,'
+		. '`page_id` INT NOT NULL DEFAULT \'0\' ,'
+		. '`post_id` INT NOT NULL DEFAULT \'0\','
+		. '`title` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
+		. '`comment` TEXT NOT NULL ,'
+		. '`commented_when` INT NOT NULL DEFAULT \'0\' ,'
+		. '`commented_by` INT NOT NULL DEFAULT \'0\' ,'
+		. 'PRIMARY KEY (comment_id)'
+		. ' )';
 	$database->query($mod_news);
 	
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_news_settings`");
 	$mod_news = 'CREATE TABLE `'.TABLE_PREFIX.'mod_news_settings` ( '
-					 . '`section_id` INT NOT NULL,'
-					 . '`page_id` INT NOT NULL,'
-					 . '`header` TEXT NOT NULL DEFAULT \'\','
-					 . '`post_loop` TEXT NOT NULL DEFAULT \'\','
-					 . '`footer` TEXT NOT NULL DEFAULT \'\','
-					 . '`posts_per_page` INT NOT NULL,'
-					 . '`post_header` TEXT NOT NULL DEFAULT \'\','
-					 . '`post_footer` TEXT NOT NULL DEFAULT \'\','
-					 . '`comments_header` TEXT NOT NULL DEFAULT \'\','
-					 . '`comments_loop` TEXT NOT NULL DEFAULT \'\','
-					 . '`comments_footer` TEXT NOT NULL DEFAULT \'\','
-					 . '`comments_page` TEXT NOT NULL DEFAULT \'\','
-					 . '`commenting` VARCHAR(7) NOT NULL DEFAULT \'\','
-					 . '`resize` INT NOT NULL,'
-					 . ' `use_captcha` INT NOT NULL,'
-					 . 'PRIMARY KEY (section_id)'
-                . ' )';
+		. '`section_id` INT NOT NULL DEFAULT \'0\' ,'
+		. '`page_id` INT NOT NULL DEFAULT \'0\','
+		. '`header` TEXT NOT NULL ,'
+		. '`post_loop` TEXT NOT NULL ,'
+		. '`footer` TEXT NOT NULL ,'
+		. '`posts_per_page` INT NOT NULL DEFAULT \'0\','
+		. '`post_header` TEXT NOT NULL ,'
+		. '`post_footer` TEXT NOT NULL ,'
+		. '`comments_header` TEXT NOT NULL ,'
+		. '`comments_loop` TEXT NOT NULL ,'
+		. '`comments_footer` TEXT NOT NULL ,'
+		. '`comments_page` TEXT NOT NULL ,'
+		. '`commenting` VARCHAR(7) NOT NULL DEFAULT \'\' ,'
+		. '`resize` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `use_captcha` INT NOT NULL DEFAULT \'0\' ,'
+		. 'PRIMARY KEY (section_id)'
+		. ' )';
 	$database->query($mod_news);
 		
 	// Insert info into the search table

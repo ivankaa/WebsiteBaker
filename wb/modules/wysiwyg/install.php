@@ -28,12 +28,12 @@ if(defined('WB_URL')) {
 	// Create table
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_wysiwyg`");
 	$mod_wysiwyg = 'CREATE TABLE `'.TABLE_PREFIX.'mod_wysiwyg` ( '
-						  . ' `section_id` INT NOT NULL,'
-						  . ' `page_id` INT NOT NULL,'
-	                 . ' `content` TEXT NOT NULL DEFAULT \'\','
-	                 . ' `text` TEXT NOT NULL DEFAULT \'\','
-	                 . ' PRIMARY KEY ( `section_id` ) )'
-	                 . ' ';
+		. ' `section_id` INT NOT NULL DEFAULT \'0\','
+		. ' `page_id` INT NOT NULL DEFAULT \'0\','
+		. ' `content` TEXT NOT NULL ,'
+		. ' `text` TEXT NOT NULL ,'
+		. ' PRIMARY KEY ( `section_id` ) '
+		. ' )';
 	$database->query($mod_wysiwyg);
 	
 	// Insert info into the search table
