@@ -28,6 +28,14 @@ $admin = new admin('Pages', 'pages');
 require_once(WB_PATH.'/framework/functions.php');
 
 ?>
+<!-- Addition for remembering expanded state of pages -->
+<script language="JavaScript">
+function writeSessionCookie (cookieName, cookieValue) {
+    document.cookie = escape(cookieName) + "=" + escape(cookieValue) + ";";
+}
+</script>
+<!-- End addition -->
+
 <script type="text/javascript" language="javascript">
 function toggle_viewers() {
 	if(document.add.visibility.value == 'private') {
@@ -44,8 +52,10 @@ function toggle_viewers() {
 function toggle_visibility(id){
 	if(document.getElementById(id).style.display == "block") {
 		document.getElementById(id).style.display = "none";
+		writeSessionCookie (id, "0");//Addition for remembering expanded state of pages
 	} else {
 		document.getElementById(id).style.display = "block";
+		writeSessionCookie (id, "1");//Addition for remembering expanded state of pages
 	}
 }
 var plus = new Image;
@@ -89,7 +99,7 @@ function make_list($parent, $editable_pages) {
 	// Get objects and vars from outside this function
 	global $admin, $template, $database, $TEXT, $MESSAGE;
 	?>
-	<ul id="p<?php echo $parent; ?>" <?php if($parent != 0) { echo 'class="page_list"'; } ?>>
+	<ul id="p<?php echo $parent; ?>" <?php if($parent != 0) { echo 'class="page_list" '; if($_COOKIE["p".$parent] =="1"){echo'style="display:block;"'; }} ?>>
 	<?php	
 	// Get page list from database
 	$database = new database();
@@ -146,7 +156,7 @@ function make_list($parent, $editable_pages) {
 					if($display_plus == true) {
 					?>
 					<a href="javascript: toggle_visibility('p<?php echo $page['page_id']; ?>');" title="<?php echo $TEXT['EXPAND'].'/'.$TEXT['COLLAPSE']; ?>">
-						<img src="<?php echo ADMIN_URL; ?>/images/plus_16.png" onclick="toggle_plus_minus('<?php echo $page['page_id']; ?>');" name="plus_minus_<?php echo $page['page_id']; ?>" border="0" alt="+" />
+						<img src="<?php echo ADMIN_URL; ?>/images/<?php if($_COOKIE["p".$page['page_id']] =="1"){echo"minus";}else{echo"plus";}?>_16.png" onclick="toggle_plus_minus('<?php echo $page['page_id']; ?>');" name="plus_minus_<?php echo $page['page_id']; ?>" border="0" alt="+" />
 					</a>
 					<?php
 					}
