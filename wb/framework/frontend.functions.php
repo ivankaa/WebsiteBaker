@@ -223,7 +223,7 @@ if (!function_exists('page_description')) {
 		if ($wb->page_description!='') {
 			echo $wb->page_description;
 		} else {
-			echo PAGE_DESCRIPTION;
+			echo WEBSITE_DESCRIPTION;
 		}
 	}
 }
