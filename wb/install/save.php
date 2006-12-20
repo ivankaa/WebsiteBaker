@@ -550,7 +550,7 @@ if($install_tables == true) {
 	$search_header = addslashes('
 <h1>Search</h1>
 
-<form name="search" action="[WB_URL]/search/index[PAGE_EXTENSION]" method="post">
+<form name="search" action="[WB_URL]/search/index[PAGE_EXTENSION]" method="get">
 <table cellpadding="3" cellspacing="0" border="0" width="500">
 <tr>
 <td>

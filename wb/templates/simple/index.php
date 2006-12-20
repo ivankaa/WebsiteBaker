@@ -57,7 +57,7 @@
 		<?php if(SHOW_SEARCH) { /* Only show search box if search is enabled */ ?>
 			<br />
 			Search: <br />
-			<form name="search" action="<?php echo WB_URL; ?>/search/index<?php echo PAGE_EXTENSION; ?>" method="post">
+			<form name="search" action="<?php echo WB_URL; ?>/search/index<?php echo PAGE_EXTENSION; ?>" method="get">
 				<input type="text" name="string" style="width: 100%;" />
 				<input type="submit" name="submit" value="Search" style="width: 100%;" />
 			</form>

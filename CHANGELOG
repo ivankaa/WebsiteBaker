@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.6.5 -------------------------------------
 20-Dez-2006 Matthias Gallas
+#	Fixed Return to Search Results Page (#365)
 !	Set Version to 2.6.5
 -	Removed Changeset 365 because this will be a part of WB 2.7.x
 #	Fixed a little typo error in class.admin.php (#364)
