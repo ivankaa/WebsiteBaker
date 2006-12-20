@@ -111,7 +111,7 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 	<td valign="top"><?php echo $TEXT['SHORT']; ?>:</td>
 	<td>
 	<?php
-	show_wysiwyg_editor("short","short",$fetch_content['content_short'],"100%","135px");
+	show_wysiwyg_editor("short","short",htmlspecialchars($fetch_content['content_short']),"100%","135px");
 	?>
 	</td>
 </tr>
@@ -119,7 +119,7 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 	<td valign="top"><?php echo $TEXT['LONG']; ?>:</td>
 	<td>
 	<?php
-	show_wysiwyg_editor("long","long",$fetch_content['content_long'],"100%","300px");
+	show_wysiwyg_editor("long","long",htmlspecialchars($fetch_content['content_long']),"100%","300px");
 	?>
 	</td>
 </tr>
