@@ -38,12 +38,12 @@ if(!isset($_GET['sessions_checked']) OR $_GET['sessions_checked'] != 'true') {
 	header('Location: index.php?sessions_checked=true');
 	exit(0);
 } else {
-   // Check if session variable has been saved after reload
-   if(isset($_SESSION['session_support'])) {
-      $session_support = $_SESSION['session_support'];
-   } else {   
-      $session_support = '<font class="bad">Disabled</font>';
-   }
+	// Check if session variable has been saved after reload
+	if(isset($_SESSION['session_support'])) {
+		$session_support = $_SESSION['session_support'];
+	} else {   
+		$session_support = '<font class="bad">Disabled</font>';
+	}
 }
 
 ?>
@@ -66,6 +66,19 @@ function change_os(type) {
 		document.getElementById('operating_system_linux').checked = false;
 		document.getElementById('operating_system_windows').checked = true;
 		document.getElementById('file_perms_box').style.display = 'none';
+	}
+}
+function change_mail_type(type) {
+	if(type == 'php') {
+		document.getElementById('outgoing_mails_php').checked = true;
+		document.getElementById('outgoing_mails_smtp').checked = false;
+		document.getElementById('smtp_server').style.display = 'none';
+		document.getElementById('caption_smtp_server').style.color = '#FFF';
+	} else if(type == 'smtp') {
+		document.getElementById('outgoing_mails_php').checked = false;
+		document.getElementById('outgoing_mails_smtp').checked = true;
+		document.getElementById('smtp_server').style.display = 'block';
+		document.getElementById('caption_smtp_server').style.color = '#666';
 	}
 }
 
@@ -329,6 +342,33 @@ function change_os(type) {
 			<td style="color: #666666;">Re-Password:</td>
 			<td>
 				<input type="password" tabindex="17" name="admin_repassword" style="width: 98%;"<?php if(isset($_SESSION['admin_password'])) { echo ' value = "'.$_SESSION['admin_password'].'"'; } ?> />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5"><h1>Step 7 (optional)</h1>Please specify options for outgoing mails below...</td>
+		</tr>
+		<tr>
+			<td width="170">
+				Send outgoing mails via:
+			</td>
+			<td>
+				<input type="radio" tabindex="18" name="outgoing_mails" id="outgoing_mails_php" onclick="document.getElementById('smtp_server').style.display = 'none';" value="php"<?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo ' checked'; } ?> />
+				<font style="cursor: pointer;" onclick="javascript: change_mail_type('php');">PHP mail()</font> 
+				<br />
+				<input type="radio" tabindex="19" name="outgoing_mails" id="outgoing_mails_smtp" onclick="document.getElementById('smtp_server').style.display = 'block';" value="smtp"<?php if(isset($_SESSION['outgoing_mails']) AND $_SESSION['outgoing_mails'] == 'smtp') { echo ' checked'; } ?> />
+				<font style="cursor: pointer;" onclick="javascript: change_mail_type('smtp');">SMTP</font> 
+			</td>
+			<td id="caption_smtp_server" colspan="2" style="color: <?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo '#FFF'; } else { echo '#666'; } ?>;">SMTP host:</td>
+			<td>
+				<input type="text" tabindex="20" id="smtp_server" name="smtp_server" style="display: <?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo 'none'; } else { echo 'block'; } ?>;" value="<?php if(isset($_SESSION['smtp_server'])) { echo $_SESSION['smtp_server']; } else { echo 'xxx.yourdomain.com'; } ?>" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5">
+				<strong>Note:</strong><br \>Some mail provider (like GMX) do not deliver mails not send via SMTP to prevent spamming.
+				To enable SMTP for all mails send out by Website Baker, you need to know the SMTP host of your domain.<br \>
+				If you are not sure about the settings, or you do not know the SMTP host of your domain, stay with the default setting PHP mail(). You can change the settings
+				later by modifying one entry in the config.php file.
 			</td>
 		</tr>
 		<tr>

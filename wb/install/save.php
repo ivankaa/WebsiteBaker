@@ -63,6 +63,14 @@ function set_error($message) {
 			$_SESSION['admin_username'] = $_POST['admin_username'];
 			$_SESSION['admin_email'] = $_POST['admin_email'];
 			$_SESSION['admin_password'] = $_POST['admin_password'];
+
+			if(!isset($_POST['outgoing_mails'])) {
+				$_SESSION['outgoing_mails'] = 'php';
+			} else {
+				$_SESSION['outgoing_mails'] = $_POST['outgoing_mails'];
+			}
+			$_SESSION['smtp_server'] = $_POST['smtp_server'];
+
 		}
 		// Set the message
 		$_SESSION['message'] = $message;
@@ -257,6 +265,24 @@ if($admin_password != $admin_repassword) {
 }
 // End admin user details code
 
+// Get the SMTP server settings and check if valid
+$smtp_server_used = "xxx.yourdomain.com";
+if(isset($_POST['outgoing_mails']) AND $_POST['outgoing_mails']=="smtp") {
+	if($_POST['smtp_server'] == "" || $_POST['smtp_server'] == "xxx.yourdomain.com") {
+		set_error('Please define the SMTP host (Step 7) of your domain or choose option PHP mail().');
+	} else {
+		$smtp_server_used = $_POST['smtp_server'];
+	}
+}
+
+// Create SMTP server output string for the config.php file
+if($smtp_server_used == "xxx.yourdomain.com") {
+	$smtp_server_used = "// define('WBMAILER_SMTP_HOST', '" .$smtp_server_used ."');\n";
+} else {
+	$smtp_server_used = "define('WBMAILER_SMTP_HOST', '" .$smtp_server_used ."');\n";
+}   
+// End SMTP server settings
+
 // Try and write settings to config file
 $config_content = "" .
 "<?php\n".
@@ -272,6 +298,10 @@ $config_content = "" .
 "define('WB_URL', '$wb_url');\n".
 "define('ADMIN_PATH', WB_PATH.'/admin');\n".
 "define('ADMIN_URL', '$wb_url/admin');\n".
+"\n".
+"// some mail provider like GMX do not deliver mails send via PHP mail() function as SMTP authentification is missing\n".
+"// in that case activate SMTP for outgoing mails: un-comment next line and specify SMTP host of your domain\n".
+$smtp_server_used.
 "\n".
 "require_once(WB_PATH.'/framework/initialize.php');\n".
 "\n".
