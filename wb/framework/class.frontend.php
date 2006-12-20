@@ -309,17 +309,17 @@ class frontend extends wb {
 	}
 	
 	function show_menu() {
-	   global $database;
-	   if ($this->menu_start_level>0) {
-	       $key_array=array_keys($this->page_trail);
-	       $real_start=$key_array[$this->menu_start_level-1];
-	       if (isset($real_start)) {
-	       	$this->menu_parent=$real_start;
-		$this->menu_start_level=0;
-	       } else {
-	       	 return;
-	       }
-	   }
+		global $database;
+		if ($this->menu_start_level>0) {
+			$key_array=array_keys($this->page_trail);
+			if (isset($key_array[$this->menu_start_level-1])) {
+				$real_start=$key_array[$this->menu_start_level-1];
+				$this->menu_parent=$real_start;
+				$this->menu_start_level=0;
+			} else {
+				return;
+			}
+		}
 	   if ($this->menu_recurse==0)
 	       return;
 	   // Check if we should add menu number check to query
