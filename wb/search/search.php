@@ -37,9 +37,15 @@ if(SHOW_SEARCH != true) {
 	$pages_listed = array();
 	$items_listed = array();
 
+	// Get the search type
+	$match = 'all';
+    if(isset($_REQUEST['match'])) {
+        $match = $_REQUEST['match'];
+    }
+
 	// Get search string
 	if(isset($_REQUEST['string'])) {
-		if ($_REQUEST['match']!='exact') {
+		if ($match!='exact') {
 			$string=str_replace(',', '', $_REQUEST['string']);
 		} else {
 			$string=$_REQUEST['string'];
@@ -59,7 +65,7 @@ if(SHOW_SEARCH != true) {
 	$all_checked = '';
 	$any_checked = '';
 	$exact_checked = '';
-	if($_REQUEST['match'] != 'exact') {
+	if($match != 'exact') {
 		// Split string into array with explode() function
 		$exploded_string = explode(' ', $string);
 		// Make sure there is no blank values in the array
@@ -69,15 +75,15 @@ if(SHOW_SEARCH != true) {
 				$string[] = $each_exploded_string;
 			}
 		}
-		if ($_REQUEST['match'] == 'any') {
-			$any_checked = ' checked';
+		if ($match == 'any') {
+			$any_checked = ' checked="checked"';
 			$logical_operator = ' OR';
 		} else {
-			$all_checked = ' checked';
+			$all_checked = ' checked="checked"';
 			$logical_operator = ' AND';
 		}
 	} else {
-		$exact_checked = ' checked';
+		$exact_checked = ' checked="checked"';
 		$exact_string=$string;
 		$string=array();
 		$string[]=$exact_string;
@@ -112,8 +118,8 @@ if(SHOW_SEARCH != true) {
 	$search_results_header = str_replace($vars, $values, ($fetch_results_header['value']));
 	$search_results_footer = str_replace($vars, $values, ($fetch_results_footer['value']));
 	// Do extra vars/values replacement
-	$vars = array('[SEARCH_STRING]', '[WB_URL]', '[PAGE_EXTENSION]', '[TEXT_SEARCH]', '[TEXT_ALL_WORDS]', '[TEXT_ANY_WORDS]', '[TEXT_EXACT_MATCH]', '[TEXT_MATCH]', '[TEXT_MATCHING]', '[ALL_CHECKED]', '[ANY_CHECKED]', '[EXACT_CHECKED]');
-	$values = array($search_string, WB_URL, PAGE_EXTENSION, $TEXT['SEARCH'], $TEXT['ALL_WORDS'], $TEXT['ANY_WORDS'], $TEXT['EXACT_MATCH'], $TEXT['MATCH'], $TEXT['MATCHING'], $all_checked, $any_checked, $exact_checked);
+	$vars = array('[SEARCH_STRING]', '[WB_URL]', '[PAGE_EXTENSION]', '[TEXT_SEARCH]', '[TEXT_ALL_WORDS]', '[TEXT_ANY_WORDS]', '[TEXT_EXACT_MATCH]', '[TEXT_MATCH]', '[TEXT_MATCHING]', '[ALL_CHECKED]', '[ANY_CHECKED]', '[EXACT_CHECKED]', '[REFERRER_ID]');
+	$values = array($search_string, WB_URL, PAGE_EXTENSION, $TEXT['SEARCH'], $TEXT['ALL_WORDS'], $TEXT['ANY_WORDS'], $TEXT['EXACT_MATCH'], $TEXT['MATCH'], $TEXT['MATCHING'], $all_checked, $any_checked, $exact_checked, REFERRER_ID);
 	$search_header = str_replace($vars, $values, ($fetch_header['value']));
 	
 	// Show search header
