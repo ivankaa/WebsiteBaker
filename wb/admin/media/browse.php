@@ -99,6 +99,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 	$temp_id = 0;
 	$row_bg_color = 'EEEEEE';
 	if(isset($DIR)) {
+		sort($DIR);
 		foreach($DIR AS $name) {
 			$link_name = str_replace(' ', '%20', $name);
 			$temp_id++;
@@ -122,6 +123,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 		}
 	}
 	if(isset($FILE)) {
+		sort($FILE);
 		foreach($FILE AS $name) {
 			$temp_id++;
 			$template->set_var(array(

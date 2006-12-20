@@ -233,7 +233,7 @@ if($query_sections->numRows() == 0) {
 			<select name="module" style="width: 100%;">
 			<?php
 			// Insert module list
-			$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page' AND directory != 'menu_link'");
+			$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page' AND directory != 'menu_link' order by name");
 			if($result->numRows() > 0) {
 				while($module = $result->fetchRow()) {
 					// Check if user is allowed to use this module

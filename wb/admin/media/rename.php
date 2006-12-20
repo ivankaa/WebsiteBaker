@@ -71,6 +71,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 	}
 	$temp_id = 0;
 	if(isset($DIR)) {
+		sort($DIR);
 		foreach($DIR AS $name) {
 			$temp_id++;
 			if($file_id == $temp_id) {
@@ -80,6 +81,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 		}
 	}
 	if(isset($FILE)) {
+		sort($FILE);
 		foreach($FILE AS $name) {
 			$temp_id++;
 			if($file_id == $temp_id) {

@@ -33,7 +33,7 @@ $template->set_block('page', 'main_block', 'main');
 
 // Insert values into template list
 $template->set_block('main_block', 'template_list_block', 'template_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' order by name");
 if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('VALUE', $addon['directory']);
