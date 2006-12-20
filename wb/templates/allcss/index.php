@@ -57,7 +57,7 @@
 	if(SHOW_MENU) {
 	?>	
 	<div class="menu">
-		<?php page_menu(0, 1, '<li class="menu_main"[class]>[a][menu_title][/a]</li>', '<ul>', '</ul>', '', ' style="font-weight: bold;"'); ?>
+		<?php page_menu(0, 1, '<li class="menu_main"[class]>[a] [menu_title] [/a]</li>', '<ul>', '</ul>', '', ' style="font-weight: bold;"'); ?>
 		
 		<?php
 		if(FRONTEND_LOGIN == 'enabled' AND VISIBILITY != 'private' AND $wb->get_session('USER_ID') == '') {

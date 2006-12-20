@@ -285,7 +285,7 @@ class frontend extends wb {
 	   	$wb->menu_collapse = true;
 	   }
 	   if (!isset($wb->menu_item_template)) {
-	   	$wb->menu_item_template = '<li><span[class]>[a][menu_title][/a]</span>';
+	   	$wb->menu_item_template = '<li><span[class]>[a] [menu_title] [/a]</span>';
 	   }
 	   if (!isset($wb->menu_item_footer)) {
 	   	$wb->menu_item_footer = '</li>';

@@ -68,7 +68,7 @@ if (!function_exists('page_link')) {
 
 // Old menu call invokes new menu function
 if (!function_exists('page_menu')) {
-	function page_menu($parent = 0, $menu_number = 1, $item_template = '<li[class]>[a][menu_title][/a]</li>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $recurse = LEVEL) {
+	function page_menu($parent = 0, $menu_number = 1, $item_template = '<li[class]>[a] [menu_title] [/a]</li>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $recurse = LEVEL) {
 		global $wb;
 		$wb->menu_number=$menu_number;
 		$wb->menu_item_template=$item_template;
