@@ -32,7 +32,7 @@ $header = '<style type=\"text/css\">
 .post_date { text-align: right; font-weight: bold; }
 .post_short { text-align: justify; padding-bottom: 5px; }
 </style>
-<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">';
+<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"98%\">';
 $post_loop = '<tr class=\"post_top\">
 <td class=\"post_title\"><a href=\"[LINK]\">[TITLE]</a></td>
 <td class=\"post_date\">[TIME], [DATE]</td>
@@ -44,14 +44,14 @@ $post_loop = '<tr class=\"post_top\">
 </td>
 </tr>';
 $footer = '</table>
-<table cellpadding="0" cellspacing="0" border="0" width="100%" style="display: [DISPLAY_PREVIOUS_NEXT_LINKS]">
+<table cellpadding="0" cellspacing="0" border="0" width="98%" style="display: [DISPLAY_PREVIOUS_NEXT_LINKS]">
 <tr>
 <td width="35%" align="left">[PREVIOUS_PAGE_LINK]</td>
 <td width="30%" align="center">[OF]</td>
 <td width="35%" align="right">[NEXT_PAGE_LINK]</td>
 </tr>
 </table>';
-$post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" width="100%">
+$post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" width="98%">
 <tr>
 <td height="30"><h1>[TITLE]</h1></td>
 <td rowspan="3" style="display: [DISPLAY_IMAGE]"><img src="[GROUP_IMAGE]" alt="[GROUP_TITLE]" /></td>
@@ -75,7 +75,7 @@ $comments_header = addslashes('<br /><br />
 .comment_title, .comment_info { border-top: 1px solid #DDDDDD; background-color: #EEEEEE; }
 </style>
 <h2>Comments</h2>
-<table cellpadding="2" cellspacing="0" border="0" width="100%">');
+<table cellpadding="2" cellspacing="0" border="0" width="98%">');
 $comments_loop = addslashes('<tr>
 <td class="comment_title">[TITLE]</td>
 <td class="comment_info">By [DISPLAY_NAME] on [DATE] at [TIME]</td>

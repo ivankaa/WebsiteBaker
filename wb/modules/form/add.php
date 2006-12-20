@@ -29,7 +29,7 @@ for his contributions to this module - adding extra field types
 */
 
 // Insert an extra rows into the database
-$header = '<table cellpadding=\"2\" cellspacing=\"0\" border=\"0\" width=\"100%\">';
+$header = '<table cellpadding=\"2\" cellspacing=\"0\" border=\"0\" width=\"98%\">';
 $field_loop = '<tr><td class=\"field_title\">{TITLE}{REQUIRED}:</td><td>{FIELD}</td></tr>';
 $footer = '<tr><td>&nbsp;</td>
 <td>
