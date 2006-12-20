@@ -11,14 +11,21 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.5 -------------------------------------
+20-Dez-2006 Matthias Gallas
+!	Set Version to 2.6.5
+-	Removed Changeset 365 because this will be a part of WB 2.7.x
+#	Fixed a little typo error in class.admin.php (#364)
+26-Nov-2006 Ryan Djurovich
++	Added new script that could possibly be apart of 2.7.x as a replacement
+	for having the pages directory 
 17-Nov-2006 Matthias Gallas
 #	Fixed fatal error in line 46 news/comment.php (thanks to eki)(#358)
 15-Nov-2006 Matthias Gallas
 #	Fixed again intropage doesn't work (#71)
 20-Oct-2006 Matthias Gallas
-!	Added phpmailer class (thanks to doc)
-!	Added Remember-expanded-pages-in-admin (thanks to ephraimt)
-!	Added List sorting in admin area (thanks to rsmith)
++	Added phpmailer class (thanks to doc)
++	Added Remember-expanded-pages-in-admin (thanks to ephraimt)
++	Added List sorting in admin area (thanks to rsmith)
 #	Fixed table width 100% are wrong displayed in container templates
 	when IE is used (#350)
 #	Fixed large space between menupoints in IE (#349)
@@ -31,18 +38,18 @@ Legend:
 #	Fixed news modul stores empty records (#338)
 #	Fixed Captcha didn't work in news comments (#337)
 #	Fixed various php notices (#334)
-!	Added new upgrade_function (thanks to kozmoz)
++	Added new upgrade_function (thanks to kozmoz)
 #	Fixed addons table isn't updated when a modul is updated (#332)
 #	Fixed spelling errors in the signup2.php (#330)
 #	Fixed MySQL 5.x missing default values for INT fields in all system
 	and modules tables (#329)
 #	Fixed installer does not insert admin user (#328)
-!	Added support for getting page ID of page that referred search
++	Added support for getting page ID of page that referred search
 	request (#327) (thanks to brofield)
 #	Fixed search results generate invalid XHTML and notify warnings (#326)
 Stefan Braunewell
 #	Fixed Field 'last_reset' doesn't have a default value (#313)
-!	Added get_post_escaped to wb class which automatically calls add_slashes
++	Added get_post_escaped to wb class which automatically calls add_slashes
 	on get_post output and used it in form/save_field.php
 ------------------------------------- 2.6.4 -------------------------------------
 20-May-2006 Ryan Djurovich
