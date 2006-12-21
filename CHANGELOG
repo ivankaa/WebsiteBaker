@@ -11,6 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.5 -------------------------------------
+21-Dez-2006 Matthias Gallas
+#	Fixed missing message when adding a site without page title (#300)
+21-Dez-2006 Ryan Djurovich
+#	Fixed bug with captcha script (#346)
 20-Dez-2006 Matthias Gallas
 #	Fixed Return to Search Results Page (#365)
 !	Set Version to 2.6.5
