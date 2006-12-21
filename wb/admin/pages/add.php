@@ -48,7 +48,7 @@ if ($parent!=0) {
 
 // Validate data
 if($title == '') {
-	$admin->print_error($MESSAGE['PAGES']['BLANK_TITLE']);
+	$admin->print_error($MESSAGE['PAGES']['BLANK_PAGE_TITLE']);
 }
 
 // Setup admin groups
