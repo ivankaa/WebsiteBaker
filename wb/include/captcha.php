@@ -52,7 +52,8 @@ if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND isset($
 		imageline($image, $x1, $y1, $x2, $y2 , $gray);  
 	}
 	
-	for ($i = 0; $i < 5; $i++) {
+	$x = 0;
+	for($i = 0; $i < 5; $i++) {
 		$fnt = rand(3,5);
 		$x = $x + rand(12 , 20);
 		$y = rand(7 , 12); 
