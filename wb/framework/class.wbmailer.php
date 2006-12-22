@@ -1,6 +1,6 @@
 <?php
 
-// $Id: class.wbmailer.php 324 2006-03-09 16:43:24Z stefan $
+// $Id$
 
 /*
 
