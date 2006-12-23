@@ -1,5 +1,7 @@
 <?php
 
+// $Id$
+
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -253,10 +255,10 @@ function parent_list($parent) {
 			if($results_array['parent'] == $page['page_id']) {
 				$template->set_var('SELECTED', ' selected');
 			} elseif($results_array['page_id'] == $page['page_id']) {
-				$template->set_var('SELECTED', ' disabled');
+				$template->set_var('SELECTED', ' disabled="disabled" style="color: #aaa;"');
 				$list_next_level=false;
 			} elseif($can_modify != true) {
-				$template->set_var('SELECTED', ' disabled');
+				$template->set_var('SELECTED', ' disabled="disabled" style="color: #aaa;"');
 			} else {
 				$template->set_var('SELECTED', '');
 			}

@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.6.5 -------------------------------------
 23-Dez-2006 Matthias Gallas
+#	Fixed IE allows to set a page as parent of itself (#320)
 #	Fixed problem with Page Title has to be escaped (#287)
 #	Fixed the possibility to call the index.php of the templates directly in the browser (#291)
 21-Dez-2006 Matthias Gallas

@@ -8,6 +8,29 @@ function toggle_viewers() {
 		document.getElementById('allowed_viewers').style.display = 'none';
 	}
 }
+var lastselectedindex = new Array();
+
+function disabled_hack_for_ie(sel) { 
+	var sels = document.getElementsByTagName("select");
+
+    var i;
+    var sel_num_in_doc = 0;
+
+    for (i = 0; i <sels.length; i++)
+    {    if (sel == sels[i])
+        {    sel_num_in_doc = i;
+        }
+    }
+
+     // never true for browsers that support option.disabled
+    if (sel.options[sel.selectedIndex].disabled)
+    {    sel.selectedIndex = lastselectedindex[sel_num_in_doc];
+    } else
+    {    lastselectedindex[sel_num_in_doc] = sel.selectedIndex;
+    }
+
+    return true;
+}
 </script>
 
 <table cellpadding="5" cellspacing="0" border="0" align="center" width="100%" height="50" style="margin-bottom: 10px;">
@@ -37,7 +60,7 @@ function toggle_viewers() {
 <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
 <tr>
 	<td width="100" height="20">{TEXT_PAGE_TITLE}:</td>
-	<td with="240" height="20">
+	<td width="240" height="20">
 		<input type="text" name="page_title" value="{PAGE_TITLE}" style="width: 232px;" />
 	</td>
 	<td rowspan="10" valign="top" style="padding-left: 20px; padding-top: 8px;">
@@ -67,14 +90,14 @@ function toggle_viewers() {
 </tr>
 <tr height="20">
 	<td width="100" height="20">{TEXT_MENU_TITLE}:</td>
-	<td with="240" height="20">
+	<td width="240" height="20">
 		<input type="text" name="menu_title" value="{MENU_TITLE}" style="width: 232px;" />
 	</td>
 </tr>
 <tr height="20">
 	<td width="100">{TEXT_PARENT}:</td>
-	<td with="240">
-		<select name="parent" style="width: 240px;">
+	<td width="240">
+		<select name="parent" style="width: 240px;" onchange="return disabled_hack_for_ie(this);">
 			<!-- BEGIN page_list_block2 -->
 			<option value="{ID}"{SELECTED}>{TITLE}</option>
 			<!-- END page_list_block2 -->

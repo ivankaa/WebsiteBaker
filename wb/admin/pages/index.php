@@ -1,5 +1,7 @@
 <?php
 
+// $Id$
+
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -466,7 +468,7 @@ function parent_list($parent) {
 				if($can_modify == true) {
 					$template->set_var('DISABLED', '');
 				} else {
-					$template->set_var('DISABLED', ' disabled');
+					$template->set_var('DISABLED', ' disabled="disabled" style="color: #aaa;"');
 				}
 				$template->parse('page_list2', 'page_list_block2', true);
 		}
