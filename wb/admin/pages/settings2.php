@@ -40,8 +40,8 @@ $admin = new admin('Pages', 'pages_settings');
 require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
-$page_title = $admin->add_slashes($admin->get_post('page_title'));
-$menu_title = $admin->add_slashes($admin->get_post('menu_title'));
+$page_title = $admin->add_slashes($admin->get_post_escaped('page_title'));
+$menu_title = $admin->add_slashes($admin->get_post_escaped('menu_title'));
 $description = $admin->add_slashes($admin->get_post('description'));
 $keywords = $admin->add_slashes($admin->get_post('keywords'));
 $parent = $admin->get_post('parent');

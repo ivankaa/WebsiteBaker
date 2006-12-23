@@ -197,9 +197,9 @@ if (!function_exists('show_breadcrumbs')) {
 					$query_menu=$database->query("SELECT menu_title,link FROM ".TABLE_PREFIX."pages WHERE page_id=$temp");
 					$page=$query_menu->fetchRow();
 					if ($links==true AND $temp!=$page_id)
-						echo '<a href="'.page_link($page['link']).'">'.$page['menu_title'].'</a>';
+						echo '<a href="'.page_link($page['link']).'">'.htmlentities($page['menu_title']).'</a>';
 					else
-					    echo $page['menu_title'];
+					    echo htmlentities($page['menu_title']);
 		        }
 	            $counter++;
 			}

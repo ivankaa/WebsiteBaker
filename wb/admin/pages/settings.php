@@ -74,8 +74,8 @@ $template->set_file('page', 'settings.html');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var(array(
 								'PAGE_ID' => $results_array['page_id'],
-								'PAGE_TITLE' => ($results_array['page_title']),
-								'MENU_TITLE' => ($results_array['menu_title']),
+								'PAGE_TITLE' => (htmlentities($results_array['page_title'])),
+								'MENU_TITLE' => (htmlentities($results_array['menu_title'])),
 								'DESCRIPTION' => ($results_array['description']),
 								'KEYWORDS' => ($results_array['keywords']),
 								'MODIFIED_BY' => $user['display_name'],
@@ -247,7 +247,7 @@ function parent_list($parent) {
 			for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - '; }
 			$template->set_var(array(
 											'ID' => $page['page_id'],
-											'TITLE' => ($title_prefix.$page['page_title'])
+											'TITLE' => ($title_prefix.htmlentities($page['page_title']))
 											)
 									);
 			if($results_array['parent'] == $page['page_id']) {
