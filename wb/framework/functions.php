@@ -267,7 +267,7 @@ function root_parent($page_id) {
 	if($level == 1) {
 		return $parent;
 	} elseif($parent == 0) {
-		return 0;
+		return $page_id;
 	} else {
 		// Figure out what the root parents id is
 		$parent_ids = array_reverse(get_parent_ids($page_id));
