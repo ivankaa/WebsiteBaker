@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.6.5 -------------------------------------
 24-Dez-2006 Matthias Gallas
+#	Fixed some minor javascript errors in admin (thanks to pcwacht)
 #	Fixed root_parent doesn't get updated when moving item in menu (#305)
 !	Changed all copyright notices to include now 2007
 23-Dez-2006 Matthias Gallas
