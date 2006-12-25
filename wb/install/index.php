@@ -360,15 +360,19 @@ function change_mail_type(type) {
 			</td>
 			<td id="caption_smtp_server" colspan="2" style="color: <?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo '#FFF'; } else { echo '#666'; } ?>;">SMTP host:</td>
 			<td>
-				<input type="text" tabindex="20" id="smtp_server" name="smtp_server" style="display: <?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo 'none'; } else { echo 'block'; } ?>;" value="<?php if(isset($_SESSION['smtp_server'])) { echo $_SESSION['smtp_server']; } else { echo 'xxx.yourdomain.com'; } ?>" />
+				<input type="text" tabindex="20" id="smtp_server" name="smtp_server" style="display: <?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo 'none'; } else { echo 'block'; } ?>;" value="<?php if(isset($_SESSION['smtp_server'])) { echo $_SESSION['smtp_server']; } else { echo 'mail.example.com'; } ?>" />
 			</td>
 		</tr>
 		<tr>
 			<td colspan="5">
-				<strong>Note:</strong><br \>Some mail provider (like GMX) do not deliver mails not send via SMTP to prevent spamming.
-				To enable SMTP for all mails send out by Website Baker, you need to know the SMTP host of your domain.<br \>
-				If you are not sure about the settings, or you do not know the SMTP host of your domain, stay with the default setting PHP mail(). You can change the settings
-				later by modifying one entry in the config.php file.
+				<div style="border: 1px solid #CCC; background-color: #EEE; padding: 5px;">
+				<strong> Please Note:</strong>
+				<br \>
+				Some service providers do not support sending mail via PHP.
+				If your provider requires you to use SMTP for sending mail, you must know the SMTP host address.
+				If you are not sure about these settings, or you do not know the SMTP host of your domain, use the default "PHP mail()" setting.
+				You can change the settings	later if needed.
+				</div>
 			</td>
 		</tr>
 		<tr>

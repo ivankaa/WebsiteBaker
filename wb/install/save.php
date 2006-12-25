@@ -266,7 +266,7 @@ if($admin_password != $admin_repassword) {
 // End admin user details code
 
 // Get the SMTP server settings and check if valid
-$smtp_server_used = "xxx.yourdomain.com";
+$smtp_server_used = "mail.example.com";
 if(isset($_POST['outgoing_mails']) AND $_POST['outgoing_mails']=="smtp") {
 	if($_POST['smtp_server'] == "" || $_POST['smtp_server'] == "xxx.yourdomain.com") {
 		set_error('Please define the SMTP host (Step 7) of your domain or choose option PHP mail().');
@@ -276,7 +276,7 @@ if(isset($_POST['outgoing_mails']) AND $_POST['outgoing_mails']=="smtp") {
 }
 
 // Create SMTP server output string for the config.php file
-if($smtp_server_used == "xxx.yourdomain.com") {
+if($smtp_server_used == "mail.example.com") {
 	$smtp_server_used = "// define('WBMAILER_SMTP_HOST', '" .$smtp_server_used ."');\n";
 } else {
 	$smtp_server_used = "define('WBMAILER_SMTP_HOST', '" .$smtp_server_used ."');\n";
@@ -299,7 +299,7 @@ $config_content = "" .
 "define('ADMIN_PATH', WB_PATH.'/admin');\n".
 "define('ADMIN_URL', '$wb_url/admin');\n".
 "\n".
-"// some mail provider like GMX do not deliver mails send via PHP mail() function as SMTP authentification is missing\n".
+"// some mail provider do not deliver mails send via PHP mail() function as SMTP authentification is missing\n".
 "// in that case activate SMTP for outgoing mails: un-comment next line and specify SMTP host of your domain\n".
 $smtp_server_used.
 "\n".
