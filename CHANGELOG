@@ -11,19 +11,21 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.5 -------------------------------------
-24-Dez-2006 Matthias Gallas
+25-Dec-2006 Ryan Djurovich
+!	Changed links to WB help website
+24-Dec-2006 Matthias Gallas
 #	Fixed some minor javascript errors in admin (thanks to pcwacht)
 #	Fixed root_parent doesn't get updated when moving item in menu (#305)
 !	Changed all copyright notices to include now 2007
-23-Dez-2006 Matthias Gallas
+23-Dec-2006 Matthias Gallas
 #	Fixed IE allows to set a page as parent of itself (#320)
 #	Fixed problem with Page Title has to be escaped (#287)
 #	Fixed the possibility to call the index.php of the templates directly in the browser (#291)
-21-Dez-2006 Matthias Gallas
+21-Dec-2006 Matthias Gallas
 #	Fixed missing message when adding a site without page title (#300)
-21-Dez-2006 Ryan Djurovich
+21-Dec-2006 Ryan Djurovich
 #	Fixed bug with captcha script (#346)
-20-Dez-2006 Matthias Gallas
+20-Dec-2006 Matthias Gallas
 #	Fixed Return to Search Results Page (#365)
 !	Set Version to 2.6.5
 -	Removed Changeset 365 because this will be a part of WB 2.7.x
