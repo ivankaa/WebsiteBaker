@@ -268,7 +268,7 @@ if($admin_password != $admin_repassword) {
 // Get the SMTP server settings and check if valid
 $smtp_server_used = "mail.example.com";
 if(isset($_POST['outgoing_mails']) AND $_POST['outgoing_mails']=="smtp") {
-	if($_POST['smtp_server'] == "" || $_POST['smtp_server'] == "xxx.yourdomain.com") {
+	if($_POST['smtp_server'] == "" || $_POST['smtp_server'] == "mail.example.com") {
 		set_error('Please define the SMTP host (Step 7) of your domain or choose option PHP mail().');
 	} else {
 		$smtp_server_used = $_POST['smtp_server'];
