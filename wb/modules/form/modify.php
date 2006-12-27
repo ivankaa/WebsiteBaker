@@ -31,6 +31,9 @@ for his contributions to this module - adding extra field types
 // Must include code to stop this file being access directly
 if(!defined('WB_PATH')) { exit("Cannot access this file directly"); }
 
+//Delete all form fields with no title
+$database->query("DELETE FROM ".TABLE_PREFIX."mod_form_fields  WHERE page_id = '$page_id' and section_id = '$section_id' and title=''");
+
 ?>
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
