@@ -97,15 +97,19 @@ $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
 // Get sections for this page
+$module_permissions = $_SESSION['MODULE_PERMISSIONS'];
 $query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
 if($query_sections->numRows() > 0) {
 	while($section = $query_sections->fetchRow()) {
 		$section_id = $section['section_id'];
 		$module = $section['module'];
-		// Include the modules editing script if it exists
-		if(file_exists(WB_PATH.'/modules/'.$module.'/modify.php')) {
-			echo '<a name="'.$section_id.'"></a>';
-			require(WB_PATH.'/modules/'.$module.'/modify.php');
+		//Have permission?
+		if(!is_numeric(array_search($module, $module_permissions))) {
+			// Include the modules editing script if it exists
+			if(file_exists(WB_PATH.'/modules/'.$module.'/modify.php')) {
+				echo '<a name="'.$section_id.'"></a>';
+				require(WB_PATH.'/modules/'.$module.'/modify.php');
+			}
 		}
 	}
 }
