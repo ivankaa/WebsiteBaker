@@ -46,25 +46,27 @@ $wb->get_page_details();
 $wb->get_website_settings();
 
 // Sending XML header
-header("Content-type: text/xml");
+header("Content-type: text/xml; charset=utf-8" );
 
 // Header info
 // Required by CSS 2.0
+?>
+<rss version="2.0" >
+<channel>
+<title><?php echo PAGE_TITLE; ?></title>
+<link>http://<?php echo $_SERVER['SERVER_NAME']; ?></link>
+<description> <?php echo PAGE_DESCRIPTION; ?></description>
+<?php
+// Optional header info 
+?>
+<language><?php echo DEFAULT_LANGUAGE; ?></language>
+<copyright><?php echo WB_URL.$_SERVER['REQUEST_URI']; ?></copyright>
+<managingEditor><?php echo SERVER_EMAIL; ?></managingEditor>
+<webMaster><?php echo SERVER_EMAIL; ?></webMaster>
+<category><?php echo WEBSITE_TITLE; ?></category>
+<generator>Website Baker Content Management System</generator>
 
-echo "<rss version='2.0'>";
-echo "<channel>";
-echo "<title>".PAGE_TITLE."</title>";
-echo "<link>".WB_URL."</link>";
-echo "<description>".PAGE_DESCRIPTION."</description>";
-
-// Optional header info
-echo "<language>".DEFAULT_LANGUAGE."</language>";
-echo "<copyright>".WB_URL."</copyright>";
-echo "<managingEditor>".SERVER_EMAIL."</managingEditor>";
-echo "<webMaster>".SERVER_EMAIL."</webMaster>";
-echo "<category>".WEBSITE_TITLE."</category>";
-echo "<generator>Website Baker Content Management System</generator>";
-
+<?php
 // Get news items from database
 
 //Query
@@ -76,23 +78,16 @@ if(isset($group_id)) {
 $result = $database->query($query);
 
 //Generating the news items
-while($item = $result->fetchRow($result)){
+while($item = $result->fetchRow($result)){ ?>
 
-    echo "<item>";
-    echo "<title>".$item["title"]."</title>";
-    // Stripping HTML Tags for text-only visibility
-    echo "<description>".strip_tags($item["content_short"])."</description>";
-    echo "<link>".WB_URL."/pages".$item["link"].PAGE_EXTENSION."</link>";
-    /* Add further (non required) information here like ie.
-    echo "<author>".$item["posted_by"]."</author>");
-    etc.
-    */
-    echo "</item>";
+<item>
+<title><![CDATA[<?php echo stripslashes($item["title"]); ?>]]></title>
+<description><![CDATA[<?php echo stripslashes($item["content_short"]); ?>]]></description>
+<guid><?php echo WB_URL."/pages".$item["link"].PAGE_EXTENSION; ?></guid>
+<link><?php echo WB_URL."/pages".$item["link"].PAGE_EXTENSION; ?></link>
+</item>
 
-}
+<?php } ?>
 
-// Writing footer information
-echo "</channel>";
-echo "</rss>";
-
-?>
+</channel>
+</rss>
