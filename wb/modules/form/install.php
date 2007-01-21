@@ -87,12 +87,12 @@ if(defined('WB_URL')) {
 	$query_start_code = "SELECT [TP]pages.page_id, [TP]pages.page_title,	[TP]pages.link, [TP]pages.description, [TP]pages.modified_when, [TP]pages.modified_by	FROM [TP]mod_form_fields, [TP]mod_form_settings, [TP]pages WHERE ";
 	$database->query("INSERT INTO ".TABLE_PREFIX."search (name,value,extra) VALUES ('query_start', '$query_start_code', 'form')");
 	// Query body
-	$query_body_code = " [TP]pages.page_id = [TP]mod_form_settings.page_id AND [TP]mod_form_settings.header [O] \'[W][STRING][W]\' AND [TP]pages.searching = \'1\'
-	OR [TP]pages.page_id = [TP]mod_form_settings.page_id AND [TP]mod_form_settings.footer [O] \'[W][STRING][W]\' AND [TP]pages.searching = \'1\'
-	OR [TP]pages.page_id = [TP]mod_form_fields.page_id AND [TP]mod_form_fields.title [O] \'[W][STRING][W]\' AND [TP]pages.searching = \'1\'";
+	$query_body_code = " [TP]pages.page_id = [TP]mod_form_settings.page_id AND [TP]mod_form_settings.header LIKE \'%[STRING]%\'
+	OR [TP]pages.page_id = [TP]mod_form_settings.page_id AND [TP]mod_form_settings.footer LIKE \'%[STRING]%\'
+	OR [TP]pages.page_id = [TP]mod_form_fields.page_id AND [TP]mod_form_fields.title LIKE \'%[STRING]%\' ";
 	$database->query("INSERT INTO ".TABLE_PREFIX."search (name,value,extra) VALUES ('query_body', '$query_body_code', 'form')");
 	// Query end
-	$query_end_code = '';
+	$query_end_code = "";
 	$database->query("INSERT INTO ".TABLE_PREFIX."search (name,value,extra) VALUES ('query_end', '$query_end_code', 'form')");
 	
 	// Insert blank row (there needs to be at least on row for the search to work)
