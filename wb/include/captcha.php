@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -52,7 +52,8 @@ if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND isset($
 		imageline($image, $x1, $y1, $x2, $y2 , $gray);  
 	}
 	
-	for ($i = 0; $i < 5; $i++) {
+	$x = 0;
+	for($i = 0; $i < 5; $i++) {
 		$fnt = rand(3,5);
 		$x = $x + rand(12 , 20);
 		$y = rand(7 , 12); 

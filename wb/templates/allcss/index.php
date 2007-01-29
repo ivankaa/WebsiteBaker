@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -22,6 +22,11 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
+
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+	exit(0);
+}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -45,7 +50,7 @@
 	
 	<div class="search_box">
 		<?php if(SHOW_SEARCH) { ?>
-		<form name="search" action="<?php echo WB_URL.'/search/index'.PAGE_EXTENSION; ?>" method="post">
+		<form name="search" action="<?php echo WB_URL.'/search/index'.PAGE_EXTENSION; ?>" method="get">
 		<input type="text" name="string" class="search_string" />
 		<input type="submit" name="submit" value="Search" class="search_submit" />
 		</form>
@@ -57,7 +62,7 @@
 	if(SHOW_MENU) {
 	?>	
 	<div class="menu">
-		<?php page_menu(0, 1, '<li class="menu_main"[class]>[a][menu_title][/a]</li>', '<ul>', '</ul>', '', ' style="font-weight: bold;"'); ?>
+		<?php page_menu(0, 1, '<li class="menu_main"[class]>[a] [menu_title] [/a]</li>', '<ul>', '</ul>', '', ' style="font-weight: bold;"'); ?>
 		
 		<?php
 		if(FRONTEND_LOGIN == 'enabled' AND VISIBILITY != 'private' AND $wb->get_session('USER_ID') == '') {

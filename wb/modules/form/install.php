@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -33,43 +33,43 @@ if(defined('WB_URL')) {
 	// Create tables
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_form_fields`");
 	$mod_form = 'CREATE TABLE `'.TABLE_PREFIX.'mod_form_fields` ( `field_id` INT NOT NULL AUTO_INCREMENT,'
-	                 . ' `section_id` INT NOT NULL ,'
-	                 . ' `page_id` INT NOT NULL ,'
-	                 . ' `position` INT NOT NULL ,'
-	                 . ' `title` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
-	                 . ' `type` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
-	                 . ' `required` INT NOT NULL ,'
-	                 . ' `value` TEXT NOT NULL DEFAULT \'\' ,'
-	                 . ' `extra` TEXT NOT NULL DEFAULT \'\' ,'
-	                 . ' PRIMARY KEY ( `field_id` ) )'
-	                 . ' ';
+		. ' `section_id` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `page_id` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `position` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `title` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
+		. ' `type` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
+		. ' `required` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `value` TEXT NOT NULL ,'
+		. ' `extra` TEXT NOT NULL ,'
+		. ' PRIMARY KEY ( `field_id` ) '
+		. ' )';
 	$database->query($mod_form);
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_form_settings`");
 	$mod_form = 'CREATE TABLE `'.TABLE_PREFIX.'mod_form_settings` ('
-						  . ' `section_id` INT NOT NULL,'
-						  . ' `page_id` INT NOT NULL,'
-	                 . ' `header` TEXT NOT NULL DEFAULT \'\' ,'
-	                 . ' `field_loop` TEXT NOT NULL DEFAULT \'\' ,'
-	                 . ' `footer` TEXT NOT NULL DEFAULT \'\' ,'
-	                 . ' `email_to` TEXT NOT NULL DEFAULT \'\' ,'
-	                 . ' `email_from` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
-	                 . ' `email_subject` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
-	                 . ' `success_message` TEXT NOT NULL DEFAULT \'\' ,'
-					 . ' `stored_submissions` INT NOT NULL,'
-					 . ' `max_submissions` INT NOT NULL,'
-					 . ' `use_captcha` INT NOT NULL,'
-	                 . ' PRIMARY KEY ( `section_id` ) )'
-	                 . ' ';
+		. ' `section_id` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `page_id` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `header` TEXT NOT NULL ,'
+		. ' `field_loop` TEXT NOT NULL ,'
+		. ' `footer` TEXT NOT NULL ,'
+		. ' `email_to` TEXT NOT NULL ,'
+		. ' `email_from` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
+		. ' `email_subject` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
+		. ' `success_message` TEXT NOT NULL ,'
+		. ' `stored_submissions` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `max_submissions` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `use_captcha` INT NOT NULL DEFAULT \'0\' ,'
+		. ' PRIMARY KEY ( `section_id` ) '
+		. ' )';
 	$database->query($mod_form);
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_form_submissions`");
 	$mod_form = 'CREATE TABLE `'.TABLE_PREFIX.'mod_form_submissions` ( `submission_id` INT NOT NULL AUTO_INCREMENT,'
-						  . ' `section_id` INT NOT NULL,'
-						  . ' `page_id` INT NOT NULL,'
-						  . ' `submitted_when` INT NOT NULL,'
-						  . ' `submitted_by` INT NOT NULL,'
-	                 . ' `body` TEXT NOT NULL DEFAULT \'\' ,'
-	                 . ' PRIMARY KEY ( `submission_id` ) )'
-	                 . ' ';
+		. ' `section_id` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `page_id` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `submitted_when` INT NOT NULL DEFAULT \'0\' ,'
+		. ' `submitted_by` INT NOT NULL DEFAULT \'0\','
+		. ' `body` TEXT NOT NULL,'
+		. ' PRIMARY KEY ( `submission_id` ) '
+		. ' )';
 	$database->query($mod_form);
 		
 	// Insert info into the search table

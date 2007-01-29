@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -63,6 +63,14 @@ function set_error($message) {
 			$_SESSION['admin_username'] = $_POST['admin_username'];
 			$_SESSION['admin_email'] = $_POST['admin_email'];
 			$_SESSION['admin_password'] = $_POST['admin_password'];
+
+			if(!isset($_POST['outgoing_mails'])) {
+				$_SESSION['outgoing_mails'] = 'php';
+			} else {
+				$_SESSION['outgoing_mails'] = $_POST['outgoing_mails'];
+			}
+			$_SESSION['smtp_server'] = $_POST['smtp_server'];
+
 		}
 		// Set the message
 		$_SESSION['message'] = $message;
@@ -257,6 +265,24 @@ if($admin_password != $admin_repassword) {
 }
 // End admin user details code
 
+// Get the SMTP server settings and check if valid
+$smtp_server_used = "mail.example.com";
+if(isset($_POST['outgoing_mails']) AND $_POST['outgoing_mails']=="smtp") {
+	if($_POST['smtp_server'] == "" || $_POST['smtp_server'] == "mail.example.com") {
+		set_error('Please define the SMTP host (Step 7) of your domain or choose option PHP mail().');
+	} else {
+		$smtp_server_used = $_POST['smtp_server'];
+	}
+}
+
+// Create SMTP server output string for the config.php file
+if($smtp_server_used == "mail.example.com") {
+	$smtp_server_used = "// define('WBMAILER_SMTP_HOST', '" .$smtp_server_used ."');\n";
+} else {
+	$smtp_server_used = "define('WBMAILER_SMTP_HOST', '" .$smtp_server_used ."');\n";
+}   
+// End SMTP server settings
+
 // Try and write settings to config file
 $config_content = "" .
 "<?php\n".
@@ -272,6 +298,10 @@ $config_content = "" .
 "define('WB_URL', '$wb_url');\n".
 "define('ADMIN_PATH', WB_PATH.'/admin');\n".
 "define('ADMIN_URL', '$wb_url/admin');\n".
+"\n".
+"// some mail provider do not deliver mails send via PHP mail() function as SMTP authentification is missing\n".
+"// in that case activate SMTP for outgoing mails: un-comment next line and specify SMTP host of your domain\n".
+$smtp_server_used.
 "\n".
 "require_once(WB_PATH.'/framework/initialize.php');\n".
 "\n".
@@ -360,49 +390,50 @@ if($install_tables == true) {
 	
 	// Pages table
 	$pages = 'CREATE TABLE `'.TABLE_PREFIX.'pages` ( `page_id` INT NOT NULL auto_increment,'
-	       . ' `parent` INT NOT NULL ,'
-	       . ' `root_parent` INT NOT NULL ,'
-	       . ' `level` INT NOT NULL ,'
-	       . ' `link` TEXT NOT NULL DEFAULT \'\' ,'
+	       . ' `parent` INT NOT NULL DEFAULT \'0\','
+	       . ' `root_parent` INT NOT NULL DEFAULT \'0\','
+	       . ' `level` INT NOT NULL DEFAULT \'0\','
+	       . ' `link` TEXT NOT NULL,'
 	       . ' `target` VARCHAR( 7 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `page_title` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `menu_title` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `description` TEXT NOT NULL DEFAULT \'\' ,'
-	       . ' `keywords` TEXT NOT NULL DEFAULT \'\' ,'
-	       . ' `page_trail` TEXT NOT NULL DEFAULT \'\' ,'
+	       . ' `description` TEXT NOT NULL ,'
+	       . ' `keywords` TEXT NOT NULL ,'
+	       . ' `page_trail` TEXT NOT NULL  ,'
 	       . ' `template` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `visibility` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `position` INT NOT NULL ,'
-	       . ' `menu` INT NOT NULL ,'
+	       . ' `position` INT NOT NULL DEFAULT \'0\','
+	       . ' `menu` INT NOT NULL DEFAULT \'0\','
 	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `searching` INT NOT NULL ,'
-	       . ' `admin_groups` TEXT NOT NULL DEFAULT \'\' ,'
-	       . ' `admin_users` TEXT NOT NULL DEFAULT \'\' ,'
-	       . ' `viewing_groups` TEXT NOT NULL DEFAULT \'\' ,'
-	       . ' `viewing_users` TEXT NOT NULL DEFAULT \'\' ,'
-	       . ' `modified_when` INT NOT NULL ,'
-	       . ' `modified_by` INT NOT NULL ,'
-	       . ' PRIMARY KEY ( `page_id` ) )'
-	       . ' ';
+	       . ' `searching` INT NOT NULL DEFAULT \'0\','
+	       . ' `admin_groups` TEXT NOT NULL ,'
+	       . ' `admin_users` TEXT NOT NULL ,'
+	       . ' `viewing_groups` TEXT NOT NULL ,'
+	       . ' `viewing_users` TEXT NOT NULL ,'
+	       . ' `modified_when` INT NOT NULL DEFAULT \'0\','
+	       . ' `modified_by` INT NOT NULL  DEFAULT \'0\','
+	       . ' PRIMARY KEY ( `page_id` ) '
+	       . ' )';
 	$database->query($pages);
 	
 	// Sections table
 	$pages = 'CREATE TABLE `'.TABLE_PREFIX.'sections` ( `section_id` INT NOT NULL auto_increment,'
-	       . ' `page_id` INT NOT NULL ,'
-	       . ' `position` INT NOT NULL ,'
+	       . ' `page_id` INT NOT NULL DEFAULT \'0\','
+	       . ' `position` INT NOT NULL DEFAULT \'0\','
 	       . ' `module` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `block` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' PRIMARY KEY ( `section_id` ) )'
-	       . ' ';
+	       . ' PRIMARY KEY ( `section_id` ) '
+	       . ' )';
 	$database->query($pages);
 	
 	require(WB_PATH.'/admin/interface/version.php');
 	
 	// Settings table
-	$settings="CREATE TABLE `".TABLE_PREFIX."settings` ( `setting_id` INT NOT NULL auto_increment,"
-		. " `name` VARCHAR( 255 ) NOT NULL DEFAULT '' ,"
-		. " `value` TEXT NOT NULL DEFAULT '' ,"
-		. " PRIMARY KEY ( `setting_id` ) )";
+	$settings='CREATE TABLE `'.TABLE_PREFIX.'settings` ( `setting_id` INT NOT NULL auto_increment,'
+		. ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+		. ' `value` TEXT NOT NULL ,'
+		. ' PRIMARY KEY ( `setting_id` ) '
+		. ' )';
 	$database->query($settings);
 
 	$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` "
@@ -451,42 +482,42 @@ if($install_tables == true) {
 	
 	// Users table
 	$users = 'CREATE TABLE `'.TABLE_PREFIX.'users` ( `user_id` INT NOT NULL auto_increment,'
-	       . ' `group_id` INT NOT NULL ,'
-	       . ' `active` INT NOT NULL ,'
+	       . ' `group_id` INT NOT NULL DEFAULT \'0\','
+	       . ' `active` INT NOT NULL DEFAULT \'0\','
 	       . ' `username` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `password` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `remember_key` VARCHAR( 255 ) NOT NULL DEFAULT \'\','
-	       . ' `last_reset` INT NOT NULL ,'
+	       . ' `last_reset` INT NOT NULL DEFAULT \'0\','
 	       . ' `display_name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `email` TEXT NOT NULL DEFAULT \'\' ,'
-	       . ' `timezone` INT NOT NULL ,'
+	       . ' `email` TEXT NOT NULL ,'
+	       . ' `timezone` INT NOT NULL DEFAULT \'0\','
 	       . ' `date_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `time_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `home_folder` TEXT NOT NULL DEFAULT \'\' ,'
-	       . ' `login_when` INT NOT NULL ,'
+	       . ' `home_folder` TEXT NOT NULL ,'
+	       . ' `login_when` INT NOT NULL  DEFAULT \'0\','
 	       . ' `login_ip` VARCHAR( 15 ) NOT NULL DEFAULT \'\' ,'
-	       . ' PRIMARY KEY ( `user_id` ) )'
-	       . ' ';
+	       . ' PRIMARY KEY ( `user_id` ) '
+	       . ' )';
 	$database->query($users);
 	
 	// Groups table
 	$groups = 'CREATE TABLE `'.TABLE_PREFIX.'groups` ( `group_id` INT NOT NULL auto_increment,'
 	        . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	        . ' `system_permissions` TEXT NOT NULL DEFAULT \'\' ,'
-	        . ' `module_permissions` TEXT NOT NULL DEFAULT \'\' ,'
-	        . ' `template_permissions` TEXT NOT NULL DEFAULT \'\' ,'
-	        . ' PRIMARY KEY ( `group_id` ) )'
-	        . ' ';
+	        . ' `system_permissions` TEXT NOT NULL ,'
+	        . ' `module_permissions` TEXT NOT NULL ,'
+	        . ' `template_permissions` TEXT NOT NULL ,'
+	        . ' PRIMARY KEY ( `group_id` ) '
+	        . ' )';
 	$database->query($groups);
 	
 	// Search settings table
 	$search = 'CREATE TABLE `'.TABLE_PREFIX.'search` ( `search_id` INT NOT NULL auto_increment,'
 	        . ' `name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	        . ' `value` TEXT NOT NULL DEFAULT \'\' ,'
-	        . ' `extra` TEXT NOT NULL DEFAULT \'\' ,'
-	        . ' PRIMARY KEY ( `search_id` ) )'
-	        . ' ';
+	        . ' `value` TEXT NOT NULL ,'
+	        . ' `extra` TEXT NOT NULL ,'
+	        . ' PRIMARY KEY ( `search_id` ) '
+	        . ' )';
 	$database->query($search);
 	
 	// Addons table
@@ -495,13 +526,14 @@ if($install_tables == true) {
 			.'`type` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`directory` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`name` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.'`description` TEXT NOT NULL DEFAULT \'\' ,'
+			.'`description` TEXT NOT NULL ,'
 			.'`function` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`version` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`platform` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`author` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 			.'`license` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-			.' PRIMARY KEY ( `addon_id` ) ) ';
+			.' PRIMARY KEY ( `addon_id` ) '
+			.' )';
 	$database->query($addons);
 
 	// Insert default data
@@ -518,7 +550,7 @@ if($install_tables == true) {
 	$search_header = addslashes('
 <h1>Search</h1>
 
-<form name="search" action="[WB_URL]/search/index[PAGE_EXTENSION]" method="post">
+<form name="search" action="[WB_URL]/search/index[PAGE_EXTENSION]" method="get">
 <table cellpadding="3" cellspacing="0" border="0" width="500">
 <tr>
 <td>

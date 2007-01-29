@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -141,21 +141,21 @@ function make_list($parent, $editable_pages) {
 				</td>
 				<?php if($admin->get_permission('pages_modify') == true AND $can_modify == true AND $page['visibility'] != 'heading') { ?>
 				<td>
-					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo ($page['page_title']); ?></a>
+					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo (htmlentities($page['page_title'])); ?></a>
 				</td>
 				<?php } else { ?>
 				<td>
 					<?php
 					if($page['visibility'] != 'heading') {
-						echo ($page['page_title']);
+						echo (htmlentities($page['page_title']));
 					} else {
-						echo '<b>'.($page['page_title']).'</b>';
+						echo '<b>'.(htmlentities($page['page_title'])).'</b>';
 					}
 					?>
 				</td>
 				<?php } ?>
 				<td align="left" width="232">
-					<font color="#999999"><?php echo $page['menu_title']; ?></font>
+					<font color="#999999"><?php echo htmlentities($page['menu_title']); ?></font>
 				</td>
 				<td align="right" valign="middle" width="30" style="padding-right: 20px;">
 				<?php if($page['visibility'] == 'public') { ?>

@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -49,6 +49,13 @@ if($template != '') {
 	define('TEMPLATE', $template);
 }
 unset($template);
+
+//Get the referrer page ID if it exists
+if(isset($_REQUEST['referrer']) && intval($_REQUEST['referrer']) > 0) {
+	define('REFERRER_ID', intval($_REQUEST['referrer']));
+} else {
+	define('REFERRER_ID', 0);
+}
 
 // Include index (wrapper) file
 require(WB_PATH.'/index.php');

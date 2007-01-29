@@ -1,9 +1,11 @@
 <?php
 
+// $Id$
+
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -28,6 +30,14 @@ $admin = new admin('Pages', 'pages');
 require_once(WB_PATH.'/framework/functions.php');
 
 ?>
+<!-- Addition for remembering expanded state of pages -->
+<script language="JavaScript">
+function writeSessionCookie (cookieName, cookieValue) {
+    document.cookie = escape(cookieName) + "=" + escape(cookieValue) + ";";
+}
+</script>
+<!-- End addition -->
+
 <script type="text/javascript" language="javascript">
 function toggle_viewers() {
 	if(document.add.visibility.value == 'private') {
@@ -44,8 +54,10 @@ function toggle_viewers() {
 function toggle_visibility(id){
 	if(document.getElementById(id).style.display == "block") {
 		document.getElementById(id).style.display = "none";
+		writeSessionCookie (id, "0");//Addition for remembering expanded state of pages
 	} else {
 		document.getElementById(id).style.display = "block";
+		writeSessionCookie (id, "1");//Addition for remembering expanded state of pages
 	}
 }
 var plus = new Image;
@@ -89,7 +101,7 @@ function make_list($parent, $editable_pages) {
 	// Get objects and vars from outside this function
 	global $admin, $template, $database, $TEXT, $MESSAGE;
 	?>
-	<ul id="p<?php echo $parent; ?>" <?php if($parent != 0) { echo 'class="page_list"'; } ?>>
+	<ul id="p<?php echo $parent; ?>" <?php if($parent != 0) { echo 'class="page_list" '; if($_COOKIE["p".$parent] =="1"){echo'style="display:block;"'; }} ?>>
 	<?php	
 	// Get page list from database
 	$database = new database();
@@ -146,7 +158,7 @@ function make_list($parent, $editable_pages) {
 					if($display_plus == true) {
 					?>
 					<a href="javascript: toggle_visibility('p<?php echo $page['page_id']; ?>');" title="<?php echo $TEXT['EXPAND'].'/'.$TEXT['COLLAPSE']; ?>">
-						<img src="<?php echo ADMIN_URL; ?>/images/plus_16.png" onclick="toggle_plus_minus('<?php echo $page['page_id']; ?>');" name="plus_minus_<?php echo $page['page_id']; ?>" border="0" alt="+" />
+						<img src="<?php echo ADMIN_URL; ?>/images/<?php if($_COOKIE["p".$page['page_id']] =="1"){echo"minus";}else{echo"plus";}?>_16.png" onclick="toggle_plus_minus('<?php echo $page['page_id']; ?>');" name="plus_minus_<?php echo $page['page_id']; ?>" border="0" alt="+" />
 					</a>
 					<?php
 					}
@@ -154,15 +166,15 @@ function make_list($parent, $editable_pages) {
 				</td>
 				<?php if($admin->get_permission('pages_modify') == true AND $can_modify == true) { ?>
 				<td>
-					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo ($page['page_title']); ?></a>
+					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo (htmlentities($page['page_title'])); ?></a>				
 				</td>
 				<?php } else { ?>
 				<td>
-					<?php	echo ($page['page_title']); ?>
+					<?php echo (htmlentities($page['page_title'])); ?>
 				</td>
 				<?php } ?>
 				<td align="left" width="232">
-					<font color="#999999"><?php echo ($page['menu_title']); ?></font>
+					<font color="#999999"><?php echo (htmlentities($page['menu_title'])); ?></font>
 				</td>
 				<td align="center" valign="middle" width="90">
 				<?php if($page['visibility'] == 'public') { ?>
@@ -450,13 +462,13 @@ function parent_list($parent) {
 			for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - '; }
 				$template->set_var(array(
 												'ID' => $page['page_id'],
-												'TITLE' => ($title_prefix.$page['page_title'])
+												'TITLE' => ($title_prefix.htmlentities($page['page_title']))
 												)
 										);
 				if($can_modify == true) {
 					$template->set_var('DISABLED', '');
 				} else {
-					$template->set_var('DISABLED', ' disabled');
+					$template->set_var('DISABLED', ' disabled="disabled" style="color: #aaa;"');
 				}
 				$template->parse('page_list2', 'page_list_block2', true);
 		}
@@ -480,7 +492,7 @@ parent_list(0);
 $module_permissions = $_SESSION['MODULE_PERMISSIONS'];
 // Modules list
 $template->set_block('main_block', 'module_list_block', 'module_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page'");
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page' order by name");
 if($result->numRows() > 0) {
 	while ($module = $result->fetchRow()) {
 		// Check if user is allowed to use this module

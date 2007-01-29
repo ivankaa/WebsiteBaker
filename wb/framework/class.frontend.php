@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -139,10 +139,10 @@ class frontend extends wb {
 			// Page ID
 			define('PAGE_ID', $this->page['page_id']);
 			// Page Title
-			define('PAGE_TITLE', ($this->page['page_title']));
+			define('PAGE_TITLE', htmlentities(($this->page['page_title'])));
 			$this->page_title=PAGE_TITLE;
 			// Menu Title
-			$menu_title = ($this->page['menu_title']);
+			$menu_title = htmlentities($this->page['menu_title']);
 			if($menu_title != '') {
 				define('MENU_TITLE', $menu_title);
 			} else {
@@ -285,7 +285,7 @@ class frontend extends wb {
 	   	$wb->menu_collapse = true;
 	   }
 	   if (!isset($wb->menu_item_template)) {
-	   	$wb->menu_item_template = '<li><span[class]>[a][menu_title][/a]</span>';
+	   	$wb->menu_item_template = '<li><span[class]>[a] [menu_title] [/a]</span>';
 	   }
 	   if (!isset($wb->menu_item_footer)) {
 	   	$wb->menu_item_footer = '</li>';
@@ -309,17 +309,17 @@ class frontend extends wb {
 	}
 	
 	function show_menu() {
-	   global $database;
-	   if ($this->menu_start_level>0) {
-	       $key_array=array_keys($this->page_trail);
-	       $real_start=$key_array[$this->menu_start_level-1];
-	       if (isset($real_start)) {
-	       	$this->menu_parent=$real_start;
-		$this->menu_start_level=0;
-	       } else {
-	       	 return;
-	       }
-	   }
+		global $database;
+		if ($this->menu_start_level>0) {
+			$key_array=array_keys($this->page_trail);
+			if (isset($key_array[$this->menu_start_level-1])) {
+				$real_start=$key_array[$this->menu_start_level-1];
+				$this->menu_parent=$real_start;
+				$this->menu_start_level=0;
+			} else {
+				return;
+			}
+		}
 	   if ($this->menu_recurse==0)
 	       return;
 	   // Check if we should add menu number check to query
@@ -353,7 +353,7 @@ class frontend extends wb {
 	            $link = $this->page_link($page['link']);
 	         }
 	         // Create values
-	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', ($page['menu_title']), ($page['page_title']));
+	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', htmlentities($page['menu_title']), htmlentities($page['page_title']));
 	         // Replace vars with value and print
 	         echo "\n".str_replace($vars, $values, $this->menu_item_template);
 	         // Generate sub-menu

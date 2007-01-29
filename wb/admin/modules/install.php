@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -126,6 +126,7 @@ if ($action=="install") {
 	load_module(WB_PATH.'/modules/'.$module_directory, false);
 	$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
 } else if ($action=="upgrade") {
+	upgrade_module($module_directory, false);
 	$admin->print_success($MESSAGE['GENERIC']['UPGRADED']);
 }	
 

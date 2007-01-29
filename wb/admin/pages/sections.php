@@ -1,9 +1,11 @@
 <?php
 
+// $Id$
+
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -136,7 +138,7 @@ if(!isset($block[1]) OR $block[1] == '') {
 	</td>
 	<td align="right">
 		<?php echo $TEXT['CURRENT_PAGE']; ?>: 
-		<b><?php echo ($results_array['page_title']); ?></b>
+		<b><?php echo (htmlentities($results_array['page_title'])); ?></b>
 		-
 		<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>"><?php echo $HEADING['MODIFY_PAGE']; ?></a>
 		-
@@ -233,7 +235,7 @@ if($query_sections->numRows() == 0) {
 			<select name="module" style="width: 100%;">
 			<?php
 			// Insert module list
-			$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page' AND directory != 'menu_link'");
+			$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page' AND directory != 'menu_link' order by name");
 			if($result->numRows() > 0) {
 				while($module = $result->fetchRow()) {
 					// Check if user is allowed to use this module

@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -139,7 +139,7 @@ if($results->numRows() > 0) {
 
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language'");
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by directory");
 if($result->numRows() > 0) {
 	while ($addon = $result->fetchRow()) {
 		// Insert code and name
@@ -228,7 +228,7 @@ foreach($TIME_FORMATS AS $format => $title) {
 
 // Insert templates
 $template->set_block('main_block', 'template_list_block', 'template_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' order by name");
 if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('FILE', $addon['directory']);
@@ -264,7 +264,7 @@ $template->set_block('main_block', 'search_template_list_block', 'search_templat
 if($search_template == '') { $selected = ' selected'; } else { $selected = ''; }
 $template->set_var(array('FILE' => '', 'NAME' => $TEXT['SYSTEM_DEFAULT'], 'SELECTED' => $selected));
 $template->parse('search_template_list', 'search_template_list_block', true);
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' order by name");
 if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('FILE', $addon['directory']);

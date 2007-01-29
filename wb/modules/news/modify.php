@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -25,6 +25,8 @@
 
 // Must include code to stop this file being access directly
 if(!defined('WB_PATH')) { exit("Cannot access this file directly"); }
+$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_posts  WHERE page_id = '$page_id' and section_id = '$section_id' and title=''"); 
+$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_groups  WHERE page_id = '$page_id' and section_id = '$section_id' and title=''"); 
 
 ?>
 <table cellpadding="0" cellspacing="0" border="0" width="100%">

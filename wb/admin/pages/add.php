@@ -32,7 +32,7 @@ $admin = new admin('Pages', 'pages_add');
 require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
-$title = $admin->add_slashes($admin->get_post('title'));
+$title = $admin->add_slashes($admin->get_post_escaped('title'));
 $module = $admin->get_post('type');
 $parent = $admin->get_post('parent');
 $visibility = $admin->get_post('visibility');
@@ -48,7 +48,7 @@ if ($parent!=0) {
 
 // Validate data
 if($title == '') {
-	$admin->print_error($MESSAGE['PAGES']['BLANK_TITLE']);
+	$admin->print_error($MESSAGE['PAGES']['BLANK_PAGE_TITLE']);
 }
 
 // Setup admin groups

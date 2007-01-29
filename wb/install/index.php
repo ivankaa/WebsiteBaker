@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -38,12 +38,12 @@ if(!isset($_GET['sessions_checked']) OR $_GET['sessions_checked'] != 'true') {
 	header('Location: index.php?sessions_checked=true');
 	exit(0);
 } else {
-   // Check if session variable has been saved after reload
-   if(isset($_SESSION['session_support'])) {
-      $session_support = $_SESSION['session_support'];
-   } else {   
-      $session_support = '<font class="bad">Disabled</font>';
-   }
+	// Check if session variable has been saved after reload
+	if(isset($_SESSION['session_support'])) {
+		$session_support = $_SESSION['session_support'];
+	} else {   
+		$session_support = '<font class="bad">Disabled</font>';
+	}
 }
 
 ?>
@@ -66,6 +66,19 @@ function change_os(type) {
 		document.getElementById('operating_system_linux').checked = false;
 		document.getElementById('operating_system_windows').checked = true;
 		document.getElementById('file_perms_box').style.display = 'none';
+	}
+}
+function change_mail_type(type) {
+	if(type == 'php') {
+		document.getElementById('outgoing_mails_php').checked = true;
+		document.getElementById('outgoing_mails_smtp').checked = false;
+		document.getElementById('smtp_server').style.display = 'none';
+		document.getElementById('caption_smtp_server').style.color = '#FFF';
+	} else if(type == 'smtp') {
+		document.getElementById('outgoing_mails_php').checked = false;
+		document.getElementById('outgoing_mails_smtp').checked = true;
+		document.getElementById('smtp_server').style.display = 'block';
+		document.getElementById('caption_smtp_server').style.color = '#666';
 	}
 }
 
@@ -332,6 +345,37 @@ function change_os(type) {
 			</td>
 		</tr>
 		<tr>
+			<td colspan="5"><h1>Step 7 (optional)</h1>Please specify options for outgoing mails below...</td>
+		</tr>
+		<tr>
+			<td width="170">
+				Send outgoing mails via:
+			</td>
+			<td>
+				<input type="radio" tabindex="18" name="outgoing_mails" id="outgoing_mails_php" onclick="document.getElementById('smtp_server').style.display = 'none';" value="php"<?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo ' checked'; } ?> />
+				<font style="cursor: pointer;" onclick="javascript: change_mail_type('php');">PHP mail()</font> 
+				<br />
+				<input type="radio" tabindex="19" name="outgoing_mails" id="outgoing_mails_smtp" onclick="document.getElementById('smtp_server').style.display = 'block';" value="smtp"<?php if(isset($_SESSION['outgoing_mails']) AND $_SESSION['outgoing_mails'] == 'smtp') { echo ' checked'; } ?> />
+				<font style="cursor: pointer;" onclick="javascript: change_mail_type('smtp');">SMTP</font> 
+			</td>
+			<td id="caption_smtp_server" colspan="2" style="color: <?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo '#FFF'; } else { echo '#666'; } ?>;">SMTP host:</td>
+			<td>
+				<input type="text" tabindex="20" id="smtp_server" name="smtp_server" style="display: <?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo 'none'; } else { echo 'block'; } ?>;" value="<?php if(isset($_SESSION['smtp_server'])) { echo $_SESSION['smtp_server']; } else { echo 'mail.example.com'; } ?>" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5">
+				<div style="border: 1px solid #CCC; background-color: #EEE; padding: 5px;">
+				<strong> Please Note:</strong>
+				<br \>
+				Some service providers do not support sending mail via PHP.
+				If your provider requires you to use SMTP for sending mail, you must know the SMTP host address.
+				If you are not sure about these settings, or you do not know the SMTP host of your domain, use the default "PHP mail()" setting.
+				You can change the settings	later if needed.
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td colspan="5" style="padding: 10px; padding-bottom: 0;"><h1 style="font-size: 0px;">&nbsp;</h1></td>
 		</tr>
 		<tr>
@@ -363,11 +407,11 @@ function change_os(type) {
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="padding: 10px 0px 10px 0px;">
 <tr>
 	<td align="center" style="font-size: 10px;">
-		<!-- Please note: the following copyright/license notice must not be removed/modified -->
-		<a href="http://www.websitebaker.com/" style="color: #000000;" target="_blank">Website Baker</a>
+		<!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
+		<a href="http://www.websitebaker.org/" style="color: #000000;" target="_blank">Website Baker</a>
 		is	released under the
 		<a href="http://www.gnu.org/licenses/gpl.html" style="color: #000000;" target="_blank">GNU General Public License</a>
-		<!-- Please note: the above copyright/license notice must not be removed/modified -->
+		<!-- Please note: the above reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
 	</td>
 </tr>
 </table>

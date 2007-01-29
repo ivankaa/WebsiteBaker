@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -69,11 +69,11 @@ if(is_numeric($list_count)) {
 
 // Get extra fields for field-type-specific settings
 if($admin->get_post('type') == 'textfield') {
-	$length = $admin->get_post('length');
-	$value = $admin->get_post('value');
+	$length = $admin->get_post_escaped('length');
+	$value = $admin->get_post_escaped('value');
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '$length' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'textarea') {
-	$value = $admin->get_post('value');
+	$value = $admin->get_post_escaped('value');
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'heading') {
 	$extra = $admin->get_post('template');
@@ -81,13 +81,13 @@ if($admin->get_post('type') == 'textfield') {
 	$extra = $admin->add_slashes($extra);
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '', extra = '$extra' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'select') {
-	$extra = $admin->get_post('size').','.$admin->get_post('multiselect');
+	$extra = $admin->get_post_escaped('size').','.$admin->get_post_escaped('multiselect');
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '$extra' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'checkbox') {
-	$extra = $admin->get_post('seperator');
+	$extra = $admin->get_post_escaped('seperator');
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '$extra' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'radio') {
-	$extra = $admin->get_post('seperator');
+	$extra = $admin->get_post_escaped('seperator');
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '$extra' WHERE field_id = '$field_id'");
 }
 

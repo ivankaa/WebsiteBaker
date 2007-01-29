@@ -1,9 +1,11 @@
 <?php
 
+// $Id$
+
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -74,8 +76,8 @@ $template->set_file('page', 'settings.html');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var(array(
 								'PAGE_ID' => $results_array['page_id'],
-								'PAGE_TITLE' => ($results_array['page_title']),
-								'MENU_TITLE' => ($results_array['menu_title']),
+								'PAGE_TITLE' => (htmlentities($results_array['page_title'])),
+								'MENU_TITLE' => (htmlentities($results_array['menu_title'])),
 								'DESCRIPTION' => ($results_array['description']),
 								'KEYWORDS' => ($results_array['keywords']),
 								'MODIFIED_BY' => $user['display_name'],
@@ -247,16 +249,16 @@ function parent_list($parent) {
 			for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - '; }
 			$template->set_var(array(
 											'ID' => $page['page_id'],
-											'TITLE' => ($title_prefix.$page['page_title'])
+											'TITLE' => ($title_prefix.htmlentities($page['page_title']))
 											)
 									);
 			if($results_array['parent'] == $page['page_id']) {
 				$template->set_var('SELECTED', ' selected');
 			} elseif($results_array['page_id'] == $page['page_id']) {
-				$template->set_var('SELECTED', ' disabled');
+				$template->set_var('SELECTED', ' disabled="disabled" style="color: #aaa;"');
 				$list_next_level=false;
 			} elseif($can_modify != true) {
-				$template->set_var('SELECTED', ' disabled');
+				$template->set_var('SELECTED', ' disabled="disabled" style="color: #aaa;"');
 			} else {
 				$template->set_var('SELECTED', '');
 			}
@@ -286,7 +288,7 @@ if($modified_ts == 'Unknown') {
 }
 // Templates list
 $template->set_block('main_block', 'template_list_block', 'template_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' order by name");
 if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) { 
 		// Check if the user has perms to use this template

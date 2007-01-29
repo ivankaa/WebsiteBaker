@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -267,7 +267,7 @@ function root_parent($page_id) {
 	if($level == 1) {
 		return $parent;
 	} elseif($parent == 0) {
-		return 0;
+		return $page_id;
 	} else {
 		// Figure out what the root parents id is
 		$parent_ids = array_reverse(get_parent_ids($page_id));
@@ -749,6 +749,40 @@ function load_language($file) {
 				"VALUES ('$language_code','$language_name','language',".
 				"'$language_version','$language_platform','$language_author','$language_license')";
 	 		$database->query($query);
+			}
+		}
+	}
+}
+
+// Upgrade module info in DB, optionally start upgrade script
+function upgrade_module($directory, $upgrade = false) {
+	global $database, $admin, $MESSAGE;
+	$directory = WB_PATH . "/modules/$directory";
+	if(file_exists($directory.'/info.php')) {
+		require($directory.'/info.php');
+		if(isset($module_name)) {
+			if(!isset($module_license)) { $module_license = 'GNU General Public License'; }
+			if(!isset($module_platform) AND isset($module_designed_for)) { $module_platform = $module_designed_for; }
+			if(!isset($module_function) AND isset($module_type)) { $module_function = $module_type; }
+			$module_function = strtolower($module_function);
+			// Check that it does already exist
+			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$module_directory."' LIMIT 0,1");
+			if($result->numRows() > 0) {
+				// Update in DB
+				$query = "UPDATE " . TABLE_PREFIX . "addons SET " .
+					"version = '$module_version', " .
+					"description = '" . addslashes($module_description) . "', " .
+					"platform = '$module_platform', " .
+					"author = '$module_author', " .
+					"license = '$module_license'" .
+					"WHERE directory = '$module_directory'";
+				$database->query($query);
+				// Run upgrade script
+				if($upgrade == true) {
+					if(file_exists($directory.'/upgrade.php')) {
+						require($directory.'/upgrade.php');
+					}
+				}
 			}
 		}
 	}

@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ $wb = new wb;
 if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_GET['post_id']) AND is_numeric($_GET['post_id']) AND isset($_POST['comment']) AND $_POST['comment'] != '') {
 	
 	// Check captcha
-	$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
+	$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".$_GET['section_id']."'");
 	if($query_settings->numRows() == 0) { 
 		exit(header('Location: '.WB_URL.'/pages/'));
 	} else {
@@ -75,7 +75,7 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	$page = $query_page->fetchRow();
 	header('Location: '.$wb->page_link($page['link']).'?id='.$post_id);
 } else {
-	header('Location: '.WB_URL.'/pages/');
+	header('Location: '.WB_URL.'/modules/news/comment.php?id='.$_GET['post_id']);
 }
 
 ?>

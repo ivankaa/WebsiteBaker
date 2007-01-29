@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -46,8 +46,8 @@ if($query_details->numRows() > 0) {
 }
 
 // Unlink post access file
-if(is_writable(WB_PATH.$get_details['link'].'.php')) {
-	unlink(WB_PATH.$get_details['link'].'.php');
+if(is_writable(WB_PATH.PAGES_DIRECTORY.$get_details['link'].'.php')) {
+	unlink(WB_PATH.PAGES_DIRECTORY.$get_details['link'].'.php');
 }
 
 // Delete post

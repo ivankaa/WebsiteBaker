@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -85,7 +85,7 @@ class admin extends wb {
 		global $TEXT;
 		// Connect to database and get website title
 		global $database;
-		$get_title = $database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name = 'title'");
+		$get_title = $database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name = 'website_title'");
 		$title = $get_title->fetchRow();
 		$header_template = new Template(ADMIN_PATH."/interface");
 		$header_template->set_file('page', 'header.html');
@@ -114,7 +114,7 @@ class admin extends wb {
 					array(ADMIN_URL.'/preferences/index.php', '', $MENU['PREFERENCES'], 'preferences', 0),
 					array(ADMIN_URL.'/settings/index.php', '', $MENU['SETTINGS'], 'settings', 1),
 					array(ADMIN_URL.'/access/index.php', '', $MENU['ACCESS'], 'access', 1),
-					array('http://www.websitebaker.org/permalink/help?version='.WB_VERSION, '_blank', $MENU['HELP'], 'help', 0),
+					array('http://www.websitebaker.org/help/'.WB_VERSION, '_blank', $MENU['HELP'], 'help', 0),
 					array(WB_URL.'/', '_blank', $MENU['VIEW'], 'view', 0),
 					array(ADMIN_URL.'/logout/index.php', '', $MENU['LOGOUT'], 'logout', 0)
 					);

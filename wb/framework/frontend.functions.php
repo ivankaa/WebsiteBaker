@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -68,7 +68,7 @@ if (!function_exists('page_link')) {
 
 // Old menu call invokes new menu function
 if (!function_exists('page_menu')) {
-	function page_menu($parent = 0, $menu_number = 1, $item_template = '<li[class]>[a][menu_title][/a]</li>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $recurse = LEVEL) {
+	function page_menu($parent = 0, $menu_number = 1, $item_template = '<li[class]>[a] [menu_title] [/a]</li>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $recurse = LEVEL) {
 		global $wb;
 		$wb->menu_number=$menu_number;
 		$wb->menu_item_template=$item_template;
@@ -197,9 +197,9 @@ if (!function_exists('show_breadcrumbs')) {
 					$query_menu=$database->query("SELECT menu_title,link FROM ".TABLE_PREFIX."pages WHERE page_id=$temp");
 					$page=$query_menu->fetchRow();
 					if ($links==true AND $temp!=$page_id)
-						echo '<a href="'.page_link($page['link']).'">'.$page['menu_title'].'</a>';
+						echo '<a href="'.page_link($page['link']).'">'.htmlentities($page['menu_title']).'</a>';
 					else
-					    echo $page['menu_title'];
+					    echo htmlentities($page['menu_title']);
 		        }
 	            $counter++;
 			}
@@ -223,7 +223,7 @@ if (!function_exists('page_description')) {
 		if ($wb->page_description!='') {
 			echo $wb->page_description;
 		} else {
-			echo PAGE_DESCRIPTION;
+			echo WEBSITE_DESCRIPTION;
 		}
 	}
 }

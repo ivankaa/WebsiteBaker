@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -28,11 +28,11 @@ if(defined('WB_URL')) {
 	// Create table
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_code`");
 	$mod_code = 'CREATE TABLE `'.TABLE_PREFIX.'mod_code` ('
-						  . ' `section_id` INT NOT NULL,'
-						  . ' `page_id` INT NOT NULL,'
-	                 . ' `content` TEXT NOT NULL DEFAULT \'\' ,'
-	                 . ' PRIMARY KEY ( `section_id` ) )'
-	                 . ' ';
+		. ' `section_id` INT NOT NULL DEFAULT \'0\','
+		. ' `page_id` INT NOT NULL DEFAULT \'0\','
+		. ' `content` TEXT NOT NULL,'
+		. ' PRIMARY KEY ( `section_id` )'
+		. ' )';
 	$database->query($mod_code);
 	
 	// Insert info into the search table
