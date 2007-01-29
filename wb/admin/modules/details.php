@@ -55,6 +55,27 @@ if($result->numRows() > 0) {
 	$module = $result->fetchRow();
 }
 
+// Get language description if available
+// First get users defined language
+$query = "SELECT language FROM ".TABLE_PREFIX."users WHERE user_id = '".$admin->get_user_id()."'";
+$results = $database->query($query);
+if($results->numRows() > 0) {
+	// We found a language for the user, store it
+	$user_info=$results->fetchRow();
+	$user_language = $user_info['language'];
+
+	// Next check for language file in module dir and insert the variables from that file
+	if(file_exists(WB_PATH.'/modules/'.$file.'/languages/'.$user_language.'.php')) {
+		require(WB_PATH.'/modules/'.$file.'/languages/'.$user_language.'.php');
+		
+		// Check to see if new variable exists... -> $MODULE_DESCRIPTION
+		if (isset($MODULE_DESCRIPTION)) {
+			// Override the module-description with correct desription in users language
+			$module['description']=$MODULE_DESCRIPTION;
+		}	
+	}
+}
+
 $template->set_var(array(
 								'NAME' => $module['name'],
 								'AUTHOR' => $module['author'],
