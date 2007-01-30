@@ -11,6 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.5 -------------------------------------
+30-Jan-2007 Ryan Djurovich
+#	Applied fix for ticket #376
+
+------------------------------------- 2.6.5 -------------------------------------
 25-Dec-2006 Ryan Djurovich
 !	Changed links to WB help website
 24-Dec-2006 Matthias Gallas
