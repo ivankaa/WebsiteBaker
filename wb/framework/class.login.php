@@ -103,7 +103,7 @@ class login extends admin {
 			// User has been "remembered"
 			// Get the users password
 			$database = new database();
-			$query_details = $database->query("SELECT * FROM ".$this->USERS_TABLE." WHERE user_id = '".substr($_COOKIE['REMEMBER_KEY'], 0, 11)."' LIMIT 1");
+			$query_details = $database->query("SELECT * FROM ".$this->USERS_TABLE." WHERE user_id = '".$this->get_safe_remember_key()."' LIMIT 1");
 			$fetch_details = $query_details->fetchRow();
 			$this->username = $fetch_details['username'];
 			$this->password = $fetch_details['password'];
@@ -287,7 +287,7 @@ class login extends admin {
 		if(isset($_COOKIE['REMEMBER_KEY']) AND $_COOKIE['REMEMBER_KEY'] != '') {
 			// Check if the remember key is correct
 			$database = new database();
-			$check_query = $database->query("SELECT user_id FROM ".$this->USERS_TABLE." WHERE remember_key = '".$_COOKIE['REMEMBER_KEY']."' LIMIT 1");
+			$check_query = $database->query("SELECT user_id FROM ".$this->USERS_TABLE." WHERE remember_key = '".$this->get_safe_remember_key()."' LIMIT 1");
 			if($check_query->numRows() > 0) {
 				$check_fetch = $check_query->fetchRow();
 				$user_id = $check_fetch['user_id'];
@@ -369,6 +369,12 @@ class login extends admin {
 			$template->parse('main', 'mainBlock', false);
 			$template->pparse('output', 'page');
 		}
+	}
+
+	// convert "REMEMBER_KEY" to a number and then repad
+	// any non numeric character will cause intval to return null thus returning 11 0's
+	function get_safe_remember_key() {
+		return str_pad(intval(substr($_COOKIE['REMEMBER_KEY'],0,11)),11,"0",STR_PAD_LEFT); // SQL Injection prevention
 	}
 	
 	// Warn user that they have had to many login attemps
