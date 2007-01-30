@@ -28,6 +28,9 @@ Legend:
 #	Fixed issue with Permissions for pages sections
 27-Dec-2006 Matthias Gallas
 #	Fixed form modul stores empty records
+------------------------------------- 2.6.6 -------------------------------------
+30-Jan-2007 Ryan Djurovich
+#	Applied fix for ticket #376
 ------------------------------------- 2.6.5 -------------------------------------
 25-Dec-2006 Ryan Djurovich
 !	Changed links to WB help website
