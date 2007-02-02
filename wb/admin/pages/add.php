@@ -47,7 +47,7 @@ if ($parent!=0) {
 }	
 
 // Validate data
-if($title == '') {
+if($title == '' || substr($title,0,1)=='.') {
 	$admin->print_error($MESSAGE['PAGES']['BLANK_PAGE_TITLE']);
 }
 

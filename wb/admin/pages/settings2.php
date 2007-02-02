@@ -55,10 +55,10 @@ $language = $admin->get_post('language');
 $menu = $admin->get_post('menu');
 
 // Validate data
-if($page_title == '') {
+if($page_title == '' || substr($menu_title,0,1)=='.') {
 	$admin->print_error($MESSAGE['PAGES']['BLANK_PAGE_TITLE']);
 }
-if($menu_title == '') {
+if($menu_title == '' || substr($menu_title,0,1)=='.') {
 	$admin->print_error($MESSAGE['PAGES']['BLANK_MENU_TITLE']);
 }
 
