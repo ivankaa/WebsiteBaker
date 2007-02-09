@@ -380,7 +380,9 @@ echo $footer;
 	if(isset($success) AND $success == true) {
 		echo $success_message;
 	} else {
-		echo $TEXT['ERROR'];
+		if(isset($success) AND $success == false) {
+			echo $TEXT['ERROR'];
+		}
 	}
 	
 }
