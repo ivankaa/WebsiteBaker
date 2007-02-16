@@ -32,6 +32,8 @@ Legend:
 27-Dec-2006 Matthias Gallas
 #	Fixed form modul stores empty records
 ------------------------------------- 2.6.6 -------------------------------------
+16-Feb-2007 Christian Sommer
+#	Applied fix to enable parsing of PHP code in the intro.php 
 30-Jan-2007 Ryan Djurovich
 #	Applied fix for ticket #376
 ------------------------------------- 2.6.5 -------------------------------------

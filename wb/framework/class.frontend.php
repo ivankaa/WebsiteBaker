@@ -72,6 +72,7 @@ class frontend extends wb {
 				$content = fread($handle, filesize($filename));
 				fclose($handle);
 				$this->preprocess($content);
+	      header("Location: pages/intro.php");   // send intro.php as header to allow parsing of php statements
 				echo ($content);
 				return false;
 			}
