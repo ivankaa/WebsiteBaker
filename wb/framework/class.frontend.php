@@ -68,9 +68,9 @@ class frontend extends wb {
 			// Get intro page content
 			$filename = WB_PATH.PAGES_DIRECTORY.'/intro.php';
 			if(file_exists($filename)) {
-				$handle = fopen($filename, "r");
-				$content = fread($handle, filesize($filename));
-				fclose($handle);
+				$handle = @fopen($filename, "r");
+				$content = @fread($handle, filesize($filename));
+				@fclose($handle);
 				$this->preprocess($content);
 	      header("Location: pages/intro.php");   // send intro.php as header to allow parsing of php statements
 				echo ($content);
