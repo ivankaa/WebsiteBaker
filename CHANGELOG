@@ -12,6 +12,10 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 12-Feb-2007 Christian Sommer
+!	Added functions page_css and page_javascript which allow to include optional
+      module files module.css and module.js into the <head> section. This allows to 
+	create valid (X)HTML, as CSS definitions of modules are included in the head section
+12-Feb-2007 Christian Sommer
 !	Security enhancement (reduced number of login trials from 50 to 3)
 02-Feb-2007 Matthias Gallas
 #	Applied fix for ticket #380 (Thanks to pcwacht)

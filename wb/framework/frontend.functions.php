@@ -257,6 +257,60 @@ if (!function_exists('page_footer')) {
 	}
 }
 
+// Function to include optional module CSS stylesheets (module.css) into the <head> section
+if (!function_exists('page_css')) {
+	function page_css() {
+    global $wb, $database;
+    $css_head = "";
+
+    // obtain list of modules used for actual displayed page
+		$page_id=$wb->page_id;
+    $query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections WHERE page_id=$page_id AND module<>'wysiwyg'");
+    while($row = $query_modules->fetchRow()) {
+      if(file_exists(WB_PATH .'/modules/' .$row['module'] .'/module.css')) {
+        // build css link for current module.css
+        $css_link = "<link href=\"" .WB_URL ."/modules/" .$row['module'];
+        $css_link .= "/module.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\" />\n";
+        // ensure that module.css is not added twice (e.g. if 2 sections include the same module)
+        $css_head = str_replace($css_link, "", $css_head);
+        $css_head .= $css_link;
+      }
+    }
+    // write out links to all external module stylesheets (module.css)
+    if($css_head != "") {
+      $css_head = "<!-- Include external module CSS stylesheets -->\n" .$css_head;
+      echo $css_head;
+    }
+	}
+}
+
+// Function to include optional module javascript files (module.js) into the <head> section
+if (!function_exists('page_javascript')) {
+	function page_javascript() {
+    global $wb, $database;
+    $js_head = "";
+
+    // obtain list of modules used for actual displayed page
+		$page_id=$wb->page_id;
+    $query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections WHERE page_id=$page_id AND module<>'wysiwyg'");
+    while($row = $query_modules->fetchRow()) {
+      if(file_exists(WB_PATH .'/modules/' .$row['module'] .'/module.js')) {
+        // build javascript link for current module.js
+        $js_link = "<script type=\"text/javascript\" src=\"" .WB_URL ."/modules/" .$row['module'];
+        $js_link .= "/module.js\"></script>\n";
+        // ensure that module.js is not added twice (e.g. if 2 sections include the same module)
+        $js_head = str_replace($js_link, "", $js_head);
+        $js_head .= $js_link;
+      }
+    }
+    // write out links to all external module javascript files (module.js)
+    if($js_head != "") {
+      $js_head = "<!-- Include external module javascript files -->\n" .$js_head;
+      echo $js_head;
+    }
+	}
+}
+
 // Begin WB < 2.4.x template compatibility code
 	// Make extra_sql accessable through private_sql
 	$private_sql = $extra_sql;
