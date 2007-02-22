@@ -667,7 +667,7 @@ function delete_page($page_id) {
 	$directory = WB_PATH.PAGES_DIRECTORY.$link;
 	$filename = $directory.'.php';
 	$directory .= '/';
-	if(file_exists($filename) && substr($file_name,0,1<>'.')) {
+	if(file_exists($filename) && substr($filename,0,1<>'.')) {
 		if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 			$admin->print_error($MESSAGE['PAGES']['CANNOT_DELETE_ACCESS_FILE']);
 		} else {
