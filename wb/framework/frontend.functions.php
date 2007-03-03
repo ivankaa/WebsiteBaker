@@ -66,6 +66,26 @@ if (!function_exists('page_link')) {
 	}
 }
 
+//function to highlight search results
+function search_highlight($foo='', $arr_string=array()) {
+	foreach($arr_string as $string) {
+		$string=str_replace('\\','\\\\',$string); 
+		$string=str_replace('/','\/',$string); 
+		$string=str_replace('*','\*',$string); 
+		$string=str_replace('.','\.',$string); 
+    
+		$foo=preg_replace('/(>[^<]*)('.strtolower($string).')/', '$1<span class="highlight">$2</span>',$foo); 
+		$foo=preg_replace('/^([^<]*)('.strtolower($string).')/', '$1<span class="highlight">$2</span>',$foo);
+    
+		$foo=preg_replace('/(>[^<]*)('.strtoupper($string).')/', '$1<span class="highlight">$2</span>',$foo); 
+		$foo=preg_replace('/^([^<]*)('.strtoupper($string).')/', '$1<span class="highlight">$2</span>',$foo);
+    
+		$foo=preg_replace('/(>[^<]*)('.ucfirst($string).')/', '$1<span class="highlight">$2</span>',$foo); 
+		$foo=preg_replace('/^([^<]*)('.ucfirst($string).')/', '$1<span class="highlight">$2</span>',$foo);
+	}
+	return $foo;
+}  
+
 // Old menu call invokes new menu function
 if (!function_exists('page_menu')) {
 	function page_menu($parent = 0, $menu_number = 1, $item_template = '<li[class]>[a] [menu_title] [/a]</li>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $recurse = LEVEL) {
@@ -166,7 +186,19 @@ if (!function_exists('page_content')) {
 			while($section = $query_sections->fetchRow()) {
 				$section_id = $section['section_id'];
 				$module = $section['module'];
-				require(WB_PATH.'/modules/'.$module.'/view.php');
+				// highlights searchresults
+				if (isset($_GET['searchresult']) AND is_numeric($_GET['searchresult']) ) {
+					if (isset($_GET['sstring']) AND !empty($_GET['sstring']) ){
+						$arr_string = explode(" ", $_GET['sstring']);
+						ob_start(); //start output buffer
+						require(WB_PATH.'/modules/'.$module.'/view.php');
+						$foo = ob_get_contents();    // put outputbuffer in $foo
+						ob_end_clean();             // clear outputbuffer
+						echo search_highlight($foo, $arr_string);
+					}
+				} else {
+					require(WB_PATH.'/modules/'.$module.'/view.php');
+				}
 			}
 		} else {
 			require(PAGE_CONTENT);
@@ -239,6 +271,7 @@ if (!function_exists('page_keywords')) {
 		}
 	}
 }
+
 // Function for page header
 if (!function_exists('page_header')) {
 	function page_header($date_format = 'Y') {

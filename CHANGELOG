@@ -36,6 +36,11 @@ Legend:
 27-Dec-2006 Matthias Gallas
 #	Fixed form modul stores empty records
 ------------------------------------- 2.6.6 -------------------------------------
+03-Mar-2007 Matthias Gallas
++	Added new function for highlighting search results in the content area
+	(Special thanks to "thorn" and "Funky_MF")
+#	Fixed some issues in search with special chars
+	(Special thanks to "thorn" and "Funky_MF")
 22-Feb-2007 Christian Sommer
 #	Fixed bug in changeset 428 (page files were not deleted in /pages folder due to a typo in wb/framework/function.php)
 16-Feb-2007 Christian Sommer
