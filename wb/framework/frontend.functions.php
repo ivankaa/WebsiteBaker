@@ -68,20 +68,14 @@ if (!function_exists('page_link')) {
 
 //function to highlight search results
 function search_highlight($foo='', $arr_string=array()) {
+	$last_string="";
 	foreach($arr_string as $string) {
-		$string=str_replace('\\','\\\\',$string); 
-		$string=str_replace('/','\/',$string); 
-		$string=str_replace('*','\*',$string); 
-		$string=str_replace('.','\.',$string); 
-    
-		$foo=preg_replace('/(>[^<]*)('.strtolower($string).')/', '$1<span class="highlight">$2</span>',$foo); 
-		$foo=preg_replace('/^([^<]*)('.strtolower($string).')/', '$1<span class="highlight">$2</span>',$foo);
-    
-		$foo=preg_replace('/(>[^<]*)('.strtoupper($string).')/', '$1<span class="highlight">$2</span>',$foo); 
-		$foo=preg_replace('/^([^<]*)('.strtoupper($string).')/', '$1<span class="highlight">$2</span>',$foo);
-    
-		$foo=preg_replace('/(>[^<]*)('.ucfirst($string).')/', '$1<span class="highlight">$2</span>',$foo); 
-		$foo=preg_replace('/^([^<]*)('.ucfirst($string).')/', '$1<span class="highlight">$2</span>',$foo);
+		// filter meta-characters
+		$string=preg_quote($string, '/');
+		if ($string!=$last_string ) {
+			$foo=preg_replace('/('.$string.')(?=[^>;]*(&|<))/iUS', '<span class="highlight">$1</span>',$foo);
+			$last_string=$string;
+		}
 	}
 	return $foo;
 }  
