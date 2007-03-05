@@ -68,10 +68,10 @@ if($results->numRows() > 0) {
 	if(file_exists(WB_PATH.'/modules/'.$file.'/languages/'.$user_language.'.php')) {
 		require(WB_PATH.'/modules/'.$file.'/languages/'.$user_language.'.php');
 		
-		// Check to see if new variable exists... -> $MODULE_DESCRIPTION
-		if (isset($MODULE_DESCRIPTION)) {
+		// Check to see if new variable exists... -> $module_description
+		if (isset($module_description)) {
 			// Override the module-description with correct desription in users language
-			$module['description']=$MODULE_DESCRIPTION;
+			$module['description']=$module_description;
 		}	
 	}
 }
