@@ -36,6 +36,8 @@ Legend:
 27-Dec-2006 Matthias Gallas
 #	Fixed form modul stores empty records
 ------------------------------------- 2.6.6 -------------------------------------
+12-Mar-2007 Matthias Gallas
++	Added multilingual support to search
 03-Mar-2007 Matthias Gallas
 +	Added new function for highlighting search results in the content area
 	(Special thanks to "thorn" and "Funky_MF")
