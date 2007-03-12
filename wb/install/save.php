@@ -522,7 +522,7 @@ if($install_tables == true) {
 	
 	// Search header
 	$search_header = addslashes('
-<h1>Search</h1>
+<h1>[TEXT_SEARCH]</h1>
 
 <form name="search" action="[WB_URL]/search/index[PAGE_EXTENSION]" method="get">
 <table cellpadding="3" cellspacing="0" border="0" width="500">
@@ -577,7 +577,7 @@ if($install_tables == true) {
 	$insert_search_results_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_footer', '$search_results_footer', '')";
 	$database->query($insert_search_results_footer);
 	// Search no results
-	$search_no_results = addslashes('<br />No results found');
+	$search_no_results = addslashes('<br />[TEXT_NO_RESULTS]');
 	$insert_search_no_results = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'no_results', '$search_no_results', '')";
 	$database->query($insert_search_no_results);
 	// Search template

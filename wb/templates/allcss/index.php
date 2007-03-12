@@ -52,7 +52,7 @@ if(!defined('WB_URL')) {
 		<?php if(SHOW_SEARCH) { ?>
 		<form name="search" action="<?php echo WB_URL.'/search/index'.PAGE_EXTENSION; ?>" method="get">
 		<input type="text" name="string" class="search_string" />
-		<input type="submit" name="submit" value="Search" class="search_submit" />
+		<input type="submit" name="submit" value="<?php echo $TEXT['SEARCH']; ?>" class="search_submit" />
 		</form>
 		<?php } ?>
 	</div>

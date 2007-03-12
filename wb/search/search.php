@@ -140,6 +140,9 @@ if(SHOW_SEARCH != true) {
 	$vars = array('[SEARCH_STRING]', '[WB_URL]', '[PAGE_EXTENSION]', '[TEXT_SEARCH]', '[TEXT_ALL_WORDS]', '[TEXT_ANY_WORDS]', '[TEXT_EXACT_MATCH]', '[TEXT_MATCH]', '[TEXT_MATCHING]', '[ALL_CHECKED]', '[ANY_CHECKED]', '[EXACT_CHECKED]', '[REFERRER_ID]');
 	$values = array($search_string, WB_URL, PAGE_EXTENSION, $TEXT['SEARCH'], $TEXT['ALL_WORDS'], $TEXT['ANY_WORDS'], $TEXT['EXACT_MATCH'], $TEXT['MATCH'], $TEXT['MATCHING'], $all_checked, $any_checked, $exact_checked, REFERRER_ID);
 	$search_header = str_replace($vars, $values, ($fetch_header['value']));
+	$vars = array('[TEXT_NO_RESULTS]');
+	$values = array($TEXT['NO_RESULTS']);
+	$search_no_results = str_replace($vars, $values, ($fetch_no_results['value']));
 	
 	// Show search header
 	echo $search_header;
@@ -302,7 +305,7 @@ if(SHOW_SEARCH != true) {
 	
 		// Say no items found if we should
 		if($pages_listed == array() AND $items_listed == array()) {
-			echo $fetch_no_results['value'];
+			echo $search_no_results;
 		}
 		
 	}

@@ -86,8 +86,7 @@ if(!defined('WB_URL')) {
 				</tr>
 				<tr>
 					<td class="login">
-
-						<input type="submit" name="submit" value="<?php if(isset($TEXT['SUBMIT'])) { echo $TEXT['SEARCH']; } else { echo 'Search'; } ?>" />
+						<input type="submit" name="submit" value="<?php echo $TEXT['SEARCH']; ?>" />
 					</td>
 				</tr>
 				<tr>
