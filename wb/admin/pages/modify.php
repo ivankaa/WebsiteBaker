@@ -60,7 +60,7 @@ $template->set_file('page', 'modify.html');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var(array(
 								'PAGE_ID' => $results_array['page_id'],
-								'PAGE_TITLE' => (htmlentities($results_array['page_title'])),
+								'PAGE_TITLE' => ($results_array['page_title']),
 								'MODIFIED_BY' => $user['display_name'],
 								'MODIFIED_BY_USERNAME' => $user['username'],
 								'MODIFIED_WHEN' => $modified_ts,

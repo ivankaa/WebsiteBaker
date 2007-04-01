@@ -28,6 +28,9 @@ if(!defined('WB_URL')) {
 	exit(0);
 }
 
+// Include the WB functions file
+require_once(WB_PATH.'/framework/functions.php');
+
 // Check if search is enabled
 if(SHOW_SEARCH != true) {
 	echo $TEXT['SEARCH'].' '.$TEXT['DISABLED'];
@@ -55,13 +58,13 @@ if(SHOW_SEARCH != true) {
 		// Double backslashes (mySQL needs doubly escaped backslashes in LIKE comparisons)
 		$string = addslashes($wb->escape_backslashes($original_string));
 		// convert a copy of $string to HTML-ENTITIES
-		$string_entities=mb_convert_encoding($string, 'UTF-8', 'HTML-ENTITIES');
-		$string_entities=htmlspecialchars($string_entities,ENT_QUOTES);
-		$string_entities=mb_convert_encoding($string_entities, 'HTML-ENTITIES', 'UTF-8');
+		$string_entities = umlauts_to_entities($string);
 		// and do some convertion to both
 		require(WB_PATH.'/search/search_convert.php');
-		$string=strtr($string,$string_conv);
-		$string_entities=strtr($string_entities,$string_entities_conv);
+		if(strcmp(DEFAULT_CHARSET, "iso-8859-1") == 0) {
+			$string=strtr($string,$string_conv_iso88591);
+			$string_entities=strtr($string_entities,$string_entities_conv_iso88591);
+		}
 		$search_string = $string_entities;
 	} else {
 		$string = '';
@@ -181,9 +184,16 @@ if(SHOW_SEARCH != true) {
 				$link = page_link($page['link']);
 				
 				//Add search string for highlighting
-				$sstring = implode(" ", array_merge($string,$string_entities));
-				//$link = $link."?searchresult=1&amp;sstring=".$sstring;
-				$link = $link."?searchresult=1&amp;sstring=".urlencode($sstring);
+				if ($match!='exact') {
+					$sorted=array_merge($string,$string_entities);
+					sort($sorted);
+					$sstring = implode(" ", $sorted);
+					$link = $link."?searchresult=1&amp;sstring=".urlencode($sstring);
+				}
+				else {
+					$sstring = strtr($string[0], " ", "_")." ".strtr($string_entities[0], " ","_");
+					$link = $link."?searchresult=2&amp;sstring=".urlencode($sstring);
+				}
 				
 				// Set vars to be replaced by values
 				$vars = array('[LINK]', '[TITLE]', '[DESCRIPTION]', '[USERNAME]','[DISPLAY_NAME]','[DATE]','[TIME]','[TEXT_LAST_UPDATED_BY]','[TEXT_ON]');
@@ -268,9 +278,16 @@ if(SHOW_SEARCH != true) {
 										$link = page_link($page[$fields['link']]);
 										
 										//Add search string for highlighting
-										$sstring = implode(" ", array_merge($string,$string_entities));
-										//$link = $link."?searchresult=1&amp;sstring=".$sstring;
-										$link = $link."?searchresult=1&amp;sstring=".urlencode($sstring);
+										if ($match!='exact') {
+											$sorted=array_merge($string,$string_entities);
+											sort($sorted);
+											$sstring = implode(" ", $sorted);
+											$link = $link."?searchresult=1&amp;sstring=".urlencode($sstring);
+										}
+										else {
+											$sstring = strtr($string[0], " ", "_")." ".strtr($string_entities[0], " ","_");
+											$link = $link."?searchresult=2&amp;sstring=".urlencode($sstring);
+										}
 										
 										// Set vars to be replaced by values
 										$vars = array('[LINK]', '[TITLE]', '[DESCRIPTION]', '[USERNAME]','[DISPLAY_NAME]','[DATE]','[TIME]','[TEXT_LAST_UPDATED_BY]','[TEXT_ON]');

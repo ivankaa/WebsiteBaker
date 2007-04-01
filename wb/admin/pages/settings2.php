@@ -41,7 +41,9 @@ require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
 $page_title = $admin->add_slashes($admin->get_post_escaped('page_title'));
+$page_title = my_htmlspecialchars($page_title);
 $menu_title = $admin->add_slashes($admin->get_post_escaped('menu_title'));
+$menu_title = my_htmlspecialchars($menu_title);
 $description = $admin->add_slashes($admin->get_post('description'));
 $keywords = $admin->add_slashes($admin->get_post('keywords'));
 $parent = $admin->get_post('parent');

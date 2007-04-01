@@ -36,6 +36,11 @@ Legend:
 27-Dec-2006 Matthias Gallas
 #	Fixed form modul stores empty records
 ------------------------------------- 2.6.6 -------------------------------------
+01-Apr-2007 Matthias Gallas
+#	Fixed issues with some languages when UTF8 is used.	Removed all htmlentites
+	from the code (revoked changeset 396) and added new functions instead. Adapted the
+	search and the highlighting to use the new functions. With this changes WB can now
+	be used with charset UTF8 for all languages.
 12-Mar-2007 Matthias Gallas
 +	Added multilingual support to search
 03-Mar-2007 Matthias Gallas

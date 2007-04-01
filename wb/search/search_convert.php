@@ -33,7 +33,7 @@ if(!defined('WB_URL')) {
 }
 
 //for Xinha, (htmlarea)
-$string_conv=array(
+$string_conv_iso88591=array(
 	"Š"=>"&Scaron;","š"=>"&scaron;","Œ"=>"&OElig;","œ"=>"&oelig;","Ÿ"=>"&Yuml;",
 	">"=>"&gt;","<"=>"&lt;",
 	"„"=>"&bdquo;","•"=>"&bull;","ˆ"=>"&circ;","&#925;"=>"&Nu;","&#957;"=>"&nu;",
@@ -61,7 +61,7 @@ $string_conv=array(
 );
 
 //for fckeditor, (tiny_mce)
-$string_entities_conv=array(
+$string_entities_conv_iso88591=array(
 	"&#140;"=>"&OElig;","&#156;"=>"&oelig;","&#138;"=>"&Scaron;","&#154;"=>"&scaron;",
 	"&#159;"=>"&Yuml;",
 	"&#152;"=>"&tilde;","&upsih;"=>"&#978;","&#149;"=>"&bull;","&#153;"=>"&trade;",

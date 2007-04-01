@@ -73,7 +73,7 @@ function search_highlight($foo='', $arr_string=array()) {
 		// filter meta-characters
 		$string=preg_quote($string, '/');
 		if ($string!=$last_string ) {
-			$foo=preg_replace('/('.$string.')(?=[^>;]*(&|<))/iUS', '<span class="highlight">$1</span>',$foo);
+			$foo=preg_replace('/((>|;)[^&<]*)('.$string.')(?=[^>;]*(&|<))/iUS', '$1<span class="highlight">$3</span>',$foo);
 			$last_string=$string;
 		}
 	}
@@ -184,6 +184,11 @@ if (!function_exists('page_content')) {
 				if (isset($_GET['searchresult']) AND is_numeric($_GET['searchresult']) ) {
 					if (isset($_GET['sstring']) AND !empty($_GET['sstring']) ){
 						$arr_string = explode(" ", $_GET['sstring']);
+						if($_GET['searchresult'] == 2) {
+							// exact match
+							$arr_string[0] = strtr($arr_string[0], "_"," ");
+							$arr_string[1] = strtr($arr_string[1], "_"," ");
+						}
 						ob_start(); //start output buffer
 						require(WB_PATH.'/modules/'.$module.'/view.php');
 						$foo = ob_get_contents();    // put outputbuffer in $foo
@@ -223,9 +228,9 @@ if (!function_exists('show_breadcrumbs')) {
 					$query_menu=$database->query("SELECT menu_title,link FROM ".TABLE_PREFIX."pages WHERE page_id=$temp");
 					$page=$query_menu->fetchRow();
 					if ($links==true AND $temp!=$page_id)
-						echo '<a href="'.page_link($page['link']).'">'.htmlentities($page['menu_title']).'</a>';
+						echo '<a href="'.page_link($page['link']).'">'.$page['menu_title'].'</a>';
 					else
-					    echo htmlentities($page['menu_title']);
+					    echo $page['menu_title'];
 		        }
 	            $counter++;
 			}
