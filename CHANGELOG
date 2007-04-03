@@ -36,6 +36,9 @@ Legend:
 27-Dec-2006 Matthias Gallas
 #	Fixed form modul stores empty records
 ------------------------------------- 2.6.6 -------------------------------------
+03-Apr-2007 Matthias Gallas
+#	Fixed a bug in menulink; if you deleted a menulink page the linked page was also deleted
+	in the pages directory (Special thanks to "Funky_MF" for the fix)
 01-Apr-2007 Matthias Gallas
 #	Fixed issues with some languages when UTF8 is used. Removed all htmlentites
 	from the code (revoked changeset 396) and added new functions instead. Adapted the
