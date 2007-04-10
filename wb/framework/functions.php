@@ -345,15 +345,6 @@ function my_htmlspecialchars($string) {
 	return($string);
 }
 
-// Function to get the DEFAULT_CHARSET
-function get_wbcharset() {
-	$charset=strtoupper(DEFAULT_CHARSET);
-	if(strcmp($charset,"BIG5") == 0) {
-		$charset="BIG-5";
-	}
-	return($charset);
-}
-
 // Function to convert a string from $from- to $to-encoding, using mysql
 function my_mysql_iconv($string, $from, $to) {
 	// keep current character set values:
@@ -372,64 +363,61 @@ function my_mysql_iconv($string, $from, $to) {
 	return $converted_string;
 }
 
-// Function to convert a string from html-entities to umlauts
-// and encode htmlspecialchars
-function entities_to_umlauts($string) {
-	$charset = get_wbcharset();
+// Function to convert a string from mixed html-entities/umlauts to pure utf-8-umlauts
+function string_to_utf8($string, $charset=DEFAULT_CHARSET) {
+	$charset = strtoupper($charset);
+	if ($charset == '') { $charset = 'ISO-8859-1'; }
+
 	// there's no GB2312 or ISO-8859-11 encoding in php's mb_* functions
-	if (strcmp($charset,"GB2312") == 0) {
-		if(function_exists('iconv')) {
-			$string=mb_convert_encoding($string,'UTF-8','HTML-ENTITIES');
-			$string=iconv("UTF-8","GB2312",$string);
-		} else {
-			$string=mb_convert_encoding($string,'UTF-8','HTML-ENTITIES');
-			$string=my_mysql_iconv($string, 'utf8', 'gb2312');
-		}
-	} elseif (strcmp($charset,"ISO-8859-11") == 0) {
-		if(function_exists('iconv')) {
-			$string=mb_convert_encoding($string,'UTF-8','HTML-ENTITIES');
-			$string=iconv("UTF-8","ISO-8859-11",$string);
-		} else {
-			$string=mb_convert_encoding($string,'UTF-8','HTML-ENTITIES');
-			$string=my_mysql_iconv($string, 'utf8', 'tis620');
-		}
+	if ($charset == "GB2312") {
+		$string=my_mysql_iconv($string, 'gb2312', 'utf8');
+	} elseif ($charset == "ISO-8859-11") {
+		$string=my_mysql_iconv($string, 'tis620', 'utf8');
 	} else {
-		$string=mb_convert_encoding($string,$charset,'HTML-ENTITIES');
+		$string=mb_convert_encoding($string, 'UTF-8', $charset);
 	}
-	$string=htmlspecialchars($string);
+	$string=mb_convert_encoding($string, 'HTML-ENTITIES', 'UTF-8');
+	$string=mb_convert_encoding($string, 'UTF-8', 'HTML-ENTITIES');
 	return($string);
 }
 
-// Function to convert a string from umlauts to html-entities
-// and encode htmlspecialchars
-function umlauts_to_entities($string) {
-	$charset=get_wbcharset();
-	// there's no GB2312 or ISO-8859-11 encoding in php's mb_* functions
-	if (strcmp($charset,"GB2312") == 0) {
-		if(function_exists('iconv')) {
-			$string=iconv("GB2312","UTF-8",$string);
-			$charset="UTF-8";
+// Function to convert a string from mixed html-entities/umlauts to pure $charset_out-umlauts
+function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET, $convert_htmlspecialchars=0) {
+	$charset_out = strtoupper($charset_out);
+	if ($charset_out == '') {
+		$charset_out = 'ISO-8859-1';
+	}
+	$string = string_to_utf8($string);
+	if($charset_out != 'UTF-8') {
+		if ($charset_out == "GB2312") {
+			$string=my_mysql_iconv($string, 'utf8', 'gb2312');
+		} elseif ($charset_out == "ISO-8859-11") {
+			$string=my_mysql_iconv($string, 'utf8', 'tis620');
 		} else {
-			$string=my_mysql_iconv($string, 'gb2312', 'utf8');
-			$charset="UTF-8";
-		}
-	} elseif (strcmp($charset,"ISO-8859-11") == 0) {
-		if(function_exists('iconv')) {
-			$string=iconv("ISO-8859-11","UTF-8",$string);
-			$charset="UTF-8";
-		} else {
-			$string=my_mysql_iconv($string, 'tis620', 'utf8');
-			$charset="UTF-8";
+			$string=mb_convert_encoding($string, $charset_out, 'UTF-8');
 		}
 	}
-	$string=mb_convert_encoding($string,'HTML-ENTITIES',$charset);
-	$string=mb_convert_encoding($string,'UTF-8','HTML-ENTITIES');
-	$string=htmlspecialchars($string,ENT_QUOTES);
+	if($convert_htmlspecialchars == 1) {
+		$string=htmlspecialchars($string);
+	}
+	return($string);
+}
+
+// Function to convert a string from mixed html-entitites/$charset_in-umlauts to pure html-entities
+function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET, $convert_htmlspecialchars=1) {
+	$charset_in = strtoupper($charset_in);
+	if ($charset_in == "") {
+		$charset_in = 'ISO-8859-1';
+	}
+	$string = string_to_utf8($string, $charset_in);
+	if($convert_htmlspecialchars == 1) {
+		$string=htmlspecialchars($string,ENT_QUOTES);
+	}
 	$string=mb_convert_encoding($string,'HTML-ENTITIES','UTF-8');
 	return($string);
 }
 
-// translate any "latin" html-entities to their plain 7bit equivalents
+// translate any latin/greek/cyrillic html-entities to their plain 7bit equivalents
 function entities_to_7bit($string) {
 	require(WB_PATH.'/framework/convert.php');
 	$string = strtr($string, $conversion_array);

@@ -13,7 +13,7 @@ Legend:
 ------------------------------------- 2.7.0 -------------------------------------
 12-Feb-2007 Christian Sommer
 !	Added functions page_css and page_javascript which allow to include optional
-      module files module.css and module.js into the <head> section. This allows to 
+	module files module.css and module.js into the <head> section. This allows to 
 	create valid (X)HTML, as CSS definitions of modules are included in the head section
 12-Feb-2007 Christian Sommer
 !	Security enhancement (reduced number of login trials from 50 to 3)
@@ -36,6 +36,8 @@ Legend:
 27-Dec-2006 Matthias Gallas
 #	Fixed form modul stores empty records
 ------------------------------------- 2.6.6 -------------------------------------
+10-Apr-2007 Matthias Gallas
++	Optimized search and highlighting funktions (Thanks to thorn)
 03-Apr-2007 Matthias Gallas
 #	Fixed a bug in menulink; if you deleted a menulink page the linked page was also deleted
 	in the pages directory (Special thanks to "Funky_MF" for the fix)

@@ -68,17 +68,19 @@ if (!function_exists('page_link')) {
 
 //function to highlight search results
 function search_highlight($foo='', $arr_string=array()) {
-	$last_string="";
+	require_once(WB_PATH.'/framework/functions.php');
+	require(WB_PATH.'/search/search_convert.php');
+	$foo = entities_to_umlauts($foo, 'UTF-8');
 	foreach($arr_string as $string) {
-		// filter meta-characters
-		$string=preg_quote($string, '/');
-		if ($string!=$last_string ) {
-			$foo=preg_replace('/((>|;)[^&<]*)('.$string.')(?=[^>;]*(&|<))/iUS', '$1<span class="highlight">$3</span>',$foo);
-			$last_string=$string;
-		}
+		$string = strtr($string, $string_htmlspecialchars_decode);
+		$string = entities_to_umlauts($string, 'UTF-8');
+		$string = preg_quote($string, '/');
+		$string = strtr($string, $string_ul_umlauts);
+		$foo = preg_replace('/('.$string.')(?=[^>]*<)/iUS', '<span class="highlight">$1</span>',$foo);
 	}
+	$foo = umlauts_to_entities($foo, 'UTF-8', 0);
 	return $foo;
-}  
+}
 
 // Old menu call invokes new menu function
 if (!function_exists('page_menu')) {
@@ -187,7 +189,6 @@ if (!function_exists('page_content')) {
 						if($_GET['searchresult'] == 2) {
 							// exact match
 							$arr_string[0] = strtr($arr_string[0], "_"," ");
-							$arr_string[1] = strtr($arr_string[1], "_"," ");
 						}
 						ob_start(); //start output buffer
 						require(WB_PATH.'/modules/'.$module.'/view.php');

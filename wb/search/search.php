@@ -61,10 +61,8 @@ if(SHOW_SEARCH != true) {
 		$string_entities = umlauts_to_entities($string);
 		// and do some convertion to both
 		require(WB_PATH.'/search/search_convert.php');
-		if(strcmp(DEFAULT_CHARSET, "iso-8859-1") == 0) {
-			$string=strtr($string,$string_conv_iso88591);
-			$string_entities=strtr($string_entities,$string_entities_conv_iso88591);
-		}
+		$string = strtr($string,$string_conv_all);
+		$string_entities = strtr($string_entities,$string_entities_conv_all);
 		$search_string = $string_entities;
 	} else {
 		$string = '';
@@ -185,13 +183,11 @@ if(SHOW_SEARCH != true) {
 				
 				//Add search string for highlighting
 				if ($match!='exact') {
-					$sorted=array_merge($string,$string_entities);
-					sort($sorted);
-					$sstring = implode(" ", $sorted);
+					$sstring = implode(" ", $string);
 					$link = $link."?searchresult=1&amp;sstring=".urlencode($sstring);
 				}
 				else {
-					$sstring = strtr($string[0], " ", "_")." ".strtr($string_entities[0], " ","_");
+					$sstring = strtr($string[0], " ", "_");
 					$link = $link."?searchresult=2&amp;sstring=".urlencode($sstring);
 				}
 				
@@ -279,13 +275,11 @@ if(SHOW_SEARCH != true) {
 										
 										//Add search string for highlighting
 										if ($match!='exact') {
-											$sorted=array_merge($string,$string_entities);
-											sort($sorted);
-											$sstring = implode(" ", $sorted);
+											$sstring = implode(" ", $string);
 											$link = $link."?searchresult=1&amp;sstring=".urlencode($sstring);
 										}
 										else {
-											$sstring = strtr($string[0], " ", "_")." ".strtr($string_entities[0], " ","_");
+											$sstring = strtr($string[0], " ", "_");
 											$link = $link."?searchresult=2&amp;sstring=".urlencode($sstring);
 										}
 										
