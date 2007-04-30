@@ -202,7 +202,7 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 }
 
 // Function to fix page trail of subs
-function fix_page_trail($parent) {
+function fix_page_trail($parent,$root_parent) {
 	// Get objects and vars from outside this function
 	global $admin, $template, $database, $TEXT, $MESSAGE;
 	// Get page list from database
@@ -213,14 +213,14 @@ function fix_page_trail($parent) {
 	if($get_pages->numRows() > 0)	{
 		while($page = $get_pages->fetchRow()) {
 			// Fix page trail
-			$database->query("UPDATE ".TABLE_PREFIX."pages SET page_trail = '".get_page_trail($page['page_id'])."' WHERE page_id = '".$page['page_id']."'");
+			$database->query("UPDATE ".TABLE_PREFIX."pages SET ".($root_parent != 0 ?"root_parent = '$root_parent', ":"")." page_trail = '".get_page_trail($page['page_id'])."' WHERE page_id = '".$page['page_id']."'");
 			// Run this query on subs
-			fix_page_trail($page['page_id']);
+			fix_page_trail($page['page_id'],$root_parent);
 		}
 	}
 }
 // Fix sub-pages page trail
-fix_page_trail($page_id);
+fix_page_trail($page_id,$root_parent);
 
 /* END page "access file" code */
 
