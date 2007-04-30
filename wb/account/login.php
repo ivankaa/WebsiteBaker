@@ -55,7 +55,7 @@ require_once(WB_PATH.'/framework/class.login.php');
 // Create new login app
 $thisApp = new Login(
 							array(
-									"MAX_ATTEMPS" => "50",
+									"MAX_ATTEMPS" => "3",
 									"WARNING_URL" => ADMIN_URL."/login/warning.html",
 									"USERNAME_FIELDNAME" => 'username',
 									"PASSWORD_FIELDNAME" => 'password',

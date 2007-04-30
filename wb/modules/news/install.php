@@ -130,7 +130,8 @@ if(defined('WB_URL')) {
 	$database->query("INSERT INTO ".TABLE_PREFIX."mod_news_settings (section_id,page_id) VALUES ('0', '0')");
 	
 	// Make news post access files dir
-	make_dir(WB_PATH.PAGES_DIRECTORY.'/posts/');
+	require_once(WB_PATH.'/framework/functions.php');
+	make_dir(WB_PATH.PAGES_DIRECTORY.'/posts');
 	
 }
 

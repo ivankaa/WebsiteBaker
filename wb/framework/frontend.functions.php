@@ -66,6 +66,22 @@ if (!function_exists('page_link')) {
 	}
 }
 
+//function to highlight search results
+function search_highlight($foo='', $arr_string=array()) {
+	require_once(WB_PATH.'/framework/functions.php');
+	require(WB_PATH.'/search/search_convert.php');
+	$foo = entities_to_umlauts($foo, 'UTF-8');
+	foreach($arr_string as $string) {
+		$string = strtr($string, $string_htmlspecialchars_decode);
+		$string = entities_to_umlauts($string, 'UTF-8');
+		$string = preg_quote($string, '/');
+		$string = strtr($string, $string_ul_umlauts);
+		$foo = preg_replace('/('.$string.')(?=[^>]*<)/iUS', '<span class="highlight">$1</span>',$foo);
+	}
+	$foo = umlauts_to_entities($foo, 'UTF-8', 0);
+	return $foo;
+}
+
 // Old menu call invokes new menu function
 if (!function_exists('page_menu')) {
 	function page_menu($parent = 0, $menu_number = 1, $item_template = '<li[class]>[a] [menu_title] [/a]</li>', $menu_header = '<ul>', $menu_footer = '</ul>', $default_class = ' class="menu_default"', $current_class = ' class="menu_current"', $recurse = LEVEL) {
@@ -166,7 +182,23 @@ if (!function_exists('page_content')) {
 			while($section = $query_sections->fetchRow()) {
 				$section_id = $section['section_id'];
 				$module = $section['module'];
-				require(WB_PATH.'/modules/'.$module.'/view.php');
+				// highlights searchresults
+				if (isset($_GET['searchresult']) AND is_numeric($_GET['searchresult']) ) {
+					if (isset($_GET['sstring']) AND !empty($_GET['sstring']) ){
+						$arr_string = explode(" ", $_GET['sstring']);
+						if($_GET['searchresult'] == 2) {
+							// exact match
+							$arr_string[0] = strtr($arr_string[0], "_"," ");
+						}
+						ob_start(); //start output buffer
+						require(WB_PATH.'/modules/'.$module.'/view.php');
+						$foo = ob_get_contents();    // put outputbuffer in $foo
+						ob_end_clean();             // clear outputbuffer
+						echo search_highlight($foo, $arr_string);
+					}
+				} else {
+					require(WB_PATH.'/modules/'.$module.'/view.php');
+				}
 			}
 		} else {
 			require(PAGE_CONTENT);
@@ -197,9 +229,9 @@ if (!function_exists('show_breadcrumbs')) {
 					$query_menu=$database->query("SELECT menu_title,link FROM ".TABLE_PREFIX."pages WHERE page_id=$temp");
 					$page=$query_menu->fetchRow();
 					if ($links==true AND $temp!=$page_id)
-						echo '<a href="'.page_link($page['link']).'">'.htmlentities($page['menu_title']).'</a>';
+						echo '<a href="'.page_link($page['link']).'">'.$page['menu_title'].'</a>';
 					else
-					    echo htmlentities($page['menu_title']);
+					    echo $page['menu_title'];
 		        }
 	            $counter++;
 			}
@@ -239,6 +271,7 @@ if (!function_exists('page_keywords')) {
 		}
 	}
 }
+
 // Function for page header
 if (!function_exists('page_header')) {
 	function page_header($date_format = 'Y') {
@@ -254,6 +287,60 @@ if (!function_exists('page_footer')) {
 		$processtime=array_sum(explode(" ",microtime()))-$starttime;
 		$values = array(date($date_format),$processtime);
 		echo str_replace($vars, $values, WEBSITE_FOOTER);
+	}
+}
+
+// Function to include optional module CSS stylesheets (module.css) into the <head> section
+if (!function_exists('page_css')) {
+	function page_css() {
+    global $wb, $database;
+    $css_head = "";
+
+    // obtain list of modules used for actual displayed page
+		$page_id=$wb->page_id;
+    $query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections WHERE page_id=$page_id AND module<>'wysiwyg'");
+    while($row = $query_modules->fetchRow()) {
+      if(file_exists(WB_PATH .'/modules/' .$row['module'] .'/module.css')) {
+        // build css link for current module.css
+        $css_link = "<link href=\"" .WB_URL ."/modules/" .$row['module'];
+        $css_link .= "/module.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\" />\n";
+        // ensure that module.css is not added twice (e.g. if 2 sections include the same module)
+        $css_head = str_replace($css_link, "", $css_head);
+        $css_head .= $css_link;
+      }
+    }
+    // write out links to all external module stylesheets (module.css)
+    if($css_head != "") {
+      $css_head = "<!-- Include external module CSS stylesheets -->\n" .$css_head;
+      echo $css_head;
+    }
+	}
+}
+
+// Function to include optional module javascript files (module.js) into the <head> section
+if (!function_exists('page_javascript')) {
+	function page_javascript() {
+    global $wb, $database;
+    $js_head = "";
+
+    // obtain list of modules used for actual displayed page
+		$page_id=$wb->page_id;
+    $query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections WHERE page_id=$page_id AND module<>'wysiwyg'");
+    while($row = $query_modules->fetchRow()) {
+      if(file_exists(WB_PATH .'/modules/' .$row['module'] .'/module.js')) {
+        // build javascript link for current module.js
+        $js_link = "<script type=\"text/javascript\" src=\"" .WB_URL ."/modules/" .$row['module'];
+        $js_link .= "/module.js\"></script>\n";
+        // ensure that module.js is not added twice (e.g. if 2 sections include the same module)
+        $js_head = str_replace($js_link, "", $js_head);
+        $js_head .= $js_link;
+      }
+    }
+    // write out links to all external module javascript files (module.js)
+    if($js_head != "") {
+      $js_head = "<!-- Include external module javascript files -->\n" .$js_head;
+      echo $js_head;
+    }
 	}
 }
 

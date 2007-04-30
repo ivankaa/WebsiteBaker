@@ -32,7 +32,8 @@ $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_posts");
 $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_groups");
 $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_comments");
 $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_settings");
-require(WB_PATH.'/framework/functions.php');
+
+require_once(WB_PATH.'/framework/functions.php');
 rm_full_dir(WB_PATH.PAGES_DIRECTORY.'/posts');
 
 ?>

@@ -60,7 +60,7 @@ $template->set_file('page', 'modify.html');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var(array(
 								'PAGE_ID' => $results_array['page_id'],
-								'PAGE_TITLE' => (htmlentities($results_array['page_title'])),
+								'PAGE_TITLE' => ($results_array['page_title']),
 								'MODIFIED_BY' => $user['display_name'],
 								'MODIFIED_BY_USERNAME' => $user['username'],
 								'MODIFIED_WHEN' => $modified_ts,
@@ -97,15 +97,19 @@ $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
 // Get sections for this page
+$module_permissions = $_SESSION['MODULE_PERMISSIONS'];
 $query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
 if($query_sections->numRows() > 0) {
 	while($section = $query_sections->fetchRow()) {
 		$section_id = $section['section_id'];
 		$module = $section['module'];
-		// Include the modules editing script if it exists
-		if(file_exists(WB_PATH.'/modules/'.$module.'/modify.php')) {
-			echo '<a name="'.$section_id.'"></a>';
-			require(WB_PATH.'/modules/'.$module.'/modify.php');
+		//Have permission?
+		if(!is_numeric(array_search($module, $module_permissions))) {
+			// Include the modules editing script if it exists
+			if(file_exists(WB_PATH.'/modules/'.$module.'/modify.php')) {
+				echo '<a name="'.$section_id.'"></a>';
+				require(WB_PATH.'/modules/'.$module.'/modify.php');
+			}
 		}
 	}
 }

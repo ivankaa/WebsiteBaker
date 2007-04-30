@@ -28,6 +28,9 @@ if(!defined('WB_URL')) {
 	exit(0);
 }
 
+// Include the WB functions file
+require_once(WB_PATH.'/framework/functions.php');
+
 // Check if search is enabled
 if(SHOW_SEARCH != true) {
 	echo $TEXT['SEARCH'].' '.$TEXT['DISABLED'];
@@ -39,9 +42,9 @@ if(SHOW_SEARCH != true) {
 
 	// Get the search type
 	$match = 'all';
-    if(isset($_REQUEST['match'])) {
-        $match = $_REQUEST['match'];
-    }
+	if(isset($_REQUEST['match'])) {
+		$match = $_REQUEST['match'];
+	}
 
 	// Get search string
 	if(isset($_REQUEST['string'])) {
@@ -54,8 +57,13 @@ if(SHOW_SEARCH != true) {
 		$original_string=$wb->strip_slashes($string);
 		// Double backslashes (mySQL needs doubly escaped backslashes in LIKE comparisons)
 		$string = addslashes($wb->escape_backslashes($original_string));
-		// then escape for mySQL query
-		$search_string = htmlspecialchars($original_string,ENT_QUOTES);
+		// convert a copy of $string to HTML-ENTITIES
+		$string_entities = umlauts_to_entities($string);
+		// and do some convertion to both
+		require(WB_PATH.'/search/search_convert.php');
+		$string = strtr($string,$string_conv_all);
+		$string_entities = strtr($string_entities,$string_entities_conv_all);
+		$search_string = $string_entities;
 	} else {
 		$string = '';
 		$search_string = '';
@@ -75,6 +83,15 @@ if(SHOW_SEARCH != true) {
 				$string[] = $each_exploded_string;
 			}
 		}
+		// Split $string_entities, too
+		$exploded_string = explode(' ', $string_entities);
+		// Make sure there is no blank values in the array
+		$string_entities = array();
+		foreach($exploded_string AS $each_exploded_string) {
+			if($each_exploded_string != '') {
+				$string_entities[] = $each_exploded_string;
+			}
+		}
 		if ($match == 'any') {
 			$any_checked = ' checked="checked"';
 			$logical_operator = ' OR';
@@ -87,6 +104,9 @@ if(SHOW_SEARCH != true) {
 		$exact_string=$string;
 		$string=array();
 		$string[]=$exact_string;
+		$exact_string=$string_entities;
+		$string_entities=array();
+		$string_entities[]=$exact_string;
 	}	
 	// Get list of usernames and display names
 	$query_users = $database->query("SELECT user_id,username,display_name FROM ".TABLE_PREFIX."users");
@@ -121,6 +141,9 @@ if(SHOW_SEARCH != true) {
 	$vars = array('[SEARCH_STRING]', '[WB_URL]', '[PAGE_EXTENSION]', '[TEXT_SEARCH]', '[TEXT_ALL_WORDS]', '[TEXT_ANY_WORDS]', '[TEXT_EXACT_MATCH]', '[TEXT_MATCH]', '[TEXT_MATCHING]', '[ALL_CHECKED]', '[ANY_CHECKED]', '[EXACT_CHECKED]', '[REFERRER_ID]');
 	$values = array($search_string, WB_URL, PAGE_EXTENSION, $TEXT['SEARCH'], $TEXT['ALL_WORDS'], $TEXT['ANY_WORDS'], $TEXT['EXACT_MATCH'], $TEXT['MATCH'], $TEXT['MATCHING'], $all_checked, $any_checked, $exact_checked, REFERRER_ID);
 	$search_header = str_replace($vars, $values, ($fetch_header['value']));
+	$vars = array('[TEXT_NO_RESULTS]');
+	$values = array($TEXT['NO_RESULTS']);
+	$search_no_results = str_replace($vars, $values, ($fetch_no_results['value']));
 	
 	// Show search header
 	echo $search_header;
@@ -131,22 +154,43 @@ if(SHOW_SEARCH != true) {
 		// Show search results_header
 		echo $search_results_header;
 		// Search page details only, such as description, keywords, etc.
-			$query_pages = "SELECT page_id, page_title, menu_title, link, description, modified_when, modified_by FROM ".TABLE_PREFIX."pages WHERE ";
-			$count = 0;
-			foreach($string AS $each_string) {
-				if($count != 0) { $query_pages .= $logical_operator; }
-				$query_pages .= " visibility != 'none' AND page_title LIKE '%$each_string%' AND searching = '1'".
-				" OR visibility != 'none' AND visibility != 'deleted' AND menu_title LIKE '%$each_string%' AND searching = '1'".
-				" OR visibility != 'none' AND visibility != 'deleted' AND description LIKE '%$each_string%' AND searching = '1'".
-				" OR visibility != 'none' AND visibility != 'deleted' AND keywords LIKE '%$each_string%' AND searching = '1'";
-				$count = $count+1;
+		$query_pages = "SELECT page_id, page_title, menu_title, link, description, modified_when, modified_by FROM ".TABLE_PREFIX."pages WHERE ";
+		$count = 0;
+		foreach($string AS $each_string) {
+			if($count != 0) { 
+				$query_pages .= $logical_operator;
 			}
-			$query_pages = $database->query($query_pages);
+			$query_pages .= " visibility != 'none' AND visibility != 'deleted' AND searching = '1'".
+			" AND (page_title LIKE '%$each_string%' OR menu_title LIKE '%$each_string%' OR description LIKE '%$each_string%' OR keywords LIKE '%$each_string%')";
+			$count = $count+1;
+		}
+		$count = 0;
+		$query_pages .= ' OR';
+		foreach($string_entities AS $each_string) {
+			if($count != 0) { 
+				$query_pages .= $logical_operator;
+			}
+			$query_pages .= " visibility != 'none' AND visibility != 'deleted' AND searching = '1'".
+			" AND (page_title LIKE '%$each_string%' OR menu_title LIKE '%$each_string%' OR description LIKE '%$each_string%' OR keywords LIKE '%$each_string%')";
+			$count = $count+1;
+		}
+		$query_pages = $database->query($query_pages);
 		// Loop through pages
 		if($query_pages->numRows() > 0) {
 			while($page = $query_pages->fetchRow()) {
 				// Get page link
 				$link = page_link($page['link']);
+				
+				//Add search string for highlighting
+				if ($match!='exact') {
+					$sstring = implode(" ", $string);
+					$link = $link."?searchresult=1&amp;sstring=".urlencode($sstring);
+				}
+				else {
+					$sstring = strtr($string[0], " ", "_");
+					$link = $link."?searchresult=2&amp;sstring=".urlencode($sstring);
+				}
+				
 				// Set vars to be replaced by values
 				$vars = array('[LINK]', '[TITLE]', '[DESCRIPTION]', '[USERNAME]','[DISPLAY_NAME]','[DATE]','[TIME]','[TEXT_LAST_UPDATED_BY]','[TEXT_ON]');
 				if($page['modified_when'] > 0) {
@@ -201,11 +245,24 @@ if(SHOW_SEARCH != true) {
 							$prepared_query = $query_start;
 							$count = 0;
 							foreach($string AS $each_string) {
-								if($count != 0) { $prepared_query .= $logical_operator; }
+								if($count != 0) {
+									$prepared_query .= $logical_operator;
+								}
 								$prepared_query .= str_replace('[STRING]', $each_string, $query_body);
 								$count = $count+1;
 							}
+							$count=0;
+							$prepared_query .= ' OR ';
+							foreach($string_entities AS $each_string) {
+								if($count != 0) {
+									$prepared_query .= $logical_operator;
+								}
+								$prepared_query .= str_replace('[STRING]', $each_string, $query_body);
+								$count = $count+1;
+							}
+							
 							$prepared_query .= $query_end;
+							
 							// Execute query
 							$query = $database->query($prepared_query);
 							// Loop though queried items
@@ -215,6 +272,17 @@ if(SHOW_SEARCH != true) {
 									if(!isset($fields['page_id']) OR !isset($pages_listed[$page[$fields['page_id']]])) {
 										// Get page link
 										$link = page_link($page[$fields['link']]);
+										
+										//Add search string for highlighting
+										if ($match!='exact') {
+											$sstring = implode(" ", $string);
+											$link = $link."?searchresult=1&amp;sstring=".urlencode($sstring);
+										}
+										else {
+											$sstring = strtr($string[0], " ", "_");
+											$link = $link."?searchresult=2&amp;sstring=".urlencode($sstring);
+										}
+										
 										// Set vars to be replaced by values
 										$vars = array('[LINK]', '[TITLE]', '[DESCRIPTION]', '[USERNAME]','[DISPLAY_NAME]','[DATE]','[TIME]','[TEXT_LAST_UPDATED_BY]','[TEXT_ON]');
 										if($page[$fields['modified_when']] > 0) {
@@ -236,7 +304,6 @@ if(SHOW_SEARCH != true) {
 									}
 								}
 							}
-						
 						}
 					}
 				}
@@ -247,10 +314,10 @@ if(SHOW_SEARCH != true) {
 			
 		}
 	
-	// Say no items found if we should
-	if($pages_listed == array() AND $items_listed == array()) {
-		echo $fetch_no_results['value'];
-	}
+		// Say no items found if we should
+		if($pages_listed == array() AND $items_listed == array()) {
+			echo $search_no_results;
+		}
 		
 	}
 	

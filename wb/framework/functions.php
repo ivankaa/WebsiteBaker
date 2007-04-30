@@ -338,11 +338,95 @@ function get_subs($parent, $subs) {
 	return $subs;
 }
 
+// Function as replecement for php's htmlspecialchars()
+function my_htmlspecialchars($string) {
+	$string = umlauts_to_entities($string);
+	$string = entities_to_umlauts($string);
+	return($string);
+}
+
+// Function to convert a string from $from- to $to-encoding, using mysql
+function my_mysql_iconv($string, $from, $to) {
+	// keep current character set values:
+	$character_set_database = mysql_result(mysql_query("SELECT @@character_set_client"),0,0);
+	$character_set_results = mysql_result(mysql_query("SELECT @@character_set_results"),0,0);
+	$collation_results = mysql_result(mysql_query("SELECT @@collation_connection"),0,0);
+	mysql_query("SET character_set_client=$from");
+	mysql_query("SET character_set_results=$to");
+	mysql_query("SET collation_connection=utf8_unicode_ci");
+	$string_escaped = mysql_real_escape_string($string);
+	$converted_string = mysql_result(mysql_query("SELECT '$string_escaped'"),0,0);
+	// restore previous character set values:
+	mysql_query("SET character_set_client=$character_set_database");
+	mysql_query("SET character_set_results=$character_set_results");
+	mysql_query("SET collation_connection=$collation_results");
+	return $converted_string;
+}
+
+// Function to convert a string from mixed html-entities/umlauts to pure utf-8-umlauts
+function string_to_utf8($string, $charset=DEFAULT_CHARSET) {
+	$charset = strtoupper($charset);
+	if ($charset == '') { $charset = 'ISO-8859-1'; }
+
+	// there's no GB2312 or ISO-8859-11 encoding in php's mb_* functions
+	if ($charset == "GB2312") {
+		$string=my_mysql_iconv($string, 'gb2312', 'utf8');
+	} elseif ($charset == "ISO-8859-11") {
+		$string=my_mysql_iconv($string, 'tis620', 'utf8');
+	} else {
+		$string=mb_convert_encoding($string, 'UTF-8', $charset);
+	}
+	$string=mb_convert_encoding($string, 'HTML-ENTITIES', 'UTF-8');
+	$string=mb_convert_encoding($string, 'UTF-8', 'HTML-ENTITIES');
+	return($string);
+}
+
+// Function to convert a string from mixed html-entities/umlauts to pure $charset_out-umlauts
+function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET, $convert_htmlspecialchars=0) {
+	$charset_out = strtoupper($charset_out);
+	if ($charset_out == '') {
+		$charset_out = 'ISO-8859-1';
+	}
+	$string = string_to_utf8($string);
+	if($charset_out != 'UTF-8') {
+		if ($charset_out == "GB2312") {
+			$string=my_mysql_iconv($string, 'utf8', 'gb2312');
+		} elseif ($charset_out == "ISO-8859-11") {
+			$string=my_mysql_iconv($string, 'utf8', 'tis620');
+		} else {
+			$string=mb_convert_encoding($string, $charset_out, 'UTF-8');
+		}
+	}
+	if($convert_htmlspecialchars == 1) {
+		$string=htmlspecialchars($string);
+	}
+	return($string);
+}
+
+// Function to convert a string from mixed html-entitites/$charset_in-umlauts to pure html-entities
+function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET, $convert_htmlspecialchars=1) {
+	$charset_in = strtoupper($charset_in);
+	if ($charset_in == "") {
+		$charset_in = 'ISO-8859-1';
+	}
+	$string = string_to_utf8($string, $charset_in);
+	if($convert_htmlspecialchars == 1) {
+		$string=htmlspecialchars($string,ENT_QUOTES);
+	}
+	$string=mb_convert_encoding($string,'HTML-ENTITIES','UTF-8');
+	return($string);
+}
+
+// translate any latin/greek/cyrillic html-entities to their plain 7bit equivalents
+function entities_to_7bit($string) {
+	require(WB_PATH.'/framework/convert.php');
+	$string = strtr($string, $conversion_array);
+	return($string);
+}
+
 // Function to convert a page title to a page filename
 function page_filename($string) {
-	// First, translate any non-english characters to their english equivalents
-	require(WB_PATH.'/framework/convert.php');
-   $string = strtr($string, $conversion_array);
+	$string = entities_to_7bit(umlauts_to_entities($string));
 	// Now replace spaces with page spcacer
 	$string = str_replace(' ', PAGE_SPACER, $string);
 	// Now remove all bad characters
@@ -371,9 +455,7 @@ function page_filename($string) {
 
 // Function to convert a desired media filename to a clean filename
 function media_filename($string) {
-	// First, translate any non-english characters to their english equivalents
-	require(WB_PATH.'/framework/convert.php');
-   $string = strtr($string, $conversion_array);
+	$string = entities_to_7bit(umlauts_to_entities($string));
 	// Now remove all bad characters
 	$bad = array(
 	'\'', // '
@@ -667,7 +749,7 @@ function delete_page($page_id) {
 	$directory = WB_PATH.PAGES_DIRECTORY.$link;
 	$filename = $directory.'.php';
 	$directory .= '/';
-	if(file_exists($filename)) {
+	if(file_exists($filename) && substr($filename,0,1<>'.')) {
 		if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 			$admin->print_error($MESSAGE['PAGES']['CANNOT_DELETE_ACCESS_FILE']);
 		} else {

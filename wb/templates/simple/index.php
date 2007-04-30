@@ -1,6 +1,6 @@
 <?php
 
-// $Id$
+// $Id: index.php 440 2007-03-12 14:25:39Z Ruebenwurzel $
 
 /*
 
@@ -64,7 +64,7 @@ if(!defined('WB_URL')) {
 			Search: <br />
 			<form name="search" action="<?php echo WB_URL; ?>/search/index<?php echo PAGE_EXTENSION; ?>" method="get">
 				<input type="text" name="string" style="width: 100%;" />
-				<input type="submit" name="submit" value="Search" style="width: 100%;" />
+				<input type="submit" name="submit" value="<?php echo $TEXT['SEARCH']; ?>" style="width: 100%;" />
 			</form>
 		<?php } ?>
 		

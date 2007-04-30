@@ -68,10 +68,11 @@ class frontend extends wb {
 			// Get intro page content
 			$filename = WB_PATH.PAGES_DIRECTORY.'/intro.php';
 			if(file_exists($filename)) {
-				$handle = fopen($filename, "r");
-				$content = fread($handle, filesize($filename));
-				fclose($handle);
+				$handle = @fopen($filename, "r");
+				$content = @fread($handle, filesize($filename));
+				@fclose($handle);
 				$this->preprocess($content);
+				header("Location: pages/intro.php");   // send intro.php as header to allow parsing of php statements
 				echo ($content);
 				return false;
 			}
@@ -139,10 +140,10 @@ class frontend extends wb {
 			// Page ID
 			define('PAGE_ID', $this->page['page_id']);
 			// Page Title
-			define('PAGE_TITLE', htmlentities(($this->page['page_title'])));
+			define('PAGE_TITLE', $this->page['page_title']);
 			$this->page_title=PAGE_TITLE;
 			// Menu Title
-			$menu_title = htmlentities($this->page['menu_title']);
+			$menu_title = $this->page['menu_title'];
 			if($menu_title != '') {
 				define('MENU_TITLE', $menu_title);
 			} else {
@@ -353,7 +354,7 @@ class frontend extends wb {
 	            $link = $this->page_link($page['link']);
 	         }
 	         // Create values
-	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', htmlentities($page['menu_title']), htmlentities($page['page_title']));
+	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', $page['menu_title'], $page['page_title']);
 	         // Replace vars with value and print
 	         echo "\n".str_replace($vars, $values, $this->menu_item_template);
 	         // Generate sub-menu

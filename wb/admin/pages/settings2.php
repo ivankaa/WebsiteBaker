@@ -41,7 +41,9 @@ require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
 $page_title = $admin->add_slashes($admin->get_post_escaped('page_title'));
+$page_title = my_htmlspecialchars($page_title);
 $menu_title = $admin->add_slashes($admin->get_post_escaped('menu_title'));
+$menu_title = my_htmlspecialchars($menu_title);
 $description = $admin->add_slashes($admin->get_post('description'));
 $keywords = $admin->add_slashes($admin->get_post('keywords'));
 $parent = $admin->get_post('parent');
@@ -55,10 +57,10 @@ $language = $admin->get_post('language');
 $menu = $admin->get_post('menu');
 
 // Validate data
-if($page_title == '') {
+if($page_title == '' || substr($page_title,0,1)=='.') {
 	$admin->print_error($MESSAGE['PAGES']['BLANK_PAGE_TITLE']);
 }
-if($menu_title == '') {
+if($menu_title == '' || substr($menu_title,0,1)=='.') {
 	$admin->print_error($MESSAGE['PAGES']['BLANK_MENU_TITLE']);
 }
 
@@ -114,7 +116,7 @@ else {
 // Work-out what the link should be
 if($parent == '0') {
 	$link = '/'.page_filename($menu_title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($menu_title).'.php';
+	$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($menu_title).PAGE_EXTENSION; 
 } else {
 	$parent_section = '';
 	$parent_titles = array_reverse(get_parent_titles($parent));
@@ -123,7 +125,7 @@ if($parent == '0') {
 	}
 	if($parent_section == '/') { $parent_section = ''; }
 	$link = '/'.$parent_section.page_filename($menu_title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($menu_title).'.php';
+	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($menu_title).PAGE_EXTENSION;  
 }
 
 // Check if a page with same page filename exists
@@ -142,9 +144,10 @@ $database->query($query);
 $page_trail = get_page_trail($page_id);
 
 // Make sure link is not overwritten if page uses the menu link module
-if(strstr($old_link, '://') != '') {
+$query_sections = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'menu_link'");
+if($query_sections->numRows() > 0) {
 	$link = $old_link;
-}
+} 
 
 // Update page settings in the pages table
 $query = "UPDATE ".TABLE_PREFIX."pages SET parent = '$parent', page_title = '$page_title', menu_title = '$menu_title', menu = '$menu', level = '$level', page_trail = '$page_trail', root_parent = '$root_parent', link = '$link', template = '$template', target = '$target', description = '$description', keywords = '$keywords', position = '$position', visibility = '$visibility', searching = '$searching', language = '$language', admin_groups = '$admin_groups', viewing_groups = '$viewing_groups' WHERE page_id = '$page_id'";
@@ -164,7 +167,7 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 	// First check if we need to create a new file
 	if($old_link != $link) {
 		// Delete old file
-		unlink(WB_PATH.PAGES_DIRECTORY.$old_link.'.php');
+		unlink(WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION);
 		// Create access file
 		create_access_file($filename,$page_id,$level);
 		// Move a directory for this page
@@ -187,11 +190,11 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 					// Update level and link
 					$database->query("UPDATE ".TABLE_PREFIX."pages SET link = '$new_sub_link', level = '$new_sub_level' WHERE page_id = '".$sub['page_id']."' LIMIT 1");
 					// Re-write the access file for this page
-					$old_subpage_file = WB_PATH.PAGES_DIRECTORY.$new_sub_link.'.php';
+					$old_subpage_file = WB_PATH.PAGES_DIRECTORY.$new_sub_link.PAGE_EXTENSION;
 					if(file_exists($old_subpage_file)) {
 						unlink($old_subpage_file);
 					}
-					create_access_file(WB_PATH.PAGES_DIRECTORY.$new_sub_link.'.php', $sub['page_id'], $new_sub_level);
+					create_access_file(WB_PATH.PAGES_DIRECTORY.$new_sub_link.PAGE_EXTENSION, $sub['page_id'], $new_sub_level);
 				}
 			}
 		}
@@ -199,7 +202,7 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 }
 
 // Function to fix page trail of subs
-function fix_page_trail($parent) {
+function fix_page_trail($parent,$root_parent) {
 	// Get objects and vars from outside this function
 	global $admin, $template, $database, $TEXT, $MESSAGE;
 	// Get page list from database
@@ -210,14 +213,14 @@ function fix_page_trail($parent) {
 	if($get_pages->numRows() > 0)	{
 		while($page = $get_pages->fetchRow()) {
 			// Fix page trail
-			$database->query("UPDATE ".TABLE_PREFIX."pages SET page_trail = '".get_page_trail($page['page_id'])."' WHERE page_id = '".$page['page_id']."'");
+			$database->query("UPDATE ".TABLE_PREFIX."pages SET ".($root_parent != 0 ?"root_parent = '$root_parent', ":"")." page_trail = '".get_page_trail($page['page_id'])."' WHERE page_id = '".$page['page_id']."'");
 			// Run this query on subs
-			fix_page_trail($page['page_id']);
+			fix_page_trail($page['page_id'],$root_parent);
 		}
 	}
 }
 // Fix sub-pages page trail
-fix_page_trail($page_id);
+fix_page_trail($page_id,$root_parent);
 
 /* END page "access file" code */
 

@@ -33,6 +33,7 @@ require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
 $title = $admin->add_slashes($admin->get_post_escaped('title'));
+$title = my_htmlspecialchars($title);
 $module = $admin->get_post('type');
 $parent = $admin->get_post('parent');
 $visibility = $admin->get_post('visibility');
@@ -47,7 +48,7 @@ if ($parent!=0) {
 }	
 
 // Validate data
-if($title == '') {
+if($title == '' || substr($title,0,1)=='.') {
 	$admin->print_error($MESSAGE['PAGES']['BLANK_PAGE_TITLE']);
 }
 
