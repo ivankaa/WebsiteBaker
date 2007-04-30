@@ -11,30 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
-12-Feb-2007 Christian Sommer
-!	Added functions page_css and page_javascript which allow to include optional
-	module files module.css and module.js into the <head> section. This allows to 
-	create valid (X)HTML, as CSS definitions of modules are included in the head section
-12-Feb-2007 Christian Sommer
-!	Security enhancement (reduced number of login trials from 50 to 3)
-02-Feb-2007 Matthias Gallas
-#	Applied fix for ticket #380 (Thanks to pcwacht)
-29-Jan-2007 Matthias Gallas
-+	Added new variable $MODULE_DESCRIPTION wich allows to have optional a language
-	specific description of the modules in the language files of the modules.
 24-Jan-2007 Christian Sommer
 !	Replaced some core files to allow configuration of wbmailer via admin settings panel
-21-Jan-2007 Matthias Gallas
-#	Fixed issue in the search table entries of form modul
-13-Jan-2007 Matthias Gallas
-#	Fixed some bugs in rss.php
-07-Jan-2007 Matthias Gallas
-#	Fixed error when uninstalling the news modul
-02-Jan-2007 Matthias Gallas
-+   Added id keywords to all missing files
-#	Fixed issue with Permissions for pages sections
-27-Dec-2006 Matthias Gallas
-#	Fixed form modul stores empty records
 ------------------------------------- 2.6.6 -------------------------------------
 10-Apr-2007 Matthias Gallas
 +	Optimized search and highlighting funktions (Thanks to thorn)
@@ -60,8 +38,30 @@ Legend:
 !	Suppressed PHP warnings and errors when reading empty intro.php
 16-Feb-2007 Christian Sommer
 #	Applied fix to enable parsing of PHP code in the intro.php 
+12-Feb-2007 Christian Sommer
+!	Added functions page_css and page_javascript which allow to include optional
+	module files module.css and module.js into the <head> section. This allows to 
+	create valid (X)HTML, as CSS definitions of modules are included in the head section
+12-Feb-2007 Christian Sommer
+!	Security enhancement (reduced number of login trials from 50 to 3)
+02-Feb-2007 Matthias Gallas
+#	Applied fix for ticket #380 (Thanks to pcwacht)
 30-Jan-2007 Ryan Djurovich
 #	Applied fix for ticket #376
+29-Jan-2007 Matthias Gallas
++	Added new variable $MODULE_DESCRIPTION wich allows to have optional a language
+	specific description of the modules in the language files of the modules.
+21-Jan-2007 Matthias Gallas
+#	Fixed issue in the search table entries of form modul
+13-Jan-2007 Matthias Gallas
+#	Fixed some bugs in rss.php
+07-Jan-2007 Matthias Gallas
+#	Fixed error when uninstalling the news modul
+02-Jan-2007 Matthias Gallas
++   Added id keywords to all missing files
+#	Fixed issue with Permissions for pages sections
+27-Dec-2006 Matthias Gallas
+#	Fixed form modul stores empty records
 ------------------------------------- 2.6.5 -------------------------------------
 25-Dec-2006 Ryan Djurovich
 !	Changed links to WB help website
