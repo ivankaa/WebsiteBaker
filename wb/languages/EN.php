@@ -31,9 +31,9 @@ if(!defined('LANGUAGE_LOADED')) {
 // Set the language information
 $language_code = 'EN';
 $language_name = 'English';
-$language_version = '2.7';
-$language_platform = '2.7.x';
-$language_author = 'Ryan Djurovich, Christian Sommer';
+$language_version = '2.6';
+$language_platform = '2.6.x';
+$language_author = 'Ryan Djurovich';
 $language_license = 'GNU General Public License';
 
 // Menu titles
@@ -105,7 +105,6 @@ $HEADING['DEFAULT_SETTINGS'] = 'Default Settings';
 $HEADING['SEARCH_SETTINGS'] = 'Search Settings';
 $HEADING['FILESYSTEM_SETTINGS'] = 'Filesystem Settings';
 $HEADING['SERVER_SETTINGS'] = 'Server Settings';
-$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings';
 $HEADING['ADMINISTRATION_TOOLS'] = 'Administration Tools';
 
 $HEADING['MODIFY_DELETE_USER'] = 'Modify/Delete User';
@@ -396,15 +395,7 @@ $TEXT['CAPTCHA_VERIFICATION'] = 'Captcha Verification';
 $TEXT['VERIFICATION'] = 'Verification';
 $TEXT['DEFAULT_CHARSET'] = 'Default Charset';
 $TEXT['CHARSET'] = 'Charset';
-$TEXT['WBMAILER_NOTICE'] = 'Some service providers do not support sending mail via PHP. If your provider requires you to use SMTP for sending mail, you must know the SMTP host address. If you are not sure about these settings, or you do not know the SMTP host of your domain, use the default "PHP mail()" setting. You can change the settings	later if needed.';
-$TEXT['WBMAILER_FUNCTION'] = 'Mail routine';
-$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP host';
-$TEXT['WBMAILER_PHP'] = 'PHP MAIL';
-$TEXT['WBMAILER_SMTP'] = 'SMTP';
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP authentification';
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification';
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP username';
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP password';
+
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, you do not have permissions to view this page';

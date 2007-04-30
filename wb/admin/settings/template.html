@@ -12,39 +12,6 @@ function change_os(type) {
 		document.getElementById('file_perms_box3').style.display = 'none';
 	}
 }
-
-function change_wbmailer(type) {
-	if(type == 'smtp') {
-		document.getElementById('wbmailer_smtp_host').style.visibility = 'visible';
-		document.getElementById('wbmailer_smtp_auth_mode').style.visibility = 'visible';
-		document.getElementById('wbmailer_smtp_username').style.visibility = 'visible';
-		document.getElementById('wbmailer_smtp_password').style.visibility = 'visible';
-		if( document.settings.wbmailer_smtp_auth.checked == true ) {
-			document.getElementById('wbmailer_smtp_username').style.visibility = 'visible';
-			document.getElementById('wbmailer_smtp_password').style.visibility = 'visible';
-		} else {
-			document.getElementById('wbmailer_smtp_username').style.visibility = 'hidden';
-			document.getElementById('wbmailer_smtp_password').style.visibility = 'hidden';
-		}
-	} else if(type == 'phpmail') {
-		document.getElementById('wbmailer_smtp_host').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_auth_mode').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_username').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_password').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_username').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_password').style.visibility = 'hidden';
-	}
-}
-
-function toggle_wbmailer_auth() {
-	if( document.settings.wbmailer_smtp_auth.checked == true ) {
-		document.getElementById('wbmailer_smtp_username').style.visibility = 'visible';
-		document.getElementById('wbmailer_smtp_password').style.visibility = 'visible';
-	} else {
-		document.getElementById('wbmailer_smtp_username').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_password').style.visibility = 'hidden';
-	}
-}
 </script>
 
 <style>
@@ -597,50 +564,6 @@ function toggle_wbmailer_auth() {
 	<td class="setting_name">{TEXT_SESSION_IDENTIFIER}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="app_name" value="{APP_NAME}" />
-	</td>
-</tr>
-<tr>
-	<td colspan="3" style="padding-top: 10px;">
-		<h2>{HEADING_WBMAILER_SETTINGS}</h2>
-		<div style="border: 1px solid #CCC; background-color: #EEE; padding: 5px;">
-			<strong> Please Note:</strong>
-			<br \>
-			{TEXT_WBMAILER_NOTICE}
-		</div>
-	</td>
-</tr>
-<tr>
-	<td class="setting_name">{TEXT_WBMAILER_FUNCTION}:</td>
-	<td class="setting_value" colspan="2">
-		<input type="radio" name="wbmailer_routine" id="wbmailer_routine_phpmail" onclick="javascript: change_wbmailer('phpmail');" style="width: 14px; height: 14px;" value="phpmail"{PHPMAIL_SELECTED} />
-		<label for="wbmailer_routine_phpmail" onclick="javascript: change_wbmailer('phpmail');">{TEXT_WBMAILER_PHP}</label>
-		<input type="radio" name="wbmailer_routine" id="wbmailer_routine_smtp" onclick="javascript: change_wbmailer('smtp');"" style="width: 14px; height: 14px;" value="smtp"{SMTPMAIL_SELECTED} />
-		<label for="wbmailer_routine_smtp" onclick="javascript: change_wbmailer('smtp');">{TEXT_WBMAILER_SMTP}</label>
-	</td>
-</tr>
-<tr id="wbmailer_smtp_host" style="visibility:{SMTP_VISIBILITY};">
-	<td class="setting_name">{TEXT_WBMAILER_SMTP_HOST}:</td>
-	<td class="setting_value" colspan="2">
-		<input type="text" name="wbmailer_smtp_host" value="{WBMAILER_SMTP_HOST}" />
-	</td>
-</tr>
-<tr id="wbmailer_smtp_auth_mode" style="visibility:{SMTP_VISIBILITY};">
-	<td class="setting_name">{TEXT_WBMAILER_SMTP_AUTH}:</td>
-	<td class="setting_value" colspan="3">
-		<input type="checkbox" name="wbmailer_smtp_auth" id="wbmailer_smtp_auth" onclick="javascript: toggle_wbmailer_auth();" style="width: 14px; height: 14px;" value="true"{SMTP_AUTH_SELECTED} />
-		<label for="wbmailer_smtp_auth" onclick="javascript: toggle_wbmailer_auth(this.value);">({TEXT_WBMAILER_SMTP_AUTH_NOTICE})</label>
-	</td>
-</tr>
-<tr id="wbmailer_smtp_username" style="visibility:{SMTP_VISIBILITY_AUTH};">
-	<td class="setting_name">{TEXT_WBMAILER_SMTP_USERNAME}:</td>
-	<td class="setting_value" colspan="2">
-		<input type="text" name="wbmailer_smtp_username" value="{WBMAILER_SMTP_USERNAME}" />
-	</td>
-</tr>
-<tr id="wbmailer_smtp_password" style="visibility:{SMTP_VISIBILITY_AUTH};">
-	<td class="setting_name">{TEXT_WBMAILER_SMTP_PASSWORD}:</td>
-	<td class="setting_value" colspan="2">
-		<input type="password" name="wbmailer_smtp_password" value="{WBMAILER_SMTP_PASSWORD}" />
 	</td>
 </tr>
 <tr class="advanced">

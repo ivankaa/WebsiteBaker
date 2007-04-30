@@ -68,6 +68,19 @@ function change_os(type) {
 		document.getElementById('file_perms_box').style.display = 'none';
 	}
 }
+function change_mail_type(type) {
+	if(type == 'php') {
+		document.getElementById('outgoing_mails_php').checked = true;
+		document.getElementById('outgoing_mails_smtp').checked = false;
+		document.getElementById('smtp_server').style.display = 'none';
+		document.getElementById('caption_smtp_server').style.color = '#FFF';
+	} else if(type == 'smtp') {
+		document.getElementById('outgoing_mails_php').checked = false;
+		document.getElementById('outgoing_mails_smtp').checked = true;
+		document.getElementById('smtp_server').style.display = 'block';
+		document.getElementById('caption_smtp_server').style.color = '#666';
+	}
+}
 
 </script>
 </head>
@@ -332,6 +345,37 @@ function change_os(type) {
 			</td>
 		</tr>
 		<tr>
+			<td colspan="5"><h1>Step 7 (optional)</h1>Please specify options for outgoing mails below...</td>
+		</tr>
+		<tr>
+			<td width="170">
+				Send outgoing mails via:
+			</td>
+			<td>
+				<input type="radio" tabindex="18" name="outgoing_mails" id="outgoing_mails_php" onclick="document.getElementById('smtp_server').style.display = 'none';" value="php"<?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo ' checked'; } ?> />
+				<font style="cursor: pointer;" onclick="javascript: change_mail_type('php');">PHP mail()</font> 
+				<br />
+				<input type="radio" tabindex="19" name="outgoing_mails" id="outgoing_mails_smtp" onclick="document.getElementById('smtp_server').style.display = 'block';" value="smtp"<?php if(isset($_SESSION['outgoing_mails']) AND $_SESSION['outgoing_mails'] == 'smtp') { echo ' checked'; } ?> />
+				<font style="cursor: pointer;" onclick="javascript: change_mail_type('smtp');">SMTP</font> 
+			</td>
+			<td id="caption_smtp_server" colspan="2" style="color: <?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo '#FFF'; } else { echo '#666'; } ?>;">SMTP host:</td>
+			<td>
+				<input type="text" tabindex="20" id="smtp_server" name="smtp_server" style="display: <?php if(!isset($_SESSION['outgoing_mails']) OR $_SESSION['outgoing_mails'] == 'php') { echo 'none'; } else { echo 'block'; } ?>;" value="<?php if(isset($_SESSION['smtp_server'])) { echo $_SESSION['smtp_server']; } else { echo 'mail.example.com'; } ?>" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5">
+				<div style="border: 1px solid #CCC; background-color: #EEE; padding: 5px;">
+				<strong> Please Note:</strong>
+				<br \>
+				Some service providers do not support sending mail via PHP.
+				If your provider requires you to use SMTP for sending mail, you must know the SMTP host address.
+				If you are not sure about these settings, or you do not know the SMTP host of your domain, use the default "PHP mail()" setting.
+				You can change the settings	later if needed.
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td colspan="5" style="padding: 10px; padding-bottom: 0;"><h1 style="font-size: 0px;">&nbsp;</h1></td>
 		</tr>
 		<tr>
@@ -353,6 +397,7 @@ function change_os(type) {
 			</td>
 		</tr>
 		</table>
+	
 	</td>
 </tr>
 </table>

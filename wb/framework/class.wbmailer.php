@@ -40,36 +40,13 @@ class wbmailer extends PHPMailer
 	// setting default values 
 
 	function wbmailer() {
-		// set mailer defaults (PHP mail function)
-		$db_wbmailer_routine = "phpmail";
-		$db_wbmailer_smtp_host = "";
-
-		// get mailer settings from database
-		$database = new database();
-		$query = "SELECT * FROM " .TABLE_PREFIX. "settings";
-		$results = $database->query($query);
-		while($setting = $results->fetchRow()) {
-			if ($setting['name'] == "wbmailer_routine") { $db_wbmailer_routine = $setting['value']; }
-			if ($setting['name'] == "wbmailer_smtp_host") { $db_wbmailer_smtp_host = $setting['value']; }
-			if ($setting['name'] == "wbmailer_smtp_auth") { $db_wbmailer_smtp_auth = (bool)$setting['value']; }
-			if ($setting['name'] == "wbmailer_smtp_username") { $db_wbmailer_smtp_username = $setting['value']; }
-			if ($setting['name'] == "wbmailer_smtp_password") { $db_wbmailer_smtp_password = $setting['value']; }
-		}
-
 		// set method to send out emails
-		if($db_wbmailer_routine == "smtp" AND strlen($db_wbmailer_smtp_host) > 5) {
-			// use SMTP for all outgoing mails send by Website Baker
+		if(defined('WBMAILER_SMTP_HOST')) {
+			// sets Mailer to send messages using SMTP
 			$this->IsSMTP();                                            
-			$this->Host = $db_wbmailer_smtp_host;
-			// check if SMTP authentification is required
-			if ($db_wbmailer_smtp_auth && strlen($db_wbmailer_smtp_username) > 1 && strlen($db_wbmailer_smtp_password) > 1) {
-				// use SMTP authentification
-				$this->SMTPAuth = true;     	  								// enable SMTP authentification
-				$this->Username = $db_wbmailer_smtp_username;  	// set SMTP username
-				$this->Password = $db_wbmailer_smtp_password;	  // set SMTP password
-			}
+			$this->Host = WBMAILER_SMTP_HOST;                        // use STMP host defined in config.php
 		} else {
-			// use PHP mail() function for outgoing mails send by Website Baker
+			// set Mailer to send message using PHP mail() function
 			$this->IsMail();
 		}
 
@@ -92,16 +69,12 @@ class wbmailer extends PHPMailer
 			$this->FromName = "WB Mailer";                           // FROM NAME: set default name
 		}
 
-/*  some mail provider (lets say mail.com) reject mails send out by foreign mail relays
-    but using the providers domain in the from mail address (e.g. myname@mail.com)
 		// set default sender mail address
 		if (isset($_SESSION['EMAIL'])) {
 			$this->From = $_SESSION['EMAIL'];                        // FROM MAIL: (of user logged in)
 		} else {
 			$this->From = SERVER_EMAIL;                              // FROM MAIL: (server mail)
 		}
-*/
-		$this->From = SERVER_EMAIL;                                // FROM MAIL: (server mail)
 
 		// set default mail formats
 		$this->IsHTML(true);                                        
