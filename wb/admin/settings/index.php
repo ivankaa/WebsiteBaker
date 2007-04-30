@@ -367,6 +367,28 @@ if(MANAGE_SECTIONS) {
 	$template->set_var('MANAGE_SECTIONS_DISABLED', ' checked');
 }
 
+// Work-out which wbmailer routine should be checked
+if(WBMAILER_ROUTINE == 'phpmail') {
+	$template->set_var('PHPMAIL_SELECTED', ' checked');
+	$template->set_var('SMTP_VISIBILITY', 'hidden');
+	$template->set_var('SMTP_VISIBILITY_AUTH', 'hidden');
+} elseif(WBMAILER_ROUTINE == 'smtp') {
+	$template->set_var('SMTPMAIL_SELECTED', ' checked');
+	$template->set_var('SMTP_VISIBILITY', 'visible');
+}
+
+// Work-out if SMTP authentification should be checked
+if(WBMAILER_SMTP_AUTH) {
+	$template->set_var('SMTP_AUTH_SELECTED', ' checked');
+	if(WBMAILER_ROUTINE == 'smtp') {
+		$template->set_var('SMTP_VISIBILITY_AUTH', 'visible');
+	} else {
+		$template->set_var('SMTP_VISIBILITY_AUTH', 'hidden');
+	}
+} else {
+	$template->set_var('SMTP_VISIBILITY_AUTH', 'hidden');
+}
+
 // Work-out if intro feature is enabled
 if(INTRO_PAGE) {
 	$template->set_var('INTRO_PAGE_ENABLED', ' checked');
@@ -500,6 +522,7 @@ $template->set_var(array(
 								'HEADING_DEFAULT_SETTINGS' => $HEADING['DEFAULT_SETTINGS'],
 								'HEADING_SEARCH_SETTINGS' => $HEADING['SEARCH_SETTINGS'],
 								'HEADING_SERVER_SETTINGS' => $HEADING['SERVER_SETTINGS'],
+								'HEADING_WBMAILER_SETTINGS' => $HEADING['WBMAILER_SETTINGS'],
 								'HEADING_ADMINISTRATION_TOOLS' => $HEADING['ADMINISTRATION_TOOLS']
 								)
 						);
@@ -585,6 +608,15 @@ $template->set_var(array(
 								'TEXT_WYSIWYG_STYLE' => $TEXT['WYSIWYG_STYLE'],
 								'TEXT_SERVER_EMAIL' => $TEXT['SERVER_EMAIL'],
 								'TEXT_WORLD_WRITEABLE_FILE_PERMISSIONS' => $TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'],
+								'TEXT_WBMAILER_NOTICE' => $TEXT['WBMAILER_NOTICE'],
+								'TEXT_WBMAILER_FUNCTION' => $TEXT['WBMAILER_FUNCTION'],
+								'TEXT_WBMAILER_SMTP_HOST' => $TEXT['WBMAILER_SMTP_HOST'],
+								'TEXT_WBMAILER_PHP' => $TEXT['WBMAILER_PHP'],
+								'TEXT_WBMAILER_SMTP' => $TEXT['WBMAILER_SMTP'],
+								'TEXT_WBMAILER_SMTP_AUTH' => $TEXT['WBMAILER_SMTP_AUTH'],
+								'TEXT_WBMAILER_SMTP_AUTH_NOTICE' => $TEXT['WBMAILER_SMTP_AUTH_NOTICE'],
+								'TEXT_WBMAILER_SMTP_USERNAME' => $TEXT['WBMAILER_SMTP_USERNAME'],
+								'TEXT_WBMAILER_SMTP_PASSWORD' => $TEXT['WBMAILER_SMTP_PASSWORD'],
 								'MODE_SWITCH_WARNING' => $MESSAGE['SETTINGS']['MODE_SWITCH_WARNING'],
 								'WORLD_WRITEABLE_WARNING' => $MESSAGE['SETTINGS']['WORLD_WRITEABLE_WARNING']
 								)

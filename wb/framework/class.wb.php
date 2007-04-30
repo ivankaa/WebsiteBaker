@@ -237,64 +237,28 @@ class wb
 
 	// Validate send email
 	function mail($fromaddress, $toaddress, $subject, $message) {
+		/* 
+			INTEGRATED OPEN SOURCE PHPMAILER CLASS FOR SMTP SUPPORT AND MORE
+			SOME SERVICE PROVIDERS DO NOT SUPPORT SENDING MAIL VIA PHP AS IT DOES NOT PROVIDE SMTP AUTHENTICATION
+			NEW WBMAILER CLASS IS ABLE TO SEND OUT MESSAGES USING SMTP WHICH RESOLVE THESE ISSUE (C. Sommer)
+
+			NOTE:
+			To use SMTP for sending out mails, you have to specify the SMTP host of your domain
+			via the Settings panel in the backend of Website Baker
+		*/ 
+
 		$fromaddress = preg_replace('/[\r\n]/', '', $fromaddress);
 		$toaddress = preg_replace('/[\r\n]/', '', $toaddress);
 		$subject = preg_replace('/[\r\n]/', '', $subject);
 		$message = preg_replace('/[\r\n]/', '<br \>', $message);
-		
-		/* 
-		SOME SERVICE PROVIDERS DO NOT SUPPORT SENDING MAIL VIA PHP AS IT DOES NOT PROVIDE SMTP AUTHENTICATION
-		NEW WBMAILER CLASS IS ABLE TO SEND OUT MESSAGES USING SMTP WHICH RESOLVE THESE ISSUE
-		
-		NOTE:
-		To use SMTP for sending out mails, you have to specify the SMTP host of your domain
-		via the variable "WBMAILER_SMTP_HOST" in the "config.php" file
-		If variable is not defined, the WBMAILER class uses the PHP mail() function per default
-		
-		the mail header is automatically created by PHPMailer and therefore commented out
-		UPDATE INTRODUCED BY DOC (C. SOMMER, 22. October 2006)
-		*/ 
-		
-		/* 
-		if ($fromaddress=='') {
-			$fromaddress = SERVER_EMAIL;
-		}
-		
-		if(defined('DEFAULT_CHARSET')) { 
-			$charset = DEFAULT_CHARSET; 
-		} else {
-			$charset='utf-8';
-		}
-		
-		$headers  = "MIME-Version: 1.0\n";
-		$headers .= "Content-type: text/plain; charset=".$charset."\n";
-		$headers .= "X-Priority: 3\n";
-		$headers .= "X-MSMail-Priority: Normal\n";
-		$headers .= "X-Mailer: Website Baker\n";
-		$headers .= "From: ".$fromaddress."\n";
-		$headers .= "Return-Path: ".$fromaddress."\n";
-		$headers .= "Reply-To: ".$fromaddress."\n";
-		$headers .= "\n"; // extra empty line needed??
-		
-		if (OPERATING_SYSTEM=='windows') {
-			//str_replace("\n","\r\n",$headers);
-			str_replace("\n","\r\n",$message);
-		}	
-		
-		if(mail($toaddress, $subject, $message, $headers)) {
-			return true;
-		} else {
-			return false;
-		}
-		*/
 		
 		// create PHPMailer object and define default settings
 		$myMail = new wbmailer();
       
 		// set user defined from address
 		if ($fromaddress!='') {
-			$myMail->From = $fromaddress;                           // FROM:
-			$myMail->AddReplyTo($fromaddress);                      // REPLY TO:
+			$myMail->From = $fromaddress;                            // FROM:
+			$myMail->AddReplyTo($fromaddress);                       // REPLY TO:
 		}
 		
 		// define recepient and information to send out
