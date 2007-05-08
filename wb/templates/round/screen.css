@@ -74,6 +74,9 @@ form {
 .menu_current {
 	font-weight: bold;
 }
+.highlight {
+	background-color: #D0D0D0;
+}
 .border {
 	font-size: 1px;
 	height: 10px;
