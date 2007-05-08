@@ -38,6 +38,8 @@ if(!defined('WB_URL')) {
 <meta name="keywords" content="<?php page_keywords(); ?>" />
 <link href="<?php echo TEMPLATE_DIR; ?>/screen.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo TEMPLATE_DIR; ?>/print.css" rel="stylesheet" type="text/css" media="print" />
+<?php page_css(); ?>
+<?php page_javascript(); ?>
 </head>
 <body>
 

@@ -11,6 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.6 -------------------------------------
+08-May-2007 Matthias Gallas
++	Added wrapper to functions.php if mb_string is not available (Thanks to thorn)
++	Added new functions page_css and page_javascript to the built in templates
++	Added search highlight class to css files of the built in templates
 30-Apr-2007 Matthias Gallas
 #	Fixed ticket #392; root_parent not being set correctly (Thanks to eggsurplus)
 10-Apr-2007 Matthias Gallas
