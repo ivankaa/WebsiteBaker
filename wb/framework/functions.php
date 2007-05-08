@@ -341,7 +341,7 @@ function get_subs($parent, $subs) {
 // Function as replecement for php's htmlspecialchars()
 function my_htmlspecialchars($string) {
 	$string = umlauts_to_entities($string);
-	$string = entities_to_umlauts($string);
+	$string = entities_to_umlauts($string, DEFAULT_CHARSET, 1);
 	return($string);
 }
 
@@ -363,6 +363,138 @@ function my_mysql_iconv($string, $from, $to) {
 	return $converted_string;
 }
 
+// Function as wrapper for mb_convert_encoding
+function mb_convert_encoding_wrapper($string, $charset_out, $charset_in) {
+	if (function_exists('mb_convert_encoding')) {
+		$string=mb_convert_encoding($string, $charset_out, $charset_in);
+	} else {
+		if ($charset_in == 'ISO-8859-1') { $mysqlcharset_from = 'latin1'; }
+		elseif ($charset_in == 'ISO-8859-2') { $mysqlcharset_from = 'latin2'; }
+		elseif ($charset_in == 'ISO-8859-3') { $mysqlcharset_from = 'latin1'; } //?
+		elseif ($charset_in == 'ISO-8859-4') { $mysqlcharset_from = 'latin7'; }
+		elseif ($charset_in == 'ISO-8859-5') { $string = convert_cyr_string ($string, "iso8859-5", "windows-1251" ); $mysqlcharset_from = 'cp1251'; }
+		elseif ($charset_in == 'ISO-8859-6') { $mysqlcharset_from = 'latin1'; } //? BROKEN
+		elseif ($charset_in == 'ISO-8859-7') { $mysqlcharset_from = 'greek'; }
+		elseif ($charset_in == 'ISO-8859-8') { $mysqlcharset_from = 'hebrew'; }
+		elseif ($charset_in == 'ISO-8859-9') { $mysqlcharset_from = 'latin5'; }
+		elseif ($charset_in == 'ISO-8859-10') { $mysqlcharset_from = 'latin1'; } //?
+		elseif ($charset_in == 'BIG5') { $mysqlcharset_from = 'big5'; }
+		elseif ($charset_in == 'ISO-2022-JP') { $mysqlcharset_from = 'latin1'; } //? BROKEN
+		elseif ($charset_in == 'ISO-2022-KR') { $mysqlcharset_from = 'latin1'; } //? BROKEN
+		elseif ($charset_in == 'GB2312') { $mysqlcharset_from = 'gb2312'; }
+		elseif ($charset_in == 'ISO-8859-11') { $mysqlcharset_from = 'tis620'; }
+		elseif ($charset_in == 'UTF-8') { $mysqlcharset_from = 'utf8'; }
+		else { $mysqlcharset_from = 'latin1'; }
+
+		if ($charset_out == 'ISO-8859-1') { $mysqlcharset_to = 'latin1'; }
+		elseif ($charset_out == 'ISO-8859-2') { $mysqlcharset_to = 'latin2'; }
+		elseif ($charset_out == 'ISO-8859-3') { $mysqlcharset_to = 'latin1'; } //?
+		elseif ($charset_out == 'ISO-8859-4') { $mysqlcharset_to = 'latin7'; }
+		elseif ($charset_out == 'ISO-8859-5') { $mysqlcharset_to = 'cp1251'; } // use convert_cyr_string afterwards
+		elseif ($charset_out == 'ISO-8859-6') { $mysqlcharset_to = 'latin1'; } //? BROKEN
+		elseif ($charset_out == 'ISO-8859-7') { $mysqlcharset_to = 'greek'; }
+		elseif ($charset_out == 'ISO-8859-8') { $mysqlcharset_to = 'hebrew'; }
+		elseif ($charset_out == 'ISO-8859-9') { $mysqlcharset_to = 'latin5'; }
+		elseif ($charset_out == 'ISO-8859-10') { $mysqlcharset_to = 'latin1'; } //?
+		elseif ($charset_out == 'BIG5') { $mysqlcharset_to = 'big5'; }
+		elseif ($charset_out == 'ISO-2022-JP') { $mysqlcharset_to = 'latin1'; } //? BROKEN
+		elseif ($charset_out == 'ISO-2022-KR') { $mysqlcharset_to = 'latin1'; } //? BROKEN
+		elseif ($charset_out == 'GB2312') { $mysqlcharset_to = 'gb2312'; }
+		elseif ($charset_out == 'ISO-8859-11') { $mysqlcharset_to = 'tis620'; }
+		elseif ($charset_out == 'UTF-8') { $mysqlcharset_to = 'utf8'; }
+		else { $mysqlcharset_to = 'latin1'; }
+        	
+		if ($charset_in == 'HTML-ENTITIES') { $mysqlcharset_from = 'html'; } // special-case
+		if ($charset_out == 'HTML-ENTITIES') { $mysqlcharset_to = 'html'; } // special-case
+
+		// use mysql to convert the string
+		if ($mysqlcharset_from!="html" && $mysqlcharset_to!="html" && $mysqlcharset_from!="" && $mysqlcharset_to!="" && $mysqlcharset_from!=$mysqlcharset_to) {
+			$string=my_mysql_iconv($string, $mysqlcharset_from, $mysqlcharset_to);
+			if ($mysqlcharset_to == 'cp1251') { 
+				$string = convert_cyr_string ($string, "windows-1251", "iso-8859-5" );
+			}
+		}
+		// do the utf8->htmlentities or htmlentities->utf8 translation
+		if (($mysqlcharset_from=='html' && $mysqlcharset_to=='utf8') || ($mysqlcharset_from=='utf8' && $mysqlcharset_to=='html')) {
+			if ($mysqlcharset_from == 'html') {
+				$named_to_numbered_entities=array('&Aacute;'=>'&#193;','&aacute;'=>'&#225;','&Acirc;'=>'&#194;',
+				'&acirc;'=>'&#226;','&AElig;'=>'&#198;','&aelig;'=>'&#230;','&Agrave;'=>'&#192;','&agrave;'=>'&#224;',
+				'&Aring;'=>'&#197;','&aring;'=>'&#229;','&Atilde;'=>'&#195;','&atilde;'=>'&#227;','&Auml;'=>'&#196;',
+				'&auml;'=>'&#228;','&Ccedil;'=>'&#199;','&ccedil;'=>'&#231;','&Eacute;'=>'&#201;','&eacute;'=>'&#233;',
+				'&Ecirc;'=>'&#202;','&ecirc;'=>'&#234;','&Egrave;'=>'&#200;','&egrave;'=>'&#232;','&Euml;'=>'&#203;',
+				'&euml;'=>'&#235;','&Iacute;'=>'&#205;','&iacute;'=>'&#237;','&Icirc;'=>'&#206;','&icirc;'=>'&#238;',
+				'&Igrave;'=>'&#204;','&igrave;'=>'&#236;','&Iuml;'=>'&#207;','&iuml;'=>'&#239;','&Ntilde;'=>'&#209;',
+				'&ntilde;'=>'&#241;','&Oacute;'=>'&#211;','&oacute;'=>'&#243;','&Ocirc;'=>'&#212;','&ocirc;'=>'&#244;',
+				'&OElig;'=>'&#338;','&oelig;'=>'&#339;','&Ograve;'=>'&#210;','&ograve;'=>'&#242;','&Otilde;'=>'&#213;',
+				'&otilde;'=>'&#245;','&Ouml;'=>'&#214;','&ouml;'=>'&#246;','&Scaron;'=>'&#352;','&scaron;'=>'&#353;',
+				'&szlig;'=>'&#223;','&Uacute;'=>'&#218;','&uacute;'=>'&#250;','&Ucirc;'=>'&#219;','&ucirc;'=>'&#251;',
+				'&Ugrave;'=>'&#217;','&ugrave;'=>'&#249;','&Uuml;'=>'&#220;','&uuml;'=>'&#252;','&Yacute;'=>'&#221;',
+				'&yacute;'=>'&#253;','&Yuml;'=>'&#376;','&yuml;'=>'&#255;','&copy;'=>'&#169;','&reg;'=>'&#174;',
+				'&ETH;'=>'&#208;','&times;'=>'&#215;','&Oslash;'=>'&#216;','&THORN;'=>'&#222;','&eth;'=>'&#240;',
+				'&oslash;'=>'&#248;','&thorn;'=>'&#254;');
+				$string = strtr($string, $named_to_numbered_entities);
+				$string = preg_replace("/&#([0-9]+);/e", "code_to_utf8($1)", $string);
+			}
+			elseif ($mysqlcharset_to == 'html') {
+				$string = preg_replace("/&#([0-9]+);/e", "code_to_utf8($1)", $string);
+				$char = "";
+				while (strlen($string) > 0) {
+					preg_match("/^(.)(.*)$/su", $string, $match);
+					if (strlen($match[1]) > 1) {
+						$char .= "&#".uniord($match[1]).";";
+					} else $char .= $match[1];
+					$string = $match[2];
+				}
+				$string = $char;
+				$string_htmlspecialchars_decode=array("&lt;"=>"<", "&gt;"=>">", "&amp;"=>"&", "&quot;"=>"\"", "&#039;'"=>"\'");
+				$string = strtr($string, $string_htmlspecialchars_decode);
+				$numbered_to_named_entities=array('&#193;'=>'&Aacute;','&#225;'=>'&aacute;','&#194;'=>'&Acirc;',
+				'&#226;'=>'&acirc;','&#198;'=>'&AElig;','&#230;'=>'&aelig;','&#192;'=>'&Agrave;','&#224;'=>'&agrave;',
+				'&#197;'=>'&Aring;','&#229;'=>'&aring;','&#195;'=>'&Atilde;','&#227;'=>'&atilde;','&#196;'=>'&Auml;',
+				'&#228;'=>'&auml;','&#199;'=>'&Ccedil;','&#231;'=>'&ccedil;','&#201;'=>'&Eacute;','&#233;'=>'&eacute;',
+				'&#202;'=>'&Ecirc;','&#234;'=>'&ecirc;','&#200;'=>'&Egrave;','&#232;'=>'&egrave;','&#203;'=>'&Euml;',
+				'&#235;'=>'&euml;','&#205;'=>'&Iacute;','&#237;'=>'&iacute;','&#206;'=>'&Icirc;','&#238;'=>'&icirc;',
+				'&#204;'=>'&Igrave;','&#236;'=>'&igrave;','&#207;'=>'&Iuml;','&#239;'=>'&iuml;','&#209;'=>'&Ntilde;',
+				'&#241;'=>'&ntilde;','&#211;'=>'&Oacute;','&#243;'=>'&oacute;','&#212;'=>'&Ocirc;','&#244;'=>'&ocirc;',
+				'&#338;'=>'&OElig;','&#339;'=>'&oelig;','&#210;'=>'&Ograve;','&#242;'=>'&ograve;','&#213;'=>'&Otilde;',
+				'&#245;'=>'&otilde;','&#214;'=>'&Ouml;','&#246;'=>'&ouml;','&#352;'=>'&Scaron;','&#353;'=>'&scaron;',
+				'&#223;'=>'&szlig;','&#218;'=>'&Uacute;','&#250;'=>'&uacute;','&#219;'=>'&Ucirc;','&#251;'=>'&ucirc;',
+				'&#217;'=>'&Ugrave;','&#249;'=>'&ugrave;','&#220;'=>'&Uuml;','&#252;'=>'&uuml;','&#221;'=>'&Yacute;',
+				'&#253;'=>'&yacute;','&#376;'=>'&Yuml;','&#255;'=>'&yuml;','&#169;'=>'&copy;','&#174;'=>'&reg;',
+				'&#208;'=>'&ETH;','&#215;'=>'&times;','&#216;'=>'&Oslash;','&#222;'=>'&THORN;','&#240;'=>'&eth;',
+				'&#248;'=>'&oslash;','&#254;'=>'&thorn;');
+				$string = strtr($string, $numbered_to_named_entities);
+			}
+		}
+	}
+	return($string);
+}
+// support-function for mb_convert_encoding_wrapper()
+function uniord($c) {
+        $ud = 0;
+        if (ord($c{0}) >= 0 && ord($c{0}) <= 127) $ud = ord($c{0});
+        if (ord($c{0}) >= 192 && ord($c{0}) <= 223) $ud = (ord($c{0})-192)*64 + (ord($c{1})-128);
+        if (ord($c{0}) >= 224 && ord($c{0}) <= 239) $ud = (ord($c{0})-224)*4096 + (ord($c{1})-128)*64 + (ord($c{2})-128);
+        if (ord($c{0}) >= 240 && ord($c{0}) <= 247) $ud = (ord($c{0})-240)*262144 + (ord($c{1})-128)*4096 + (ord($c{2})-128)*64 + (ord($c{3})-128);
+        if (ord($c{0}) >= 248 && ord($c{0}) <= 251) $ud = (ord($c{0})-248)*16777216 + (ord($c{1})-128)*262144 + (ord($c{2})-128)*4096 + (ord($c{3})-128)*64 + (ord($c{4})-128);
+        if (ord($c{0}) >= 252 && ord($c{0}) <= 253) $ud = (ord($c{0})-252)*1073741824 + (ord($c{1})-128)*16777216 + (ord($c{2})-128)*262144 + (ord($c{3})-128)*4096 + (ord($c{4})-128)*64 + (ord($c{5})-128);
+        if (ord($c{0}) >= 254 && ord($c{0}) <= 255) $ud = false; // error
+        return $ud;
+}
+// support-function for mb_convert_encoding_wrapper()
+function code_to_utf8($num) {
+	if ($num <= 0x7F) {
+		return chr($num);
+	} elseif ($num <= 0x7FF) {
+		return chr(($num >> 6) + 192) . chr(($num & 63) + 128);
+	} elseif ($num <= 0xFFFF) {
+		 return chr(($num >> 12) + 224) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
+	} elseif ($num <= 0x1FFFFF) {
+		return chr(($num >> 18) + 240) . chr((($num >> 12) & 63) + 128) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
+	}
+	return " ";
+}
+
 // Function to convert a string from mixed html-entities/umlauts to pure utf-8-umlauts
 function string_to_utf8($string, $charset=DEFAULT_CHARSET) {
 	$charset = strtoupper($charset);
@@ -373,11 +505,11 @@ function string_to_utf8($string, $charset=DEFAULT_CHARSET) {
 		$string=my_mysql_iconv($string, 'gb2312', 'utf8');
 	} elseif ($charset == "ISO-8859-11") {
 		$string=my_mysql_iconv($string, 'tis620', 'utf8');
-	} else {
-		$string=mb_convert_encoding($string, 'UTF-8', $charset);
+	} elseif ($charset != "UTF-8") {
+		$string=mb_convert_encoding_wrapper($string, 'UTF-8', $charset);
 	}
-	$string=mb_convert_encoding($string, 'HTML-ENTITIES', 'UTF-8');
-	$string=mb_convert_encoding($string, 'UTF-8', 'HTML-ENTITIES');
+	$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
+	$string=mb_convert_encoding_wrapper($string, 'UTF-8', 'HTML-ENTITIES');
 	return($string);
 }
 
@@ -394,7 +526,7 @@ function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET, $convert_htm
 		} elseif ($charset_out == "ISO-8859-11") {
 			$string=my_mysql_iconv($string, 'utf8', 'tis620');
 		} else {
-			$string=mb_convert_encoding($string, $charset_out, 'UTF-8');
+			$string=mb_convert_encoding_wrapper($string, $charset_out, 'UTF-8');
 		}
 	}
 	if($convert_htmlspecialchars == 1) {
@@ -413,7 +545,7 @@ function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET, $convert_html
 	if($convert_htmlspecialchars == 1) {
 		$string=htmlspecialchars($string,ENT_QUOTES);
 	}
-	$string=mb_convert_encoding($string,'HTML-ENTITIES','UTF-8');
+	$string=mb_convert_encoding_wrapper($string,'HTML-ENTITIES','UTF-8');
 	return($string);
 }
 
