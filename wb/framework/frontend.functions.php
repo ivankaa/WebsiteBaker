@@ -77,6 +77,10 @@ function search_highlight($foo='', $arr_string=array()) {
 		$string = preg_quote($string, '/');
 		$string = strtr($string, $string_ul_umlauts);
 		$foo = preg_replace('/('.$string.')(?=[^>]*<)/iUS', '<span class="highlight">$1</span>',$foo);
+		$pos = strpos($foo, '<');
+		if ($pos === false) { // "===" means identicaly
+			$foo = preg_replace('/('.$string.')/i', '<span class="highlight">$1</span>',$foo);
+		}
 	}
 	$foo = umlauts_to_entities($foo, 'UTF-8', 0);
 	return $foo;
