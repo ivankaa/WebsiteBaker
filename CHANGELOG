@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.6.6 -------------------------------------
+14-May-2007 Matthias Gallas
++	Added support for ISO-8859-6.(Thanks to thorn)
 12-May-2007 Christian Sommer
 +	Replaced functions page_css and page_javascript by register_frontend_modfiles
 +	Added function register_backend_modfiles to allow backend modules to use optional CSS and JS files
