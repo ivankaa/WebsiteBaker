@@ -367,6 +367,9 @@ function my_mysql_iconv($string, $from, $to) {
 // converts $charset_in to $charset_out or 
 // UTF-8 to HTML-ENTITIES or HTML-ENTITIES to UTF-8
 function mb_convert_encoding_wrapper($string, $charset_out, $charset_in) {
+	if ($charset_out == $charset_in) {
+		return $string;
+	}
 	// try mb_convert_encoding(). This can handle to or from HTML-ENTITIES, too
 	if (function_exists('mb_convert_encoding')) {
 		// there's no GB2312 or ISO-8859-11 encoding in php's mb_* functions
@@ -561,21 +564,41 @@ function string_to_utf8($string, $charset=DEFAULT_CHARSET) {
 
 	if (!is_UTF8($string)) {
 		$string=mb_convert_encoding_wrapper($string, 'UTF-8', $charset);
-	} else {
 	}
-
-	// check if we really get UTF-8. We don't get UTF-8 if charset is ISO-8859-11 or GB2312 and mb_string AND iconv aren't available.
+	// check if we really get UTF-8. We don't get UTF-8 if charset is ISO-8859-6 or ISO-2022-JP/KR
+	// and mb_string AND iconv aren't available.
 	if (is_UTF8($string)) {
 		$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
 		$string=mb_convert_encoding_wrapper($string, 'UTF-8', 'HTML-ENTITIES');
 	} else {
+		// nothing we can do here :-(
 	}
 	return($string);
 }
 
 // function to check if a string is UTF-8
-function is_UTF8 ($string) {
-	return preg_match('%^(?:[\x09\x0A\x0D\x20-\x7E]|[\xC2-\xDF][\x80-\xBF]|\xE0[\xA0-\xBF][\x80-\xBF]|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|\xED[\x80-\x9F][\x80-\xBF]|\xF0[\x90-\xBF][\x80-\xBF]{2}|[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2})*$%xs', $string);
+function is_UTF8 ($str) {
+	if (strlen($str) < 4000) {
+		// see http://bugs.php.net/bug.php?id=24460 and http://bugs.php.net/bug.php?id=27070 and http://ilia.ws/archives/5-Top-10-ways-to-crash-PHP.html for this.
+		// 4000 works for me ...
+		return preg_match('/^(?:[\x09\x0A\x0D\x20-\x7E]|[\xC2-\xDF][\x80-\xBF]|\xE0[\xA0-\xBF][\x80-\xBF]|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|\xED[\x80-\x9F][\x80-\xBF]|\xF0[\x90-\xBF][\x80-\xBF]{2}|[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2})*$/s', $str);
+	}	else {
+		$isUTF8 = true;
+		while($str{0}) {
+			if (preg_match("/^[\x09\x0A\x0D\x20-\x7E]/", $str)) { $str = substr($str, 1); continue; }
+			if (preg_match("/^[\xC2-\xDF][\x80-\xBF]/", $str)) { $str = substr($str, 2); continue; }
+			if (preg_match("/^\xE0[\xA0-\xBF][\x80-\xBF]/", $str)) { $str = substr($str, 3); continue; }
+			if (preg_match("/^[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}/", $str)) { $str = substr($str, 3); continue; }
+			if (preg_match("/^\xED[\x80-\x9F][\x80-\xBF]/", $str)) { $str = substr($str, 3); continue; }
+			if (preg_match("/^\xF0[\x90-\xBF][\x80-\xBF]{2}/", $str)) { $str = substr($str, 4); continue; }
+			if (preg_match("/^[\xF1-\xF3][\x80-\xBF]{3}/", $str)) { $str = substr($str, 4); continue; }
+			if (preg_match("/^\xF4[\x80-\x8F][\x80-\xBF]{2}/", $str)) { $str = substr($str, 4); continue; }
+			if (preg_match("/^$/", $str)) { break; }
+			$isUTF8 = false;
+			break;
+		}
+		return ($isUTF8);
+	}
 }
 
 // Function to convert a string from mixed html-entities/umlauts to pure $charset_out-umlauts
