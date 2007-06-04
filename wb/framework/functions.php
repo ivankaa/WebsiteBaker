@@ -340,8 +340,7 @@ function get_subs($parent, $subs) {
 
 // Function as replecement for php's htmlspecialchars()
 function my_htmlspecialchars($string) {
-	$string = umlauts_to_entities($string);
-	$string = entities_to_umlauts($string, DEFAULT_CHARSET, 1);
+	$string = strtr($string, array("<"=>"&lt;", ">"=>"&gt;", "\""=>"&quot;", "\'"=>"&#039;"));
 	return($string);
 }
 
@@ -402,7 +401,9 @@ function mb_convert_encoding_wrapper($string, $charset_out, $charset_in) {
 				}
 			}
 		} else {
+			$string = strtr($string, array("&lt;"=>"&_lt;", "&gt;"=>"&_gt;", "&amp;"=>"&_amp;", "&quot;"=>"&_quot;", "&#039;"=>"&_#039;"));
 			$string=mb_convert_encoding($string, $charset_out, $charset_in);
+			$string = strtr($string, array("&_lt;"=>"&lt;", "&_gt;"=>"&gt;", "&_amp;"=>"&amp;", "&_quot;"=>"&quot;", "&_#039;"=>"&#039;"));
 		}
 		return $string;
 	}
@@ -475,8 +476,6 @@ function mb_convert_encoding_wrapper($string, $charset_out, $charset_in) {
 				$string = $match[2];
 			}
 			$string = $char;
-			$string_htmlspecialchars_decode=array("&lt;"=>"<", "&gt;"=>">", "&amp;"=>"&", "&quot;"=>"\"", "&#039;"=>"\'");
-			$string = strtr($string, $string_htmlspecialchars_decode);
 			$string = strtr($string, $numbered_to_named_entities);
 		}
 		return $string;
@@ -606,9 +605,6 @@ function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET, $convert_htm
 	$charset_out = strtoupper($charset_out);
 	if ($charset_out == '') { $charset_out = 'ISO-8859-1'; }
 	$string = string_to_utf8($string);
-	if($convert_htmlspecialchars == 1) {
-		$string=htmlspecialchars($string);
-	}
 	if($charset_out!='UTF-8' && is_UTF8($string)) {
 		$string=mb_convert_encoding_wrapper($string, $charset_out, 'UTF-8');
 	}
@@ -616,13 +612,10 @@ function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET, $convert_htm
 }
 
 // Function to convert a string from mixed html-entitites/$charset_in-umlauts to pure html-entities
-function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET, $convert_htmlspecialchars=1) {
+function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET, $convert_htmlspecialchars=0) {
 	$charset_in = strtoupper($charset_in);
 	if ($charset_in == "") { $charset_in = 'ISO-8859-1'; }
 	$string = string_to_utf8($string, $charset_in);
-	if($convert_htmlspecialchars == 1) {
-		$string=htmlspecialchars($string,ENT_QUOTES);
-	}
 	if (is_UTF8($string)) {
 		$string=mb_convert_encoding_wrapper($string,'HTML-ENTITIES','UTF-8');
 	}
