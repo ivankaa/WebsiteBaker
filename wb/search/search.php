@@ -49,9 +49,9 @@ if(SHOW_SEARCH != true) {
 	// Get search string
 	if(isset($_REQUEST['string'])) {
 		if ($match!='exact') {
-			$string=str_replace(',', '', $_REQUEST['string']);
+			$string=str_replace(',', '', my_htmlspecialchars($_REQUEST['string']));
 		} else {
-			$string=$_REQUEST['string'];
+			$string=my_htmlspecialchars($_REQUEST['string']);
 		}
 		// reverse potential magic_quotes action
 		$original_string=$wb->strip_slashes($string);
