@@ -238,6 +238,8 @@ class frontend extends wb {
 			define('SHOW_SEARCH', true);
 		} elseif(SEARCH == 'private' AND $this->is_authenticated() == true) {
 			define('SHOW_SEARCH', true);
+		} elseif(SEARCH == 'registered' AND $this->is_authenticated() == true) {
+			define('SHOW_SEARCH', true);	
 		} else {
 			define('SHOW_SEARCH', false);
 		}
