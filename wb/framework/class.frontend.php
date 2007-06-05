@@ -323,53 +323,61 @@ class frontend extends wb {
 				return;
 			}
 		}
-	   if ($this->menu_recurse==0)
+		if ($this->menu_recurse==0)
 	       return;
-	   // Check if we should add menu number check to query
-	   if($this->menu_parent == 0) {
-	       $menu_number = "menu = '$this->menu_number'";
-	   } else {
-	      $menu_number = '1';
-	   }
-	   // Query pages
-	   $query_menu = $database->query("SELECT page_id,menu_title,page_title,link,target,level,visibility FROM ".
-	TABLE_PREFIX."pages WHERE parent = '$this->menu_parent' AND $menu_number AND $this->extra_where_sql ORDER BY position ASC");
-	   // Check if there are any pages to show
-	   if($query_menu->numRows() > 0) {
-	   	  // Print menu header
-	   	  echo "\n".$this->menu_header;
-	      // Loop through pages
-	      while($page = $query_menu->fetchRow()) {
-	      	 // Check if this page should be shown
-	         // Create vars
-	         $vars = array('[class]','[a]', '[/a]', '[menu_title]', '[page_title]');
-	         // Work-out class
-	         if($page['page_id'] == PAGE_ID) {
-	            $class = $this->menu_current_class;
-	         } else {
-	            $class = $this->menu_default_class;
-	         }
-	         // Check if link is same as first page link, and if so change to WB URL
-	         if($page['link'] == $this->default_link AND !INTRO_PAGE) {
-	            $link = WB_URL;
-	         } else {
-	            $link = $this->page_link($page['link']);
-	         }
-	         // Create values
-	         $values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', $page['menu_title'], $page['page_title']);
-	         // Replace vars with value and print
-	         echo "\n".str_replace($vars, $values, $this->menu_item_template);
-	         // Generate sub-menu
-	         if($this->menu_collapse==false OR ($this->menu_collapse==true AND isset($this->page_trail[$page['page_id']]))) {
-	            $this->menu_recurse--;
-	            $this->menu_parent=$page['page_id'];
-	            $this->show_menu();
-	         }
-	         echo "\n".$this->menu_item_footer;
-	      }
-	      // Print menu footer
-	      echo "\n".$this->menu_footer;
-	   }
+		// Check if we should add menu number check to query
+		if($this->menu_parent == 0) {
+			$menu_number = "menu = '$this->menu_number'";
+		} else {
+			$menu_number = '1';
+		}
+		// Query pages
+		$query_menu = $database->query("SELECT page_id,menu_title,page_title,link,target,level,visibility,viewing_groups,viewing_users FROM ".TABLE_PREFIX."pages WHERE parent = '$this->menu_parent' AND $menu_number AND $this->extra_where_sql ORDER BY position ASC");
+		// Check if there are any pages to show
+		if($query_menu->numRows() > 0) {
+			// Print menu header
+			echo "\n".$this->menu_header;
+			// Loop through pages
+			while($page = $query_menu->fetchRow()) {
+				// Check if this page should be shown
+				// $this->extra_where_sql will show menu-title from private pages only if user is authenticated,
+				// but we have to check if user is in viewing_groups or viewing_users for this page
+				if($page['visibility'] == 'private') {
+					$viewing_groups = explode(',', $page['viewing_groups']);
+					$viewing_users = explode(',', $page['viewing_users']);
+					if(!in_array($this->get_group_id(), $viewing_groups) && (!in_array($this->get_user_id(), $viewing_users))) {
+						continue;
+					}
+				}
+				// Create vars
+				$vars = array('[class]','[a]', '[/a]', '[menu_title]', '[page_title]');
+				// Work-out class
+				if($page['page_id'] == PAGE_ID) {
+					$class = $this->menu_current_class;
+				} else {
+					$class = $this->menu_default_class;
+				}
+				// Check if link is same as first page link, and if so change to WB URL
+				if($page['link'] == $this->default_link AND !INTRO_PAGE) {
+					$link = WB_URL;
+				} else {
+					$link = $this->page_link($page['link']);
+				}
+				// Create values
+				$values = array($class,'<a href="'.$link.'" target="'.$page['target'].'" '.$class.'>', '</a>', $page['menu_title'], $page['page_title']);
+				// Replace vars with value and print
+				echo "\n".str_replace($vars, $values, $this->menu_item_template);
+				// Generate sub-menu
+				if($this->menu_collapse==false OR ($this->menu_collapse==true AND isset($this->page_trail[$page['page_id']]))) {
+					$this->menu_recurse--;
+					$this->menu_parent=$page['page_id'];
+					$this->show_menu();
+				}
+				echo "\n".$this->menu_item_footer;
+			}
+			// Print menu footer
+			echo "\n".$this->menu_footer;
+		}
 	}
 
 
