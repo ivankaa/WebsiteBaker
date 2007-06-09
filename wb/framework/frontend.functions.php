@@ -71,16 +71,14 @@ function search_highlight($foo='', $arr_string=array()) {
 	require_once(WB_PATH.'/framework/functions.php');
 	require(WB_PATH.'/search/search_convert.php');
 	$foo = entities_to_umlauts($foo, 'UTF-8');
-	foreach($arr_string as $string) {
-		$string = strtr($string, $string_htmlspecialchars_decode);
-		$string = entities_to_umlauts($string, 'UTF-8');
-		$string = preg_quote($string, '/');
-		$string = strtr($string, $string_ul_umlauts);
-		$foo = preg_replace('/('.$string.')(?=[^>]*<)/iUS', '<span class="highlight">$1</span>',$foo);
-		$pos = strpos($foo, '<');
-		if ($pos === false) { // "===" means identicaly
-			$foo = preg_replace('/('.$string.')/i', '<span class="highlight">$1</span>',$foo);
-		}
+	array_walk($arr_string, create_function('&$v,$k','$v = preg_quote($v, \'/\');'));
+	$search_string = implode("|", $arr_string);
+	$string = entities_to_umlauts($search_string, 'UTF-8');
+	$string = strtr($string, $string_ul_umlauts);
+	$foo = preg_replace('/('.$string.')(?=[^>]*<)/iUS', '<span class="highlight">$1</span>',$foo);
+	$pos = strpos($foo, '<');
+	if ($pos === false) { // "===" means identicaly
+		$foo = preg_replace('/('.$string.')/i', '<span class="highlight">$1</span>',$foo);
 	}
 	$foo = umlauts_to_entities($foo, 'UTF-8', 0);
 	return $foo;
