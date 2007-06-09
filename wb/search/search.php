@@ -62,7 +62,7 @@ if(SHOW_SEARCH != true) {
 		// and do some convertion to both
 		require(WB_PATH.'/search/search_convert.php');
 		$string = strtr($string,$string_conv_all);
-		$string_entities = strtr($string_entities,$string_entities_conv_all);
+		$string_entities = strtr($string_entities,$string_conv_all);
 		$search_string = $string_entities;
 	} else {
 		$string = '';
