@@ -44,7 +44,7 @@ $string_htmlspecialchars_encode=array(
 
 //convert some bad characters
 $string_conv_all=array(
-	"!"=>" ","-"=>" ","="=>" "
+	"!"=>" ","_"=>" ","="=>" ","+"=>" "
 );
 
 //umlauts to '(upper|lower)' for preg_match()
