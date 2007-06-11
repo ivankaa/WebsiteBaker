@@ -488,7 +488,7 @@ function string_decode_encode_entities($string, $out='HTML-ENTITIES', $in='UTF-8
 		'&Aacute;'=>'&#193;','&aacute;'=>'&#225;',
 		'&Acirc;'=>'&#194;','&acirc;'=>'&#226;','&acute;'=>'&#180;','&AElig;'=>'&#198;','&aelig;'=>'&#230;',
 		'&Agrave;'=>'&#192;','&agrave;'=>'&#224;','&alefsym;'=>'&#8501;','&Alpha;'=>'&#913;','&alpha;'=>'&#945;',
-		'&amp;'=>'&#38;','&and;'=>'&#8743;','&ang;'=>'&#8736;','&apos;'=>'&#39;','&Aring;'=>'&#197;','&aring;'=>'&#229;',
+		'&and;'=>'&#8743;','&ang;'=>'&#8736;','&apos;'=>'&#39;','&Aring;'=>'&#197;','&aring;'=>'&#229;',
 		'&asymp;'=>'&#8776;','&Atilde;'=>'&#195;','&atilde;'=>'&#227;','&Auml;'=>'&#196;','&auml;'=>'&#228;',
 		'&bdquo;'=>'&#8222;','&Beta;'=>'&#914;','&beta;'=>'&#946;','&brvbar;'=>'&#166;','&bull;'=>'&#8226;',
 		'&cap;'=>'&#8745;','&Ccedil;'=>'&#199;','&ccedil;'=>'&#231;','&cedil;'=>'&#184;','&cent;'=>'&#162;',
@@ -501,14 +501,14 @@ function string_decode_encode_entities($string, $out='HTML-ENTITIES', $in='UTF-8
 		'&Eta;'=>'&#919;','&eta;'=>'&#951;','&ETH;'=>'&#208;','&eth;'=>'&#240;','&Euml;'=>'&#203;','&euml;'=>'&#235;',
 		'&euro;'=>'&#8364;','&exist;'=>'&#8707;','&fnof;'=>'&#402;','&forall;'=>'&#8704;','&frac12;'=>'&#189;',
 		'&frac14;'=>'&#188;','&frac34;'=>'&#190;','&frasl;'=>'&#8260;','&Gamma;'=>'&#915;','&gamma;'=>'&#947;',
-		'&ge;'=>'&#8805;','&gt;'=>'&#62;','&hArr;'=>'&#8660;','&harr;'=>'&#8596;','&hearts;'=>'&#9829;',
+		'&ge;'=>'&#8805;','&hArr;'=>'&#8660;','&harr;'=>'&#8596;','&hearts;'=>'&#9829;',
 		'&hellip;'=>'&#8230;','&Iacute;'=>'&#205;','&iacute;'=>'&#237;','&Icirc;'=>'&#206;','&icirc;'=>'&#238;',
 		'&iexcl;'=>'&#161;','&Igrave;'=>'&#204;','&igrave;'=>'&#236;','&image;'=>'&#8465;','&infin;'=>'&#8734;',
 		'&int;'=>'&#8747;','&Iota;'=>'&#921;','&iota;'=>'&#953;','&iquest;'=>'&#191;','&isin;'=>'&#8712;',
 		'&Iuml;'=>'&#207;','&iuml;'=>'&#239;','&Kappa;'=>'&#922;','&kappa;'=>'&#954;','&Lambda;'=>'&#923;',
 		'&lambda;'=>'&#955;','&lang;'=>'&#9001;','&laquo;'=>'&#171;','&lArr;'=>'&#8656;','&larr;'=>'&#8592;',
 		'&lceil;'=>'&#8968;','&ldquo;'=>'&#8220;','&le;'=>'&#8804;','&lfloor;'=>'&#8970;','&lowast;'=>'&#8727;',
-		'&loz;'=>'&#9674;','&lrm;'=>'&#8206;','&lsaquo;'=>'&#8249;','&lsquo;'=>'&#8216;','&lt;'=>'&#60;',
+		'&loz;'=>'&#9674;','&lrm;'=>'&#8206;','&lsaquo;'=>'&#8249;','&lsquo;'=>'&#8216;',
 		'&macr;'=>'&#175;','&mdash;'=>'&#8212;','&micro;'=>'&#181;','&middot;'=>'&#183;','&minus;'=>'&#8722;',
 		'&Mu;'=>'&#924;','&mu;'=>'&#956;','&nabla;'=>'&#8711;','&nbsp;'=>'&#160;','&ndash;'=>'&#8211;',
 		'&ne;'=>'&#8800;','&ni;'=>'&#8715;','&not;'=>'&#172;','&notin;'=>'&#8713;','&nsub;'=>'&#8836;',
@@ -540,7 +540,7 @@ function string_decode_encode_entities($string, $out='HTML-ENTITIES', $in='UTF-8
 	$numbered_to_named_entities=array(
 		'&#193;'=>'&Aacute;','&#225;'=>'&aacute;','&#194;'=>'&Acirc;','&#226;'=>'&acirc;','&#180;'=>'&acute;',
 		'&#198;'=>'&AElig;','&#230;'=>'&aelig;','&#192;'=>'&Agrave;','&#224;'=>'&agrave;','&#8501;'=>'&alefsym;',
-		'&#913;'=>'&Alpha;','&#945;'=>'&alpha;','&#38;'=>'&amp;','&#8743;'=>'&and;','&#8736;'=>'&ang;',
+		'&#913;'=>'&Alpha;','&#945;'=>'&alpha;','&#8743;'=>'&and;','&#8736;'=>'&ang;',
 		'&#39;'=>'&apos;','&#197;'=>'&Aring;','&#229;'=>'&aring;','&#8776;'=>'&asymp;','&#195;'=>'&Atilde;',
 		'&#227;'=>'&atilde;','&#196;'=>'&Auml;','&#228;'=>'&auml;','&#8222;'=>'&bdquo;','&#914;'=>'&Beta;',
 		'&#946;'=>'&beta;','&#166;'=>'&brvbar;','&#8226;'=>'&bull;','&#8745;'=>'&cap;','&#199;'=>'&Ccedil;',
@@ -554,14 +554,14 @@ function string_decode_encode_entities($string, $out='HTML-ENTITIES', $in='UTF-8
 		'&#208;'=>'&ETH;','&#240;'=>'&eth;','&#203;'=>'&Euml;','&#235;'=>'&euml;','&#8364;'=>'&euro;',
 		'&#8707;'=>'&exist;','&#402;'=>'&fnof;','&#8704;'=>'&forall;','&#189;'=>'&frac12;','&#188;'=>'&frac14;',
 		'&#190;'=>'&frac34;','&#8260;'=>'&frasl;','&#915;'=>'&Gamma;','&#947;'=>'&gamma;','&#8805;'=>'&ge;',
-		'&#62;'=>'&gt;','&#8660;'=>'&hArr;','&#8596;'=>'&harr;','&#9829;'=>'&hearts;','&#8230;'=>'&hellip;',
+		'&#8660;'=>'&hArr;','&#8596;'=>'&harr;','&#9829;'=>'&hearts;','&#8230;'=>'&hellip;',
 		'&#205;'=>'&Iacute;','&#237;'=>'&iacute;','&#206;'=>'&Icirc;','&#238;'=>'&icirc;','&#161;'=>'&iexcl;',
 		'&#204;'=>'&Igrave;','&#236;'=>'&igrave;','&#8465;'=>'&image;','&#8734;'=>'&infin;','&#8747;'=>'&int;',
 		'&#921;'=>'&Iota;','&#953;'=>'&iota;','&#191;'=>'&iquest;','&#8712;'=>'&isin;','&#207;'=>'&Iuml;',
 		'&#239;'=>'&iuml;','&#922;'=>'&Kappa;','&#954;'=>'&kappa;','&#923;'=>'&Lambda;','&#955;'=>'&lambda;',
 		'&#9001;'=>'&lang;','&#171;'=>'&laquo;','&#8656;'=>'&lArr;','&#8592;'=>'&larr;','&#8968;'=>'&lceil;',
 		'&#8220;'=>'&ldquo;','&#8804;'=>'&le;','&#8970;'=>'&lfloor;','&#8727;'=>'&lowast;','&#9674;'=>'&loz;',
-		'&#8206;'=>'&lrm;','&#8249;'=>'&lsaquo;','&#8216;'=>'&lsquo;','&#60;'=>'&lt;','&#175;'=>'&macr;',
+		'&#8206;'=>'&lrm;','&#8249;'=>'&lsaquo;','&#8216;'=>'&lsquo;','&#175;'=>'&macr;',
 		'&#8212;'=>'&mdash;','&#181;'=>'&micro;','&#183;'=>'&middot;','&#8722;'=>'&minus;','&#924;'=>'&Mu;',
 		'&#956;'=>'&mu;','&#8711;'=>'&nabla;','&#160;'=>'&nbsp;','&#8211;'=>'&ndash;','&#8800;'=>'&ne;',
 		'&#8715;'=>'&ni;','&#172;'=>'&not;','&#8713;'=>'&notin;','&#8836;'=>'&nsub;','&#209;'=>'&Ntilde;',
@@ -695,6 +695,8 @@ function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET, $convert_htm
 		// decode html-entities
 		if(preg_match("/&[#a-zA-Z0-9]+;/", $string)) {
 			$string=string_decode_encode_entities($string, 'UTF-8', 'HTML-ENTITIES');
+			//$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
+			//$string=mb_convert_encoding_wrapper($string, 'UTF-8', 'HTML-ENTITIES');
 		}
 	}
 	else {
@@ -721,15 +723,15 @@ function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET, $convert_html
 			$string=utf8_encode($string);
 		}
 		// encode html-entities
-		$string=string_decode_encode_entities($string, 'HTML-ENTITIES', 'UTF-8');
-		//$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
+		//$string=string_decode_encode_entities($string, 'HTML-ENTITIES', 'UTF-8');
+		$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
 	}
 	else {
 		$string = string_to_utf8($string, $charset_in);
 		// encode html-entities
 		if (is_UTF8($string)) {
-			$string=string_decode_encode_entities($string, 'HTML-ENTITIES', 'UTF-8');
-			//$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
+			//$string=string_decode_encode_entities($string, 'HTML-ENTITIES', 'UTF-8');
+			$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
 		}
 	}
 	return $string;

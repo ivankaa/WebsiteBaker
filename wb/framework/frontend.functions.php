@@ -75,12 +75,18 @@ function search_highlight($foo='', $arr_string=array()) {
 	$search_string = implode("|", $arr_string);
 	$string = entities_to_umlauts($search_string, 'UTF-8');
 	$string = strtr($string, $string_ul_umlauts);
+	$foo = strtr($foo, array("&lt;"=>"!,,!", "&gt;"=>"!,,,!", "&amp;"=>"!,,,,!", "&quot;"=>"!,,,,,!", "&#039;"=>"!,,,,,,!"));
+	$string = strtr($string, array("&lt;"=>"!,,!", "&gt;"=>"!,,,!", "&amp;"=>"!,,,,!", "&quot;"=>"!,,,,,!", "&#039;"=>"!,,,,,,!"));
 	$foo = preg_replace('/('.$string.')(?=[^>]*<)/iUS', '<span class="highlight">$1</span>',$foo);
 	$pos = strpos($foo, '<');
 	if ($pos === false) { // "===" means identicaly
 		$foo = preg_replace('/('.$string.')/i', '<span class="highlight">$1</span>',$foo);
 	}
-	$foo = umlauts_to_entities($foo, 'UTF-8', 0);
+	$foo = strtr($foo, array("!,,!"=>"&lt;", "!,,,!"=>"&gt;", "!,,,,!"=>"&amp;", "!,,,,,!"=>"&quot;", "!,,,,,,!"=>"&#039;"));
+	if(DEFAULT_CHARSET != 'utf-8') {
+		$foo = mb_convert_encoding_wrapper($foo, DEFAULT_CHARSET, 'UTF-8');
+		//$foo = umlauts_to_entities($foo, 'UTF-8');
+	}
 	return $foo;
 }
 
