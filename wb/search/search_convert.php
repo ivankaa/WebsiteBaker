@@ -1,6 +1,6 @@
 <?php
 
-// $Id: search_convert.php 445 2007-04-10 18:04:09Z Ruebenwurzel $
+// $Id: search_convert.php 480 2007-06-11 16:35:58Z Ruebenwurzel $
 
 /*
 
@@ -44,7 +44,7 @@ $string_htmlspecialchars_encode=array(
 
 //convert some bad characters
 $string_conv_all=array(
-	"!"=>" ","-"=>" ","="=>" "
+	"!"=>" ","_"=>" ","="=>" ","+"=>" "
 );
 
 //umlauts to '(upper|lower)' for preg_match()

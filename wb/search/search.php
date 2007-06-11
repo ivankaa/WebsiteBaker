@@ -154,7 +154,7 @@ if(SHOW_SEARCH != true) {
 		// Show search results_header
 		echo $search_results_header;
 		// Search page details only, such as description, keywords, etc.
-		$query_pages = "SELECT page_id, page_title, menu_title, link, description, modified_when, modified_by FROM ".TABLE_PREFIX."pages WHERE ";
+		$query_pages = "SELECT page_id, page_title, menu_title, link, description, modified_when, modified_by, visibility FROM ".TABLE_PREFIX."pages WHERE ";
 		$count = 0;
 		foreach($string AS $each_string) {
 			if($count != 0) { 
@@ -178,6 +178,34 @@ if(SHOW_SEARCH != true) {
 		// Loop through pages
 		if($query_pages->numRows() > 0) {
 			while($page = $query_pages->fetchRow()) {
+				
+				// check if user is allowed to see the page (for private-pages)
+				$visibility = $page['visibility'];
+				if($visibility == 'private') {
+					$access_denied = true;
+					$rightsquery = $database->query("SELECT ".
+						TABLE_PREFIX."pages.viewing_groups, ".
+						TABLE_PREFIX."pages.viewing_users
+						FROM ".TABLE_PREFIX."pages
+						WHERE ".TABLE_PREFIX."pages.page_id='".$page['page_id']."' LIMIT 1 "
+					);
+					$viewing_groups=array() ; $viewing_users=array();
+					if($rightsquery->numRows() > 0) {
+						if($res = $rightsquery->fetchRow()) {
+							$viewing_groups = explode(',', $res['viewing_groups']);
+							$viewing_users = explode(',', $res['viewing_users']);
+						}
+					}
+					if($wb->is_authenticated() == true) {
+						if(in_array($wb->get_group_id(), $viewing_groups) || (in_array($wb->get_user_id(), $viewing_users))) {
+							$access_denied = false;
+						}
+					}
+					if($access_denied) {
+						continue;
+					}
+				}
+				
 				// Get page link
 				$link = page_link($page['link']);
 				
@@ -270,6 +298,49 @@ if(SHOW_SEARCH != true) {
 								while($page = $query->fetchRow()) {
 									// Only show this page if it hasn't already been list
 									if(!isset($fields['page_id']) OR !isset($pages_listed[$page[$fields['page_id']]])) {
+										
+										
+										// don't list pages with visibility == none|deleted
+										$query = $database->query("SELECT ".
+											TABLE_PREFIX."pages.visibility
+											FROM ".TABLE_PREFIX."pages
+											WHERE ".TABLE_PREFIX."pages.page_id='".$page[$fields['page_id']]."' LIMIT 1 "
+										);
+										$visibility = 'public';
+										if($query->numRows() > 0) {
+											if($res = $query->fetchRow()) {
+												$visibility = $res['visibility'];
+											}
+										}
+										if($visibility == 'deleted' || $visibility == 'none') {
+											continue;
+										}
+										// check if user is allowed to see the page (for private-pages)
+										if($visibility == 'private') {
+											$access_denied = true;
+											$rightsquery = $database->query("SELECT ".
+												TABLE_PREFIX."pages.viewing_groups, ".
+												TABLE_PREFIX."pages.viewing_users
+												FROM ".TABLE_PREFIX."pages
+												WHERE ".TABLE_PREFIX."pages.page_id='".$page[$fields['page_id']]."' LIMIT 1 "
+											);
+											$viewing_groups=array() ; $viewing_users=array();
+											if($rightsquery->numRows() > 0) {
+												if($res = $rightsquery->fetchRow()) {
+													$viewing_groups = explode(',', $res['viewing_groups']);
+													$viewing_users = explode(',', $res['viewing_users']);
+												}
+											}
+											if($wb->is_authenticated() == true) {
+												if(in_array($wb->get_group_id(), $viewing_groups) || (in_array($wb->get_user_id(), $viewing_users))) {
+													$access_denied = false;
+												}
+											}
+											if($access_denied) {
+												continue;
+											}
+										}
+											
 										// Get page link
 										$link = page_link($page[$fields['link']]);
 										
