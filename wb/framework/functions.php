@@ -348,19 +348,38 @@ function my_htmlspecialchars($string) {
 
 // Function to convert a string from $from- to $to-encoding, using mysql
 function my_mysql_iconv($string, $from, $to) {
-	// keep current character set values:
-	$character_set_database = mysql_result(mysql_query("SELECT @@character_set_client"),0,0);
-	$character_set_results = mysql_result(mysql_query("SELECT @@character_set_results"),0,0);
-	$collation_results = mysql_result(mysql_query("SELECT @@collation_connection"),0,0);
-	mysql_query("SET character_set_client=$from");
-	mysql_query("SET character_set_results=$to");
-	mysql_query("SET collation_connection=utf8_unicode_ci");
+	// keep current character set values
+	global $database;
+	$query = $database->query("SELECT @@character_set_client");
+	if($query->numRows() > 0) {
+		$res = $query->fetchRow();
+		$character_set_database = $res['@@character_set_client'];
+	}	else { echo mysql_error()."\n<br />"; }
+	$query = $database->query("SELECT @@character_set_results");
+	if($query->numRows() > 0) {
+		$res = $query->fetchRow();
+		$character_set_results = $res['@@character_set_results'];
+	}	else { echo mysql_error()."\n<br />"; }
+	$query = $database->query("SELECT @@collation_connection");
+	if($query->numRows() > 0) {
+		$res = $query->fetchRow();
+		$collation_results = $res['@@collation_connection'];
+	}	else { echo mysql_error()."\n<br />"; }
+	// set new character set values
+	$query = $database->query("SET character_set_client=$from");
+	$query = $database->query("SET character_set_results=$to");
+	$query = $database->query("SET collation_connection=utf8_unicode_ci");
 	$string_escaped = mysql_real_escape_string($string);
-	$converted_string = mysql_result(mysql_query("SELECT '$string_escaped'"),0,0);
-	// restore previous character set values:
-	mysql_query("SET character_set_client=$character_set_database");
-	mysql_query("SET character_set_results=$character_set_results");
-	mysql_query("SET collation_connection=$collation_results");
+	// convert the string
+	$query = $database->query("SELECT '$string_escaped'");
+	if($query->numRows() > 0) {
+		$res = $query->fetchRow();
+		$converted_string = $res[0];
+	}	else { echo mysql_error()."\n<br />"; }
+	// restore previous character set values
+	$query = $database->query("SET character_set_client=$character_set_database");
+	$query = $database->query("SET character_set_results=$character_set_results");
+	$query = $database->query("SET collation_connection=$collation_results");
 	return $converted_string;
 }
 
@@ -373,10 +392,12 @@ function mb_convert_encoding_wrapper($string, $charset_out, $charset_in) {
 	}
 	$use_iconv = true;
 	$use_mbstring = true;
+	/*
 	if(version_compare(PHP_VERSION, "5.1.0", "<")) {
 		$use_mbstring = false; // don't rely on mb_convert_encoding if php<5.1.0
 		$use_iconv = false; // don't rely on iconv neither
 	}
+	*/
 	
 	// try mb_convert_encoding(). This can handle to or from HTML-ENTITIES, too
 	if ($use_mbstring && function_exists('mb_convert_encoding')) {
@@ -723,20 +744,37 @@ function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET, $convert_html
 			$string=utf8_encode($string);
 		}
 		// encode html-entities
-		//$string=string_decode_encode_entities($string, 'HTML-ENTITIES', 'UTF-8');
-		$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
+		$string=string_decode_encode_entities($string, 'HTML-ENTITIES', 'UTF-8'); // this is very slow!
+		//$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
 	}
 	else {
 		$string = string_to_utf8($string, $charset_in);
 		// encode html-entities
 		if (is_UTF8($string)) {
-			//$string=string_decode_encode_entities($string, 'HTML-ENTITIES', 'UTF-8');
-			$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
+			$string=string_decode_encode_entities($string, 'HTML-ENTITIES', 'UTF-8');
+			//$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
 		}
 	}
 	return $string;
 }
 
+function umlauts_to_defcharset($string, $charset) {
+		$charset_out = strtoupper(DEFAULT_CHARSET);
+		if ($charset_out == "") { $charset_out = 'ISO-8859-1'; }
+		
+		if($charset_out == $charset) {
+			return $string;
+		}
+		if($charset_out == 'ISO-8859-1' && $charset == 'UTF-8') {
+			$string = utf8_decode($string);
+		}
+		else {
+			$string=mb_convert_encoding_wrapper($string, $charset_out, 'UTF-8');
+		}
+		
+	return $string;
+}
+	
 // translate any latin/greek/cyrillic html-entities to their plain 7bit equivalents
 // and numbered-entities into hex
 function entities_to_7bit($string) {
