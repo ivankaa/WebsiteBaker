@@ -115,8 +115,8 @@ else {
 
 // Work-out what the link should be
 if($parent == '0') {
-	$link = '/'.page_filename($menu_title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($menu_title).PAGE_EXTENSION; 
+	$link = '/'.page_filename($page_title);
+	$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($page_title).PAGE_EXTENSION; 
 } else {
 	$parent_section = '';
 	$parent_titles = array_reverse(get_parent_titles($parent));
@@ -124,8 +124,8 @@ if($parent == '0') {
 		$parent_section .= page_filename($parent_title).'/';
 	}
 	if($parent_section == '/') { $parent_section = ''; }
-	$link = '/'.$parent_section.page_filename($menu_title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($menu_title).PAGE_EXTENSION;  
+	$link = '/'.$parent_section.page_filename($page_title);
+	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($page_title).PAGE_EXTENSION;  
 }
 
 // Check if a page with same page filename exists
