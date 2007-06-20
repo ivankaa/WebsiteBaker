@@ -49,10 +49,13 @@ if(SHOW_SEARCH != true) {
 	// Get search string
 	if(isset($_REQUEST['string'])) {
 		if ($match!='exact') {
-			$string=str_replace(',', '', my_htmlspecialchars($_REQUEST['string']));
+			$string=str_replace(',', '', $_REQUEST['string']);
 		} else {
-			$string=my_htmlspecialchars($_REQUEST['string']);
+			$string=$_REQUEST['string'];
 		}
+		// remove some bad chars like _single_ '"', '&'. '!", ...
+		$string = preg_replace("/(^|\s+)([-=+_&!;#]|\\\\\"|\\\\')+(?=\s+|$)/", "", $string);
+		$string = my_htmlspecialchars($string);
 		// reverse potential magic_quotes action
 		$original_string=$wb->strip_slashes($string);
 		// Double backslashes (mySQL needs doubly escaped backslashes in LIKE comparisons)
@@ -61,8 +64,6 @@ if(SHOW_SEARCH != true) {
 		$string_entities = umlauts_to_entities($string);
 		// and do some convertion to both
 		require(WB_PATH.'/search/search_convert.php');
-		$string = strtr($string,$string_conv_all);
-		$string_entities = strtr($string_entities,$string_conv_all);
 		$search_string = $string_entities;
 	} else {
 		$string = '';
@@ -301,14 +302,14 @@ if(SHOW_SEARCH != true) {
 										
 										
 										// don't list pages with visibility == none|deleted
-										$query = $database->query("SELECT ".
+										$viewquery = $database->query("SELECT ".
 											TABLE_PREFIX."pages.visibility
 											FROM ".TABLE_PREFIX."pages
 											WHERE ".TABLE_PREFIX."pages.page_id='".$page[$fields['page_id']]."' LIMIT 1 "
 										);
 										$visibility = 'public';
-										if($query->numRows() > 0) {
-											if($res = $query->fetchRow()) {
+										if($viewquery->numRows() > 0) {
+											if($res = $viewquery->fetchRow()) {
 												$visibility = $res['visibility'];
 											}
 										}
