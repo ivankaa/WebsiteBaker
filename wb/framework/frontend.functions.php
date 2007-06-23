@@ -76,14 +76,14 @@ function search_highlight($foo='', $arr_string=array()) {
 	$string = entities_to_umlauts($search_string, 'UTF-8');
 	$string = strtr($string, $string_ul_umlauts);
 	// do some magic to prevent &lt; &gt; ... from being highlighted
-	$foo = strtr($foo, array("&lt;"=>"!,,!", "&gt;"=>"!,,,!", "&amp;"=>"!,,,,!", "&quot;"=>"!,,,,,!", "&#039;"=>"!,,,,,,!"));
-	$string = strtr($string, array("&lt;"=>"!,,!", "&gt;"=>"!,,,!", "&amp;"=>"!,,,,!", "&quot;"=>"!,,,,,!", "&#039;"=>"!,,,,,,!"));
+	$foo = strtr($foo, array("&lt;"=>"!,,!", "&gt;"=>"!,,,!", "&amp;"=>"!,,,,!", "&quot;"=>"!,,,,,!", "&#39;"=>"!,,,,,,!"));
+	$string = strtr($string, array("&lt;"=>"!,,!", "&gt;"=>"!,,,!", "&amp;"=>"!,,,,!", "&quot;"=>"!,,,,,!", "&#39;"=>"!,,,,,,!"));
 	$foo = preg_replace('/('.$string.')(?=[^>]*<)/iUS', '<span class="highlight">$1</span>',$foo);
 	$pos = strpos($foo, '<');
 	if ($pos === false) { // "===" means identicaly
 		$foo = preg_replace('/('.$string.')/i', '<span class="highlight">$1</span>',$foo);
 	}
-	$foo = strtr($foo, array("!,,!"=>"&lt;", "!,,,!"=>"&gt;", "!,,,,!"=>"&amp;", "!,,,,,!"=>"&quot;", "!,,,,,,!"=>"&#039;"));
+	$foo = strtr($foo, array("!,,!"=>"&lt;", "!,,,!"=>"&gt;", "!,,,,!"=>"&amp;", "!,,,,,!"=>"&quot;", "!,,,,,,!"=>"&#39;"));
 	if(DEFAULT_CHARSET != 'utf-8') {
 		$foo = umlauts_to_defcharset($foo, 'UTF-8');
 	}

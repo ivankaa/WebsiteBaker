@@ -1,6 +1,6 @@
 <?php
 
-// $Id: search_convert.php 480 2007-06-11 16:35:58Z Ruebenwurzel $
+// $Id: search_convert.php 490 2007-06-23 08:13:53Z Ruebenwurzel $
 
 /*
 
@@ -35,11 +35,11 @@ if(!defined('WB_URL')) {
 
 //htmlspecialchars_decode
 $string_htmlspecialchars_decode=array(
-	"&lt;"=>"<", "&gt;"=>">", "&amp;"=>"&", "&quot;"=>"\"", "&#039;"=>"\'"
+	"&lt;"=>"<", "&gt;"=>">", "&amp;"=>"&", "&quot;"=>"\"", "&#39;"=>"\'"
 );
 //htmlspecialchars_decode
 $string_htmlspecialchars_encode=array(
-	"<"=>"&lt;", ">"=>"&gt;", "&"=>"&amp;", "\""=>"&quot;", "\'"=>"&#039;"
+	"<"=>"&lt;", ">"=>"&gt;", "&"=>"&amp;", "\""=>"&quot;", "\'"=>"&#39;"
 );
 
 //convert some bad characters
