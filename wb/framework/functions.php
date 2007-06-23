@@ -629,6 +629,8 @@ function string_decode_encode_entities($string, $out='HTML-ENTITIES', $in='UTF-8
 		}
 		$string = $char;
 		$string = strtr($string, $numbered_to_named_entities);
+		// do ' and "
+		$string = strtr($string, array('\''=>'&#39;', '\"'=>'&quot;'));
 	}
 	return $string;
 }
