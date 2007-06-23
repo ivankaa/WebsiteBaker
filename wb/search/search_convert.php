@@ -1,6 +1,6 @@
 <?php
 
-// $Id: search_convert.php 490 2007-06-23 08:13:53Z Ruebenwurzel $
+// $Id$
 
 /*
 
