@@ -341,7 +341,7 @@ function get_subs($parent, $subs) {
 // Function as replecement for php's htmlspecialchars()
 function my_htmlspecialchars($string) {
 	$string = preg_replace("/&(?=[#a-z0-9]+;)/i", "_x_", $string);
-	$string = strtr($string, array("<"=>"&lt;", ">"=>"&gt;", "&"=>"&amp;", "\""=>"&quot;", "\'"=>"&#039;"));
+	$string = strtr($string, array("<"=>"&lt;", ">"=>"&gt;", "&"=>"&amp;", "\""=>"&quot;", "\'"=>"&#39;"));
 	$string = preg_replace("/_x_(?=[#a-z0-9]+;)/i", "&", $string);
 	return($string);
 }
@@ -431,9 +431,9 @@ function mb_convert_encoding_wrapper($string, $charset_out, $charset_in) {
 				}
 			}
 		} else {
-			$string = strtr($string, array("&lt;"=>"&_lt;", "&gt;"=>"&_gt;", "&amp;"=>"&_amp;", "&quot;"=>"&_quot;", "&#039;"=>"&_#039;"));
+			$string = strtr($string, array("&lt;"=>"&_lt;", "&gt;"=>"&_gt;", "&amp;"=>"&_amp;", "&quot;"=>"&_quot;", "&#39;"=>"&_#39;"));
 			$string=mb_convert_encoding($string, $charset_out, $charset_in);
-			$string = strtr($string, array("&_lt;"=>"&lt;", "&_gt;"=>"&gt;", "&_amp;"=>"&amp;", "&_quot;"=>"&quot;", "&_#039;"=>"&#039;"));
+			$string = strtr($string, array("&_lt;"=>"&lt;", "&_gt;"=>"&gt;", "&_amp;"=>"&amp;", "&_quot;"=>"&quot;", "&_#39;"=>"&#39;"));
 		}
 		return $string;
 	}
@@ -613,6 +613,7 @@ function string_decode_encode_entities($string, $out='HTML-ENTITIES', $in='UTF-8
 	);
 		
 	if ($in == 'HTML-ENTITIES') {
+		$string = strtr($string, array('&#039;'=>'&#39;')); // fix a broken entity
 		$string = strtr($string, $named_to_numbered_entities);
 		$string = preg_replace("/&#([0-9]+);/e", "code_to_utf8($1)", $string);
 	}

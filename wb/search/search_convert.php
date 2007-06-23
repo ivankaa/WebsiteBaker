@@ -35,11 +35,11 @@ if(!defined('WB_URL')) {
 
 //htmlspecialchars_decode
 $string_htmlspecialchars_decode=array(
-	"&lt;"=>"<", "&gt;"=>">", "&amp;"=>"&", "&quot;"=>"\"", "&#039;"=>"\'"
+	"&lt;"=>"<", "&gt;"=>">", "&amp;"=>"&", "&quot;"=>"\"", "&#39;"=>"\'"
 );
 //htmlspecialchars_decode
 $string_htmlspecialchars_encode=array(
-	"<"=>"&lt;", ">"=>"&gt;", "&"=>"&amp;", "\""=>"&quot;", "\'"=>"&#039;"
+	"<"=>"&lt;", ">"=>"&gt;", "&"=>"&amp;", "\""=>"&quot;", "\'"=>"&#39;"
 );
 
 //convert some bad characters

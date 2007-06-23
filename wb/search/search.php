@@ -53,13 +53,14 @@ if(SHOW_SEARCH != true) {
 		} else {
 			$string=$_REQUEST['string'];
 		}
+		$string = $wb->add_slashes($string);
 		// remove some bad chars like _single_ '"', '&'. '!", ...
 		$string = preg_replace("/(^|\s+)([-=+_&!;#]|\\\\\"|\\\\')+(?=\s+|$)/", "", $string);
-		$string = my_htmlspecialchars($string);
+		$string = strtr(my_htmlspecialchars($string), array('\&quot;'=>'&quot;'));
 		// reverse potential magic_quotes action
 		$original_string=$wb->strip_slashes($string);
 		// Double backslashes (mySQL needs doubly escaped backslashes in LIKE comparisons)
-		$string = addslashes($wb->escape_backslashes($original_string));
+		$string = $wb->escape_backslashes($original_string);
 		// convert a copy of $string to HTML-ENTITIES
 		$string_entities = umlauts_to_entities($string);
 		// and do some convertion to both
