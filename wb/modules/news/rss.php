@@ -45,13 +45,21 @@ $wb->page_id = $page_id;
 $wb->get_page_details();
 $wb->get_website_settings();
 
+//checkout if a charset is defined otherwise use UTF-8
+if(defined('DEFAULT_CHARSET')) {
+	$charset=DEFAULT_CHARSET;
+} else {
+	$charset='utf-8';
+}
+
 // Sending XML header
-header("Content-type: text/xml; charset=utf-8" );
+header("Content-type: text/xml; charset=$charset" );
 
 // Header info
 // Required by CSS 2.0
-?>
-<rss version="2.0" >
+echo '<?xml version="1.0" encoding="'.$charset.'"?>';
+?> 
+<rss version="2.0">
 <channel>
 <title><?php echo PAGE_TITLE; ?></title>
 <link>http://<?php echo $_SERVER['SERVER_NAME']; ?></link>
