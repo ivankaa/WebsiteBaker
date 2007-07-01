@@ -338,7 +338,7 @@ function get_subs($parent, $subs) {
 	return $subs;
 }
 
-// Function as replecement for php's htmlspecialchars()
+// Function as replacement for php's htmlspecialchars()
 function my_htmlspecialchars($string) {
 	$string = preg_replace("/&(?=[#a-z0-9]+;)/i", "_x_", $string);
 	$string = strtr($string, array("<"=>"&lt;", ">"=>"&gt;", "&"=>"&amp;", "\""=>"&quot;", "\'"=>"&#39;"));
@@ -613,20 +613,26 @@ function string_decode_encode_entities($string, $out='HTML-ENTITIES', $in='UTF-8
 	);
 		
 	if ($in == 'HTML-ENTITIES') {
-		$string = strtr($string, array('&#039;'=>'&#39;')); // fix a broken entity
 		$string = strtr($string, $named_to_numbered_entities);
 		$string = preg_replace("/&#([0-9]+);/e", "code_to_utf8($1)", $string);
 	}
 	elseif ($out == 'HTML-ENTITIES') {
-		//$string = preg_replace("/&#([0-9]+);/e", "code_to_utf8($1)", $string);
 		$char = "";
-		while (strlen($string) > 0) {
-			preg_match("/^(.)(.*)$/su", $string, $match);
-			if (strlen($match[1]) > 1) {
-				$char .= "&#".uniord($match[1]).";";
-			} else $char .= $match[1];
-			$string = $match[2];
-		}
+		$i=0;
+		$len=strlen($string);
+		if($len==0) return $string;
+		do {
+			if(ord($string{$i}) <= 127) $ud = $string{$i++};
+			elseif(ord($string{$i}) <= 223) $ud = (ord($string{$i++})-192)*64 + (ord($string{$i++})-128);
+			elseif(ord($string{$i}) <= 239) $ud = (ord($string{$i++})-224)*4096 + (ord($string{$i++})-128)*64 + (ord($string{$i++})-128);
+			elseif(ord($string{$i}) <= 247) $ud = (ord($string{$i++})-240)*262144 + (ord($string{$i++})-128)*4096 + (ord($string{$i++})-128)*64 + (ord($string{$i++})-128);
+			elseif(ord($string{$i}) <= 251) $ud = ord($string{$i++}); // error!
+			if($ud > 127) {
+				$char .= "&#$ud;";
+			} else {
+				$char .= $ud;
+			}
+		} while($i < $len);
 		$string = $char;
 		$string = strtr($string, $numbered_to_named_entities);
 		// do ' and "
@@ -636,18 +642,6 @@ function string_decode_encode_entities($string, $out='HTML-ENTITIES', $in='UTF-8
 }
 
 // support-function for string_decode_encode_entities()
-function uniord($c) {
-        $ud = 0;
-        if (ord($c{0}) >= 0 && ord($c{0}) <= 127) $ud = ord($c{0});
-        if (ord($c{0}) >= 192 && ord($c{0}) <= 223) $ud = (ord($c{0})-192)*64 + (ord($c{1})-128);
-        if (ord($c{0}) >= 224 && ord($c{0}) <= 239) $ud = (ord($c{0})-224)*4096 + (ord($c{1})-128)*64 + (ord($c{2})-128);
-        if (ord($c{0}) >= 240 && ord($c{0}) <= 247) $ud = (ord($c{0})-240)*262144 + (ord($c{1})-128)*4096 + (ord($c{2})-128)*64 + (ord($c{3})-128);
-        if (ord($c{0}) >= 248 && ord($c{0}) <= 251) $ud = (ord($c{0})-248)*16777216 + (ord($c{1})-128)*262144 + (ord($c{2})-128)*4096 + (ord($c{3})-128)*64 + (ord($c{4})-128);
-        if (ord($c{0}) >= 252 && ord($c{0}) <= 253) $ud = (ord($c{0})-252)*1073741824 + (ord($c{1})-128)*16777216 + (ord($c{2})-128)*262144 + (ord($c{3})-128)*4096 + (ord($c{4})-128)*64 + (ord($c{5})-128);
-        if (ord($c{0}) >= 254 && ord($c{0}) <= 255) $ud = false; // error
-        return $ud;
-}
-// support-function for mb_convert_encoding_wrapper()
 function code_to_utf8($num) {
 	if ($num <= 0x7F) {
 		return chr($num);
@@ -706,20 +700,43 @@ function is_UTF8 ($str) {
 }
 
 // Function to convert a string from mixed html-entities/umlauts to pure $charset_out-umlauts
-function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET, $convert_htmlspecialchars=0) {
+function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET) {
 	$charset_out = strtoupper($charset_out);
 	if ($charset_out == '') { $charset_out = 'ISO-8859-1'; }
 	$charset_in = strtoupper(DEFAULT_CHARSET);
-	
-	// string to utf-8
-	if ($charset_in == 'ISO-8859-1' || $charset_in == 'UTF-8') {
+	require_once(WB_PATH.'/framework/charsets_table.php');
+	global $iso_8859_2_to_utf8, $iso_8859_3_to_utf8, $iso_8859_4_to_utf8, $iso_8859_5_to_utf8, $iso_8859_6_to_utf8, $iso_8859_7_to_utf8, $iso_8859_8_to_utf8, $iso_8859_9_to_utf8, $iso_8859_10_to_utf8, $iso_8859_11_to_utf8;
+	global $utf8_to_iso_8859_2, $utf8_to_iso_8859_3, $utf8_to_iso_8859_4, $utf8_to_iso_8859_5, $utf8_to_iso_8859_6, $utf8_to_iso_8859_7, $utf8_to_iso_8859_8, $utf8_to_iso_8859_9, $utf8_to_iso_8859_10, $utf8_to_iso_8859_11;
+
+	// string to utf-8, entities_to_utf8
+	if (substr($charset_in,0,8) == 'ISO-8859' || $charset_in == 'UTF-8') {
 		if ($charset_in == 'ISO-8859-1') {
 			$string=utf8_encode($string);
+		} elseif ($charset_in == 'ISO-8859-2') {
+			$string = strtr($string, $iso_8859_2_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-3') {
+			$string = strtr($string, $iso_8859_3_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-4') {
+			$string = strtr($string, $iso_8859_4_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-5') {
+			$string = strtr($string, $iso_8859_5_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-6') {
+			$string = strtr($string, $iso_8859_6_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-7') {
+			$string = strtr($string, $iso_8859_7_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-8') {
+			$string = strtr($string, $iso_8859_8_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-9') {
+			$string = strtr($string, $iso_8859_9_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-10') {
+			$string = strtr($string, $iso_8859_10_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-11') {
+			$string = strtr($string, $iso_8859_11_to_utf8);
 		}
 		// decode html-entities
 		if(preg_match("/&[#a-zA-Z0-9]+;/", $string)) {
 			$string=string_decode_encode_entities($string, 'UTF-8', 'HTML-ENTITIES');
-			//$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
+			//$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8'); // alternative to string_decode_encode_entities()
 			//$string=mb_convert_encoding_wrapper($string, 'UTF-8', 'HTML-ENTITIES');
 		}
 	}
@@ -729,25 +746,68 @@ function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET, $convert_htm
 	// string to $charset_out
 	if($charset_out == 'ISO-8859-1') {
 			$string=utf8_decode($string);
-	}
-	elseif($charset_out != 'UTF-8' && is_UTF8($string)) {
-		$string=mb_convert_encoding_wrapper($string, $charset_out, 'UTF-8');
+	} elseif($charset_out == 'ISO-8859-2') {
+		$string = strtr($string, $utf8_to_iso_8859_2);
+	} elseif($charset_out == 'ISO-8859-3') {
+		$string = strtr($string, $utf8_to_iso_8859_3);
+	} elseif($charset_out == 'ISO-8859-4') {
+		$string = strtr($string, $utf8_to_iso_8859_4);
+	} elseif($charset_out == 'ISO-8859-5') {
+		$string = strtr($string, $utf8_to_iso_8859_5);
+	} elseif($charset_out == 'ISO-8859-6') {
+		$string = strtr($string, $utf8_to_iso_8859_6);
+	} elseif($charset_out == 'ISO-8859-7') {
+		$string = strtr($string, $utf8_to_iso_8859_7);
+	} elseif($charset_out == 'ISO-8859-8') {
+		$string = strtr($string, $utf8_to_iso_8859_8);
+	} elseif($charset_out == 'ISO-8859-9') {
+		$string = strtr($string, $utf8_to_iso_8859_9);
+	} elseif($charset_out == 'ISO-8859-10') {
+		$string = strtr($string, $utf8_to_iso_8859_10);
+	} elseif($charset_out == 'ISO-8859-11') {
+		$string = strtr($string, $utf8_to_iso_8859_11);
+	} elseif($charset_out != 'UTF-8') {
+		if(is_UTF8($string)) {
+			$string=mb_convert_encoding_wrapper($string, $charset_out, 'UTF-8');
+		}
 	}
 	return $string;
 }	
 
 // Function to convert a string from mixed html-entitites/$charset_in-umlauts to pure html-entities
-function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET, $convert_htmlspecialchars=0) {
+function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET) {
 	$charset_in = strtoupper($charset_in);
 	if ($charset_in == "") { $charset_in = 'ISO-8859-1'; }
+	require_once(WB_PATH.'/framework/charsets_table.php');
+	global $iso_8859_2_to_utf8, $iso_8859_3_to_utf8, $iso_8859_4_to_utf8, $iso_8859_5_to_utf8, $iso_8859_6_to_utf8, $iso_8859_7_to_utf8, $iso_8859_8_to_utf8, $iso_8859_9_to_utf8, $iso_8859_10_to_utf8, $iso_8859_11_to_utf8;
 
-	// string to utf-8
-	if ($charset_in == 'ISO-8859-1' || $charset_in == 'UTF-8') {
+	// string to utf-8, umlauts_to_entities
+	if ($charset_in == 'UTF-8' || substr($charset_in,0,8) == 'ISO-8859') {
 		if ($charset_in == 'ISO-8859-1') {
 			$string=utf8_encode($string);
+		} elseif ($charset_in == 'ISO-8859-2') {
+			$string = strtr($string, $iso_8859_2_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-3') {
+			$string = strtr($string, $iso_8859_3_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-4') {
+			$string = strtr($string, $iso_8859_4_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-5') {
+			$string = strtr($string, $iso_8859_5_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-6') {
+			$string = strtr($string, $iso_8859_6_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-7') {
+			$string = strtr($string, $iso_8859_7_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-8') {
+			$string = strtr($string, $iso_8859_8_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-9') {
+			$string = strtr($string, $iso_8859_9_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-10') {
+			$string = strtr($string, $iso_8859_10_to_utf8);
+		} elseif ($charset_in == 'ISO-8859-11') {
+			$string = strtr($string, $iso_8859_11_to_utf8);
 		}
 		// encode html-entities
-		$string=string_decode_encode_entities($string, 'HTML-ENTITIES', 'UTF-8'); // this is very slow!
+		$string=string_decode_encode_entities($string, 'HTML-ENTITIES', 'UTF-8');
 		//$string=mb_convert_encoding_wrapper($string, 'HTML-ENTITIES', 'UTF-8');
 	}
 	else {
@@ -764,15 +824,43 @@ function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET, $convert_html
 function umlauts_to_defcharset($string, $charset) {
 		$charset_out = strtoupper(DEFAULT_CHARSET);
 		if ($charset_out == "") { $charset_out = 'ISO-8859-1'; }
+		require_once(WB_PATH.'/framework/charsets_table.php');
+		global $utf8_to_iso_8859_2, $utf8_to_iso_8859_3, $utf8_to_iso_8859_4, $utf8_to_iso_8859_5, $utf8_to_iso_8859_6, $utf8_to_iso_8859_7, $utf8_to_iso_8859_8, $utf8_to_iso_8859_9, $utf8_to_iso_8859_10, $utf8_to_iso_8859_11;
 		
 		if($charset_out == $charset) {
 			return $string;
 		}
-		if($charset_out == 'ISO-8859-1' && $charset == 'UTF-8') {
-			$string = utf8_decode($string);
+
+		if($charset == 'UTF-8') {
+			if($charset_out == 'ISO-8859-1') {
+				$string = utf8_decode($string);
+			} elseif ($charset_out == 'ISO-8859-2') {
+				$string = strtr($string, $utf8_to_iso_8859_2);
+			} elseif ($charset_out == 'ISO-8859-3') {
+				$string = strtr($string, $utf8_to_iso_8859_3);
+			} elseif ($charset_out == 'ISO-8859-4') {
+				$string = strtr($string, $utf8_to_iso_8859_4);
+			} elseif ($charset_out == 'ISO-8859-5') {
+				$string = strtr($string, $utf8_to_iso_8859_5);
+			} elseif ($charset_out == 'ISO-8859-6') {
+				$string = strtr($string, $utf8_to_iso_8859_6);
+			} elseif ($charset_out == 'ISO-8859-7') {
+				$string = strtr($string, $utf8_to_iso_8859_7);
+			} elseif ($charset_out == 'ISO-8859-8') {
+				$string = strtr($string, $utf8_to_iso_8859_8);
+			} elseif ($charset_out == 'ISO-8859-9') {
+				$string = strtr($string, $utf8_to_iso_8859_9);
+			} elseif ($charset_out == 'ISO-8859-10') {
+				$string = strtr($string, $utf8_to_iso_8859_10);
+			} elseif ($charset_out == 'ISO-8859-11') {
+				$string = strtr($string, $utf8_to_iso_8859_11);
+			}
+			else {
+				$string=mb_convert_encoding_wrapper($string, $charset_out, $charset);
+			}
 		}
 		else {
-			$string=mb_convert_encoding_wrapper($string, $charset_out, 'UTF-8');
+			$string=mb_convert_encoding_wrapper($string, $charset_out, $charset);
 		}
 		
 	return $string;
