@@ -193,11 +193,11 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 					// Update level and link
 					$database->query("UPDATE ".TABLE_PREFIX."pages SET link = '$new_sub_link', level = '$new_sub_level' WHERE page_id = '".$sub['page_id']."' LIMIT 1");
 					// Re-write the access file for this page
-					$old_subpage_file = WB_PATH.PAGES_DIRECTORY.$new_sub_link.PAGE_EXTENSION;
+					$old_subpage_file = WB_PATH.PAGES_DIRECTORY.$new_sub_link.'.php';
 					if(file_exists($old_subpage_file)) {
 						unlink($old_subpage_file);
 					}
-					create_access_file(WB_PATH.PAGES_DIRECTORY.$new_sub_link.PAGE_EXTENSION, $sub['page_id'], $new_sub_level);
+					create_access_file(WB_PATH.PAGES_DIRECTORY.$new_sub_link.'.php', $sub['page_id'], $new_sub_level);
 				}
 			}
 		}
