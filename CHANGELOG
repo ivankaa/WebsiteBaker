@@ -15,6 +15,7 @@ Legend:
 !	Replaced some core files to allow configuration of wbmailer via admin settings panel
 ------------------------------------- 2.6.6 -------------------------------------
 01-Jul-2007 Ryan Djurovich
+#	Fixed bug where error message not displayed when script fails to create a page
 #	Fixed bugs introduced in [484]
 14-May-2007 Matthias Gallas
 +	Added support for ISO-8859-6.(Thanks to thorn)
