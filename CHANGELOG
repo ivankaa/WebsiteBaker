@@ -14,6 +14,8 @@ Legend:
 24-Jan-2007 Christian Sommer
 !	Replaced some core files to allow configuration of wbmailer via admin settings panel
 ------------------------------------- 2.6.6 -------------------------------------
+01-Jul-2007 Matthias Gallas
+#	Fixed converting issue with some ISO-charsets and speeded up converting on large pages (thanks to Thorn)
 01-Jul-2007 Ryan Djurovich
 #	Fixed bug where error message not displayed when script fails to create a page
 #	Fixed bugs introduced in [484]
