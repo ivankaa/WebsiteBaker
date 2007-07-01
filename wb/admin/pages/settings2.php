@@ -115,8 +115,8 @@ else {
 
 // Work-out what the link should be
 if($parent == '0') {
-	$link = '/'.page_filename($page_title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($page_title).PAGE_EXTENSION; 
+	$link = '/'.page_filename($menu_title);
+	$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($menu_title).'.php'; 
 } else {
 	$parent_section = '';
 	$parent_titles = array_reverse(get_parent_titles($parent));
@@ -124,8 +124,8 @@ if($parent == '0') {
 		$parent_section .= page_filename($parent_title).'/';
 	}
 	if($parent_section == '/') { $parent_section = ''; }
-	$link = '/'.$parent_section.page_filename($page_title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($page_title).PAGE_EXTENSION;  
+	$link = '/'.$parent_section.page_filename($menu_title);
+	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($menu_title).'.php';  
 }
 
 // Check if a page with same page filename exists
@@ -167,7 +167,10 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 	// First check if we need to create a new file
 	if($old_link != $link) {
 		// Delete old file
-		unlink(WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION);
+		$old_filename = WB_PATH.PAGES_DIRECTORY.$old_link.'.php';
+		if(file_exists($old_filename)) {
+			unlink($old_filename);
+		}
 		// Create access file
 		create_access_file($filename,$page_id,$level);
 		// Move a directory for this page
