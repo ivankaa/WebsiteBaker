@@ -10,6 +10,9 @@ Legend:
 # = Bugfix
 ! = Update/Change
 
+------------------------------------- 2.6.7 -------------------------------------
+02-Jan-2007 Christian Sommer
++	Added missing converting file for changeset [504]
 ------------------------------------- 2.6.6 -------------------------------------
 01-Jul-2007 Matthias Gallas
 #	Fixed converting issue with some ISO-charsets and speeded up converting on large pages (thanks to Thorn)
