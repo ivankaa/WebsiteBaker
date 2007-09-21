@@ -313,7 +313,7 @@ if(!function_exists('register_frontend_modfiles')) {
 		$head_links = "";
 		if($file_id == "css") {
       	$base_link = '<link href="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend.css"'; 
-			$base_link.= 'rel="stylesheet" type="text/css" media="screen" />';
+			$base_link.= ' rel="stylesheet" type="text/css" media="screen" />';
 			$base_file = "frontend.css";
 		} else {
 			$base_link = '<script type="text/javascript" src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend.js"></script>';
