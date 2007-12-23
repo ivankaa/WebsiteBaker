@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+23-Dec-2007 Matthias Gallas
+!	Changed all copyright notices to include now 2008
 21-Sep-2007 Matthias Gallas
 #	Fixed a typo in /framework/frontend.functions.php cause that websites using
 	the new register_frontend_modifles() functions do not validate
