@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+21-Sep-2007 Matthias Gallas
+#	Fixed a typo in /framework/frontend.functions.php cause that websites using
+	the new register_frontend_modifles() functions do not validate
 24-Jan-2007 Christian Sommer
 !	Replaced some core files to allow configuration of wbmailer via admin settings panel
 ------------------------------------- 2.6.7 -------------------------------------
