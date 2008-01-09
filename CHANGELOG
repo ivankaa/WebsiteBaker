@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+09-Jan-2008 Matthias Gallas
+#	Fixed ticket #542 (Thanks to Thorn)
 23-Dec-2007 Matthias Gallas
 !	Changed all copyright notices to include now 2008
 21-Sep-2007 Matthias Gallas

@@ -879,7 +879,8 @@ function entities_to_7bit($string) {
 function page_filename($string) {
 	$string = entities_to_7bit(umlauts_to_entities($string));
 	// Now replace spaces with page spcacer
-	$string = str_replace(' ', PAGE_SPACER, $string);
+	$string = trim($string);
+	$string = preg_replace('/(\s)+/', PAGE_SPACER, $string);
 	// Now remove all bad characters
 	$bad = array(
 	'\'', /* /  */ '"', /* " */	'<', /* < */	'>', /* > */
@@ -892,12 +893,6 @@ function page_filename($string) {
 	$string = str_replace($bad, '', $string);
 	// Now convert to lower-case
 	$string = strtolower($string);
-	// Now remove multiple page spacers
-	$string = str_replace(PAGE_SPACER.PAGE_SPACER, PAGE_SPACER, $string);
-	// Clean any page spacers at the end of string
-	$string = str_replace(PAGE_SPACER, ' ', $string);
-	$string = trim($string);
-	$string = str_replace(' ', PAGE_SPACER, $string);
 	// If there are any weird language characters, this will protect us against possible problems they could cause
 	$string = str_replace(array('%2F', '%'), array('/', ''), urlencode($string));
 	// Finally, return the cleaned string
