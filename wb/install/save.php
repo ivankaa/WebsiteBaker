@@ -431,7 +431,7 @@ if($install_tables == true) {
 	." ('page_trash', 'disabled'),"
 	." ('homepage_redirection', 'false'),"
 	." ('page_languages', 'false'),"
-	." ('wysiwyg_editor', 'htmlarea'),"
+	." ('wysiwyg_editor', 'fckeditor'),"
 	." ('manage_sections', 'true'),"
 	." ('section_blocks', 'false'),"
 	." ('smart_login', 'false'),"
