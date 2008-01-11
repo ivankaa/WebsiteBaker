@@ -12,8 +12,10 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 09-Jan-2008 Matthias Gallas
-!	Upgrade pclzip to the newer more php5 complaint version 2.6, see ticket #526
+!	Update codepress to Version 0.9.6
+!	Update phplib to Version 7.4a
 09-Jan-2008 Matthias Gallas
+!	Upgrade pclzip to the newer more php5 complaint version 2.6, see ticket #526
 #	Fixed ticket #542 (Thanks to Thorn)
 23-Dec-2007 Matthias Gallas
 !	Changed all copyright notices to include now 2008
