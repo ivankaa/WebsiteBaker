@@ -11,6 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+11-Jan-2008 Christian Sommer
+!	Updated function: register_frontend_modfiles in /framework/frontend.functions.php
+	(added constants MOD_FRONTEND_CSS_REGISTERED, MOD_FRONTEND_JAVASCRIPT_REGISTERED)
+
 11-Jan-2008 Matthias Gallas
 !	Update codepress to Version 0.9.6
 !	Update phplib to Version 7.4a
