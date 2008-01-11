@@ -12,7 +12,10 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 11-Jan-2008 Christian Sommer
-+	added the fckeditor as new default WYSIWYG editor (htmlarea removed)
++	added the FCKEditor module files missing in Changeset 527 (/modules/fckeditor)
+
+11-Jan-2008 Christian Sommer
++	removed the hmtlarea files and set FCKEditor as new default editor
 
 11-Jan-2008 Christian Sommer
 !	Updated function: register_frontend_modfiles in /framework/frontend.functions.php
