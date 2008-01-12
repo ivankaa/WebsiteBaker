@@ -12,6 +12,10 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 12-Jan-2008 Christian Sommer
+!	introduced smart URL detection for the 'View' menu in the WB backend
+	(if page_id is set, redirect to this page instead of the root)
+
+12-Jan-2008 Christian Sommer
 !	introduced the enhanced pages admin dialogue (thanks to icouto)
 
 11-Jan-2008 Christian Sommer

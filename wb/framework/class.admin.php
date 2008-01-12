@@ -108,6 +108,17 @@ class admin extends wb {
 													'BACKEND_MODULE_JS'  => $this->register_backend_modfiles('js')		// adds backend.js
 													)
 											);
+
+		// work out the URL for the 'View menu' link in the WB backend
+		// if the page_id is set, show this page otherwise show the root directory of WB
+		$view_url = WB_URL;
+		if(isset($_GET['page_id'])) {
+			// extract page link from the database
+			$result = @$database->query("SELECT link FROM " .TABLE_PREFIX ."pages WHERE page_id = '" .(int) $_GET['page_id'] ."'");
+			$row = @$result->fetchRow();
+			if($row) $view_url .= PAGES_DIRECTORY .$row['link'] .PAGE_EXTENSION;
+		}
+
 		// Create the menu
 		$menu = array(
 					array(ADMIN_URL.'/start/index.php', '', $MENU['START'], 'start', 0),
@@ -118,7 +129,7 @@ class admin extends wb {
 					array(ADMIN_URL.'/settings/index.php', '', $MENU['SETTINGS'], 'settings', 1),
 					array(ADMIN_URL.'/access/index.php', '', $MENU['ACCESS'], 'access', 1),
 					array('http://www.websitebaker.org/help/'.WB_VERSION, '_blank', $MENU['HELP'], 'help', 0),
-					array(WB_URL.'/', '_blank', $MENU['VIEW'], 'view', 0),
+					array($view_url, '_blank', $MENU['VIEW'], 'view', 0),
 					array(ADMIN_URL.'/logout/index.php', '', $MENU['LOGOUT'], 'logout', 0)
 					);
 		$header_template->set_block('header_block', 'linkBlock', 'link');
