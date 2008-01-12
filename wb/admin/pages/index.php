@@ -99,7 +99,7 @@ ul, li {
 
 function make_list($parent, $editable_pages) {
 	// Get objects and vars from outside this function
-	global $admin, $template, $database, $TEXT, $MESSAGE;
+	global $admin, $template, $database, $TEXT, $MESSAGE, $HEADING;
 	?>
 	<ul id="p<?php echo $parent; ?>" <?php if($parent != 0) { echo 'class="page_list" '; if($_COOKIE["p".$parent] =="1"){echo'style="display:block;"'; }} ?>>
 	<?php	
@@ -131,12 +131,7 @@ function make_list($parent, $editable_pages) {
 					$editable_pages = $editable_pages+1;
 				}
 			} else {
-				if($page['visibility'] == 'private') {
-					continue;
-				}
-				else {
-					$can_modify = false;
-				}
+				$can_modify = false;
 			}
 						
 			// Work out if we should show a plus or not
@@ -171,30 +166,50 @@ function make_list($parent, $editable_pages) {
 				</td>
 				<?php if($admin->get_permission('pages_modify') == true AND $can_modify == true) { ?>
 				<td>
-					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>"><?php echo ($page['page_title']); ?></a>				
+					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
+						<?php if($page['visibility'] == 'public') { ?>
+							<img src="<?php echo ADMIN_URL; ?>/images/visible_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PUBLIC']; ?>" border="0" align="left" style="margin-right: 5px" />
+						<?php } elseif($page['visibility'] == 'private') { ?>
+							<img src="<?php echo ADMIN_URL; ?>/images/private_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PRIVATE']; ?>" border="0" align="left" style="margin-right: 5px" />
+						<?php } elseif($page['visibility'] == 'registered') { ?>
+							<img src="<?php echo ADMIN_URL; ?>/images/keys_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['REGISTERED']; ?>" border="0" align="left" style="margin-right: 5px" />
+						<?php } elseif($page['visibility'] == 'hidden') { ?>
+							<img src="<?php echo ADMIN_URL; ?>/images/hidden_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['HIDDEN']; ?>" border="0" align="left" style="margin-right: 5px" />
+						<?php } elseif($page['visibility'] == 'none') { ?>
+							<img src="<?php echo ADMIN_URL; ?>/images/none_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['NONE']; ?>" border="0" align="left" style="margin-right: 5px" />
+						<?php } elseif($page['visibility'] == 'deleted') { ?>
+							<img src="<?php echo ADMIN_URL; ?>/images/deleted_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['DELETED']; ?>" border="0" align="left" style="margin-right: 5px" />
+						<?php } 
+						echo ($page['page_title']); ?>
+					</a>				
 				</td>
 				<?php } else { ?>
 				<td>
-					<?php echo ($page['page_title']); ?>
+					<?php if($page['visibility'] == 'public') { ?>
+						<img src="<?php echo ADMIN_URL; ?>/images/visible_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PUBLIC']; ?>" border="0" align="left" style="margin-right: 5px" />
+					<?php } elseif($page['visibility'] == 'private') { ?>
+						<img src="<?php echo ADMIN_URL; ?>/images/private_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PRIVATE']; ?>" border="0" align="left" style="margin-right: 5px" />
+					<?php } elseif($page['visibility'] == 'registered') { ?>
+						<img src="<?php echo ADMIN_URL; ?>/images/keys_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['REGISTERED']; ?>" border="0" align="left" style="margin-right: 5px" />
+					<?php } elseif($page['visibility'] == 'hidden') { ?>
+						<img src="<?php echo ADMIN_URL; ?>/images/hidden_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['HIDDEN']; ?>" border="0" align="left" style="margin-right: 5px" />
+					<?php } elseif($page['visibility'] == 'none') { ?>
+						<img src="<?php echo ADMIN_URL; ?>/images/none_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['NONE']; ?>" border="0" align="left" style="margin-right: 5px" />
+					<?php } elseif($page['visibility'] == 'deleted') { ?>
+						<img src="<?php echo ADMIN_URL; ?>/images/deleted_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['DELETED']; ?>" border="0" align="left" style="margin-right: 5px" />
+					<?php } 
+					echo ($page['page_title']); ?>
 				</td>
 				<?php } ?>
 				<td align="left" width="232">
 					<font color="#999999"><?php echo ($page['menu_title']); ?></font>
 				</td>
-				<td align="center" valign="middle" width="90">
-				<?php if($page['visibility'] == 'public') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/visible_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PUBLIC']; ?>" border="0" />
-				<?php } elseif($page['visibility'] == 'private') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/private_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PRIVATE']; ?>" border="0" />
-				<?php } elseif($page['visibility'] == 'registered') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/keys_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['REGISTERED']; ?>" border="0" />
-				<?php } elseif($page['visibility'] == 'hidden') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/hidden_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['HIDDEN']; ?>" border="0" />
-				<?php } elseif($page['visibility'] == 'none') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/none_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['NONE']; ?>" border="0" />
-				<?php } elseif($page['visibility'] == 'deleted') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/deleted_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['DELETED']; ?>" border="0" />
-				<?php } ?>
+				<td width="20">
+					<?php if($page['visibility'] != 'deleted' AND $page['visibility'] != 'none') { ?>
+					<a href="<?php echo $admin->page_link($page['link']); ?>" target="_blank" title="<?php echo $TEXT['VIEW']; ?>">
+						<img src="<?php echo ADMIN_URL; ?>/images/view_16.png" border="0" alt="<?php echo $TEXT['VIEW']; ?>" />
+					</a>
+					<?php } ?>
 				</td>
 				<td width="20">
 					<?php if($page['visibility'] != 'deleted') { ?>
@@ -209,6 +224,21 @@ function make_list($parent, $editable_pages) {
 						</a>
 					<?php } ?>
 				</td>
+				
+				<!-- 'MANAGE SECTIONS' BUTTON -->
+				<td width="20">
+					<?php
+					// Work-out if we should show the "manage sections" link
+					$query_sections = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '" . $page['page_id'] . "' AND module = 'menu_link'");
+					if(($query_sections->numRows() == 0) && (MANAGE_SECTIONS == 'enabled')) {
+					?>
+						<a href="<?php echo ADMIN_URL; ?>/pages/sections.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $HEADING['MANAGE_SECTIONS']; ?>">
+						<img src="<?php echo ADMIN_URL; ?>/images/sections_16.png" border="0" alt="<?php echo $HEADING['MANAGE_SECTIONS']; ?>" />	
+						</a>
+					<?php } ?>
+				</td>
+				
+				
 				<td width="20">
 				<?php if($page['position'] != 1) { ?>
 					<?php if($page['visibility'] != 'deleted') { ?>
@@ -235,13 +265,6 @@ function make_list($parent, $editable_pages) {
 					<?php if($admin->get_permission('pages_delete') == true AND $can_modify == true) { ?>
 					<a href="javascript: confirm_link('<?php echo $MESSAGE['PAGES']['DELETE_CONFIRM']; ?>?', '<?php echo ADMIN_URL; ?>/pages/delete.php?page_id=<?php echo $page['page_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
 						<img src="<?php echo ADMIN_URL; ?>/images/delete_16.png" border="0" alt="X" />
-					</a>
-					<?php } ?>
-				</td>
-				<td width="20">
-					<?php if($page['visibility'] != 'deleted' AND $page['visibility'] != 'none') { ?>
-					<a href="<?php echo $admin->page_link($page['link']); ?>" target="_blank">
-						<img src="<?php echo ADMIN_URL; ?>/images/view_16.png" border="0" alt="<?php echo $TEXT['VIEW']; ?>" />
 					</a>
 					<?php } ?>
 				</td>
@@ -293,13 +316,10 @@ if($admin->get_permission('pages_view') == true) {
 			&nbsp;
 		</td>
 		<td>
-			<?php echo $TEXT['PAGE_TITLE']; ?>:
+			<?php echo $TEXT['VISIBILITY'] .' / ' .$TEXT['PAGE_TITLE']; ?>:
 		</td>
-		<td width="175" align="left">
+		<td width="235" align="left">
 			<?php echo $TEXT['MENU_TITLE']; ?>:
-		</td>
-		<td width="130" align="right">
-			<?php echo $TEXT['VISIBILITY']; ?>:
 		</td>
 		<td width="125" align="center">
 			<?php echo $TEXT['ACTIONS']; ?>:
