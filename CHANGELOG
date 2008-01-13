@@ -12,6 +12,9 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 13-Jan-2008 Christian Sommer
+!	updated PHPMailer framework to version 2.0.0 (/include/phpmailer)
+
+13-Jan-2008 Christian Sommer
 #	this bugfix closes ticket 412 (direct call of admin/settings/save.php clears database)
 
 13-Jan-2008 Christian Sommer
