@@ -164,6 +164,7 @@ $template->set_var(array(
 								'SECTION_LANGUAGES' => $MENU['LANGUAGES'],
 								'SECTION_USERS' => $MENU['USERS'],
 								'SECTION_GROUPS' => $MENU['GROUPS'],
+								'SECTION_ADMINTOOLS' => $MENU['ADMINTOOLS'],
 								'TEXT_VIEW' => $TEXT['VIEW'],
 								'TEXT_ADD' => $TEXT['ADD'],
 								'TEXT_LEVEL' => $TEXT['LEVEL'],

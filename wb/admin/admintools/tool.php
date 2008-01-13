@@ -1,6 +1,6 @@
 <?php
 
-// $Id$
+// $Id: tool.php 519 2007-12-23 14:37:02Z Ruebenwurzel $
 
 /*
 
@@ -27,26 +27,24 @@ require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 require_once(WB_PATH.'/framework/functions.php');
 
+$admin = new admin('admintools', 'admintools');
+
 if(!isset($_GET['tool'])) {
-	header("Location: index.php?advanced=yes");
+	header("Location: index.php");
 	exit(0);
 }
 
 // Check if tool is installed
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND directory = '".$_GET['tool']."'");
 if($result->numRows() == 0) {
-	header("Location: index.php?advanced=yes");
+	header("Location: index.php");
 	exit(0);
 }
 $tool = $result->fetchRow();
 
-$admin = new admin('Settings', 'settings_advanced');
-
 ?>
 <h4 style="margin: 0; border-bottom: 1px solid #DDD; padding-bottom: 5px;">
-	<a href="<?php echo ADMIN_URL; ?>/settings/index.php?advanced=yes"><?php echo $MENU['SETTINGS']; ?></a>
-	->
-	<a href="<?php echo ADMIN_URL; ?>/settings/index.php?advanced=yes#administration_tools"><?php echo $HEADING['ADMINISTRATION_TOOLS']; ?></a>
+	<a href="<?php echo ADMIN_URL; ?>/admintools/index.php"><?php echo $HEADING['ADMINISTRATION_TOOLS']; ?></a>
 	->
 	<?php echo $tool['name']; ?>
 </h4>

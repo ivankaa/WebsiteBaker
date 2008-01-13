@@ -127,6 +127,7 @@ class admin extends wb {
 					array(ADMIN_URL.'/addons/index.php', '', $MENU['ADDONS'], 'addons', 1),
 					array(ADMIN_URL.'/preferences/index.php', '', $MENU['PREFERENCES'], 'preferences', 0),
 					array(ADMIN_URL.'/settings/index.php', '', $MENU['SETTINGS'], 'settings', 1),
+					array(ADMIN_URL.'/admintools/index.php', '', $MENU['ADMINTOOLS'], 'admintools', 1),
 					array(ADMIN_URL.'/access/index.php', '', $MENU['ACCESS'], 'access', 1),
 					array('http://www.websitebaker.org/help/'.WB_VERSION, '_blank', $MENU['HELP'], 'help', 0),
 					array($view_url, '_blank', $MENU['VIEW'], 'view', 0),

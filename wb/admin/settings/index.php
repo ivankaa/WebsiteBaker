@@ -123,20 +123,6 @@ $template->set_var(array(
 								 )
 						 );
 
-// Insert tools into tool list
-$template->set_block('main_block', 'tool_list_block', 'tool_list');
-$results = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool'");
-if($results->numRows() > 0) {
-	while($tool = $results->fetchRow()) {
-		$template->set_var('TOOL_NAME', $tool['name']);
-		$template->set_var('TOOL_DIR', $tool['directory']);
-		$template->set_var('TOOL_DESCRIPTION', $tool['description']);
-		$template->parse('tool_list', 'tool_list_block', true);
-	}
-} else {
-	$template->set_var('TOOL_LIST', $TEXT['NONE_FOUND']);	
-}
-
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by directory");

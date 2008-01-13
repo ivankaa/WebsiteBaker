@@ -141,6 +141,7 @@ if($_POST['action'] == 'modify') {
 									'SECTION_SETTINGS' => $MENU['SETTINGS'],
 									'SECTION_USERS' => $MENU['USERS'],
 									'SECTION_GROUPS' => $MENU['GROUPS'],
+									'SECTION_ADMINTOOLS' => $MENU['ADMINTOOLS'],
 									'TEXT_VIEW' => $TEXT['VIEW'],
 									'TEXT_ADD' => $TEXT['ADD'],
 									'TEXT_LEVEL' => $TEXT['LEVEL'],

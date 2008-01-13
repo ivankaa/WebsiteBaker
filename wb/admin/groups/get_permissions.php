@@ -66,16 +66,17 @@ if($admin->get_post('advanced') != 'yes') {
 	} else {
 		$system_permissions['access'] = 0;
 	}
-		$system_permissions['users'] = $admin->get_post('users');
-			$system_permissions['users_view'] = $system_permissions['users'];
-			$system_permissions['users_add'] = $system_permissions['users'];
-			$system_permissions['users_modify'] = $system_permissions['users'];
-			$system_permissions['users_delete'] = $system_permissions['users'];
-		$system_permissions['groups'] = $admin->get_post('groups');
-			$system_permissions['groups_view'] = $system_permissions['groups'];
-			$system_permissions['groups_add'] = $system_permissions['groups'];
-			$system_permissions['groups_modify'] = $system_permissions['groups'];
-			$system_permissions['groups_delete'] = $system_permissions['groups'];
+	$system_permissions['users'] = $admin->get_post('users');
+	$system_permissions['users_view'] = $system_permissions['users'];
+	$system_permissions['users_add'] = $system_permissions['users'];
+	$system_permissions['users_modify'] = $system_permissions['users'];
+	$system_permissions['users_delete'] = $system_permissions['users'];
+	$system_permissions['groups'] = $admin->get_post('groups');
+	$system_permissions['groups_view'] = $system_permissions['groups'];
+	$system_permissions['groups_add'] = $system_permissions['groups'];
+	$system_permissions['groups_modify'] = $system_permissions['groups'];
+	$system_permissions['groups_delete'] = $system_permissions['groups'];
+	$system_permissions['admintools'] = $admin->get_post('admintools');
 } else {
 	// Pages
 	$system_permissions['pages_view'] = $admin->get_post('pages_view');

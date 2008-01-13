@@ -12,6 +12,9 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 13-Jan-2008 Christian Sommer
+#	moved administration tools from Settings to the new section Admin-Tools
+
+13-Jan-2008 Christian Sommer
 #	this bugfix closes the ticket 529 (WB upgrades modules with identical version)	
 
 13-Jan-2008 Christian Sommer

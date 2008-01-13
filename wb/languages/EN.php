@@ -46,6 +46,7 @@ $MENU['TEMPLATES'] = 'Templates';
 $MENU['LANGUAGES'] = 'Languages';
 $MENU['PREFERENCES'] = 'Preferences';
 $MENU['SETTINGS'] = 'Settings';
+$MENU['ADMINTOOLS'] = 'Admin-Tools';
 $MENU['ACCESS'] = 'Access';
 $MENU['USERS'] = 'Users';
 $MENU['GROUPS'] = 'Groups';
