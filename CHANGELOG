@@ -12,8 +12,10 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 13-Jan-2008 Christian Sommer
-!	changed admin/login/template.html HOME link to WB_URL
-!	increased redirection time after success message
+#	this bugfix closes the ticket 529 (WB upgrades modules with identical version)	
+
+13-Jan-2008 Christian Sommer
+!	increased redirection time after success message, corrected HOME link of the login panel
 
 13-Jan-2008 Christian Sommer
 !	updated PHPMailer framework to version 2.0.0 (/include/phpmailer)

@@ -76,7 +76,7 @@ if(is_dir(WB_PATH.'/modules/'.$module_directory)) {
 	if(file_exists(WB_PATH.'/modules/'.$module_directory.'/info.php')) {
 		require(WB_PATH.'/modules/'.$module_directory.'/info.php');
 		// Version to be installed is older than currently installed version
-		if ($module_version>$new_module_version) {
+		if ($module_version>=$new_module_version) {
 			if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
 			$admin->print_error($MESSAGE['GENERIC']['ALREADY_INSTALLED']);
 		}
