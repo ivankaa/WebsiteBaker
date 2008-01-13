@@ -12,6 +12,9 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 13-Jan-2008 Christian Sommer
+#	this bugfix closes ticket 412 (direct call of admin/settings/save.php clears database)
+
+13-Jan-2008 Christian Sommer
 #	fixed error with redirection to admin panel after installation
 
 12-Jan-2008 Christian Sommer
