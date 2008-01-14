@@ -62,7 +62,7 @@ $database->query($query);
 if($database->is_error()) {
 	$wb->print_error($database->get_error, 'index.php', false);
 } else {
-	$wb->print_success($MESSAGE['PREFERENCES']['PASSWORD_CHANGED'], WB_URL.'/account/preferences'.PAGE_EXTENSION);
+	$wb->print_success($MESSAGE['PREFERENCES']['PASSWORD_CHANGED'], WB_URL.'/account/preferences.php');
 }
 
 

@@ -38,7 +38,7 @@ if(!defined('WB_URL')) {
 
 <h1>&nbsp;<?php echo $TEXT['SIGNUP']; ?></h1>
 
-<form name="user" action="<?php echo WB_URL.'/account/signup'.PAGE_EXTENSION; ?>" method="post">
+<form name="user" action="<?php echo WB_URL.'/account/signup.php'; ?>" method="post">
 
 <table cellpadding="5" cellspacing="0" border="0" width="90%">
 <tr>

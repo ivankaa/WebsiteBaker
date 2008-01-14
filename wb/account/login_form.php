@@ -59,7 +59,7 @@ if(defined('SMART_LOGIN') AND SMART_LOGIN == 'enabled') {
 <br />
 <br />
 
-<form name="login" action="<?php echo WB_URL.'/account/login'.PAGE_EXTENSION; ?>" method="post">
+<form name="login" action="<?php echo WB_URL.'/account/login.php'; ?>" method="post">
 <input type="hidden" name="username_fieldname" value="<?php echo $username_fieldname; ?>" />
 <input type="hidden" name="password_fieldname" value="<?php echo $password_fieldname; ?>" />
 <input type="hidden" name="redirect" value="<?php echo $thisApp->redirect_url;?>" />

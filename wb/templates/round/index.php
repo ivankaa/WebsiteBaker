@@ -77,7 +77,7 @@ if(function_exists('register_frontend_modfiles')) {
 		</table>
 		
 		<?php if(SHOW_SEARCH) { ?>
-		<form name="search" action="<?php echo WB_URL.'/search/index'.PAGE_EXTENSION; ?>" method="get">
+		<form name="search" action="<?php echo WB_URL.'/search/index.php'; ?>" method="get">
 			<table cellpadding="0" cellspacing="0" border="0" width="150" align="center" style="margin-top: 10px;">
 				<tr>
 					<td class="border">

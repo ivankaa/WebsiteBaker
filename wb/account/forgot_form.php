@@ -119,7 +119,7 @@ if(!isset($message)) {
 ?>
 <h1 style="text-align: center;"><?php echo $MENU['FORGOT']; ?></h1>
 
-<form name="forgot_pass" action="<?php echo WB_URL.'/account/forgot'.PAGE_EXTENSION; ?>" method="post">
+<form name="forgot_pass" action="<?php echo WB_URL.'/account/forgot.php'; ?>" method="post">
 	<input type="hidden" name="url" value="{URL}" />
 		<table cellpadding="5" cellspacing="0" border="0" align="center" width="500">
 		<tr>

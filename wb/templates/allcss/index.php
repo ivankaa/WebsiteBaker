@@ -55,7 +55,7 @@ if(function_exists('register_frontend_modfiles')) {
 	
 	<div class="search_box">
 		<?php if(SHOW_SEARCH) { ?>
-		<form name="search" action="<?php echo WB_URL.'/search/index'.PAGE_EXTENSION; ?>" method="get">
+		<form name="search" action="<?php echo WB_URL.'/search/index.php'; ?>" method="get">
 		<input type="text" name="string" class="search_string" />
 		<input type="submit" name="submit" value="<?php echo $TEXT['SEARCH']; ?>" class="search_submit" />
 		</form>

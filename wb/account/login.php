@@ -28,10 +28,10 @@ require_once("../config.php");
 // Make sure the login is enabled
 if(!FRONTEND_LOGIN) {
 	if(INTRO_PAGE) {
-		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index'.PAGE_EXTENSION);
+		header('Location: '.WB_URL.PAGES_DIRECTORY.'/index.php');
 		exit(0);
 	} else {
-		header('Location: '.WB_URL.'/index'.PAGE_EXTENSION);
+		header('Location: '.WB_URL.'/index.php');
 		exit(0);
 	}
 }
@@ -64,12 +64,12 @@ $thisApp = new Login(
 									"MIN_PASSWORD_LEN" => "2",
 									"MAX_USERNAME_LEN" => "30",
 									"MAX_PASSWORD_LEN" => "30",
-									"LOGIN_URL" => WB_URL."/account/login".PAGE_EXTENSION.'?redirect='.$_REQUEST['redirect'],
-									"DEFAULT_URL" => WB_URL.PAGES_DIRECTORY."/index".PAGE_EXTENSION,
+									"LOGIN_URL" => WB_URL."/account/login.php?redirect=".$_REQUEST['redirect'],
+									"DEFAULT_URL" => WB_URL.PAGES_DIRECTORY."/index.php",
 									"TEMPLATE_DIR" => ADMIN_PATH."/login",
 									"TEMPLATE_FILE" => "template.html",
 									"FRONTEND" => true,
-									"FORGOTTEN_DETAILS_APP" => WB_URL."/account/forgot.php".PAGE_EXTENSION,
+									"FORGOTTEN_DETAILS_APP" => WB_URL."/account/forgot.php",
 									"USERS_TABLE" => TABLE_PREFIX."users",
 									"GROUPS_TABLE" => TABLE_PREFIX."groups",
 									"REDIRECT_URL" => $_REQUEST['redirect']

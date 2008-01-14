@@ -67,7 +67,7 @@ if(function_exists('register_frontend_modfiles')) {
 		<?php if(SHOW_SEARCH) { /* Only show search box if search is enabled */ ?>
 			<br />
 			Search: <br />
-			<form name="search" action="<?php echo WB_URL; ?>/search/index<?php echo PAGE_EXTENSION; ?>" method="get">
+			<form name="search" action="<?php echo WB_URL; ?>/search/index.php" method="get">
 				<input type="text" name="string" style="width: 100%;" />
 				<input type="submit" name="submit" value="<?php echo $TEXT['SEARCH']; ?>" style="width: 100%;" />
 			</form>
