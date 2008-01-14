@@ -131,7 +131,12 @@ function make_list($parent, $editable_pages) {
 					$editable_pages = $editable_pages+1;
 				}
 			} else {
-				$can_modify = false;
+				if($page['visibility'] == 'private') {
+					continue;
+				}
+				else {
+					$can_modify = false;
+				}
 			}
 						
 			// Work out if we should show a plus or not
