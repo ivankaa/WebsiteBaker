@@ -1193,7 +1193,7 @@ function delete_page($page_id) {
 	
 	// Unlink the page access file and directory
 	$directory = WB_PATH.PAGES_DIRECTORY.$link;
-	$filename = $directory.'.php';
+	$filename = $directory.PAGE_EXTENSION;
 	$directory .= '/';
 	if(file_exists($filename) && substr($filename,0,1<>'.')) {
 		if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {

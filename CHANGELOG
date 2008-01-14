@@ -12,9 +12,11 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 14-Jan-2008 Matthias Gallas
-#	Replaced hardcoded text in login.php with language variables (fixes ticket 386)
+#	Replaced hardcoded .php with the variable PAGE_EXTENSION for the use in pagenames.
+	(!!Attention!! To get extenions other than .php working additional fixes are necessary!)
 #	Replaced the variable PAGE_EXTENSION with hardcoded .php on all places where the
 	pathes points to WB Corefiles with the page extension .php
+#	Replaced hardcoded text in login.php with language variables (fixes ticket 386)
 14-Jan-2008 Christian Sommer
 !	added a missing </tr> tag
 #	re-introduced bugfix of Changeset 472 (fixes ticket 402) accidentally 
