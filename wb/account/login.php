@@ -44,8 +44,8 @@ define('PAGE_ID', 0);
 define('ROOT_PARENT', 0);
 define('PARENT', 0);
 define('LEVEL', 0);
-define('PAGE_TITLE', 'Please login');
-define('MENU_TITLE', 'Please login');
+define('PAGE_TITLE', $TEXT['PLEASE_LOGIN']);
+define('MENU_TITLE', $TEXT['PLEASE_LOGIN']);
 define('VISIBILITY', 'public');
 // Set the page content include file
 define('PAGE_CONTENT', WB_PATH.'/account/login_form.php');

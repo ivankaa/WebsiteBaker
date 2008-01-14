@@ -406,6 +406,7 @@ $TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP authentification';
 $TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification';
 $TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP username';
 $TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP password';
+$TEXT['PLEASE_LOGIN'] = 'Please login';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, you do not have permissions to view this page';

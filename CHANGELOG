@@ -11,46 +11,28 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
-13-Jan-2008 Christian Sommer
+14-Jan-2008 Matthias Gallas
+#	Replaced hardcoded text in login.php with language variables (fixes ticket 386)	
+14-Jan-2008 Christian Sommer
 #	re-introduced bugfix of Changeset 472 (fixes ticket 402) accidentally 
 	removed by Changeset 529 (enhanced pages admin)
-
 13-Jan-2008 Christian Sommer
 #	moved administration tools from Settings to the new section Admin-Tools
-
-13-Jan-2008 Christian Sommer
 #	this bugfix closes the ticket 529 (WB upgrades modules with identical version)	
-
-13-Jan-2008 Christian Sommer
 !	increased redirection time after success message, corrected HOME link of the login panel
-
-13-Jan-2008 Christian Sommer
 !	updated PHPMailer framework to version 2.0.0 (/include/phpmailer)
-
-13-Jan-2008 Christian Sommer
 #	this bugfix closes ticket 412 (direct call of admin/settings/save.php clears database)
-
-13-Jan-2008 Christian Sommer
 #	fixed error with redirection to admin panel after installation
-
 12-Jan-2008 Christian Sommer
 !	introduced smart URL detection for the 'View' menu in the WB backend
 	(if page_id is set, redirect to this page instead of the root)
-
-12-Jan-2008 Christian Sommer
 !	introduced the enhanced pages admin dialogue (thanks to icouto)
-
 11-Jan-2008 Christian Sommer
 +	added the FCKEditor module files missing in Changeset 527 (/modules/fckeditor)
-
-11-Jan-2008 Christian Sommer
 -	removed the hmtlarea files in /modules/htmlarea
 !	set the fckeditor as the new default editor /install/save.php
-
-11-Jan-2008 Christian Sommer
 !	Updated function: register_frontend_modfiles in /framework/frontend.functions.php
 	(added constants MOD_FRONTEND_CSS_REGISTERED, MOD_FRONTEND_JAVASCRIPT_REGISTERED)
-
 11-Jan-2008 Matthias Gallas
 !	Update codepress to Version 0.9.6
 !	Update phplib to Version 7.4a
