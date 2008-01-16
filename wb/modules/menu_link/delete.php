@@ -23,6 +23,12 @@
 
 */
 
-// Nothing special has to be deleted
+// prevent this file from being accesses directly
+if(defined('WB_PATH') == false) {
+	exit("Cannot access this file directly"); 
+}
+
+$table = TABLE_PREFIX ."mod_menu_link";
+$database->query("DELETE FROM `$table` WHERE section_id = '$section_id'");
 
 ?>

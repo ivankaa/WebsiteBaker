@@ -1195,12 +1195,12 @@ function delete_page($page_id) {
 	$directory = WB_PATH.PAGES_DIRECTORY.$link;
 	$filename = $directory.PAGE_EXTENSION;
 	$directory .= '/';
-	if(file_exists($filename) && substr($filename,0,1<>'.')) {
+	if(file_exists($filename)) {
 		if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 			$admin->print_error($MESSAGE['PAGES']['CANNOT_DELETE_ACCESS_FILE']);
 		} else {
 			unlink($filename);
-			if(file_exists($directory)) {
+			if(file_exists($directory) && rtrim($directory,'/')!=WB_PATH.PAGES_DIRECTORY) {
 				rm_full_dir($directory);
 			}
 		}

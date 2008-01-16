@@ -23,12 +23,22 @@
 
 */
 
+/* History:
+
+2.6.1.0 - 16. Jan. 2008 - thorn
+- added table mod_menu_link
+- added install.php, delete.php, add.php
+- changed wb/index.php: redirect if page is menu_link
+- removed special-handling of menu_link in: admin/pages/settings2.php
+
+*/
+
 $module_directory = 'menu_link';
 $module_name = 'Menu Link';
 $module_function = 'page';
-$module_version = '2.6';
+$module_version = '2.6.1.0';
 $module_platform = '2.6.x';
-$module_author = 'Ryan Djurovich';
+$module_author = 'Ryan Djurovich, thorn';
 $module_license = 'GNU General Public License';
 $module_description = 'This module allows you to insert a link into the menu.';
 

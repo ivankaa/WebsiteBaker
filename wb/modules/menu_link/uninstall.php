@@ -29,15 +29,6 @@ if(defined('WB_PATH') == false) {
 }
 
 $table = TABLE_PREFIX ."mod_menu_link";
-$database->query("DROP TABLE IF EXISTS `$table`");
-
-$database->query("
-	CREATE TABLE `$table` (
-		`section_id` INT(11) NOT NULL DEFAULT '0',
-		`page_id` INT(11) NOT NULL DEFAULT '0',
-		`target_page_id` INT(11) NOT NULL DEFAULT '0',
-		PRIMARY KEY (`section_id`)
-	)
-");
+$database->query("DROP TABLE `$table`");
 
 ?>

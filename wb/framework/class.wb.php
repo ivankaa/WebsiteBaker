@@ -45,6 +45,47 @@ class wb
 	// performed when frontend or backend is loaded.
 	function wb() {
 	}
+	
+	// Check whether a page is visible or not.
+	// This will check page-visibility and user- and group-rights.
+	/* page_is_visible() returns
+		false: if page-visibility is 'none' or 'deleted', or page-vis. is 'registered' or 'private' and user isn't allowed to see the page.
+		true: if page-visibility is 'public' or 'hidden', or page-vis. is 'registered' or 'private' and user _is_ allowed to see the page.
+	*/
+	function page_is_visible($page) {
+		$show_it = false; // shall we show the page?
+		$page_id = $page['page_id'];
+		$visibility = $page['visibility'];
+		$viewing_groups = $page['viewing_groups'];
+		$viewing_users = $page['viewing_users'];
+		// First check if visibility is 'none', 'deleted'
+		if($visibility == 'none') {
+			return(false);
+		} elseif($visibility == 'deleted') {
+			return(false);
+		}
+		// Now check if visibility is 'hidden', 'private' or 'registered'
+		if($visibility == 'hidden') { // hidden: hide the menu-link, but show the page
+			$show_it = true;
+		} elseif($visibility == 'private' || $visibility == 'registered') {
+			// Check if the user is logged in
+			if($this->is_authenticated() == true) {
+				// Now check if the user has perms to view the page
+				if(in_array($this->get_group_id(), explode(',', $viewing_groups)) || in_array($this->get_user_id(), explode(',', $viewing_users))) {
+					$show_it = true;
+				} else {
+					$show_it = false;
+				}
+			} else {
+				$show_it = false;
+			}
+		} elseif($visibility == 'public') {
+			$show_it = true;
+		} else {
+			$show_it = false;
+		}
+		return($show_it);
+	}
 
 	// Check whether we should show a page or not (for front-end)
 	function show_page($page) {

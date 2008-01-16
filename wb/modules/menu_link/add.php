@@ -23,6 +23,12 @@
 
 */
 
-// Nothing needs to be inserted anywhere special
+// prevent this file from being accesses directly
+if(defined('WB_PATH') == false) {
+	exit("Cannot access this file directly"); 
+}
+
+$table = TABLE_PREFIX ."mod_menu_link";
+$database->query("INSERT INTO `$table` (`page_id`, `section_id`, target_page_id) VALUES ('$page_id', '$section_id', '0')");
 
 ?>
