@@ -12,10 +12,12 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 16-Jan-2008 Thomas Hornik
-! changed module menu_link: added table mod_menu_link, fixed page-deleting-bug,
+!	changed admin/pages/save.php to allow hidden config-elements in table search.
+16-Jan-2008 Thomas Hornik
+!	changed module menu_link: added table mod_menu_link, fixed page-deleting-bug,
 	fixed odd behavior in case of menu_link as default-page.
 16-Jan-2008 Thomas Hornik
-# changing PHP-error-level within website baker does not work - fixed (fixed ticket 532)
+#	changing PHP-error-level within website baker does not work - fixed (fixed ticket 532)
 14-Jan-2008 Matthias Gallas
 #	Replaced hardcoded .php with the variable PAGE_EXTENSION for the use in pagenames.
 	(!!Attention!! To get extenions other than .php working additional fixes are necessary!)

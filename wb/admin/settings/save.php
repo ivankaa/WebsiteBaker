@@ -143,12 +143,16 @@ while($setting = $results->fetchRow()) {
 }
 
 // Query current search settings in the db, then loop through them and update the db with the new value
-$query = "SELECT name FROM ".TABLE_PREFIX."search WHERE extra = ''";
+$query = "SELECT name, value FROM ".TABLE_PREFIX."search WHERE extra = ''";
 $results = $database->query($query);
 while($search_setting = $results->fetchRow()) {
+	$old_value = $search_setting['value'];
 	$setting_name = $search_setting['name'];
 	$post_name = 'search_'.$search_setting['name'];
-	$value = $admin->get_post($post_name);
+	if($admin->get_post($post_name) == '')
+		$value = $old_value;
+	else
+		$value = $admin->get_post($post_name);
 	$value = $admin->add_slashes($value);
 	$database->query("UPDATE ".TABLE_PREFIX."search SET value = '$value' WHERE name = '$setting_name'");
 }
