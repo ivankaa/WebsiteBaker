@@ -25,7 +25,7 @@
 
 /* History:
 
-2.6.1.0 - 16. Jan. 2008 - thorn
+2.6.1.1 - 16. Jan. 2008 - thorn
 - added table mod_menu_link
 - added install.php, delete.php, add.php
 - changed wb/index.php: redirect if page is menu_link
@@ -36,7 +36,7 @@
 $module_directory = 'menu_link';
 $module_name = 'Menu Link';
 $module_function = 'page';
-$module_version = '2.6.1.0';
+$module_version = '2.6.1.1';
 $module_platform = '2.6.x';
 $module_author = 'Ryan Djurovich, thorn';
 $module_license = 'GNU General Public License';

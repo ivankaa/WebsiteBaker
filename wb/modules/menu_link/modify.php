@@ -23,7 +23,7 @@
 
 */
 
-// Must include code to stop this file being access directly
+// Must include code to stop this file being accessed directly
 if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
 // get target page_id
@@ -44,7 +44,8 @@ if($query_page->numRows() > 0) {
 			if($query_subpage->numRows() > 0) {
 				while($sub = $query_subpage->fetchRow()) {
 					if($admin->page_is_visible($sub)) {
-						$links[$sub['page_id']]=$links[$sub['parent']].'/'.$sub['menu_title'];
+						$parent_link = (array_key_exists($sub['parent'],$links))?$links[$sub['parent']]:"";
+						$links[$sub['page_id']]=$parent_link.'/'.$sub['menu_title'];
 					}
 				}
 			}
