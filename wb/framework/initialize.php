@@ -51,6 +51,11 @@ if (file_exists(WB_PATH.'/framework/class.database.php')) {
 	$string_dir_mode = STRING_DIR_MODE;
 	define('OCTAL_DIR_MODE',(int) octdec($string_dir_mode));
 	
+	// set error-reporting
+	if(is_numeric(ER_LEVEL)) {
+		error_reporting(ER_LEVEL);
+	}
+
 	// Start a session
 	if(!defined('SESSION_STARTED')) {
 		session_name(APP_NAME.'_session_id');
