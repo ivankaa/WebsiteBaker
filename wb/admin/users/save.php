@@ -40,7 +40,7 @@ if(!isset($_POST['user_id']) OR !is_numeric($_POST['user_id']) OR $_POST['user_i
 }
 
 // Gather details entered
-$groups_id = implode(",", $_POST['groups']);
+$groups_id = (isset($_POST['groups'])) ? $groups_id = implode(",", $_POST['groups']) : '';
 $active = $_POST['active'][0];
 $username_fieldname = $admin->get_post('username_fieldname');
 $username = strtolower($admin->get_post($username_fieldname));

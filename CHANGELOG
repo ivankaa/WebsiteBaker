@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+17-Jan-2008 Christian Sommer
+#	fixed bug in frontend login and multiple groups (only in conjunction with E_ALL)
+
 17-Jan-2008 Matthias Gallas
 #	Reintroduced changes from changeset 520 and 540 wich where overwritten 
 	by changeset 546
