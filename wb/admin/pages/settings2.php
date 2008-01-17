@@ -150,12 +150,6 @@ $database->query($query);
 // Get page trail
 $page_trail = get_page_trail($page_id);
 
-// Make sure link is not overwritten if page uses the menu link module
-$query_sections = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'menu_link'");
-if($query_sections->numRows() > 0) {
-	$link = $old_link;
-} 
-
 // Update page settings in the pages table
 $query = "UPDATE ".TABLE_PREFIX."pages SET parent = '$parent', page_title = '$page_title', menu_title = '$menu_title', menu = '$menu', level = '$level', page_trail = '$page_trail', root_parent = '$root_parent', link = '$link', template = '$template', target = '$target', description = '$description', keywords = '$keywords', position = '$position', visibility = '$visibility', searching = '$searching', language = '$language', admin_groups = '$admin_groups', viewing_groups = '$viewing_groups' WHERE page_id = '$page_id'";
 $database->query($query);
