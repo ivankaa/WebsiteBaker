@@ -116,7 +116,7 @@ class admin extends wb {
 			// extract page link from the database
 			$result = @$database->query("SELECT link FROM " .TABLE_PREFIX ."pages WHERE page_id = '" .(int) $_GET['page_id'] ."'");
 			$row = @$result->fetchRow();
-			if($row) $view_url .= PAGES_DIRECTORY .$row['link'] .PAGE_EXTENSION;
+			if($row) $view_url .= PAGES_DIRECTORY .$row['link']. '.php';
 		}
 
 		// Create the menu

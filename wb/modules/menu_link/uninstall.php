@@ -1,6 +1,6 @@
 <?php
 
-// $Id: install.php 519 2007-12-23 14:37:02Z Ruebenwurzel $
+// $Id$
 
 /*
 

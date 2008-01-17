@@ -201,7 +201,7 @@ class frontend extends wb {
 			// Check if the user is authenticated
 			if($this->is_authenticated() == false) {
 				// User needs to login first
-				header("Location: ".WB_URL."/account/login".PAGE_EXTENSION.'?redirect='.$this->link);
+				header("Location: ".WB_URL."/account/login.php?redirect=".$this->link);
 				exit(0);
 			}
 			// Check if we should show this page
@@ -250,11 +250,11 @@ class frontend extends wb {
 		// Work-out if login menu constants should be set
 		if(FRONTEND_LOGIN) {
 			// Set login menu constants
-			define('LOGIN_URL', WB_URL.'/account/login'.PAGE_EXTENSION);
-			define('LOGOUT_URL', WB_URL.'/account/logout'.PAGE_EXTENSION);
-			define('FORGOT_URL', WB_URL.'/account/forgot'.PAGE_EXTENSION);
-			define('PREFERENCES_URL', WB_URL.'/account/preferences'.PAGE_EXTENSION);
-			define('SIGNUP_URL', WB_URL.'/account/signup'.PAGE_EXTENSION);
+			define('LOGIN_URL', WB_URL.'/account/login.php');
+			define('LOGOUT_URL', WB_URL.'/account/logout.php');
+			define('FORGOT_URL', WB_URL.'/account/forgot.php');
+			define('PREFERENCES_URL', WB_URL.'/account/preferences.php');
+			define('SIGNUP_URL', WB_URL.'/account/signup.php');
 		}
 	}
 	
