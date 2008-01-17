@@ -65,7 +65,7 @@ $thisApp = new Login(
 									"MIN_PASSWORD_LEN" => "2",
 									"MAX_USERNAME_LEN" => "30",
 									"MAX_PASSWORD_LEN" => "30",
-									"LOGIN_URL" => WB_URL."/account/login".PAGE_EXTENSION .'?redirect=' .$redirect,
+									"LOGIN_URL" => WB_URL."/account/login.php?redirect=" .$redirect,
 									"DEFAULT_URL" => WB_URL.PAGES_DIRECTORY."/index.php",
 									"TEMPLATE_DIR" => ADMIN_PATH."/login",
 									"TEMPLATE_FILE" => "template.html",
