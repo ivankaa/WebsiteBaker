@@ -63,7 +63,7 @@ if($admin->get_permission('settings') != true) {
 // Check if installation directory still exists
 if(file_exists(WB_PATH.'/install/')) {
 	// Check if user is part of Adminstrators group
-	if($admin->get_group_id() == 1) {
+	if(in_array(1, $admin->get_groups_id())) {
 		$template->set_var('WARNING', $MESSAGE['START']['INSTALL_DIR_EXISTS']);
 	} else {
 		$template->set_var('DISPLAY_WARNING', 'none');

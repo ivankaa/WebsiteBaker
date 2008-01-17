@@ -48,7 +48,13 @@ $results = $database->query("SELECT admin_groups,admin_users FROM ".TABLE_PREFIX
 $results_array = $results->fetchRow();
 $old_admin_groups = explode(',', str_replace('_', '', $results_array['admin_groups']));
 $old_admin_users = explode(',', str_replace('_', '', $results_array['admin_users']));
-if(!is_numeric(array_search($admin->get_group_id(), $old_admin_groups)) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
+$in_old_group = FALSE;
+foreach($admin->get_groups_id() as $cur_gid){
+    if (in_array($cur_gid, $old_admin_groups)) {
+        $in_old_group = TRUE;
+    }
+}
+if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
 	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
 }
 

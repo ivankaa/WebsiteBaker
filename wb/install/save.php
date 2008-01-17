@@ -457,6 +457,7 @@ if($install_tables == true) {
 	// Users table
 	$users = 'CREATE TABLE `'.TABLE_PREFIX.'users` ( `user_id` INT NOT NULL auto_increment,'
 	       . ' `group_id` INT NOT NULL DEFAULT \'0\','
+	       . ' `groups_id` VARCHAR( 255 ) NOT NULL DEFAULT \'0\','
 	       . ' `active` INT NOT NULL DEFAULT \'0\','
 	       . ' `username` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `password` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
@@ -517,7 +518,7 @@ if($install_tables == true) {
 	$insert_admin_group = "INSERT INTO `".TABLE_PREFIX."groups` VALUES ('1', 'Administrators', '$full_system_permissions', '', '')";
 	$database->query($insert_admin_group);
 	// Admin user
-	$insert_admin_user = "INSERT INTO `".TABLE_PREFIX."users` (user_id,group_id,active,username,password,email,display_name) VALUES ('1','1','1','$admin_username','".md5($admin_password)."','$admin_email','Administrator')";
+	$insert_admin_user = "INSERT INTO `".TABLE_PREFIX."users` (user_id,group_id,groups_id,active,username,password,email,display_name) VALUES ('1','1','1','1','$admin_username','".md5($admin_password)."','$admin_email','Administrator')";
 	$database->query($insert_admin_user);
 	
 	// Search header

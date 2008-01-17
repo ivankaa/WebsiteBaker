@@ -31,6 +31,7 @@ if(isset($_COOKIE['REMEMBER_KEY'])) {
 
 $_SESSION['USER_ID'] = null;
 $_SESSION['GROUP_ID'] = null;
+$_SESSION['GROUPS_ID'] = null;
 $_SESSION['USERNAME'] = null;
 $_SESSION['PAGE_PERMISSIONS'] = null;
 $_SESSION['SYSTEM_PERMISSIONS'] = null;

@@ -42,7 +42,14 @@ $results = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id =
 $results_array = $results->fetchRow();
 $old_admin_groups = explode(',', $results_array['admin_groups']);
 $old_admin_users = explode(',', $results_array['admin_users']);
-if(!is_numeric(array_search($admin->get_group_id(), $old_admin_groups)) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
+
+$in_old_group = FALSE;
+foreach($admin->get_groups_id() as $cur_gid){
+    if (in_array($cur_gid, $old_admin_groups)) {
+        $in_old_group = TRUE;
+    }
+}
+if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
 	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
 }
 
@@ -111,11 +118,9 @@ if($results_array['visibility'] == 'public') {
 }
 // Group list 1 (admin_groups)
 	$admin_groups = explode(',', str_replace('_', '', $results_array['admin_groups']));
-	if($admin->get_group_id() == 1) {
-		$query = "SELECT * FROM ".TABLE_PREFIX."groups";
-	} else {
-		$query = "SELECT * FROM ".TABLE_PREFIX."groups WHERE group_id != '".$admin->get_group_id()."'";
-	}
+
+	$query = "SELECT * FROM ".TABLE_PREFIX."groups";
+	
 	$get_groups = $database->query($query);
 	$template->set_block('main_block', 'group_list_block', 'group_list');
 	// Insert admin group and current group first
@@ -131,48 +136,63 @@ if($results_array['visibility'] == 'public') {
 									)
 							);
 	$template->parse('group_list', 'group_list_block', true);
-	if($admin->get_group_id() != 1) {
-		$template->set_var(array(
-										'ID' => $admin->get_group_id(),
+	/*
+	if(!in_array(1, $admin->get_groups_id())) {
+		$users_groups = $admin->get_groups_name();
+		foreach ($admin->get_groups_id() as $users_group_id) {
+			$template->set_var(array(
+										'ID' => $users_group_id,
 										'TOGGLE' => '',
 										'DISABLED' => ' disabled',
 										'LINK_COLOR' => '000000',
 										'CURSOR' => 'default',
-										'NAME' => $admin->get_group_name(),
+										'NAME' => $users_groups[$users_group_id],
 										'CHECKED' => ' checked'
 										)
 								);
-		$template->parse('group_list', 'group_list_block', true);
+			$template->parse('group_list', 'group_list_block', true);
+		}
 	}
+	*/
 	while($group = $get_groups->fetchRow()) {
+		// check if the user is a member of this group
+		$flag_disabled = '';
+		$flag_checked =  '';
+		$flag_cursor =   'pointer';
+		$flag_color =    '';
+		if (in_array($group["group_id"], $admin->get_groups_id())) {
+			$flag_disabled = ' disabled';
+			$flag_checked =  ' checked';
+			$flag_cursor =   'default';
+			$flag_color =    '000000';
+		}
+
 		// Check if the group is allowed to edit pages
 		$system_permissions = explode(',', $group['system_permissions']);
 		if(is_numeric(array_search('pages_modify', $system_permissions))) {
 			$template->set_var(array(
 											'ID' => $group['group_id'],
 											'TOGGLE' => $group['group_id'],
-											'DISABLED' => '',
-											'LINK_COLOR' => '',
-											'CURSOR' => 'pointer',
+											'DISABLED' => $flag_disabled,
+											'LINK_COLOR' => $flag_color,
+											'CURSOR' => $flag_cursor,
 											'NAME' => $group['name'],
-											'CHECKED' => ''
+											'CHECKED' => $flag_checked
 											)
 									);
 			if(is_numeric(array_search($group['group_id'], $admin_groups))) {
 				$template->set_var('CHECKED', 'checked');
 			} else {
-				$template->set_var('CHECKED', '');
+				if (!$flag_checked) $template->set_var('CHECKED', '');
 			}
 			$template->parse('group_list', 'group_list_block', true);
 		}
 	}
 // Group list 2 (viewing_groups)
 	$viewing_groups = explode(',', str_replace('_', '', $results_array['viewing_groups']));
-	if($admin->get_group_id() == 1) {
-		$query = "SELECT * FROM ".TABLE_PREFIX."groups";
-	} else {
-		$query = "SELECT * FROM ".TABLE_PREFIX."groups WHERE group_id != '".$admin->get_group_id()."'";
-	}
+
+	$query = "SELECT * FROM ".TABLE_PREFIX."groups";
+
 	$get_groups = $database->query($query);
 	$template->set_block('main_block', 'group_list_block2', 'group_list2');
 	// Insert admin group and current group first
@@ -188,33 +208,35 @@ if($results_array['visibility'] == 'public') {
 									)
 							);
 	$template->parse('group_list2', 'group_list_block2', true);
-	if($admin->get_group_id() != 1) {
-		$template->set_var(array(
-										'ID' => $admin->get_group_id(),
-										'TOGGLE' => '',
-										'DISABLED' => ' disabled',
-										'LINK_COLOR' => '000000',
-										'CURSOR' => 'default',
-										'NAME' => $admin->get_group_name(),
-										'CHECKED' => ' checked'
-										)
-								);
-		$template->parse('group_list2', 'group_list_block2', true);
-	}
+
+
 	while($group = $get_groups->fetchRow()) {
+		// check if the user is a member of this group
+		$flag_disabled = '';
+		$flag_checked =  '';
+		$flag_cursor =   'pointer';
+		$flag_color =    '';
+		if (in_array($group["group_id"], $admin->get_groups_id())) {
+			$flag_disabled = ' disabled';
+			$flag_checked =  ' checked';
+			$flag_cursor =   'default';
+			$flag_color =    '000000';
+		}
+
 		$template->set_var(array(
 										'ID' => $group['group_id'],
 										'TOGGLE' => $group['group_id'],
-										'DISABLED' => '',
-										'LINK_COLOR' => '',
-										'CURSOR' => 'pointer',
+										'DISABLED' => $flag_disabled,
+										'LINK_COLOR' => $flag_color,
+										'CURSOR' => $flag_cursor,
 										'NAME' => $group['name'],
+										'CHECKED' => $flag_checked
 										)
 								);
 		if(is_numeric(array_search($group['group_id'], $viewing_groups))) {
 			$template->set_var('CHECKED', 'checked');
 		} else {
-			$template->set_var('CHECKED', '');
+			if (!$flag_checked) $template->set_var('CHECKED', '');
 		}
 		$template->parse('group_list2', 'group_list_block2', true);
 	}
@@ -239,7 +261,15 @@ function parent_list($parent) {
 			// Get user perms
 			$admin_groups = explode(',', str_replace('_', '', $page['admin_groups']));
 			$admin_users = explode(',', str_replace('_', '', $page['admin_users']));
-			if(is_numeric(array_search($admin->get_group_id(), $admin_groups)) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
+
+			$in_group = FALSE;
+			foreach($admin->get_groups_id() as $cur_gid){
+			    if (in_array($cur_gid, $admin_groups)) {
+			        $in_group = TRUE;
+			    }
+			}
+			
+			if(($in_group) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
 				$can_modify = true;
 			} else {
 				$can_modify = false;

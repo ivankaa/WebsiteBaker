@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+17-Jan-2008 Christian Sommer
+!	added the "users in multiple groups" feature (closes parts of ticket #546)
+
 16-Jan-2008 Thomas Hornik
 !	changed admin/pages/save.php to allow hidden config-elements in table search.
 16-Jan-2008 Thomas Hornik

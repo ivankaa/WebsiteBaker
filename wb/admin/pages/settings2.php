@@ -73,20 +73,27 @@ $old_link = $results_array['link'];
 $old_position = $results_array['position'];
 $old_admin_groups = explode(',', str_replace('_', '', $results_array['admin_groups']));
 $old_admin_users = explode(',', str_replace('_', '', $results_array['admin_users']));
-if(!is_numeric(array_search($admin->get_group_id(), $old_admin_groups)) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
+
+$in_old_group = FALSE;
+foreach($admin->get_groups_id() as $cur_gid){
+    if (in_array($cur_gid, $old_admin_groups)) {
+	$in_old_group = TRUE;
+    }
+}
+if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
 	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
 }
 
 // Setup admin groups
 $admin_groups[] = 1;
-if($admin->get_group_id() != 1) {
-	$admin_groups[] = $admin->get_group_id();
+if(!in_array(1, $admin->get_groups_id())) {
+	$admin_groups[] = implode(",",$admin->get_groups_id());
 }
 $admin_groups = implode(',', $admin_groups);
 // Setup viewing groups
 $viewing_groups[] = 1;
-if($admin->get_group_id() != 1) {
-	$viewing_groups[] = $admin->get_group_id();
+if(!in_array(1, $admin->get_groups_id())) {
+	$viewing_groups[] = implode(",",$admin->get_groups_id());
 }
 $viewing_groups = implode(',', $viewing_groups);
 
@@ -142,6 +149,12 @@ $database->query($query);
 
 // Get page trail
 $page_trail = get_page_trail($page_id);
+
+// Make sure link is not overwritten if page uses the menu link module
+$query_sections = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'menu_link'");
+if($query_sections->numRows() > 0) {
+	$link = $old_link;
+} 
 
 // Update page settings in the pages table
 $query = "UPDATE ".TABLE_PREFIX."pages SET parent = '$parent', page_title = '$page_title', menu_title = '$menu_title', menu = '$menu', level = '$level', page_trail = '$page_trail', root_parent = '$root_parent', link = '$link', template = '$template', target = '$target', description = '$description', keywords = '$keywords', position = '$position', visibility = '$visibility', searching = '$searching', language = '$language', admin_groups = '$admin_groups', viewing_groups = '$viewing_groups' WHERE page_id = '$page_id'";

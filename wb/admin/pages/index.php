@@ -118,7 +118,14 @@ function make_list($parent, $editable_pages) {
 			// Get user perms
 			$admin_groups = explode(',', str_replace('_', '', $page['admin_groups']));
 			$admin_users = explode(',', str_replace('_', '', $page['admin_users']));
-			if(is_numeric(array_search($admin->get_group_id(), $admin_groups)) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
+
+			$in_group = FALSE;
+			foreach($admin->get_groups_id() as $cur_gid){
+			    if (in_array($cur_gid, $admin_groups)) {
+			        $in_group = TRUE;
+			    }
+			}
+			if(($in_group) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
 				if($page['visibility'] == 'deleted') {
 					if(PAGE_TRASH == 'inline') {
 						$can_modify = true;
@@ -370,11 +377,9 @@ if($editable_pages == 0) {
 // Insert values into the add page form
 
 // Group list 1
-	if($admin->get_group_id() == 1) {
-		$query = "SELECT * FROM ".TABLE_PREFIX."groups";
-	} else {
-		$query = "SELECT * FROM ".TABLE_PREFIX."groups WHERE group_id != '".$admin->get_group_id()."'";
-	}
+
+	$query = "SELECT * FROM ".TABLE_PREFIX."groups";
+
 	$get_groups = $database->query($query);
 	$template->set_block('main_block', 'group_list_block', 'group_list');
 	// Insert admin group and current group first
@@ -390,43 +395,40 @@ if($editable_pages == 0) {
 									)
 							);
 	$template->parse('group_list', 'group_list_block', true);
-	if($admin->get_group_id() != 1) {
-		$template->set_var(array(
-										'ID' => $admin->get_group_id(),
-										'TOGGLE' => '',
-										'DISABLED' => ' disabled',
-										'LINK_COLOR' => '000000',
-										'CURSOR' => 'default',
-										'NAME' => $admin->get_group_name(),
-										'CHECKED' => ' checked'
-										)
-								);
-		$template->parse('group_list', 'group_list_block', true);
-	}
+
 	while($group = $get_groups->fetchRow()) {
+		// check if the user is a member of this group
+		$flag_disabled = '';
+		$flag_checked =  '';
+		$flag_cursor =   'pointer';
+		$flag_color =    '';
+		if (in_array($group["group_id"], $admin->get_groups_id())) {
+			$flag_disabled = ' disabled';
+			$flag_checked =  ' checked';
+			$flag_cursor =   'default';
+			$flag_color =    '000000';
+		}
+
 		// Check if the group is allowed to edit pages
 		$system_permissions = explode(',', $group['system_permissions']);
 		if(is_numeric(array_search('pages_modify', $system_permissions))) {
 			$template->set_var(array(
 											'ID' => $group['group_id'],
 											'TOGGLE' => $group['group_id'],
-											'CHECKED' => '',
-											'DISABLED' => '',
-											'LINK_COLOR' => '',
-											'CURSOR' => 'pointer',
+											'CHECKED' => $flag_checked,
+											'DISABLED' => $flag_disabled,
+											'LINK_COLOR' => $flag_color,
+											'CURSOR' => $flag_checked,
 											'NAME' => $group['name'],
-											'CHECKED' => ''
 											)
 									);
 			$template->parse('group_list', 'group_list_block', true);
 		}
 	}
 // Group list 2
-	if($admin->get_group_id() == 1) {
-		$query = "SELECT * FROM ".TABLE_PREFIX."groups";
-	} else {
-		$query = "SELECT * FROM ".TABLE_PREFIX."groups WHERE group_id != '".$admin->get_group_id()."'";
-	}
+
+	$query = "SELECT * FROM ".TABLE_PREFIX."groups";
+
 	$get_groups = $database->query($query);
 	$template->set_block('main_block', 'group_list_block2', 'group_list2');
 	// Insert admin group and current group first
@@ -442,29 +444,28 @@ if($editable_pages == 0) {
 									)
 							);
 	$template->parse('group_list2', 'group_list_block2', true);
-	if($admin->get_group_id() != 1) {
-		$template->set_var(array(
-										'ID' => $admin->get_group_id(),
-										'TOGGLE' => '',
-										'DISABLED' => ' disabled',
-										'LINK_COLOR' => '000000',
-										'CURSOR' => 'default',
-										'NAME' => $admin->get_group_name(),
-										'CHECKED' => ' checked'
-										)
-								);
-		$template->parse('group_list2', 'group_list_block2', true);
-	}
+
 	while($group = $get_groups->fetchRow()) {
+		// check if the user is a member of this group
+		$flag_disabled = '';
+		$flag_checked =  '';
+		$flag_cursor =   'pointer';
+		$flag_color =    '';
+		if (in_array($group["group_id"], $admin->get_groups_id())) {
+			$flag_disabled = ' disabled';
+			$flag_checked =  ' checked';
+			$flag_cursor =   'default';
+			$flag_color =    '000000';
+		}
+
 		$template->set_var(array(
 										'ID' => $group['group_id'],
 										'TOGGLE' => $group['group_id'],
-										'CHECKED' => '',
-										'DISABLED' => '',
-										'LINK_COLOR' => '',
-										'CURSOR' => 'pointer',
+										'CHECKED' => $flag_checked,
+										'DISABLED' => $flag_disabled,
+										'LINK_COLOR' => $flag_color,
+										'CURSOR' => $flag_cursor,
 										'NAME' => $group['name'],
-										'CHECKED' => ''
 										)
 								);
 		$template->parse('group_list2', 'group_list_block2', true);
@@ -482,7 +483,14 @@ function parent_list($parent) {
 			// Get user perms
 			$admin_groups = explode(',', str_replace('_', '', $page['admin_groups']));
 			$admin_users = explode(',', str_replace('_', '', $page['admin_users']));
-			if(is_numeric(array_search($admin->get_group_id(), $admin_groups)) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
+			
+			$in_group = FALSE;
+			foreach($admin->get_groups_id() as $cur_gid){
+			    if (in_array($cur_gid, $admin_groups)) {
+			        $in_group = TRUE;
+			    }
+			}
+			if(($in_group) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
 				$can_modify = true;
 			} else {
 				$can_modify = false;

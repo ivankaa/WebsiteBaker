@@ -165,6 +165,7 @@ class login extends admin {
 			$this->user_id = $user_id;
 			$_SESSION['USER_ID'] = $user_id;
 			$_SESSION['GROUP_ID'] = $results_array['group_id'];
+			$_SESSION['GROUPS_ID'] = $results_array['groups_id'];
 			$_SESSION['USERNAME'] = $results_array['username'];
 			$_SESSION['DISPLAY_NAME'] = $results_array['display_name'];
 			$_SESSION['EMAIL'] = $results_array['email'];
@@ -199,28 +200,54 @@ class login extends admin {
 				$_SESSION['USE_DEFAULT_TIME_FORMAT'] = true;
 			}
 			// Get group information
-			$query = "SELECT * FROM ".$this->GROUPS_TABLE." WHERE group_id = '".$this->get_session('GROUP_ID')."'";
-			$results = $database->query($query);
-			$results_array = $results->fetchRow();
-			$_SESSION['GROUP_NAME'] = $results_array['name'];
-			// Set system permissions
-			if($results_array['system_permissions'] != '') {
-				$_SESSION['SYSTEM_PERMISSIONS'] = explode(',', $results_array['system_permissions']);
-			} else {
-				$_SESSION['SYSTEM_PERMISSIONS'] = array();
-			}
-			// Set module permissions
-			if($results_array['module_permissions'] != '') {
-				$_SESSION['MODULE_PERMISSIONS'] = explode(',', $results_array['module_permissions']);
-			} else {
-				$_SESSION['MODULE_PERMISSIONS'] = array();
-			}
-			// Set template permissions
-			if($results_array['template_permissions'] != '') {
-				$_SESSION['TEMPLATE_PERMISSIONS'] = explode(',', $results_array['template_permissions']);
-			} else {
-				$_SESSION['TEMPLATE_PERMISSIONS'] = array();
-			}
+//			$query = "SELECT * FROM ".$this->GROUPS_TABLE." WHERE group_id = '".$this->get_session('GROUP_ID')."'";
+//			$results = $database->query($query);
+//			$results_array = $results->fetchRow();
+//			$_SESSION['GROUP_NAME'] = $results_array['name'];
+//			// Set system permissions
+//			if($results_array['system_permissions'] != '') {
+//				$_SESSION['SYSTEM_PERMISSIONS'] = explode(',', $results_array['system_permissions']);
+//			} else {
+//				$_SESSION['SYSTEM_PERMISSIONS'] = array();
+//			}
+//			// Set module permissions
+//			if($results_array['module_permissions'] != '') {
+//				$_SESSION['MODULE_PERMISSIONS'] = explode(',', $results_array['module_permissions']);
+//			} else {
+//				$_SESSION['MODULE_PERMISSIONS'] = array();
+//			}
+//			// Set template permissions
+//			if($results_array['template_permissions'] != '') {
+//				$_SESSION['TEMPLATE_PERMISSIONS'] = explode(',', $results_array['template_permissions']);
+//			} else {
+//				$_SESSION['TEMPLATE_PERMISSIONS'] = array();
+//			}
+
+			$_SESSION['SYSTEM_PERMISSIONS'] = array();
+			$_SESSION['MODULE_PERMISSIONS'] = array();
+			$_SESSION['TEMPLATE_PERMISSIONS'] = array();
+			$_SESSION['GROUP_NAME'] = array();
+
+
+			foreach (split(",", $this->get_session('GROUPS_ID')) as $cur_group_id) {
+				$query = "SELECT * FROM ".$this->GROUPS_TABLE." WHERE group_id = '".$cur_group_id."'";
+				$results = $database->query($query);
+				$results_array = $results->fetchRow();
+				$_SESSION['GROUP_NAME'][$cur_group_id] = $results_array['name'];
+				// Set system permissions
+				if($results_array['system_permissions'] != '') {
+					$_SESSION['SYSTEM_PERMISSIONS'] = array_merge($_SESSION['SYSTEM_PERMISSIONS'], explode(',', $results_array['system_permissions']));
+				}
+				// Set module permissions
+				if($results_array['module_permissions'] != '') {
+					$_SESSION['MODULE_PERMISSIONS'] = array_merge($_SESSION['MODULE_PERMISSIONS'], explode(',', $results_array['module_permissions']));
+				}
+				// Set template permissions
+				if($results_array['template_permissions'] != '') {
+					$_SESSION['TEMPLATE_PERMISSIONS'] = array_merge($_SESSION['TEMPLATE_PERMISSIONS'], explode(',', $results_array['template_permissions']));
+				}
+			}	
+
 			// Update the users table with current ip and timestamp
 			$get_ts = mktime();
 			$get_ip = $_SERVER['REMOTE_ADDR'];

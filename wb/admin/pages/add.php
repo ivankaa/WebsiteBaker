@@ -54,14 +54,14 @@ if($title == '' || substr($title,0,1)=='.') {
 
 // Setup admin groups
 $admin_groups[] = 1;
-if($admin->get_group_id() != 1) {
-	$admin_groups[] = $admin->get_group_id();
+if(!in_array(1, $admin->get_groups_id())) {
+	$admin_groups[] = implode(",",$admin->get_groups_id());
 }
 $admin_groups = implode(',', $admin_groups);
 // Setup viewing groups
 $viewing_groups[] = 1;
-if($admin->get_group_id() != 1) {
-	$viewing_groups[] = $admin->get_group_id();
+if(!in_array(1, $admin->get_groups_id())) {
+	$viewing_groups[] = implode(",",$admin->get_groups_id());
 }
 $viewing_groups = implode(',', $viewing_groups);
 

@@ -40,7 +40,7 @@ if(!isset($_POST['user_id']) OR !is_numeric($_POST['user_id']) OR $_POST['user_i
 }
 
 // Gather details entered
-$group_id = $admin->get_post('group');
+$groups_id = implode(",", $_POST['groups']);
 $active = $_POST['active'][0];
 $username_fieldname = $admin->get_post('username_fieldname');
 $username = strtolower($admin->get_post($username_fieldname));
@@ -54,7 +54,7 @@ $home_folder = $admin->get_post('home_folder');
 $js_back = "javascript: history.go(-1);";
 
 // Check values
-if($group_id == "") {
+if($groups_id == "") {
 	$admin->print_error($MESSAGE['USERS']['NO_GROUP'], $js_back);
 }
 if(strlen($username) < 2) {
@@ -83,11 +83,11 @@ if($username != 'admin') {
 
 // Update the database
 if($password == "") {
-	$query = "UPDATE ".TABLE_PREFIX."users SET group_id = '$group_id', active = '$active'$username_code, display_name = '$display_name', home_folder = '$home_folder', email = '$email' WHERE user_id = '$user_id'";
+	$query = "UPDATE ".TABLE_PREFIX."users SET groups_id = '$groups_id', active = '$active'$username_code, display_name = '$display_name', home_folder = '$home_folder', email = '$email' WHERE user_id = '$user_id'";
 } else {
 	// MD5 supplied password
 	$md5_password = md5($password);
-	$query = "UPDATE ".TABLE_PREFIX."users SET group_id = '$group_id', active = '$active'$username_code, display_name = '$display_name', home_folder = '$home_folder', email = '$email', password = '$md5_password' WHERE user_id = '$user_id'";
+	$query = "UPDATE ".TABLE_PREFIX."users SET groups_id = '$groups_id', active = '$active'$username_code, display_name = '$display_name', home_folder = '$home_folder', email = '$email', password = '$md5_password' WHERE user_id = '$user_id'";
 }
 $database->query($query);
 if($database->is_error()) {

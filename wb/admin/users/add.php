@@ -32,7 +32,7 @@ $admin = new admin('Access', 'users_add');
 $database = new database();
 
 // Get details entered
-$group_id = $admin->get_post('group');
+$groups_id = implode(",", $_POST['groups']); //should check permissions
 $active = $_POST['active'][0];
 $username_fieldname = $admin->get_post('username_fieldname');
 $username = strtolower($admin->get_post($username_fieldname));
@@ -46,7 +46,7 @@ $home_folder = $admin->get_post('home_folder');
 $js_back = "javascript: history.go(-1);";
 
 // Check values
-if($group_id == "") {
+if($groups_id == "") {
 	$admin->print_error($MESSAGE['USERS']['NO_GROUP'], $js_back);
 }
 if(strlen($username) < 2) {
@@ -84,7 +84,7 @@ if($results->numRows() > 0) {
 $md5_password = md5($password);
 
 // Inser the user into the database
-$query = "INSERT INTO ".TABLE_PREFIX."users (group_id,active,username,password,display_name,home_folder,email,timezone) VALUES ('$group_id', '$active', '$username','$md5_password','$display_name','$home_folder','$email','-72000')";
+$query = "INSERT INTO ".TABLE_PREFIX."users (groups_id,active,username,password,display_name,home_folder,email,timezone) VALUES ('$groups_id', '$active', '$username','$md5_password','$display_name','$home_folder','$email','-72000')";
 $database->query($query);
 if($database->is_error()) {
 	$admin->print_error($database->get_error());

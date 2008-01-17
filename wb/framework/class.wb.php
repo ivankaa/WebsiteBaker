@@ -96,7 +96,13 @@ class wb
 				// Now check if the user has perms to view it
 				$viewing_groups = explode(',', $page['viewing_groups']);
 				$viewing_users = explode(',', $page['viewing_users']);
-				if(is_numeric(array_search($this->get_group_id(), $viewing_groups)) OR is_numeric(array_search($this->get_user_id(), $viewing_users))) {
+				$in_group = FALSE;
+				foreach($this->get_groups_id() as $cur_gid){
+				    if (in_array($cur_gid, $viewing_groups)) {
+				        $in_group = TRUE;
+				    }
+				}
+				if(($in_group) OR is_numeric(array_search($this->get_user_id(), $viewing_users))) {
 					return true;
 				} else {
 					return false;
@@ -203,8 +209,18 @@ class wb
 		return $_SESSION['GROUP_ID'];
 	}
 
+	// Get the current users group ids
+	function get_groups_id() {
+		return split(",", $_SESSION['GROUPS_ID']);
+	}
+
 	// Get the current users group name
 	function get_group_name() {
+		return implode(",", $_SESSION['GROUP_NAME']);
+	}
+
+	// Get the current users group name
+	function get_groups_name() {
 		return $_SESSION['GROUP_NAME'];
 	}
 

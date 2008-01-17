@@ -115,9 +115,10 @@ if($results->numRows() > 0) {
 	}
 }
 // Only allow the user to add a user to the Administrators group if they belong to it
-if($admin->get_group_id() == 1) {
+if(in_array(1, $admin->get_groups_id())) {
+	$users_groups = $admin->get_groups_name();
 	$template->set_var('ID', '1');
-	$template->set_var('NAME', $admin->get_group_name());
+	$template->set_var('NAME', $users_groups[1]);
 	$template->set_var('SELECTED', '');
 	$template->parse('group_list', 'group_list_block', true);
 } else {

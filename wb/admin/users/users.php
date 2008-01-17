@@ -77,7 +77,7 @@ if($_POST['action'] == 'modify') {
 		while($group = $results->fetchRow()) {
 			$template->set_var('ID', $group['group_id']);
 			$template->set_var('NAME', $group['name']);
-			if($user['group_id'] == $group['group_id']) {
+			if(in_array($group['group_id'], split(",",$user['groups_id']))) {
 				$template->set_var('SELECTED', 'selected');
 			} else {
 				$template->set_var('SELECTED', '');
@@ -86,10 +86,19 @@ if($_POST['action'] == 'modify') {
 		}
 	}
 	// Only allow the user to add a user to the Administrators group if they belong to it
-	if($admin->get_group_id() == 1) {
+	if(in_array(1, $admin->get_groups_id())) {
 		$template->set_var('ID', '1');
-		$template->set_var('NAME', $admin->get_group_name());
-		if($user['group_id'] == $admin->get_group_id()) {
+		$users_groups = $admin->get_groups_name();
+		$template->set_var('NAME', $users_groups[1]);
+		
+		$in_group = FALSE;
+		foreach($admin->get_groups_id() as $cur_gid){
+		    if (in_array($cur_gid, split(",", $user['groups_id']))) {
+		        $in_group = TRUE;
+		    }
+		}
+
+		if($in_group) {
 			$template->set_var('SELECTED', 'selected');
 		} else {
 			$template->set_var('SELECTED', '');

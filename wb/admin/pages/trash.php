@@ -102,7 +102,13 @@ function make_list($parent, $editable_pages) {
 			// Get user perms
 			$admin_groups = explode(',', str_replace('_', '', $page['admin_groups']));
 			$admin_users = explode(',', str_replace('_', '', $page['admin_users']));
-			if(is_numeric(array_search($admin->get_group_id(), $admin_groups)) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
+			$in_old_group = FALSE;
+			foreach($admin->get_groups_id() as $cur_gid){
+			    if (in_array($cur_gid, $old_admin_groups)) {
+				$in_old_group = TRUE;
+			    }
+			}
+			if((!$in_old_group) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
 				if($page['visibility'] == 'deleted') {
 					$can_modify = true;
 					$editable_pages = $editable_pages+1;

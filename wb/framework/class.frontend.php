@@ -201,7 +201,7 @@ class frontend extends wb {
 			// Check if the user is authenticated
 			if($this->is_authenticated() == false) {
 				// User needs to login first
-				header("Location: ".WB_URL."/account/login.php?redirect=".$this->link);
+				header("Location: ".WB_URL."/account/login".PAGE_EXTENSION.'?redirect='.$this->link);
 				exit(0);
 			}
 			// Check if we should show this page
@@ -250,11 +250,11 @@ class frontend extends wb {
 		// Work-out if login menu constants should be set
 		if(FRONTEND_LOGIN) {
 			// Set login menu constants
-			define('LOGIN_URL', WB_URL.'/account/login.php');
-			define('LOGOUT_URL', WB_URL.'/account/logout.php');
-			define('FORGOT_URL', WB_URL.'/account/forgot.php');
-			define('PREFERENCES_URL', WB_URL.'/account/preferences.php');
-			define('SIGNUP_URL', WB_URL.'/account/signup.php');
+			define('LOGIN_URL', WB_URL.'/account/login'.PAGE_EXTENSION);
+			define('LOGOUT_URL', WB_URL.'/account/logout'.PAGE_EXTENSION);
+			define('FORGOT_URL', WB_URL.'/account/forgot'.PAGE_EXTENSION);
+			define('PREFERENCES_URL', WB_URL.'/account/preferences'.PAGE_EXTENSION);
+			define('SIGNUP_URL', WB_URL.'/account/signup'.PAGE_EXTENSION);
 		}
 	}
 	
@@ -345,7 +345,17 @@ class frontend extends wb {
 				if($page['visibility'] == 'private') {
 					$viewing_groups = explode(',', $page['viewing_groups']);
 					$viewing_users = explode(',', $page['viewing_users']);
-					if(!in_array($this->get_group_id(), $viewing_groups) && (!in_array($this->get_user_id(), $viewing_users))) {
+					
+					$is_viewing_user = in_array($this->get_user_id(), $viewing_users);
+
+					$access_granted = FALSE;
+					foreach ($this->get_groups_id() as $group_id) {
+
+						if(in_array($group_id, $viewing_groups) || ($is_viewing_user)) {
+							$access_granted = TRUE;
+						}
+					}
+					if (!$access_granted) {
 						continue;
 					}
 				}

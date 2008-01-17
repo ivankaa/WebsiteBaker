@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+ Copyright (C) 2004-2007, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -156,7 +156,9 @@ function get_home_folders() {
 	$home_folders = array();
 	// Only return home folders is this feature is enabled
 	// and user is not admin
-	if(HOME_FOLDERS AND ($_SESSION['GROUP_ID']!='1')) {
+//	if(HOME_FOLDERS AND ($_SESSION['GROUP_ID']!='1')) {
+	if(HOME_FOLDERS AND (!in_array('1',split(",",$_SESSION['GROUPS_ID'])))) {
+
 		$query_home_folders = $database->query("SELECT home_folder FROM ".TABLE_PREFIX."users WHERE home_folder != '".$admin->get_home_folder()."'");
 		if($query_home_folders->numRows() > 0) {
 			while($folder = $query_home_folders->fetchRow()) {
@@ -879,8 +881,7 @@ function entities_to_7bit($string) {
 function page_filename($string) {
 	$string = entities_to_7bit(umlauts_to_entities($string));
 	// Now replace spaces with page spcacer
-	$string = trim($string);
-	$string = preg_replace('/(\s)+/', PAGE_SPACER, $string);
+	$string = str_replace(' ', PAGE_SPACER, $string);
 	// Now remove all bad characters
 	$bad = array(
 	'\'', /* /  */ '"', /* " */	'<', /* < */	'>', /* > */
@@ -893,6 +894,12 @@ function page_filename($string) {
 	$string = str_replace($bad, '', $string);
 	// Now convert to lower-case
 	$string = strtolower($string);
+	// Now remove multiple page spacers
+	$string = str_replace(PAGE_SPACER.PAGE_SPACER, PAGE_SPACER, $string);
+	// Clean any page spacers at the end of string
+	$string = str_replace(PAGE_SPACER, ' ', $string);
+	$string = trim($string);
+	$string = str_replace(' ', PAGE_SPACER, $string);
 	// If there are any weird language characters, this will protect us against possible problems they could cause
 	$string = str_replace(array('%2F', '%'), array('/', ''), urlencode($string));
 	// Finally, return the cleaned string
@@ -1193,14 +1200,14 @@ function delete_page($page_id) {
 	
 	// Unlink the page access file and directory
 	$directory = WB_PATH.PAGES_DIRECTORY.$link;
-	$filename = $directory.PAGE_EXTENSION;
+	$filename = $directory.'.php';
 	$directory .= '/';
-	if(file_exists($filename)) {
+	if(file_exists($filename) && substr($filename,0,1<>'.')) {
 		if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
 			$admin->print_error($MESSAGE['PAGES']['CANNOT_DELETE_ACCESS_FILE']);
 		} else {
 			unlink($filename);
-			if(file_exists($directory) && rtrim($directory,'/')!=WB_PATH.PAGES_DIRECTORY) {
+			if(file_exists($directory)) {
 				rm_full_dir($directory);
 			}
 		}

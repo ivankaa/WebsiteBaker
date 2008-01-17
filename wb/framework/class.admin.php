@@ -246,7 +246,14 @@ class admin extends wb {
 			$groups = explode(',', str_replace('_', '', $result[$action_groups]));
 			$users = explode(',', str_replace('_', '', $result[$action_users]));
 		}
-		if(!is_numeric(array_search($this->get_group_id(), $groups)) AND !is_numeric(array_search($this->get_user_id(), $users))) {
+
+		$in_group = FALSE;
+		foreach($this->get_groups_id() as $cur_gid){
+		    if (in_array($cur_gid, $groups)) {
+		        $in_group = TRUE;
+		    }
+		}
+		if((!$in_group) AND !is_numeric(array_search($this->get_user_id(), $users))) {
 			return false;
 		}
 		return true;
