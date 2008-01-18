@@ -1,0 +1,82 @@
+<?php
+
+// $Id: $
+
+/*
+
+ Website Baker Project <http://www.websitebaker.org/>
+ Copyright (C) 2004-2008, Ryan Djurovich
+
+ Website Baker is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ Website Baker is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with Website Baker; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*/
+
+/*
+	import jscalendar css and scripts
+*/
+
+if(!defined('WB_URL')) {
+	header('Location: ../index.php');
+	exit(0);
+}
+
+?>
+<style type="text/css">
+<?php
+require_once(WB_PATH."/include/jscalendar/calendar-system.css");
+?>
+</style>
+<script type="text/javascript" src="<?php echo WB_URL ?>/include/jscalendar/calendar.js"></script>
+<?php // some stuff for jscalendar
+	// language
+	$jscal_lang = defined('LANGUAGE')?strtolower(LANGUAGE):"en";
+	$jscal_lang = $jscal_lang!=""?$jscal_lang:"en";
+	if(!file_exists(WB_PATH."/include/jscalendar/lang/calendar-$jscal_lang.js")) {
+		$jscal_lang = "en";
+	}
+	// today
+	$jscal_today = date("Y/m/d");
+	// first-day-of-week
+	$jscal_firstday = "1"; // monday
+	if(LANGUAGE=="EN")
+		$jscal_firstday = "0"; // sunday
+	// date and time format for the text-field and for jscal's "ifFormat". We offer dd.mm.yyyy or yyyy-mm-dd or mm/dd/yyyy
+	switch(DATE_FORMAT) {
+		case 'd.m.Y':
+		case 'd M Y':
+		case 'l, jS F, Y':
+		case 'jS F, Y':
+		case 'D M d, Y':
+		case 'd-m-Y':
+		case 'd/m/Y':
+			$jscal_format = "d.m.Y H:i"; // dd.mm.yyyy hh:mm
+			$jscal_ifformat = "%d.%m.%Y %H:%M";
+			break;
+		case 'm/d/Y':
+		case 'm-d-Y':
+		case 'M d Y':
+		case 'm.d.Y':
+			$jscal_format = "m/d/Y H:i"; // mm/dd/yyyy hh:mm
+			$jscal_ifformat = "%m/%d/%Y %H:%M";
+			break;
+		default:
+			$jscal_format = "Y-m-d H:i"; // yyyy-mm-dd hh:mm
+			$jscal_ifformat = "%Y-%m-%d %H:%M";
+			break;
+	}
+	// load scripts for jscalendar
+?>
+<script type="text/javascript" src="<?php echo WB_URL ?>/include/jscalendar/lang/calendar-<?php echo $jscal_lang ?>.js"></script>
+<script type="text/javascript" src="<?php echo WB_URL ?>/include/jscalendar/calendar-setup.js"></script>

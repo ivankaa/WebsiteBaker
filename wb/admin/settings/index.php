@@ -79,6 +79,14 @@ while($setting = $results->fetchRow()) {
 		case 'footer':
 			$template->set_var('SEARCH_FOOTER', $setting_value);
 		break;
+		// Search module-order
+		case 'module_order':
+			$template->set_var('SEARCH_MODULE_ORDER', $setting_value);
+		break;
+		// Search max lines of excerpt
+		case 'max_excerpt':
+			$template->set_var('SEARCH_MAX_EXCERPT', $setting_value);
+		break;
 		// Search template
 		case 'template':
 			$search_template = $setting_value;
@@ -604,7 +612,9 @@ $template->set_var(array(
 								'TEXT_WBMAILER_SMTP_USERNAME' => $TEXT['WBMAILER_SMTP_USERNAME'],
 								'TEXT_WBMAILER_SMTP_PASSWORD' => $TEXT['WBMAILER_SMTP_PASSWORD'],
 								'MODE_SWITCH_WARNING' => $MESSAGE['SETTINGS']['MODE_SWITCH_WARNING'],
-								'WORLD_WRITEABLE_WARNING' => $MESSAGE['SETTINGS']['WORLD_WRITEABLE_WARNING']
+								'WORLD_WRITEABLE_WARNING' => $MESSAGE['SETTINGS']['WORLD_WRITEABLE_WARNING'],
+								'TEXT_MODULE_ORDER' => $TEXT['MODULE_ORDER'],
+								'TEXT_MAX_EXCERPT' => $TEXT['MAX_EXCERPT']
 								)
 						);
 

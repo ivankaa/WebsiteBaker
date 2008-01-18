@@ -67,28 +67,42 @@ if (!function_exists('page_link')) {
 }
 
 //function to highlight search results
+if (!function_exists('search_highlight')) {
 function search_highlight($foo='', $arr_string=array()) {
 	require_once(WB_PATH.'/framework/functions.php');
-	require(WB_PATH.'/search/search_convert.php');
+	require_once(WB_PATH.'/search/search_convert.php');
+
 	$foo = entities_to_umlauts($foo, 'UTF-8');
 	array_walk($arr_string, create_function('&$v,$k','$v = preg_quote($v, \'/\');'));
 	$search_string = implode("|", $arr_string);
 	$string = entities_to_umlauts($search_string, 'UTF-8');
 	$string = strtr($string, $string_ul_umlauts);
-	// do some magic to prevent &lt; &gt; ... from being highlighted
-	$foo = strtr($foo, array("&lt;"=>"!,,!", "&gt;"=>"!,,,!", "&amp;"=>"!,,,,!", "&quot;"=>"!,,,,,!", "&#39;"=>"!,,,,,,!"));
-	$string = strtr($string, array("&lt;"=>"!,,!", "&gt;"=>"!,,,!", "&amp;"=>"!,,,,!", "&quot;"=>"!,,,,,!", "&#39;"=>"!,,,,,,!"));
-	$foo = preg_replace('/('.$string.')(?=[^>]*<)/iUS', '<span class="highlight">$1</span>',$foo);
-	$pos = strpos($foo, '<');
-	if ($pos === false) { // "===" means identicaly
-		$foo = preg_replace('/('.$string.')/i', '<span class="highlight">$1</span>',$foo);
+	// special-feature: '|' means word-boundary (\b). Searching for 'the|' will find 'the', but not 'thema'.
+	$string = strtr($string, array('\\|'=>'\b'));
+	
+	// the highlighting
+	// match $string, but not inside <style>...</style>, <script>...</script>, <!--...--> or HTML-Tags
+	// split $string into pieces - "cut away" styles, scripts, comments, and HTML-tags
+	$matches = preg_split("/(<style.*<\/style>|<script.*<\/script>|<!--.*-->|<.*>)/iUs",$foo,-1,(PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY));
+	if(is_array($matches) && $matches != array()) {
+		$foo = "";
+		$string = strtr($string, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));
+		foreach($matches as $match) {
+			if($match{0}!="<") {
+				$match = strtr($match, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));
+				$match = preg_replace('/('.$string.')/iS', '_span class=_highlight__$1_/span_',$match);
+				$match = strtr($match, array('<'=>'&lt;', '>'=>'&gt;', '&'=>'&amp;', '"'=>'&quot;', '\''=>'&#39;', "\xC2\xA0"=>'&nbsp;'));
+				$match = str_replace(array('_span class=_highlight__', '_/span_'), array('<span class="highlight">', '</span>'), $match);
+			}
+			$foo .= $match;
+		}
 	}
-	$foo = strtr($foo, array("!,,!"=>"&lt;", "!,,,!"=>"&gt;", "!,,,,!"=>"&amp;", "!,,,,,!"=>"&quot;", "!,,,,,,!"=>"&#39;"));
-	//$foo = umlauts_to_defcharset($foo, 'UTF-8');
+	
 	if(DEFAULT_CHARSET != 'utf-8') {
 		$foo = umlauts_to_entities($foo, 'UTF-8');
 	}
 	return $foo;
+}
 }
 
 // Old menu call invokes new menu function
@@ -163,6 +177,10 @@ if (!function_exists('page_content')) {
 	        echo $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'];
 			exit();
 		}
+		if ($wb->page_no_active_sections==true) {
+	        echo $MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'];
+			exit();
+		}
 		if(isset($globals) AND is_array($globals)) { foreach($globals AS $global_name) { global $$global_name; } }
 		// Make sure block is numeric
 		if(!is_numeric($block)) { $block = 1; }
@@ -170,7 +188,7 @@ if (!function_exists('page_content')) {
 		if(!defined('PAGE_CONTENT') OR $block!=1) {
 			$page_id=$wb->page_id;
 			// First get all sections for this page
-			$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '".$page_id."' AND block = '$block' ORDER BY position");
+			$query_sections = $database->query("SELECT section_id,module,publ_start,publ_end FROM ".TABLE_PREFIX."sections WHERE page_id = '".$page_id."' AND block = '$block' ORDER BY position");
 			// If none were found, check if default content is supposed to be shown
 			if($query_sections->numRows() == 0) {
 				if ($wb->default_block_content=='none') {
@@ -181,7 +199,7 @@ if (!function_exists('page_content')) {
 				} else {
 					$page_id=$wb->default_page_id;
 				}				
-				$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '".$page_id."' AND block = '$block' ORDER BY position");
+				$query_sections = $database->query("SELECT section_id,module,publ_start,publ_end FROM ".TABLE_PREFIX."sections WHERE page_id = '".$page_id."' AND block = '$block' ORDER BY position");
 				// Still no cotent found? Give it up, there's just nothing to show!
 				if($query_sections->numRows() == 0) {
 					return;
@@ -189,10 +207,18 @@ if (!function_exists('page_content')) {
 			}
 			// Loop through them and include their module file
 			while($section = $query_sections->fetchRow()) {
+				// skip this section if it is out of publication-date
+				$now = time();
+				if( !( $now<$section['publ_end'] && ($now>$section['publ_start'] || $section['publ_start']==0) ||
+					$now>$section['publ_start'] && $section['publ_end']==0) ) {
+					continue;
+				}
 				$section_id = $section['section_id'];
 				$module = $section['module'];
+				// make a anchor for every section. This is for the search_extension
+				echo "<a id=\"wb_section_$section_id\" name=\"wb_section_$section_id\"></a>";
 				// highlights searchresults
-				if (isset($_GET['searchresult']) AND is_numeric($_GET['searchresult']) ) {
+				if (isset($_GET['searchresult']) AND is_numeric($_GET['searchresult']) AND !isset($_GET['nohighlight'])) {
 					if (isset($_GET['sstring']) AND !empty($_GET['sstring']) ){
 						$arr_string = explode(" ", $_GET['sstring']);
 						if($_GET['searchresult'] == 2) {

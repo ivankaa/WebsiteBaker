@@ -392,10 +392,12 @@ if($install_tables == true) {
 	       . ' `position` INT NOT NULL DEFAULT \'0\','
 	       . ' `module` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `block` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `publ_start` VARCHAR( 255 ) NOT NULL DEFAULT \'0\' ,'
+	       . ' `publ_end` VARCHAR( 255 ) NOT NULL DEFAULT \'0\' ,' 
 	       . ' PRIMARY KEY ( `section_id` ) '
 	       . ' )';
 	$database->query($pages);
-	
+
 	require(WB_PATH.'/admin/interface/version.php');
 	
 	// Settings table
@@ -529,6 +531,7 @@ if($install_tables == true) {
 <table cellpadding="3" cellspacing="0" border="0" width="500">
 <tr>
 <td>
+<input type="hidden" name="search_path" value="[SEARCH_PATH]" />
 <input type="text" name="string" value="[SEARCH_STRING]" style="width: 100%;" />
 </td>
 <td width="150">
@@ -569,7 +572,8 @@ if($install_tables == true) {
 <td><a href="[LINK]">[TITLE]</a></td>
 <td align="right">[TEXT_LAST_UPDATED_BY] [DISPLAY_NAME] ([USERNAME]) [TEXT_ON] [DATE]</td>
 </tr>
-<tr><td colspan="2" style="text-align: justify; padding-bottom: 10px;">[DESCRIPTION]</td></tr>');
+<tr><td colspan="2" style="text-align: justify; padding-bottom: 5px;">[DESCRIPTION]</td></tr>
+<tr><td colspan="2" style="text-align: justify; padding-bottom: 10px;">[EXCERPT]</td></tr>');
 
 	$insert_search_results_loop = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_loop', '$search_results_loop', '')";
 	$database->query($insert_search_results_loop);
@@ -581,6 +585,19 @@ if($install_tables == true) {
 	$search_no_results = addslashes('<br />[TEXT_NO_RESULTS]');
 	$insert_search_no_results = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'no_results', '$search_no_results', '')";
 	$database->query($insert_search_no_results);
+	// Search module-order
+	$search_module_order = addslashes('faqbaker,manual,wysiwyg');
+	$insert_search_module_order = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'module_order', '$search_module_order', '')";
+	$database->query($insert_search_module_order);
+	// Search max lines of excerpt
+	$search_max_excerpt = addslashes('15');
+	$insert_search_max_excerpt = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'max_excerpt', '$search_max_excerpt', '')";
+	$database->query($insert_search_max_excerpt);
+	// some config-elements
+	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_enable_old_search', 'true', '')");
+	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_search_keywords', 'true', '')");
+	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_search_description', 'true', '')");
+	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_show_description', 'true', '')");
 	// Search template
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` (name) VALUES ('template')");
 		

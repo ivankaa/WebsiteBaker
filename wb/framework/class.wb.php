@@ -71,7 +71,13 @@ class wb
 			// Check if the user is logged in
 			if($this->is_authenticated() == true) {
 				// Now check if the user has perms to view the page
-				if(in_array($this->get_group_id(), explode(',', $viewing_groups)) || in_array($this->get_user_id(), explode(',', $viewing_users))) {
+				$in_group = false;
+				foreach($this->get_groups_id() as $cur_gid){
+				    if(in_array($cur_gid, explode(',', $viewing_groups))) {
+				        $in_group = true;
+				    }
+				}
+				if($in_group || in_array($this->get_user_id(), explode(',', $viewing_users))) {
 					$show_it = true;
 				} else {
 					$show_it = false;
@@ -86,31 +92,27 @@ class wb
 		}
 		return($show_it);
 	}
+	// Check if there is at least one active section on this page
+	function page_is_active($page) {
+		global $database;
+		$has_active_sections = false;
+		$page_id = $page['page_id'];
+		$now = time();
+		$query_sections = $database->query("SELECT publ_start,publ_end FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id'");
+		if($query_sections->numRows() != 0) {
+			while($section = $query_sections->fetchRow()) {
+				if($now<$section['publ_end'] && ($now>$section['publ_start'] || $section['publ_start']==0) || $now>$section['publ_start'] && $section['publ_end']==0) {
+					$has_active_sections = true;
+					break;
+				}
+			}
+		}
+		return($has_active_sections);
+	}
 
 	// Check whether we should show a page or not (for front-end)
 	function show_page($page) {
-		// First check if the page is set to private
-		if($page['visibility'] == 'private' OR $page['visibility'] == 'registered') {
-			// Check if the user is logged in
-			if($this->is_authenticated() == true) {
-				// Now check if the user has perms to view it
-				$viewing_groups = explode(',', $page['viewing_groups']);
-				$viewing_users = explode(',', $page['viewing_users']);
-				$in_group = FALSE;
-				foreach($this->get_groups_id() as $cur_gid){
-				    if (in_array($cur_gid, $viewing_groups)) {
-				        $in_group = TRUE;
-				    }
-				}
-				if(($in_group) OR is_numeric(array_search($this->get_user_id(), $viewing_users))) {
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-		} elseif($page['visibility'] == 'public') {
+		if($this->page_is_visible($page) && $this->page_is_active($page)) {
 			return true;
 		} else {
 			return false;

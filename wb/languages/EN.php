@@ -397,6 +397,10 @@ $TEXT['CAPTCHA_VERIFICATION'] = 'Captcha Verification';
 $TEXT['VERIFICATION'] = 'Verification';
 $TEXT['DEFAULT_CHARSET'] = 'Default Charset';
 $TEXT['CHARSET'] = 'Charset';
+$TEXT['MODULE_ORDER'] = 'Module-order for searching';
+$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt';
+$TEXT['PUBL_START_DATE'] = 'Start date';
+$TEXT['PUBL_END_DATE'] = 'End date';
 $TEXT['WBMAILER_NOTICE'] = 'Some service providers do not support sending mail via PHP. If your provider requires you to use SMTP for sending mail, you must know the SMTP host address. If you are not sure about these settings, or you do not know the SMTP host of your domain, use the default "PHP mail()" setting. You can change the settings	later if needed.';
 $TEXT['WBMAILER_FUNCTION'] = 'Mail routine';
 $TEXT['WBMAILER_SMTP_HOST'] = 'SMTP host';
@@ -410,6 +414,7 @@ $TEXT['PLEASE_LOGIN'] = 'Please login';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, you do not have permissions to view this page';
+$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display';
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Insufficient privelliges to be here';
 

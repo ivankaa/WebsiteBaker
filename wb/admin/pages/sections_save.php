@@ -85,13 +85,31 @@ if($query_sections->numRows() > 0) {
 		if(!is_numeric(array_search($section['module'], $module_permissions))) {
 			// Update the section record with properties
 			$section_id = $section['section_id'];
-			$sql = '';
+			$sql = ''; $publ_start = 0; $publ_end = 0;
+			$dst = date("I")?" DST":""; // daylight saving time?
 			if(isset($_POST['block'.$section_id]) AND $_POST['block'.$section_id] != '') {
 				$sql = "block = '".$admin->add_slashes($_POST['block'.$section_id])."'";
-				$query = "UPDATE ".TABLE_PREFIX."sections SET $sql WHERE section_id = '$section_id' LIMIT 1";
-				if($sql != '') {
-					$database->query($query);
+			}
+			// update publ_start and publ_end, trying to make use of the strtotime()-features like "next week", "+1 month", ...
+			if(isset($_POST['start_date'.$section_id]) AND isset($_POST['end_date'.$section_id])) {
+				if(trim($_POST['start_date'.$section_id]) == '0' OR trim($_POST['start_date'.$section_id]) == '') {
+					$publ_start = 0;
+				} else {
+					$publ_start = strtotime($_POST['start_date'.$section_id]);
 				}
+				if(trim($_POST['end_date'.$section_id]) == '0' OR trim($_POST['end_date'.$section_id]) == '') {
+					$publ_end = 0;
+				} else {
+					$publ_end = strtotime($_POST['end_date'.$section_id], $publ_start);
+				}
+				if($sql != '')
+					$sql .= ",";
+				$sql .= " publ_start = '".$publ_start."'";
+				$sql .= ", publ_end = '".$publ_end."'";
+			}
+			$query = "UPDATE ".TABLE_PREFIX."sections SET $sql WHERE section_id = '$section_id' LIMIT 1";
+			if($sql != '') {
+				$database->query($query);
 			}
 		}
 	}

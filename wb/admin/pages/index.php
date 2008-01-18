@@ -250,7 +250,32 @@ function make_list($parent, $editable_pages) {
 					<?php } ?>
 				</td>
 				
-				
+				<!-- 'MANAGE DATES' BUTTON -->
+				<td width="20">
+				<?php
+				// Work-out if we should show the "manage dates" link
+				if(MANAGE_SECTIONS == 'enabled' && $admin->get_permission('pages_modify')==true && $can_modify==true) {
+					$query_sections = $database->query("SELECT publ_start, publ_end FROM ".TABLE_PREFIX."sections WHERE page_id = '{$page['page_id']}' AND module != 'menu_link'");
+					if($query_sections->numRows() > 0) {
+						$mdate_display=false;
+						while($mdate_res = $query_sections->fetchRow()) {
+							if($mdate_res['publ_start']!='0' || $mdate_res['publ_end']!='0') {
+								$mdate_display=true;
+								break;
+							}
+						}
+						if($mdate_display==1) {
+							$file=$admin->page_is_active($page)?"clock_16.png":"clock_red_16.png";
+							?>
+							<a href="<?php echo ADMIN_URL; ?>/pages/sections.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $HEADING['MANAGE_SECTIONS']; ?>">
+							<img src="<?php echo ADMIN_URL."/images/$file"; ?>" border="0" alt="<?php echo $HEADING['MANAGE_SECTIONS']; ?>" />	
+							</a>
+						<?php } else { ?>
+							<img src="<?php echo ADMIN_URL; ?>/images/noclock_16.png" border="0" alt="<?php echo $HEADING['MANAGE_SECTIONS']; ?>" />	
+						<?php } ?>
+					<?php } ?>
+				<?php } ?>
+				</td>
 				<td width="20">
 				<?php if($page['position'] != 1) { ?>
 					<?php if($page['visibility'] != 'deleted') { ?>

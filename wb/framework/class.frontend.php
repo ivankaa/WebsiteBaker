@@ -52,6 +52,7 @@ class frontend extends wb {
 	var $page_trail=array();
 	
 	var $page_access_denied;
+	var $page_no_active_sections;
 	
 	// website settings
 	var $website_title,$website_description,$website_keywords,$website_header,$website_footer;
@@ -197,20 +198,26 @@ class frontend extends wb {
 		define('TEMPLATE_DIR', WB_URL.'/templates/'.TEMPLATE);
 
 		// Check if user is allowed to view this page
-		if(VISIBILITY == 'private' OR VISIBILITY == 'registered') {
-			// Check if the user is authenticated
-			if($this->is_authenticated() == false) {
-				// User needs to login first
-				header("Location: ".WB_URL."/account/login.php?redirect=".$this->link);
-				exit(0);
-			}
-			// Check if we should show this page
-			if($this->show_page($this->page) == false) {
+		if($this->page && $this->page_is_visible($this->page) == false) {
+			if(VISIBILITY == 'deleted' OR VISIBILITY == 'none') {
+				// User isnt allowed on this page so tell them
 				$this->page_access_denied=true;
+			} elseif(VISIBILITY == 'private' OR VISIBILITY == 'registered') {
+				// Check if the user is authenticated
+				if($this->is_authenticated() == false) {
+					// User needs to login first
+					header("Location: ".WB_URL."/account/login".PAGE_EXTENSION.'?redirect='.$this->link);
+					exit(0);
+				} else {
+					// User isnt allowed on this page so tell them
+					$this->page_access_denied=true;
+				}
+				
 			}
-		} elseif(VISIBILITY == 'deleted' OR VISIBILITY == 'none') {
-			// User isnt allowed on this page so tell them
-			$this->page_access_denied=true;
+		}
+		// check if there is at least one active section
+		if($this->page && $this->page_is_active($this->page) == false) {
+			$this->page_no_active_sections=true;
 		}
 	}
 
@@ -339,26 +346,12 @@ class frontend extends wb {
 			echo "\n".$this->menu_header;
 			// Loop through pages
 			while($page = $query_menu->fetchRow()) {
-				// Check if this page should be shown
-				// $this->extra_where_sql will show menu-title from private pages only if user is authenticated,
-				// but we have to check if user is in viewing_groups or viewing_users for this page
-				if($page['visibility'] == 'private') {
-					$viewing_groups = explode(',', $page['viewing_groups']);
-					$viewing_users = explode(',', $page['viewing_users']);
-					
-					$is_viewing_user = in_array($this->get_user_id(), $viewing_users);
-
-					$access_granted = FALSE;
-					foreach ($this->get_groups_id() as $group_id) {
-
-						if(in_array($group_id, $viewing_groups) || ($is_viewing_user)) {
-							$access_granted = TRUE;
-						}
-					}
-					if (!$access_granted) {
-						continue;
-					}
+				// check whether to show this menu-link
+				if($this->page_is_active($page)==false && $page['link']!=$this->default_link && !INTRO_PAGE) {
+					continue; // no active sections
 				}
+				if($this->page_is_visible($page)==false)
+					continue;
 				// Create vars
 				$vars = array('[class]','[a]', '[/a]', '[menu_title]', '[page_title]');
 				// Work-out class

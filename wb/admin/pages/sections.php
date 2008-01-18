@@ -135,7 +135,16 @@ if(!isset($block[1]) OR $block[1] == '') {
 	// Make our own menu list
 	$block[1] = $TEXT['MAIN'];
 }
+?>
 
+<?php // include jscalendar-setup
+	require_once(WB_PATH."/include/jscalendar/wb-setup.php");
+	// override some vars:
+	//$jscal_lang = "en"; //- calendar-language (default: wb-backend-language)
+	//$jscal_today = ""; // - date, the calendar offers if the text-field is empty (default: today)
+	//$jscal_firstday = "0"; // - first-day-of-week (0-sunday, 1-monday, ...) (default: 0(EN) or 1(everything else))
+	//$jscal_format = "Y-m-d H:i"; // - initial-format used for the text-field (default: from wb-backend-date-format)
+	//$jscal_ifformat = "%Y-%m-%d %H:%M"; // - format for jscalendar (default: wb-backend-date-format)
 ?>
 <table cellpadding="5" cellspacing="0" border="0" align="center" width="100%" height="50" style="margin-bottom: 10px;">
 <tr style="background-color: #F0F0F0;">
@@ -154,7 +163,7 @@ if(!isset($block[1]) OR $block[1] == '') {
 </table>
 
 <?php
-$query_sections = $database->query("SELECT section_id,module,position,block FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
+$query_sections = $database->query("SELECT section_id,module,position,block,publ_start,publ_end FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
 if($query_sections->numRows() > 0) {
 ?>
 <form name="section_properties" action="<?php echo ADMIN_URL; ?>/pages/sections_save.php?page_id=<?php echo $page_id; ?>" method="post">
@@ -165,6 +174,8 @@ if($query_sections->numRows() > 0) {
 	<?php if(SECTION_BLOCKS) { ?>
 	<td style="display: {DISPLAY_BLOCK}"><?php echo $TEXT['BLOCK']; ?>:</td>
 	<?php } ?>
+	<td><?php echo $TEXT['PUBL_START_DATE']; ?>:</td>
+	<td><?php echo $TEXT['PUBL_END_DATE']; ?>:</td>
 	<td colspan="3" width="60"><?php echo $TEXT['ACTIONS']; ?>:</td>
 </tr>
 <?php
@@ -175,7 +186,7 @@ if($query_sections->numRows() > 0) {
 		if(!is_numeric(array_search($section['module'], $module_permissions))) {
 			?>
 			<tr>
-				<td style="width: 250px;"><a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>#<?php echo $section['section_id']; ?>"><?php echo $module_name; ?></a></td>
+				<td style="width: <?php if(SECTION_BLOCKS) print "120"; else print "200"; ?>px;"><a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>#<?php echo $section['section_id']; ?>"><?php echo $module_name; ?></a></td>
 				<?php if(SECTION_BLOCKS) { ?>
 				<td>
 					<select name="block<?php echo $section['section_id']; ?>" style="width: 150px;">
@@ -188,7 +199,11 @@ if($query_sections->numRows() > 0) {
 						?>
 					</select>
 				</td>
-				<?php } ?>
+				<?php } // jscalendar-stuff following ?>
+				<td><input type="text" id="start_date<?php echo $section['section_id']; ?>" name="start_date<?php echo $section['section_id']; ?>" value="<?php if($section['publ_start']==0) print ""; else print date($jscal_format, $section['publ_start'])?>" style="width: 120px;" />
+					<img src="<?php echo WB_URL ?>/include/jscalendar/img.gif" id="trigger_start<?php echo $section['section_id']; ?>" style="cursor: pointer; border: 1px solid red;" title="Calendar" onmouseover="this.style.background='red';" onmouseout="this.style.background=''" /></td>
+				<td><input type="text" id="end_date<?php echo $section['section_id']; ?>" name="end_date<?php echo $section['section_id']; ?>" value="<?php if($section['publ_end']==0) print ""; else print date($jscal_format, $section['publ_end'])?>" style="width: 120px;" />
+					<img src="<?php echo WB_URL ?>/include/jscalendar/img.gif" id="trigger_stop<?php echo $section['section_id']; ?>" style="cursor: pointer; border: 1px solid red;" title="Calendar" onmouseover="this.style.background='red';" onmouseout="this.style.background=''" /></td>
 				<td width="20">
 					<?php if($section['position'] != 1) { ?>
 					<a href="<?php echo ADMIN_URL; ?>/pages/move_up.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section['section_id']; ?>">
@@ -214,16 +229,57 @@ if($query_sections->numRows() > 0) {
 	}
 	?>
 	<tr>
-		<td>&nbsp;</td>
-		<?php if(SECTION_BLOCKS) { ?>
-		<td><input type="submit" name="save" value="<?php echo $TEXT['SAVE']; ?>" style="width: 150px;" /></td>
-		<?php } ?>
-		<td colspan="3" width="60">&nbsp;</td>
+		<td align="center" colspan="<?php if(SECTION_BLOCKS) print "7"; else print "6"; ?>"><input type="submit" name="save" value="<?php echo $TEXT['SAVE']; ?>" style="width: 150px;" /></td>
 	</tr>
 	</table>
 
 </form>
-
+<?php
+	// now add the calendars -- remember to to set the range to [1970, 2037] if the date is used as timestamp!
+	// the loop is simply a copy from above.
+	$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
+	if($query_sections->numRows() > 0) {
+		$num_sections = $query_sections->numRows();
+		while($section = $query_sections->fetchRow()) {
+			// Get the modules real name
+			$module_name=$database->get_one("SELECT name FROM ".TABLE_PREFIX."addons WHERE directory='".$section['module']."'");
+			if(!is_numeric(array_search($section['module'], $module_permissions))) {
+	?>			
+				<script type="text/javascript">
+					Calendar.setup(
+						{
+							inputField  : "start_date<?php echo $section['section_id']; ?>",
+							ifFormat    : "<?php echo $jscal_ifformat ?>",
+							button      : "trigger_start<?php echo $section['section_id']; ?>",
+							firstDay    : <?php echo $jscal_firstday ?>,
+							showsTime   : "true",
+							timeFormat  : "24",
+							date        : "<?php echo $jscal_today ?>",
+							range       : [1970, 2037],
+							step        : 1
+						}
+					);
+				</script>
+				<script type="text/javascript">
+					Calendar.setup(
+						{
+							inputField  : "end_date<?php echo $section['section_id']; ?>",
+							ifFormat    : "<?php echo $jscal_ifformat ?>",
+							button      : "trigger_stop<?php echo $section['section_id']; ?>",
+							firstDay    : <?php echo $jscal_firstday ?>,
+							showsTime   : "true",
+							timeFormat  : "24",
+							date        : "<?php echo $jscal_today ?>",
+							range       : [1970, 2037],
+							step        : 1
+						}
+					);
+				</script>
+<?php
+			}
+		}
+	}
+?>
 <?php
 }
 
