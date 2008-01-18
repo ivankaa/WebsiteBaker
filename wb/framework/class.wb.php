@@ -153,7 +153,7 @@ class wb
 	function page_link($link){
 		// Check for :// in the link (used in URL's) as well as mailto:
 		if(strstr($link, '://') == '' AND substr($link, 0, 7) != 'mailto:') {
-			return WB_URL.PAGES_DIRECTORY.$link.'.php';
+			return WB_URL.PAGES_DIRECTORY.$link.PAGE_EXTENSION;
 		} else {
 			return $link;
 		}

@@ -68,7 +68,7 @@ $viewing_groups = implode(',', $viewing_groups);
 // Work-out what the link and page filename should be
 if($parent == '0') {
 	$link = '/'.page_filename($title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($title).'.php';
+	$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($title).PAGE_EXTENSION;
 } else {
 	$parent_section = '';
 	$parent_titles = array_reverse(get_parent_titles($parent));
@@ -77,13 +77,13 @@ if($parent == '0') {
 	}
 	if($parent_section == '/') { $parent_section = ''; }
 	$link = '/'.$parent_section.page_filename($title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($title).'.php';
+	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$parent_section.page_filename($title).PAGE_EXTENSION;
 	make_dir(WB_PATH.PAGES_DIRECTORY.'/'.$parent_section);
 }
 
 // Check if a page with same page filename exists
 $get_same_page = $database->query("SELECT page_id FROM ".TABLE_PREFIX."pages WHERE link = '$link'");
-if($get_same_page->numRows() > 0 OR file_exists(WB_PATH.PAGES_DIRECTORY.$link.'.php') OR file_exists(WB_PATH.PAGES_DIRECTORY.$link.'/')) {
+if($get_same_page->numRows() > 0 OR file_exists(WB_PATH.PAGES_DIRECTORY.$link.PAGE_EXTENSION) OR file_exists(WB_PATH.PAGES_DIRECTORY.$link.'/')) {
 	$admin->print_error($MESSAGE['PAGES']['PAGE_EXISTS']);
 }
 

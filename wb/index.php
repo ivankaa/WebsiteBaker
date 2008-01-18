@@ -70,7 +70,7 @@ if($query_this_module->numRows() == 1) { // This is a menu_link. Get link of tar
 			$res=$query_link->fetchRow();
 			$target_page_link = $res['link'];
 			// redirect
-			header('Location: '.WB_URL.PAGES_DIRECTORY.$target_page_link.'.php');
+			header('Location: '.WB_URL.PAGES_DIRECTORY.$target_page_link.PAGE_EXTENSION);
 			exit;
 		}
 	}
