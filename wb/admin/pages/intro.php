@@ -29,7 +29,7 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_intro');
 
 // Get page content
-$filename = WB_PATH.'/pages/intro.php';
+$filename = WB_PATH.PAGES_DIRECTORY.'/intro'.PAGE_EXTENSION;
 if(file_exists($filename)) {
 	$handle = fopen($filename, "r");
 	$content = fread($handle, filesize($filename));

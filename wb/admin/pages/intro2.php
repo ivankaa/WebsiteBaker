@@ -25,7 +25,7 @@
 
 // Get posted content
 if(!isset($_POST['content'])) {
-	header("Location: intro.php");
+	header("Location: intro".PAGE_EXTENSION."");
 	exit(0);
 } else {
 	$content = $_POST['content'];
@@ -42,7 +42,7 @@ $content=$admin->strip_slashes($content);
 require_once(WB_PATH.'/framework/functions.php');
 
 // Write new content
-$filename = WB_PATH.PAGES_DIRECTORY.'/intro.php';
+$filename = WB_PATH.PAGES_DIRECTORY.'/intro'.PAGE_EXTENSION;
 $handle = fopen($filename, 'w');
 if(is_writable($filename)) {
 	if(fwrite($handle, $content)) {

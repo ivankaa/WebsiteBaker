@@ -11,13 +11,14 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
-18-Jan-2008 Thomas Hornik
-#	fixed two E_NOTICE-warnings in admin/pages/index.php
+
 18-Jan-2008 Matthias Gallas
+#	Fixed hardcoded /pages issue in intro page feature
 +	Added example .htaccess to parse .html files, fixed bug in changeset 555
 !	Revoked parts of changeset 547 and again introduced changeset 540
 +	Added keywords to new files
 18-Jan-2008 Thomas Hornik
+#	fixed two E_NOTICE-warnings in admin/pages/index.php
 +	added new module-based search-function
 +	added new publish-by-date code
 17-Jan-2008 Christian Sommer

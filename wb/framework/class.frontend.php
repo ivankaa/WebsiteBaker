@@ -67,13 +67,13 @@ class frontend extends wb {
 		if((INTRO_PAGE AND !isset($no_intro)) AND (!isset($page_id) OR !is_numeric($page_id))) {
 			// Since we have no page id check if we should go to intro page or default page
 			// Get intro page content
-			$filename = WB_PATH.PAGES_DIRECTORY.'/intro.php';
+			$filename = WB_PATH.PAGES_DIRECTORY.'/intro'.PAGE_EXTENSION;
 			if(file_exists($filename)) {
 				$handle = @fopen($filename, "r");
 				$content = @fread($handle, filesize($filename));
 				@fclose($handle);
 				$this->preprocess($content);
-				header("Location: pages/intro.php");   // send intro.php as header to allow parsing of php statements
+				header("Location: ".WB_URL.PAGES_DIRECTORY."/intro".PAGE_EXTENSION."");   // send intro.php as header to allow parsing of php statements
 				echo ($content);
 				return false;
 			}
