@@ -50,6 +50,10 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 }
 
 ?>
+<script type="text/javascript" src="calendar/calendarDateInput.js"></script>
+
+<h2><?php echo $TEXT['ADD'].'/'.$TEXT['MODIFY'].' '.$TEXT['POST']; ?></h2>
+
 <form name="modify" action="<?php echo WB_URL; ?>/modules/news/save_post.php" method="post" style="margin: 0;">
 
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
@@ -57,11 +61,11 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
 <input type="hidden" name="link" value="<?php echo $fetch_content['link']; ?>">
 
-<table cellpadding="4" cellspacing="0" border="0" width="100%">
+<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
 <tr>
-	<td width="80"><?php echo $TEXT['TITLE']; ?>:</td>
-	<td width="100%">
-		<input type="text" name="title" value="<?php echo (htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
+	<td><?php echo $TEXT['TITLE']; ?>:</td>
+	<td width="80%">
+		<input type="text" name="title" value="<?php echo (htmlspecialchars($fetch_content['title'])); ?>" style="width: 98%;" maxlength="255" />
 	</td>
 </tr>
 <tr>
@@ -108,7 +112,16 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 	</td>
 </tr>
 <tr>
+	<td><?php echo $TEXT['DATE']; ?>:</td>
+	<td><script>DateInput('publishdate', true, 'YYYY-MM-DD'<?php if($fetch_content['published_when'] != 0) { echo ",'" . date("Y-m-d",$fetch_content['published_when']) . "'"; } ?>)</script></td>
+</tr>
+</table>
+
+<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
+<tr>
 	<td valign="top"><?php echo $TEXT['SHORT']; ?>:</td>
+</tr>
+<tr>
 	<td>
 	<?php
 	show_wysiwyg_editor("short","short",htmlspecialchars($fetch_content['content_short']),"100%","135px");
@@ -117,6 +130,8 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 </tr>
 <tr>
 	<td valign="top"><?php echo $TEXT['LONG']; ?>:</td>
+</tr>
+<tr>
 	<td>
 	<?php
 	show_wysiwyg_editor("long","long",htmlspecialchars($fetch_content['content_long']),"100%","300px");
@@ -125,13 +140,10 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 </tr>
 </table>
 
-<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<table cellpadding="2" cellspacing="0" border="0" width="100%">
 <tr>
-	<td width="90">
-		&nbsp;
-	</td>
 	<td align="left">
-		<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 200px; margin-top: 5px;"></form>
+		<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;"></form>
 	</td>
 	<td align="right">
 		<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />

@@ -13,6 +13,7 @@ Legend:
 ------------------------------------- 2.7.0 -------------------------------------
 
 18-Jan-2008 Matthias Gallas
+!	Updated news modul with features from the advanced news modul
 !	Updated form modul with features from the advanced form modul
 #	Fixed hardcoded /pages issue in intro page feature
 +	Added example .htaccess to parse .html files, fixed bug in changeset 555

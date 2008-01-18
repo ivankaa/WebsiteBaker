@@ -45,6 +45,7 @@ if($admin->get_post('title') == '' AND $admin->get_post('url') == '') {
 	$title = $admin->add_slashes($admin->get_post('title'));
 	$short = $admin->add_slashes($admin->get_post('short'));
 	$long = $admin->add_slashes($admin->get_post('long'));
+	$publishedwhen = strtotime($admin->get_post('publishdate'));	
 	$commenting = $admin->get_post('commenting');
 	$active = $admin->get_post('active');
 	$old_link = $admin->get_post('link');
@@ -68,14 +69,14 @@ $post_link = '/posts/'.page_filename($title).$post_id;
 make_dir(WB_PATH.PAGES_DIRECTORY.'/posts/');
 if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/posts/')) {
 	$admin->print_error($MESSAGE['PAGES']['CANNOT_CREATE_ACCESS_FILE']);
-} elseif($old_link != $post_link OR !file_exists(WB_PATH.PAGES_DIRECTORY.$post_link.'.php')) {
+} elseif($old_link != $post_link OR !file_exists(WB_PATH.PAGES_DIRECTORY.$post_link.PAGE_EXTENSION)) {
 	// We need to create a new file
 	// First, delete old file if it exists
-	if(file_exists(WB_PATH.$old_link.'.php')) {
-		unlink(WB_PATH.$old_link.'.php');
+	if(file_exists(WB_PATH.$old_link.PAGE_EXTENSION)) {
+		unlink(WB_PATH.$old_link.PAGE_EXTENSION);
 	}
 	// Specify the filename
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$post_link.'.php';
+	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$post_link.PAGE_EXTENSION;
 	// The depth of the page directory in the directory hierarchy
 	// '/pages' is at depth 1
 	$pages_dir_depth=count(explode('/',PAGES_DIRECTORY))-1;
@@ -101,7 +102,7 @@ require(WB_PATH."/index.php");
 }
 
 // Update row
-$database->query("UPDATE ".TABLE_PREFIX."mod_news_posts SET group_id = '$group_id', title = '$title', link = '$post_link', content_short = '$short', content_long = '$long', commenting = '$commenting', active = '$active', posted_when = '".mktime()."', posted_by = '".$admin->get_user_id()."' WHERE post_id = '$post_id'");
+$database->query("UPDATE ".TABLE_PREFIX."mod_news_posts SET group_id = '$group_id', title = '$title', link = '$post_link', content_short = '$short', content_long = '$long', commenting = '$commenting', active = '$active', published_when = '$publishedwhen', posted_when = '".mktime()."', posted_by = '".$admin->get_user_id()."' WHERE post_id = '$post_id'");
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {

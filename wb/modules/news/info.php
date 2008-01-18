@@ -26,9 +26,9 @@
 $module_directory = 'news';
 $module_name = 'News';
 $module_function = 'page';
-$module_version = '2.6';
+$module_version = '2.7';
 $module_platform = '2.6.x';
-$module_author = 'Ryan Djurovich';
+$module_author = 'Ryan Djurovich, Rob Smith';
 $module_license = 'GNU General Public License';
 $module_description = 'This page type is designed for making a news page.';
 

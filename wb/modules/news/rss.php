@@ -91,8 +91,8 @@ while($item = $result->fetchRow($result)){ ?>
 <item>
 <title><![CDATA[<?php echo stripslashes($item["title"]); ?>]]></title>
 <description><![CDATA[<?php echo stripslashes($item["content_short"]); ?>]]></description>
-<guid><?php echo WB_URL."/pages".$item["link"].PAGE_EXTENSION; ?></guid>
-<link><?php echo WB_URL."/pages".$item["link"].PAGE_EXTENSION; ?></link>
+<guid><?php echo WB_URL.PAGES_DIRECTORY.$item["link"].PAGE_EXTENSION; ?></guid>
+<link><?php echo WB_URL.PAGES_DIRECTORY.$item["link"].PAGE_EXTENSION; ?></link>
 </item>
 
 <?php } ?>

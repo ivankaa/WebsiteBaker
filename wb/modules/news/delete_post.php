@@ -46,12 +46,13 @@ if($query_details->numRows() > 0) {
 }
 
 // Unlink post access file
-if(is_writable(WB_PATH.PAGES_DIRECTORY.$get_details['link'].'.php')) {
-	unlink(WB_PATH.PAGES_DIRECTORY.$get_details['link'].'.php');
+if(is_writable(WB_PATH.PAGES_DIRECTORY.$get_details['link'].PAGE_EXTENSION)) {
+	unlink(WB_PATH.PAGES_DIRECTORY.$get_details['link'].PAGE_EXTENSION);
 }
 
 // Delete post
 $database->query("DELETE FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id' LIMIT 1");
+$database->query("DELETE FROM ".TABLE_PREFIX."mod_news_comments WHERE post_id = '$post_id'");
 
 // Clean up ordering
 require(WB_PATH.'/framework/class.order.php');

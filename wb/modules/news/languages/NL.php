@@ -23,5 +23,16 @@
 
 */
 
-header("Location: ../../index.php");
+//Modul Description
+$module_description = 'This page type is designed for making a news page.';
+
+//Variables for the  backend
+$MOD_NEWS['SETTINGS'] = 'News Settings';
+
+// Variables for the module CSS edit outputs
+$CAP_EDIT_CSS = 'Wijzig CSS';
+$CAP_TOGGLE_CSS = 'Wijzig ';
+$HEADING_CSS_FILE = 'Actuele module bestand: ';
+$TXT_EDIT_CSS_FILE = 'Wijzig de CSS definities in het textveld hieronder.';
+
 ?>

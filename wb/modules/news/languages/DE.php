@@ -23,5 +23,16 @@
 
 */
 
-header("Location: ../../index.php");
+//Modulbeschreibung
+$module_description = 'Mit diesem Modul k&ouml;nnen sie eine News Seite ihrer Seite hinzuf&uuml;gen.';
+
+//Variablen für backend Texte
+$MOD_NEWS['SETTINGS'] = 'News Einstellungen';
+
+// Variablen für Textausgabe der frontend.css/backend.css Bearbeitung
+$CAP_EDIT_CSS = 'Bearbeite CSS';
+$CAP_TOGGLE_CSS = 'Wechsle zu ';
+$HEADING_CSS_FILE = 'Aktuelle Moduldatei: ';
+$TXT_EDIT_CSS_FILE = 'Bearbeite die CSS Definitionen im nachfolgenden Textfeld.';
+
 ?>

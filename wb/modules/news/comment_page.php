@@ -32,7 +32,7 @@ if(!defined('WB_URL')) {
 // Get comments page template details from db
 $query_settings = $database->query("SELECT comments_page,use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
 if($query_settings->numRows() == 0) {
-	header('Location: '.WB_URL.'/pages/');
+	header("Location: ".WB_URL.PAGES_DIRECTORY."");
 	exit(0);
 } else {
 	$settings = $query_settings->fetchRow();

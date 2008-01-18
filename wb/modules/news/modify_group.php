@@ -42,17 +42,19 @@ $fetch_content = $query_content->fetchRow();
 
 ?>
 
+<h2><?php echo $TEXT['ADD'].'/'.$TEXT['MODIFY'].' '.$TEXT['GROUP']; ?></h2>
+
 <form name="modify" action="<?php echo WB_URL; ?>/modules/news/save_group.php" method="post" enctype="multipart/form-data" style="margin: 0;">
 
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
 
-<table cellpadding="4" cellspacing="0" border="0" width="100%">
+<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
 <tr>
 	<td width="80"><?php echo $TEXT['TITLE']; ?>:</td>
 	<td>
-		<input type="text" name="title" value="<?php echo (htmlspecialchars($fetch_content['title'])); ?>" style="width: 100%;" maxlength="255" />
+		<input type="text" name="title" value="<?php echo (htmlspecialchars($fetch_content['title'])); ?>" style="width: 98%;" maxlength="255" />
 	</td>
 </tr>
 <tr>
@@ -89,7 +91,7 @@ $fetch_content = $query_content->fetchRow();
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 	<td align="left">
-		<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 200px; margin-top: 5px;"></form>
+		<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;"></form>
 	</td>
 	<td align="right">
 		<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />

@@ -35,7 +35,7 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	// Check captcha
 	$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".$_GET['section_id']."'");
 	if($query_settings->numRows() == 0) { 
-		exit(header('Location: '.WB_URL.'/pages/'));
+		exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
 	} else {
 		$settings = $query_settings->fetchRow();
 		if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND $settings['use_captcha']) { /* Make's sure GD library is installed */

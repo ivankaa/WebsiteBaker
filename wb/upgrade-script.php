@@ -198,11 +198,11 @@ if($query->numRows() == 0) { // add field
 }
 
 
-//******************************************************************************
-//The following lines upgrades the form modul from 2.6.x to the andvanced version from 2.7.x
-//******************************************************************************
-
 $database = new database(DB_URL);
+
+//******************************************************************************
+//Start of upgrade script for the form modul
+//******************************************************************************
 
 echo "<BR><B>Adding new field to database table mod_form_settings</B><BR>";
 
@@ -294,6 +294,101 @@ while($result = $query_dates->fetchRow()) {
 
 //******************************************************************************
 //End of upgrade script for the form modul
+//******************************************************************************
+
+//******************************************************************************
+//Start of upgrade script for the news modul
+//******************************************************************************
+
+echo "<BR><B>Adding new field to database table mod_news_posts</B><BR>";
+if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_news_posts` ADD `published_when` INT NOT NULL AFTER `commenting`")) {
+	echo 'Database Field published_when added successfully<br />';
+}
+echo mysql_error().'<br />';
+
+// UPDATING DATA INTO FIELDS
+echo "<BR>";
+
+// These are the default setting
+$header = '<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"98%\">';
+$post_loop = '<tr class=\"post_top\">
+<td class=\"post_title\"><a href=\"[LINK]\">[TITLE]</a></td>
+<td class=\"post_date\">[MODI_TIME], [MODI_DATE]</td>
+</tr>
+<tr>
+<td class=\"post_short\" colspan=\"2\">
+[SHORT] 
+<a href=\"[LINK]\">[TEXT_READ_MORE]</a>
+</td>
+</tr>';
+$post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+<td height="30"><h1>[TITLE]</h1></td>
+<td rowspan="3" style="display: [DISPLAY_IMAGE]"><img src="[GROUP_IMAGE]" alt="[GROUP_TITLE]" /></td>
+</tr>
+<tr>
+<td valign="top"><b>Posted by [DISPLAY_NAME] ([USERNAME]) on [PUBL_DATE]</b></td>
+</tr>
+<tr style="display: [DISPLAY_GROUP]">
+<td valign="top"><a href="[BACK]">[PAGE_TITLE]</a> >> <a href="[BACK]?g=[GROUP_ID]">[GROUP_TITLE]</a></td>
+</tr>
+</table>
+<p style="text-align: justify;">');
+$post_footer = '</p><p>Last changed: [MODI_DATE] at [MODI_TIME]</p>
+<a href=\"[BACK]\">Back</a>';
+$comments_header = addslashes('<br /><br />
+<h2>Comments</h2>
+<table cellpadding="2" cellspacing="0" border="0" width="98%">');
+
+// Insert default settings into database
+$query_dates = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings where section_id != 0 and page_id != 0");
+while($result = $query_dates->fetchRow()) {
+	
+	echo "<B>Add default settings data to database for news section_id= ".$result['section_id']."</b><BR>";
+	$section_id = $result['section_id'];
+
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `header` = '$header' WHERE `section_id` = $section_id")) {
+		echo 'Database data header added successfully<br>';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `post_loop` = '$post_loop' WHERE `section_id` = $section_id")) {
+		echo 'Database data post_loop added successfully<br>';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `post_header` = '$post_header' WHERE `section_id` = $section_id")) {
+		echo 'Database data post_header added successfully<br>';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `post_footer` = '$post_footer' WHERE `section_id` = $section_id")) {
+		echo 'Database data post_footer added successfully<br>';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `comments_header` = '$comments_header' WHERE `section_id` = $section_id")) {
+		echo 'Database data comments_header added successfully<br>';
+	}
+	echo mysql_error().'<br />';
+
+}
+
+// MIGRATING FIELD DATES to POSTED_WHEN
+echo "<B>Copying field posted_when value to published_when</B><BR>";
+$query_dates = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts where section_id != 0 and page_id != 0");
+
+while($result = $query_dates->fetchRow()) {
+	$pid = $result['post_id'];
+	$NEW_DATE = $result['posted_when'];
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_posts` SET `published_when` = '$NEW_DATE' WHERE `post_id` = $pid")) {
+		echo 'Copying posted_when value to published_when successfully<br>';
+	}
+	echo mysql_error().'<br />';
+}
+
+//******************************************************************************
+//End of upgrade script for the news modul
 //******************************************************************************
 
 echo "<br /><br />Done<br />";
