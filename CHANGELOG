@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+18-Jan-2008 Thomas Hornik
+#	fixed two E_NOTICE-warnings in admin/pages/index.php
 18-Jan-2008 Matthias Gallas
 +	Added example .htaccess to parse .html files, fixed bug in changeset 555
 !	Revoked parts of changeset 547 and again introduced changeset 540

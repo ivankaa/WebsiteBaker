@@ -101,7 +101,7 @@ function make_list($parent, $editable_pages) {
 	// Get objects and vars from outside this function
 	global $admin, $template, $database, $TEXT, $MESSAGE, $HEADING;
 	?>
-	<ul id="p<?php echo $parent; ?>" <?php if($parent != 0) { echo 'class="page_list" '; if($_COOKIE["p".$parent] =="1"){echo'style="display:block;"'; }} ?>>
+	<ul id="p<?php echo $parent; ?>" <?php if($parent != 0) { echo 'class="page_list" '; if(isset($_COOKIE["p".$parent]) && $_COOKIE["p".$parent] =="1"){echo'style="display:block;"'; }} ?>>
 	<?php	
 	// Get page list from database
 	$database = new database();
@@ -170,7 +170,7 @@ function make_list($parent, $editable_pages) {
 					if($display_plus == true) {
 					?>
 					<a href="javascript: toggle_visibility('p<?php echo $page['page_id']; ?>');" title="<?php echo $TEXT['EXPAND'].'/'.$TEXT['COLLAPSE']; ?>">
-						<img src="<?php echo ADMIN_URL; ?>/images/<?php if($_COOKIE["p".$page['page_id']] =="1"){echo"minus";}else{echo"plus";}?>_16.png" onclick="toggle_plus_minus('<?php echo $page['page_id']; ?>');" name="plus_minus_<?php echo $page['page_id']; ?>" border="0" alt="+" />
+						<img src="<?php echo ADMIN_URL; ?>/images/<?php if(isset($_COOKIE["p".$page['page_id']]) && $_COOKIE["p".$page['page_id']] =="1"){echo"minus";}else{echo"plus";}?>_16.png" onclick="toggle_plus_minus('<?php echo $page['page_id']; ?>');" name="plus_minus_<?php echo $page['page_id']; ?>" border="0" alt="+" />
 					</a>
 					<?php
 					}
