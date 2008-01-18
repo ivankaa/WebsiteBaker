@@ -1,5 +1,7 @@
 <?php
 
+// $Id$
+
 /*
 
  Website Baker Project <http://www.websitebaker.org/>

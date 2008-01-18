@@ -1,5 +1,7 @@
 <?php
 
+// $Id$
+
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
@@ -26,7 +28,7 @@
  *
  * See the readme file : http://www.phpclasses.org/browse/file/4685.html
  *
- * $Id: cssparser.inc.php,v 1.2 2005/03/30 23:42:15 yalnifj dead $
+ * $Id$
  *
  * @author http://www.phpclasses.org/browse/package/1289.html
  * @package PhpGedView
