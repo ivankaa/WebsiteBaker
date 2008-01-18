@@ -355,10 +355,10 @@ if($admin->get_permission('pages_view') == true) {
 		<td>
 			<?php echo $TEXT['VISIBILITY'] .' / ' .$TEXT['PAGE_TITLE']; ?>:
 		</td>
-		<td width="235" align="left">
+		<td width="130" align="left">
 			<?php echo $TEXT['MENU_TITLE']; ?>:
 		</td>
-		<td width="125" align="center">
+		<td width="255" align="center">
 			<?php echo $TEXT['ACTIONS']; ?>:
 		</td>		
 	</tr>
