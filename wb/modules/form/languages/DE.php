@@ -23,11 +23,16 @@
 
 */
 
-/*
-The Website Baker Project would like to thank Rudolph Lartey <www.carbonect.com>
-for his contributions to this module - adding extra field types
-*/
+//Modulbeschreibung
+$module_description = 'Mit diesem Modul k&ouml;nnen sie ein beliebiges Formular f&uuml;r ihre Seite erzeugen';
 
-header('Location: ../index.php');
+//Variablen für backend Texte
+$MOD_FORM['SETTINGS'] = 'Formular Einstellungen';
+
+// Variablen für Textausgabe der frontend.css/backend.css Bearbeitung
+$CAP_EDIT_CSS = 'Bearbeite CSS';
+$CAP_TOGGLE_CSS = 'Wechsle zu ';
+$HEADING_CSS_FILE = 'Aktuelle Moduldatei: ';
+$TXT_EDIT_CSS_FILE = 'Bearbeite die CSS Definitionen im nachfolgenden Textfeld.';
 
 ?>

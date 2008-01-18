@@ -23,11 +23,16 @@
 
 */
 
-/*
-The Website Baker Project would like to thank Rudolph Lartey <www.carbonect.com>
-for his contributions to this module - adding extra field types
-*/
+//Modul Description
+$module_description = 'This module allows you to create customised online forms, such as a feedback form. '.'Thank-you to Rudolph Lartey who help enhance this module, providing code for extra field types, etc.';
 
-header('Location: ../index.php');
+//Variables for the  backend
+$MOD_FORM['SETTINGS'] = 'Form Settings';
+
+// Variables for the module CSS edit outputs
+$CAP_EDIT_CSS = 'Wijzig CSS';
+$CAP_TOGGLE_CSS = 'Wijzig ';
+$HEADING_CSS_FILE = 'Actuele module bestand: ';
+$TXT_EDIT_CSS_FILE = 'Wijzig de CSS definities in het textveld hieronder.';
 
 ?>

@@ -40,14 +40,19 @@ $footer = '<tr><td>&nbsp;</td>
 $email_to = $admin->get_email();
 $email_from = '';
 $email_subject = 'Results from form on website...';
-$success_message = 'Thank-you.';
+$success_page = 'none';
+$success_email_to = '';
+$success_email_from = $admin->get_email();
+$success_email_text = 'Thank you for submitting your form on '.WEBSITE_TITLE;
+$success_email_text = addslashes($success_email_text);
+$success_email_subject = 'You have submitted a form';
 $max_submissions = 50;
-$stored_submissions = 100;
+$stored_submissions = 50;
 if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
 	$use_captcha = true;
 } else {
 	$use_captcha = false;
 }
-$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_settings (page_id,section_id,header,field_loop,footer,email_to,email_from,email_subject,success_message,max_submissions,stored_submissions,use_captcha) VALUES ('$page_id','$section_id','$header','$field_loop','$footer','$email_to','$email_from','$email_subject','$success_message','$max_submissions','$stored_submissions','$use_captcha')");
+$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_settings (page_id,section_id,header,field_loop,footer,email_to,email_from,email_subject,success_page,success_email_to,success_email_from,success_email_text,success_email_subject,max_submissions,stored_submissions,use_captcha) VALUES ('$page_id','$section_id','$header','$field_loop','$footer','$email_to','$email_from','$email_subject','$success_page','$success_email_to','$success_email_from','$success_email_text','$success_email_subject','$max_submissions','$stored_submissions','$use_captcha')");
 
 ?>

@@ -198,7 +198,103 @@ if($query->numRows() == 0) { // add field
 }
 
 
+//******************************************************************************
+//The following lines upgrades the form modul from 2.6.x to the andvanced version from 2.7.x
+//******************************************************************************
 
+$database = new database(DB_URL);
+
+echo "<BR><B>Adding new field to database table mod_form_settings</B><BR>";
+
+if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` ADD `success_email_subject` VARCHAR(255) NOT NULL AFTER `success_message`")) {
+	echo 'Database Field success_email_subject added successfully<br />';
+}
+echo mysql_error().'<br />';
+
+if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` ADD `success_email_text` TEXT NOT NULL AFTER `success_message`")) {
+	echo 'Database Field success_email_text added successfully<br />';
+}
+echo mysql_error().'<br />';
+
+if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` ADD `success_email_from` VARCHAR(255) NOT NULL AFTER `success_message`")) {
+	echo 'Database Field success_email_from added successfully<br />';
+}
+echo mysql_error().'<br />';
+
+if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` ADD `success_email_to` TEXT NOT NULL AFTER `success_message`")) {
+	echo 'Database Field success_email_to added successfully<br />';
+}
+echo mysql_error().'<br />';
+
+if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` ADD `success_page` TEXT NOT NULL AFTER `success_message`")) {
+	echo 'Database Field success_page added successfully<br />';
+}
+echo mysql_error().'<br />';
+
+echo "<BR><B>Deleting field success_message from table mod_form_settings</B><BR>";
+
+if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` DROP `success_message`")) {
+	echo 'Database field success_message droped successfully<br>';
+}
+echo mysql_error().'<br />';
+
+
+// UPDATING DATA INTO FIELDS
+echo "<BR>";
+
+// These are the default setting
+$success_page = 'none';
+$success_email_to = '';
+$success_email_text = 'Thank you for submitting your form on '.WEBSITE_TITLE;
+$success_email_text = addslashes($success_email_text);
+$success_email_subject = 'You have submitted a form';
+
+// Insert default settings into database
+$query_dates = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_settings where section_id != 0 and page_id != 0");
+while($result = $query_dates->fetchRow()) {
+	
+	echo "<B>Add default settings data to database for form section_id= ".$result['section_id']."</b><BR>";
+	$section_id = $result['section_id'];
+
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_form_settings` SET `success_page` = '$success_page' WHERE `section_id` = $section_id")) {
+		echo 'Database data success_page added successfully<br>';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_form_settings` SET `success_email_to` = '$success_email_to' WHERE `section_id` = $section_id")) {
+		echo 'Database data success_email_to added successfully<br>';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_form_settings` SET `success_email_text` = '$success_email_text' WHERE `section_id` = $section_id")) {
+		echo 'Database data success_email_text added successfully<br>';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_form_settings` SET `success_email_subject` = '$success_email_subject' WHERE `section_id` = $section_id")) {
+		echo 'Database data success_email_subject added successfully<br>';
+	}
+	echo mysql_error().'<br />';
+	
+}
+
+// copy field email_to to success_email_from
+$query_dates = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_settings where section_id != 0 and page_id != 0");
+while($result = $query_dates->fetchRow()) {
+	
+	echo "<B>Copying field email_to to success_email_from for form section_id= ".$result['section_id']."</B><BR>";
+	$section_id = $result['section_id'];
+
+	$success_email_from = $result['email_to'];
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_form_settings` SET `success_email_from` = '$success_email_from' WHERE `section_id` = $section_id")) {
+		echo 'Copyied field email_to to success_email_from successfully<br>';
+	}
+	echo mysql_error().'<br />';
+}
+
+//******************************************************************************
+//End of upgrade script for the form modul
+//******************************************************************************
 
 echo "<br /><br />Done<br />";
 

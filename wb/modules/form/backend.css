@@ -1,0 +1,20 @@
+.setting_name {
+	vertical-align: top;
+}
+.newsection {
+	border-top: 1px dashed #fff;
+}
+
+div.mod_form_edit_css {
+  width: 100%;
+  margin-top: -20px;
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+div.mod_form_edit_css a {
+  width: 100px;
+  padding: 5px;
+  border: 1px solid;
+  background-color: #F0F0F0;
+}

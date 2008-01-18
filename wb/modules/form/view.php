@@ -31,7 +31,15 @@ for his contributions to this module - adding extra field types
 // Must include code to stop this file being access directly
 if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
+// check if frontend.css file needs to be included into the <body></body> of view.php
+if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) &&  file_exists(WB_PATH .'/modules/form/frontend.css')) {
+   echo '<style type="text/css">';
+   include(WB_PATH .'/modules/form/frontend.css');
+   echo "\n</style>\n";
+} 
+
 // Function for generating an optionsfor a select field
+if (!function_exists(make_option)) {
 function make_option(&$n) {
 	// start option group if it exists
 	if (substr($n,0,2) == '[=') {
@@ -42,23 +50,25 @@ function make_option(&$n) {
 		$n = '<option value="'.$n.'">'.$n.'</option>';
 	}
 }
-
+}
 // Function for generating a checkbox
+if (!function_exists(make_checkbox)) {
 function make_checkbox(&$n, $idx, $params) {
 	$field_id = $params[0];
 	$seperator = $params[1];
 	//$n = '<input class="field_checkbox" type="checkbox" id="'.$n.'" name="field'.$field_id.'" value="'.$n.'">'.'<font class="checkbox_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = !document.getElementById(\''.$n.'\').checked;">'.$n.'</font>'.$seperator;
 	$n = '<input class="field_checkbox" type="checkbox" id="'.$n.'" name="field'.$field_id.'['.$idx.']" value="'.$n.'">'.'<font class="checkbox_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = !document.getElementById(\''.$n.'\').checked;">'.$n.'</font>'.$seperator;
 }
-
+}
 // Function for generating a radio button
+if (!function_exists(make_radio)) {
 function make_radio(&$n, $idx, $params) {
 	$field_id = $params[0];
 	$group = $params[1];
 	$seperator = $params[2];
 	$n = '<input class="field_radio" type="radio" id="'.$n.'" name="field'.$field_id.'" value="'.$n.'">'.'<font class="radio_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = true;">'.$n.'</font>'.$seperator;
 }
-
+}
 // Generate temp submission id
 function new_submission_id() {
 	$submission_id = '';
@@ -80,53 +90,6 @@ if($_POST == array()) {
 // Set new submission ID in session
 $_SESSION['form_submission_id'] = new_submission_id();
 
-?>
-<style type="text/css">
-.required {
-	color: #FF0000;
-}
-.field_title {
-	font-size: 12px;
-	width: 100px;
-	vertical-align: top;
-	text-align:right;
-}
-.textfield {
-	font-size: 12px;
-	width: 200px;
-}
-.textarea {
-	font-size: 12px;
-	width: 90%;
-	height: 100px;
-}
-.field_heading {
-	font-size: 12px;
-	font-weight: bold;
-	border-bottom-width: 2px;
-	border-bottom-style: solid;
-	border-bottom-color: #666666;
-	padding-top: 10px;
-	color: #666666;
-}
-.select {
-	font-size: 12px;
-}
-.checkbox_label {
-	font-size: 11px;
-	cursor: pointer;
-}
-.radio_label {
-	font-size: 11px;
-	cursor: pointer;
-}
-.email {
-	font-size: 12px;
-	width: 200px;
-}
-</style>
-<?php
-
 // Get settings
 $query_settings = $database->query("SELECT header,field_loop,footer,use_captcha FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 if($query_settings->numRows() > 0) {
@@ -141,9 +104,14 @@ if($query_settings->numRows() > 0) {
 	$footer = '';
 }
 
+$java_fields = '';
+$java_titles = '';
+$java_tween = ''; // I know kinda stupid, anyone better idea?
+$java_mailcheck = '';
+
 // Add form starter code
 ?>
-<form name="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<form name="form" onsubmit="return formCheck(this);" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" />
 <?php
 
@@ -162,6 +130,9 @@ if($query_fields->numRows() > 0) {
 		$values = array($field['title']);
 		if($field['required'] == 1) {
 			$values[] = '<font class="required">*</font>';
+			$java_fields .= $java_tween.'"field'.$field_id.'"';
+			$java_titles .= $java_tween.'"'.$field['title'].'"';
+			$java_tween = ', ';
 		} else {
 			$values[] = '';
 		}
@@ -186,15 +157,18 @@ if($query_fields->numRows() > 0) {
 			$vars[] = '{FIELD}';
 			$options = explode(',', $value);
 			array_walk($options, 'make_checkbox',array($field_id,$field['extra']));
+			$options[count($options)-1]=substr($options[count($options)-1],0,strlen($options[count($options)-1])-strlen($field['extra']));
 			$values[] = implode($options);
 		} elseif($field['type'] == 'radio') {
 			$vars[] = '{FIELD}';
 			$options = explode(',', $value);
 			array_walk($options, 'make_radio',array($field_id,$field['title'],$field['extra']));
+			$options[count($options)-1]=substr($options[count($options)-1],0,strlen($options[count($options)-1])-strlen($field['extra']));
 			$values[] = implode($options);
 		} elseif($field['type'] == 'email') {
 			$vars[] = '{FIELD}';
-			$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'" maxlength="'.$field['extra'].'" class="email" />';
+			$values[] = '<input type="text" name="field'.$field_id.'" onChange="return checkmail(this.form.field'.$field_id.')"  id="field'.$field_id.'" maxlength="'.$field['extra'].'" class="email" />';
+			$java_mailcheck .= 'onChange="return checkmail(this.form'.$field_id.'" ';
 		}
 		if($field['type'] != '') {
 			echo str_replace($vars, $values, $field_loop);
@@ -217,6 +191,89 @@ if($use_captcha) {
 	</td></tr>
 	<?php
 }
+echo '
+<script language="JavaScript">
+<!--
+
+/***********************************************
+* Required field(s) validation v1.10- By NavSurf
+* Visit Nav Surf at http://navsurf.com
+* Visit http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+function formCheck(formobj){
+	// Enter name of mandatory fields
+	var fieldRequired = Array('.$java_fields.');
+	// Enter field description to appear in the dialog box
+	var fieldDescription = Array('.$java_titles.');
+	// dialog message
+	var alertMsg = "'.$MESSAGE['MOD_FORM']['REQUIRED_FIELDS'].':\n";
+	
+	var l_Msg = alertMsg.length;
+	
+	for (var i = 0; i < fieldRequired.length; i++){
+		var obj = formobj.elements[fieldRequired[i]];
+		if (obj){
+			switch(obj.type){
+			case "select-one":
+				if (obj.selectedIndex == -1 || obj.options[obj.selectedIndex].text == ""){
+					alertMsg += " - " + fieldDescription[i] + "\n";
+				}
+				break;
+			case "select-multiple":
+				if (obj.selectedIndex == -1){
+					alertMsg += " - " + fieldDescription[i] + "\n";
+				}
+				break;
+			case "text":
+			case "textarea":
+				if (obj.value == "" || obj.value == null){
+					alertMsg += " - " + fieldDescription[i] + "\n";
+				}
+				break;
+			default:
+			}
+			if (obj.type == undefined){
+				var blnchecked = false;
+				for (var j = 0; j < obj.length; j++){
+					if (obj[j].checked){
+						blnchecked = true;
+					}
+				}
+				if (!blnchecked){
+					alertMsg += " - " + fieldDescription[i] + "\n";
+				}
+			}
+		}
+	}
+
+	if (alertMsg.length == l_Msg){
+		return true;
+	}else{
+		alert(alertMsg);
+		return false;
+	}
+}
+/***********************************************
+* Email Validation script- © Dynamic Drive (www.dynamicdrive.com)
+* This notice must stay intact for legal use.
+* Visit http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+var emailfilter=/^\w+[\+\.\w-]*@([\w-]+\.)*\w+[\w-]*\.([a-z]{2,4}|\d+)$/i
+
+function checkmail(e){
+var returnval=emailfilter.test(e.value);
+if (returnval==false){
+alert("Please enter a valid email address.");
+e.select();
+}
+return returnval;
+}
+-->
+
+</script>';
+
 
 // Print footer
 echo $footer;
@@ -236,7 +293,7 @@ echo $footer;
 		
 		// Submit form data
 		// First start message settings
-		$query_settings = $database->query("SELECT email_to,email_from,email_subject,success_message,max_submissions,stored_submissions,use_captcha FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
+		$query_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 		if($query_settings->numRows() > 0) {
 			$fetch_settings = $query_settings->fetchRow();
 			$email_to = $fetch_settings['email_to'];
@@ -246,7 +303,15 @@ echo $footer;
 				$email_from = $wb->add_slashes($_POST[$email_from]);
 			}
 			$email_subject = $fetch_settings['email_subject'];
-			$success_message = $fetch_settings['success_message'];
+			$success_page = $fetch_settings['success_page'];
+			$success_email_to = $fetch_settings['success_email_to'];
+			if(substr($success_email_to, 0, 5) == 'field') {
+				// Set the success_email to field to what the user entered in the specified field
+				$success_email_to = $wb->add_slashes($_POST[$success_email_to]);
+			}
+			$success_email_from = $fetch_settings['success_email_from'];
+			$success_email_text = $fetch_settings['success_email_text'];
+			$success_email_subject = $fetch_settings['success_email_subject'];		
 			$max_submissions = $fetch_settings['max_submissions'];
 			$stored_submissions = $fetch_settings['stored_submissions'];
 			$use_captcha = $fetch_settings['use_captcha'];
@@ -343,9 +408,27 @@ echo $footer;
 					// Now send the email
 					if($email_to != '') {
 						if($email_from != '') {
-							if($wb->mail($email_from,$email_to,$email_subject,$email_body)) { $success = true; }
+							if($wb->mail($email_from,$email_to,$email_subject,$email_body)) {
+								$success = true;
+							}
+						} else {
+							if($wb->mail('',$email_to,$email_subject,$email_body)) { 
+								$success = true; 
+							}
 						}
 					}				
+					if($success_email_to != '') {
+						if($success_email_from != '') {
+							if($wb->mail($success_email_from,$success_email_to,$success_email_subject,$success_email_text)) {
+								$success = true;
+							}
+						} else {
+							if($wb->mail('',$success_email_to,$success_email_subject,$success_email_text)) {
+								$success = true;
+							}
+						}
+					}				
+			
 					// Write submission to database
 					if(isset($admin) AND $admin->get_user_id() > 0) {
 						$admin->get_user_id();
@@ -378,11 +461,18 @@ echo $footer;
 	
 	// Now check if the email was sent successfully
 	if(isset($success) AND $success == true) {
-		echo $success_message;
-	} else {
-		if(isset($success) AND $success == false) {
-			echo $TEXT['ERROR'];
+	    if ($success_page=='none') {
+			echo str_replace("\n","<br />",$success_email_text);
+  		} else {
+			$query_menu = $database->query("SELECT link,target FROM ".TABLE_PREFIX."pages WHERE `page_id` = '$success_page'");
+			if($query_menu->numRows() > 0) {
+  	         	$fetch_settings = $query_menu->fetchRow();
+			    $link = WB_URL.PAGES_DIRECTORY.$fetch_settings['link'].PAGE_EXTENSION;
+			    echo "<script type='text/javascript'>location.href='".$link."';</script>";
+			}    
 		}
+	} else {
+		echo $TEXT['ERROR'];
 	}
 	
 }

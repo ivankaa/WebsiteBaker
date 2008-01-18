@@ -54,13 +54,18 @@ if(defined('WB_URL')) {
 		. ' `email_to` TEXT NOT NULL ,'
 		. ' `email_from` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
 		. ' `email_subject` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
-		. ' `success_message` TEXT NOT NULL ,'
+		. ' `success_page` TEXT NOT NULL ,'
+		. ' `success_email_to` TEXT NOT NULL ,'
+		. ' `success_email_from` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
+		. ' `success_email_text` TEXT NOT NULL ,'
+		. ' `success_email_subject` VARCHAR(255) NOT NULL DEFAULT \'\' ,'
 		. ' `stored_submissions` INT NOT NULL DEFAULT \'0\' ,'
 		. ' `max_submissions` INT NOT NULL DEFAULT \'0\' ,'
 		. ' `use_captcha` INT NOT NULL DEFAULT \'0\' ,'
 		. ' PRIMARY KEY ( `section_id` ) '
 		. ' )';
 	$database->query($mod_form);
+	
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_form_submissions`");
 	$mod_form = 'CREATE TABLE `'.TABLE_PREFIX.'mod_form_submissions` ( `submission_id` INT NOT NULL AUTO_INCREMENT,'
 		. ' `section_id` INT NOT NULL DEFAULT \'0\' ,'

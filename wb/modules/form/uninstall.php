@@ -28,6 +28,14 @@ The Website Baker Project would like to thank Rudolph Lartey <www.carbonect.com>
 for his contributions to this module - adding extra field types
 */
 
-header('Location: ../index.php');
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
+
+$database->query("DELETE FROM ".TABLE_PREFIX."search WHERE name = 'module' AND value = 'form'");
+$database->query("DELETE FROM ".TABLE_PREFIX."search WHERE extra = 'form'");
+
+$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_form_fields`");
+$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_form_settings`");
+$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_form_submissions`");
 
 ?>
