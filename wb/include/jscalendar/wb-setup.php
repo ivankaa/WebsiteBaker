@@ -1,6 +1,6 @@
 <?php
 
-// $Id: $
+// $Id$
 
 /*
 
@@ -35,23 +35,23 @@ if(!defined('WB_URL')) {
 ?>
 <style type="text/css">
 <?php
-require_once(WB_PATH."/include/jscalendar/calendar-system.css");
+require_once(WB_PATH.'/include/jscalendar/calendar-system.css');
 ?>
 </style>
 <script type="text/javascript" src="<?php echo WB_URL ?>/include/jscalendar/calendar.js"></script>
 <?php // some stuff for jscalendar
 	// language
-	$jscal_lang = defined('LANGUAGE')?strtolower(LANGUAGE):"en";
-	$jscal_lang = $jscal_lang!=""?$jscal_lang:"en";
+	$jscal_lang = defined('LANGUAGE')?strtolower(LANGUAGE):'en';
+	$jscal_lang = $jscal_lang!=''?$jscal_lang:'en';
 	if(!file_exists(WB_PATH."/include/jscalendar/lang/calendar-$jscal_lang.js")) {
-		$jscal_lang = "en";
+		$jscal_lang = 'en';
 	}
 	// today
-	$jscal_today = date("Y/m/d");
+	$jscal_today = date('Y/m/d');
 	// first-day-of-week
-	$jscal_firstday = "1"; // monday
-	if(LANGUAGE=="EN")
-		$jscal_firstday = "0"; // sunday
+	$jscal_firstday = '1'; // monday
+	if(LANGUAGE=='EN')
+		$jscal_firstday = '0'; // sunday
 	// date and time format for the text-field and for jscal's "ifFormat". We offer dd.mm.yyyy or yyyy-mm-dd or mm/dd/yyyy
 	switch(DATE_FORMAT) {
 		case 'd.m.Y':
@@ -61,20 +61,24 @@ require_once(WB_PATH."/include/jscalendar/calendar-system.css");
 		case 'D M d, Y':
 		case 'd-m-Y':
 		case 'd/m/Y':
-			$jscal_format = "d.m.Y H:i"; // dd.mm.yyyy hh:mm
-			$jscal_ifformat = "%d.%m.%Y %H:%M";
+			$jscal_format = 'd.m.Y'; // dd.mm.yyyy hh:mm
+			$jscal_ifformat = '%d.%m.%Y';
 			break;
 		case 'm/d/Y':
 		case 'm-d-Y':
 		case 'M d Y':
 		case 'm.d.Y':
-			$jscal_format = "m/d/Y H:i"; // mm/dd/yyyy hh:mm
-			$jscal_ifformat = "%m/%d/%Y %H:%M";
+			$jscal_format = 'm/d/Y'; // mm/dd/yyyy hh:mm
+			$jscal_ifformat = '%m/%d/%Y';
 			break;
 		default:
-			$jscal_format = "Y-m-d H:i"; // yyyy-mm-dd hh:mm
-			$jscal_ifformat = "%Y-%m-%d %H:%M";
+			$jscal_format = 'Y-m-d'; // yyyy-mm-dd hh:mm
+			$jscal_ifformat = '%Y-%m-%d';
 			break;
+	}
+	if(isset($jscal_use_time) && $jscal_use_time==TRUE) {
+		$jscal_format .= ' H:i';
+		$jscal_ifformat .= ' %H:%M';
 	}
 	// load scripts for jscalendar
 ?>

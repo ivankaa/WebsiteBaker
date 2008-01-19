@@ -49,8 +49,17 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 			require(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
 }
 
+// include jscalendar-setup
+$jscal_use_time = false; // whether to use a clock, too
+require_once(WB_PATH."/include/jscalendar/wb-setup.php");
+// override some vars: (normally, there is no need to change this)
+//$jscal_lang = "en"; //- calendar-language (default: wb-backend-language)
+//$jscal_today = ""; // - date the calendar offers if the text-field is empty (default: today)
+//$jscal_firstday = "0"; // - first-day-of-week (0-sunday, 1-monday, ...) (default: 0(EN) or 1(everything else))
+//$jscal_format = "Y-m-d"; // - initial-format used for the text-field (default: from wb-backend-date-format)
+//$jscal_ifformat = "%Y-%m-%d"; // - format for jscalendar (default: from wb-backend-date-format)
+
 ?>
-<script type="text/javascript" src="calendar/calendarDateInput.js"></script>
 
 <h2><?php echo $TEXT['ADD'].'/'.$TEXT['MODIFY'].' '.$TEXT['POST']; ?></h2>
 
@@ -113,7 +122,10 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 </tr>
 <tr>
 	<td><?php echo $TEXT['DATE']; ?>:</td>
-	<td><script>DateInput('publishdate', true, 'YYYY-MM-DD'<?php if($fetch_content['published_when'] != 0) { echo ",'" . date("Y-m-d",$fetch_content['published_when']) . "'"; } ?>)</script></td>
+	<td>
+	<input type="text" id="publishdate" name="publishdate" value="<?php if($fetch_content['published_when']==0) print ""; else print date($jscal_format, $fetch_content['published_when'])?>" style="width: 120px;" />
+	<img src="<?php echo WB_URL ?>/include/jscalendar/img.gif" id="publishdate_trigger" style="cursor: pointer; border: 1px solid red;" title="Calendar" onmouseover="this.style.background='red';" onmouseout="this.style.background=''" />
+	</td>
 </tr>
 </table>
 
@@ -150,6 +162,24 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 	</td>
 </tr>
 </table>
+
+<script type="text/javascript">
+	Calendar.setup(
+		{
+			inputField  : "publishdate",
+			ifFormat    : "<?php echo $jscal_ifformat ?>",
+			button      : "publishdate_trigger",
+			firstDay    : <?php echo $jscal_firstday ?>,
+			<?php if(isset($jscal_use_time) && $jscal_use_time==TRUE) { ?>
+				showsTime   : "true",
+				timeFormat  : "24",
+			<?php } ?>
+			date        : "<?php echo $jscal_today ?>",
+			range       : [1970, 2037],
+			step        : 1
+		}
+	);
+</script>
 
 <br />
 
