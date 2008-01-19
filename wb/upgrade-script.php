@@ -198,7 +198,76 @@ if($query->numRows() == 0) { // add field
 }
 
 
-$database = new database(DB_URL);
+/**********************************************************
+ *  - core-module menu_link
+ */
+// create table
+$table = TABLE_PREFIX ."mod_menu_link";
+$database->query("DROP TABLE IF EXISTS `$table`");
+$database->query("
+	CREATE TABLE `$table` (
+		`section_id` INT(11) NOT NULL DEFAULT '0',
+		`page_id` INT(11) NOT NULL DEFAULT '0',
+		`target_page_id` INT(11) NOT NULL DEFAULT '0',
+		`anchor` VARCHAR(255) NOT NULL DEFAULT '' ,
+		PRIMARY KEY (`section_id`)
+	)
+");
+// fetch all menu_link-pages in $pages
+$pages = array();
+$table_p = TABLE_PREFIX.'pages';
+$table_s = TABLE_PREFIX.'sections';
+$query_page = $database->query("SELECT p.* FROM $table_p AS p, $table_s AS s WHERE p.page_id=s.page_id AND s.module = 'menu_link'");
+if($query_page->numRows() > 0) {
+	while($page = $query_page->fetchRow()) {
+		$pages[$page['page_id']]['page_details'] = $page;
+	}
+}
+// get all related files with content from pages/ in $pages, too
+function list_files_dirs($dir, $depth=true, $files=array(), $dirs=array()) {
+	$dh=opendir($dir);
+	while(($file = readdir($dh)) !== false) {
+		if($file == '.' || $file == '..') {
+			continue;
+		}
+		if(is_dir($dir.'/'.$file)) {
+			if($depth) {
+				$dirs[] = $dir.'/'.$file;
+				list($files, $dirs) = list_files_dirs($dir.'/'.$file, $depth, $files, $dirs);
+			}
+		} else {
+			$files[] = $dir.'/'.$file;
+		}
+	}
+	closedir($dh);
+	natcasesort($files);
+	natcasesort($dirs);
+	return(array($files, $dirs));
+}
+list($files, $dirs) = list_files_dirs(WB_PATH.PAGES_DIRECTORY);
+foreach($files as $file) {
+	if(($content = implode('', file($file))) !== FALSE) {
+		if(preg_match('/\$page_id = (\d+)/', $content, $matches)) {
+			if(array_key_exists($matches[1], $pages)) {
+				$pages[$matches[1]]['file_content'] = $content;
+				$pages[$matches[1]]['filename'] = $file;
+			}
+		}
+	}
+}
+// try to convert old menu_links to new ones
+foreach($pages as $p) {
+	$page = $p['page_details'];
+	$file_content = $p['file_content'];
+	$filename = $p['filename'];
+	$link = $p['page_details']['link'];
+//var_dump($page);var_dump($file_content);var_dump($filename);var_dump($link);
+
+// This part is still missing
+
+
+}
+
 
 //******************************************************************************
 //Start of upgrade script for the form modul
