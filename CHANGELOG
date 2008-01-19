@@ -18,11 +18,12 @@ Legend:
 !	Added support to configure the mailer settings via the backend
 19-Jan-2008 Matthias Gallas
 #	Fixed bug in news modul with missing variable PAGE_DIRECTORY
++	Added keywords to new files
 19-Jan-2008 Thomas Hornik
 -	Module news: removed old calendar
-+ Module news: adapted news to use the new include/jscalendar
++	Module news: adapted news to use the new include/jscalendar
 +	added installation-instructions to include/jscalendar
-# Module code: curly backets get deleted by pparse() from phplib. fixed
+#	Module code: curly backets get deleted by pparse() from phplib. fixed
 +	Module menu_link: added dropdown-listbox to select anchor
 !	upgrade-script: added code to convert old menu_links to new ones (partly)
 18-Jan-2008 Matthias Gallas
