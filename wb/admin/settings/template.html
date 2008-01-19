@@ -15,34 +15,34 @@ function change_os(type) {
 
 function change_wbmailer(type) {
 	if(type == 'smtp') {
-		document.getElementById('wbmailer_smtp_host').style.visibility = 'visible';
-		document.getElementById('wbmailer_smtp_auth_mode').style.visibility = 'visible';
-		document.getElementById('wbmailer_smtp_username').style.visibility = 'visible';
-		document.getElementById('wbmailer_smtp_password').style.visibility = 'visible';
+		document.getElementById('row_wbmailer_smtp_settings').style.display = '';
+		document.getElementById('row_wbmailer_smtp_host').style.display = '';
+		document.getElementById('row_wbmailer_smtp_auth_mode').style.display = '';
+		document.getElementById('row_wbmailer_smtp_username').style.display = '';
+		document.getElementById('row_wbmailer_smtp_password').style.display = '';
 		if( document.settings.wbmailer_smtp_auth.checked == true ) {
-			document.getElementById('wbmailer_smtp_username').style.visibility = 'visible';
-			document.getElementById('wbmailer_smtp_password').style.visibility = 'visible';
+			document.getElementById('row_wbmailer_smtp_username').style.display = '';
+			document.getElementById('row_wbmailer_smtp_password').style.display = '';
 		} else {
-			document.getElementById('wbmailer_smtp_username').style.visibility = 'hidden';
-			document.getElementById('wbmailer_smtp_password').style.visibility = 'hidden';
+			document.getElementById('row_wbmailer_smtp_username').style.display = 'none';
+			document.getElementById('row_wbmailer_smtp_password').style.display = 'none';
 		}
 	} else if(type == 'phpmail') {
-		document.getElementById('wbmailer_smtp_host').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_auth_mode').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_username').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_password').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_username').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_password').style.visibility = 'hidden';
+		document.getElementById('row_wbmailer_smtp_settings').style.display = 'none';
+		document.getElementById('row_wbmailer_smtp_host').style.display = 'none';
+		document.getElementById('row_wbmailer_smtp_auth_mode').style.display = 'none';
+		document.getElementById('row_wbmailer_smtp_username').style.display = 'none';
+		document.getElementById('row_wbmailer_smtp_password').style.display = 'none';
 	}
 }
 
 function toggle_wbmailer_auth() {
 	if( document.settings.wbmailer_smtp_auth.checked == true ) {
-		document.getElementById('wbmailer_smtp_username').style.visibility = 'visible';
-		document.getElementById('wbmailer_smtp_password').style.visibility = 'visible';
+		document.getElementById('row_wbmailer_smtp_username').style.display = '';
+		document.getElementById('row_wbmailer_smtp_password').style.display = '';
 	} else {
-		document.getElementById('wbmailer_smtp_username').style.visibility = 'hidden';
-		document.getElementById('wbmailer_smtp_password').style.visibility = 'hidden';
+		document.getElementById('row_wbmailer_smtp_username').style.display = 'none';
+		document.getElementById('row_wbmailer_smtp_password').style.display = 'none';
 	}
 }
 </script>
@@ -261,12 +261,6 @@ function toggle_wbmailer_auth() {
 	<td class="setting_name">{TEXT_WYSIWYG_STYLE}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="wysiwyg_style" value="{WYSIWYG_STYLE}" />
-	</td>
-</tr>
-<tr class="advanced">
-	<td class="setting_name">{TEXT_SERVER_EMAIL}:</td>
-	<td class="setting_value" colspan="2">
-		<input type="text" name="server_email" value="{SERVER_EMAIL}" />
 	</td>
 </tr>
 <tr class="advanced">
@@ -611,14 +605,23 @@ function toggle_wbmailer_auth() {
 		<input type="text" name="app_name" value="{APP_NAME}" />
 	</td>
 </tr>
+<!-- BASIC MAILER SETTINGS -->
 <tr>
 	<td colspan="3" style="padding-top: 10px;">
 		<h2>{HEADING_WBMAILER_SETTINGS}</h2>
-		<div style="border: 1px solid #CCC; background-color: #EEE; padding: 5px;">
-			<strong> Please Note:</strong>
-			<br \>
-			{TEXT_WBMAILER_NOTICE}
-		</div>
+		<p style="line-height: 1.4em; margin-top: 0;">{TEXT_WBMAILER_DEFAULT_SETTINGS_NOTICE}</p>
+	</td>
+</tr>
+<tr>
+	<td class="setting_name">{TEXT_WBMAILER_DEFAULT_SENDER_MAIL}:</td>
+	<td class="setting_value" colspan="2">
+		<input type="text" style="width: 250px" name="server_email" value="{SERVER_EMAIL}" />
+	</td>
+</tr>
+<tr>
+	<td class="setting_name">{TEXT_WBMAILER_DEFAULT_SENDER_NAME}:</td>
+	<td class="setting_value" colspan="2">
+		<input type="text" style="width: 250px" name="wbmailer_default_sendername" value="{WBMAILER_DEFAULT_SENDERNAME}" />
 	</td>
 </tr>
 <tr>
@@ -630,29 +633,35 @@ function toggle_wbmailer_auth() {
 		<label for="wbmailer_routine_smtp" onclick="javascript: change_wbmailer('smtp');">{TEXT_WBMAILER_SMTP}</label>
 	</td>
 </tr>
-<tr id="wbmailer_smtp_host" style="visibility:{SMTP_VISIBILITY};">
-	<td class="setting_name">{TEXT_WBMAILER_SMTP_HOST}:</td>
-	<td class="setting_value" colspan="2">
-		<input type="text" name="wbmailer_smtp_host" value="{WBMAILER_SMTP_HOST}" />
+<!-- MORE ADVANCED SMTP MAILER SETTINGS -->
+<tr id="row_wbmailer_smtp_settings" style="display:{SMTP_VISIBILITY};">
+	<td colspan="3" style="padding-top: 10px;">
+			<p style="line-height: 1.4em; margin-top: 0;">{TEXT_WBMAILER_NOTICE}</p>
 	</td>
 </tr>
-<tr id="wbmailer_smtp_auth_mode" style="visibility:{SMTP_VISIBILITY};">
+<tr id="row_wbmailer_smtp_host" style="display:{SMTP_VISIBILITY};">
+	<td class="setting_name">{TEXT_WBMAILER_SMTP_HOST}:</td>
+	<td class="setting_value" colspan="2">
+		<input type="text" style="width: 250px" name="wbmailer_smtp_host" value="{WBMAILER_SMTP_HOST}" />
+	</td>
+</tr>
+<tr id="row_wbmailer_smtp_auth_mode" style="display:{SMTP_VISIBILITY};">
 	<td class="setting_name">{TEXT_WBMAILER_SMTP_AUTH}:</td>
 	<td class="setting_value" colspan="3">
 		<input type="checkbox" name="wbmailer_smtp_auth" id="wbmailer_smtp_auth" onclick="javascript: toggle_wbmailer_auth();" style="width: 14px; height: 14px;" value="true"{SMTP_AUTH_SELECTED} />
 		<label for="wbmailer_smtp_auth" onclick="javascript: toggle_wbmailer_auth(this.value);">({TEXT_WBMAILER_SMTP_AUTH_NOTICE})</label>
 	</td>
 </tr>
-<tr id="wbmailer_smtp_username" style="visibility:{SMTP_VISIBILITY_AUTH};">
+<tr id="row_wbmailer_smtp_username" style="display:{SMTP_VISIBILITY_AUTH};">
 	<td class="setting_name">{TEXT_WBMAILER_SMTP_USERNAME}:</td>
 	<td class="setting_value" colspan="2">
-		<input type="text" name="wbmailer_smtp_username" value="{WBMAILER_SMTP_USERNAME}" />
+		<input type="text" style="width: 250px" name="wbmailer_smtp_username" value="{WBMAILER_SMTP_USERNAME}" />
 	</td>
 </tr>
-<tr id="wbmailer_smtp_password" style="visibility:{SMTP_VISIBILITY_AUTH};">
+<tr id="row_wbmailer_smtp_password" style="display:{SMTP_VISIBILITY_AUTH};">
 	<td class="setting_name">{TEXT_WBMAILER_SMTP_PASSWORD}:</td>
 	<td class="setting_value" colspan="2">
-		<input type="password" name="wbmailer_smtp_password" value="{WBMAILER_SMTP_PASSWORD}" />
+		<input type="password" style="width: 250px" name="wbmailer_smtp_password" value="{WBMAILER_SMTP_PASSWORD}" />
 	</td>
 </tr>
 <tr>

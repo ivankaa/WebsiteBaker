@@ -43,6 +43,8 @@ class wbmailer extends PHPMailer
 		// set mailer defaults (PHP mail function)
 		$db_wbmailer_routine = "phpmail";
 		$db_wbmailer_smtp_host = "";
+		$db_wbmailer_default_sendername = "WB Mailer";
+		$db_server_email = SERVER_EMAIL;
 
 		// get mailer settings from database
 		$database = new database();
@@ -54,6 +56,8 @@ class wbmailer extends PHPMailer
 			if ($setting['name'] == "wbmailer_smtp_auth") { $db_wbmailer_smtp_auth = (bool)$setting['value']; }
 			if ($setting['name'] == "wbmailer_smtp_username") { $db_wbmailer_smtp_username = $setting['value']; }
 			if ($setting['name'] == "wbmailer_smtp_password") { $db_wbmailer_smtp_password = $setting['value']; }
+			if ($setting['name'] == "wbmailer_default_sendername") { $db_wbmailer_default_sendername = $setting['value']; }
+			if ($setting['name'] == "server_email") { $db_server_email = $setting['value']; }
 		}
 
 		// set method to send out emails
@@ -62,7 +66,7 @@ class wbmailer extends PHPMailer
 			$this->IsSMTP();                                            
 			$this->Host = $db_wbmailer_smtp_host;
 			// check if SMTP authentification is required
-			if ($db_wbmailer_smtp_auth && strlen($db_wbmailer_smtp_username) > 1 && strlen($db_wbmailer_smtp_password) > 1) {
+			if ($db_wbmailer_smtp_auth == "true" && strlen($db_wbmailer_smtp_username) > 1 && strlen($db_wbmailer_smtp_password) > 1) {
 				// use SMTP authentification
 				$this->SMTPAuth = true;     	  								// enable SMTP authentification
 				$this->Username = $db_wbmailer_smtp_username;  	// set SMTP username
@@ -75,7 +79,7 @@ class wbmailer extends PHPMailer
 
 		// set language file for PHPMailer error messages
 		if(defined("LANGUAGE")) {
-			$this->SetLanguage(strtolower(LANGUAGE),"language");     // english default (also used if file is missing)
+			$this->SetLanguage(strtolower(LANGUAGE),"language");    // english default (also used if file is missing)
 		}
 
 		// set default charset
@@ -87,21 +91,16 @@ class wbmailer extends PHPMailer
 
 		// set default sender name
 		if (isset($_SESSION['DISPLAY_NAME'])) {
-			$this->FromName = $_SESSION['DISPLAY_NAME'];             // FROM NAME: display name of user logged in
+			$this->FromName = $_SESSION['DISPLAY_NAME'];            // FROM NAME: display name of user logged in
 		} else {
-			$this->FromName = "WB Mailer";                           // FROM NAME: set default name
+			$this->FromName = $db_wbmailer_default_sendername;			// FROM NAME: set default name
 		}
 
-/*  some mail provider (lets say mail.com) reject mails send out by foreign mail relays
-    but using the providers domain in the from mail address (e.g. myname@mail.com)
-		// set default sender mail address
-		if (isset($_SESSION['EMAIL'])) {
-			$this->From = $_SESSION['EMAIL'];                        // FROM MAIL: (of user logged in)
-		} else {
-			$this->From = SERVER_EMAIL;                              // FROM MAIL: (server mail)
-		}
-*/
-		$this->From = SERVER_EMAIL;                                // FROM MAIL: (server mail)
+		/* 
+			some mail provider (lets say mail.com) reject mails send out by foreign mail 
+			relays but using the providers domain in the from mail address (e.g. myname@mail.com)
+		*/
+		$this->From = $db_server_email;                           // FROM MAIL: (server mail)
 
 		// set default mail formats
 		$this->IsHTML(true);                                        

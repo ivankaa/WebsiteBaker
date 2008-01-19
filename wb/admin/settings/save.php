@@ -39,6 +39,18 @@ if($advanced == '') {
 	$admin = new admin('Settings', 'settings_advanced');
 }
 
+// Create a javascript back link
+$js_back = "javascript: history.go(-1);";
+
+// Ensure that the specified default email is formally valid
+if(isset($_POST['server_email'])) {
+	$_POST['server_email'] = strip_tags($_POST['server_email']);
+	if(!eregi("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$", $_POST['server_email'])) {
+		$admin->print_error($MESSAGE['USERS']['INVALID_EMAIL'].
+			'<br /><strong>Email: '.htmlentities($_POST['server_email']).'</strong>', $js_back);
+	}
+}
+
 // Work-out file mode
 if($advanced == '') {
 	// Check if should be set to 777 or left alone
@@ -126,7 +138,7 @@ while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
 	if ($setting_name!='wb_version') {
-		$value = $admin->add_slashes($value);
+		$value = strip_tags($admin->add_slashes($value));
 		switch ($setting_name) {
 			case 'default_timezone':
 				$value=$value*60*60;

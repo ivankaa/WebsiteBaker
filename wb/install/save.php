@@ -440,7 +440,6 @@ if($install_tables == true) {
 	." ('captcha_verification', 'true'),"
 	." ('frontend_login', 'false'),"
 	." ('frontend_signup', 'false'),"
-	." ('server_email', '$admin_email'),"
 	." ('search', 'public'),"
 	." ('page_extension', '.php'),"
 	." ('page_spacer', '-'),"
@@ -450,6 +449,8 @@ if($install_tables == true) {
 	." ('string_file_mode', '$file_mode'),"
 	." ('string_dir_mode', '$dir_mode'),"
 	." ('wbmailer_routine', 'phpmail'),"
+	." ('server_email', 'admin@yourdomain.com'),"		// avoid that mail provider (e.g. mail.com) reject mails like yourname@mail.com
+	." ('wbmailer_default_sendername', 'WB Mailer'),"
 	." ('wbmailer_smtp_host', ''),"
 	." ('wbmailer_smtp_auth', ''),"
 	." ('wbmailer_smtp_username', ''),"

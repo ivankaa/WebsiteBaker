@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 
+19-Jan-2008 Christian Sommer
+!	Added support to configure the mailer settings via the backend
 19-Jan-2008 Matthias Gallas
 #	Fixed bug in news modul with missing variable PAGE_DIRECTORY
 19-Jan-2008 Thomas Hornik

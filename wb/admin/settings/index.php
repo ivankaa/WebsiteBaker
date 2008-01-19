@@ -364,23 +364,23 @@ if(MANAGE_SECTIONS) {
 // Work-out which wbmailer routine should be checked
 if(WBMAILER_ROUTINE == 'phpmail') {
 	$template->set_var('PHPMAIL_SELECTED', ' checked');
-	$template->set_var('SMTP_VISIBILITY', 'hidden');
-	$template->set_var('SMTP_VISIBILITY_AUTH', 'hidden');
+	$template->set_var('SMTP_VISIBILITY', 'none');
+	$template->set_var('SMTP_VISIBILITY_AUTH', 'none');
 } elseif(WBMAILER_ROUTINE == 'smtp') {
 	$template->set_var('SMTPMAIL_SELECTED', ' checked');
-	$template->set_var('SMTP_VISIBILITY', 'visible');
+	$template->set_var('SMTP_VISIBILITY', '');
 }
 
 // Work-out if SMTP authentification should be checked
 if(WBMAILER_SMTP_AUTH) {
 	$template->set_var('SMTP_AUTH_SELECTED', ' checked');
 	if(WBMAILER_ROUTINE == 'smtp') {
-		$template->set_var('SMTP_VISIBILITY_AUTH', 'visible');
+		$template->set_var('SMTP_VISIBILITY_AUTH', '');
 	} else {
-		$template->set_var('SMTP_VISIBILITY_AUTH', 'hidden');
+		$template->set_var('SMTP_VISIBILITY_AUTH', 'none');
 	}
 } else {
-	$template->set_var('SMTP_VISIBILITY_AUTH', 'hidden');
+	$template->set_var('SMTP_VISIBILITY_AUTH', 'none');
 }
 
 // Work-out if intro feature is enabled
@@ -600,8 +600,10 @@ $template->set_var(array(
 								'TEXT_SEPARATE' => $TEXT['SEPARATE'],
 								'TEXT_HOME_FOLDERS' => $TEXT['HOME_FOLDERS'],
 								'TEXT_WYSIWYG_STYLE' => $TEXT['WYSIWYG_STYLE'],
-								'TEXT_SERVER_EMAIL' => $TEXT['SERVER_EMAIL'],
 								'TEXT_WORLD_WRITEABLE_FILE_PERMISSIONS' => $TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'],
+								'TEXT_WBMAILER_DEFAULT_SETTINGS_NOTICE' => $TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'],
+								'TEXT_WBMAILER_DEFAULT_SENDER_MAIL' => $TEXT['WBMAILER_DEFAULT_SENDER_MAIL'],
+								'TEXT_WBMAILER_DEFAULT_SENDER_NAME' => $TEXT['WBMAILER_DEFAULT_SENDER_NAME'],
 								'TEXT_WBMAILER_NOTICE' => $TEXT['WBMAILER_NOTICE'],
 								'TEXT_WBMAILER_FUNCTION' => $TEXT['WBMAILER_FUNCTION'],
 								'TEXT_WBMAILER_SMTP_HOST' => $TEXT['WBMAILER_SMTP_HOST'],
