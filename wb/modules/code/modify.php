@@ -47,6 +47,6 @@ $template->set_var(array(
 
 // Parse template object
 $template->parse('main', 'main_block', false);
-$template->pparse('output', 'page');
+$template->pparse('output', 'page', false, false);
 
 ?>

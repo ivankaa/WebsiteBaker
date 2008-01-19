@@ -648,11 +648,14 @@ class Template
   * @return    false
   * @see       parse
   */
-  function pparse($target, $varname, $append = false) {
+  function pparse($target, $varname, $append = false, $clear = true) { // added $clear: whether to delete undefined vars or not (needed for wb-module code) - thorn
     if ($this->debug & 4) {
       echo "<p><b>pparse:</b> passing parameters to parse...</p>\n";
     }
-    print $this->finish($this->parse($target, $varname, $append));
+		if($clear)
+			print $this->finish($this->parse($target, $varname, $append));
+		else
+			print $this->parse($target, $varname, $append);
     return false;
   }
 

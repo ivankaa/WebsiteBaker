@@ -17,6 +17,7 @@ Legend:
 19-Jan-2008 Matthias Gallas
 #	Fixed bug in news modul with missing variable PAGE_DIRECTORY
 19-Jan-2008 Thomas Hornik
+# Module code: curly backets get deleted by pparse() from phplib. fixed
 +	Module menu_link: added dropdown-listbox to select anchor
 !	upgrade-script: added code to convert old menu_links to new ones (partly)
 18-Jan-2008 Matthias Gallas
