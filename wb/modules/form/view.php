@@ -32,14 +32,15 @@ for his contributions to this module - adding extra field types
 if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
 // check if frontend.css file needs to be included into the <body></body> of view.php
-if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) &&  file_exists(WB_PATH .'/modules/form/frontend.css')) {
-   echo '<style type="text/css">';
-   include(WB_PATH .'/modules/form/frontend.css');
-   echo "\n</style>\n";
+if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) &&  
+	file_exists(WB_PATH .'/modules/form/frontend.css')) {
+	echo '<style type="text/css">';
+	include(WB_PATH .'/modules/form/frontend.css');
+	echo "\n</style>\n";
 } 
 
 // Function for generating an optionsfor a select field
-if (!function_exists(make_option)) {
+if (!function_exists('make_option')) {
 function make_option(&$n) {
 	// start option group if it exists
 	if (substr($n,0,2) == '[=') {
@@ -52,7 +53,7 @@ function make_option(&$n) {
 }
 }
 // Function for generating a checkbox
-if (!function_exists(make_checkbox)) {
+if (!function_exists('make_checkbox')) {
 function make_checkbox(&$n, $idx, $params) {
 	$field_id = $params[0];
 	$seperator = $params[1];
@@ -61,7 +62,7 @@ function make_checkbox(&$n, $idx, $params) {
 }
 }
 // Function for generating a radio button
-if (!function_exists(make_radio)) {
+if (!function_exists('make_radio')) {
 function make_radio(&$n, $idx, $params) {
 	$field_id = $params[0];
 	$group = $params[1];

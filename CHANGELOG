@@ -13,6 +13,8 @@ Legend:
 ------------------------------------- 2.7.0 -------------------------------------
 
 19-Jan-2008 Christian Sommer
+!	Reduced the success time out and set WYSIWSY background to white
+#	Fixed some errors in form module (only in conjunction with E_ALL)
 !	Added support to configure the mailer settings via the backend
 19-Jan-2008 Matthias Gallas
 #	Fixed bug in news modul with missing variable PAGE_DIRECTORY
