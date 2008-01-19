@@ -29,17 +29,17 @@ require_once('../../config.php');
 $update_when_modified = true; // Tells script to update when this page was last updated
 require(WB_PATH.'/modules/admin.php');
 
-// Update id and target
-if(!isset($_POST['link']))
-	$foreign_page_id = 0;
-else
-	$foreign_page_id = $_POST['link']; // foreign-page_id
+// Update id, anchor and target
+if(isset($_POST['page_link'])) {
+	$foreign_page_id = $_POST['page_link'];
+	$page_target = $_POST['page_target'];
+	$url_target = $_POST['target'];
 
-$url_target = $_POST['target'];
-$table_pages = TABLE_PREFIX.'pages';
-$table_mod = TABLE_PREFIX.'mod_menu_link';
-$database->query("UPDATE $table_pages SET target = '$url_target' WHERE page_id = '$page_id'");
-$database->query("UPDATE $table_mod SET target_page_id = '$foreign_page_id' WHERE page_id = '$page_id'");
+	$table_pages = TABLE_PREFIX.'pages';
+	$table_mod = TABLE_PREFIX.'mod_menu_link';
+	$database->query("UPDATE $table_pages SET target = '$url_target' WHERE page_id = '$page_id'");
+	$database->query("UPDATE $table_mod SET target_page_id = '$foreign_page_id', anchor = '$page_target' WHERE page_id = '$page_id'");
+}
 
 // Check if there is a database error, otherwise say successful
 if($database->is_error()) {

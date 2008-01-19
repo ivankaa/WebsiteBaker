@@ -223,6 +223,7 @@ $TEXT['WELCOME_BACK'] = 'Welcome back';
 $TEXT['FULL_NAME'] = 'Full Name';
 $TEXT['ACCOUNT_SIGNUP'] = 'Account Sign-Up';
 $TEXT['LINK'] = 'Link';
+$TEXT['ANCHOR'] = 'Anchor';
 $TEXT['TARGET'] = 'Target';
 $TEXT['NEW_WINDOW'] = 'New Window';
 $TEXT['SAME_WINDOW'] = 'Same Window';

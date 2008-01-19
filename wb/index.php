@@ -59,10 +59,13 @@ $query_this_module = $database->query("SELECT module, block FROM ".TABLE_PREFIX.
 if($query_this_module->numRows() == 1) { // This is a menu_link. Get link of target-page and redirect
 	// get target_page_id
 	$table = TABLE_PREFIX.'mod_menu_link';
-	$query_tpid = $database->query("SELECT target_page_id FROM $table WHERE page_id = '$this_page_id'");
+	$query_tpid = $database->query("SELECT target_page_id, anchor FROM $table WHERE page_id = '$this_page_id'");
 	if($query_tpid->numRows() == 1) {
 		$res=$query_tpid->fetchRow();
 		$target_page_id = $res['target_page_id'];
+		$anchor = $res['anchor'];
+		if($anchor != '0') $anchor = ''.$anchor;
+		else $anchor = FALSE;
 		// get link of target-page
 		$table = TABLE_PREFIX.'pages';
 		$query_link = $database->query("SELECT link FROM $table WHERE page_id = '$target_page_id'");
@@ -70,7 +73,7 @@ if($query_this_module->numRows() == 1) { // This is a menu_link. Get link of tar
 			$res=$query_link->fetchRow();
 			$target_page_link = $res['link'];
 			// redirect
-			header('Location: '.WB_URL.PAGES_DIRECTORY.$target_page_link.PAGE_EXTENSION);
+			header('Location: '.WB_URL.PAGES_DIRECTORY.$target_page_link.PAGE_EXTENSION.($anchor?'#'.$anchor:''));
 			exit;
 		}
 	}
