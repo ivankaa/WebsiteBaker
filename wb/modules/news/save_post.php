@@ -72,8 +72,8 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/posts/')) {
 } elseif($old_link != $post_link OR !file_exists(WB_PATH.PAGES_DIRECTORY.$post_link.PAGE_EXTENSION)) {
 	// We need to create a new file
 	// First, delete old file if it exists
-	if(file_exists(WB_PATH.$old_link.PAGE_EXTENSION)) {
-		unlink(WB_PATH.$old_link.PAGE_EXTENSION);
+	if(file_exists(WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION)) {
+		unlink(WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION);
 	}
 	// Specify the filename
 	$filename = WB_PATH.PAGES_DIRECTORY.'/'.$post_link.PAGE_EXTENSION;
