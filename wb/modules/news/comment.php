@@ -28,21 +28,18 @@ require('../../config.php');
 
 // Check if there is a post id
 if(!isset($_GET['id']) OR !is_numeric($_GET['id'])) {
-	if(!isset($_POST['post_id']) OR !is_numeric($_POST['post_id'])) {
-		header("Location: ".WB_URL.PAGES_DIRECTORY."");
-		exit(0);
-	} else {
-		$post_id = $_POST['post_id'];
-	}
-} else {
-	$post_id = $_GET['id'];
+	header("Location: ".WB_URL.PAGES_DIRECTORY."");
+	exit(0);
 }
+$post_id = $_GET['id'];
+$section_id = $_GET['sid'];
+
 
 // Include database class
 require_once(WB_PATH.'/framework/class.database.php');
 $database = new database();
 
-$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
+$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
 $use_captcha = $query_settings->fetchRow();
 if($use_captcha['use_captcha']) {
 	$_SESSION['captcha'] = '';

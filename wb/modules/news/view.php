@@ -301,7 +301,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	if($post['commenting'] == 'private' AND isset($admin) AND $admin->is_authenticated() == true OR $post['commenting'] == 'public') {
 		
 		// Print comments header
-		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID, $setting_comments_header);
+		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&sid='.$section_id, $setting_comments_header);
 		
 		// Query for comments
 		$query_comments = $database->query("SELECT title,comment,commented_when,commented_by FROM ".TABLE_PREFIX."mod_news_comments WHERE post_id = '".POST_ID."' ORDER BY commented_when ASC");
@@ -332,7 +332,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		}
 		
 		// Print comments footer
-		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID, $setting_comments_footer);
+		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&sid='.$section_id, $setting_comments_footer);
 		
 	}
 		
