@@ -67,7 +67,7 @@ function db_add_search_key_value($key, $value) {
 		return true;
 	} else {
 		$database->query("INSERT INTO ".TABLE_PREFIX."search (name,value,extra) VALUES ('$key', '$value', '')");
-		echo mysql_error()?'<br />':'';
+		echo mysql_error()?mysql_error().'<br />':'';
 		$query = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = '$key' LIMIT 1");
 		if($query->numRows() > 0) {
 			echo "$key: $OK.<br />";
@@ -107,7 +107,7 @@ if($query->numRows() > 0) {
 		$string .= "<tr><td colspan=\"2\" style=\"text-align: justify; padding-bottom: 10px;\">[EXCERPT]</td></tr>";
 		$string = addslashes($string);
 		$database->query("UPDATE ".TABLE_PREFIX."search SET name='results_loop',value='".$string."',extra='' WHERE name = 'results_loop' LIMIT 1");
-		echo mysql_error().'<br />';
+		echo mysql_error()?mysql_error().'<br />':'';
 		$query = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = 'results_loop' LIMIT 1");
 		if($query->numRows() > 0) {
 			$fetch_results_loop = $query->fetchRow();
@@ -134,7 +134,7 @@ if($query->numRows() > 0) {
 		$string = preg_replace("/<input type=\"text\" name=\"string\" value=\"\[SEARCH_STRING\]\" style=\"width: 100%;\" \/>/", "<input type=\"hidden\" name=\"search_path\" value=\"[SEARCH_PATH]\" /><input type=\"text\" name=\"string\" value=\"[SEARCH_STRING]\" style=\"width: 100%;\" />", $string);
 		$string = addslashes($string);
 		$database->query("UPDATE ".TABLE_PREFIX."search SET name='header',value='".$string."',extra='' WHERE name = 'header' LIMIT 1");
-		echo mysql_error().'<br />';
+		echo mysql_error()?mysql_error().'<br />':'';
 		$query = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = 'header' LIMIT 1");
 		if($query->numRows() > 0) {
 			$fetch_header = $query->fetchRow();
@@ -175,7 +175,9 @@ $table = TABLE_PREFIX."sections";
 $query = $database->query("DESCRIBE $table 'publ_start'");
 if($query->numRows() == 0) { // add field
 	$query = $database->query("ALTER TABLE $table ADD publ_start INT NOT NULL DEFAULT '0'");
+	echo mysql_error()?mysql_error().'<br />':'';
 	$query = $database->query("DESCRIBE $table 'publ_start'");
+	echo mysql_error()?mysql_error().'<br />':'';
 	if($query->numRows() > 0) {
 		echo "'publ_start' added. $OK.<br />";
 	} else {
@@ -187,6 +189,7 @@ if($query->numRows() == 0) { // add field
 $query = $database->query("DESCRIBE $table 'publ_end'");
 if($query->numRows() == 0) { // add field
 	$query = $database->query("ALTER TABLE $table ADD publ_end INT NOT NULL DEFAULT '0'");
+	echo mysql_error()?mysql_error().'<br />':'';
 	$query = $database->query("DESCRIBE $table 'publ_end'");
 	if($query->numRows() > 0) {
 		echo "'publ_end' added. $OK.<br />";
@@ -256,14 +259,31 @@ foreach($files as $file) {
 	}
 }
 // try to convert old menu_links to new ones
+$table_p = TABLE_PREFIX.'pages';
+$table_s = TABLE_PREFIX.'sections';
+$table_mm = TABLE_PREFIX ."mod_menu_link";
 foreach($pages as $p) {
 	$page = $p['page_details'];
 	$file_content = $p['file_content'];
 	$filename = $p['filename'];
 	$link = $p['page_details']['link'];
-//var_dump($page);var_dump($file_content);var_dump($filename);var_dump($link);
+	$page_trail = $p['page_details']['page_trail'];
+	$page_id = $p['page_details']['page_id'];
+	//var_dump($page);var_dump($file_content);var_dump($filename);var_dump($link);var_dump($page_trail);
 
-// This part is still missing
+	// - aus wb_pages.page_trail aktuelle Position bestimmen
+	// - daraus link bestimmen und in wb_pages eintragen
+	// - Datei in pages wenn nötig verschieben
+	//ok - Über $link die page_id der Zielseite feststellen (--> $target_page_id), und nach mod_menu_link speichern, anchor leer.
+	if($query_pid = $database->query("SELECT p.page_id, s.section_id FROM $table_p AS p, $table_s AS s WHERE p.page_id = s.page_id AND p.link = '$link' AND p.page_id != '$page_id'")) {
+		$res = $query_pid->fetchRow();
+		$target_page_id = $res['page_id'];
+		$section_id = $res['section_id'];
+		$database->query("INSERT INTO $table_mm (page_id, section_id, target_page_id, anchor) VALUES ('$page_id', '$section_id', '$target_page_id', '0')");
+		echo mysql_error()?mysql_error().'<br />':'';
+	}
+//var_dump("-------------------");
+	// This part is still missing
 
 
 }
