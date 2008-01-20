@@ -79,7 +79,25 @@ if($query_this_module->numRows() == 1) { // This is a menu_link. Get link of tar
 	}
 }
 
-// Display the template
+if(file_exists(WB_PATH .'/modules/mail_filter/filter-routines.php')) {
+	// include the filter routines
+	require_once(WB_PATH .'/modules/mail_filter/filter-routines.php');
+	
+	// get the mail filter settings from the database 
+	$mail_filter_settings = get_mail_filter_settings();
+	// check if we should filter emails before displaying them
+	if($mail_filter_settings['email_filter'] == '1') {
+		// filter email addresses before displaying them
+		ob_start();
+		require(WB_PATH.'/templates/'.TEMPLATE.'/index.php');
+		$frontend_output = ob_get_contents();
+		ob_end_clean();
+		$frontend_output = filter_email_links($frontend_output);
+		echo $frontend_output;
+		die;
+	}
+}
+// Display the template (no output filtering)
 require(WB_PATH.'/templates/'.TEMPLATE.'/index.php');
 
 ?>
