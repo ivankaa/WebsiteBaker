@@ -14,6 +14,7 @@ Legend:
 
 20-Jan-2008 Thomas Hornik
 !	updated admin/pages/sections.php to changed jscalendar-api from changeset 571
+!	module menu_link: after adding a menu_link, the anchor dropdown shows "#"; fixed 
 #	fixed E_NOTICE-warning in news-module (about SECTION_ID in comment.php)
 19-Jan-2008 Christian Sommer
 !	Reduced the success time out and set WYSIWSY background to white

@@ -209,7 +209,7 @@ $database->query("
 		`section_id` INT(11) NOT NULL DEFAULT '0',
 		`page_id` INT(11) NOT NULL DEFAULT '0',
 		`target_page_id` INT(11) NOT NULL DEFAULT '0',
-		`anchor` VARCHAR(255) NOT NULL DEFAULT '' ,
+		`anchor` VARCHAR(255) NOT NULL DEFAULT '0' ,
 		PRIMARY KEY (`section_id`)
 	)
 ");
