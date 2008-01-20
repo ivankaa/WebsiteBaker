@@ -66,7 +66,7 @@ function db_add_search_key_value($key, $value) {
 		echo "$key: allready there. $OK.<br />";
 		return true;
 	} else {
-		$database->query("INSERT INTO D".TABLE_PREFIX."search (name,value,extra) VALUES ('$key', '$value', '')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."search (name,value,extra) VALUES ('$key', '$value', '')");
 		echo mysql_error()?'<br />':'';
 		$query = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = '$key' LIMIT 1");
 		if($query->numRows() > 0) {
