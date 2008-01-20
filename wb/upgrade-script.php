@@ -204,6 +204,7 @@ if($query->numRows() == 0) { // add field
 /**********************************************************
  *  - core-module menu_link
  */
+echo "<br /><u>Convert menu_links</u><br />";
 // create table
 $table = TABLE_PREFIX ."mod_menu_link";
 $database->query("DROP TABLE IF EXISTS `$table`");
@@ -220,7 +221,9 @@ $database->query("
 $pages = array();
 $table_p = TABLE_PREFIX.'pages';
 $table_s = TABLE_PREFIX.'sections';
-$query_page = $database->query("SELECT p.* FROM $table_p AS p, $table_s AS s WHERE p.page_id=s.page_id AND s.module = 'menu_link'");
+$table_mm = TABLE_PREFIX ."mod_menu_link";
+
+$query_page = $database->query("SELECT p.*, s.section_id FROM $table_p AS p, $table_s AS s WHERE p.page_id=s.page_id AND s.module = 'menu_link'");
 if($query_page->numRows() > 0) {
 	while($page = $query_page->fetchRow()) {
 		$pages[$page['page_id']]['page_details'] = $page;
@@ -258,35 +261,94 @@ foreach($files as $file) {
 		}
 	}
 }
+unset($files); unset($dirs);
 // try to convert old menu_links to new ones
-$table_p = TABLE_PREFIX.'pages';
-$table_s = TABLE_PREFIX.'sections';
-$table_mm = TABLE_PREFIX ."mod_menu_link";
 foreach($pages as $p) {
 	$page = $p['page_details'];
 	$file_content = $p['file_content'];
 	$filename = $p['filename'];
 	$link = $p['page_details']['link'];
-	$page_trail = $p['page_details']['page_trail'];
+	$parent_pid = $p['page_details']['parent'];
 	$page_id = $p['page_details']['page_id'];
-	//var_dump($page);var_dump($file_content);var_dump($filename);var_dump($link);var_dump($page_trail);
+	$section_id = $p['page_details']['section_id'];
+	$menu_title = $p['page_details']['menu_title'];
 
-	// - aus wb_pages.page_trail aktuelle Position bestimmen
-	// - daraus link bestimmen und in wb_pages eintragen
-	// - Datei in pages wenn nötig verschieben
-	//ok - Über $link die page_id der Zielseite feststellen (--> $target_page_id), und nach mod_menu_link speichern, anchor leer.
-	if($query_pid = $database->query("SELECT p.page_id, s.section_id FROM $table_p AS p, $table_s AS s WHERE p.page_id = s.page_id AND p.link = '$link' AND p.page_id != '$page_id'")) {
+	// calculate link from wb_pages.parent and menu_title
+	$cur_link = '';
+	if($parent_pid != '0' && $query_link = $database->query("SELECT link FROM $table_p WHERE page_id = '$parent_pid'")) {
+		$res = $query_link->fetchRow();
+		$cur_link .= $res['link'];
+	}
+	$cur_link .= '/'.page_filename($menu_title);
+echo "found: $cur_link<br />";
+	$database->query("UPDATE $table_p SET link = '$cur_link' WHERE page_id = '$page_id'");
+	echo mysql_error()?'mySQL: '.mysql_error().'<br />':'';
+	
+	$new_filenames[$page_id]['file'] = WB_PATH.PAGES_DIRECTORY.$cur_link.PAGE_EXTENSION;
+	$new_filenames[$page_id]['link'] = $cur_link;
+	$new_filenames[$page_id]['menu'] = $menu_title;
+
+	// delete old access files in pages
+	if(file_exists($filename)) {
+		if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/')) {
+			echo "Cannot delete access file in pages/ - permission denied ($FAIL)<br />";
+		} else {
+			unlink($filename);
+		}
+	}
+	
+	// make entry in wb_mod_menu_link
+	if($query_pid = $database->query("SELECT page_id FROM $table_p WHERE page_id != '$page_id' AND link = '$link'")) {
 		$res = $query_pid->fetchRow();
 		$target_page_id = $res['page_id'];
-		$section_id = $res['section_id'];
 		$database->query("INSERT INTO $table_mm (page_id, section_id, target_page_id, anchor) VALUES ('$page_id', '$section_id', '$target_page_id', '0')");
-		echo mysql_error()?mysql_error().'<br />':'';
+		echo mysql_error()?'mySQL: '.mysql_error().'<br />':'';
 	}
-//var_dump("-------------------");
-	// This part is still missing
-
-
 }
+// create new access files in pages/; make directories as needed
+foreach($pages as $p) {
+	$page_id = $p['page_details']['page_id'];
+	$filename = $new_filenames[$page_id]['file'];
+	$menu_title = $new_filenames[$page_id]['menu'];
+	$link = $new_filenames[$page_id]['link'];
+	$content = $p['file_content'];
+	$level = $p['page_details']['level'];
+	$depth = '';
+	for($i=0; $i<=$level; $i++)
+		$depth .= '../';
+	$content = preg_replace('#((../)+)config\.php#', "{$depth}config.php", $content);
+	while(file_exists($filename)) {
+		echo "Cannot create '$filename' - file exist. Renamed to: ";
+		$menu_title .= '_';
+		$link .= '_';
+		$filename = WB_PATH.PAGES_DIRECTORY.$link.PAGE_EXTENSION;
+		echo "$filename<br />";
+		$database->query("UPDATE $table_p SET link='$link', menu_title='$menu_title' WHERE page_id = '$page_id'");
+		echo mysql_error()?'mySQL: '.mysql_error().'<br />':'';
+	}
+	// check if we need to create a subdir somewhere
+	$dirs = array();
+	while(dirname($link) != '/') {
+		$link = dirname($link);
+		$dirs[] = WB_PATH.PAGES_DIRECTORY.$link;
+	}
+	foreach(array_reverse($dirs) as $dir) {
+		if(!file_exists($dir)) {
+			mkdir($dir, OCTAL_DIR_MODE);
+		}
+	}
+	// create new file in pages/
+	if($handle=fopen($filename, "wb")) {
+		if(!fwrite($handle, $content)) {
+			echo "Cannot write to $filename - ($FAIL)<br />";
+		}
+		fclose($handle);
+	} else {
+		echo "Cannot create $filename - ($FAIL)<br />";
+	}
+	
+}
+
 
 
 //******************************************************************************
