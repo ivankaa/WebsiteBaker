@@ -13,6 +13,7 @@ Legend:
 ------------------------------------- 2.7.0 -------------------------------------
 
 20-Jan-2008 Christian Sommer
+#	fixed E_NOTICE-warning in save.php when input data was wrong
 +	added the new admin tool email output filter which allows to transform
 	emails before displaying them on the frontend
 20-Jan-2008 Thomas Hornik

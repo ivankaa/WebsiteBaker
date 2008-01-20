@@ -37,7 +37,6 @@ function set_error($message) {
 		// Copy values entered into session so user doesn't have to re-enter everything
 		if(isset($_POST['website_title'])) {
 			$_SESSION['wb_url'] = $_POST['wb_url'];
-			$_SESSION['wb_path'] = $_POST['wb_path'];
 			$_SESSION['default_timezone'] = $_POST['default_timezone'];
 			if(!isset($_POST['operating_system'])) {
 				$_SESSION['operating_system'] = 'linux';
