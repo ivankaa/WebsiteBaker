@@ -25,17 +25,14 @@
 
 // Start a session
 if(!defined('SESSION_STARTED')) {
-	// get random-part for session_name()
-	list($usec,$sec) = explode(' ',microtime());
-	srand((float)$sec+((float)$usec*100000));
-	$session_rand = rand(1000,9999);
-	session_name("wb_{$session_rand}_session_id");
+	session_name('wb_session_id');
 	session_start();
-	$_SESSION['SESSION_RAND'] = $session_rand;
 	define('SESSION_STARTED', true);
-} else {
-	$session_rand = $_SESSION['SESSION_RAND'];
 }
+// get random-part for session_name()
+list($usec,$sec) = explode(' ',microtime());
+srand((float)$sec+((float)$usec*100000));
+$session_rand = rand(1000,9999);
 
 // Function to set error
 function set_error($message) {
