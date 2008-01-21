@@ -1,32 +1,27 @@
 <?php
 
-// $Id:$
+// $Id$
 
-######################################################################################################################
-#
-#	PURPOSE OF THIS FILE:
-#	This file contains the routines required to edit the optional module files: frontend.css and backend.css.
-# Nothing needs to be changed in this file. Keep it as is.
-#
-#	INVOKED BY:
-#	This file should be invoked by clicking on a text link shown in modify.php.
-#
-######################################################################################################################
+/*
 
-/**
-  Module developed for the Open Source Content Management System Website Baker (http://websitebaker.org)
-  Copyright (C) year, Authors name
-  Contact me: author(at)domain.xxx, http://authorwebsite.xxx
+ Website Baker Project <http://www.websitebaker.org/>
+ Copyright (C) 2004-2008, Ryan Djurovich
 
-  This module is free software. You can redistribute it and/or modify it 
-  under the terms of the GNU General Public License  - version 2 or later, 
-  as published by the Free Software Foundation: http://www.gnu.org/licenses/gpl.html.
+ Website Baker is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
 
-  This module is distributed in the hope that it will be useful, 
-  but WITHOUT ANY WARRANTY; without even the implied warranty of 
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-  GNU General Public License for more details.
-**/
+ Website Baker is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with Website Baker; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*/
 
 // include configuration file and admin wrapper script
 require('../../config.php');
@@ -103,15 +98,18 @@ if(isset($_GET['action']) && $_GET['action'] == 'save' && isset($_POST['edit_fil
 			
 			<p><?php echo $TXT_EDIT_CSS_FILE; ?></p> 
 			
-			<textarea name="css_data" id="css_data" class="codepress css" cols="115" rows="25" wrap="VIRTUAL" style="margin:2px;"><?php echo $css_content; ?></textarea>
+			<textarea id="css_data" class="codepress css" cols="115" rows="25"
+				wrap="VIRTUAL" style="margin:2px;"><?php echo $css_content; ?></textarea>
 			
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
 				<tr>
 					<td align="left">
-						<input name="save" type="submit" value="<?php echo $TEXT['SAVE'];?>" onclick="javascript: css_codepress.value = css_data.getCode();" style="width: 100px; margin-top: 5px;" />
+						<input name="save" type="submit" value="<?php echo $TEXT['SAVE'];?>" 
+							onclick="javascript: css_codepress.value = css_data.getCode();" style="width: 100px; margin-top: 5px;" />
 					</td>
 					<td align="right">
-						<input type="button" value="<?php echo $TEXT['CANCEL']; ?>"	onclick="javascript: window.location = '<?php echo ADMIN_URL;?>/pages/modify.php?page_id=<?php echo $page_id; ?>';"	style="width: 100px; margin-top: 5px;" />
+						<input type="button" value="<?php echo $TEXT['CANCEL']; ?>"	
+							onclick="javascript: window.location = '<?php echo ADMIN_URL;?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
 					</td>
 				</tr>
 			</table>
