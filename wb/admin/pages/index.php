@@ -213,7 +213,7 @@ function make_list($parent, $editable_pages) {
 					echo ($page['page_title']); ?>
 				</td>
 				<?php } ?>
-				<td align="left" width="232">
+				<td align="left" width="252">
 					<font color="#999999"><?php echo ($page['menu_title']); ?></font>
 				</td>
 				<td width="20">
@@ -236,21 +236,7 @@ function make_list($parent, $editable_pages) {
 						</a>
 					<?php } ?>
 				</td>
-				
-				<!-- 'MANAGE SECTIONS' BUTTON -->
-				<td width="20">
-					<?php
-					// Work-out if we should show the "manage sections" link
-					$query_sections = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '" . $page['page_id'] . "' AND module = 'menu_link'");
-					if(($query_sections->numRows() == 0) && (MANAGE_SECTIONS == 'enabled')) {
-					?>
-						<a href="<?php echo ADMIN_URL; ?>/pages/sections.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $HEADING['MANAGE_SECTIONS']; ?>">
-						<img src="<?php echo ADMIN_URL; ?>/images/sections_16.png" border="0" alt="<?php echo $HEADING['MANAGE_SECTIONS']; ?>" />	
-						</a>
-					<?php } ?>
-				</td>
-				
-				<!-- 'MANAGE DATES' BUTTON -->
+				<!-- MANAGE SECTIONS AND DATES BUTTONS -->
 				<td width="20">
 				<?php
 				// Work-out if we should show the "manage dates" link
@@ -271,7 +257,8 @@ function make_list($parent, $editable_pages) {
 							<img src="<?php echo ADMIN_URL."/images/$file"; ?>" border="0" alt="<?php echo $HEADING['MANAGE_SECTIONS']; ?>" />	
 							</a>
 						<?php } else { ?>
-							<img src="<?php echo ADMIN_URL; ?>/images/noclock_16.png" border="0" alt="<?php echo $HEADING['MANAGE_SECTIONS']; ?>" />	
+							<a href="<?php echo ADMIN_URL; ?>/pages/sections.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $HEADING['MANAGE_SECTIONS']; ?>">
+							<img src="<?php echo ADMIN_URL; ?>/images/noclock_16.png" border="0" alt="<?php echo $HEADING['MANAGE_SECTIONS']; ?>" /></a>	
 						<?php } ?>
 					<?php } ?>
 				<?php } ?>
@@ -347,18 +334,18 @@ if($admin->get_permission('pages_view') == true) {
 	</tr>
 	</table>
 	<div class="pages_list">
-	<table cellpadding="1" cellspacing="0" width="720" border="0">
+	<table cellpadding="0" cellspacing="0" width="720px" border="0">
 	<tr>
-		<td width="20">
+		<td width="20px">
 			&nbsp;
 		</td>
-		<td>
+		<td width="314px">
 			<?php echo $TEXT['VISIBILITY'] .' / ' .$TEXT['PAGE_TITLE']; ?>:
 		</td>
-		<td width="130" align="left">
+		<td width="256px" align="left">
 			<?php echo $TEXT['MENU_TITLE']; ?>:
 		</td>
-		<td width="255" align="center">
+		<td width="130px" align="center">
 			<?php echo $TEXT['ACTIONS']; ?>:
 		</td>		
 	</tr>
