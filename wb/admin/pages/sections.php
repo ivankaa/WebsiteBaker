@@ -202,9 +202,13 @@ if($query_sections->numRows() > 0) {
 				</td>
 				<?php } // jscalendar-stuff following ?>
 				<td><input type="text" id="start_date<?php echo $section['section_id']; ?>" name="start_date<?php echo $section['section_id']; ?>" value="<?php if($section['publ_start']==0) print ""; else print date($jscal_format, $section['publ_start'])?>" style="width: 120px;" />
-					<img src="<?php echo WB_URL ?>/include/jscalendar/img.gif" id="trigger_start<?php echo $section['section_id']; ?>" style="cursor: pointer; border: 1px solid red;" title="Calendar" onmouseover="this.style.background='red';" onmouseout="this.style.background=''" /></td>
+					<img src="<?php echo ADMIN_URL ?>/images/clock_16.png" id="trigger_start<?php echo $section['section_id']; ?>" style="cursor: pointer;" title="Calendar" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
+					<img src="<?php echo ADMIN_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="delete date" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.section_properties.start_date<?php echo $section['section_id']; ?>.value=''" />
+				</td>
 				<td><input type="text" id="end_date<?php echo $section['section_id']; ?>" name="end_date<?php echo $section['section_id']; ?>" value="<?php if($section['publ_end']==0) print ""; else print date($jscal_format, $section['publ_end'])?>" style="width: 120px;" />
-					<img src="<?php echo WB_URL ?>/include/jscalendar/img.gif" id="trigger_stop<?php echo $section['section_id']; ?>" style="cursor: pointer; border: 1px solid red;" title="Calendar" onmouseover="this.style.background='red';" onmouseout="this.style.background=''" /></td>
+					<img src="<?php echo ADMIN_URL ?>/images/clock_16.png" id="trigger_stop<?php echo $section['section_id']; ?>" style="cursor: pointer;" title="Calendar" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
+					<img src="<?php echo ADMIN_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="delete date" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.section_properties.end_date<?php echo $section['section_id']; ?>.value=''"/>
+				</td>
 				<td width="20">
 					<?php if($section['position'] != 1) { ?>
 					<a href="<?php echo ADMIN_URL; ?>/pages/move_up.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section['section_id']; ?>">
