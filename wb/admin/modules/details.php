@@ -25,6 +25,7 @@
 
 // Include the config file
 require('../../config.php');
+require_once(WB_PATH .'/framework/functions.php');
 
 // Get module name
 if(!isset($_POST['file']) OR $_POST['file'] == "") {
@@ -55,25 +56,17 @@ if($result->numRows() > 0) {
 	$module = $result->fetchRow();
 }
 
-// Get language description if available
-// First get users defined language
-$query = "SELECT language FROM ".TABLE_PREFIX."users WHERE user_id = '".$admin->get_user_id()."'";
-$results = $database->query($query);
-if($results->numRows() > 0) {
-	// We found a language for the user, store it
-	$user_info=$results->fetchRow();
-	$user_language = $user_info['language'];
-
-	// Next check for language file in module dir and insert the variables from that file
-	if(file_exists(WB_PATH.'/modules/'.$file.'/languages/'.$user_language.'.php')) {
-		require(WB_PATH.'/modules/'.$file.'/languages/'.$user_language.'.php');
-		
-		// Check to see if new variable exists... -> $module_description
-		if (isset($module_description)) {
-			// Override the module-description with correct desription in users language
-			$module['description']=$module_description;
-		}	
-	}
+// check if a module description exists for the displayed backend language
+$tool_description = false;
+if(function_exists('file_get_contents') && file_exists(WB_PATH.'/modules/'.$file.'/languages/'.LANGUAGE .'.php')) {
+	// read contents of the module language file into string
+	$data = @file_get_contents(WB_PATH .'/modules/' .$file .'/languages/' .LANGUAGE .'.php');
+	// use regular expressions to fetch the content of the variable from the string
+	$tool_description = get_variable_content('module_description', $data, true, false);
+}		
+if($tool_description !== false) {
+	// Override the module-description with correct desription in users language
+	$module['description'] = $tool_description;
 }
 
 $template->set_var(array(

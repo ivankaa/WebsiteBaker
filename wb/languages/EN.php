@@ -388,8 +388,6 @@ $TEXT['BACKUP'] = 'Backup';
 $TEXT['RESTORE'] = 'Restore';
 $TEXT['BACKUP_DATABASE'] = 'Backup Database';
 $TEXT['RESTORE_DATABASE'] = 'Restore Database';
-$TEXT['BACKUP_ALL_TABLES'] = 'Backup all tables in database';
-$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup only WB-specific tables';
 $TEXT['BACKUP_MEDIA'] = 'Backup Media';
 $TEXT['RESTORE_MEDIA'] = 'Restore Media';
 $TEXT['ADMINISTRATION_TOOL'] = 'Administration tool';
@@ -545,10 +543,5 @@ $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Error opening file.';
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'You must enter details for the following fields';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sorry, this form has been submitted too many times so far this hour. Please retry in the next hour.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'The verification number (also known as Captcha) that you entered is incorrect. If you are having problems reading the Captcha, please email: '.SERVER_EMAIL;
-
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you would like to have reloaded';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully';
 
 ?>

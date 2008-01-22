@@ -825,4 +825,23 @@ function upgrade_module($directory, $upgrade = false) {
 	}
 }
 
+// extracts the content of a string variable from a string (save alternative to including files)
+if(!function_exists('get_variable_content')) {
+	function get_variable_content($search, $data, $striptags=true, $convert_to_entities=true) {
+		$match = '';
+		// search for $variable followed by 0-n whitespace then by = then by 0-n whitespace
+		// then either " or ' then 0-n characters then either " or ' followed by 0-n whitespace and ;
+		// the variable name is returned in $match[1], the content in $match[3]
+		if (preg_match('/(\$' .$search .')\s*=\s*("|\')(.*)\2\s*;/', $data, $match)) {
+			if(strip_tags(trim($match[1])) == '$' .$search) {
+				// variable name matches, return it´s value
+				$match[3] = ($striptags == true) ? strip_tags($match[3]) : $match[3];
+				$match[3] = ($convert_to_entities == true) ? htmlentities($match[3]) : $match[3];
+				return $match[3];
+			}
+		}
+		return false;
+	}
+}
+
 ?>

@@ -26,6 +26,14 @@
 // direct access prevention
 defined('WB_PATH') OR die(header('Location: ../index.php'));
 
+// check if module language file exists for the language set by the user (e.g. DE, EN)
+if(!file_exists(WB_PATH .'/modules/mail_filter/languages/'.LANGUAGE .'.php')) {
+	// no module language file exists for the language set by the user, include default module language file EN.php
+	require_once(WB_PATH .'/modules/mail_filter/languages/EN.php');
+} else {
+	// a module language file exists for the language defined by the user, load it
+	require_once(WB_PATH .'/modules/mail_filter/languages/'.LANGUAGE .'.php');
+}
 // check if data was submitted
 if(isset($_POST['save_settings'])) {
 	// get configuration settings
@@ -51,7 +59,7 @@ if(isset($_POST['save_settings'])) {
 
 } else {
 	// write out heading
-	echo '<h2>Email Output Filter</h2>';
+	echo '<h2>' .$MOD_MAIL_FILTER['HEADING'] .'</h2>';
 
 	// include filter functions
 	require_once(WB_PATH .'/modules/mail_filter/filter-routines.php');
@@ -60,38 +68,37 @@ if(isset($_POST['save_settings'])) {
 	$data = get_mail_filter_settings();
 	
 	// output the form with values from the database
+	echo '<p>' .$MOD_MAIL_FILTER['HOWTO'] .'</p>';
 ?>
-
-<p>You can enable/disable the output filtering of email adresses with the options below. The Javascript mailto: encryption requires to enable the register_frontend_modfiles in your browser.</p>
 <form name="store_settings" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 	<table width="98%" cellspacing="0" cellpadding="5px" class="row_a">
-	<tr><td colspan="2"><strong>Basic Configuration:</strong></td></tr>
+	<tr><td colspan="2"><strong><?php echo $MOD_MAIL_FILTER['BASIC_CONF'];?>:</strong></td></tr>
 	<tr>
-		<td width="35%">Email Output Filter:</td>
+		<td width="35%"><?php echo $MOD_MAIL_FILTER['EMAIL_FILTER'];?>:</td>
 		<td>
 			<input type="radio" <?php echo ($data['email_filter']=='1') ?'checked="checked"' :'';?> 
-				name="email_filter" value="1">Enabled
+				name="email_filter" value="1"><?php echo $MOD_MAIL_FILTER['ENABLED'];?>
 			<input type="radio" <?php echo ($data['email_filter']=='0') ?'checked="checked"' :'';?> 
-				name="email_filter" value="0">Disabled
+				name="email_filter" value="0"><?php echo $MOD_MAIL_FILTER['DISABLED'];?>
 		</td>
 	</tr>
 	<tr>
-		<td>Javascript Encryption (mailto):</td>
+		<td><?php echo $MOD_MAIL_FILTER['MAILTO_FILTER'];?>:</td>
 		<td>
 			<input type="radio" <?php echo ($data['mailto_filter']=='1') ?'checked="checked"' :'';?>
-				name="mailto_filter" value="1">Enabled
+				name="mailto_filter" value="1"><?php echo $MOD_MAIL_FILTER['ENABLED'];?>
 			<input type="radio" <?php echo (($data['mailto_filter'])=='0') ?'checked="checked"' :'';?>
-				name="mailto_filter" value="0">Disabled
+				name="mailto_filter" value="0"><?php echo $MOD_MAIL_FILTER['DISABLED'];?>
 		</td>
 	</tr>
-	<tr><td colspan="2"><br /><strong>Email Replacements:</strong></td></tr>
+	<tr><td colspan="2"><br /><strong><?php echo $MOD_MAIL_FILTER['REPLACEMENT_CONF'];?>:</strong></td></tr>
 	<tr>
-		<td>Replacement for "@":</td>
+		<td><?php echo $MOD_MAIL_FILTER['AT_REPLACEMENT'];?>:</td>
 		<td><input type="text" style="width: 160px" value="<?php echo $data['at_replacement'];?>" 
 			name="at_replacement"/></td>
 	</tr>
 	<tr>
-		<td>Replacement for ".":</td>
+		<td><?php echo $MOD_MAIL_FILTER['DOT_REPLACEMENT'];?>:</td>
 		<td><input type="text" style="width: 160px" value="<?php echo $data['dot_replacement'];?>" 
 			name="dot_replacement"/></td>
 	</tr>

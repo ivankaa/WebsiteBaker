@@ -26,6 +26,15 @@
 // Direct access prevention
 defined('WB_PATH') OR die(header('Location: ../index.php'));
 
+// check if module language file exists for the language set by the user (e.g. DE, EN)
+if(!file_exists(WB_PATH .'/modules/reload/languages/'.LANGUAGE .'.php')) {
+	// no module language file exists for the language set by the user, include default module language file EN.php
+	require_once(WB_PATH .'/modules/reload/languages/EN.php');
+} else {
+	// a module language file exists for the language defined by the user, load it
+	require_once(WB_PATH .'/modules/reload/languages/'.LANGUAGE .'.php');
+}
+
 // Check if user selected what add-ons to reload
 if(isset($_POST['submit']) AND $_POST['submit'] != '') {
 	// Include functions file
@@ -43,7 +52,7 @@ if(isset($_POST['submit']) AND $_POST['submit'] != '') {
 			}
 		closedir($handle);
 		}
-		echo '<br />'.$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'];
+		echo '<br />'.$MOD_RELOAD['MODULES_RELOADED'];
 	}
 	if(isset($_POST['reload_templates'])) {
 		// Remove all templates
@@ -57,7 +66,7 @@ if(isset($_POST['submit']) AND $_POST['submit'] != '') {
 			}
 		closedir($handle);
 		}
-		echo '<br />'.$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'];
+		echo '<br />'.$MOD_RELOAD['TEMPLATES_RELOADED'];
 	}
 	if(isset($_POST['reload_languages'])) {
 		// Remove all languages
@@ -71,7 +80,7 @@ if(isset($_POST['submit']) AND $_POST['submit'] != '') {
 			}
 		closedir($handle);
 		}
-		echo '<br />'.$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'];
+		echo '<br />'.$MOD_RELOAD['LANGUAGES_RELOADED'];
 	}
 	?>
 	<br /><br />
@@ -84,19 +93,19 @@ if(isset($_POST['submit']) AND $_POST['submit'] != '') {
 	<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 	<table cellpadding="4" cellspacing="0" border="0">
 	<tr>
-		<td colspan="2"><?php echo $MESSAGE['MOD_RELOAD']['PLEASE_SELECT']; ?>:</td>
+		<td colspan="2"><?php echo $MOD_RELOAD['PLEASE_SELECT']; ?>:</td>
 	</tr>
 	<tr>
 		<td width="20"><input type="checkbox" name="reload_modules" id="reload_modules" value="true" /></td>
-		<td><label for="reload_modules"><?php echo $MENU['MODULES']; ?></label></td>
+		<td><label for="reload_modules"><?php echo $MOD_RELOAD['MODULES']; ?></label></td>
 	</tr>
 	<tr>
 		<td><input type="checkbox" name="reload_templates" id="reload_templates" value="true" /></td>
-		<td><label for="reload_templates"><?php echo $MENU['TEMPLATES']; ?></label></td>
+		<td><label for="reload_templates"><?php echo $MOD_RELOAD['TEMPLATES']; ?></label></td>
 	</tr>
 	<tr>
 		<td><input type="checkbox" name="reload_languages" id="reload_languages" value="true" /></td>
-		<td><label for="reload_languages"><?php echo $MENU['LANGUAGES']; ?></label></td>
+		<td><label for="reload_languages"><?php echo $MOD_RELOAD['LANGUAGES']; ?></label></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>

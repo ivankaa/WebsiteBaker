@@ -11,6 +11,12 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+22-Jan-2008 Christian Sommer
++	Added language support for the Admin tools (backup, reload, mail_filter)
+-	Removed all admin tool text outputs from global language file to module language files
+!	Introduced language support for the overview page of the Admin tools
++	Added function get_variable_content to allow extraction of variable content without including files
+!	Changed language support for Addons -> Moduls -> Details
 22-Jan-2008 Matthias Gallas
 +	Added keywords to new mail filter files
 22-Jan-2008 Thomas Hornik
