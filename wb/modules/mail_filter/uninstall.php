@@ -1,6 +1,6 @@
 <?php
 
-// $Id: uninstall.php 547 2008-01-17 19:38:05Z doc $
+// $Id$
 
 /*
 
