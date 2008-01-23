@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+23-Jan-2008 Christian Sommer
++	Added German language file for WB 2.7
+
 22-Jan-2008 Christian Sommer
 +	Added language support for the Admin tools (backup, reload, mail_filter)
 -	Removed all admin tool text outputs from global language file to module language files
