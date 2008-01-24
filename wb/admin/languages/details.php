@@ -56,7 +56,7 @@ $template->set_var(array(
 								'NAME' => $language_name,
 								'AUTHOR' => $language_author,
 								'VERSION' => $language_version,
-								'DESIGNED_FOR' => $language_designed_for
+								'DESIGNED_FOR' => $language_platform
 								)
 						);
 
