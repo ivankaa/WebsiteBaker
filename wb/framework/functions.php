@@ -709,7 +709,7 @@ function delete_page($page_id) {
 			$admin->print_error($MESSAGE['PAGES']['CANNOT_DELETE_ACCESS_FILE']);
 		} else {
 			unlink($filename);
-			if(file_exists($directory) && rtrim($directory,'/')!=WB_PATH.PAGES_DIRECTORY) {
+			if(file_exists($directory) && rtrim($directory,'/')!=WB_PATH.PAGES_DIRECTORY && substr($link, 0, 1) != '.') {
 				rm_full_dir($directory);
 			}
 		}
