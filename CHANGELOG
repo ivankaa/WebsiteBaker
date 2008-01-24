@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 24-Jan-2008 Christian Sommer
++	added language support to all integrated modules (except for news and form module)
 #	fixed another E_NOTICE warning
 24-Jan-2008 Matthias Gallas
 +	Added keywords to files where they are missing

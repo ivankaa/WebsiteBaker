@@ -26,8 +26,8 @@
 $module_directory = 'backup';
 $module_name = 'Backup';
 $module_function = 'tool';
-$module_version = '2.6';
-$module_platform = '2.6.x';
+$module_version = '2.7';
+$module_platform = '2.7.x';
 $module_author = 'Ryan Djurovich, John';
 $module_license = 'GNU General Public License';
 $module_description = 'This module allows you to backup your database.';

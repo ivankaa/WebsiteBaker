@@ -22,13 +22,11 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  ENGLISH LANGUAGE FILE FOR THE ADDON: BACKUP
+  ENGLISH LANGUAGE FILE FOR THE ADDON: WRAPPER
  -----------------------------------------------------------------------------------------
 */
 
-// text outputs
-$MOD_BACKUP['BACKUP_ALL_TABLES'] 	= 	'Backup all tables in database';
-$MOD_BACKUP['BACKUP_WB_SPECIFIC'] 	= 	'Backup only WB-specific tables';
-$TEXT['BACKUP_DATABASE']				=	'Backup Database';
+// Headings and text outputs
+$MOD_WRAPPER['NOTICE'] 		=	'Your browser does not support inline frames.<br />Click on the link below to visit the website that was meant to be shown here...<br />';
 
 ?>

@@ -23,14 +23,22 @@
 
 */
 
-// Get url
+// check if module language file exists for the language set by the user (e.g. DE, EN)
+if(!file_exists(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php')) {
+	// no module language file exists for the language set by the user, include default module language file EN.php
+	require_once(WB_PATH .'/modules/wrapper/languages/EN.php');
+} else {
+	// a module language file exists for the language defined by the user, load it
+	require_once(WB_PATH .'/modules/wrapper/languages/'.LANGUAGE .'.php');
+}
+
+// get url
 $get_settings = $database->query("SELECT url,height FROM ".TABLE_PREFIX."mod_wrapper WHERE section_id = '$section_id'");
 $fetch_settings = $get_settings->fetchRow();
 $url = ($fetch_settings['url']);
 
 ?>
 <iframe src="<?php echo $url; ?>" width="100%" height="<?php echo $fetch_settings['height']; ?>px" frameborder="0" scrolling="auto">
-Your browser does not support inline frames.<br />
-Click on the link below to visit the website that was meant to be shown here...<br />
+<?php echo $MOD_WRAPPER['NOTICE']; ?>
 <a href="<?php echo $url; ?>" target="_blank"><?php echo $url; ?></a>
 </iframe>

@@ -28,7 +28,16 @@ Since there is nothing to show and users shouldn't really know this
 page exists, we might as well give them a link to the home page.
 */
 
+// check if module language file exists for the language set by the user (e.g. DE, EN)
+if(!file_exists(WB_PATH .'/modules/menu_link/languages/'.LANGUAGE .'.php')) {
+	// no module language file exists for the language set by the user, include default module language file EN.php
+	require_once(WB_PATH .'/modules/menu_link/languages/EN.php');
+} else {
+	// a module language file exists for the language defined by the user, load it
+	require_once(WB_PATH .'/modules/menu_link/languages/'.LANGUAGE .'.php');
+}
+
 ?>
 <a href="<?php echo WB_URL; ?>">
-Click HERE to go to the main page
+<?php echo $MOD_MENU_LINK['TEXT']; ?>
 </a>

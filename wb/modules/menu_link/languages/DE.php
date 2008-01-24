@@ -22,13 +22,14 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  ENGLISH LANGUAGE FILE FOR THE ADDON: BACKUP
+  DEUTSCHE SPRACHDATEI FUER DAS MODUL: MENU_LINK
  -----------------------------------------------------------------------------------------
 */
 
-// text outputs
-$MOD_BACKUP['BACKUP_ALL_TABLES'] 	= 	'Backup all tables in database';
-$MOD_BACKUP['BACKUP_WB_SPECIFIC'] 	= 	'Backup only WB-specific tables';
-$TEXT['BACKUP_DATABASE']				=	'Backup Database';
+// Deutsche Modulbeschreibung
+$module_description 	= 'Dieses Modul erm&ouml;glicht die Anzeige eines Links im Seitenmen&uuml;.';
+
+// Überschriften und Textausgaben
+$MOD_MENU_LINK['TEXT']				= 'Klicke HIER um zur Startseite zu gelangen';
 
 ?>

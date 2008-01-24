@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  DEUTSCHES SPRACHDATEI FUER DAS MAIL_FILTER ADMINISTRATIONS TOOL
+  DEUTSCHE SPRACHDATEI FUER DAS MODUL: MAIL_FILTER
  -----------------------------------------------------------------------------------------
 */
 
@@ -35,8 +35,8 @@ $MOD_MAIL_FILTER['HOWTO']					= 'Mit nachfolgenden Optionen kann die Emailfilter
 
 // Text and captions of form elements
 $MOD_MAIL_FILTER['BASIC_CONF']			= 'Grundeinstellungen';
-$MOD_MAIL_FILTER['EMAIL_FILTER']			= 'Email Filterung';
-$MOD_MAIL_FILTER['MAILTO_FILTER']		= 'Javascript Verschl&uuml;sselung (mailto)';
+$MOD_MAIL_FILTER['EMAIL_FILTER']			= 'Textmail Filterung';
+$MOD_MAIL_FILTER['MAILTO_FILTER']		= 'Mailto Filterung (Javascript)';
 $MOD_MAIL_FILTER['ENABLED']				= 'Aktiviert';
 $MOD_MAIL_FILTER['DISABLED']				= 'Ausgeschaltet';
 

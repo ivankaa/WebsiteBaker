@@ -22,13 +22,14 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  ENGLISH LANGUAGE FILE FOR THE ADDON: BACKUP
+  DEUTSCHE SPRACHDATEI FUER DAS MODUL: WRAPPER
  -----------------------------------------------------------------------------------------
 */
 
-// text outputs
-$MOD_BACKUP['BACKUP_ALL_TABLES'] 	= 	'Backup all tables in database';
-$MOD_BACKUP['BACKUP_WB_SPECIFIC'] 	= 	'Backup only WB-specific tables';
-$TEXT['BACKUP_DATABASE']				=	'Backup Database';
+// Deutsche Modulbeschreibung
+$module_description = 'Dieses Modul erlaubt das einbinden fremder Inhalte auf Deiner Seiten mithilfe von Inline Frames (iframe)';
+
+// Überschriften und Textausgaben
+$MOD_WRAPPER['NOTICE'] =	'Dein Browser unterst&uuml;tzt keine Inline Frames.<br />Bitte klicke auf nachfolgenden Link um den Seiteninhalt der externen Seite zu betrachten ...<br />';
 
 ?>
