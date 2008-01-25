@@ -41,12 +41,12 @@ $table_s = TABLE_PREFIX."sections";
 if($query_page = $database->query("SELECT DISTINCT p.* FROM $table_p AS p INNER JOIN $table_s AS s ON p.page_id=s.page_id WHERE s.module != 'menu_link' AND p.page_id != '$page_id' AND parent = '0' ORDER BY position")) {
 	while($page = $query_page->fetchRow()) {
 		if($admin->page_is_visible($page)) {
-			$links[$page['page_id']]='/'.$page['page_title'];
+			$links[$page['page_id']]='/'.$page['menu_title'];
 			if($query_subpage = $database->query("SELECT DISTINCT p.* FROM $table_p AS p INNER JOIN $table_s AS s ON p.page_id=s.page_id WHERE s.module != 'menu_link' AND p.page_id != '$page_id' AND root_parent = '{$page['page_id']}' ORDER BY level")) {
 				while($sub = $query_subpage->fetchRow()) {
 					if($admin->page_is_visible($sub)) {
 						$parent_link = (array_key_exists($sub['parent'],$links))?$links[$sub['parent']]:"";
-						$links[$sub['page_id']]=$parent_link.'/'.$sub['page_title'];
+						$links[$sub['page_id']]=$parent_link.'/'.$sub['menu_title'];
 					}
 				}
 			}

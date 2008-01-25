@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+25-Jan-2008 Christian Sommer
+!	removed changes introduced with changeset 593 (we need to think off if we want to implement that feature)
 25-Jan-2008 Thomas Hornik
 #	module news: it was possible to post comments to postings with commenting disabled
 	or to inactive postings. Fixed

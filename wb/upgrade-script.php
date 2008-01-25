@@ -349,13 +349,6 @@ foreach($pages as $p) {
 	
 }
 
-// some code missing to regenerate page_title from link/filename
-// for_all_pages: if filename($page_title) != basename($link) {
-//   rename $page_title to basename($link)
-// }
-// This must be done after menu_link-upgrade
-// 
-// Should we really do this? - must be checked
 
 
 //******************************************************************************
