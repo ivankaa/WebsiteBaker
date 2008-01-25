@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+25-Jan-2008 Thomas Hornik
+#	module news: it was possible to post comments to postings with commenting disabled
+	or to inactive postings. Fixed
 24-Jan-2008 Thomas Hornik
 !	Generate filename in pages/ from page_title instead of menu_title.
 24-Jan-2008 Christian Sommer
