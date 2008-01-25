@@ -1,5 +1,5 @@
-These two fonts (LLBd.ttf and LLBI.ttf) are derivated from LinuxLibertine for use with website baker's captcha.
-All chars above pos. 127 has been removed.
+These fonts (LLBd.ttf and LLBI.ttf, and cond-variants) are derivated from LinuxLibertine-Font for use with website baker's captcha _only_.
+All chars above pos. 127 has been removed!
 Jan. 2008 - thorn
 
 ---------------------------------------------------
