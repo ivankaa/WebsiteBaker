@@ -30,8 +30,8 @@ require_once(WB_PATH.'/include/captcha/captcha.php');
 require_once(WB_PATH.'/search/search_modext.php');
 list($fonts, $dirs) = list_files_dirs(WB_PATH.'/include/captcha/fonts', false);
 list($bgs, $dirs) = list_files_dirs(WB_PATH.'/include/captcha/backgrounds', false);
-$fonts = clear_filelist($fonts, '\.ttf');
-$bgs = clear_filelist($bgs, '\.png');
+$fonts = clear_filelist($fonts, '\.ttf$');
+$bgs = clear_filelist($bgs, '\.png$');
 
 // make random string
 if(!function_exists('randomString')) {
@@ -69,13 +69,13 @@ do {
 	$t_y = rand($height-10,$height-2);
 	$res = imagettftext($image, $ttfsize, $angle, $t_x, $t_y, $color, $ttf, $text);
 	// check if text fits into the image
-	//if(($res[0]>0 && $res[0]<$width) && ($res[1]>0 && $res[1]<$height) && 
-	//   ($res[2]>0 && $res[2]<$width) && ($res[3]>0 && $res[3]<$height) && 
-	//   ($res[4]>0 && $res[4]<$width) && ($res[5]>0 && $res[5]<$height) && 
-	//   ($res[6]>0 && $res[6]<$width) && ($res[7]>0 && $res[7]<$height)
-	//) {
+	if(($res[0]>0 && $res[0]<$width) && ($res[1]>0 && $res[1]<$height) && 
+	   ($res[2]>0 && $res[2]<$width) && ($res[3]>0 && $res[3]<$height) && 
+	   ($res[4]>0 && $res[4]<$width) && ($res[5]>0 && $res[5]<$height) && 
+	   ($res[6]>0 && $res[6]<$width) && ($res[7]>0 && $res[7]<$height)
+	) {
 		$image_failed = false;
-	//}
+	}
 } while($image_failed);
 
 captcha_header();
