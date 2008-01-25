@@ -321,12 +321,6 @@ if(defined('SMART_LOGIN') AND SMART_LOGIN == true) {
 	$template->set_var('SMART_LOGIN_DISABLED', ' checked');
 }
 
-// Work-out if captcha verification feature is enabled
-if(defined('CAPTCHA_VERIFICATION') AND CAPTCHA_VERIFICATION == true) {
-	$template->set_var('CAPTCHA_VERIFICATION_ENABLED', ' checked');
-} else {
-	$template->set_var('CAPTCHA_VERIFICATION_DISABLED', ' checked');
-}
 if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
 	$template->set_var('GD_EXTENSION_ENABLED', '');
 } else {
@@ -589,7 +583,6 @@ $template->set_var(array(
 								'TEXT_WRITE' => $TEXT['WRITE'],
 								'TEXT_EXECUTE' => $TEXT['EXECUTE'],
 								'TEXT_SMART_LOGIN' => $TEXT['SMART_LOGIN'],
-								'TEXT_CAPTCHA_VERIFICATION' => $TEXT['CAPTCHA_VERIFICATION'],
 								'TEXT_MULTIPLE_MENUS' => $TEXT['MULTIPLE_MENUS'],
 								'TEXT_HOMEPAGE_REDIRECTION' => $TEXT['HOMEPAGE_REDIRECTION'],
 								'TEXT_SECTION_BLOCKS' => $TEXT['SECTION_BLOCKS'],

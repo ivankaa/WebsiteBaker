@@ -38,25 +38,43 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 		exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
 	} else {
 		$settings = $query_settings->fetchRow();
-		if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND $settings['use_captcha']) { /* Make's sure GD library is installed */
-			if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
+		$t=time();
+		if(ENABLED_ASP && ( // Advanced Spam Protection
+			($_SESSION['session_started']+ASP_SESSION_MIN_AGE > $t) OR // session too young
+			(!isset($_SESSION['comes_from_view'])) OR // user doesn't come from view.php
+			(!isset($_SESSION['comes_from_view_time']) OR $_SESSION['comes_from_view_time'] > $t-ASP_VIEW_MIN_AGE) OR // user is too fast
+			(!isset($_SESSION['submitted_when']) OR !isset($_POST['submitted_when'])) OR // faked form
+			($_SESSION['submitted_when'] != $_POST['submitted_when']) OR // faked form
+			($_SESSION['submitted_when'] > $t-ASP_INPUT_MIN_AGE) OR // user too fast
+			($_SESSION['submitted_when'] < $t-43200) OR // form older than 12h
+			($_POST['email'] OR $_POST['url'] OR $_POST['homepage']) // honeypot-fields
+		)) {
+			exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
+		}
+		if($settings['use_captcha']) {
+			if(isset($_POST['captcha']) AND $_POST['captcha'] != '') {
 				// Check for a mismatch
 				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
 					$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 					$_SESSION['comment_title'] = $_POST['title'];
 					$_SESSION['comment_body'] = $_POST['comment'];
-					exit(header('Location: '.WB_URL.'/modules/news/comment.php?id='.$_GET['post_id']));
+					exit(header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}"));
 				}
 			} else {
 				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 				$_SESSION['comment_title'] = $_POST['title'];
 				$_SESSION['comment_body'] = $_POST['comment'];
-				exit(header('Location: '.WB_URL.'/modules/news/comment.php?id='.$_GET['post_id']));
+				exit(header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}"));
 			}
 		}
 	}
 	if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
-	
+	if(ENABLED_ASP) {
+		unset($_SESSION['comes_from_view']);
+		unset($_SESSION['comes_from_view_time']);
+		unset($_SESSION['submitted_when']);
+	}
+
 	// Insert the comment into db
 	$page_id = $_GET['page_id'];
 	$section_id = $_GET['section_id'];
@@ -75,7 +93,7 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	$page = $query_page->fetchRow();
 	header('Location: '.$wb->page_link($page['link']).'?id='.$post_id);
 } else {
-	header('Location: '.WB_URL.'/modules/news/comment.php?id='.$_GET['post_id']);
+	header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}");
 }
 
 ?>

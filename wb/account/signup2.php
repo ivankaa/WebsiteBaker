@@ -62,7 +62,7 @@ if($email != "") {
 $email = $wb->add_slashes($email);
 
 // Captcha
-if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg') AND CAPTCHA_VERIFICATION) { /* Make's sure GD library is installed */
+if(ENABLED_CAPTCHA) {
 	if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
 		// Check for a mismatch
 		if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {

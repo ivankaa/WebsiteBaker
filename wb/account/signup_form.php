@@ -27,7 +27,8 @@ if(!defined('WB_URL')) {
 	header('Location: ../index.php');
 	exit(0);
 }
-
+require_once(WB_PATH.'/include/captcha/captcha.php');
+require_once(WB_PATH.'/include/captcha/asp.php');
 ?>
 
 <style>
@@ -42,6 +43,22 @@ if(!defined('WB_URL')) {
 
 <table cellpadding="5" cellspacing="0" border="0" width="90%">
 <tr>
+	<?php if(ENABLED_ASP) { // add some honeypot-fields
+	?>
+	<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
+	<p class="nixhier">
+	email-address:
+	<label for="email-address">Leave this field empty, dont enter your e-mail address:</label>
+	<input id="email-address" name="email-address" size="60" value="" /><br />
+	username (id):
+	<label for="name">Enter your user name or id not here:</label>
+	<input id="name" name="name" size="60" value="" /><br />
+	Full Name:
+	<label for="full_name">This is to leave blank, dont enter your full name here:</label>
+	<input id="full_name" name="full_name" size="60" value="" /><br />
+	</p>
+	<?php }
+	?>
 	<td width="180"><?php echo $TEXT['USERNAME']; ?>:</td>
 	<td class="value_input">
 		<input type="text" name="username" maxlength="30" />
@@ -61,20 +78,12 @@ if(!defined('WB_URL')) {
 </tr>
 <?php
 // Captcha
-if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
-	if(CAPTCHA_VERIFICATION == true) {
-		$_SESSION['captcha'] = '';
-		for($i = 0; $i < 5; $i++) {
-			$_SESSION['captcha'] .= rand(0,9);
-		}
-		?><tr><td class="field_title"><?php echo $TEXT['VERIFICATION']; ?>:</td><td>
-		<table cellpadding="2" cellspacing="0" border="0">
-		<tr><td><img src="<?php echo WB_URL; ?>/include/captcha.php?t=<?php echo time(); ?>" alt="Captcha" /></td>
-		<td><input type="text" name="captcha" maxlength="5" /></td>
-		</tr></table>
-		</td></tr>
-		<?php
-	}
+if(ENABLED_CAPTCHA) {
+	?><tr>
+		<td class="field_title"><?php echo $TEXT['VERIFICATION']; ?>:</td>
+		<td><?php call_captcha(); ?></td>
+		</tr>
+	<?php
 }
 ?>
 <tr>

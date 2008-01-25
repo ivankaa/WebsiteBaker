@@ -35,6 +35,16 @@ if(!is_numeric(FRONTEND_SIGNUP)) {
 	}
 }
 
+if(ENABLED_ASP && isset($_POST['username']) && ( // form faked? Check the honeypot-fields.
+	(!isset($_POST['submitted_when']) OR !isset($_SESSION['submitted_when'])) OR 
+	($_POST['submitted_when'] != $_SESSION['submitted_when']) OR
+	(!isset($_POST['email-address']) OR $_POST['email-address']) OR
+	(!isset($_POST['name']) OR $_POST['name']) OR
+	(!isset($_POST['full_name']) OR $_POST['full_name'])
+)) {
+	exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
+}
+
 // Load the language file
 if(!file_exists(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php')) {
 	exit('Error loading language file '.DEFAULT_LANGUAGE.', please check configuration');

@@ -39,6 +39,9 @@ if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS
 	echo "\n</style>\n";
 } 
 
+require_once(WB_PATH.'/include/captcha/captcha.php');
+require_once(WB_PATH.'/include/captcha/asp.php');
+
 // Function for generating an optionsfor a select field
 if (!function_exists('make_option')) {
 function make_option(&$n) {
@@ -119,6 +122,25 @@ $java_mailcheck = '';
 // Print header
 echo $header;
 
+if(ENABLED_ASP) { // first add some honeypot-fields
+?>
+<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
+<p class="nixhier">
+email address:
+<label for="email">Your e-mail address is not relevant Leave this field blank:</label>
+<input id="email" name="email" size="56" value="" /><br />
+Homepage:
+<label for="homepage">Do not enter a homepage-url www.whatever.com here:</label>
+<input id="homepage" name="homepage" size="55" value="" /><br />
+URL:
+<label for="url">Don't write anything in this field:</label>
+<input id="url" name="url" size="61" value="" /><br />
+Comment:
+<label for="comment">Enter not your comment here:</label>
+<textarea name="comment" cols="50" rows="10"></textarea><br />
+</p>
+<?php }
+
 // Get list of fields
 $query_fields = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_fields WHERE section_id = '$section_id' ORDER BY position ASC");
 if($query_fields->numRows() > 0) {
@@ -179,17 +201,11 @@ if($query_fields->numRows() > 0) {
 }
 
 // Captcha
-if($use_captcha) {
-	$_SESSION['captcha'] = '';
-	for($i = 0; $i < 5; $i++) {
-		$_SESSION['captcha'] .= rand(0,9);
-	}
-	?><tr><td class="field_title"><?php echo $TEXT['VERIFICATION']; ?>:</td><td>
-	<table cellpadding="2" cellspacing="0" border="0">
-	<tr><td><img src="<?php echo WB_URL; ?>/include/captcha.php?t=<?php echo time(); ?>" alt="Captcha" /></td>
-	<td><input type="text" name="captcha" maxlength="5" /></td>
-	</tr></table>
-	</td></tr>
+if($use_captcha) { ?>
+	<tr>
+	<td class="field_title"><?php echo $TEXT['VERIFICATION']; ?>:</td>
+	<td><?php call_captcha(); ?></td>
+	</tr>
 	<?php
 }
 echo '
@@ -292,6 +308,17 @@ echo $footer;
 		// Set new submission ID in session
 		$_SESSION['form_submission_id'] = new_submission_id();
 		
+		if(ENABLED_ASP && ( // form faked? Check the honeypot-fields.
+			(!isset($_POST['submitted_when']) OR !isset($_SESSION['submitted_when'])) OR 
+			($_POST['submitted_when'] != $_SESSION['submitted_when']) OR
+			(!isset($_POST['email']) OR $_POST['email']) OR
+			(!isset($_POST['homepage']) OR $_POST['homepage']) OR
+			(!isset($_POST['comment']) OR $_POST['comment']) OR
+			(!isset($_POST['url']) OR $_POST['url'])
+		)) {
+			exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
+		}
+
 		// Submit form data
 		// First start message settings
 		$query_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
@@ -354,16 +381,14 @@ echo $footer;
 		}
 		
 		// Captcha
-		if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
-			if($use_captcha) {
-				if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
-					// Check for a mismatch
-					if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
-						$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
-					}
-				} else {
+		if($use_captcha) {
+			if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
+				// Check for a mismatch
+				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
 					$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 				}
+			} else {
+				$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 			}
 		}
 		if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
@@ -431,8 +456,8 @@ echo $footer;
 					}				
 			
 					// Write submission to database
-					if(isset($admin) AND $admin->get_user_id() > 0) {
-						$admin->get_user_id();
+					if(isset($admin) AND $admin->is_authenticated() AND $admin->get_user_id() > 0) {
+						$submitted_by = $admin->get_user_id();
 					} else {
 						$submitted_by = 0;
 					}

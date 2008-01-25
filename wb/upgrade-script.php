@@ -61,14 +61,15 @@ $FAIL = '<span class="red">failed</span>';
  */
 function db_add_search_key_value($key, $value) {
 	global $database; global $OK; global $FAIL;
-	$query = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = '$key' LIMIT 1");
+	$table = TABLE_PREFIX.'search';
+	$query = $database->query("SELECT value FROM $table WHERE name = '$key' LIMIT 1");
 	if($query->numRows() > 0) {
 		echo "$key: allready there. $OK.<br />";
 		return true;
 	} else {
-		$database->query("INSERT INTO ".TABLE_PREFIX."search (name,value,extra) VALUES ('$key', '$value', '')");
+		$database->query("INSERT INTO $table (name,value,extra) VALUES ('$key', '$value', '')");
 		echo mysql_error()?mysql_error().'<br />':'';
-		$query = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = '$key' LIMIT 1");
+		$query = $database->query("SELECT value FROM $table WHERE name = '$key' LIMIT 1");
 		if($query->numRows() > 0) {
 			echo "$key: $OK.<br />";
 			return true;
@@ -349,6 +350,27 @@ foreach($pages as $p) {
 	
 }
 
+/**********************************************************
+ *  - asp - Advanced Spam Protection
+ */
+echo "<br /><u>Adding table mod_captcha_control</u><br />";
+$table = TABLE_PREFIX.'mod_captcha_control';
+$database->query("DROP TABLE IF EXISTS `$table`");
+$database->query("CREATE TABLE `$table` (
+	`enabled_captcha` VARCHAR(1) NOT NULL DEFAULT '1',
+	`enabled_asp` VARCHAR(1) NOT NULL DEFAULT '1',
+	`captcha_type` VARCHAR(255) NOT NULL DEFAULT 'calc_text',
+	`asp_session_min_age` INT(11) NOT NULL DEFAULT '20',
+	`asp_view_min_age` INT(11) NOT NULL DEFAULT '10',
+	`asp_input_min_age` INT(11) NOT NULL DEFAULT '5'
+	)"
+);
+$database->query("
+	INSERT INTO `$table`
+		(`enabled_captcha`, `enabled_asp`, `captcha_type`)
+	VALUES
+		('1', '1', 'calc_text')
+");
 
 
 //******************************************************************************

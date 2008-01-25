@@ -28,18 +28,38 @@ if(!defined('WB_URL')) {
 	header('Location: ../index.php');
 	exit(0);
 }
-	
+
+require_once(WB_PATH.'/include/captcha/captcha.php');
+require_once(WB_PATH.'/include/captcha/asp.php');
+
 // Get comments page template details from db
-$query_settings = $database->query("SELECT comments_page,use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
+$query_settings = $database->query("SELECT comments_page,use_captcha,commenting FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
 if($query_settings->numRows() == 0) {
 	header("Location: ".WB_URL.PAGES_DIRECTORY."");
 	exit(0);
 } else {
 	$settings = $query_settings->fetchRow();
+
 	// Print comments page
 	echo str_replace('[POST_TITLE]', POST_TITLE, ($settings['comments_page']));
 	?>
 	<form name="comment" action="<?php echo WB_URL.'/modules/news/submit_comment.php?page_id='.PAGE_ID.'&section_id='.SECTION_ID.'&post_id='.POST_ID; ?>" method="post">
+	<?php if(ENABLED_ASP) { // add some honeypot-fields
+	?>
+	<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
+	<p class="nixhier">
+	email address:
+	<label for="email">We dont want to know your email-address. Leave this field empty:</label>
+	<input id="email" name="email" size="60" value="" /><br />
+	Homepage:
+	<label for="homepage">Do not enter a homepage-url here, use field comment instead if you want:</label>
+	<input id="homepage" name="homepage" size="60" value="" /><br />
+	URL:
+	<label for="url">Don't write anything in this url field:</label>
+	<input id="url" name="url" size="60" value="" /><br />
+	</p>
+	<?php }
+	?>
 	<?php echo $TEXT['TITLE']; ?>:
 	<br />
 	<input type="text" name="title" maxlength="255" style="width: 90%;"<?php if(isset($_SESSION['comment_title'])) { echo ' value="'.$_SESSION['comment_title'].'"'; unset($_SESSION['comment_title']); } ?> />
@@ -55,16 +75,11 @@ if($query_settings->numRows() == 0) {
 	}
 	// Captcha
 	if($settings['use_captcha']) {
-	$_SESSION['captcha'] = '';
-	for($i = 0; $i < 5; $i++) {
-		$_SESSION['captcha'] .= rand(0,9);
-	}
 	?>
 	<table cellpadding="2" cellspacing="0" border="0">
 	<tr>
-	<td><?php echo $TEXT['VERIFICATION']; ?>:</td>
-	<td><img src="<?php echo WB_URL; ?>/include/captcha.php?t=<?php echo time(); ?>" alt="Captcha" /></td>
-	<td><input type="text" name="captcha" maxlength="5" /></td>
+		<td><?php echo $TEXT['VERIFICATION']; ?>:</td>
+		<td><?php call_captcha(); ?></td>
 	</tr></table>
 	<br />
 	<?php
