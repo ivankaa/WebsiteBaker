@@ -63,6 +63,26 @@ if(isset($_POST['save_settings'])) {
 	// include captcha-file
 	require_once(WB_PATH .'/include/captcha/captcha.php');
 
+// script to load image
+?>
+<script type="text/javascript">
+	var pics = new Array();
+
+	pics["ttf_image"] = new Image();
+	pics["ttf_image"].src = "<?php echo WB_URL.'/include/captcha/captchas/ttf_image.png'?>";
+
+	pics["calc_image"] = new Image();
+	pics["calc_image"].src = "<?php echo WB_URL.'/include/captcha/captchas/calc_image.png'?>";
+	
+	pics["old_image"] = new Image();
+	pics["old_image"].src = "<?php echo WB_URL.'/include/captcha/captchas/old_image.png'?>";
+	
+	pics["calc_text"] = new Image();
+	pics["calc_text"].src = "<?php echo WB_URL.'/include/captcha/captchas/calc_text.png'?>";
+
+</script>
+<?php
+
 	// connect to database and read out captcha settings
 	if($query = $database->query("SELECT * FROM $table")) {
 		$data = $query->fetchRow();
@@ -85,10 +105,15 @@ if(isset($_POST['save_settings'])) {
 <form name="store_settings" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 	<table width="98%" cellspacing="0" cellpadding="5px" class="row_a">
 	<tr><td colspan="2"><strong><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_CONF'];?>:</strong></td></tr>
-	<tr>
-		<td width="35%"><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_TYPE'];?>:</td>
+	<tr><td>
+		<table>
+			<tr height="50px">
+			<td><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_TYPE'];?>:</td>
+			<td align="right" width="150px"><img name="captcha_example" id="captcha_example" src="<?php echo WB_URL.'/include/captcha/captchas/calc_text.png'?>" onload="javascript: document.captcha_example.src = pics[document.store_settings.captcha_type.value].src;"></td>
+			</tr>
+		</table>
 		<td>
-			<select name="captcha_type" id="captcha_type" style="width: 98%;">
+			<select name="captcha_type" id="captcha_type" onchange="load_captcha_image()" style="width: 98%;">
 			<?php foreach($useable_captchas AS $key=>$text) {
 				echo "<option value=\"$key\" ".($captcha_type==$key?'selected':'').">$text</option>";
 			} ?>

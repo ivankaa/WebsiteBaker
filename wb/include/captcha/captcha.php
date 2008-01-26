@@ -88,7 +88,9 @@ if(extension_loaded('gd') && function_exists('imagepng') && function_exists('ima
 if(!function_exists('call_captcha')) {
 	function call_captcha() {
 		global $MOD_CAPTCHA;
-
+		$t = time();
+		$_SESSION['captcha_time'] = $t;
+	
 		switch(CAPTCHA_TYPE) {
 			// two special cases
 			case 'calc_text': // calculation as text
@@ -99,7 +101,7 @@ if(!function_exists('call_captcha')) {
 				break;
 			case 'calc_image': // calculation with image (old captcha)
 				?>
-				<img src="<?php echo WB_URL.'/include/captcha/captchas/calc_image.php?t='.time(); ?>" align="middle" alt="Captcha" /> = 
+				<img src="<?php echo WB_URL."/include/captcha/captchas/calc_image.php?t=$t"; ?>" align="middle" alt="Captcha" /> = 
 				<input type="text" name="captcha" maxlength="5" style="width:20px" />&nbsp;&nbsp;<?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></font>
 				<?php
 				break;
@@ -107,7 +109,7 @@ if(!function_exists('call_captcha')) {
 			case 'ttf_image': // captcha with varying background and ttf-font
 			case 'old_image': // old captcha
 				?>
-				<img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php?t='.time(); ?>" align="middle" alt="Captcha" />
+				<img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" align="middle" alt="Captcha" />
 				<input type="text" name="captcha" maxlength="5" style="width:50px" />&nbsp;&nbsp;<?php echo $MOD_CAPTCHA['VERIFICATION_INFO_TEXT']; ?></font>
 				<?php
 				break;

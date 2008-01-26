@@ -26,6 +26,10 @@
 require_once("../../../config.php");
 require_once(WB_PATH.'/include/captcha/captcha.php');
 
+if(!isset($_SESSION['captcha_time']))
+	exit;
+unset($_SESSION['captcha_time']);
+
 // get lists of fonts and backgrounds
 require_once(WB_PATH.'/search/search_modext.php');
 list($fonts, $dirs) = list_files_dirs(WB_PATH.'/include/captcha/fonts', false);

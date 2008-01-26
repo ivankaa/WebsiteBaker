@@ -26,6 +26,10 @@
 require_once("../../../config.php");
 require_once(WB_PATH.'/include/captcha/captcha.php');
 
+if(!isset($_SESSION['captcha_time']))
+	exit;
+unset($_SESSION['captcha_time']);
+
 // Captcha
 srand((double)microtime()*100000);
 $_SESSION['captcha'] = rand(10000,99999);
