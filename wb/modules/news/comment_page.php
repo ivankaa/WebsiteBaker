@@ -31,6 +31,7 @@ if(!defined('WB_URL')) {
 
 require_once(WB_PATH.'/include/captcha/captcha.php');
 require_once(WB_PATH.'/include/captcha/asp.php');
+if(isset($_SESSION['captcha_retry_news'])) unset($_SESSION['captcha_retry_news']);
 
 // Get comments page template details from db
 $query_settings = $database->query("SELECT comments_page,use_captcha,commenting FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
@@ -57,6 +58,9 @@ if($query_settings->numRows() == 0) {
 	URL:
 	<label for="url">Don't write anything in this url field:</label>
 	<input id="url" name="url" size="60" value="" /><br />
+	Comment:
+	<label for="comment">Leave not your comment here:</label>
+	<input id="comment" name="comment" size="60" value="" /><br />
 	</p>
 	<?php }
 	?>
@@ -64,14 +68,17 @@ if($query_settings->numRows() == 0) {
 	<br />
 	<input type="text" name="title" maxlength="255" style="width: 90%;"<?php if(isset($_SESSION['comment_title'])) { echo ' value="'.$_SESSION['comment_title'].'"'; unset($_SESSION['comment_title']); } ?> />
 	<br /><br />
-	<?php echo $TEXT['COMMENT']; ?>:
+	<?php echo $TEXT['COMMENT']; 
+	// naming this field c0mment is part of ASP
+	?>:
 	<br />
-	<textarea name="comment" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
+	<textarea name="c0mment" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
 	<br /><br />
 	<?php
 	if(isset($_SESSION['captcha_error'])) {
 		echo '<font color="#FF0000">'.$_SESSION['captcha_error'].'</font><br />';
 		unset($_SESSION['captcha_error']);
+		$_SESSION['captcha_retry_news'] = true;
 	}
 	// Captcha
 	if($settings['use_captcha']) {

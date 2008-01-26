@@ -43,12 +43,11 @@ $comments_footer = $admin->add_slashes(str_replace($friendly, $raw, $_POST['comm
 $comments_page = $admin->add_slashes(str_replace($friendly, $raw, $_POST['comments_page']));
 $commenting = $_POST['commenting'];
 $posts_per_page = $_POST['posts_per_page'];
+$use_captcha = $_POST['use_captcha'];
 if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) {
 	$resize = $_POST['resize'];
-	$use_captcha = $_POST['use_captcha'];
 } else {
 	$resize = '';
-	$use_captcha = false;
 }
 
 // Update settings

@@ -30,7 +30,7 @@ require_once(WB_PATH.'/framework/class.wb.php');
 $wb = new wb;
 
 // Check if we should show the form or add a comment
-if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_GET['post_id']) AND is_numeric($_GET['post_id']) AND isset($_POST['comment']) AND $_POST['comment'] != '') {
+if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_GET['post_id']) AND is_numeric($_GET['post_id']) AND isset($_POST['c0mment']) AND $_POST['c0mment'] != '') {
 	
 	// Check captcha
 	$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".$_GET['section_id']."'");
@@ -45,9 +45,9 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 			(!isset($_SESSION['comes_from_view_time']) OR $_SESSION['comes_from_view_time'] > $t-ASP_VIEW_MIN_AGE) OR // user is too fast
 			(!isset($_SESSION['submitted_when']) OR !isset($_POST['submitted_when'])) OR // faked form
 			($_SESSION['submitted_when'] != $_POST['submitted_when']) OR // faked form
-			($_SESSION['submitted_when'] > $t-ASP_INPUT_MIN_AGE) OR // user too fast
+			($_SESSION['submitted_when'] > $t-ASP_INPUT_MIN_AGE && !isset($_SESSION['captcha_retry_news'])) OR // user too fast
 			($_SESSION['submitted_when'] < $t-43200) OR // form older than 12h
-			($_POST['email'] OR $_POST['url'] OR $_POST['homepage']) // honeypot-fields
+			($_POST['email'] OR $_POST['url'] OR $_POST['homepage'] OR $_POST['comment']) // honeypot-fields
 		)) {
 			exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
 		}
@@ -57,13 +57,13 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
 					$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 					$_SESSION['comment_title'] = $_POST['title'];
-					$_SESSION['comment_body'] = $_POST['comment'];
+					$_SESSION['comment_body'] = $_POST['c0mment'];
 					exit(header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}"));
 				}
 			} else {
 				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 				$_SESSION['comment_title'] = $_POST['title'];
-				$_SESSION['comment_body'] = $_POST['comment'];
+				$_SESSION['comment_body'] = $_POST['c0mment'];
 				exit(header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}"));
 			}
 		}
@@ -80,7 +80,7 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	$section_id = $_GET['section_id'];
 	$post_id = $_GET['post_id'];
 	$title = $wb->add_slashes(strip_tags($_POST['title']));
-	$comment = $wb->add_slashes(strip_tags($_POST['comment']));
+	$comment = $wb->add_slashes(strip_tags($_POST['c0mment']));
 	$commented_when = mktime();
 	if($wb->is_authenticated() == true) {
 		$commented_by = $wb->get_user_id();

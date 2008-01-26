@@ -341,13 +341,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		
 		// Print comments footer
 		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&sid='.$section_id, $setting_comments_footer);
-		
-		if(ENABLED_ASP) {
-			$_SESSION['comes_from_view'] = true;
-			$_SESSION['comes_from_view_time'] = time();
-		}
 	}
-		
+	if(ENABLED_ASP) {
+		$_SESSION['comes_from_view'] = POST_ID;
+		$_SESSION['comes_from_view_time'] = time();
+	}
 }
 
 ?>

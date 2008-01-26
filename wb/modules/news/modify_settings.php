@@ -130,7 +130,6 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 				</select>
 			</td>
 		</tr>
-		<?php if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */ ?>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['CAPTCHA_VERIFICATION']; ?>:</td>
 			<td>
@@ -140,6 +139,7 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 				<label for="use_captcha_false"><?php echo $TEXT['DISABLED']; ?></label>
 			</td>
 		</tr>
+		<?php if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */ ?>
 		<tr>
 			<td>
 				<?php echo $TEXT['RESIZE_IMAGE_TO']; ?>:

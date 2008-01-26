@@ -77,7 +77,6 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 	<tr>
 		<td colspan="2"><strong><?php echo $HEADING['GENERAL_SETTINGS']; ?></strong></td>
 	</tr>
-	<?php if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */ ?>
 	<tr>
 		<td class="setting_name" width="30%"><?php echo $TEXT['CAPTCHA_VERIFICATION']; ?>:</td>
 		<td>
@@ -87,7 +86,6 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 			<label for="use_captcha_false"><?php echo $TEXT['DISABLED']; ?></label>
 		</td>
 	</tr>
-	<?php } ?>
 	<tr>
 		<td class="setting_name" width="30%"><?php echo $TEXT['MAX_SUBMISSIONS_PER_HOUR']; ?>:</td>
 		<td class="setting_name">

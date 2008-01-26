@@ -27,7 +27,7 @@
 require('../../config.php');
 
 // Check if there is a post id
-if(!isset($_GET['id']) OR !is_numeric($_GET['id'])) {
+if(!isset($_GET['id']) OR !is_numeric($_GET['id']) OR !isset($_GET['sid']) OR !is_numeric($_GET['sid'])) {
 	header("Location: ".WB_URL.PAGES_DIRECTORY."");
 	exit(0);
 }
@@ -64,8 +64,8 @@ if($query_post->numRows() == 0) {
 		exit(0);
 	}
 
-	// don't allow commenting if ASP enabled and user doesn't comes from view.php
-	if(ENABLED_ASP && !isset($_SESSION['comes_from_view'])) {
+	// don't allow commenting if ASP enabled and user doesn't comes from the right view.php
+	if(ENABLED_ASP && (!isset($_SESSION['comes_from_view']) OR $_SESSION['comes_from_view']!=POST_ID)) {
 		header("Location: ".WB_URL.PAGES_DIRECTORY."");
 		exit(0);
 	}
@@ -83,6 +83,6 @@ if($query_post->numRows() == 0) {
 		require(WB_PATH.'/index.php');
 	}
 }
-
+var_dump($_SESSION);
 
 ?>

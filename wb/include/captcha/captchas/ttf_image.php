@@ -58,6 +58,7 @@ list($width, $height, $type, $attr) = getimagesize($bg);
 
 // create image
 $image_failed = true;
+$i=0;
 do {
 	$image = ImageCreateFromPNG($bg); // backgroundimage
 	$grey = rand(0,50);
@@ -76,6 +77,8 @@ do {
 	) {
 		$image_failed = false;
 	}
+	if(++$i > 5) // too many tries! Use the image
+		break;
 } while($image_failed);
 
 captcha_header();
