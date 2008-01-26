@@ -1,6 +1,6 @@
 // Copyright 2006 Stepan Riha
 // www.nonplus.net
-// $Id$
+// $Id: restore_pages.js 2 2006-04-18 03:04:39Z stepan $
 
 // Array of ids that can be toggled using toggle_visibility()
 JsAdmin.toggled_ids = function() {

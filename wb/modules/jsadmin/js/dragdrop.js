@@ -1,6 +1,6 @@
 // Copyright 2006 Stepan Riha
 // www.nonplus.net
-// $Id$
+// $Id: dragdrop.js 2 2006-04-18 03:04:39Z stepan $
 /**
 * -----------------------------------------------------------------------------------------
 *  MODIFICATON FOR THE JSADMIN MODULE
