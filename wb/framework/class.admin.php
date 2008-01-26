@@ -161,6 +161,10 @@ class admin extends wb {
 	
 	// Print the admin footer
 	function print_footer() {
+		// include the required file for Javascript admin
+    	if(file_exists(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php')){
+      	@include(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php');
+    	}
 		$footer_template = new Template(ADMIN_PATH."/interface");
 		$footer_template->set_file('page', 'footer.html');
 		$footer_template->set_block('page', 'footer_block', 'header');
