@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 26-Jan-2008 Christian Sommer
+!	changed WYSIWYG content field from text to longtext (allows more than 65'534 characters) 
 +	Added Javascript Admin module (developed by Stepan Riha, adapted for WB2.7 by Swen Uth)
 26-Jan-2008 Matthias Gallas
 +	Added keywords to files where they are missing
