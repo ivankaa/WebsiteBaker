@@ -83,6 +83,5 @@ if($query_post->numRows() == 0) {
 		require(WB_PATH.'/index.php');
 	}
 }
-var_dump($_SESSION);
 
 ?>
