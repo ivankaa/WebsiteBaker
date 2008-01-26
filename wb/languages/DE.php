@@ -375,6 +375,7 @@ $TEXT['RESULTS_FOR'] = 'Ergebnisse f&uuml;r';
 $TEXT['TIME'] = 'Zeit';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Stil';
 $TEXT['WYSIWYG_EDITOR'] = "WYSIWYG Editor";
+$TEXT['SERVER_EMAIL'] = 'Server E-Mail';
 $TEXT['MENU'] = 'Men&uuml;';
 $TEXT['MANAGE_GROUPS'] = 'Gruppen verwalten';
 $TEXT['MANAGE_USERS'] = 'Benutzer verwalten';
@@ -388,6 +389,8 @@ $TEXT['BACKUP'] = 'Sichern';
 $TEXT['RESTORE'] = 'Wiederherstellen';
 $TEXT['BACKUP_DATABASE'] = 'Datenbank sichern';
 $TEXT['RESTORE_DATABASE'] = 'Datenbank wiederherstellen';
+$TEXT['BACKUP_ALL_TABLES'] = 'komplette Datenbank sichern';
+$TEXT['BACKUP_WB_SPECIFIC'] = 'nur WB Tabellen sichern';
 $TEXT['BACKUP_MEDIA'] = 'Dateien sichern';
 $TEXT['RESTORE_MEDIA'] = 'Dateien wiederherstellen';
 $TEXT['ADMINISTRATION_TOOL'] = 'Verwaltungsprogramme';
@@ -544,4 +547,8 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Bitte folgende Angaben erg&auml;nzen'
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Dieses Formular wurde zu oft aufgerufen. Bitte versuchen Sie es in einer Stunde noch einmal.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Die eingegebene Pr&uuml;fziffer stimmt nicht &uuml;berein. Wenn Sie Probleme mit dem Lesen der Pr&uuml;fziffer haben, bitte schreiben Sie eine E-Mail an uns: '.SERVER_EMAIL;
 
+$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Bitte ausw&auml;hlen welche Erweiterungen neu geladen werden sollen';
+$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Module erfolgreich geladen';
+$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Designvorlagen erfolgreich geladen';
+$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Sprachen erfolgreich geladen';
 ?>
