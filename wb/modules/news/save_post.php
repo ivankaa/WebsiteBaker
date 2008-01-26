@@ -45,7 +45,8 @@ if($admin->get_post('title') == '' AND $admin->get_post('url') == '') {
 	$title = $admin->add_slashes($admin->get_post('title'));
 	$short = $admin->add_slashes($admin->get_post('short'));
 	$long = $admin->add_slashes($admin->get_post('long'));
-	$publishedwhen = strtotime($admin->get_post('publishdate'));	
+	$publishedwhen = strtotime($admin->get_post('publishdate'));
+	$publisheduntil = strtotime($admin->get_post('enddate'));
 	$commenting = $admin->get_post('commenting');
 	$active = $admin->get_post('active');
 	$old_link = $admin->get_post('link');
@@ -102,7 +103,7 @@ require(WB_PATH."/index.php");
 }
 
 // Update row
-$database->query("UPDATE ".TABLE_PREFIX."mod_news_posts SET group_id = '$group_id', title = '$title', link = '$post_link', content_short = '$short', content_long = '$long', commenting = '$commenting', active = '$active', published_when = '$publishedwhen', posted_when = '".mktime()."', posted_by = '".$admin->get_user_id()."' WHERE post_id = '$post_id'");
+$database->query("UPDATE ".TABLE_PREFIX."mod_news_posts SET group_id = '$group_id', title = '$title', link = '$post_link', content_short = '$short', content_long = '$long', commenting = '$commenting', active = '$active', published_when = '$publishedwhen', published_until = '$publisheduntil', posted_when = '".mktime()."', posted_by = '".$admin->get_user_id()."' WHERE post_id = '$post_id'");
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {

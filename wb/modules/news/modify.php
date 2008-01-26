@@ -82,7 +82,7 @@ if($query_posts->numRows() > 0) {
 				}
 				?>
 			</td>
-			<td width="80">
+			<td width="120">
 				<?php echo $TEXT['COMMENTS'].': ';
 				// Get number of comments
 				$query_title = $database->query("SELECT title FROM ".TABLE_PREFIX."mod_news_comments WHERE post_id = '".$post['post_id']."'");
@@ -91,6 +91,22 @@ if($query_posts->numRows() > 0) {
 			</td>
 			<td width="80">
 				<?php echo $TEXT['ACTIVE'].': '; if($post['active'] == 1) { echo $TEXT['YES']; } else { echo $TEXT['NO']; } ?>
+			</td>
+			<td width="20">
+			<?php
+			$start = $post['published_when'];
+			$end = $post['published_until'];
+			$t = time();
+			$icon = '';
+			if($start<=$t && $end==0)
+				$icon=ADMIN_URL.'/images/noclock_16.png';
+			elseif(($start<=$t || $start==0) && $end>=$t)
+				$icon=ADMIN_URL.'/images/clock_16.png';
+			else
+				$icon=ADMIN_URL.'/images/clock_red_16.png';
+			?>
+			<a href="<?php echo WB_URL; ?>/modules/news/modify_post.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&post_id=<?php echo $post['post_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
+				<img src="<?php echo $icon; ?>" border="0" alt="" />
 			</td>
 			<td width="20">
 			<?php if($post['position'] != $num_posts) { ?>

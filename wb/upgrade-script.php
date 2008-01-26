@@ -473,9 +473,13 @@ while($result = $query_dates->fetchRow()) {
 //Start of upgrade script for the news modul
 //******************************************************************************
 
-echo "<BR><B>Adding new field to database table mod_news_posts</B><BR>";
+echo "<BR><B>Adding new fields to database table mod_news_posts</B><BR>";
 if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_news_posts` ADD `published_when` INT NOT NULL AFTER `commenting`")) {
 	echo 'Database Field published_when added successfully<br />';
+}
+echo mysql_error().'<br />';
+if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_news_posts` ADD `published_until` INT NOT NULL AFTER `published_when`")) {
+	echo 'Database Field published_until added successfully<br />';
 }
 echo mysql_error().'<br />';
 

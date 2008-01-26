@@ -109,7 +109,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	}
 	
 	// Query posts (for this page)
-	$query_posts = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id' AND active = '1' AND title != ''$query_extra ORDER BY position DESC".$limit_sql);
+	$t = time();
+	$query_posts = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts
+		WHERE section_id = '$section_id' AND active = '1' AND title != ''$query_extra
+		AND (published_when = '0' OR published_when <= $t) AND (published_until = 0 OR published_until >= $t)
+		ORDER BY position DESC".$limit_sql);
 	$num_posts = $query_posts->numRows();
 	
 	// Create previous and next links
@@ -256,7 +260,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	}
 	
 	// Get post info
-	$query_post = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '".POST_ID."' AND active = '1'");
+	$t = time();
+	$query_post = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts
+		WHERE post_id = '".POST_ID."' AND active = '1'
+		AND (published_when = '0' OR published_when <= $t) AND (published_until = 0 OR published_until >= $t)
+	");
 	if($query_post->numRows() > 0) {
 		$post = $query_post->fetchRow();
 		if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false) { // Make sure parent group is active
@@ -282,7 +290,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			$post_long = ($post['content_long']);
 		}
 	} else {
-		header("Location: ".WB_URL.PAGES_DIRECTORY."");
+		$wb->print_error($MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'], "javascript: history.go(-1);", false);
 		exit(0);
 	}
 	
@@ -298,7 +306,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	echo str_replace($vars, $values, $setting_post_footer);
 	
 	// Show comments section if we have to
-	if($post['commenting'] == 'private' AND isset($admin) AND $admin->is_authenticated() == true OR $post['commenting'] == 'public') {
+	if(($post['commenting'] == 'private' AND isset($wb) AND $wb->is_authenticated() == true) OR $post['commenting'] == 'public') {
 		
 		// Print comments header
 		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&sid='.$section_id, $setting_comments_header);

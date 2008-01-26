@@ -14,6 +14,7 @@ Legend:
 26-Jan-2008 Matthias Gallas
 +	Added keywords to files where they are missing
 26-Jan-2008 Thomas Hornik
++	module news: added publish_until field to control the visibility of a news-posting by date and time
 !	added strongly "condensed" fonts with many intersections for ttf-CAPTCHA as default fonts.
 	It should be very difficult for spam-bots to recognize intersected characters.
 25-Jan-2008 Christian Sommer

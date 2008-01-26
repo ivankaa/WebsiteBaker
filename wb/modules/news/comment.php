@@ -50,12 +50,14 @@ if($query_post->numRows() == 0) {
 	define('POST_TITLE', $post_title);
 	
 	// don't allow commenting if its disabled, or if post or group is inactive
+	$t = time();
 	$table_posts = TABLE_PREFIX."mod_news_posts";
 	$table_groups = TABLE_PREFIX."mod_news_groups";
 	$query = $database->query("
 		SELECT p.post_id
 		FROM $table_posts AS p LEFT OUTER JOIN $table_groups AS g ON p.group_id = g.group_id
 		WHERE p.post_id='$post_id' AND p.commenting != 'none' AND p.active = '1' AND ( g.active IS NULL OR g.active = '1' )
+		AND (p.published_when = '0' OR p.published_when <= $t) AND (p.published_until = 0 OR p.published_until >= $t)
 	");
 	if($query->numRows() == 0) {
 		header("Location: ".WB_URL.PAGES_DIRECTORY."");

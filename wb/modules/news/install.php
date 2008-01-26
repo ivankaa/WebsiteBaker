@@ -38,11 +38,12 @@ if(defined('WB_URL')) {
 					 . '`content_short` TEXT NOT NULL ,'
 					 . '`content_long` TEXT NOT NULL ,'
 					 . '`commenting` VARCHAR(7) NOT NULL DEFAULT \'\','
-					. '`published_when` INT NOT NULL DEFAULT \'0\','
-		   	    	 . '`posted_when` INT NOT NULL DEFAULT \'0\','
+					 . '`published_when` INT NOT NULL DEFAULT \'0\','
+					 . '`published_until` INT NOT NULL DEFAULT \'0\','
+					 . '`posted_when` INT NOT NULL DEFAULT \'0\','
 					 . '`posted_by` INT NOT NULL DEFAULT \'0\','
 					 . 'PRIMARY KEY (post_id)'
-                . ' )';
+					 . ' )';
 	$database->query($mod_news);
 	
 	$database->query("DROP TABLE IF EXISTS `".TABLE_PREFIX."mod_news_groups`");

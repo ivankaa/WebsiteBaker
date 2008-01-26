@@ -34,12 +34,14 @@ function news_search($func_vars) {
 	$result = false;
 
 	// fetch all active news-posts (from active groups) in this section.
+	$t = time();
 	$table_posts = TABLE_PREFIX."mod_news_posts";
 	$table_groups = TABLE_PREFIX."mod_news_groups";
 	$query = $func_database->query("
 		SELECT p.post_id, p.title, p.content_short, p.content_long, p.link, p.posted_when, p.posted_by
 		FROM $table_posts AS p LEFT OUTER JOIN $table_groups AS g ON p.group_id = g.group_id
 		WHERE p.section_id='$func_section_id' AND p.active = '1' AND ( g.active IS NULL OR g.active = '1' )
+		AND (published_when = '0' OR published_when <= $t) AND (published_until = 0 OR published_until >= $t)
 		ORDER BY p.post_id DESC
 	");
 	// now call print_excerpt() for every single post

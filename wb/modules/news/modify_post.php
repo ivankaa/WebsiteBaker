@@ -50,7 +50,7 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 }
 
 // include jscalendar-setup
-$jscal_use_time = false; // whether to use a clock, too
+$jscal_use_time = true; // whether to use a clock, too
 require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 // override some vars: (normally, there is no need to change this)
 //$jscal_lang = "en"; //- calendar-language (default: wb-backend-language)
@@ -121,10 +121,19 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 	</td>
 </tr>
 <tr>
-	<td><?php echo $TEXT['DATE']; ?>:</td>
+	<td><?php echo $TEXT['PUBL_START_DATE']; ?>:</td>
 	<td>
-	<input type="text" id="publishdate" name="publishdate" value="<?php if($fetch_content['published_when']==0) print ""; else print date($jscal_format, $fetch_content['published_when'])?>" style="width: 120px;" />
-	<img src="<?php echo WB_URL ?>/include/jscalendar/img.gif" id="publishdate_trigger" style="cursor: pointer; border: 1px solid red;" title="Calendar" onmouseover="this.style.background='red';" onmouseout="this.style.background=''" />
+	<input type="text" id="publishdate" name="publishdate" value="<?php if($fetch_content['published_when']==0) print date($jscal_format, time()); else print date($jscal_format, $fetch_content['published_when']);?>" style="width: 120px;" />
+	<img src="<?php echo ADMIN_URL ?>/images/clock_16.png" id="publishdate_trigger" style="cursor: pointer;" title="Calendar" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
+	<img src="<?php echo ADMIN_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="delete date" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.modify.publishdate.value=''" />
+	</td>
+</tr>
+<tr>
+	<td><?php echo $TEXT['PUBL_END_DATE']; ?>:</td>
+	<td>
+	<input type="text" id="enddate" name="enddate" value="<?php if($fetch_content['published_until']==0) print ""; else print date($jscal_format, $fetch_content['published_until'])?>" style="width: 120px;" />
+	<img src="<?php echo ADMIN_URL ?>/images/clock_16.png" id="enddate_trigger" style="cursor: pointer;" title="Calendar" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
+	<img src="<?php echo ADMIN_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="delete date" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.modify.enddate.value=''" />
 	</td>
 </tr>
 </table>
@@ -169,6 +178,21 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 			inputField  : "publishdate",
 			ifFormat    : "<?php echo $jscal_ifformat ?>",
 			button      : "publishdate_trigger",
+			firstDay    : <?php echo $jscal_firstday ?>,
+			<?php if(isset($jscal_use_time) && $jscal_use_time==TRUE) { ?>
+				showsTime   : "true",
+				timeFormat  : "24",
+			<?php } ?>
+			date        : "<?php echo $jscal_today ?>",
+			range       : [1970, 2037],
+			step        : 1
+		}
+	);
+	Calendar.setup(
+		{
+			inputField  : "enddate",
+			ifFormat    : "<?php echo $jscal_ifformat ?>",
+			button      : "enddate_trigger",
 			firstDay    : <?php echo $jscal_firstday ?>,
 			<?php if(isset($jscal_use_time) && $jscal_use_time==TRUE) { ?>
 				showsTime   : "true",
