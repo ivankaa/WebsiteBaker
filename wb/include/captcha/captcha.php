@@ -92,7 +92,7 @@ if(!function_exists('call_captcha')) {
 				break;
 			case 'calc_image': // calculation with image (old captcha)
 				?><table class="captcha_table"><tr>
-				<td><img src="<?php echo WB_URL."/include/captcha/captchas/calc_image.php?t=$t"; ?>" alt="Captcha" />&nbsp;=&nbsp;</td>
+				<td><img src="<?php echo WB_URL."/include/captcha/captchas/calc_image.php?t=$t"; ?>" alt="Captcha" /></td><td>&nbsp;=&nbsp;</td>
 				<td><input type="text" name="captcha" maxlength="5" style="width:20px" /></td>
 				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
 				</tr></table><?php

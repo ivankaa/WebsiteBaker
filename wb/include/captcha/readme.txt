@@ -28,7 +28,7 @@ One can improve CAPTCHA-type "CAPTCHA with varying fonts and backgrounds"
 
 How to use:
 use 
-	require_once(WB_PATH.'/include/captcha/captcha.php'); // will output a table with 3 columns: |CAPTCHA|Input|Text|
+	require_once(WB_PATH.'/include/captcha/captcha.php'); // will output a table with 3 columns: |CAPTCHA|Input|Text|. The calc_image captcha have 4 columns |CAPTCHA|=|Input|Text|.
 and put 
 	<?php call_captcha(); ?>
 into your form.
