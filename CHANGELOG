@@ -12,7 +12,8 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 27-Jan-2008 Christian Sommer
-#	added default language for users to avoid empty language fields
+!	added missing ID tags
+!	added default language for users to avoid empty language fields
 27-Jan-2008 Matthias Gallas
 #	Fixed some spelling errors in german language file
 27-Jan-2008 Thomas Hornik
