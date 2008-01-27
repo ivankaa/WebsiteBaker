@@ -17,6 +17,11 @@ Legend:
 27-Jan-2008 Matthias Gallas
 #	Fixed some spelling errors in german language file
 27-Jan-2008 Thomas Hornik
+#	fixed 100%-cpu-load-event in CAPTCHA admin-tool.
++	Added Calc_ttf_image CAPTCHA.
+!	Changed captcha/captcha.php to use table-layout for CAPTCHA.
+!	Some minor changes in CAPTCHA-code.
+!	Added some text to CAPTCHA admin-tool.
 #	Module form: dropdown "success page" listed foreign private pages, too. Fixed.
 +	Added preview-images for CAPTCHA.
 !	Improved security: CAPTCHAS can't be loaded from outside WB
