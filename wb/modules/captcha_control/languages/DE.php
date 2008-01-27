@@ -36,7 +36,7 @@ $MOD_CAPTCHA_CONTROL['HOWTO']             = 'Hiermit kann das Verhalten von "CAP
 // Text and captions of form elements
 $MOD_CAPTCHA_CONTROL['CAPTCHA_CONF']      = 'CAPTCHA-Einstellungen';
 $MOD_CAPTCHA_CONTROL['CAPTCHA_TYPE']      = 'CAPTCHA-Typ';
-$MOD_CAPTCHA_CONTROL['CAPTCHA_EXP']       = 'Die CAPTCHA-Einstellungen für die Module befinden sich in den jeweiligen Modul-Optionen';
+$MOD_CAPTCHA_CONTROL['CAPTCHA_EXP']       = 'Die CAPTCHA-Einstellungen f&uuml;r die Module befinden sich in den jeweiligen Modul-Optionen';
 $MOD_CAPTCHA_CONTROL['USE_SIGNUP_CAPTCHA']= 'CAPTCHA f&uuml;r Registrierung aktivieren';
 $MOD_CAPTCHA_CONTROL['ENABLED']           = 'Aktiviert';
 $MOD_CAPTCHA_CONTROL['DISABLED']          = 'Ausgeschaltet';
@@ -49,7 +49,7 @@ $MOD_CAPTCHA_CONTROL['CALC_TTF_IMAGE']    = "Rechnung als Bild mit wechselnden S
 $MOD_CAPTCHA_CONTROL['TTF_IMAGE']         = "Bild mit wechselnden Schriften und Hintergr&uuml;nden";
 $MOD_CAPTCHA_CONTROL['OLD_IMAGE']         = "Alter Stil (nicht empfohlen)";
 
-$MOD_CAPTCHA['VERIFICATION']           = 'Prüfziffer';
+$MOD_CAPTCHA['VERIFICATION']           = 'Pr&uuml;fziffer';
 $MOD_CAPTCHA['ADDITION']               = 'plus';
 $MOD_CAPTCHA['SUBTRAKTION']            = 'minus';
 $MOD_CAPTCHA['MULTIPLIKATION']         = 'mal';
