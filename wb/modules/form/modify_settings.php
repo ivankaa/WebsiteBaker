@@ -210,6 +210,8 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 			// Get exisiting pages and show the pagenames
 			$query = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE visibility <> 'deleted'");
 			while($mail_page = $query->fetchRow()) {
+				if(!$admin->page_is_visible($mail_page))
+					continue;
 				$mail_pagename = $mail_page['menu_title'];		
 				$success_page = $mail_page['page_id'];
 				echo $success_page.':'.$setting['success_page'].':';
