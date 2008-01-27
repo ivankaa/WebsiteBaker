@@ -51,6 +51,7 @@ if($admin->get_post('title') == '' OR $admin->get_post('type') == '') {
 	$type = $admin->get_post('type');
 	$required = $admin->get_post('required');
 }
+$value = '';
 
 // Update row
 $database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET title = '$title', type = '$type', required = '$required' WHERE field_id = '$field_id'");

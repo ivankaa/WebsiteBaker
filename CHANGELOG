@@ -18,6 +18,7 @@ Legend:
 +	added kewyword id to new file
 #	Fixed some spelling errors in german language file
 27-Jan-2008 Thomas Hornik
+!	Module form: user supplied input isn't lost on captcha-failure anymore.
 #	fixed 100%-cpu-load-event in CAPTCHA admin-tool.
 +	Added Calc_ttf_image CAPTCHA.
 !	Changed captcha/captcha.php to use table-layout for CAPTCHA.

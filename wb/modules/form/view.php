@@ -44,24 +44,30 @@ require_once(WB_PATH.'/include/captcha/asp.php');
 
 // Function for generating an optionsfor a select field
 if (!function_exists('make_option')) {
-function make_option(&$n) {
+function make_option(&$n, $k, $values) {
 	// start option group if it exists
 	if (substr($n,0,2) == '[=') {
 	 	$n = '<optgroup label="'.substr($n,2,strlen($n)).'">';
 	} elseif ($n == ']') {
 		$n = '</optgroup>';
 	} else {
-		$n = '<option value="'.$n.'">'.$n.'</option>';
+		if(in_array($n, $values))
+			$n = '<option selected="selected" value="'.$n.'">'.$n.'</option>';
+		else
+			$n = '<option value="'.$n.'">'.$n.'</option>';
 	}
 }
 }
 // Function for generating a checkbox
 if (!function_exists('make_checkbox')) {
 function make_checkbox(&$n, $idx, $params) {
-	$field_id = $params[0];
-	$seperator = $params[1];
+	$field_id = $params[0][0];
+	$seperator = $params[0][1];
 	//$n = '<input class="field_checkbox" type="checkbox" id="'.$n.'" name="field'.$field_id.'" value="'.$n.'">'.'<font class="checkbox_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = !document.getElementById(\''.$n.'\').checked;">'.$n.'</font>'.$seperator;
-	$n = '<input class="field_checkbox" type="checkbox" id="'.$n.'" name="field'.$field_id.'['.$idx.']" value="'.$n.'">'.'<font class="checkbox_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = !document.getElementById(\''.$n.'\').checked;">'.$n.'</font>'.$seperator;
+	if(in_array($n, $params[1]))
+		$n = '<input class="field_checkbox" type="checkbox" id="'.$n.'" name="field'.$field_id.'['.$idx.']" value="'.$n.'" checked="checked">'.'<font class="checkbox_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = !document.getElementById(\''.$n.'\').checked;">'.$n.'</font>'.$seperator;
+	else
+		$n = '<input class="field_checkbox" type="checkbox" id="'.$n.'" name="field'.$field_id.'['.$idx.']" value="'.$n.'">'.'<font class="checkbox_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = !document.getElementById(\''.$n.'\').checked;">'.$n.'</font>'.$seperator;
 }
 }
 // Function for generating a radio button
@@ -70,7 +76,10 @@ function make_radio(&$n, $idx, $params) {
 	$field_id = $params[0];
 	$group = $params[1];
 	$seperator = $params[2];
-	$n = '<input class="field_radio" type="radio" id="'.$n.'" name="field'.$field_id.'" value="'.$n.'">'.'<font class="radio_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = true;">'.$n.'</font>'.$seperator;
+	if($n == $params[3])
+		$n = '<input class="field_radio" type="radio" id="'.$n.'" name="field'.$field_id.'" value="'.$n.'" checked="checked">'.'<font class="radio_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = true;">'.$n.'</font>'.$seperator;
+	else
+		$n = '<input class="field_radio" type="radio" id="'.$n.'" name="field'.$field_id.'" value="'.$n.'">'.'<font class="radio_label" onclick="javascript: document.getElementById(\''.$n.'\').checked = true;">'.$n.'</font>'.$seperator;
 }
 }
 // Generate temp submission id
@@ -161,14 +170,14 @@ if($query_fields->numRows() > 0) {
 		}
 		if($field['type'] == 'textfield') {
 			$vars[] = '{FIELD}';
-			$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'" maxlength="'.$field['extra'].'" value="'.$value.'" class="textfield" />';
+			$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'" maxlength="'.$field['extra'].'" value="'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:$value).'" class="textfield" />';
 		} elseif($field['type'] == 'textarea') {
 			$vars[] = '{FIELD}';
-			$values[] = '<textarea name="field'.$field_id.'" id="field'.$field_id.'" class="textarea">'.$value.'</textarea>';
+			$values[] = '<textarea name="field'.$field_id.'" id="field'.$field_id.'" class="textarea">'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:$value).'</textarea>';
 		} elseif($field['type'] == 'select') {
 			$vars[] = '{FIELD}';
 			$options = explode(',', $value);
-			array_walk($options, 'make_option');
+			array_walk($options, 'make_option', (isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:array()));
 			$field['extra'] = explode(',',$field['extra']); 
 			$values[] = '<select name="field'.$field_id.'[]" id="field'.$field_id.'" size="'.$field['extra'][0].'" '.$field['extra'][1].' class="select">'.implode($options).'</select>';
 		} elseif($field['type'] == 'heading') {
@@ -179,20 +188,21 @@ if($query_fields->numRows() > 0) {
 		} elseif($field['type'] == 'checkbox') {
 			$vars[] = '{FIELD}';
 			$options = explode(',', $value);
-			array_walk($options, 'make_checkbox',array($field_id,$field['extra']));
+			array_walk($options, 'make_checkbox', array(array($field_id,$field['extra']),(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:array())));
 			$options[count($options)-1]=substr($options[count($options)-1],0,strlen($options[count($options)-1])-strlen($field['extra']));
 			$values[] = implode($options);
 		} elseif($field['type'] == 'radio') {
 			$vars[] = '{FIELD}';
 			$options = explode(',', $value);
-			array_walk($options, 'make_radio',array($field_id,$field['title'],$field['extra']));
+			array_walk($options, 'make_radio', array($field_id,$field['title'],$field['extra'], (isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:'')));
 			$options[count($options)-1]=substr($options[count($options)-1],0,strlen($options[count($options)-1])-strlen($field['extra']));
 			$values[] = implode($options);
 		} elseif($field['type'] == 'email') {
 			$vars[] = '{FIELD}';
-			$values[] = '<input type="text" name="field'.$field_id.'" onChange="return checkmail(this.form.field'.$field_id.')"  id="field'.$field_id.'" maxlength="'.$field['extra'].'" class="email" />';
+			$values[] = '<input type="text" name="field'.$field_id.'" onChange="return checkmail(this.form.field'.$field_id.')"  id="field'.$field_id.'" value="'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:'').'" maxlength="'.$field['extra'].'" class="email" />';
 			$java_mailcheck .= 'onChange="return checkmail(this.form'.$field_id.'" ';
 		}
+		if(isset($_SESSION['field'.$field_id])) unset($_SESSION['field'.$field_id]);
 		if($field['type'] != '') {
 			echo str_replace($vars, $values, $field_loop);
 		}
@@ -351,6 +361,19 @@ echo $footer;
 		// Create blank "required" array
 		$required = array();
 		
+		// Captcha
+		if($use_captcha) {
+			if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
+				// Check for a mismatch
+				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
+					$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
+				}
+			} else {
+				$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
+			}
+		}
+		if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
+
 		// Loop through fields and add to message body
 		// Get list of fields
 		$query_fields = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_fields WHERE section_id = '$section_id' ORDER BY position ASC");
@@ -359,6 +382,7 @@ echo $footer;
 				// Add to message body
 				if($field['type'] != '') {
 					if(!empty($_POST['field'.$field['field_id']])) {
+						if(isset($captcha_error)) $_SESSION['field'.$field['field_id']] = $_POST['field'.$field['field_id']];
 						if($field['type'] == 'email' AND $admin->validate_email($_POST['field'.$field['field_id']]) == false) {
 							$email_error = $MESSAGE['USERS']['INVALID_EMAIL'];
 						}
@@ -379,20 +403,7 @@ echo $footer;
 				}
 			}
 		}
-		
-		// Captcha
-		if($use_captcha) {
-			if(isset($_POST['captcha']) AND $_POST['captcha'] != ''){
-				// Check for a mismatch
-				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
-					$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
-				}
-			} else {
-				$captcha_error = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
-			}
-		}
-		if(isset($_SESSION['captcha'])) { unset($_SESSION['captcha']); }
-		
+
 		// Addslashes to email body - proposed by Icheb in topic=1170.0
 		// $email_body = $wb->add_slashes($email_body);
 		
