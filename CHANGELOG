@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 27-Jan-2008 Christian Sommer
+!	fixed CSS background color of the installer CSS
 !	replaced static text with variable text from language file
 !	introduced the WB 2.7 backend style developed by Michael Brinsteiner (escpro), thanks man
 !	added missing ID tags
