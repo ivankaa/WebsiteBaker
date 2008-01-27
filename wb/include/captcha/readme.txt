@@ -26,6 +26,21 @@ One can improve CAPTCHA-type "CAPTCHA with varying fonts and backgrounds"
 - and by adding TrueType-fonts to fonts/
 
 
-The CAPTCHA-string is allways stored in $_SESSION['captcha']
-The input-field is called "captcha", too.
+How to use:
+use 
+	require_once(WB_PATH.'/include/captcha/captcha.php'); // will output a table with 3 columns: |CAPTCHA|Input|Text|
+and put 
+	<?php call_captcha(); ?>
+into your form.
 
+
+The CAPTCHA-code is allways stored in $_SESSION['captcha']
+The user-input is in $_POST['captcha'] (or $_GET['captcha']).
+
+
+call_captcha() will output code like this
+<table class="captcha_table"><tr>
+  <td><img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" /></td>
+  <td><input type="text" name="captcha" maxlength="5" style="width:50px" /></td>
+  <td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_TEXT']; ?></td>
+</tr></table>

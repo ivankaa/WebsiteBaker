@@ -74,12 +74,18 @@ if(isset($_POST['save_settings'])) {
 	pics["calc_image"] = new Image();
 	pics["calc_image"].src = "<?php echo WB_URL.'/include/captcha/captchas/calc_image.png'?>";
 	
+	pics["calc_ttf_image"] = new Image();
+	pics["calc_ttf_image"].src = "<?php echo WB_URL.'/include/captcha/captchas/calc_ttf_image.png'?>";
+
 	pics["old_image"] = new Image();
 	pics["old_image"].src = "<?php echo WB_URL.'/include/captcha/captchas/old_image.png'?>";
 	
 	pics["calc_text"] = new Image();
 	pics["calc_text"].src = "<?php echo WB_URL.'/include/captcha/captchas/calc_text.png'?>";
-
+	
+	function load_captcha_image() {
+		document.captcha_example.src = pics[document.store_settings.captcha_type.value].src;
+	}
 </script>
 <?php
 
@@ -109,7 +115,7 @@ if(isset($_POST['save_settings'])) {
 		<table>
 			<tr height="50px">
 			<td><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_TYPE'];?>:</td>
-			<td align="right" width="150px"><img name="captcha_example" id="captcha_example" src="<?php echo WB_URL.'/include/captcha/captchas/calc_text.png'?>" onload="javascript: document.captcha_example.src = pics[document.store_settings.captcha_type.value].src;"></td>
+			<td align="right" width="150px"><img name="captcha_example" id="captcha_example" src="<?php echo WB_URL.'/include/captcha/captchas/'.$captcha_type.'.png'?>" ></td>
 			</tr>
 		</table>
 		<td>
@@ -129,6 +135,7 @@ if(isset($_POST['save_settings'])) {
 				name="enabled_captcha" value="0"><?php echo $MOD_CAPTCHA_CONTROL['DISABLED'];?>
 		</td>
 	</tr>
+	<tr><td>&nbsp;</td><td style="font-size:smaller;"><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_EXP'];?></td></tr>
 	<tr><td colspan="2"><br /><strong><?php echo $MOD_CAPTCHA_CONTROL['ASP_CONF'];?>:</strong></td></tr>
 	<tr>
 		<td><?php echo $MOD_CAPTCHA_CONTROL['ASP_TEXT'];?>:</td>
@@ -139,6 +146,7 @@ if(isset($_POST['save_settings'])) {
 				name="enabled_asp" value="0"><?php echo $MOD_CAPTCHA_CONTROL['DISABLED'];?>
 		</td>
 	</tr>
+	<tr><td>&nbsp;</td><td style="font-size:smaller;"><?php echo $MOD_CAPTCHA_CONTROL['ASP_EXP'];?></td></tr>
 	</table>
 	<input type="submit" name="save_settings" style="margin-top:10px; width:140px;" value="<?php echo $TEXT['SAVE']; ?>" />
 </form>

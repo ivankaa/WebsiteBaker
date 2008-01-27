@@ -36,17 +36,20 @@ $MOD_CAPTCHA_CONTROL['HOWTO']             = 'Hiermit kann das Verhalten von "CAP
 // Text and captions of form elements
 $MOD_CAPTCHA_CONTROL['CAPTCHA_CONF']      = 'CAPTCHA-Einstellungen';
 $MOD_CAPTCHA_CONTROL['CAPTCHA_TYPE']      = 'CAPTCHA-Typ';
+$MOD_CAPTCHA_CONTROL['CAPTCHA_EXP']       = 'Die CAPTCHA-Einstellungen für die Module befinden sich in den jeweiligen Modul-Optionen';
 $MOD_CAPTCHA_CONTROL['USE_SIGNUP_CAPTCHA']= 'CAPTCHA f&uuml;r Registrierung aktivieren';
 $MOD_CAPTCHA_CONTROL['ENABLED']           = 'Aktiviert';
 $MOD_CAPTCHA_CONTROL['DISABLED']          = 'Ausgeschaltet';
-$MOD_CAPTCHA_CONTROL['ASP_CONF']          = 'Advanced Spam Protection Configuration';
+$MOD_CAPTCHA_CONTROL['ASP_CONF']          = 'Erweiterter-Spam-Schutz (ASP) Einstellungen';
 $MOD_CAPTCHA_CONTROL['ASP_TEXT']          = 'ASP benutzen (wenn im Modul vorhanden)';
+$MOD_CAPTCHA_CONTROL['ASP_EXP']           = 'ASP versucht anhand der verschiedenen Verhaltensweisen zu erkennen, ob eine Formular-Eingabe von einem Menschen oder einem Spam-Bot kommt.';
 $MOD_CAPTCHA_CONTROL['CALC_TEXT']         = "Rechnung als Text";
-$MOD_CAPTCHA_CONTROL['CALC_IMAGE']        = "Rechnung als Bild"; 
+$MOD_CAPTCHA_CONTROL['CALC_IMAGE']        = "Rechnung als Bild";
+$MOD_CAPTCHA_CONTROL['CALC_TTF_IMAGE']    = "Rechnung als Bild mit wechselnden Schriften und Hintergr&uuml;nden";
 $MOD_CAPTCHA_CONTROL['TTF_IMAGE']         = "Bild mit wechselnden Schriften und Hintergr&uuml;nden";
 $MOD_CAPTCHA_CONTROL['OLD_IMAGE']         = "Alter Stil (nicht empfohlen)";
 
-$MOD_CAPTCHA['VERIFICATION']           = 'Verifizieren';
+$MOD_CAPTCHA['VERIFICATION']           = 'Prüfziffer';
 $MOD_CAPTCHA['ADDITION']               = 'plus';
 $MOD_CAPTCHA['SUBTRAKTION']            = 'minus';
 $MOD_CAPTCHA['MULTIPLIKATION']         = 'mal';

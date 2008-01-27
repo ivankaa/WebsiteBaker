@@ -23,17 +23,6 @@
 
 */
 
-/* CAPTCHA - How to use:
- * use 
- *	require_once(WB_PATH.'/include/captcha/captcha.php');
- * and put 
- *	<?php call_captcha(); ?>
- * into your form.
- *
- * captcha-code is in $_SESSION['captcha']
- * user input in $_POST['captcha']
- */
-
 // Must include code to stop this file being accessed directly
 if(!defined('WB_PATH')) { exit("Cannot access this file directly"); }
 
@@ -70,6 +59,7 @@ if(extension_loaded('gd') && function_exists('imagepng') && function_exists('ima
 	$useable_captchas = array(
 		'calc_text'=>$MOD_CAPTCHA_CONTROL['CALC_TEXT'],
 		'calc_image'=>$MOD_CAPTCHA_CONTROL['CALC_IMAGE'],
+		'calc_ttf_image'=>$MOD_CAPTCHA_CONTROL['CALC_TTF_IMAGE'],
 		'ttf_image'=>$MOD_CAPTCHA_CONTROL['TTF_IMAGE'],
 		'old_image'=>$MOD_CAPTCHA_CONTROL['OLD_IMAGE']
 	);
@@ -94,24 +84,28 @@ if(!function_exists('call_captcha')) {
 		switch(CAPTCHA_TYPE) {
 			// two special cases
 			case 'calc_text': // calculation as text
-				?>
-				<?php include(WB_PATH.'/include/captcha/captchas/calc_text.php'); ?> = 
-				<input type="text" name="captcha" maxlength="5"  style="width:20px" />&nbsp;&nbsp;<?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></font>
-				<?php
+				?><table class="captcha_table"><tr>
+				<td><?php include(WB_PATH.'/include/captcha/captchas/calc_text.php'); ?>&nbsp;=&nbsp;</td>
+				<td><input type="text" name="captcha" maxlength="5"  style="width:20px" /></td>
+				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
+				</tr></table><?php
 				break;
 			case 'calc_image': // calculation with image (old captcha)
-				?>
-				<img src="<?php echo WB_URL."/include/captcha/captchas/calc_image.php?t=$t"; ?>" align="middle" alt="Captcha" /> = 
-				<input type="text" name="captcha" maxlength="5" style="width:20px" />&nbsp;&nbsp;<?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></font>
-				<?php
+				?><table class="captcha_table"><tr>
+				<td><img src="<?php echo WB_URL."/include/captcha/captchas/calc_image.php?t=$t"; ?>" alt="Captcha" />&nbsp;=&nbsp;</td>
+				<td><input type="text" name="captcha" maxlength="5" style="width:20px" /></td>
+				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
+				</tr></table><?php
 				break;
 			// normal images
 			case 'ttf_image': // captcha with varying background and ttf-font
+			case 'calc_ttf_image': // calculation with varying background and ttf-font
 			case 'old_image': // old captcha
-				?>
-				<img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" align="middle" alt="Captcha" />
-				<input type="text" name="captcha" maxlength="5" style="width:50px" />&nbsp;&nbsp;<?php echo $MOD_CAPTCHA['VERIFICATION_INFO_TEXT']; ?></font>
-				<?php
+				?><table class="captcha_table"><tr>
+				<td><img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" /></td>
+				<td><input type="text" name="captcha" maxlength="5" style="width:50px" /></td>
+				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_TEXT']; ?></td>
+				</tr></table><?php
 				break;
 		}
 	}

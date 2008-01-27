@@ -33,13 +33,16 @@ $MOD_CAPTCHA_CONTROL['HOWTO']             = 'Here you can control the behavior o
 // Text and captions of form elements
 $MOD_CAPTCHA_CONTROL['CAPTCHA_CONF']      = 'CAPTCHA Configuration';
 $MOD_CAPTCHA_CONTROL['CAPTCHA_TYPE']      = 'Type of CAPTCHA';
+$MOD_CAPTCHA_CONTROL['CAPTCHA_EXP']       = 'CAPTCHA settings for modules are located in the respective module settings';
 $MOD_CAPTCHA_CONTROL['USE_SIGNUP_CAPTCHA']= 'Activate CAPTCHA for signup';
 $MOD_CAPTCHA_CONTROL['ENABLED']           = 'Enabled';
 $MOD_CAPTCHA_CONTROL['DISABLED']          = 'Disabled';
 $MOD_CAPTCHA_CONTROL['ASP_CONF']          = 'Advanced Spam Protection Configuration';
 $MOD_CAPTCHA_CONTROL['ASP_TEXT']          = 'Activate ASP (if available)';
+$MOD_CAPTCHA_CONTROL['ASP_EXP']           = 'ASP tries to determine if a form-inputs was originated from a human or a spam-bot.';
 $MOD_CAPTCHA_CONTROL['CALC_TEXT']         = "Calculation as text";
-$MOD_CAPTCHA_CONTROL['CALC_IMAGE']        = "Calculation as image"; 
+$MOD_CAPTCHA_CONTROL['CALC_IMAGE']        = "Calculation as image";
+$MOD_CAPTCHA_CONTROL['CALC_TTF_IMAGE']    = "Calculation as image with varying fonts and backgrounds"; 
 $MOD_CAPTCHA_CONTROL['TTF_IMAGE']         = "Image with varying fonts and backgrounds";
 $MOD_CAPTCHA_CONTROL['OLD_IMAGE']         = "Old style (not recommended)";
 
