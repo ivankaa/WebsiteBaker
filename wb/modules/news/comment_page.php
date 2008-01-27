@@ -31,7 +31,6 @@ if(!defined('WB_URL')) {
 
 require_once(WB_PATH.'/include/captcha/captcha.php');
 require_once(WB_PATH.'/include/captcha/asp.php');
-if(isset($_SESSION['captcha_retry_news'])) unset($_SESSION['captcha_retry_news']);
 
 // Get comments page template details from db
 $query_settings = $database->query("SELECT comments_page,use_captcha,commenting FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");

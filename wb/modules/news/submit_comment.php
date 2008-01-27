@@ -51,6 +51,9 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 		)) {
 			exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
 		}
+		if(ENABLED_ASP) {
+			if(isset($_SESSION['captcha_retry_news'])) unset($_SESSION['captcha_retry_news']);
+		}
 		if($settings['use_captcha']) {
 			if(isset($_POST['captcha']) AND $_POST['captcha'] != '') {
 				// Check for a mismatch
