@@ -473,7 +473,7 @@ if($install_tables == true) {
 	       . ' `timezone` INT NOT NULL DEFAULT \'0\','
 	       . ' `date_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `time_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'\' ,'
+	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'EN\' ,'
 	       . ' `home_folder` TEXT NOT NULL ,'
 	       . ' `login_when` INT NOT NULL  DEFAULT \'0\','
 	       . ' `login_ip` VARCHAR( 15 ) NOT NULL DEFAULT \'\' ,'

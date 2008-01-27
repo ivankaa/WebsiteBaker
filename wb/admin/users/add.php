@@ -41,6 +41,7 @@ $password2 = $admin->get_post('password2');
 $display_name = $admin->get_post('display_name');
 $email = $admin->get_post('email');
 $home_folder = $admin->get_post('home_folder');
+$default_language = DEFAULT_LANGUAGE;
 
 // Create a javascript back link
 $js_back = "javascript: history.go(-1);";
@@ -84,7 +85,7 @@ if($results->numRows() > 0) {
 $md5_password = md5($password);
 
 // Inser the user into the database
-$query = "INSERT INTO ".TABLE_PREFIX."users (groups_id,active,username,password,display_name,home_folder,email,timezone) VALUES ('$groups_id', '$active', '$username','$md5_password','$display_name','$home_folder','$email','-72000')";
+$query = "INSERT INTO ".TABLE_PREFIX."users (groups_id,active,username,password,display_name,home_folder,email,timezone, language) VALUES ('$groups_id', '$active', '$username','$md5_password','$display_name','$home_folder','$email','-72000', '$default_language')";
 $database->query($query);
 if($database->is_error()) {
 	$admin->print_error($database->get_error());
