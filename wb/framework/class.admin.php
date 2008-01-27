@@ -95,19 +95,6 @@ class admin extends wb {
 		} else {
 			$charset='utf-8';
 		}
-		$header_template->set_var(	array(
-													'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
-													'INTERFACE_DIR' => ADMIN_URL.'/interface',
-													'BODY_TAGS' => $body_tags,
-													'WEBSITE_TITLE' => ($title['value']),
-													'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
-													'CHARSET' => $charset,
-													'VERSION' => VERSION,
-													'WB_URL' => WB_URL,
-													'BACKEND_MODULE_CSS' => $this->register_backend_modfiles('css'),	// adds backend.css
-													'BACKEND_MODULE_JS'  => $this->register_backend_modfiles('js')		// adds backend.js
-													)
-											);
 
 		// work out the URL for the 'View menu' link in the WB backend
 		// if the page_id is set, show this page otherwise show the root directory of WB
@@ -119,19 +106,35 @@ class admin extends wb {
 			if($row) $view_url .= PAGES_DIRECTORY .$row['link']. PAGE_EXTENSION;
 		}
 
+		$header_template->set_var(	array(
+													'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
+													'INTERFACE_DIR' => ADMIN_URL.'/interface',
+													'BODY_TAGS' => $body_tags,
+													'WEBSITE_TITLE' => ($title['value']),
+													'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
+													'CHARSET' => $charset,
+													'VERSION' => VERSION,
+													'WB_URL' => WB_URL,
+													'TITLE_START' => $MENU['START'],
+													'TITLE_VIEW' => $MENU['VIEW'],
+													'TITLE_HELP' => $MENU['HELP'],
+													'TITLE_LOGOUT' =>  $MENU['LOGOUT'],
+													'URL_VIEW' => $view_url,
+													'URL_HELP' => 'http://www.websitebaker.org/help/'.WB_VERSION,
+													'BACKEND_MODULE_CSS' => $this->register_backend_modfiles('css'),	// adds backend.css
+													'BACKEND_MODULE_JS'  => $this->register_backend_modfiles('js')		// adds backend.js
+													)
+											);
+
 		// Create the menu
 		$menu = array(
-					array(ADMIN_URL.'/start/index.php', '', $MENU['START'], 'start', 0),
 					array(ADMIN_URL.'/pages/index.php', '', $MENU['PAGES'], 'pages', 1),
 					array(ADMIN_URL.'/media/index.php', '', $MENU['MEDIA'], 'media', 1),
 					array(ADMIN_URL.'/addons/index.php', '', $MENU['ADDONS'], 'addons', 1),
 					array(ADMIN_URL.'/preferences/index.php', '', $MENU['PREFERENCES'], 'preferences', 0),
 					array(ADMIN_URL.'/settings/index.php', '', $MENU['SETTINGS'], 'settings', 1),
 					array(ADMIN_URL.'/admintools/index.php', '', $MENU['ADMINTOOLS'], 'admintools', 1),
-					array(ADMIN_URL.'/access/index.php', '', $MENU['ACCESS'], 'access', 1),
-					array('http://www.websitebaker.org/help/'.WB_VERSION, '_blank', $MENU['HELP'], 'help', 0),
-					array($view_url, '_blank', $MENU['VIEW'], 'view', 0),
-					array(ADMIN_URL.'/logout/index.php', '', $MENU['LOGOUT'], 'logout', 0)
+					array(ADMIN_URL.'/access/index.php', '', $MENU['ACCESS'], 'access', 1)
 					);
 		$header_template->set_block('header_block', 'linkBlock', 'link');
 		foreach($menu AS $menu_item) {

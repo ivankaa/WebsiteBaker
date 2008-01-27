@@ -69,6 +69,7 @@ $OVERVIEW['USERS'] = 'Verwaltung von Benutzern, die sich in Website Baker einlog
 $OVERVIEW['GROUPS'] = 'Verwaltung von Gruppen und Ihrer Zugangsberechtigungen...';
 $OVERVIEW['HELP'] = 'Noch Fragen? Hier finden Sie Antworten';
 $OVERVIEW['VIEW'] = 'Ansicht Ihrer Webseite in einem neuen Fenster...';
+$OVERVIEW['ADMINTOOLS'] = 'Zugriff auf die Website Baker Verwaltungsprogramme...';
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Seite &auml;ndern/Seite l&ouml;schen';

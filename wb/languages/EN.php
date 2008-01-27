@@ -69,6 +69,7 @@ $OVERVIEW['USERS'] = 'Manage users who can log-in to Website Baker...';
 $OVERVIEW['GROUPS'] = 'Manage user groups and their system permissions...';
 $OVERVIEW['HELP'] = 'Got a questions? Find your answer...';
 $OVERVIEW['VIEW'] = 'Quickly view and browse your website in a new window...';
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...';
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Modify/Delete Page';

@@ -59,6 +59,9 @@ if($admin->get_permission('access') != true) {
 if($admin->get_permission('settings') != true) {
 	$template->set_var('DISPLAY_SETTINGS', 'none');
 }
+if($admin->get_permission('admintools') != true) {
+	$template->set_var('DISPLAY_ADMINTOOLS', 'none');
+}
 
 // Check if installation directory still exists
 if(file_exists(WB_PATH.'/install/')) {
@@ -104,15 +107,13 @@ if($admin->get_permission('groups') == true) {
 
 // Insert section names and descriptions
 $template->set_var(array(
-								'HOME' => $MENU['START'],
 								'PAGES' => $MENU['PAGES'],
 								'MEDIA' => $MENU['MEDIA'],
 								'ADDONS' => $MENU['ADDONS'],
 								'ACCESS' => $MENU['ACCESS'],
 								'PREFERENCES' => $MENU['PREFERENCES'],
 								'SETTINGS' => $MENU['SETTINGS'],
-								'HELP' => $MENU['HELP'],
-								'VIEW' => $MENU['VIEW'],
+								'ADMINTOOLS' => $MENU['ADMINTOOLS'],
 								'HOME_OVERVIEW' => $OVERVIEW['START'],
 								'PAGES_OVERVIEW' => $OVERVIEW['PAGES'],
 								'MEDIA_OVERVIEW' => $OVERVIEW['MEDIA'],
@@ -120,8 +121,7 @@ $template->set_var(array(
 								'ACCESS_OVERVIEW' => $access_overview,
 								'PREFERENCES_OVERVIEW' => $OVERVIEW['PREFERENCES'],
 								'SETTINGS_OVERVIEW' => $OVERVIEW['SETTINGS'],
-								'HELP_OVERVIEW' => $OVERVIEW['HELP'],
-								'VIEW_OVERVIEW' => $OVERVIEW['VIEW']
+								'ADMINTOOLS_OVERVIEW' => $OVERVIEW['ADMINTOOLS']
 								)
 						);
 

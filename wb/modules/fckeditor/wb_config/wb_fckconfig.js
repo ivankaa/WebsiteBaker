@@ -129,6 +129,8 @@
    FCKConfig.FontNames	= 'Arial;Comic Sans MS;Courier New;Tahoma;Times New Roman;Verdana' ;
    FCKConfig.FontSizes	= 'smaller;larger;xx-small;x-small;small;medium;large;x-large;xx-large' ;
 
+// make the offic2003 skin the default skin
+   FCKConfig.SkinPath = FCKConfig.BasePath + 'skins/office2003/'
 
 /*
    -----------------------------------------------------------------------------------------
