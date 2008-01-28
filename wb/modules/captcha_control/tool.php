@@ -51,6 +51,15 @@ if(isset($_POST['save_settings'])) {
 		captcha_type = '$captcha_type'
 	");
 
+	// save text-captchas
+	if($_POST['captcha_type'] == 'text') {
+		$text_qa=$admin->add_slashes($_POST['text_qa']);
+		if($fh = fopen(WB_PATH.'/temp/.captcha_text.txt', 'wb')) {
+			fwrite($fh, $text_qa);
+			fclose($fh);
+		}
+	}
+	
 	// check if there is a database error, otherwise say successful
 	if($database->is_error()) {
 		$admin->print_error($database->get_error(), $js_back);
@@ -62,6 +71,17 @@ if(isset($_POST['save_settings'])) {
 	
 	// include captcha-file
 	require_once(WB_PATH .'/include/captcha/captcha.php');
+
+	// load text-captchas
+	$text_qa='';
+	if(file_exists(WB_PATH.'/include/captcha/captchas/text.php')) {
+		if(file_exists(WB_PATH.'/temp/.captcha_text.txt')) {
+			@$content = file(WB_PATH.'/temp/.captcha_text.txt');
+			if($content!==FALSE) {
+				$text_qa = $admin->strip_slashes(implode('', $content));
+			}
+		}
+	}
 
 // script to load image
 ?>
@@ -83,9 +103,22 @@ if(isset($_POST['save_settings'])) {
 	pics["calc_text"] = new Image();
 	pics["calc_text"].src = "<?php echo WB_URL.'/include/captcha/captchas/calc_text.png'?>";
 	
+	pics["text"] = new Image();
+	pics["text"].src = "<?php echo WB_URL.'/include/captcha/captchas/text.png'?>";
+
 	function load_captcha_image() {
 		document.captcha_example.src = pics[document.store_settings.captcha_type.value].src;
+		toggle_text_qa();
 	}
+	
+	function toggle_text_qa() {
+		if(document.store_settings.captcha_type.value == 'text' ) {
+			document.getElementById('text_qa').style.display = '';
+		} else {
+			document.getElementById('text_qa').style.display = 'none';
+		}
+	}
+
 </script>
 <?php
 
@@ -124,6 +157,12 @@ if(isset($_POST['save_settings'])) {
 				echo "<option value=\"$key\" ".($captcha_type==$key?'selected':'').">$text</option>";
 			} ?>
 		</select>
+		</td>
+	</tr>
+	<tr id="text_qa" style="display:<?php if($captcha_type=='text') echo ''; else echo 'none'; ;?>;">
+		<td class="setting_name"><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_ENTER_TEXT'];?>:</td>
+		<td class="setting_value" colspan="2">
+			<textarea name="text_qa" wrap="off" cols="50" rows="10"><?php echo $text_qa; ?></textarea>
 		</td>
 	</tr>
 	<tr>

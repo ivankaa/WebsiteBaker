@@ -43,11 +43,13 @@ $MOD_CAPTCHA_CONTROL['DISABLED']          = 'Ausgeschaltet';
 $MOD_CAPTCHA_CONTROL['ASP_CONF']          = 'Erweiterter-Spam-Schutz (ASP) Einstellungen';
 $MOD_CAPTCHA_CONTROL['ASP_TEXT']          = 'ASP benutzen (wenn im Modul vorhanden)';
 $MOD_CAPTCHA_CONTROL['ASP_EXP']           = 'ASP versucht anhand der verschiedenen Verhaltensweisen zu erkennen, ob eine Formular-Eingabe von einem Menschen oder einem Spam-Bot kommt.';
-$MOD_CAPTCHA_CONTROL['CALC_TEXT']         = "Rechnung als Text";
-$MOD_CAPTCHA_CONTROL['CALC_IMAGE']        = "Rechnung als Bild";
-$MOD_CAPTCHA_CONTROL['CALC_TTF_IMAGE']    = "Rechnung als Bild mit wechselnden Schriften und Hintergr&uuml;nden";
-$MOD_CAPTCHA_CONTROL['TTF_IMAGE']         = "Bild mit wechselnden Schriften und Hintergr&uuml;nden";
-$MOD_CAPTCHA_CONTROL['OLD_IMAGE']         = "Alter Stil (nicht empfohlen)";
+$MOD_CAPTCHA_CONTROL['CALC_TEXT']         = 'Rechnung als Text';
+$MOD_CAPTCHA_CONTROL['CALC_IMAGE']        = 'Rechnung als Bild';
+$MOD_CAPTCHA_CONTROL['CALC_TTF_IMAGE']    = 'Rechnung als Bild mit wechselnden Schriften und Hintergr&uuml;nden';
+$MOD_CAPTCHA_CONTROL['TTF_IMAGE']         = 'Bild mit wechselnden Schriften und Hintergr&uuml;nden';
+$MOD_CAPTCHA_CONTROL['OLD_IMAGE']         = 'Alter Stil (nicht empfohlen)';
+$MOD_CAPTCHA_CONTROL['TEXT']              = 'Text-CAPTCHA';
+$MOD_CAPTCHA_CONTROL['CAPTCHA_ENTER_TEXT']= 'Fragen und Antworten';
 
 $MOD_CAPTCHA['VERIFICATION']           = 'Pr&uuml;fziffer';
 $MOD_CAPTCHA['ADDITION']               = 'plus';
@@ -55,6 +57,7 @@ $MOD_CAPTCHA['SUBTRAKTION']            = 'minus';
 $MOD_CAPTCHA['MULTIPLIKATION']         = 'mal';
 $MOD_CAPTCHA['VERIFICATION_INFO_RES']  = 'Bitte Ergebnis eintragen';
 $MOD_CAPTCHA['VERIFICATION_INFO_TEXT'] = 'Bitte Text eintragen';
+$MOD_CAPTCHA['VERIFICATION_INFO_QUEST'] = 'Bitte Frage beantworten';
 $MOD_CAPTCHA['INCORRECT_VERIFICATION'] = 'Ergebnis ist falsch. Bitte neu eintragen';
 
 ?>

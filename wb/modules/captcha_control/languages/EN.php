@@ -39,12 +39,14 @@ $MOD_CAPTCHA_CONTROL['ENABLED']           = 'Enabled';
 $MOD_CAPTCHA_CONTROL['DISABLED']          = 'Disabled';
 $MOD_CAPTCHA_CONTROL['ASP_CONF']          = 'Advanced Spam Protection Configuration';
 $MOD_CAPTCHA_CONTROL['ASP_TEXT']          = 'Activate ASP (if available)';
-$MOD_CAPTCHA_CONTROL['ASP_EXP']           = 'ASP tries to determine if a form-inputs was originated from a human or a spam-bot.';
-$MOD_CAPTCHA_CONTROL['CALC_TEXT']         = "Calculation as text";
-$MOD_CAPTCHA_CONTROL['CALC_IMAGE']        = "Calculation as image";
-$MOD_CAPTCHA_CONTROL['CALC_TTF_IMAGE']    = "Calculation as image with varying fonts and backgrounds"; 
-$MOD_CAPTCHA_CONTROL['TTF_IMAGE']         = "Image with varying fonts and backgrounds";
-$MOD_CAPTCHA_CONTROL['OLD_IMAGE']         = "Old style (not recommended)";
+$MOD_CAPTCHA_CONTROL['ASP_EXP']           = 'ASP tries to determine if a form-input was originated from a human or a spam-bot.';
+$MOD_CAPTCHA_CONTROL['CALC_TEXT']         = 'Calculation as text';
+$MOD_CAPTCHA_CONTROL['CALC_IMAGE']        = 'Calculation as image';
+$MOD_CAPTCHA_CONTROL['CALC_TTF_IMAGE']    = 'Calculation as image with varying fonts and backgrounds'; 
+$MOD_CAPTCHA_CONTROL['TTF_IMAGE']         = 'Image with varying fonts and backgrounds';
+$MOD_CAPTCHA_CONTROL['OLD_IMAGE']         = 'Old style (not recommended)';
+$MOD_CAPTCHA_CONTROL['TEXT']              = 'Text-CAPTCHA';
+$MOD_CAPTCHA_CONTROL['CAPTCHA_ENTER_TEXT']= 'Questions and Answers';
 
 $MOD_CAPTCHA['VERIFICATION']           = 'Verification';
 $MOD_CAPTCHA['ADDITION']               = 'add';
@@ -52,6 +54,7 @@ $MOD_CAPTCHA['SUBTRAKTION']            = 'subtract';
 $MOD_CAPTCHA['MULTIPLIKATION']         = 'multiply';
 $MOD_CAPTCHA['VERIFICATION_INFO_RES']  = 'Fill in the result';
 $MOD_CAPTCHA['VERIFICATION_INFO_TEXT'] = 'Fill in the text';
+$MOD_CAPTCHA['VERIFICATION_INFO_QUEST'] = 'Answer the question';
 $MOD_CAPTCHA['INCORRECT_VERIFICATION'] = 'Verification failed';
 
 ?>
