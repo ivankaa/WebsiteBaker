@@ -58,7 +58,7 @@ while($s = current($content)) {
 	// get answer
 	$s=next($content);
 	$s=trim(rtrim(rtrim($s,"\n"),"\r")); // remove newline
-	if($s{0}!='!') continue;
+	if(isset($s{0}) && $s{0}!='!') continue;
 	$a=substr($s,1);
 	$qa[$lang][$q]=$a;
 	next($content);
