@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 28-Jan-2008 Christian Sommer
+!	added missing session cookie forgotten in Changeset 593
 !	added possibility to select the default backend language during installation process
 !	Re-introduced Changeset 593 (filename in pages/ from page_title instead of menu_title)
 #	Fixed some bugs in the Javascript Admin modul

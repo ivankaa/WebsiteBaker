@@ -42,6 +42,7 @@ function set_error($message) {
 		if(isset($_POST['website_title'])) {
 			$_SESSION['wb_url'] = $_POST['wb_url'];
 			$_SESSION['default_timezone'] = $_POST['default_timezone'];
+			$_SESSION['default_language'] = $_POST['default_language'];
 			if(!isset($_POST['operating_system'])) {
 				$_SESSION['operating_system'] = 'linux';
 			} else {
