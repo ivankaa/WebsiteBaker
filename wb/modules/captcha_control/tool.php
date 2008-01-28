@@ -53,10 +53,13 @@ if(isset($_POST['save_settings'])) {
 
 	// save text-captchas
 	if($_POST['captcha_type'] == 'text') {
-		$text_qa=$admin->add_slashes($_POST['text_qa']);
-		if($fh = fopen(WB_PATH.'/temp/.captcha_text.txt', 'wb')) {
-			fwrite($fh, $text_qa);
-			fclose($fh);
+		$text_qa=$_POST['text_qa'];
+		if(strpos($text_qa, '### example ###') === FALSE) {
+			$text_qa=$admin->add_slashes($text_qa);
+			if($fh = fopen(WB_PATH.'/temp/.captcha_text.txt', 'wb')) {
+				fwrite($fh, $text_qa);
+				fclose($fh);
+			}
 		}
 	}
 	
@@ -82,6 +85,8 @@ if(isset($_POST['save_settings'])) {
 			}
 		}
 	}
+	if($text_qa == '')
+		$text_qa = $MOD_CAPTCHA_CONTROL['CAPTCHA_TEXT_DESC'];
 
 // script to load image
 ?>

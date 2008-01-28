@@ -26,6 +26,7 @@
 // Must include code to stop this file being accessed directly
 if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
+global $admin;
 $name = 'text';
 $file = WB_PATH."/temp/.captcha_$name.txt";
 
@@ -44,6 +45,7 @@ reset($content);
 while($s = current($content)) {
 	// get question
 	$s=trim(rtrim(rtrim($s,"\n"),"\r")); // remove newline
+	$s=$admin->strip_slashes($s);
 	if($s=='' OR $s{0}!='?') {
 		next($content);
 		continue;
@@ -58,6 +60,7 @@ while($s = current($content)) {
 	// get answer
 	$s=next($content);
 	$s=trim(rtrim(rtrim($s,"\n"),"\r")); // remove newline
+	$s=$admin->strip_slashes($s);
 	if(isset($s{0}) && $s{0}!='!') continue;
 	$a=substr($s,1);
 	$qa[$lang][$q]=$a;
