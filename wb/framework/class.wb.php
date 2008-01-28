@@ -295,7 +295,7 @@ class wb
 	}
 
 	// Validate send email
-	function mail($fromaddress, $toaddress, $subject, $message) {
+	function mail($fromaddress, $toaddress, $subject, $message, $fromname='') {
 		/* 
 			INTEGRATED OPEN SOURCE PHPMAILER CLASS FOR SMTP SUPPORT AND MORE
 			SOME SERVICE PROVIDERS DO NOT SUPPORT SENDING MAIL VIA PHP AS IT DOES NOT PROVIDE SMTP AUTHENTICATION
@@ -313,9 +313,10 @@ class wb
 		
 		// create PHPMailer object and define default settings
 		$myMail = new wbmailer();
-      
+
 		// set user defined from address
 		if ($fromaddress!='') {
+			if($fromname!='') $myMail->FromName = $fromname;         // FROM-NAME
 			$myMail->From = $fromaddress;                            // FROM:
 			$myMail->AddReplyTo($fromaddress);                       // REPLY TO:
 		}

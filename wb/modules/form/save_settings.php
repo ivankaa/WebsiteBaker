@@ -47,10 +47,12 @@ if($_POST['email_from_field'] == '') {
 } else {
 	$email_from = $admin->add_slashes($_POST['email_from_field']);
 }
+$email_fromname = $admin->add_slashes($_POST['email_fromname']);
 $email_subject = $admin->add_slashes($_POST['email_subject']);
 $success_page = $_POST['success_page'];
 $success_email_to = $admin->add_slashes($_POST['success_email_to']);
 $success_email_from = $admin->add_slashes($_POST['success_email_from']);
+$success_email_fromname = $admin->add_slashes($_POST['success_email_fromname']);
 $success_email_text = $admin->add_slashes($_POST['success_email_text']);
 $success_email_subject = $admin->add_slashes($_POST['success_email_subject']);
 if(!is_numeric($_POST['max_submissions'])) {
@@ -69,7 +71,7 @@ if($max_submissions > $stored_submissions) {
 }
 
 // Update settings
-$database->query("UPDATE ".TABLE_PREFIX."mod_form_settings SET header = '$header', field_loop = '$field_loop', footer = '$footer', email_to = '$email_to', email_from = '$email_from', email_subject = '$email_subject', success_page = '$success_page', success_email_to = '$success_email_to', success_email_from = '$success_email_from', success_email_text = '$success_email_text', success_email_subject = '$success_email_subject', max_submissions = '$max_submissions', stored_submissions = '$stored_submissions', use_captcha = '$use_captcha' WHERE section_id = '$section_id'");
+$database->query("UPDATE ".TABLE_PREFIX."mod_form_settings SET header = '$header', field_loop = '$field_loop', footer = '$footer', email_to = '$email_to', email_from = '$email_from', email_fromname = '$email_fromname', email_subject = '$email_subject', success_page = '$success_page', success_email_to = '$success_email_to', success_email_from = '$success_email_from', success_email_fromname = '$success_email_fromname', success_email_text = '$success_email_text', success_email_subject = '$success_email_subject', max_submissions = '$max_submissions', stored_submissions = '$stored_submissions', use_captcha = '$use_captcha' WHERE section_id = '$section_id'");
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {

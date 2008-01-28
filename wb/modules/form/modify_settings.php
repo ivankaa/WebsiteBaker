@@ -151,6 +151,12 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 		</td>
 	</tr>
 	<tr>
+		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['NAME']; ?>:</td>
+		<td class="setting_name">
+			<input type="text" name="email_fromname" style="width: 98%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['email_fromname'])); ?>" />
+		</td>
+	</tr>
+	<tr>
 		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['SUBJECT']; ?>:</td>
 		<td class="setting_name">
 			<input type="text" name="email_subject" style="width: 98%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['email_subject'])); ?>" />
@@ -187,6 +193,12 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['FROM']; ?>:</td>
 		<td class="setting_name">
 			<input type="text" name="success_email_from" style="width: 98%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['success_email_from'])); ?>" />
+		</td>
+	</tr>
+	<tr>
+		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['NAME']; ?>:</td>
+		<td class="setting_name">
+			<input type="text" name="success_email_fromname" style="width: 98%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['success_email_fromname'])); ?>" />
 		</td>
 	</tr>
 	<tr>

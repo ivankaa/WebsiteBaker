@@ -90,10 +90,12 @@ class wbmailer extends PHPMailer
 		}
 
 		// set default sender name
-		if (isset($_SESSION['DISPLAY_NAME'])) {
-			$this->FromName = $_SESSION['DISPLAY_NAME'];            // FROM NAME: display name of user logged in
-		} else {
-			$this->FromName = $db_wbmailer_default_sendername;			// FROM NAME: set default name
+		if($this->FromName == 'Root User') {
+			if(isset($_SESSION['DISPLAY_NAME'])) {
+				$this->FromName = $_SESSION['DISPLAY_NAME'];            // FROM NAME: display name of user logged in
+			} else {
+				$this->FromName = $db_wbmailer_default_sendername;			// FROM NAME: set default name
+			}
 		}
 
 		/* 

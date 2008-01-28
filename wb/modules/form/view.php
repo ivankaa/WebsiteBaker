@@ -340,6 +340,7 @@ echo $footer;
 				// Set the email from field to what the user entered in the specified field
 				$email_from = $wb->add_slashes($_POST[$email_from]);
 			}
+			$email_fromname = $fetch_settings['email_fromname'];
 			$email_subject = $fetch_settings['email_subject'];
 			$success_page = $fetch_settings['success_page'];
 			$success_email_to = $fetch_settings['success_email_to'];
@@ -348,6 +349,7 @@ echo $footer;
 				$success_email_to = $wb->add_slashes($_POST[$success_email_to]);
 			}
 			$success_email_from = $fetch_settings['success_email_from'];
+			$success_email_fromname = $fetch_settings['success_email_fromname'];
 			$success_email_text = $fetch_settings['success_email_text'];
 			$success_email_subject = $fetch_settings['success_email_subject'];		
 			$max_submissions = $fetch_settings['max_submissions'];
@@ -445,22 +447,22 @@ echo $footer;
 					// Now send the email
 					if($email_to != '') {
 						if($email_from != '') {
-							if($wb->mail($email_from,$email_to,$email_subject,$email_body)) {
+							if($wb->mail($email_from,$email_to,$email_subject,$email_body,$email_fromname)) {
 								$success = true;
 							}
 						} else {
-							if($wb->mail('',$email_to,$email_subject,$email_body)) { 
+							if($wb->mail('',$email_to,$email_subject,$email_body,$email_fromname)) { 
 								$success = true; 
 							}
 						}
 					}				
 					if($success_email_to != '') {
 						if($success_email_from != '') {
-							if($wb->mail($success_email_from,$success_email_to,$success_email_subject,$success_email_text)) {
+							if($wb->mail($success_email_from,$success_email_to,$success_email_subject,$success_email_text,$success_email_fromname)) {
 								$success = true;
 							}
 						} else {
-							if($wb->mail('',$success_email_to,$success_email_subject,$success_email_text)) {
+							if($wb->mail('',$success_email_to,$success_email_subject,$success_email_text,$success_email_fromname)) {
 								$success = true;
 							}
 						}

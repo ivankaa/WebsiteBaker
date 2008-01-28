@@ -24,6 +24,7 @@ Legend:
 !	Re-introduced Changeset 593 (filename in pages/ from page_title instead of menu_title)
 #	Fixed some bugs in the Javascript Admin modul
 28-Jan-2008 Thomas Hornik
++	Allow a user-supplied From-Name in form-settings for email und success-email.
 !	changeset 627: menu_link and search/search.php needs some minor changes, too.
 +	Added Text-CAPTCHA on request. The captcha-text will be stored in temp/.captcha_text.txt
 27-Jan-2008 Christian Sommer
