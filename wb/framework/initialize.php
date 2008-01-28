@@ -77,9 +77,8 @@ if (file_exists(WB_PATH.'/framework/class.database.php')) {
 		session_start();
 		define('SESSION_STARTED', true);
 	}
-	if(ENABLED_ASP && !isset($_SESSION['session_started']))
+	if(defined('ENABLED_ASP') && ENABLED_ASP && !isset($_SESSION['session_started']))
 		$_SESSION['session_started'] = time();
-
 
 	// Get users language
 	if(isset($_GET['lang']) AND $_GET['lang'] != '' AND !is_numeric($_GET['lang']) AND strlen($_GET['lang']) == 2) {
