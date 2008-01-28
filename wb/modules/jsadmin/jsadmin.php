@@ -51,7 +51,8 @@ function save_setting($name, $value) {
 }
 
 // the follwing variables to use and check existing the YUI
-$YUI_PATH = '../../include/yui';
+$WB_MAIN_RELATIVE_PATH="../..";
+$YUI_PATH = '/include/yui';
 $js_yui_min = "-min";  // option for smaller code so faster
 $js_yui_scripts = Array();
 $js_yui_scripts[] = $YUI_PATH.'/yahoo/yahoo'.$js_yui_min.'.js';

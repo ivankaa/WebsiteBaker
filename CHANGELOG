@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+28-Jan-2008 Christian Sommer
+#	Fixed some bugs in the Javascript Admin modul
 28-Jan-2008 Thomas Hornik
 +	Added Text-CAPTCHA on request. The captcha-text will be stored in temp/.captcha_text.txt
 27-Jan-2008 Christian Sommer

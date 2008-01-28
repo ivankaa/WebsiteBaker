@@ -66,7 +66,7 @@ if($page_type) {
 	} elseif($page_type == 'sections') {
 		if(get_setting('mod_jsadmin_ajax_order_sections', '1')) {
 			$js_scripts[] = 'dragdrop.js';
-			$js_buttonCell= 3; // This ist the Cell where the Button "Up" is , by Swen Uth
+			$js_buttonCell= 4; // This ist the Cell where the Button "Up" is , by Swen Uth
 		}
 	} elseif($page_type == 'config') {
 		$js_scripts[] = 'tool.js';
@@ -118,16 +118,14 @@ var JsAdmin = { WB_URL : '<?php echo WB_URL ?>' };
   $YUI_ERROR=false; // ist there an Error
   $YUI_PUT ='';   // String with javascipt includes
   $YUI_PUT_MISSING_Files=''; // Strin with missing files
-  
+  reset($js_yui_scripts);
   foreach($js_yui_scripts as $script) {
-    $fcheck =fopen($script,"r");  // Check if File Exist , This is better the file_exists
-    if($fcheck){
-        $YUI_PUT=$YUI_PUT."<script type='text/javascript' src='".$script."'></script>\n"; // go and include
+    if(file_exists($WB_MAIN_RELATIVE_PATH.$script)){
+        $YUI_PUT=$YUI_PUT."<script type='text/javascript' src='".$WB_MAIN_RELATIVE_PATH.$script."'></script>\n"; // go and include
     } else {
         $YUI_ERROR=true;
-        $YUI_PUT_MISSING_Files=$YUI_PUT_MISSING_Files."- ".$script."\\n";   // catch all missing files
+        $YUI_PUT_MISSING_Files=$YUI_PUT_MISSING_Files."- ".WB_URL.$script."\\n";   // catch all missing files
     }
-    fclose($fcheck);
 	}
 	if(!$YUI_ERROR)
 	{

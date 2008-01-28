@@ -73,12 +73,10 @@ $ajax_order_sections = get_setting('mod_jsadmin_ajax_order_sections', true) ? 'c
   $YUI_PUT_MISSING_Files=''; // String with missing files
   reset($js_yui_scripts);
   foreach($js_yui_scripts as $script) {
-    $fcheck =fopen($script,"r");  // Check if File Exist , This is better the file_exists
-    if(!$fcheck){
+     if(!file_exists($WB_MAIN_RELATIVE_PATH.$script)){
         $YUI_ERROR=true;
-        $YUI_PUT_MISSING_Files =$YUI_PUT_MISSING_Files."- ".$script."<br />";   // catch all missing files
+        $YUI_PUT_MISSING_Files =$YUI_PUT_MISSING_Files."- ".WB_URL.$script."<br />";   // catch all missing files
     }
-    fclose($fcheck);
 	}
 	if($YUI_ERROR)
 	{
@@ -111,7 +109,7 @@ $ajax_order_sections = get_setting('mod_jsadmin_ajax_order_sections', true) ? 'c
    <tr>
 	     <td>&nbsp;</td>
 	     <td>
-		   <input type="submit" name="submit" value="<?php echo $TEXT['SAVE']; ?>" onClick="javascript: if(!confirm('<?php echo $TEXT['ARE_YOU_SURE']; ?>')) { return false; }" />
+		   <input type="submit" name="submit" value="<?php echo $TEXT['SAVE']; ?>" />
 	    </td>
    </tr>
    </table>
