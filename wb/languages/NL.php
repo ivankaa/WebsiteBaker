@@ -439,7 +439,7 @@ $MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'] = 'Het is niet mogelijk uw wachtwoord pe
 $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'] = 'Uw gebruikersnaam en wachtwoord zijn verzonden naar het opgegeven e-mailadres';
 $MESSAGE['FORGOT_PASS']['ALREADY_RESET'] = 'Sorry, het wachtwoord kan maximaal eens per uur worden aangepast.';
 
-$$MESSAGE['START']['WELCOME_MESSAGE'] = 'Welkom bij het website-beheer';
+$MESSAGE['START']['WELCOME_MESSAGE'] = 'Welkom bij het website-beheer';
 $MESSAGE['START']['INSTALL_DIR_EXISTS'] = 'Waarschuwing, de installatiemap bestaat nog steeds!';
 $MESSAGE['START']['CURRENT_USER'] = 'U bent ingelogd als';
 

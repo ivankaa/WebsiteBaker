@@ -163,7 +163,7 @@ function make_list($parent, $editable_pages) {
 			?>
 			
 			<li id="p<?php echo $page['parent']; ?>" style="padding: 2px 0px 2px 0px;">
-			<table width="720" cellpadding="1" cellspacing="0" border="0" style="background-color: #F0F0F0;">
+			<table width="720" cellpadding="1" cellspacing="0" border="0" style="background-color: #edf5fc;">
 			<tr>
 				<td width="20" style="padding-left: <?php echo $page['level']*20; ?>px;">
 					<?php

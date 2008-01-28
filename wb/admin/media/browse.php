@@ -97,7 +97,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 	}
 	// Now parse these values to the template
 	$temp_id = 0;
-	$row_bg_color = 'EEEEEE';
+	$row_bg_color = 'BDD3EC';
 	if(isset($DIR)) {
 		sort($DIR);
 		foreach($DIR AS $name) {
@@ -115,10 +115,10 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 									);
 			$template->parse('list', 'list_block', true);
 			// Code to alternate row colors
-			if($row_bg_color == 'DEDEDE') {
-				$row_bg_color = 'EEEEEE';
+			if($row_bg_color == 'D2E1F2') {
+				$row_bg_color = 'BDD3EC';
 			} else {
-				$row_bg_color = 'DEDEDE';
+				$row_bg_color = 'D2E1F2';
 			}
 		}
 	}
@@ -138,10 +138,10 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 									);
 			$template->parse('list', 'list_block', true);
 			// Code to alternate row colors
-			if($row_bg_color == 'DEDEDE') {
-				$row_bg_color = 'EEEEEE';
+			if($row_bg_color == 'D2E1F2') {
+				$row_bg_color = 'BDD3EC';
 			} else {
-				$row_bg_color = 'DEDEDE';
+				$row_bg_color = 'D2E1F2';
 			}
 		}
 	}
