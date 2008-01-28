@@ -167,7 +167,7 @@ function change_os(type) {
 		</table>
 		<table cellpadding="3" cellspacing="0" width="100%" align="center">
 		<tr>
-			<td colspan="2"><h1>Step 3</h1>Please check your path settings, and select your default timezone...</td>
+			<td colspan="2"><h1>Step 3</h1>Please check your path settings, and select a default timezone and a default backend language...</td>
 		</tr>
 		<tr>
 			<td width="125" style="color: #666666;">
@@ -224,6 +224,28 @@ function change_os(type) {
 					foreach($TIMEZONES AS $hour_offset => $title) {
 						?>
 							<option value="<?php echo $hour_offset; ?>"<?php if(isset($_SESSION['default_timezone']) AND $_SESSION['default_timezone'] == $hour_offset) { echo ' selected'; } elseif(!isset($_SESSION['default_timezone']) AND $hour_offset == 0) { echo 'selected'; } ?>><?php echo $title; ?></option>
+						<?php
+					}
+					?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td style="color: #666666;">
+				Default Language:
+			</td>
+			<td>
+				<select tabindex="3" name="default_language" style="width: 100%;">
+					<?php
+					$DEFAULT_LANGUAGE = array(
+						'CA'=>'Catalan', 'DA'=>'Danish', 'DE'=>'Deutsch', 'EN'=>'English',
+						'ES'=>'Spanish', 'ET'=>'Eesti', 'FI'=>'Suomi', 'FR'=>'Fran&ccedil;ais',
+						'HR'=>'Hrvatski', 'HU'=>'Magyar','IT'=>'Italiano', 'LV'=>'Latviesu',
+						'NL'=>'Nederlands','PT'=>'Portuguese (Brazil)','SE'=>'Svenska', 'TR'=>'Turkish'
+					);
+					foreach($DEFAULT_LANGUAGE as $lang_id => $lang_title) {
+						?>
+							<option value="<?php echo $lang_id; ?>"<?php if(isset($_SESSION['default_language']) AND $_SESSION['default_language'] == $lang_id) { echo ' selected'; } elseif(!isset($_SESSION['default_language']) AND $lang_id == 'EN') { echo 'selected'; } ?>><?php echo $lang_title; ?></option>
 						<?php
 					}
 					?>

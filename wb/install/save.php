@@ -163,6 +163,19 @@ if(!isset($_POST['default_timezone']) OR !is_numeric($_POST['default_timezone'])
 }
 // End path and timezone details code
 
+// Get the default language
+$allowed_languages = array('CA', 'DA', 'DE', 'EN', 'ES', 'ET', 'FI', 'FR', 'HR', 'HU', 'IT', 'LV', 'NL', 'PT','SE', 'TR');
+if(!isset($_POST['default_language']) OR !in_array($_POST['default_language'], $allowed_languages)) {
+	set_error('Please select a valid default backend language');
+} else {
+	$default_language = $_POST['default_language'];
+	// make sure the selected language file exists in the language folder
+	if(!file_exists('../languages/' .$default_language .'.php')) {
+		set_error('The language file: \'' .$default_language .'.php\' is missing. Upload file to language folder or choose another language');
+	}
+}
+// End default language details code
+
 // Begin operating system specific code
 // Get operating system
 if(!isset($_POST['operating_system']) OR $_POST['operating_system'] != 'linux' AND $_POST['operating_system'] != 'windows') {
@@ -422,7 +435,7 @@ if($install_tables == true) {
 	." ('wysiwyg_style', 'font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;'),"
 	." ('rename_files_on_upload', 'php,asp,phpx,aspx'),"
 	." ('er_level', ''),"
-	." ('default_language', 'EN'),"
+	." ('default_language', '$default_language'),"
 	." ('app_name', 'wb_$session_rand'),"
 	." ('default_timezone', '$default_timezone'),"
 	." ('default_date_format', 'M d Y'),"
@@ -473,7 +486,7 @@ if($install_tables == true) {
 	       . ' `timezone` INT NOT NULL DEFAULT \'0\','
 	       . ' `date_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
 	       . ' `time_format` VARCHAR( 255 ) NOT NULL DEFAULT \'\' ,'
-	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'EN\' ,'
+	       . ' `language` VARCHAR( 5 ) NOT NULL DEFAULT \'' .$default_language .'\' ,'
 	       . ' `home_folder` TEXT NOT NULL ,'
 	       . ' `login_when` INT NOT NULL  DEFAULT \'0\','
 	       . ' `login_ip` VARCHAR( 15 ) NOT NULL DEFAULT \'\' ,'
