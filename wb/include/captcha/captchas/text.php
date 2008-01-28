@@ -28,7 +28,7 @@ if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
 global $admin;
 $name = 'text';
-$file = WB_PATH."/temp/.captcha_$name.txt";
+$file = WB_PATH."/temp/.captcha_$name.php";
 
 srand((double)microtime()*100000);
 $_SESSION['captcha'] = rand(0,99999);
@@ -61,10 +61,11 @@ while($s = current($content)) {
 	$s=next($content);
 	$s=trim(rtrim(rtrim($s,"\n"),"\r")); // remove newline
 	$s=$admin->strip_slashes($s);
-	if(isset($s{0}) && $s{0}!='!') continue;
-	$a=substr($s,1);
-	$qa[$lang][$q]=$a;
-	next($content);
+	if(isset($s{0}) && $s{0}=='!') {
+		$a=substr($s,1);
+		$qa[$lang][$q]=$a;
+		next($content);
+	}
 }
 if($qa == array()) {
 	echo '<b>Error</b>: no text defined! Enter <b>0</b> to solve this captcha';

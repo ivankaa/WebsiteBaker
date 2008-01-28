@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+29-Jan-2008 Thomas Hornik
+#	Security bugfix: Text file for text-captcha was readable from everywhere
+#	Text-captcha: empty line in test file, following a question, was accepted as answer. Fixed.
 28-Jan-2008 Matthias Gallas
 #	Replaced all special chars in language files with htmlentities or unicode
 +	Added some missing lines in language files

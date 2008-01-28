@@ -56,7 +56,8 @@ if(isset($_POST['save_settings'])) {
 		$text_qa=$_POST['text_qa'];
 		if(strpos($text_qa, '### example ###') === FALSE) {
 			$text_qa=$admin->add_slashes($text_qa);
-			if($fh = fopen(WB_PATH.'/temp/.captcha_text.txt', 'wb')) {
+			$text_qa="<?php die(header('Location: ../index.php')); ?>\n".$text_qa;
+			if($fh = fopen(WB_PATH.'/temp/.captcha_text.php', 'wb')) {
 				fwrite($fh, $text_qa);
 				fclose($fh);
 			}
@@ -78,9 +79,10 @@ if(isset($_POST['save_settings'])) {
 	// load text-captchas
 	$text_qa='';
 	if(file_exists(WB_PATH.'/include/captcha/captchas/text.php')) {
-		if(file_exists(WB_PATH.'/temp/.captcha_text.txt')) {
-			@$content = file(WB_PATH.'/temp/.captcha_text.txt');
+		if(file_exists(WB_PATH.'/temp/.captcha_text.php')) {
+			@$content = file(WB_PATH.'/temp/.captcha_text.php');
 			if($content!==FALSE) {
+				$content[0]='';
 				$text_qa = $admin->strip_slashes(implode('', $content));
 			}
 		}
