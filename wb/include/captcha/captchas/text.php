@@ -39,7 +39,7 @@ $qa = array();
 if($content===FALSE) {
 	echo '<b>Error</b>: Can not read text! Enter <b>0</b> to solve this captcha';
 	$_SESSION['captcha'] = '0';
-	exit;
+	return;
 }
 reset($content);
 while($s = current($content)) {
@@ -69,7 +69,7 @@ while($s = current($content)) {
 if($qa == array()) {
 	echo '<b>Error</b>: no text defined! Enter <b>0</b> to solve this captcha';
 	$_SESSION['captcha'] = '0';
-	exit;
+	return;
 }
 
 // choose language to use
@@ -80,7 +80,7 @@ else
 if(!isset($qa[$lang])) {
 	echo '<b>Error</b>: no text defined! Enter <b>0</b> to solve this captcha';
 	$_SESSION['captcha'] = '0';
-	exit;
+	return;
 }
 
 // choose random question
