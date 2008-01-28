@@ -69,6 +69,7 @@ $OVERVIEW['USERS'] = 'K&auml;ytt&auml;j&auml;hallinta...';
 $OVERVIEW['GROUPS'] = 'k&auml;ytt&auml;j&auml;ryhm&auml;t...';
 $OVERVIEW['HELP'] = 'Kysymykset, vastaukset...';
 $OVERVIEW['VIEW'] = 'Tarkastele sivuja...';
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Muokka/poista sivu';
@@ -551,4 +552,5 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Valitse uudelleen ladattavat...';
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduulin lataus onnistui';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Sivupohjan lataus onnistui';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Kielen lataus onnistui';
+
 ?>

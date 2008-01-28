@@ -541,7 +541,7 @@ $MESSAGE['GENERIC']['INVALID'] = 'Die &uuml;bertragene Datei ist ung&uuml;ltig';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Deinstallation nicht m&ouml;glich: Datei wird benutzt';
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Momentan in Bearbeitung';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Bitte versuchen Sie es sp&auml;ter noch einmal ...';
-$MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Die Datenbanksicherung kann je nach Gr&ouml;ße der Datenbank einige Zeit dauern.';
+$MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Die Datenbanksicherung kann je nach Gr&ouml;&szlig;e der Datenbank einige Zeit dauern.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Fehler beim &Ouml;ffnen der Datei.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Bitte folgende Angaben erg&auml;nzen';
@@ -552,4 +552,5 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Bitte ausw&auml;hlen welche Erweiteru
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Module erfolgreich geladen';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Designvorlagen erfolgreich geladen';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Sprachen erfolgreich geladen';
+
 ?>

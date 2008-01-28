@@ -69,6 +69,7 @@ $OVERVIEW['USERS'] = 'Gestisci gli utenti che possono collegarsi a Website Baker
 $OVERVIEW['GROUPS'] = 'Gestisci gruppi utenti e permessi...';
 $OVERVIEW['HELP'] = 'Trova risposte alle tue domande...';
 $OVERVIEW['VIEW'] = 'Visualizza il sito in una nuova finestra...';
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Modifica/Elimina una pagina';
@@ -147,7 +148,7 @@ $TEXT['PRIVATE_VIEWERS'] = 'Visione privata';
 $TEXT['EXPAND'] = 'Espandi';
 $TEXT['COLLAPSE'] = 'Restringi';
 $TEXT['MOVE_UP'] = 'Muovi su';
-$TEXT['MOVE_DOWN'] = 'Muovi giù';
+$TEXT['MOVE_DOWN'] = 'Muovi gi&Atilde;&sup1;';
 $TEXT['RENAME'] = 'Rinomina';
 $TEXT['MODIFY_SETTINGS'] = 'Modifica Impostazioni';
 $TEXT['MODIFY_CONTENT'] = 'Modifica Contenuto';
@@ -437,7 +438,7 @@ $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Prego inserire email';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'L\'Email inserita non &egrave; stata trovata nel database';
 $MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'] = 'Impossibile inviare l\'email. Contattare l\'ammnistratore';
 $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'] = 'Username e password sono stati inviati per email';
-$MESSAGE['FORGOT_PASS']['ALREADY_RESET'] = 'La Password non può essere modificata più di una volta all\'ora';
+$MESSAGE['FORGOT_PASS']['ALREADY_RESET'] = 'La Password non pu&Atilde;&sup2; essere modificata pi&Atilde;&sup1; di una volta all\'ora';
 
 $MESSAGE['START']['WELCOME_MESSAGE'] = 'Benvenuto alla pagina di Amministrazione di Website Baker';
 $MESSAGE['START']['INSTALL_DIR_EXISTS'] = 'Attenzione, la directory di installazione esiste gi&agrave;!';
@@ -545,10 +546,11 @@ $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Errore nella apertura del file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Devi inserire tutti i dati nei seguenti campi';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Spiacente: hai compilato questa form troppe volte nell\'ultima ora.';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Il numero di controllo (chiama Captcha) che hai inserito non � valido. Se hai problemi con la lettura del Captcha, invia un email email: '.SERVER_EMAIL;
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Il numero di controllo (chiama Captcha) che hai inserito non &egrave; valido. Se hai problemi con la lettura del Captcha, invia un email email: '.SERVER_EMAIL;
 
 $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Seleziona gli add-ons che desideri ricaricare';
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduli ricaricati con successo';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates ricaricati con successo';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Lingue ricaricate con successo';
+
 ?>

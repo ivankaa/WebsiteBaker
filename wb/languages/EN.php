@@ -552,4 +552,5 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you wou
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully';
+
 ?>

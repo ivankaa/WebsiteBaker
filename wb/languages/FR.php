@@ -69,6 +69,7 @@ $OVERVIEW['USERS'] = 'Gestion des acc&egrave;s au site';
 $OVERVIEW['GROUPS'] = 'Gestions des groupes d\'utilisateurs et des permissions';
 $OVERVIEW['HELP'] = 'Aide et FAQ sur l\'utilisation du site';
 $OVERVIEW['VIEW'] = 'Aper&ccedil;u du site dans une nouvelle fen&ecirc;tre';
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Modifier/Supprimer une page';
@@ -317,7 +318,7 @@ $TEXT['OPTION'] = 'Option'; //needs to be translated
 $TEXT['ALLOW_MULTIPLE_SELECTIONS'] = 'Autoriser la s&eacute;lection multiple';
 $TEXT['TEXTFIELD'] = 'Champ de texte';
 $TEXT['TEXTAREA'] = 'Zone de texte';
-$TEXT['SELECT_BOX'] = 'S&eacute;lection des boîtes';
+$TEXT['SELECT_BOX'] = 'S&eacute;lection des bo&icirc;tes';
 $TEXT['CHECKBOX_GROUP'] = 'Groupe bouton Box';
 $TEXT['RADIO_BUTTON_GROUP'] = 'Groupe bouton Radio';
 $TEXT['SIZE'] = 'Taille';
@@ -551,4 +552,5 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'S&eacute;lectionnez les ADD-ON que vo
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules r&eacute;install&eacute;s avec succ&egrave;s';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Mod&egrave;les r&eacute;install&eacute;s avec succ&egrave;s';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Langages r&eacute;install&eacute;s avec succ&egrave;s';
+
 ?>

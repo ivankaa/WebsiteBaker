@@ -69,6 +69,7 @@ $OVERVIEW['USERS'] = 'Beheren van de gebruikers van uw website.';
 $OVERVIEW['GROUPS'] = 'Beheren van de gebruikersgroepen en hun rechten.';
 $OVERVIEW['HELP'] = 'Uitgebreide (Engelstalige) hulp voor het gebruik van dit systeem.';
 $OVERVIEW['VIEW'] = 'Bekijk uw website zoals deze voor bezoekers te zien is (nieuw scherm).';
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Beheer bestaande pagina&#8217;s';
@@ -551,4 +552,5 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Selecteer de extra&#8217;s die u opni
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules succesvol herladen';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates succesvol herladen';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Taalbestanden succesvol herladen';
+
 ?>

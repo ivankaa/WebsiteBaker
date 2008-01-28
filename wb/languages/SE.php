@@ -69,6 +69,7 @@ $OVERVIEW['USERS'] = 'Behandla anv&auml;ndare som kan logga in till Website Bake
 $OVERVIEW['GROUPS'] = 'Behandla anv&auml;ndargrupper och deras system&aring;tkomst...';
 $OVERVIEW['HELP'] = 'Hitta svar p&aring; dina fr&aring;gor (p&aring; engelska)...';
 $OVERVIEW['VIEW'] = 'Titta p&aring; dina sidor i ett nytt f&ouml;nster...';
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = '&Auml;ndra/radera sida';
@@ -231,7 +232,7 @@ $TEXT['TOP_FRAME'] = 'Top frame';
 $TEXT['PAGE_LEVEL_LIMIT'] = 'Sidniv&aring; gr&auml;ns';
 $TEXT['SUCCESS'] = 'Lyckades';
 $TEXT['ERROR'] = 'FEL';
-$TEXT['ARE_YOU_SURE'] = 'Är du s&auml;ker?';
+$TEXT['ARE_YOU_SURE'] = '&Auml;r du s&auml;ker?';
 $TEXT['YES'] = 'Ja';
 $TEXT['NO'] = 'Nej';
 $TEXT['SYSTEM_DEFAULT'] = 'Systemets standard';
@@ -247,7 +248,7 @@ $TEXT['COMMENT'] = 'Kommentar';
 $TEXT['COMMENTS'] = 'Kommentarer';
 $TEXT['COMMENTING'] = 'Kommenterar';
 $TEXT['SHORT'] = 'Ingress';
-$TEXT['LONG'] = 'Brödtext';
+$TEXT['LONG'] = 'Br&ouml;dtext';
 $TEXT['LOOP'] = 'Loop'; //needs to be translated
 $TEXT['FIELD'] = 'F&auml;lt';
 $TEXT['REQUIRED'] = 'Obligatoriskt';
@@ -390,7 +391,7 @@ $TEXT['RESTORE'] = '&Aring;terst&auml;ll';
 $TEXT['BACKUP_DATABASE'] = 'Backup av databas';
 $TEXT['RESTORE_DATABASE'] = '&Aring;terst&auml;ll databas';
 $TEXT['BACKUP_ALL_TABLES'] = 'Backup av samtliga tabeller i databasen';
-$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup av endast tabeller för WB';
+$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup av endast tabeller f&ouml;r WB';
 $TEXT['BACKUP_MEDIA'] = 'Backup av media';
 $TEXT['RESTORE_MEDIA'] = '&Aring;terst&auml;ll media';
 $TEXT['ADMINISTRATION_TOOL'] = 'Administrationsverktyg';
@@ -435,7 +436,7 @@ $MESSAGE['SIGNUP']['NO_EMAIL'] = 'Du m&aring;ste skriva en e-postadress';
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Skriv din e-postadress';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'E-postadressen som du skrev in kan inte hittas i v&aring;r databas';
-$MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'] = 'Kunde inte skicka l&ouml;senordet, v&auml;nligen kontakta administratatören';
+$MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'] = 'Kunde inte skicka l&ouml;senordet, v&auml;nligen kontakta administratat&ouml;ren';
 $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'] = 'Ditt anv&auml;ndarnamn & l&ouml;senord har skickats till din e-postadress';
 $MESSAGE['FORGOT_PASS']['ALREADY_RESET'] = 'L&ouml;senordet kan bara &auml;ndras max en g&aring;ng per timme';
 
@@ -551,4 +552,5 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'V&auml;nligen v&auml;lj vilka till&au
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduler laddades om';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Mallar laddades om';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Spr&aring;k laddades om';
+
 ?>
