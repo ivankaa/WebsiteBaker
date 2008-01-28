@@ -337,8 +337,8 @@ if($search_normal_string != '') {
 					'database' => $database,
 					'page_id' => $res['page_id'],
 					'section_id' => $res['section_id'],
-					'page_title' => $res['page_title'],
-					'page_menu_title' => $res['menu_title'],
+					'page_title' => $res['menu_title'], // had to change this, since the link is build from page_title (changeset #593)
+					'page_menu_title' => $res['page_title'],
 					'page_description' => ($cfg_show_description?$res['description']:""),
 					'page_keywords' => $res['keywords'],
 					'page_link' => $res['link'],
@@ -390,8 +390,8 @@ if($search_normal_string != '') {
 			$func_vars = array(
 				'database' => $database,
 				'page_id' => $page['page_id'],
-				'page_title' => $page['page_title'],
-				'page_menu_title' => $page['menu_title'],
+				'page_title' => $page['menu_title'], // had to change this, since the link is build from page_title (changeset #593)
+				'page_menu_title' => $page['page_title'],
 				'page_description' => ($cfg_show_description?$page['description']:""),
 				'page_keywords' => $page['keywords'],
 				'page_link' => $page['link'],
@@ -605,7 +605,9 @@ if($search_normal_string != '') {
 						if($cfg_show_description == 0) {
 							$page['description'] = "";
 						}
-						$values = array($link, $page['page_title'], $page['description'], $users[$page['modified_by']]['username'], $users[$page['modified_by']]['display_name'], $date, $time, $TEXT['LAST_UPDATED_BY'], strtolower($TEXT['ON']), $excerpt);
+						if(isset($page['menu_title'])) $rep_title = $page['menu_title'];
+						else $rep_title = $page['page_title'];
+						$values = array($link, $rep_title, $page['description'], $users[$page['modified_by']]['username'], $users[$page['modified_by']]['display_name'], $date, $time, $TEXT['LAST_UPDATED_BY'], strtolower($TEXT['ON']), $excerpt);
 						// Show loop code with vars replaced by values
 						echo str_replace($vars, $values, ($fetch_results_loop['value']));
 						// Say that this page has been listed
