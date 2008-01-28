@@ -14,6 +14,7 @@ Legend:
 28-Jan-2008 Matthias Gallas
 #	Replaced all special chars in language files with htmlentities or unicode
 +	Added some missing lines in language files
++	Added missing keyword Id
 28-Jan-2008 Christian Sommer
 !	added some more backend layout modifications
 !	corrected bug in NL.php language file
