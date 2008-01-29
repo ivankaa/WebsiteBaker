@@ -52,15 +52,7 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 // include jscalendar-setup
 $jscal_use_time = true; // whether to use a clock, too
 require_once(WB_PATH."/include/jscalendar/wb-setup.php");
-// override some vars: (normally, there is no need to change this)
-//$jscal_lang = "en"; //- calendar-language (default: wb-backend-language)
-//$jscal_today = ""; // - date the calendar offers if the text-field is empty (default: today)
-//$jscal_firstday = "0"; // - first-day-of-week (0-sunday, 1-monday, ...) (default: 0(EN) or 1(everything else))
-//$jscal_format = "Y-m-d"; // - initial-format used for the text-field (default: from wb-backend-date-format)
-//$jscal_ifformat = "%Y-%m-%d"; // - format for jscalendar (default: from wb-backend-date-format)
-
 ?>
-
 <h2><?php echo $TEXT['ADD'].'/'.$TEXT['MODIFY'].' '.$TEXT['POST']; ?></h2>
 
 <form name="modify" action="<?php echo WB_URL; ?>/modules/news/save_post.php" method="post" style="margin: 0;">
@@ -123,7 +115,7 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 <tr>
 	<td><?php echo $TEXT['PUBL_START_DATE']; ?>:</td>
 	<td>
-	<input type="text" id="publishdate" name="publishdate" value="<?php if($fetch_content['published_when']==0) print date($jscal_format, time()); else print date($jscal_format, $fetch_content['published_when']);?>" style="width: 120px;" />
+	<input type="text" id="publishdate" name="publishdate" value="<?php if($fetch_content['published_when']==0) print date($jscal_format, strtotime((date('Y-m-d')))); else print date($jscal_format, $fetch_content['published_when']);?>" style="width: 120px;" />
 	<img src="<?php echo ADMIN_URL ?>/images/clock_16.png" id="publishdate_trigger" style="cursor: pointer;" title="Calendar" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
 	<img src="<?php echo ADMIN_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="delete date" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.modify.publishdate.value=''" />
 	</td>

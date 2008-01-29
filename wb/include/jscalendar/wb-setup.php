@@ -1,6 +1,6 @@
 <?php
 
-// $Id:$
+// $Id$
 
 /*
 
@@ -53,6 +53,7 @@ require_once(WB_PATH.'/include/jscalendar/calendar-system.css');
 	if(LANGUAGE=='EN')
 		$jscal_firstday = '0'; // sunday
 	// date and time format for the text-field and for jscal's "ifFormat". We offer dd.mm.yyyy or yyyy-mm-dd or mm/dd/yyyy
+	// ATTN: strtotime() fails with "dd.mm.yyyy" and PHP4. So the string has to be converted to e.g. "yyyy-mm-dd", which will work.
 	switch(DATE_FORMAT) {
 		case 'd.m.Y':
 		case 'd M Y':

@@ -140,12 +140,6 @@ if(!isset($block[1]) OR $block[1] == '') {
 <?php // include jscalendar-setup
 	$jscal_use_time = true; // whether to use a clock, too
 	require_once(WB_PATH."/include/jscalendar/wb-setup.php");
-	// override some vars: (normally, there is no need to change this)
-	//$jscal_lang = "en"; //- calendar-language (default: wb-backend-language)
-	//$jscal_today = ""; // - date the calendar offers if the text-field is empty (default: today)
-	//$jscal_firstday = "0"; // - first-day-of-week (0-sunday, 1-monday, ...) (default: 0(EN) or 1(everything else))
-	//$jscal_format = "Y-m-d"; // - initial-format used for the text-field (default: from wb-backend-date-format)
-	//$jscal_ifformat = "%Y-%m-%d"; // - format for jscalendar (default: from wb-backend-date-format)
 ?>
 <table cellpadding="5" cellspacing="0" border="0" align="center" width="100%" height="50" style="margin-bottom: 10px;">
 <tr style="background-color: #F0F0F0;">

@@ -32,6 +32,8 @@ if(MANAGE_SECTIONS != 'enabled') {
 	exit(0);
 }
 
+require_once(WB_PATH."/include/jscalendar/jscalendar-functions.php");
+
 // Get page id
 if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 	header("Location: index.php");
@@ -95,12 +97,12 @@ if($query_sections->numRows() > 0) {
 				if(trim($_POST['start_date'.$section_id]) == '0' OR trim($_POST['start_date'.$section_id]) == '') {
 					$publ_start = 0;
 				} else {
-					$publ_start = strtotime($_POST['start_date'.$section_id]);
+					$publ_start = jscalendar_to_timestamp($_POST['start_date'.$section_id]);
 				}
 				if(trim($_POST['end_date'.$section_id]) == '0' OR trim($_POST['end_date'.$section_id]) == '') {
 					$publ_end = 0;
 				} else {
-					$publ_end = strtotime($_POST['end_date'.$section_id], $publ_start);
+					$publ_end = jscalendar_to_timestamp($_POST['end_date'.$section_id], $publ_start);
 				}
 				if($sql != '')
 					$sql .= ",";
