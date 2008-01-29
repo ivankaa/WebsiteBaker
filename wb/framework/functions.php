@@ -355,10 +355,6 @@ function init_utf8funcs() {
 	static $utf8_ok=0;
 	if($utf8_ok == 0) {
 		++$utf8_ok;
-		// debug XXX to be removed
-		if($utf8_ok > 1)
-			trigger_error("init_utf8funcs: utf8_ok > 1", E_USER_ERROR);
-		// XXX remove end
 		require_once(WB_PATH.'/framework/functions-utf8.php');
 	}
 }
@@ -367,7 +363,7 @@ function init_utf8funcs() {
 // Will replace all numeric and named entities except &gt; &lt; &apos; &quot; &#39; &nbsp;
 // In case of error the returned string is unchanged, and a message is emitted.
 function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET) {
-	//init utf8-functions -- workaround to prevent functions-utf8.php and charsets_table.php (~140kB) to be loaded more than once
+	//init utf8-functions
 	init_utf8funcs();
 	return entities_to_umlauts2($string, $charset_out);
 }
@@ -375,14 +371,14 @@ function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET) {
 // Will convert a string in $charset_in encoding to a pure ASCII string with HTML-entities.
 // In case of error the returned string is unchanged, and a message is emitted.
 function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET) {
-	//init utf8-functions -- workaround to prevent functions-utf8.php and charsets_table.php (~140kB) to be loaded more than once
+	//init utf8-functions
 	init_utf8funcs();
 	return umlauts_to_entities2($string, $charset_in);
 }
 
 // Function to convert a page title to a page filename
 function page_filename($string) {
-	//init utf8-functions -- workaround to prevent functions-utf8.php and charsets_table.php (~140kB) to be loaded more than once
+	//init utf8-functions
 	init_utf8funcs();
 	$string = entities_to_7bit($string);
 	// Now replace spaces with page spcacer
@@ -408,7 +404,7 @@ function page_filename($string) {
 
 // Function to convert a desired media filename to a clean filename
 function media_filename($string) {
-	//init utf8-functions -- workaround to prevent functions-utf8.php and charsets_table.php (~140kB) to be loaded more than once
+	//init utf8-functions
 	init_utf8funcs();
 	$string = entities_to_7bit($string);
 	// Now remove all bad characters
