@@ -35,7 +35,8 @@ $database->query("CREATE TABLE `$table` (
 	`captcha_type` VARCHAR(255) NOT NULL DEFAULT 'calc_text',
 	`asp_session_min_age` INT(11) NOT NULL DEFAULT '20',
 	`asp_view_min_age` INT(11) NOT NULL DEFAULT '10',
-	`asp_input_min_age` INT(11) NOT NULL DEFAULT '5'
+	`asp_input_min_age` INT(11) NOT NULL DEFAULT '5',
+	`ct_text` LONGTEXT NOT NULL DEFAULT ''
 	)"
 );
 

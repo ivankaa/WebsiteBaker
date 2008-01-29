@@ -52,15 +52,11 @@ if(isset($_POST['save_settings'])) {
 	");
 
 	// save text-captchas
-	if($_POST['captcha_type'] == 'text') {
+	if($_POST['captcha_type'] == 'text') { // ct_text
 		$text_qa=$_POST['text_qa'];
 		if(strpos($text_qa, '### example ###') === FALSE) {
 			$text_qa=$admin->add_slashes($text_qa);
-			$text_qa="<?php die(header('Location: ../index.php')); ?>\n".$text_qa;
-			if($fh = fopen(WB_PATH.'/temp/.captcha_text.php', 'wb')) {
-				fwrite($fh, $text_qa);
-				fclose($fh);
-			}
+			$database->query("UPDATE $table SET ct_text = '$text_qa'");
 		}
 	}
 	
@@ -78,14 +74,9 @@ if(isset($_POST['save_settings'])) {
 
 	// load text-captchas
 	$text_qa='';
-	if(file_exists(WB_PATH.'/include/captcha/captchas/text.php')) {
-		if(file_exists(WB_PATH.'/temp/.captcha_text.php')) {
-			@$content = file(WB_PATH.'/temp/.captcha_text.php');
-			if($content!==FALSE) {
-				$content[0]='';
-				$text_qa = $admin->strip_slashes(implode('', $content));
-			}
-		}
+	if($query = $database->query("SELECT ct_text FROM $table")) {
+		$data = $query->fetchRow();
+		$text_qa = $admin->strip_slashes($data['ct_text']);
 	}
 	if($text_qa == '')
 		$text_qa = $MOD_CAPTCHA_CONTROL['CAPTCHA_TEXT_DESC'];

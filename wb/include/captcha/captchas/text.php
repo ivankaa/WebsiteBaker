@@ -27,6 +27,7 @@
 if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
 global $admin;
+global $database;
 $name = 'text';
 $file = WB_PATH."/temp/.captcha_$name.php";
 
@@ -34,13 +35,14 @@ srand((double)microtime()*100000);
 $_SESSION['captcha'] = rand(0,99999);
 
 // get questions and answers
-$qa = array();
-@$content = file($file);
-if($content===FALSE) {
-	echo '<b>Error</b>: Can not read text! Enter <b>0</b> to solve this captcha';
-	$_SESSION['captcha'] = '0';
-	return;
+$text_qa='';
+$table = TABLE_PREFIX.'mod_captcha_control';
+if($query = $database->query("SELECT ct_text FROM $table")) {
+	$data = $query->fetchRow();
+	$text_qa = $admin->strip_slashes($data['ct_text']);
 }
+$content = explode("\n", $text_qa);
+
 reset($content);
 while($s = current($content)) {
 	// get question
@@ -56,6 +58,10 @@ while($s = current($content)) {
 	}	else {
 		$lang='XX';
 		$q=substr($s,1);
+		if($q=='') {
+			next($content);
+			continue;
+		}
 	}
 	// get answer
 	$s=next($content);
@@ -67,7 +73,7 @@ while($s = current($content)) {
 		next($content);
 	}
 }
-if($qa == array()) {
+if(!isset($qa) || $qa == array()) {
 	echo '<b>Error</b>: no text defined! Enter <b>0</b> to solve this captcha';
 	$_SESSION['captcha'] = '0';
 	return;
