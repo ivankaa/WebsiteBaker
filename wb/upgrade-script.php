@@ -79,6 +79,25 @@ function db_add_search_key_value($key, $value) {
 		}
 	}
 }
+function db_add_field($field, $table, $desc) {
+	global $database; global $OK; global $FAIL;
+	echo "<br /><u>Adding field '$field' to table '$table'</u><br />";
+	$table = TABLE_PREFIX.$table;
+	$query = $database->query("DESCRIBE $table '$field'");
+	if($query->numRows() == 0) { // add field
+		$query = $database->query("ALTER TABLE $table ADD $field $desc");
+		echo mysql_error()?mysql_error().'<br />':'';
+		$query = $database->query("DESCRIBE $table '$field'");
+		echo mysql_error()?mysql_error().'<br />':'';
+		if($query->numRows() > 0) {
+			echo "'$field' added. $OK.<br />";
+		} else {
+			echo "adding '$field' $FAIL!<br />";
+		}
+	} else {
+		echo "'$field' allready there. $OK.<br />";
+	}
+}
 
 
 echo "<br /><u>Adding module_order and max_excerpt to search-table</u><br />";
@@ -93,6 +112,21 @@ foreach($cfg as $key=>$value) {
 	db_add_search_key_value($key, $value);
 }
 
+echo "<br /><u>Adding some internal config-elements to search-table</u><br />";
+// These are global config-elements which don't appear in settings-page. Change them in the database if needed.
+// cfg_show_description - whether to show page-description on the results page (true/false), def: true
+// cfg_search_description - whether to search in page-description (true/false), def: true [only used while searching title/link/description/keywords]
+// cfg_search_keywords - whether to search in page-keywords (true/false), def: true [only used while searching title/link/description/keywords]
+// cfg_enable_old_search - use old search-method, too (true/false), def: true [use old method as fallback]
+$cfg = array(
+	'cfg_show_description' => 'true',
+	'cfg_search_description' => 'true',
+	'cfg_search_keywords' => 'true',
+	'cfg_enable_old_search' => 'true'
+);
+foreach($cfg as $key=>$value) {
+	db_add_search_key_value($key, $value);
+}
 
 echo "<br /><u>Changing results_loop in search-table</u><br />";
 // adding [EXCERPT]
@@ -149,57 +183,13 @@ if($query->numRows() > 0) {
 	}
 }
 
-echo "<br /><u>Adding some internal config-elements to search-table</u><br />";
-// These are global config-elements which don't appear in settings-page. Change them in the database if needed.
-// cfg_show_description - whether to show page-description on the results page (true/false), def: true
-// cfg_search_description - whether to search in page-description (true/false), def: true [only used while searching title/link/description/keywords]
-// cfg_search_keywords - whether to search in page-keywords (true/false), def: true [only used while searching title/link/description/keywords]
-// cfg_enable_old_search - use old search-method, too (true/false), def: true [use old method as fallback]
-$cfg = array(
-	'cfg_show_description' => 'true',
-	'cfg_search_description' => 'true',
-	'cfg_search_keywords' => 'true',
-	'cfg_enable_old_search' => 'true'
-);
-foreach($cfg as $key=>$value) {
-	db_add_search_key_value($key, $value);
-}
-
-
 /**********************************************************
  *  - publish-by-date
  */
-echo "<br /><u>Adding fields 'publ_start' and 'publ_end' to table 'sections'</u><br />";
 // Add fields "publ_start" and "publ_end" to table "sections"
 // check if fields are present
-$table = TABLE_PREFIX."sections";
-$query = $database->query("DESCRIBE $table 'publ_start'");
-if($query->numRows() == 0) { // add field
-	$query = $database->query("ALTER TABLE $table ADD publ_start INT NOT NULL DEFAULT '0'");
-	echo mysql_error()?mysql_error().'<br />':'';
-	$query = $database->query("DESCRIBE $table 'publ_start'");
-	echo mysql_error()?mysql_error().'<br />':'';
-	if($query->numRows() > 0) {
-		echo "'publ_start' added. $OK.<br />";
-	} else {
-		echo "adding 'publ_start' $FAIL!<br />";
-	}
-} else {
-	echo "'publ_start' allready there. $OK.<br />";
-}
-$query = $database->query("DESCRIBE $table 'publ_end'");
-if($query->numRows() == 0) { // add field
-	$query = $database->query("ALTER TABLE $table ADD publ_end INT NOT NULL DEFAULT '0'");
-	echo mysql_error()?mysql_error().'<br />':'';
-	$query = $database->query("DESCRIBE $table 'publ_end'");
-	if($query->numRows() > 0) {
-		echo "'publ_end' added. $OK.<br />";
-	} else {
-		echo "adding 'publ_end' $FAIL!<br />";
-	}
-} else {
-	echo "'publ_end' allready there. $OK<br />";
-}
+db_add_field('publ_start', 'sections', "INT NOT NULL DEFAULT '0'");
+db_add_field('publ_end', 'sections', "INT NOT NULL DEFAULT '0'");
 
 
 /**********************************************************
@@ -386,32 +376,13 @@ $database->query("
 //Start of upgrade script for the form modul
 //******************************************************************************
 
-echo "<BR><B>Adding new field to database table mod_form_settings</B><BR>";
-
-if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` ADD `success_email_subject` VARCHAR(255) NOT NULL AFTER `success_message`")) {
-	echo 'Database Field success_email_subject added successfully<br />';
-}
-echo mysql_error().'<br />';
-
-if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` ADD `success_email_text` TEXT NOT NULL AFTER `success_message`")) {
-	echo 'Database Field success_email_text added successfully<br />';
-}
-echo mysql_error().'<br />';
-
-if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` ADD `success_email_from` VARCHAR(255) NOT NULL AFTER `success_message`")) {
-	echo 'Database Field success_email_from added successfully<br />';
-}
-echo mysql_error().'<br />';
-
-if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` ADD `success_email_to` TEXT NOT NULL AFTER `success_message`")) {
-	echo 'Database Field success_email_to added successfully<br />';
-}
-echo mysql_error().'<br />';
-
-if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` ADD `success_page` TEXT NOT NULL AFTER `success_message`")) {
-	echo 'Database Field success_page added successfully<br />';
-}
-echo mysql_error().'<br />';
+db_add_field('success_email_subject', 'mod_form_settings', "VARCHAR(255) NOT NULL AFTER `success_message`");
+db_add_field('success_email_text', 'mod_form_settings', "TEXT NOT NULL AFTER `success_message`");
+db_add_field('success_email_from', 'mod_form_settings', "VARCHAR(255) NOT NULL AFTER `success_message`");
+db_add_field('success_email_to', 'mod_form_settings', "TEXT NOT NULL AFTER `success_message`");
+db_add_field('success_page', 'mod_form_settings', "TEXT NOT NULL AFTER `success_message`");
+db_add_field('email_fromname', 'mod_form_settings', "VARCHAR( 255 ) NOT NULL AFTER email_from");
+db_add_field('success_email_fromname', 'mod_form_settings', "VARCHAR( 255 ) NOT NULL AFTER success_email_from");
 
 echo "<BR><B>Deleting field success_message from table mod_form_settings</B><BR>";
 
@@ -482,15 +453,8 @@ while($result = $query_dates->fetchRow()) {
 //Start of upgrade script for the news modul
 //******************************************************************************
 
-echo "<BR><B>Adding new fields to database table mod_news_posts</B><BR>";
-if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_news_posts` ADD `published_when` INT NOT NULL AFTER `commenting`")) {
-	echo 'Database Field published_when added successfully<br />';
-}
-echo mysql_error().'<br />';
-if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_news_posts` ADD `published_until` INT NOT NULL AFTER `published_when`")) {
-	echo 'Database Field published_until added successfully<br />';
-}
-echo mysql_error().'<br />';
+db_add_field('published_when', 'mod_news_posts', "INT NOT NULL AFTER `commenting`");
+db_add_field('published_until', 'mod_news_posts', "INT NOT NULL AFTER `published_when`");
 
 // UPDATING DATA INTO FIELDS
 echo "<BR>";
@@ -576,6 +540,9 @@ while($result = $query_dates->fetchRow()) {
 //******************************************************************************
 //End of upgrade script for the news modul
 //******************************************************************************
+
+
+
 
 echo "<br /><br />Done<br />";
 
