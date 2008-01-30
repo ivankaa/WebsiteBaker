@@ -350,8 +350,10 @@ class frontend extends wb {
 				if($this->page_is_active($page)==false && $page['link']!=$this->default_link && !INTRO_PAGE) {
 					continue; // no active sections
 				}
-				if($this->page_is_visible($page)==false)
-					continue;
+				if($this->page_is_visible($page)==false) {
+					if($page['visibility'] != 'registered') // special case: page_to_visible() check wheter to show the page contents, but the menu should be visible allways
+						continue;
+				}
 				// Create vars
 				$vars = array('[class]','[a]', '[/a]', '[menu_title]', '[page_title]');
 				// Work-out class

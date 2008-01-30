@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 30-Jan-2008 Thomas Hornik
+#	registered pages didn't appear in menu. fixed.
 !	Updated upgrade-script. (Some upgrades still missing)
 29-Jan-2008 Thomas Hornik
 #	strtotime()'s behavior differ in PHP4 and PHP5.
