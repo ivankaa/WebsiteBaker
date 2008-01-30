@@ -89,7 +89,7 @@ if(!function_exists('call_captcha')) {
 			case 'text': // text-captcha
 				?><table class="captcha_table"><tr>
 				<td class="text_captcha"><?php include(WB_PATH.'/include/captcha/captchas/text.php'); ?></td>
-				<td><input type="text" name="captcha" maxlength="10"  style="width:70px" /></td>
+				<td><input type="text" name="captcha" maxlength="50"  style="width:150px" /></td>
 				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_QUEST']; ?></td>
 				</tr></table><?php
 				break;

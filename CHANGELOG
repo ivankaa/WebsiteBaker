@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+30-Jan-2008 Christian Sommer
+#	fixed bug with text Captcha (input was restricted to 10 chars.) and a small layout issue
 30-Jan-2008 Thomas Hornik
 #	registered pages didn't appear in menu. fixed.
 !	Updated upgrade-script. (Some upgrades still missing)
