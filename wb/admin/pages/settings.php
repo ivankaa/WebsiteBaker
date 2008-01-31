@@ -254,6 +254,8 @@ function parent_list($parent) {
 	$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' ORDER BY position ASC";
 	$get_pages = $database->query($query);
 	while($page = $get_pages->fetchRow()) {
+		if($admin->page_is_visible($page)==false)
+			continue;
 		// If the current page cannot be parent, then its children neither
 		$list_next_level = true;
 		// Stop users from adding pages with a level of more than the set page level limit
