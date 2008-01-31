@@ -490,6 +490,8 @@ function parent_list($parent) {
 	$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' AND visibility!='deleted' ORDER BY position ASC";
 	$get_pages = $database->query($query);
 	while($page = $get_pages->fetchRow()) {
+		if($admin->page_is_visible($page)==false)
+			continue;
 		// Stop users from adding pages with a level of more than the set page level limit
 		if($page['level']+1 < PAGE_LEVEL_LIMIT) {
 			// Get user perms
