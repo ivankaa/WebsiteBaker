@@ -140,27 +140,26 @@ if(isset($_POST['save_settings'])) {
 	echo '<p>' .$MOD_CAPTCHA_CONTROL['HOWTO'] .'</p>';
 ?>
 <form name="store_settings" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
-	<table width="98%" cellspacing="0" cellpadding="5px" class="row_a">
+	<table width="98%" cellspacing="0" border="0" cellpadding="5px" class="row_a">
 	<tr><td colspan="2"><strong><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_CONF'];?>:</strong></td></tr>
-	<tr><td>
-		<table>
-			<tr height="50px">
-			<td><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_TYPE'];?>:</td>
-			<td align="right" width="150px"><img name="captcha_example" id="captcha_example" src="<?php echo WB_URL.'/include/captcha/captchas/'.$captcha_type.'.png'?>" ></td>
-			</tr>
-		</table>
+	<tr>
+		<td width="30%"><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_TYPE'];?>:</td>
 		<td>
-			<select name="captcha_type" id="captcha_type" onchange="load_captcha_image()" style="width: 98%;">
+		<select name="captcha_type" id="captcha_type" onchange="load_captcha_image()" style="width: 98%;">
 			<?php foreach($useable_captchas AS $key=>$text) {
-				echo "<option value=\"$key\" ".($captcha_type==$key?'selected':'').">$text</option>";
+			echo "<option value=\"$key\" ".($captcha_type==$key?'selected':'').">$text</option>";
 			} ?>
 		</select>
 		</td>
 	</tr>
+	<tr height="55px">
+		<td>&nbsp;</td>
+		<td align="left" width="150px"><img name="captcha_example" id="captcha_example" src="<?php echo WB_URL.'/include/captcha/captchas/'.$captcha_type.'.png'?>" ></td>
+	</tr>
 	<tr id="text_qa" style="display:<?php if($captcha_type=='text') echo ''; else echo 'none'; ;?>;">
-		<td class="setting_name"><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_ENTER_TEXT'];?>:</td>
+		<td valign="top" class="setting_name"><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_ENTER_TEXT'];?>:</td>
 		<td class="setting_value" colspan="2">
-			<textarea name="text_qa" wrap="off" cols="50" rows="10"><?php echo $text_qa; ?></textarea>
+			<textarea name="text_qa" wrap="off" cols="60" rows="10"><?php echo $text_qa; ?></textarea>
 		</td>
 	</tr>
 	<tr>
