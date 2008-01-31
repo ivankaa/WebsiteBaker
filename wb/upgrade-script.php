@@ -39,13 +39,12 @@ require(WB_PATH.'/framework/functions.php');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
-<style type="text/css">
 <!--
+<style type="text/css">
 *.red { background-color:#FF0000 }
 *.green { background-color:#00FF00 }
--->
 </style>
-
+-->
 <h2>Upgrade-script</h2>
 <p>
 will upgrade Website Baker 2.6.5 / 2.6.7 to version 2.7
@@ -68,7 +67,7 @@ function db_add_search_key_value($key, $value) {
 		return true;
 	} else {
 		$database->query("INSERT INTO $table (name,value,extra) VALUES ('$key', '$value', '')");
-		echo mysql_error()?mysql_error().'<br />':'';
+		echo (mysql_error()?mysql_error().'<br />':'');
 		$query = $database->query("SELECT value FROM $table WHERE name = '$key' LIMIT 1");
 		if($query->numRows() > 0) {
 			echo "$key: $OK.<br />";
@@ -81,14 +80,14 @@ function db_add_search_key_value($key, $value) {
 }
 function db_add_field($field, $table, $desc) {
 	global $database; global $OK; global $FAIL;
-	echo "<br /><u>Adding field '$field' to table '$table'</u><br />";
+	echo "<u>Adding field '$field' to table '$table'</u><br />";
 	$table = TABLE_PREFIX.$table;
 	$query = $database->query("DESCRIBE $table '$field'");
 	if($query->numRows() == 0) { // add field
 		$query = $database->query("ALTER TABLE $table ADD $field $desc");
-		echo mysql_error()?mysql_error().'<br />':'';
+		echo (mysql_error()?mysql_error().'<br />':'');
 		$query = $database->query("DESCRIBE $table '$field'");
-		echo mysql_error()?mysql_error().'<br />':'';
+		echo (mysql_error()?mysql_error().'<br />':'');
 		if($query->numRows() > 0) {
 			echo "'$field' added. $OK.<br />";
 		} else {
@@ -142,7 +141,7 @@ if($query->numRows() > 0) {
 		$string .= "<tr><td colspan=\"2\" style=\"text-align: justify; padding-bottom: 10px;\">[EXCERPT]</td></tr>";
 		$string = addslashes($string);
 		$database->query("UPDATE ".TABLE_PREFIX."search SET name='results_loop',value='".$string."',extra='' WHERE name = 'results_loop' LIMIT 1");
-		echo mysql_error()?mysql_error().'<br />':'';
+		echo (mysql_error()?mysql_error().'<br />':'');
 		$query = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = 'results_loop' LIMIT 1");
 		if($query->numRows() > 0) {
 			$fetch_results_loop = $query->fetchRow();
@@ -169,7 +168,7 @@ if($query->numRows() > 0) {
 		$string = preg_replace("/<input type=\"text\" name=\"string\" value=\"\[SEARCH_STRING\]\" style=\"width: 100%;\" \/>/", "<input type=\"hidden\" name=\"search_path\" value=\"[SEARCH_PATH]\" /><input type=\"text\" name=\"string\" value=\"[SEARCH_STRING]\" style=\"width: 100%;\" />", $string);
 		$string = addslashes($string);
 		$database->query("UPDATE ".TABLE_PREFIX."search SET name='header',value='".$string."',extra='' WHERE name = 'header' LIMIT 1");
-		echo mysql_error()?mysql_error().'<br />':'';
+		echo (mysql_error()?mysql_error().'<br />':'');
 		$query = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = 'header' LIMIT 1");
 		if($query->numRows() > 0) {
 			$fetch_header = $query->fetchRow();
@@ -195,7 +194,6 @@ db_add_field('publ_end', 'sections', "INT NOT NULL DEFAULT '0'");
 /**********************************************************
  *  - core-module menu_link
  */
-echo "<br /><u>Convert menu_links</u><br />";
 // create table
 $table = TABLE_PREFIX ."mod_menu_link";
 $database->query("DROP TABLE IF EXISTS `$table`");
@@ -220,6 +218,9 @@ if($query_page->numRows() > 0) {
 		$pages[$page['page_id']]['page_details'] = $page;
 	}
 }
+if($pages!=array())
+	echo "<br /><u>Convert menu_links</u><br />";
+
 // get all related files with content from pages/ in $pages, too
 function list_files_dirs($dir, $depth=true, $files=array(), $dirs=array()) {
 	$dh=opendir($dir);
@@ -273,7 +274,7 @@ foreach($pages as $p) {
 	$cur_link .= '/'.page_filename($menu_title);
 echo "found: $cur_link<br />";
 	$database->query("UPDATE $table_p SET link = '$cur_link' WHERE page_id = '$page_id'");
-	echo mysql_error()?'mySQL: '.mysql_error().'<br />':'';
+	echo (mysql_error()?'mySQL: '.mysql_error().'<br />':'');
 	
 	$new_filenames[$page_id]['file'] = WB_PATH.PAGES_DIRECTORY.$cur_link.PAGE_EXTENSION;
 	$new_filenames[$page_id]['link'] = $cur_link;
@@ -293,7 +294,7 @@ echo "found: $cur_link<br />";
 		$res = $query_pid->fetchRow();
 		$target_page_id = $res['page_id'];
 		$database->query("INSERT INTO $table_mm (page_id, section_id, target_page_id, anchor) VALUES ('$page_id', '$section_id', '$target_page_id', '0')");
-		echo mysql_error()?'mySQL: '.mysql_error().'<br />':'';
+		echo (mysql_error()?'mySQL: '.mysql_error().'<br />':'');
 	}
 }
 // create new access files in pages/; make directories as needed
@@ -371,16 +372,33 @@ $database->query("
 		('1', '1', 'calc_text')
 ");
 
+/**********************************************************
+ *  - multi-group
+ */
+db_add_field('groups_id', 'users', "VARCHAR( 255 ) NOT NULL DEFAULT '0' AFTER group_id");
+$table = TABLE_PREFIX.'users';
+if($query_group = $database->query("SELECT user_id,group_id,groups_id FROM $table")) {
+	while($group = $query_group->fetchRow()) {
+		if($group['groups_id'] == '0') {
+			if($database->query("UPDATE $table SET groups_id = group_id WHERE user_id = {$group['user_id']}")) {
+				echo 'groups_id updated successfully<br>';
+			}
+			echo mysql_error().'<br />';
+		}
+	}
+}
+
+
 
 //******************************************************************************
 //Start of upgrade script for the form modul
 //******************************************************************************
 
-db_add_field('success_email_subject', 'mod_form_settings', "VARCHAR(255) NOT NULL AFTER `success_message`");
-db_add_field('success_email_text', 'mod_form_settings', "TEXT NOT NULL AFTER `success_message`");
-db_add_field('success_email_from', 'mod_form_settings', "VARCHAR(255) NOT NULL AFTER `success_message`");
-db_add_field('success_email_to', 'mod_form_settings', "TEXT NOT NULL AFTER `success_message`");
-db_add_field('success_page', 'mod_form_settings', "TEXT NOT NULL AFTER `success_message`");
+db_add_field('success_email_subject', 'mod_form_settings', "VARCHAR(255) NOT NULL AFTER `email_subject`");
+db_add_field('success_email_text', 'mod_form_settings', "TEXT NOT NULL AFTER `email_subject`");
+db_add_field('success_email_from', 'mod_form_settings', "VARCHAR(255) NOT NULL AFTER `email_subject`");
+db_add_field('success_email_to', 'mod_form_settings', "TEXT NOT NULL AFTER `email_subject`");
+db_add_field('success_page', 'mod_form_settings', "TEXT NOT NULL AFTER `email_subject`");
 db_add_field('email_fromname', 'mod_form_settings', "VARCHAR( 255 ) NOT NULL AFTER email_from");
 db_add_field('success_email_fromname', 'mod_form_settings', "VARCHAR( 255 ) NOT NULL AFTER success_email_from");
 
@@ -525,9 +543,10 @@ while($result = $query_dates->fetchRow()) {
 }
 
 // MIGRATING FIELD DATES to POSTED_WHEN
-echo "<B>Copying field posted_when value to published_when</B><BR>";
 $query_dates = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts where section_id != 0 and page_id != 0");
-
+if($query_dates->numRows() > 0) {
+	echo "<B>Copying field posted_when value to published_when</B><BR>";
+}
 while($result = $query_dates->fetchRow()) {
 	$pid = $result['post_id'];
 	$NEW_DATE = $result['posted_when'];

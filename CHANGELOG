@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+31-Jan-2008 Thomas Hornik
++	Added multi-group to upgrade-script
 30-Jan-2008 Christian Sommer
 #	fixed bug with text Captcha (input was restricted to 10 chars.) and a small layout issue
 30-Jan-2008 Thomas Hornik
