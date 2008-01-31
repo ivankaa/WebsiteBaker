@@ -68,10 +68,13 @@ if($query_settings->numRows() == 0) {
 	<input type="text" name="title" maxlength="255" style="width: 90%;"<?php if(isset($_SESSION['comment_title'])) { echo ' value="'.$_SESSION['comment_title'].'"'; unset($_SESSION['comment_title']); } ?> />
 	<br /><br />
 	<?php echo $TEXT['COMMENT']; 
-	// naming this field c0mment is part of ASP
 	?>:
 	<br />
-	<textarea name="c0mment" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
+	<?php if(ENABLED_ASP) { ?>
+		<textarea name="c0mment_<?php echo date('W'); ?>" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
+	<?php } else { ?>
+		<textarea name="comment" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
+	<?php } ?>
 	<br /><br />
 	<?php
 	if(isset($_SESSION['captcha_error'])) {

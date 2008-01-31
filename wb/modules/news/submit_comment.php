@@ -30,7 +30,15 @@ require_once(WB_PATH.'/framework/class.wb.php');
 $wb = new wb;
 
 // Check if we should show the form or add a comment
-if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_GET['post_id']) AND is_numeric($_GET['post_id']) AND isset($_POST['c0mment']) AND $_POST['c0mment'] != '') {
+if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_GET['post_id']) AND is_numeric($_GET['post_id'])
+	AND ( ENABLED_ASP AND isset($_POST['c0mment_'.date('W')]) AND $_POST['c0mment_'.date('W')] != '')
+	OR  (!ENABLED_ASP AND isset($_POST['comment']) AND $_POST['comment'] != '')
+) {
+	
+	if(ENABLED_ASP)
+		$comment = $_POST['c0mment_'.date('W')];
+	else
+		$comment = $_POST['comment'];
 	
 	// Check captcha
 	$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".$_GET['section_id']."'");
@@ -60,13 +68,13 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
 					$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 					$_SESSION['comment_title'] = $_POST['title'];
-					$_SESSION['comment_body'] = $_POST['c0mment'];
+					$_SESSION['comment_body'] = $comment;
 					exit(header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}"));
 				}
 			} else {
 				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 				$_SESSION['comment_title'] = $_POST['title'];
-				$_SESSION['comment_body'] = $_POST['c0mment'];
+				$_SESSION['comment_body'] = $comment;
 				exit(header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}"));
 			}
 		}
@@ -83,7 +91,7 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	$section_id = $_GET['section_id'];
 	$post_id = $_GET['post_id'];
 	$title = $wb->add_slashes(strip_tags($_POST['title']));
-	$comment = $wb->add_slashes(strip_tags($_POST['c0mment']));
+	$comment = $wb->add_slashes(strip_tags($comment));
 	$commented_when = mktime();
 	if($wb->is_authenticated() == true) {
 		$commented_by = $wb->get_user_id();
