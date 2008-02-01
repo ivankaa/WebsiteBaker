@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+01-Feb-2008 Thomas Hornik
+#	Fixed possible XSS-vulnerability in wb/search/search.php
 31-Jan-2008 Thomas Hornik
 !	Adjusted clock-red icon to match wb colors
 #	admin/pages: the parent dropdown-list in index.php and settings.php showed foreign private pages, too. Fixed.

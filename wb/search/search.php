@@ -70,7 +70,7 @@ if($query->numRows() > 0) {
 // Get the search type
 $match = 'all';
 if(isset($_REQUEST['match'])) {
-	$match = $_REQUEST['match'];
+	$match = $wb->add_slashes(strip_tags($_REQUEST['match']));
 }
 
 // Get the path to search into. Normally left blank
@@ -83,7 +83,7 @@ if(isset($_REQUEST['match'])) {
 $search_path_SQL = "";
 $search_path = "";
 if(isset($_REQUEST['search_path'])) {
-	$search_path = $_REQUEST['search_path'];
+	$search_path = $wb->add_slashes(strip_tags($_REQUEST['search_path']));
 	if($search_path != '') {
 		$search_path_SQL = "AND ( ";
 		$not = "";
@@ -121,14 +121,14 @@ if(isset($_REQUEST['string'])) {
 	if ($match!='exact') {
 		$string=str_replace(',', '', $_REQUEST['string']);
 	} else {
-		$string=$_REQUEST['string'];
+		$string=$_REQUEST['string']; // $string will be cleaned below
 	}
 	// redo possible magic quotes
 	$string = $wb->strip_slashes($string);
 	$string = htmlspecialchars($string);
 	$search_display_string = $string;
-	// simulate mysql_real_escape_string()
-	$string = strtr($string, array("\x00"=>"\\\x00", "\n"=>"\\\n", "\r"=>"\\\r", '\\'=>'\\\\','\''=>'\\\'','"'=>"\\\"","\x1a"=>"\\\x1a"));
+	// do really addslashes()
+	$string = $wb->add_slashes($string);
 	// remove some bad chars
 	$string = preg_replace("/(^|\s+)([.])+(?=\s+|$)/", "", $string);
 	// mySQL needs four backslashes to match one in LIKE comparisons)
