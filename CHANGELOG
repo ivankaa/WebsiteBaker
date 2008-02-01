@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+01-Feb-2008 Christian Sommer
+#	Added default index.php to all folders to prevent directory spoofing
 01-Feb-2008 Thomas Hornik
 #	Fixed possible XSS-vulnerability in wb/search/search.php
 31-Jan-2008 Thomas Hornik
