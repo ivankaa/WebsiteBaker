@@ -14,6 +14,7 @@ Legend:
 01-Feb-2008 Christian Sommer
 #	Added default index.php to all folders to prevent directory spoofing
 01-Feb-2008 Thomas Hornik
+#	Added some missing add_slashes(), get_post_escaped(), and strip_tags() for $_POST, $_GET and $_REQUEST-data. Also for $_SERVER['PHP_SELF'].
 #	Fixed possible XSS-vulnerability in wb/search/search.php
 31-Jan-2008 Thomas Hornik
 !	Adjusted clock-red icon to match wb colors

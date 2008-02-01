@@ -106,8 +106,8 @@ if($query_sections->numRows() > 0) {
 				}
 				if($sql != '')
 					$sql .= ",";
-				$sql .= " publ_start = '".$publ_start."'";
-				$sql .= ", publ_end = '".$publ_end."'";
+				$sql .= " publ_start = '".$admin->add_slashes($publ_start)."'";
+				$sql .= ", publ_end = '".$admin->add_slashes($publ_end)."'";
 			}
 			$query = "UPDATE ".TABLE_PREFIX."sections SET $sql WHERE section_id = '$section_id' LIMIT 1";
 			if($sql != '') {

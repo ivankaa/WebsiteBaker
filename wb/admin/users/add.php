@@ -32,15 +32,15 @@ $admin = new admin('Access', 'users_add');
 $database = new database();
 
 // Get details entered
-$groups_id = implode(",", $_POST['groups']); //should check permissions
-$active = $_POST['active'][0];
-$username_fieldname = $admin->get_post('username_fieldname');
-$username = strtolower($admin->get_post($username_fieldname));
+$groups_id = implode(",", $admin->add_slashes($_POST['groups'])); //should check permissions
+$active = $admin->add_slashes($_POST['active'][0]);
+$username_fieldname = $admin->get_post_escaped('username_fieldname');
+$username = strtolower($admin->get_post_escaped($username_fieldname));
 $password = $admin->get_post('password');
 $password2 = $admin->get_post('password2');
-$display_name = $admin->get_post('display_name');
-$email = $admin->get_post('email');
-$home_folder = $admin->get_post('home_folder');
+$display_name = $admin->get_post_escaped('display_name');
+$email = $admin->get_post_escaped('email');
+$home_folder = $admin->get_post_escaped('home_folder');
 $default_language = DEFAULT_LANGUAGE;
 
 // Create a javascript back link

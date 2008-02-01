@@ -137,6 +137,9 @@ class wb
 	}
 
 	// Ditto for stripslashes
+	// Attn: this is _not_ the counterpart to $this->add_slashes() !
+	// Use stripslashes() to undo a preliminarily done $this->add_slashes()
+	// The purpose of $this->strip_slashes() is to undo the effects of magic_quotes_gpc==On
 	function strip_slashes($input) {
 		if ( !get_magic_quotes_gpc() || ( !is_string($input) ) ) {
 			return $input;

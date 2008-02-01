@@ -52,10 +52,9 @@ if(isset($_POST['save_settings'])) {
 	");
 
 	// save text-captchas
-	if($_POST['captcha_type'] == 'text') { // ct_text
-		$text_qa=$_POST['text_qa'];
+	if($captcha_type == 'text') { // ct_text
+		$text_qa=$admin->add_slashes($_POST['text_qa']);
 		if(strpos($text_qa, '### example ###') === FALSE) {
-			$text_qa=$admin->add_slashes($text_qa);
 			$database->query("UPDATE $table SET ct_text = '$text_qa'");
 		}
 	}
@@ -76,7 +75,7 @@ if(isset($_POST['save_settings'])) {
 	$text_qa='';
 	if($query = $database->query("SELECT ct_text FROM $table")) {
 		$data = $query->fetchRow();
-		$text_qa = $admin->strip_slashes($data['ct_text']);
+		$text_qa = $data['ct_text'];
 	}
 	if($text_qa == '')
 		$text_qa = $MOD_CAPTCHA_CONTROL['CAPTCHA_TEXT_DESC'];
@@ -125,7 +124,7 @@ if(isset($_POST['save_settings'])) {
 		$data = $query->fetchRow();
 		$enabled_captcha = $data['enabled_captcha'];
 		$enabled_asp = $data['enabled_asp'];
-		$captcha_type = $admin->strip_slashes($data['captcha_type']);
+		$captcha_type = $data['captcha_type'];
 	} else {
 		// something went wrong, use dummy value
 		$enabled_captcha = '1';

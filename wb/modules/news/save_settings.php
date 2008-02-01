@@ -41,9 +41,9 @@ $comments_header = $admin->add_slashes(str_replace($friendly, $raw, $_POST['comm
 $comments_loop = $admin->add_slashes(str_replace($friendly, $raw, $_POST['comments_loop']));
 $comments_footer = $admin->add_slashes(str_replace($friendly, $raw, $_POST['comments_footer']));
 $comments_page = $admin->add_slashes(str_replace($friendly, $raw, $_POST['comments_page']));
-$commenting = $_POST['commenting'];
-$posts_per_page = $_POST['posts_per_page'];
-$use_captcha = $_POST['use_captcha'];
+$commenting = $admin->add_slashes($_POST['commenting']);
+$posts_per_page = $admin->add_slashes($_POST['posts_per_page']);
+$use_captcha = $admin->add_slashes($_POST['use_captcha']);
 if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) {
 	$resize = $_POST['resize'];
 } else {

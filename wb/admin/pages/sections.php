@@ -70,7 +70,7 @@ if(isset($_GET['section_id']) AND is_numeric($_GET['section_id'])) {
 	}
 } elseif(isset($_POST['module']) AND $_POST['module'] != '') {
 	// Get section info
-	$module = $_POST['module'];
+	$module = $admin->add_slashes($_POST['module']);
 	// Include the ordering class
 	require(WB_PATH.'/framework/class.order.php');
 	// Get new order

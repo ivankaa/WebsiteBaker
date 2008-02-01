@@ -51,7 +51,7 @@ if($template != '') {
 unset($template);
 
 //Get the referrer page ID if it exists
-if(isset($_REQUEST['referrer']) && intval($_REQUEST['referrer']) > 0) {
+if(isset($_REQUEST['referrer']) && is_numeric($_REQUEST['referrer']) && intval($_REQUEST['referrer']) > 0) {
 	define('REFERRER_ID', intval($_REQUEST['referrer']));
 } else {
 	define('REFERRER_ID', 0);

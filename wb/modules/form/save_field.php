@@ -36,7 +36,6 @@ if(!isset($_POST['field_id']) OR !is_numeric($_POST['field_id'])) {
 	exit(0);
 } else {
 	$field_id = $_POST['field_id'];
-	$field_id = $field_id;
 }
 
 // Include WB admin wrapper script
@@ -48,8 +47,8 @@ if($admin->get_post('title') == '' OR $admin->get_post('type') == '') {
 	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
 } else {
 	$title = $admin->add_slashes($admin->get_post('title'));
-	$type = $admin->get_post('type');
-	$required = $admin->get_post('required');
+	$type = $admin->add_slashes($admin->get_post('type'));
+	$required = $admin->add_slashes($admin->get_post('required'));
 }
 $value = '';
 

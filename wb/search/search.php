@@ -127,8 +127,7 @@ if(isset($_REQUEST['string'])) {
 	$string = $wb->strip_slashes($string);
 	$string = htmlspecialchars($string);
 	$search_display_string = $string;
-	// do really addslashes()
-	$string = $wb->add_slashes($string);
+	$string = addslashes($string);
 	// remove some bad chars
 	$string = preg_replace("/(^|\s+)([.])+(?=\s+|$)/", "", $string);
 	// mySQL needs four backslashes to match one in LIKE comparisons)

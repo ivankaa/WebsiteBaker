@@ -101,7 +101,7 @@ class admin extends wb {
 		$view_url = WB_URL;
 		if(isset($_GET['page_id'])) {
 			// extract page link from the database
-			$result = @$database->query("SELECT link FROM " .TABLE_PREFIX ."pages WHERE page_id = '" .(int) $_GET['page_id'] ."'");
+			$result = @$database->query("SELECT link FROM " .TABLE_PREFIX ."pages WHERE page_id = '" .(int) addslashes($_GET['page_id']) ."'");
 			$row = @$result->fetchRow();
 			if($row) $view_url .= PAGES_DIRECTORY .$row['link']. PAGE_EXTENSION;
 		}
@@ -311,7 +311,7 @@ class admin extends wb {
 		if(isset($_GET['tool'])) {
 			// check if displayed page contains a installed admin tool
 			$result = $database->query("SELECT * FROM " .TABLE_PREFIX ."addons 
-				WHERE type = 'module' AND function = 'tool' AND directory = '".$_GET['tool']."'");
+				WHERE type = 'module' AND function = 'tool' AND directory = '".addslashes($_GET['tool'])."'");
 
 			if($result->numRows()) {
 				// check if admin tool directory contains a backend.js or backend.css file to include
@@ -323,7 +323,7 @@ class admin extends wb {
 			}
 		} elseif(isset($_GET['page_id'])) {
 			// check if displayed page in the backend contains a page module
-			$page_id = (int) $_GET['page_id'];
+			$page_id = (int) addslashes($_GET['page_id']);
 
     		// gather information for all models embedded on actual page
 			$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections 

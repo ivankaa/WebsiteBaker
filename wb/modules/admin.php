@@ -39,23 +39,13 @@ if(!defined('WB_URL')) {
 }
 
 // Get page id
-if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
-	if(!isset($_POST['page_id']) OR !is_numeric($_POST['page_id'])) {
-		if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
-			if(!isset($_POST['page_id']) OR !is_numeric($_POST['page_id'])) {
-				header("Location: index.php");
-				exit(0);
-			} else {
-				$page_id = $_POST['page_id'];
-			}
-		} else {
-			$page_id = $_GET['page_id'];
-		}
-	} else {
-		$page_id = $_POST['page_id'];
-	}
-} else {
+if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])) {
 	$page_id = $_GET['page_id'];
+} elseif(isset($_POST['page_id']) AND is_numeric($_POST['page_id'])) {
+	$page_id = $_POST['page_id'];
+} else {
+	header("Location: index.php");
+	exit(0);
 }
 
 // Get section id if there is one

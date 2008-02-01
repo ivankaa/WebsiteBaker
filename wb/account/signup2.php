@@ -37,8 +37,8 @@ $database = new database();
 // Get details entered
 $group_id = FRONTEND_SIGNUP;
 $active = 1;
-$username = strtolower($wb->add_slashes(strip_tags($wb->get_post('username'))));
-$display_name = $wb->add_slashes(strip_tags($wb->get_post('display_name')));
+$username = strtolower(strip_tags($wb->get_post_escaped('username')));
+$display_name = strip_tags($wb->get_post_escaped('display_name'));
 $email = $wb->get_post('email');
 
 // Create a javascript back link
@@ -94,7 +94,7 @@ if($results->numRows() > 0) {
 }
 
 // Check if the email already exists
-$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '$email'");
+$results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '$wb->add_slashes($email'");
 if($results->numRows() > 0) {
 	if(isset($MESSAGE['USERS']['EMAIL_TAKEN'])) {
 		$wb->print_error($MESSAGE['USERS']['EMAIL_TAKEN'], $js_back, false);

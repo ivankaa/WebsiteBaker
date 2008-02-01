@@ -93,7 +93,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'save' &&
 		}
 			
 	?>
-		<form name="edit_module_file" action="<?php echo $_SERVER['PHP_SELF'] .'?action=save';?>" method="post" style="margin: 0;">
+		<form name="edit_module_file" action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])) .'?action=save';?>" method="post" style="margin: 0;">
 	  		<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
 	  		<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
 			<input type="hidden" name="css_codepress" value="" />

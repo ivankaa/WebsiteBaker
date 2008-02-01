@@ -41,20 +41,20 @@ require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
 $page_title = $admin->get_post_escaped('page_title');
-$page_title = my_htmlspecialchars($page_title);
+$page_title = htmlspecialchars($page_title);
 $menu_title = $admin->get_post_escaped('menu_title');
-$menu_title = my_htmlspecialchars($menu_title);
-$description = my_htmlspecialchars($admin->add_slashes($admin->get_post('description')));
-$keywords = my_htmlspecialchars($admin->add_slashes($admin->get_post('keywords')));
-$parent = $admin->get_post('parent');
-$visibility = $admin->get_post('visibility');
-$template = $admin->get_post('template');
-$target = $admin->get_post('target');
-$admin_groups = $admin->get_post('admin_groups');
-$viewing_groups = $admin->get_post('viewing_groups');
-$searching = $admin->get_post('searching');
-$language = $admin->get_post('language');
-$menu = $admin->get_post('menu');
+$menu_title = htmlspecialchars($menu_title);
+$description = htmlspecialchars($admin->add_slashes($admin->get_post('description')));
+$keywords = htmlspecialchars($admin->add_slashes($admin->get_post('keywords')));
+$parent = $admin->get_post_escaped('parent');
+$visibility = $admin->get_post_escaped('visibility');
+$template = $admin->get_post_escaped('template');
+$target = $admin->get_post_escaped('target');
+$admin_groups = $admin->get_post_escaped('admin_groups');
+$viewing_groups = $admin->get_post_escaped('viewing_groups');
+$searching = $admin->get_post_escaped('searching');
+$language = $admin->get_post_escaped('language');
+$menu = $admin->get_post_escaped('menu');
 
 // Validate data
 if($page_title == '' || substr($page_title,0,1)=='.') {

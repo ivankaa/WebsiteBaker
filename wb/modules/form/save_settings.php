@@ -41,7 +41,7 @@ $header = $admin->add_slashes($_POST['header']);
 $field_loop = $admin->add_slashes($_POST['field_loop']);
 $footer = $admin->add_slashes($_POST['footer']);
 $email_to = $admin->add_slashes($_POST['email_to']);
-$use_captcha = $_POST['use_captcha'];
+$use_captcha = $admin->add_slashes($_POST['use_captcha']);
 if($_POST['email_from_field'] == '') {
 	$email_from = $admin->add_slashes($_POST['email_from']);
 } else {
@@ -49,7 +49,7 @@ if($_POST['email_from_field'] == '') {
 }
 $email_fromname = $admin->add_slashes($_POST['email_fromname']);
 $email_subject = $admin->add_slashes($_POST['email_subject']);
-$success_page = $_POST['success_page'];
+$success_page = $admin->add_slashes($_POST['success_page']);
 $success_email_to = $admin->add_slashes($_POST['success_email_to']);
 $success_email_from = $admin->add_slashes($_POST['success_email_from']);
 $success_email_fromname = $admin->add_slashes($_POST['success_email_fromname']);

@@ -30,18 +30,23 @@ require_once(WB_PATH.'/framework/class.wb.php');
 $wb = new wb;
 
 // Check if we should show the form or add a comment
-if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_GET['post_id']) AND is_numeric($_GET['post_id'])
-	AND ( ENABLED_ASP AND isset($_POST['c0mment_'.date('W')]) AND $_POST['c0mment_'.date('W')] != '')
-	OR  (!ENABLED_ASP AND isset($_POST['comment']) AND $_POST['comment'] != '')
+if(isset($_GET['page_id']) AND is_numeric($_GET['page_id']) AND isset($_GET['section_id']) AND is_numeric($_GET['section_id']) AND isset($_GET['post_id']) AND is_numeric($_GET['post_id'])
+	AND (( ENABLED_ASP AND isset($_POST['c0mment_'.date('W')]) AND $_POST['c0mment_'.date('W')] != '')
+		OR  (!ENABLED_ASP AND isset($_POST['comment']) AND $_POST['comment'] != ''))
 ) {
 	
 	if(ENABLED_ASP)
 		$comment = $_POST['c0mment_'.date('W')];
 	else
 		$comment = $_POST['comment'];
-	
+	$comment = $wb->add_slashes(strip_tags($comment));
+	$title = $wb->add_slashes(strip_tags($_POST['title']));
+	$page_id = $_GET['page_id'];
+	$section_id = $_GET['section_id'];
+	$post_id = $_GET['post_id'];
+
 	// Check captcha
-	$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".$_GET['section_id']."'");
+	$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
 	if($query_settings->numRows() == 0) { 
 		exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
 	} else {
@@ -67,15 +72,15 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 				// Check for a mismatch
 				if(!isset($_POST['captcha']) OR !isset($_SESSION['captcha']) OR $_POST['captcha'] != $_SESSION['captcha']) {
 					$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
-					$_SESSION['comment_title'] = $_POST['title'];
+					$_SESSION['comment_title'] = $title;
 					$_SESSION['comment_body'] = $comment;
-					exit(header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}"));
+					exit(header('Location: '.WB_URL."/modules/news/comment.php?id=$post_id&sid=$section_id"));
 				}
 			} else {
 				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
-				$_SESSION['comment_title'] = $_POST['title'];
+				$_SESSION['comment_title'] = $title;
 				$_SESSION['comment_body'] = $comment;
-				exit(header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}"));
+				exit(header('Location: '.WB_URL."/modules/news/comment.php?id=$post_id&sid=$section_id"));
 			}
 		}
 	}
@@ -87,11 +92,6 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	}
 
 	// Insert the comment into db
-	$page_id = $_GET['page_id'];
-	$section_id = $_GET['section_id'];
-	$post_id = $_GET['post_id'];
-	$title = $wb->add_slashes(strip_tags($_POST['title']));
-	$comment = $wb->add_slashes(strip_tags($comment));
 	$commented_when = mktime();
 	if($wb->is_authenticated() == true) {
 		$commented_by = $wb->get_user_id();
@@ -104,7 +104,10 @@ if(is_numeric($_GET['page_id']) AND is_numeric($_GET['section_id']) AND isset($_
 	$page = $query_page->fetchRow();
 	header('Location: '.$wb->page_link($page['link']).'?id='.$post_id);
 } else {
-	header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}");
+	if(isset($_GET['post_id']) AND is_numeric($_GET['post_id']) AND isset($_GET['section_id']) AND is_numeric($_GET['section_id']))
+		header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}");
+	else
+		exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
 }
 
 ?>

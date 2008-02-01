@@ -39,7 +39,7 @@ $text_qa='';
 $table = TABLE_PREFIX.'mod_captcha_control';
 if($query = $database->query("SELECT ct_text FROM $table")) {
 	$data = $query->fetchRow();
-	$text_qa = $admin->strip_slashes($data['ct_text']);
+	$text_qa = $data['ct_text'];
 }
 $content = explode("\n", $text_qa);
 
@@ -47,7 +47,6 @@ reset($content);
 while($s = current($content)) {
 	// get question
 	$s=trim(rtrim(rtrim($s,"\n"),"\r")); // remove newline
-	$s=$admin->strip_slashes($s);
 	if($s=='' OR $s{0}!='?') {
 		next($content);
 		continue;
@@ -66,7 +65,6 @@ while($s = current($content)) {
 	// get answer
 	$s=next($content);
 	$s=trim(rtrim(rtrim($s,"\n"),"\r")); // remove newline
-	$s=$admin->strip_slashes($s);
 	if(isset($s{0}) && $s{0}=='!') {
 		$a=substr($s,1);
 		$qa[$lang][$q]=$a;

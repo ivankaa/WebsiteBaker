@@ -27,12 +27,16 @@
 require('../../config.php');
 require_once(WB_PATH .'/framework/functions.php');
 
+// Print admin header
+require_once(WB_PATH.'/framework/class.admin.php');
+$admin = new admin('Addons', 'modules_view');
+
 // Get module name
 if(!isset($_POST['file']) OR $_POST['file'] == "") {
 	header("Location: index.php");
 	exit(0);
 } else {
-	$file = $_POST['file'];
+	$file = $admin->add_slashes($_POST['file']);
 }
 
 // Check if the module exists
@@ -40,10 +44,6 @@ if(!file_exists(WB_PATH.'/modules/'.$file)) {
 	header("Location: index.php");
 	exit(0);
 }
-
-// Print admin header
-require_once(WB_PATH.'/framework/class.admin.php');
-$admin = new admin('Addons', 'modules_view');
 
 // Setup module object
 $template = new Template(ADMIN_PATH.'/modules');

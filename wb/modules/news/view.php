@@ -167,7 +167,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		if($query_extra != '') {
 			?>
 			<div class="selected_group_title">
-				<?php echo '<a href="'.$_SERVER['PHP_SELF'].'">'.PAGE_TITLE.'</a> >> '.$groups[$_GET['g']]['title']; ?>
+				<?php echo '<a href="'.htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])).'">'.PAGE_TITLE.'</a> >> '.$groups[$_GET['g']]['title']; ?>
 			</div>
 			<?php
 		}

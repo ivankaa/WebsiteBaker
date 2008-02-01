@@ -26,7 +26,7 @@
 require('../../config.php');
 
 // Get id
-if(!isset($_POST['comment_id']) OR !is_numeric($_POST['comment_id'])) {
+if(!isset($_POST['comment_id']) OR !is_numeric($_POST['comment_id']) OR !isset($_POST['post_id']) OR !is_numeric($_POST['post_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
 	exit(0);
 } else {
@@ -41,8 +41,8 @@ require(WB_PATH.'/modules/admin.php');
 if($admin->get_post('title') == '' AND $admin->get_post('comment') == '') {
 	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/news/modify_comment.php?page_id='.$page_id.'&section_id='.$section_id.'comment_id='.$id);
 } else {
-	$title = $admin->add_slashes($admin->get_post('title'));
-	$comment = $admin->add_slashes($admin->get_post('comment'));
+	$title = strip_tags($admin->get_post_escaped('title'));
+	$comment = strip_tags($admin->get_post_escaped('comment'));
 	$post_id = $admin->get_post('post_id');
 }
 

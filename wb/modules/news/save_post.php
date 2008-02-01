@@ -44,13 +44,13 @@ require(WB_PATH.'/modules/admin.php');
 if($admin->get_post('title') == '' AND $admin->get_post('url') == '') {
 	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/news/modify_post.php?page_id='.$page_id.'&section_id='.$section_id.'&post_id='.$id);
 } else {
-	$title = $admin->add_slashes($admin->get_post('title'));
-	$short = $admin->add_slashes($admin->get_post('short'));
-	$long = $admin->add_slashes($admin->get_post('long'));
-	$commenting = $admin->get_post('commenting');
-	$active = $admin->get_post('active');
-	$old_link = $admin->get_post('link');
-	$group_id = $admin->get_post('group');
+	$title = $admin->get_post_escaped('title');
+	$short = $admin->get_post_escaped('short');
+	$long = $admin->get_post_escaped('long');
+	$commenting = $admin->get_post_escaped('commenting');
+	$active = $admin->get_post_escaped('active');
+	$old_link = $admin->get_post_escaped('link');
+	$group_id = $admin->get_post_escaped('group');
 }
 
 // Get page link URL
@@ -103,10 +103,10 @@ require(WB_PATH."/index.php");
 }
 
 // get publisedwhen and publisheduntil
-$publishedwhen = jscalendar_to_timestamp($admin->get_post('publishdate'));
+$publishedwhen = jscalendar_to_timestamp($admin->get_post_escaped('publishdate'));
 if($publishedwhen == '' || $publishedwhen < 1)
 	$publishedwhen=0;
-$publisheduntil = jscalendar_to_timestamp($admin->get_post('enddate'), $publishedwhen);
+$publisheduntil = jscalendar_to_timestamp($admin->get_post_escaped('enddate'), $publishedwhen);
 if($publisheduntil == '' || $publisheduntil < 1)
 	$publisheduntil=0;
 

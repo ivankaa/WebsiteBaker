@@ -35,7 +35,7 @@ if(!isset($_GET['tool'])) {
 }
 
 // Check if tool is installed
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND directory = '".$_GET['tool']."'");
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND directory = '".$admin->add_slashes($_GET['tool'])."'");
 if($result->numRows() == 0) {
 	header("Location: index.php");
 	exit(0);

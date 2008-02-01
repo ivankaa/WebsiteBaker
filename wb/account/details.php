@@ -30,10 +30,10 @@ if(!defined('WB_URL')) {
 
 // Get entered values
 $display_name = $wb->add_slashes(strip_tags($wb->get_post('display_name')));
-$language = $wb->get_post('language');
-$timezone = $wb->get_post('timezone')*60*60;
-$date_format = $wb->get_post('date_format');
-$time_format = $wb->get_post('time_format');
+$language = $wb->get_post_escaped('language');
+$timezone = $wb->get_post_escaped('timezone')*60*60;
+$date_format = $wb->get_post_escaped('date_format');
+$time_format = $wb->get_post_escaped('time_format');
 
 // Create a javascript back link
 $js_back = "javascript: history.go(-1);";

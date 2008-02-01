@@ -31,12 +31,11 @@ require(WB_PATH.'/modules/admin.php');
 
 // Update the mod_wrapper table with the contents
 if(isset($_POST['url'])) {
-	$url = $admin->add_slashes($_POST['url']);
+	$url = $admin->add_slashes(strip_tags($_POST['url']));
 	$height = $_POST['height'];
 	if(!is_numeric($height)) {
 		$height = 400;
 	}
-	$database = new database();
 	$query = "UPDATE ".TABLE_PREFIX."mod_wrapper SET url = '$url', height = '$height' WHERE section_id = '$section_id'";
 	$database->query($query);	
 }

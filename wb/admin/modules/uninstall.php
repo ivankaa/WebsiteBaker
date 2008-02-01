@@ -23,12 +23,17 @@
 
 */
 
+// Setup admin object
+require('../../config.php');
+require_once(WB_PATH.'/framework/class.admin.php');
+$admin = new admin('Addons', 'modules_uninstall');
+
 // Check if user selected module
 if(!isset($_POST['file']) OR $_POST['file'] == "") {
 	header("Location: index.php");
 	exit(0);
 } else {
-	$file = $_POST['file'];
+	$file = $admin->add_slashes($_POST['file']);
 }
 
 // Extra protection
@@ -36,11 +41,6 @@ if(trim($file) == '') {
 	header("Location: index.php");
 	exit(0);
 }
-
-// Setup admin object
-require('../../config.php');
-require_once(WB_PATH.'/framework/class.admin.php');
-$admin = new admin('Addons', 'modules_uninstall');
 
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');

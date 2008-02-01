@@ -124,7 +124,7 @@ $java_mailcheck = '';
 
 // Add form starter code
 ?>
-<form name="form" onsubmit="return formCheck(this);" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<form name="form" onsubmit="return formCheck(this);" action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])); ?>" method="post">
 <input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" />
 <?php
 
@@ -338,7 +338,7 @@ echo $footer;
 			$email_from = $fetch_settings['email_from'];
 			if(substr($email_from, 0, 5) == 'field') {
 				// Set the email from field to what the user entered in the specified field
-				$email_from = $wb->add_slashes($_POST[$email_from]);
+				$email_from = htmlspecialchars($wb->add_slashes($_POST[$email_from]));
 			}
 			$email_fromname = $fetch_settings['email_fromname'];
 			$email_subject = $fetch_settings['email_subject'];
@@ -346,7 +346,7 @@ echo $footer;
 			$success_email_to = $fetch_settings['success_email_to'];
 			if(substr($success_email_to, 0, 5) == 'field') {
 				// Set the success_email to field to what the user entered in the specified field
-				$success_email_to = $wb->add_slashes($_POST[$success_email_to]);
+				$success_email_to = htmlspecialchars($wb->add_slashes($_POST[$success_email_to]));
 			}
 			$success_email_from = $fetch_settings['success_email_from'];
 			$success_email_fromname = $fetch_settings['success_email_fromname'];
@@ -384,7 +384,7 @@ echo $footer;
 				// Add to message body
 				if($field['type'] != '') {
 					if(!empty($_POST['field'.$field['field_id']])) {
-						if(isset($captcha_error)) $_SESSION['field'.$field['field_id']] = $_POST['field'.$field['field_id']];
+						if(isset($captcha_error)) $_SESSION['field'.$field['field_id']] = htmlspecialchars($_POST['field'.$field['field_id']]);
 						if($field['type'] == 'email' AND $admin->validate_email($_POST['field'.$field['field_id']]) == false) {
 							$email_error = $MESSAGE['USERS']['INVALID_EMAIL'];
 						}

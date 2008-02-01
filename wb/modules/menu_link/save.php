@@ -31,9 +31,9 @@ require(WB_PATH.'/modules/admin.php');
 
 // Update id, anchor and target
 if(isset($_POST['page_link'])) {
-	$foreign_page_id = $_POST['page_link'];
-	$page_target = $_POST['page_target'];
-	$url_target = $_POST['target'];
+	$foreign_page_id = $admin->add_slashes($_POST['page_link']);
+	$page_target = $admin->add_slashes($_POST['page_target']);
+	$url_target = $admin->add_slashes($_POST['target']);
 
 	$table_pages = TABLE_PREFIX.'pages';
 	$table_mod = TABLE_PREFIX.'mod_menu_link';
