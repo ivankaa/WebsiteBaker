@@ -14,6 +14,7 @@ Legend:
 02-Feb-2008 Thomas Hornik
 !	settings: pages-directory '/' will be converted to '' (empty string) on save.
 !	changed last remaining call to my_htmlspecialchars() to htmlspecialchars()
+#	fixed path in jscalendar-css
 01-Feb-2008 Christian Sommer
 #	Added default index.php to all folders to prevent directory spoofing
 01-Feb-2008 Thomas Hornik
