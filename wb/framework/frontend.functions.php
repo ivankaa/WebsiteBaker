@@ -82,13 +82,13 @@ function search_highlight($foo='', $arr_string=array()) {
 	
 	// the highlighting
 	// match $string, but not inside <style>...</style>, <script>...</script>, <!--...--> or HTML-Tags
-	// split $string into pieces - "cut away" styles, scripts, comments, and HTML-tags
-	$matches = preg_split("/(<style.*<\/style>|<script.*<\/script>|<!--.*-->|<.*>)/iUs",$foo,-1,(PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY));
+	// split $string into pieces - "cut away" styles, scripts, comments, HTML-tags and eMail-addresses
+	$matches = preg_split("/(<style.*<\/style>|<script.*<\/script>|<!--.*-->|<.*>|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b)/iUs",$foo,-1,(PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY));
 	if(is_array($matches) && $matches != array()) {
 		$foo = "";
 		$string = strtr($string, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));
 		foreach($matches as $match) {
-			if($match{0}!="<") {
+			if($match{0}!="<" && !preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i', $match)) {
 				$match = strtr($match, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));
 				$match = preg_replace('/('.$string.')/iS', '_span class=_highlight__$1_/span_',$match);
 				$match = strtr($match, array('<'=>'&lt;', '>'=>'&gt;', '&'=>'&amp;', '"'=>'&quot;', '\''=>'&#39;', "\xC2\xA0"=>'&nbsp;'));
