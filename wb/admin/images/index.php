@@ -23,7 +23,6 @@
 
 */
 
-require('../../config.php');
-header('Location: '.ADMIN_URL.'/home/index.php');
+header("Location: ../../index.php");
 
 ?>

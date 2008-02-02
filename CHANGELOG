@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+02-Feb-2008 Christian Sommer
+#	fixed wrong redirect in /admin/images
 02-Feb-2008 Thomas Hornik
 !	settings: pages-directory '/' will be converted to '' (empty string) on save.
 !	changed last remaining call to my_htmlspecialchars() to htmlspecialchars()
