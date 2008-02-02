@@ -33,7 +33,7 @@ require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
 $title = $admin->get_post_escaped('title');
-$title = my_htmlspecialchars($title);
+$title = htmlspecialchars($title);
 $module = $admin->get_post('type');
 $parent = $admin->get_post('parent');
 $visibility = $admin->get_post('visibility');

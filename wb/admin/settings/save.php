@@ -149,6 +149,9 @@ while($setting = $results->fetchRow()) {
 			case 'string_file_mode':
 				$value=$file_mode;
 				break;
+			case 'pages_directory':
+				if(trim($value)=='/') $value='';
+				break;
 		}
 		$database->query("UPDATE ".TABLE_PREFIX."settings SET value = '$value' WHERE name = '$setting_name'");
 	}
