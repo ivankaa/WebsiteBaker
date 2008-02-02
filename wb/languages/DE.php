@@ -403,6 +403,8 @@ $TEXT['MODULE_ORDER'] = 'Modulreihenfolge f&uuml;r die Suche';
 $TEXT['MAX_EXCERPT'] = 'Max Anzahl Treffer';
 $TEXT['PUBL_START_DATE'] = 'Start Datum';
 $TEXT['PUBL_END_DATE'] = 'End Datum';
+$TEXT['CALENDAR'] = 'Kalender';
+$TEXT['DELETE_DATE'] = 'Datum l&ouml;schen';
 $TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Bitte gebe Standard "VON" Adresse und einen Senddernamen an. Als Absender Adresse empfiehlt sich ein Format wie: <strong>admin@DeineWebseite.de</strong>. Manche E-Mail-Provider (z.B. <em>mail.de</em>) stellen keine E-Mails zu, die nicht &uuml;ber den Provider selbst verschickt wurden, in der Absenderadresse aber den Namen des E-Mail-Providers <em>name@mail.de</em> enthalten. Die Standard Werte werden nur verwendet, wenn keine anderen Werte von Website Baker gesetzt wurden. Wenn Dein Service Provider <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> anbietet, solltest Du diese Option f&uuml;r ausgehende E-Mails verwenden.';
 $TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Standard "VON" Adresse';
 $TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Standard Absender Name';

@@ -403,6 +403,8 @@ $TEXT['MODULE_ORDER'] = 'Module-order for searching'; //needs to be translated
 $TEXT['MAX_EXCERPT'] = 'Max lines of excerpt'; //needs to be translated
 $TEXT['PUBL_START_DATE'] = 'Start date'; //needs to be translated
 $TEXT['PUBL_END_DATE'] = 'End date'; //needs to be translated
+$TEXT['CALENDAR'] = 'Calender'; //needs to be translated
+$TEXT['DELETE_DATE'] = 'Delete date'; //needs to be translated
 $TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.'; //needs to be translated
 $TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail'; //needs to be translated
 $TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name'; //needs to be translated
