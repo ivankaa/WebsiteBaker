@@ -209,8 +209,7 @@ if (!function_exists('page_content')) {
 			while($section = $query_sections->fetchRow()) {
 				// skip this section if it is out of publication-date
 				$now = time();
-				if( !( $now<$section['publ_end'] && ($now>$section['publ_start'] || $section['publ_start']==0) ||
-					$now>$section['publ_start'] && $section['publ_end']==0) ) {
+				if( !(($now<=$section['publ_end'] || $section['publ_end']==0) && ($now>=$section['publ_start'] || $section['publ_start']==0)) ) {
 					continue;
 				}
 				$section_id = $section['section_id'];

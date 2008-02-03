@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+03-Feb-2008 Thomas Hornik
+#	out-of-date default page isn't shown anymore, instead shows next public page.
 03-Feb-2008 Matthias Gallas
 +	added kewyword id to all new files
 02-Feb-2008 Christian Sommer

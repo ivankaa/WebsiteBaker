@@ -84,7 +84,17 @@ class frontend extends wb {
 		}
 		// Get default page
 		// Check for a page id
-		$query_default = "SELECT page_id,link FROM ".TABLE_PREFIX."pages WHERE parent = '0' AND visibility = 'public'$this->sql_where_language ORDER BY position ASC LIMIT 1";
+		$table_p = TABLE_PREFIX.'pages';
+		$table_s = TABLE_PREFIX.'sections';
+		$now = time();
+		$query_default = "
+			SELECT p.page_id, p.link
+			FROM $table_p AS p, $table_s AS s
+			WHERE p.page_id=s.page_id
+			AND p.parent = '0' AND p.visibility = 'public'
+			AND (($now>=s.publ_start OR s.publ_start=0) AND ($now<=s.publ_end OR s.publ_end=0))
+			$this->sql_where_language
+			ORDER BY p.position ASC LIMIT 1";
 		$get_default = $database->query($query_default);
 		$default_num_rows = $get_default->numRows();
 		if(!isset($page_id) OR !is_numeric($page_id)){
