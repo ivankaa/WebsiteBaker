@@ -14,9 +14,11 @@ $template->set_block('page', 'main_block', 'main');
 
 // Function to generate page list
 function gen_page_list($parent) {
-	global $template, $database;
-	$get_pages = $database->query("SELECT page_id,menu_title,link,level FROM ".TABLE_PREFIX."pages WHERE parent = '$parent'");
+	global $template, $database, $admin;
+	$get_pages = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent'");
 	while($page = $get_pages->fetchRow()) {
+		if(!$admin->page_is_visible($page))
+			continue;
 		$title = stripslashes($page['menu_title']);
 		// Add leading -'s so we can tell what level a page is at
 		$leading_dashes = '';
@@ -44,10 +46,12 @@ function gen_page_list($parent) {
 // Get pages and put them into the pages list
 $template->set_block('main_block', 'page_list_block', 'page_list');
 $database = new database();
-$get_pages = $database->query("SELECT page_id,menu_title,link FROM ".TABLE_PREFIX."pages WHERE parent = '0'");
-if($get_pages > 0) {
+$get_pages = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '0'");
+if($get_pages->numRows() > 0) {
 	// Loop through pages
 	while($page = $get_pages->fetchRow()) {
+		if(!$admin->page_is_visible($page))
+			continue;
 		$title = stripslashes($page['menu_title']);
 		$template->set_var('TITLE', $title);
 		$template->set_var('LINK', '[wblink'.$page['page_id'].']');
