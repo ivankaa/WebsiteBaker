@@ -34,7 +34,7 @@ $database = new database();
 // Check if the user has already submitted the form, otherwise show it
 if(isset($_POST['email']) AND $_POST['email'] != "") {
 	
-	$email = $_POST['email'];
+	$email = strip_tags($_POST['email']);
 	
 	// Check if the email exists in the database
 	$query = "SELECT user_id,username,display_name,email,last_reset,password FROM ".TABLE_PREFIX."users WHERE email = '".$wb->add_slashes($_POST['email'])."'";
