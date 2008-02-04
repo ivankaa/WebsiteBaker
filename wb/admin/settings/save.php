@@ -138,7 +138,10 @@ while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
 	if ($setting_name!='wb_version') {
-		$value = strip_tags($admin->add_slashes($value));
+		$allow_tags_in_fields = array('website_header', 'website_footer');
+		if(!in_array($setting_name, $allow_tags_in_fields)) {
+			$value = strip_tags($value);
+		}
 		switch ($setting_name) {
 			case 'default_timezone':
 				$value=$value*60*60;
@@ -153,6 +156,7 @@ while($setting = $results->fetchRow()) {
 				if(trim($value)=='/') $value='';
 				break;
 		}
+		$value = $admin->add_slashes($value);
 		$database->query("UPDATE ".TABLE_PREFIX."settings SET value = '$value' WHERE name = '$setting_name'");
 	}
 }
