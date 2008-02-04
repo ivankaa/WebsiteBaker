@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+04-Feb-2008 Thomas Hornik
+!	email-addresses are excluded from search-results page.
 04-Feb-2008 Christian Sommer
 #	allowed usage of tags in settings fields: website_header, website_footer
 03-Feb-2008 Thomas Hornik
@@ -21,7 +23,7 @@ Legend:
 02-Feb-2008 Christian Sommer
 #	fixed wrong redirect in /admin/images
 02-Feb-2008 Thomas Hornik
-!	search will show email-addresses, even if email-filter is activated (on page with highlighting). Fixed.
+!	search shows email-addresses, even if email-filter is activated (on page with highlighting). Fixed.
 +	Added missing text in languages files for jscalendar
 !	settings: pages-directory '/' will be converted to '' (empty string) on save.
 !	changed last remaining call to my_htmlspecialchars() to htmlspecialchars()

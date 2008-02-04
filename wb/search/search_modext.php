@@ -235,6 +235,8 @@ function print_excerpt2($mod_vars, $func_vars) {
 	// prepare the text (part 1): remove lf and cr, convert \" to ", remove comments, style, scripting and unnecessary whitespace, convert to utf8
 	$mod_text = strtr($mod_text, array("\x0D\x0A" => ' ', "\x0D" => ' ', "\x0A" => ' ', '\"' => '"'));
 	$mod_text = preg_replace('/(<!--.*?-->|<style.*?<\/style>|<script.*?<\/script>|\s+)/i', ' ', $mod_text);
+	// remove email-addresses
+	$mod_text = preg_replace('/\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\b/', ' ', $mod_text);
 	$mod_text = entities_to_umlauts($mod_text, 'UTF-8');
 
 	// make the link from $mod_page_link, add target
