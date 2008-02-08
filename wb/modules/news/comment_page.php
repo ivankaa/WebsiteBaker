@@ -79,7 +79,6 @@ if($query_settings->numRows() == 0) {
 	<?php
 	if(isset($_SESSION['captcha_error'])) {
 		echo '<font color="#FF0000">'.$_SESSION['captcha_error'].'</font><br />';
-		unset($_SESSION['captcha_error']);
 		$_SESSION['captcha_retry_news'] = true;
 	}
 	// Captcha
@@ -91,6 +90,11 @@ if($query_settings->numRows() == 0) {
 		<td><?php call_captcha(); ?></td>
 	</tr></table>
 	<br />
+	<?php
+	if(isset($_SESSION['captcha_error'])) {
+		unset($_SESSION['captcha_error']);
+		?><script>document.comment.captcha.focus();</script><?php
+	}?>
 	<?php
 	}
 	?>
