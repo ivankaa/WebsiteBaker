@@ -108,7 +108,7 @@ function chmod_directory_contents($directory, $file_mode) {
 		if(is_dir("$directory/$entry")) {
 			chmod_directory_contents("$directory/$entry", $file_mode);
 		}
-		change_mode($directory.'/'.$entry, 'file');
+		change_mode($directory.'/'.$entry);
 	}
 	
 	// Restore the umask
@@ -480,7 +480,7 @@ require(WB_PATH."/index.php");
 		fwrite($handle, $content);
 		fclose($handle);
 		// Chmod the file
-		change_mode($filename, 'file');
+		change_mode($filename);
 	}
 }
 
