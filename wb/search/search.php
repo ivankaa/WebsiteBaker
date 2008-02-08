@@ -351,7 +351,6 @@ if($search_normal_string != '') {
 					'default_max_excerpt' => $search_max_excerpt
 				);
 				// Only show this page if we are allowed to see it
-				//if(is_access_denied($res['visibility'], $res['viewing_groups'], $res['viewing_users'])) {
 				if($admin->page_is_visible($res) == false) {
 					if($res['visibility'] == 'registered') { // don't show excerpt
 						$search_func_vars['default_max_excerpt'] = 0;
@@ -404,7 +403,6 @@ if($search_normal_string != '') {
 				'default_max_excerpt' => $max_excerpt_num
 			);
 			// Only show this page if we are allowed to see it
-			//if(is_access_denied($page['visibility'], $page['viewing_groups'], $page['viewing_users'])) {
 			if($admin->page_is_visible($page) == false) {
 				if($page['visibility'] != 'registered') {
 					continue;
@@ -562,7 +560,6 @@ if($search_normal_string != '') {
 									continue;
 								}
 								if($visibility == 'private') {
-									//if(is_access_denied($visibility, $viewing_groups, $viewing_users)) {
 									if($admin->page_is_visible(array(
 										'page_id'=>$page[$fields['page_id']],
 										'visibility' =>$visibility,

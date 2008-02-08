@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+08-Feb-2008 Thomas Hornik
+-	Removed unused function is_access_denied() from search
 04-Feb-2008 Thomas Hornik
 !	email-addresses are excluded from search-results page.
 #	Fixed possible XSS in account/login.php and forgot-form.php

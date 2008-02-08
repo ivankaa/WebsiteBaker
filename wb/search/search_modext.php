@@ -84,23 +84,6 @@ function is_any_matched($text, $search_words) {
 	return $any_matched;
 }
 
-// work-out if user is in $viewing_groups or $viewing_users
-function is_access_denied($visibility, $viewing_groups_str, $viewing_users_str) {
-	global $wb;
-	$access_denied = false;
-	if($visibility == 'private' || $visibility == 'registered') {
-		$access_denied = true;
-		if($wb->is_authenticated() == true) {
-			$viewing_groups = explode(',', $viewing_groups_str);
-			$viewing_users = explode(',', $viewing_users_str);
-			if(in_array($wb->get_group_id(), $viewing_groups) || (in_array($wb->get_user_id(), $viewing_users))) {
-				$access_denied = false;
-			}
-		}
-	}
-	return $access_denied;
-}
-
 // collects the matches from text in excerpt_array
 function get_excerpts($text, $search_words, $max_excerpt_num) {
 	$match_array = array();
