@@ -33,9 +33,22 @@
 if(!defined('WB_PATH')) { exit('Cannot access this file directly'); }
 
 // add new rows to table "settings"
+
+$table = TABLE_PREFIX ."mod_jsadmin";
+$database->query("DROP TABLE IF EXISTS `$table`");
+
+$database->query("
+	CREATE TABLE `$table` (
+    `id` INT(11) NOT NULL DEFAULT '0',
+		`name` VARCHAR(255) NOT NULL DEFAULT '0',
+		`value` INT(11) NOT NULL DEFAULT '0',
+   	PRIMARY KEY (`id`)
+	)
+");
+
 global $database;
-$database->query("INSERT INTO ".TABLE_PREFIX."settings (name,value) VALUES ('mod_jsadmin_persist_order','0')");
-$database->query("INSERT INTO ".TABLE_PREFIX."settings (name,value) VALUES ('mod_jsadmin_ajax_order_pages','0')");
-$database->query("INSERT INTO ".TABLE_PREFIX."settings (name,value) VALUES ('mod_jsadmin_ajax_order_sections','0')");
+$database->query("INSERT INTO ".$table." (id,name,value) VALUES ('1','mod_jsadmin_persist_order','0')");
+$database->query("INSERT INTO ".$table." (id,name,value) VALUES ('2','mod_jsadmin_ajax_order_pages','0')");
+$database->query("INSERT INTO ".$table." (id,name,value) VALUES ('3','mod_jsadmin_ajax_order_sections','0')");
 
 ?>

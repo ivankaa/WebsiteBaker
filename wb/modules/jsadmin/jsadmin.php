@@ -31,7 +31,7 @@
 
 function get_setting($name, $default = '') {
 	global $database;
-	$rs = $database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name = '".$name."'");
+	$rs = $database->query("SELECT value FROM ".TABLE_PREFIX."mod_jsadmin WHERE name = '".$name."'");
 	if($row = $rs->fetchRow())
 		return $row['value'];
 	return
@@ -44,9 +44,9 @@ function save_setting($name, $value) {
 	$prev_value = get_setting($name, false);
 
 	if($prev_value === false) {
-		$database->query("INSERT INTO ".TABLE_PREFIX."settings (name,value) VALUES ('$name','$value')");
+		$database->query("INSERT INTO ".TABLE_PREFIX."mod_jsadmin (name,value) VALUES ('$name','$value')");
 	} else {
-		$database->query("UPDATE ".TABLE_PREFIX."settings SET value = '$value' WHERE name = '$name'");
+		$database->query("UPDATE ".TABLE_PREFIX."mod_jsadmin SET value = '$value' WHERE name = '$name'");
 	}
 }
 

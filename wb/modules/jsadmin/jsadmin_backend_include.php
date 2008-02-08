@@ -66,7 +66,9 @@ if($page_type) {
 	} elseif($page_type == 'sections') {
 		if(get_setting('mod_jsadmin_ajax_order_sections', '1')) {
 			$js_scripts[] = 'dragdrop.js';
-			$js_buttonCell= 4; // This ist the Cell where the Button "Up" is , by Swen Uth
+			if(SECTION_BLOCKS) {
+			$js_buttonCell= 4;}
+      else{ $js_buttonCell= 3;} // This ist the Cell where the Button "Up" is , by Swen Uth
 		}
 	} elseif($page_type == 'config') {
 		$js_scripts[] = 'tool.js';

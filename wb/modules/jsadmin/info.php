@@ -65,8 +65,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 $module_directory 		= 'jsadmin';
 $module_name 				= 'Javascript Admin';
 $module_function 			= 'tool';
-$module_version 			= '1.2';
-$module_platform 			= '2.7';
+$module_version 			= '1.2.1';
+$module_platform 			= 'WB 2.7.x';
 $module_author 			= 'Stepan Riha, Swen Uth';
 $module_license 			= 'BSD License';
 $module_description 		= 'This module adds Javascript functionality to the Website Baker Admin to improve some of the UI interactions. Uses the YahooUI library.';

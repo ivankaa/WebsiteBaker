@@ -32,14 +32,6 @@
 // prevent this file from being accessed directly
 if(!defined('WB_PATH')) { exit('Cannot access this file directly'); }
 
-// delete the rows from the addons table
-$table = TABLE_PREFIX .'addons';
-$database->query("DELETE FROM `".$table."` WHERE `".$table."`.`name` ='Javascript Admin' LIMIT 1 ");
-
-// delete the rows from the settings table
-$table = TABLE_PREFIX .'settings';
-$database->query("DELETE FROM `".$table."` WHERE `".$table."`.`name` ='mod_jsadmin_persist_order' LIMIT 1 ");
-$database->query("DELETE FROM `".$table."` WHERE `".$table."`.`name` ='mod_jsadmin_ajax_order_pages' LIMIT 1 ");
-$database->query("DELETE FROM `".$table."` WHERE `".$table."`.`name` ='mod_jsadmin_ajax_order_sections' LIMIT 1 ");
-
+$table = TABLE_PREFIX ."mod_jsadmin";
+$database->query("DROP TABLE `$table`");
 ?>
