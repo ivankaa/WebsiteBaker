@@ -370,8 +370,8 @@ if(!function_exists('register_frontend_modfiles')) {
 			}
     	}
   		// include the Javascript email protection function
-  		if($file_id != 'css' && file_exists(WB_PATH .'/modules/mail_filter/js/mdcr.js')) {
-			$head_links .= '<script type="text/javascript" src="'.WB_URL.'/modules/mail_filter/js/mdcr.js"></script>' ."\n";
+  		if($file_id != 'css' && file_exists(WB_PATH .'/modules/output_filter/js/mdcr.js')) {
+			$head_links .= '<script type="text/javascript" src="'.WB_URL.'/modules/output_filter/js/mdcr.js"></script>' ."\n";
 		}
   		
 		// write out links with all external module javascript/CSS files, remove last line feed

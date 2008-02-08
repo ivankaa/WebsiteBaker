@@ -22,23 +22,24 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  ENGLISH LANGUAGE FILE FOR THE ADDON: MAIL FILTER
+  Output Filter tool for Website Baker v2.7
+  Licencsed under GNU, written by Christian Sommer (Doc)
  -----------------------------------------------------------------------------------------
+   v0.11  (Chritian Sommer; 06 Feb, 2008)
+    ~ renamed module to output filter, splitted email filter in two functions (text emails, mailto links)
+
+   v0.10  (Christian Sommer; 21 Jan, 2008)
+    ~ initial module release (Note: requires WB 2.7 core file changes to work)
+
 */
 
-// Headings and text outputs
-$MOD_MAIL_FILTER['HEADING']				= 'Email Output Filter';
-$MOD_MAIL_FILTER['HOWTO']					= 'You can enable/disable the output filtering of emails with the options below. For Javascript mailto: encryption you need to add the <em>register_frontend_modfiles(\'js\')</em> PHP function call to the index.php of your template.';
-
-// Text and captions of form elements
-$MOD_MAIL_FILTER['BASIC_CONF']			= 'Basic Configuration';
-$MOD_MAIL_FILTER['EMAIL_FILTER']			= 'Email Output Filter';
-$MOD_MAIL_FILTER['MAILTO_FILTER']		= 'Javascript Encryption (mailto)';
-$MOD_MAIL_FILTER['ENABLED']				= 'Enabled';
-$MOD_MAIL_FILTER['DISABLED']				= 'Disabled';
-
-$MOD_MAIL_FILTER['REPLACEMENT_CONF']	= 'Email Replacements';
-$MOD_MAIL_FILTER['AT_REPLACEMENT']		= 'Replace "@" by';
-$MOD_MAIL_FILTER['DOT_REPLACEMENT']		= 'Replace "." by';
+$module_directory 	= 'output_filter';
+$module_name 				= 'Frontend Output Filter';
+$module_function 		= 'tool';
+$module_version 		= '0.11';
+$module_platform 		= '2.7.x';
+$module_author 			= 'Christian Sommer (doc)';
+$module_license 		= 'GNU General Public License';
+$module_description = 'This module allows to filter the output before displaying it on the frontend. Support for filtering mailto links and mail addresses in strings.';
 
 ?>

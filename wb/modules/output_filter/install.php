@@ -24,9 +24,9 @@
 */
 
 // prevent this file from being accessed directly
-if(!defined('WB_PATH')) { exit('Cannot access this file directly'); }
+if(!defined('WB_PATH')) die(header('Location: ../index.php'));
 
-$table = TABLE_PREFIX .'mod_mail_filter';
+$table = TABLE_PREFIX .'mod_output_filter';
 $database->query("DROP TABLE IF EXISTS `$table`");
 
 $database->query("CREATE TABLE `$table` (
@@ -37,9 +37,8 @@ $database->query("CREATE TABLE `$table` (
 	)"
 );
 
-// add new row using the table default values defined above
-//$database->query("INSERT INTO ".TABLE_PREFIX."mod_mail_filter");
-$database->query("INSERT INTO ".TABLE_PREFIX."mod_mail_filter (email_filter, mailto_filter, at_replacement, dot_replacement) VALUES ('0', '0', '(at)', '(dot)')");
-
+// add default values to the module table
+$database->query("INSERT INTO ".TABLE_PREFIX
+	."mod_output_filter (email_filter, mailto_filter, at_replacement, dot_replacement) VALUES ('0', '0', '(at)', '(dot)')");
 
 ?>

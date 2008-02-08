@@ -21,22 +21,12 @@
  along with Website Baker; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
- -----------------------------------------------------------------------------------------
-  Email Output Filter tool for Website Baker v2.7
-  Licencsed under GNU, written by Christian Sommer (Doc)
- -----------------------------------------------------------------------------------------
-   v0.10  (doc; 21 Jan, 2008)
-    + initial module release (Note: requires WB 2.7 core file changes to work)
-
 */
 
-$module_directory 	= 'mail_filter';
-$module_name 			= 'Email Output Filter';
-$module_function 		= 'tool';
-$module_version 		= '0.10';
-$module_platform 		= '2.7.x';
-$module_author 		= 'Christian Sommer (doc)';
-$module_license 		= 'GNU General Public License';
-$module_description 	= 'This module allows you to define rewrite rules for emails (e.g. <em>name@mail.com</em> --> <em>name(at)mail(dot).com</em>).';
+// prevent this file from being accessed directly
+if(!defined('WB_PATH')) die(header('Location: ../index.php'));
+
+$table = TABLE_PREFIX .'mod_output_filter';
+$database->query("DROP TABLE IF EXISTS `$table`");
 
 ?>

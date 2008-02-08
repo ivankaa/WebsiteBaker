@@ -1,6 +1,9 @@
+
+// $Id$
+
 /*
 --------------------------------------------------------------------------------
-  MDCR (Mail DeCrypt Routine) for Website Baker v2.6.x
+  JAVASCRIPT ROUTINE FOR THE WEBSITE BAKER 2.7 OUTPUT FILTER MODULE
   Licencsed under GNU, written by Christian Sommer (Doc)
 --------------------------------------------------------------------------------
 */
