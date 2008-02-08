@@ -29,12 +29,14 @@
 
 */
 
-// prevent this file from being accessed directly
-if(!defined('WB_PATH')) { exit('Cannot access this file directly'); }
 require('../../config.php');
 
  if(isset($_GET['page_id']) AND is_numeric($_GET['page_id']) AND is_numeric(@$_GET['position'])) {
 	$position = $_GET['position'];
+
+	// Include WB admin wrapper script
+	$update_when_modified = true; // Tells script to update when this page was last updated
+	require(WB_PATH.'/modules/admin.php');
 
 	// Get common fields
 	if(isset($_GET['section_id']) AND is_numeric($_GET['section_id'])) {
