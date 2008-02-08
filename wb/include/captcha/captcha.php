@@ -97,14 +97,14 @@ if(!function_exists('call_captcha')) {
 			case 'calc_text': // calculation as text
 				?><table class="captcha_table"><tr>
 				<td class="text_captcha"><?php include(WB_PATH.'/include/captcha/captchas/calc_text.php'); ?>&nbsp;=&nbsp;</td>
-				<td><input type="text" name="captcha" maxlength="5"  style="width:20px" /></td>
+				<td><input type="text" name="captcha" maxlength="10"  style="width:20px" /></td>
 				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
 				</tr></table><?php
 				break;
 			case 'calc_image': // calculation with image (old captcha)
 				?><table class="captcha_table"><tr>
 				<td class="image_captcha"><img src="<?php echo WB_URL."/include/captcha/captchas/calc_image.php?t=$t"; ?>" alt="Captcha" /></td><td>&nbsp;=&nbsp;</td>
-				<td><input type="text" name="captcha" maxlength="5" style="width:20px" /></td>
+				<td><input type="text" name="captcha" maxlength="10" style="width:20px" /></td>
 				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
 				</tr></table><?php
 				break;
@@ -114,7 +114,7 @@ if(!function_exists('call_captcha')) {
 			case 'old_image': // old captcha
 				?><table class="captcha_table"><tr>
 				<td class="image_captcha"><img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" /></td>
-				<td><input type="text" name="captcha" maxlength="5" style="width:50px" /></td>
+				<td><input type="text" name="captcha" maxlength="10" style="width:50px" /></td>
 				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_TEXT']; ?></td>
 				</tr></table><?php
 				break;

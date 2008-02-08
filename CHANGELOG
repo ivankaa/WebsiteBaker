@@ -17,6 +17,7 @@ Legend:
 -	Removed admin module mail_filter
 +	Added revised version of the output filter module
 08-Feb-2008 Thomas Hornik
+!	Changed maxlength of captcha-fields - don't tell the bots how many chars we want to have.
 -	Removed unused function is_access_denied() from search
 04-Feb-2008 Thomas Hornik
 !	email-addresses are excluded from search-results page.
