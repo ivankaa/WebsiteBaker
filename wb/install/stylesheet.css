@@ -12,6 +12,15 @@ body {
 form {
 	margin: 0;
 }
+
+input:hover, input:focus, select:hover, select:focus, option:hover, option:focus {
+	background: #FFFFE0;
+}
+
+.wrong {
+	background-color: #FFDBDB;
+}
+
 .submit {
 	border : solid 1px #CCCCCC;
 	background: #E9ECEF;

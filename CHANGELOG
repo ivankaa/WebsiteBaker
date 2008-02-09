@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+10-Feb-2008 Christian Sommer
+!	added visualization of wrong/empty input fields
+#	fixed a bug with re-enter admin password
 09-Feb-2008 Christian Sommer
 !	modified some colors and CSS definitions of pages, media and section interface
 #	output_filter: fixed bug in regular expression (eats up characters in mailto links)

@@ -35,7 +35,7 @@ srand((float)$sec+((float)$usec*100000));
 $session_rand = rand(1000,9999);
 
 // Function to set error
-function set_error($message) {
+function set_error($message, $field_name = '') {
 	global $_POST;
 	if(isset($message) AND $message != '') {
 		// Copy values entered into session so user doesn't have to re-enter everything
@@ -67,9 +67,14 @@ function set_error($message) {
 			$_SESSION['admin_username'] = $_POST['admin_username'];
 			$_SESSION['admin_email'] = $_POST['admin_email'];
 			$_SESSION['admin_password'] = $_POST['admin_password'];
+			$_SESSION['admin_repassword'] = $_POST['admin_repassword'];
 		}
 		// Set the message
 		$_SESSION['message'] = $message;
+		// Set the element(s) to highlight
+		if($field_name != '') {
+			$_SESSION['ERROR_FIELD'] = $field_name;
+		}
 		// Specify that session support is enabled
 		$_SESSION['session_support'] = '<font class="good">Enabled</font>';
 		// Redirect to first page again and exit
@@ -139,7 +144,7 @@ if(!isset($_POST['website_title'])) {
 
 // Check if user has entered the installation url
 if(!isset($_POST['wb_url']) OR $_POST['wb_url'] == '') {
-	set_error('Please enter an absolute URL');
+	set_error('Please enter an absolute URL', 'wb_url');
 } else {
 	$wb_url = $_POST['wb_url'];
 }
@@ -158,7 +163,7 @@ if(substr($wb_url, strlen($wb_url)-1, 1) == "\\") {
 }
 // Get the default time zone
 if(!isset($_POST['default_timezone']) OR !is_numeric($_POST['default_timezone'])) {
-	set_error('Please select a valid default timezone');
+	set_error('Please select a valid default timezone', 'default_timezone');
 } else {
 	$default_timezone = $_POST['default_timezone']*60*60;
 }
@@ -167,12 +172,12 @@ if(!isset($_POST['default_timezone']) OR !is_numeric($_POST['default_timezone'])
 // Get the default language
 $allowed_languages = array('CA', 'DA', 'DE', 'EN', 'ES', 'ET', 'FI', 'FR', 'HR', 'HU', 'IT', 'LV', 'NL', 'PT','SE', 'TR');
 if(!isset($_POST['default_language']) OR !in_array($_POST['default_language'], $allowed_languages)) {
-	set_error('Please select a valid default backend language');
+	set_error('Please select a valid default backend language','default_language');
 } else {
 	$default_language = $_POST['default_language'];
 	// make sure the selected language file exists in the language folder
 	if(!file_exists('../languages/' .$default_language .'.php')) {
-		set_error('The language file: \'' .$default_language .'.php\' is missing. Upload file to language folder or choose another language');
+		set_error('The language file: \'' .$default_language .'.php\' is missing. Upload file to language folder or choose another language','default_language');
 	}
 }
 // End default language details code
@@ -200,25 +205,25 @@ if($operating_system == 'windows') {
 // Begin database details code
 // Check if user has entered a database host
 if(!isset($_POST['database_host']) OR $_POST['database_host'] == '') {
-	set_error('Please enter a database host name');
+	set_error('Please enter a database host name', 'database_host');
 } else {
 	$database_host = $_POST['database_host'];
 }
 // Check if user has entered a database username
 if(!isset($_POST['database_username']) OR $_POST['database_username'] == '') {
-	set_error('Please enter a database username');
+	set_error('Please enter a database username','database_username');
 } else {
 	$database_username = $_POST['database_username'];
 }
 // Check if user has entered a database password
 if(!isset($_POST['database_password'])) {
-	set_error('Please enter a database password');
+	set_error('Please enter a database password', 'database_password');
 } else {
 	$database_password = $_POST['database_password'];
 }
 // Check if user has entered a database name
 if(!isset($_POST['database_name']) OR $_POST['database_name'] == '') {
-	set_error('Please enter a database name');
+	set_error('Please enter a database name', 'database_name');
 } else {
 	$database_name = $_POST['database_name'];
 }
@@ -235,7 +240,7 @@ if(isset($_POST['install_tables']) AND $_POST['install_tables'] == 'true') {
 // Begin website title code
 // Get website title
 if(!isset($_POST['website_title']) OR $_POST['website_title'] == '') {
-	set_error('Please enter a website title');
+	set_error('Please enter a website title', 'website_title');
 } else {
 	$website_title = add_slashes($_POST['website_title']);
 }
@@ -244,33 +249,33 @@ if(!isset($_POST['website_title']) OR $_POST['website_title'] == '') {
 // Begin admin user details code
 // Get admin username
 if(!isset($_POST['admin_username']) OR $_POST['admin_username'] == '') {
-	set_error('Please enter a username for the Administrator account');
+	set_error('Please enter a username for the Administrator account','admin_username');
 } else {
 	$admin_username = $_POST['admin_username'];
 }
 // Get admin email and validate it
 if(!isset($_POST['admin_email']) OR $_POST['admin_email'] == '') {
-	set_error('Please enter an email for the Administrator account');
+	set_error('Please enter an email for the Administrator account','admin_email');
 } else {
 	if(eregi("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$", $_POST['admin_email'])) {
 		$admin_email = $_POST['admin_email'];
 	} else {
-		set_error('Please enter a valid email address for the Administrator account');
+		set_error('Please enter a valid email address for the Administrator account','admin_email');
 	}
 }
 // Get the two admin passwords entered, and check that they match
 if(!isset($_POST['admin_password']) OR $_POST['admin_password'] == '') {
-	set_error('Please enter a password for the Administrator account');
+	set_error('Please enter a password for the Administrator account','admin_password');
 } else {
 	$admin_password = $_POST['admin_password'];
 }
 if(!isset($_POST['admin_repassword']) OR $_POST['admin_repassword'] == '') {
-	set_error('Please make sure you re-enter the password for the Administrator account');
+	set_error('Please make sure you re-enter the password for the Administrator account','admin_repassword');
 } else {
 	$admin_repassword = $_POST['admin_repassword'];
 }
 if($admin_password != $admin_repassword) {
-	set_error('Sorry, the two Administrator account passwords you entered do not match');
+	set_error('Sorry, the two Administrator account passwords you entered do not match','admin_repassword');
 }
 // End admin user details code
 

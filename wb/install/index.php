@@ -30,6 +30,14 @@ if(!defined('SESSION_STARTED')) {
 	define('SESSION_STARTED', true);
 }
 
+// Function to highlight input fields which contain wrong/missing data
+function field_error($field_name='') {
+	if(!defined('SESSION_STARTED') || $field_name == '') return;
+	if(isset($_SESSION['ERROR_FIELD']) && $_SESSION['ERROR_FIELD'] == $field_name) {
+		return ' class="wrong"';
+	}
+}
+
 // Check if the page has been reloaded
 if(!isset($_GET['sessions_checked']) OR $_GET['sessions_checked'] != 'true') {
 	// Set session variable
@@ -179,7 +187,7 @@ function change_os(type) {
 				$guessed_url = 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"];
 				$guessed_url = rtrim(dirname($guessed_url), 'install');
 				?>
-				<input type="text" tabindex="1" name="wb_url" style="width: 99%;" value="<?php if(isset($_SESSION['wb_url'])) { echo $_SESSION['wb_url']; } else { echo $guessed_url; } ?>" />
+				<input <?php echo field_error('wb_url');?> type="text" tabindex="1" name="wb_url" style="width: 99%;" value="<?php if(isset($_SESSION['wb_url'])) { echo $_SESSION['wb_url']; } else { echo $guessed_url; } ?>" />
 			</td>
 		</tr>
 		<tr>
@@ -187,7 +195,7 @@ function change_os(type) {
 				Default Timezone:
 			</td>
 			<td>
-				<select tabindex="3" name="default_timezone" style="width: 100%;">
+				<select <?php echo field_error('default_timezone');?> tabindex="3" name="default_timezone" style="width: 100%;">
 					<?php
 					$TIMEZONES['-12'] = 'GMT - 12 Hours';
 					$TIMEZONES['-11'] = 'GMT -11 Hours';
@@ -235,7 +243,7 @@ function change_os(type) {
 				Default Language:
 			</td>
 			<td>
-				<select tabindex="3" name="default_language" style="width: 100%;">
+				<select <?php echo field_error('default_language');?> tabindex="3" name="default_language" style="width: 100%;">
 					<?php
 					$DEFAULT_LANGUAGE = array(
 						'CA'=>'Catalan', 'DA'=>'Danish', 'DE'=>'Deutsch', 'EN'=>'English',
@@ -287,18 +295,18 @@ function change_os(type) {
 		<tr>
 			<td width="120" style="color: #666666;">Host Name:</td>
 			<td width="230">
-				<input type="text" tabindex="7" name="database_host" style="width: 98%;" value="<?php if(isset($_SESSION['database_host'])) { echo $_SESSION['database_host']; } else { echo 'localhost'; } ?>" />
+				<input <?php echo field_error('database_host');?> type="text" tabindex="7" name="database_host" style="width: 98%;" value="<?php if(isset($_SESSION['database_host'])) { echo $_SESSION['database_host']; } else { echo 'localhost'; } ?>" />
 			</td>
 			<td width="7">&nbsp;</td>
 			<td width="70" style="color: #666666;">Username:</td>
 			<td>
-				<input type="text" tabindex="9" name="database_username" style="width: 98%;" value="<?php if(isset($_SESSION['database_username'])) { echo $_SESSION['database_username']; } else { echo 'root'; } ?>" />
+				<input <?php echo field_error('database_username');?> type="text" tabindex="9" name="database_username" style="width: 98%;" value="<?php if(isset($_SESSION['database_username'])) { echo $_SESSION['database_username']; } else { echo 'root'; } ?>" />
 			</td>
 		</tr>
 		<tr>
 			<td style="color: #666666;">Database Name:</td>
 			<td>
-				<input type="text" tabindex="8" name="database_name" style="width: 98%;" value="<?php if(isset($_SESSION['database_name'])) { echo $_SESSION['database_name']; } else { echo 'wb'; } ?>" />
+				<input <?php echo field_error('database_name');?> type="text" tabindex="8" name="database_name" style="width: 98%;" value="<?php if(isset($_SESSION['database_name'])) { echo $_SESSION['database_name']; } else { echo 'wb'; } ?>" />
 			</td>
 			<td>&nbsp;</td>
 			<td style="color: #666666;">Password:</td>
@@ -325,7 +333,7 @@ function change_os(type) {
 		<tr>
 			<td style="color: #666666;" colspan="1">Website Title:</td>
 			<td colspan="4">
-				<input type="text" tabindex="13" name="website_title" style="width: 99%;" value="<?php if(isset($_SESSION['website_title'])) { echo $_SESSION['website_title']; } ?>" />
+				<input <?php echo field_error('website_title');?> type="text" tabindex="13" name="website_title" style="width: 99%;" value="<?php if(isset($_SESSION['website_title'])) { echo $_SESSION['website_title']; } ?>" />
 			</td>
 		</tr>
 		<tr>
@@ -334,23 +342,23 @@ function change_os(type) {
 		<tr>
 			<td style="color: #666666;">Username:</td>
 			<td>
-				<input type="text" tabindex="14" name="admin_username" style="width: 98%;" value="<?php if(isset($_SESSION['admin_username'])) { echo $_SESSION['admin_username']; } else { echo 'admin'; } ?>" />
+				<input <?php echo field_error('admin_username');?> type="text" tabindex="14" name="admin_username" style="width: 98%;" value="<?php if(isset($_SESSION['admin_username'])) { echo $_SESSION['admin_username']; } else { echo 'admin'; } ?>" />
 			</td>
 			<td>&nbsp;</td>
 			<td style="color: #666666;">Password:</td>
 			<td>
-				<input type="password" tabindex="16" name="admin_password" style="width: 98%;"<?php if(isset($_SESSION['admin_password'])) { echo ' value = "'.$_SESSION['admin_password'].'"'; } ?> />
+				<input <?php echo field_error('admin_password');?> type="password" tabindex="16" name="admin_password" style="width: 98%;"<?php if(isset($_SESSION['admin_password'])) { echo ' value = "'.$_SESSION['admin_password'].'"'; } ?> />
 			</td>
 		</tr>
 		<tr>
 			<td style="color: #666666;">Email:</td>
 			<td>
-				<input type="text" tabindex="15" name="admin_email" style="width: 98%;"<?php if(isset($_SESSION['admin_email'])) { echo ' value = "'.$_SESSION['admin_email'].'"'; } ?> />
+				<input <?php echo field_error('admin_email');?> type="text" tabindex="15" name="admin_email" style="width: 98%;"<?php if(isset($_SESSION['admin_email'])) { echo ' value = "'.$_SESSION['admin_email'].'"'; } ?> />
 			</td>
 			<td>&nbsp;</td>
 			<td style="color: #666666;">Re-Password:</td>
 			<td>
-				<input type="password" tabindex="17" name="admin_repassword" style="width: 98%;"<?php if(isset($_SESSION['admin_password'])) { echo ' value = "'.$_SESSION['admin_password'].'"'; } ?> />
+				<input <?php echo field_error('admin_repassword');?> type="password" tabindex="17" name="admin_repassword" style="width: 98%;"<?php if(isset($_SESSION['admin_repassword'])) { echo ' value = "'.$_SESSION['admin_repassword'].'"'; } ?> />
 			</td>
 		</tr>
 		<tr>
