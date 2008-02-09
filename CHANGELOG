@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 09-Feb-2008 Christian Sommer
+!	modified some colors and CSS definitions of pages, media and section interface
 #	output_filter: fixed bug in regular expression (eats up characters in mailto links)
 #	output_filter: removed word boundary from mailto regex part
 #	fixed bug in menu_link module (IE 7 did not show the select boxes at all)

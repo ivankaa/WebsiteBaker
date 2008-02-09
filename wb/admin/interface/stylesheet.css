@@ -74,7 +74,6 @@ label {
 	color: #fff;
 }
 .content {
-	background: #fff;
     background: #fff url(bgtitle.png) ;
     background-repeat:repeat-x;
 	padding: 20px;
@@ -84,7 +83,7 @@ label {
 	vertical-align: top;
 }
 .row_a {
-	background-color: #BDE4F4;
+	background-color: #ECF3F7;
 }
 .row_b {
 	background-color: #EBF7FC;
