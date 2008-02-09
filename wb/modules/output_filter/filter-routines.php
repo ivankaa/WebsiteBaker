@@ -89,11 +89,11 @@ if (!function_exists('filter_frontend_output')) {
 		define('OUTPUT_FILTER_DOT_REPLACEMENT', $filter_settings['dot_replacement']);
 		
 		// first search part to find all mailto email addresses
-		$pattern = '#(<a.*?href\s*?=\s*?"\s*?mailto\s*?:\s*?)([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})([^"]*?)"([^>]*>)(.*?)</a>';
+		$pattern = '#(<a[^<]*href\s*?=\s*?"\s*?mailto\s*?:\s*?)([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})([^"]*?)"([^>]*>)(.*?)</a>';
 		// second part to find all non mailto email addresses
 		$pattern .= '|\b([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})\b#i';
 		/*
-		Sub 1:\b(<a.*?href\s*?=\s*?"\s*?mailto\s*?:\s*?)				-->	"<a id="yyy" class="xxx" href = " mailto :" ignoring white spaces
+		Sub 1:\b(<a.[^<]*href\s*?=\s*?"\s*?mailto\s*?:\s*?)			-->	"<a id="yyy" class="xxx" href = " mailto :" ignoring white spaces
 		Sub 2:([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})			-->	the email address in the mailto: part of the mail link
 		Sub 3:([^"]*?)"																					--> possible ?Subject&cc... stuff attached to the mail address
 		Sub 4:([^>]*>)																					--> all class or id statements after the mailto but before closing ..>
