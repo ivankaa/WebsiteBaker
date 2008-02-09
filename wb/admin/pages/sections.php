@@ -184,7 +184,7 @@ if($query_sections->numRows() > 0) {
 				<td style="width: <?php if(SECTION_BLOCKS) print "120"; else print "200"; ?>px;"><a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>#<?php echo $section['section_id']; ?>"><?php echo $module_name; ?></a></td>
 				<?php if(SECTION_BLOCKS) { ?>
 				<td>
-					<select name="block<?php echo $section['section_id']; ?>" style="width: 150px;">
+					<select name="block<?php echo $section['section_id']; ?>" style="width: 120px;">
 						<?php
 						foreach($block AS $number => $name) {
 							?>
