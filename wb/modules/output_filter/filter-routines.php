@@ -89,7 +89,7 @@ if (!function_exists('filter_frontend_output')) {
 		define('OUTPUT_FILTER_DOT_REPLACEMENT', $filter_settings['dot_replacement']);
 		
 		// first search part to find all mailto email addresses
-		$pattern = '#\b(<a.*?href\s*?=\s*?"\s*?mailto\s*?:\s*?)([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})([^"]*?)"([^>]*>)(.*?)</a>\b';
+		$pattern = '#(<a.*?href\s*?=\s*?"\s*?mailto\s*?:\s*?)([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})([^"]*?)"([^>]*>)(.*?)</a>';
 		// second part to find all non mailto email addresses
 		$pattern .= '|\b([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})\b#i';
 		/*

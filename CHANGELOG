@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 09-Feb-2008 Christian Sommer
+#	output_filter: removed word boundary from mailto regex part
 #	fixed bug in menu_link module (IE 7 did not show the select boxes at all)
 #	fixed bug in user signup
 !	output_filter: added word boundary for the mailto regex part
