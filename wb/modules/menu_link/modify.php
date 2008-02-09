@@ -129,7 +129,7 @@ $target = $page['target'];
 		<?php echo $TEXT['LINK'].':' ?>
 	</td>
 	<td>
-		<select name="page_link" id="page_link" onchange="populate()" style="width: 50%" />
+		<select name="page_link" id="page_link" onchange="populate()" style="width:250px;" />
 			<option value="0"<?php echo $target_page_id=='0'?$sel:''?>><?php echo $TEXT['PLEASE_SELECT']; ?></option>
 			<?php foreach($links AS $pid=>$link) {
 				echo "<option value=\"$pid\" ".($target_page_id==$pid?$sel:'').">$link</option>";
@@ -142,7 +142,7 @@ $target = $page['target'];
 		<?php echo $TEXT['ANCHOR'].':' ?>
 	</td>
 	<td>
-		<select name="page_target" id="page_target" onfocus="populate()" style="width: 50%" />
+		<select name="page_target" id="page_target" onfocus="populate()" style="width:250px;" />
 			<option value="<?php echo $anchor ?>" selected><?php echo $anchor=='0'?' ':'#'.$anchor ?></option>
 		</select>
 	</td>
@@ -152,7 +152,7 @@ $target = $page['target'];
 		<?php echo $TEXT['TARGET'].':' ?>
 	</td>
 	<td>
-		<select name="target" style="width: 50%" />
+		<select name="target" style="width:250px;" />
 			<option value="_blank"<?php if($target=='_blank') echo ' selected'; ?>><?php echo $TEXT['NEW_WINDOW'] ?></option>
 			<option value="_self"<?php if($target=='_self') echo ' selected'; ?>><?php echo $TEXT['SAME_WINDOW'] ?></option>
 			<option value="_top"<?php if($target=='_top') echo ' selected'; ?>><?php echo $TEXT['TOP_FRAME'] ?></option>
