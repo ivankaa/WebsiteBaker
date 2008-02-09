@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 09-Feb-2008 Christian Sommer
+#	fixed bug in user signup
 !	output_filter: added word boundary for the mailto regex part
 09-Feb-2008 Thomas Hornwik
 !	jsadmin: added latest changes from swen, fixes most (or all?) issues.

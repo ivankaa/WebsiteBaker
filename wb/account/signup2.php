@@ -130,11 +130,11 @@ If you have received this message in error, please delete it immediately.';
 
 	// Try sending the email
 	if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
-		$wb->print_success($MESSAGE['FORGOT_PASS']['PASSWORD_RESET'], WB_URL.'/account/login.php');
 		$display_form = false;
+		$wb->print_success($MESSAGE['FORGOT_PASS']['PASSWORD_RESET'], WB_URL.'/account/login.php');
 	} else {
-		$wb->print_error($MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'], $js_back, false);
 		$database->query("DELETE FROM ".TABLE_PREFIX."users WHERE username = '$username'");
+		$wb->print_error($MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'], $js_back, false);
 	}
 }
 
