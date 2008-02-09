@@ -13,7 +13,7 @@ form {
 	margin: 0;
 }
 
-input:hover, input:focus, select:hover, select:focus, option:hover, option:focus {
+input:focus, select:focus {
 	background: #FFFFE0;
 }
 
