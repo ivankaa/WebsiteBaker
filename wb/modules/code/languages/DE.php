@@ -27,6 +27,6 @@
 */
 
 // Deutsche Modulbeschreibung
-$module_description = 'Dieses Modul erlaubt das ausf&uuml;hren von PHP Befehlen (begrenze den Zugriff auf vertrauensw&uuml;rdige Personen!!)';
+$module_description = 'Dieses Modul erlaubt das ausf&uuml;hren von PHP Befehlen (bitte begrenzen Sie den Zugriff auf vertrauensw&uuml;rdige Personen!!)';
 
 ?>

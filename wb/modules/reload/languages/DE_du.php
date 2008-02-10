@@ -27,10 +27,10 @@
 */
 
 // Deutsche Modulbeschreibung
-$module_description = 'Dieses Modul gleicht die Addon Informationen der Datenbank mit Ihrer WB Installation ab.';
+$module_description = 'Dieses Modul gleicht die Addon Informationen der Datenbank mit deiner Website Baker Installation ab.';
 
 // Textausgaben
-$MOD_RELOAD['PLEASE_SELECT']			= 'W&auml;hlen Sie die Addons aus, deren Informationen mit der Datenbank abgeglichen werden sollen';
+$MOD_RELOAD['PLEASE_SELECT']			= 'W&auml;hle die Addons aus, deren Informationen mit der Datenbank abgeglichen werden sollen';
 $MOD_RELOAD['MODULES']					= 'Module';
 $MOD_RELOAD['TEMPLATES']				= 'Designvorlagen';
 $MOD_RELOAD['LANGUAGES']				= 'Sprachdateien';

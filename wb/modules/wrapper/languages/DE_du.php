@@ -22,20 +22,14 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  DEUTSCHE SPRACHDATEI FUER DAS MODUL: RELOAD ADDONS
+  DEUTSCHE SPRACHDATEI FUER DAS MODUL: WRAPPER
  -----------------------------------------------------------------------------------------
 */
 
 // Deutsche Modulbeschreibung
-$module_description = 'Dieses Modul gleicht die Addon Informationen der Datenbank mit Ihrer WB Installation ab.';
+$module_description = 'Dieses Modul erlaubt das Einbinden fremder Inhalte auf deiner Seite mit Hilfe von Inline Frames (iframe)';
 
-// Textausgaben
-$MOD_RELOAD['PLEASE_SELECT']			= 'W&auml;hlen Sie die Addons aus, deren Informationen mit der Datenbank abgeglichen werden sollen';
-$MOD_RELOAD['MODULES']					= 'Module';
-$MOD_RELOAD['TEMPLATES']				= 'Designvorlagen';
-$MOD_RELOAD['LANGUAGES']				= 'Sprachdateien';
-$MOD_RELOAD['MODULES_RELOADED']			= 'Module erfolgreich abgeglichen';
-$MOD_RELOAD['TEMPLATES_RELOADED']		= 'Designvorlagen erfolgreich abgeglichen';
-$MOD_RELOAD['LANGUAGES_RELOADED']		= 'Sprachdateien erfolgreich abgeglichen';
+// Ueberschriften und Textausgaben
+$MOD_WRAPPER['NOTICE'] = 'Dein Browser unterst&uuml;tzt keine Inline Frames.<br />Bitte klicke auf nachfolgenden Link, um den Seiteninhalt der externen Seite zu betrachten ...<br />';
 
 ?>

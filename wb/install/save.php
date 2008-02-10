@@ -170,7 +170,7 @@ if(!isset($_POST['default_timezone']) OR !is_numeric($_POST['default_timezone'])
 // End path and timezone details code
 
 // Get the default language
-$allowed_languages = array('CA', 'DA', 'DE', 'EN', 'ES', 'ET', 'FI', 'FR', 'HR', 'HU', 'IT', 'LV', 'NL', 'PT','SE', 'TR');
+$allowed_languages = array('CA', 'DA', 'DE', 'DE_du', 'EN', 'ES', 'ET', 'FI', 'FR', 'HR', 'HU', 'IT', 'LV', 'NL', 'PT','SE', 'TR');
 if(!isset($_POST['default_language']) OR !in_array($_POST['default_language'], $allowed_languages)) {
 	set_error('Please select a valid default backend language','default_language');
 } else {

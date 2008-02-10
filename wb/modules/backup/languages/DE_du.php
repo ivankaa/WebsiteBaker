@@ -22,20 +22,16 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  DEUTSCHE SPRACHDATEI FUER DAS MODUL: RELOAD ADDONS
+  DEUTSCHE SPRACHDATEI FUER DAS MODUL: BACKUP
  -----------------------------------------------------------------------------------------
 */
 
 // Deutsche Modulbeschreibung
-$module_description = 'Dieses Modul gleicht die Addon Informationen der Datenbank mit Ihrer WB Installation ab.';
+$module_description = 'Dieses Modul erm&ouml;glicht die Erstellung einer Datenbanksicherung.';
 
 // Textausgaben
-$MOD_RELOAD['PLEASE_SELECT']			= 'W&auml;hlen Sie die Addons aus, deren Informationen mit der Datenbank abgeglichen werden sollen';
-$MOD_RELOAD['MODULES']					= 'Module';
-$MOD_RELOAD['TEMPLATES']				= 'Designvorlagen';
-$MOD_RELOAD['LANGUAGES']				= 'Sprachdateien';
-$MOD_RELOAD['MODULES_RELOADED']			= 'Module erfolgreich abgeglichen';
-$MOD_RELOAD['TEMPLATES_RELOADED']		= 'Designvorlagen erfolgreich abgeglichen';
-$MOD_RELOAD['LANGUAGES_RELOADED']		= 'Sprachdateien erfolgreich abgeglichen';
+$MOD_BACKUP['BACKUP_ALL_TABLES'] 	=	'Sichere alle Tabellen der Datenbank';
+$MOD_BACKUP['BACKUP_WB_SPECIFIC'] 	= 	'Sichere nur die von Website Baker generierten Tabellen der Datenbank';
+$TEXT['BACKUP_DATABASE']				=	'Erstelle Datenbanksicherung';
 
 ?>

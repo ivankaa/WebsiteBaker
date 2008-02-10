@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+10-Feb-2008 Matthias Gallas
+#	fixed some errors in standard german language file
++	added new colloquially german language file (thanks to Michael Tenschert)
 10-Feb-2008 Thomas Hornik
 #	CAPTCHA: Wrong text for calc_ttf-captcha. 
 10-Feb-2008 Christian Sommer

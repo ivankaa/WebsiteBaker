@@ -50,7 +50,7 @@ $MOD_CAPTCHA_CONTROL['TTF_IMAGE']         = 'Bild mit wechselnden Schriften und 
 $MOD_CAPTCHA_CONTROL['OLD_IMAGE']         = 'Alter Stil (nicht empfohlen)';
 $MOD_CAPTCHA_CONTROL['TEXT']              = 'Text-CAPTCHA';
 $MOD_CAPTCHA_CONTROL['CAPTCHA_ENTER_TEXT']= 'Fragen und Antworten';
-$MOD_CAPTCHA_CONTROL['CAPTCHA_TEXT_DESC'] = "Bitte hier alles l&ouml;schen\nsonst werden Ihre &Auml;nderungen nicht gespeichert!\n### Beispiel ###\nHier k&ouml;nnen sie Fragen und Antworten eingeben.\nEntweder:\n?Wie ist der <b>Vorname</b> von <b>Claudia</b> Schiffer?\n!Claudia\n\n?Frage 2\n!Antwort 2\n...\nwenn die Benutzte Sprache egal ist.\n\nOder, wenn die Sprache relevant ist:\n?EN:What's <b>Claudia</b> Schiffer's <b>first name</b>?\n!Claudia\n\n?EN:Question 2\n!Answer 2\n\n?DE:Wie ist der <b>Vorname</b> von <b>Claudia</b> Schiffer?\n!Claudia\n...\n### example ###\n";
+$MOD_CAPTCHA_CONTROL['CAPTCHA_TEXT_DESC'] = "Bitte hier alles l&ouml;schen\nsonst werden deine &Auml;nderungen nicht gespeichert!\n### Beispiel ###\nHier kannst du Fragen und Antworten eingeben.\nEntweder:\n?Wie ist der <b>Vorname</b> von <b>Claudia</b> Schiffer?\n!Claudia\n\n?Frage 2\n!Antwort 2\n...\nWenn die benutzte Sprache egal ist.\n\nOder, wenn die Sprache relevant ist:\n?EN:What's <b>Claudia</b> Schiffer's <b>first name</b>?\n!Claudia\n\n?EN:Question 2\n!Answer 2\n\n?DE:Wie ist der <b>Vorname</b> von <b>Claudia</b> Schiffer?\n!Claudia\n...\n### example ###\n";
 
 $MOD_CAPTCHA['VERIFICATION']           = 'Pr&uuml;fziffer';
 $MOD_CAPTCHA['ADDITION']               = 'plus';
@@ -59,6 +59,6 @@ $MOD_CAPTCHA['MULTIPLIKATION']         = 'mal';
 $MOD_CAPTCHA['VERIFICATION_INFO_RES']  = 'Bitte Ergebnis eintragen';
 $MOD_CAPTCHA['VERIFICATION_INFO_TEXT'] = 'Bitte Text eintragen';
 $MOD_CAPTCHA['VERIFICATION_INFO_QUEST'] = 'Bitte Frage beantworten';
-$MOD_CAPTCHA['INCORRECT_VERIFICATION'] = 'Das Ergebnis ist falsch. Bitte tragen Sie es erneut ein';
+$MOD_CAPTCHA['INCORRECT_VERIFICATION'] = 'Das Ergebnis ist falsch. Bitte trage es neu ein.';
 
 ?>

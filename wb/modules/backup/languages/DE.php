@@ -30,8 +30,8 @@
 $module_description = 'Dieses Modul erm&ouml;glicht die Erstellung einer Datenbanksicherung.';
 
 // Textausgaben
-$MOD_BACKUP['BACKUP_ALL_TABLES'] 	=	'Sichere alle Tabellen der Datenbank';
-$MOD_BACKUP['BACKUP_WB_SPECIFIC'] 	= 	'Sichere nur die von Website Baker generierten Tabellen der Datenbank';
+$MOD_BACKUP['BACKUP_ALL_TABLES'] 	=	'Sichern Sie alle Tabellen der Datenbank';
+$MOD_BACKUP['BACKUP_WB_SPECIFIC'] 	= 	'Sichern Sie nur die von Website Baker generierten Tabellen der Datenbank';
 $TEXT['BACKUP_DATABASE']				=	'Erstelle Datenbanksicherung';
 
 ?>

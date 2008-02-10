@@ -29,7 +29,7 @@
 // Deutsche Modulbeschreibung
 $module_description 	= 'Dieses Modul erm&ouml;glicht die Anzeige eines Links im Seitenmen&uuml;.';
 
-// Überschriften und Textausgaben
-$MOD_MENU_LINK['TEXT']				= 'Klicke HIER um zur Startseite zu gelangen';
+// Ueberschriften und Textausgaben
+$MOD_MENU_LINK['TEXT']				= 'Klicken Sie HIER um zur Startseite zu gelangen';
 
 ?>

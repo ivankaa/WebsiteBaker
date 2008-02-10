@@ -27,9 +27,9 @@
 */
 
 // Deutsche Modulbeschreibung
-$module_description = 'Dieses Modul erlaubt das einbinden fremder Inhalte auf Deiner Seiten mithilfe von Inline Frames (iframe)';
+$module_description = 'Dieses Modul erlaubt das Einbinden fremder Inhalte auf Ihrer Seite mit Hilfe von Inline Frames (iframe)';
 
-// Überschriften und Textausgaben
-$MOD_WRAPPER['NOTICE'] =	'Dein Browser unterst&uuml;tzt keine Inline Frames.<br />Bitte klicke auf nachfolgenden Link um den Seiteninhalt der externen Seite zu betrachten ...<br />';
+// Ueberschriften und Textausgaben
+$MOD_WRAPPER['NOTICE'] = 'Ihr Browser unterst&uuml;tzt keine Inline Frames.<br />Bitte klicken Sie auf nachfolgenden Link, um den Seiteninhalt der externen Seite zu betrachten ...<br />';
 
 ?>

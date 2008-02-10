@@ -29,8 +29,8 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'DE';
-$language_name = 'Deutsch (formal)';
+$language_code = 'DE_du';
+$language_name = 'Deutsch (umgangssprachlich)';
 $language_version = '2.7';
 $language_platform = '2.7.x';
 $language_author = 'Stefan Braunewell, Matthias Gallas, Dave Camenisch, Klaus Weitzel, Michael Tenschert';
@@ -58,17 +58,17 @@ $MENU['FORGOT'] = 'Anmelde-Details anfordern';
 
 // Section overviews
 $OVERVIEW['START'] = '&Uuml;berblick &uuml;ber die Verwaltung';
-$OVERVIEW['PAGES'] = 'Verwaltung Ihrer Webseiten...';
+$OVERVIEW['PAGES'] = 'Verwaltung deiner Webseiten...';
 $OVERVIEW['MEDIA'] = 'Verwaltung der im Medienordner gespeicherten Dateien...';
 $OVERVIEW['MODULES'] = 'Verwaltung der Website Baker Module...';
-$OVERVIEW['TEMPLATES'] = '&Auml;ndern des Designs Ihrer Webseite mit Vorlagen...';
+$OVERVIEW['TEMPLATES'] = '&Auml;ndern des Designs deiner Webseite mit Vorlagen...';
 $OVERVIEW['LANGUAGES'] = 'Sprachen verwalten...';
 $OVERVIEW['PREFERENCES'] = '&Auml;ndern pers&ouml;nlicher Einstellungen wie E-Mail-Adresse, Passwort, usw.... ';
 $OVERVIEW['SETTINGS'] = '&Auml;ndern der Optionen f&uuml;r Website Baker...';
 $OVERVIEW['USERS'] = 'Verwaltung von Benutzern, die sich in Website Baker einloggen d&uuml;rfen...';
 $OVERVIEW['GROUPS'] = 'Verwaltung von Gruppen und Ihrer Zugangsberechtigungen...';
-$OVERVIEW['HELP'] = 'Noch Fragen? Hier finden Sie Antworten';
-$OVERVIEW['VIEW'] = 'Ansicht Ihrer Webseite in einem neuen Fenster...';
+$OVERVIEW['HELP'] = 'Noch Fragen? Hier findest du Antworten';
+$OVERVIEW['VIEW'] = 'Ansicht deiner Webseite in einem neuen Fenster...';
 $OVERVIEW['ADMINTOOLS'] = 'Zugriff auf die Website Baker Verwaltungsprogramme...';
 
 // Headings
@@ -154,8 +154,8 @@ $TEXT['MODIFY_SETTINGS'] = 'Optionen &auml;ndern';
 $TEXT['MODIFY_CONTENT'] = 'Inhalt &auml;ndern';
 $TEXT['VIEW'] = 'Ansicht';
 $TEXT['UP'] = 'Aufw&auml;rts';
-$TEXT['FORGOTTEN_DETAILS'] = 'Haben Sie Ihre pers&ouml;nlichen Daten vergessen?';
-$TEXT['NEED_TO_LOGIN'] = 'M&uuml;ssen Sie sich einloggen?';
+$TEXT['FORGOTTEN_DETAILS'] = 'Hast du deine pers&ouml;nlichen Daten vergessen?';
+$TEXT['NEED_TO_LOGIN'] = 'Musst du dich einloggen?';
 $TEXT['SEND_DETAILS'] = 'Anmeldedaten senden';
 $TEXT['USERNAME'] = 'Benutzername';
 $TEXT['PASSWORD'] = 'Passwort';
@@ -188,7 +188,7 @@ $TEXT['RETYPE_NEW_PASSWORD'] = 'Neues Passwort wiederholen';
 $TEXT['ACTIVE'] = 'Aktiv';
 $TEXT['DISABLED'] = 'Ausgeschaltet';
 $TEXT['ENABLED'] = 'Eingeschaltet';
-$TEXT['RETYPE_PASSWORD'] = 'Geben Sie bitte Ihr Passwort nochmal ein';
+$TEXT['RETYPE_PASSWORD'] = 'Bitte gib dein Passwort nochmal ein';
 $TEXT['GROUP'] = 'Gruppe';
 $TEXT['SYSTEM_PERMISSIONS'] = 'Zugangsberechtigungen';
 $TEXT['MODULE_PERMISSIONS'] = 'Modulberechtigungen';
@@ -218,7 +218,7 @@ $TEXT['EXTENSION'] = 'Endungen';
 $TEXT['TABLE_PREFIX'] = 'TabellenPr&auml;fix';
 $TEXT['CHANGES'] = '&Auml;nderungen';
 $TEXT['ADMINISTRATION'] = 'Verwaltung';
-$TEXT['FORGOT_DETAILS'] = 'Haben Sie Ihre pers&ouml;nlichen Daten vergessen?';
+$TEXT['FORGOT_DETAILS'] = 'Hast du deine pers&ouml;nlichen Daten vergessen?';
 $TEXT['LOGGED_IN'] = 'Angemeldet';
 $TEXT['WELCOME_BACK'] = 'Willkommen zur&uuml;ck';
 $TEXT['FULL_NAME'] = 'Voller Name';
@@ -232,7 +232,7 @@ $TEXT['TOP_FRAME'] = 'Frameset sprengen';
 $TEXT['PAGE_LEVEL_LIMIT'] = 'Limit der Seitenebenen';
 $TEXT['SUCCESS'] = 'Erfolgreich';
 $TEXT['ERROR'] = 'Fehler';
-$TEXT['ARE_YOU_SURE'] = 'Sind Sie sicher?';
+$TEXT['ARE_YOU_SURE'] = 'Bist du dir sicher?';
 $TEXT['YES'] = 'Ja';
 $TEXT['NO'] = 'Nein';
 $TEXT['SYSTEM_DEFAULT'] = 'Standardeinstellung';
@@ -273,7 +273,7 @@ $TEXT['DATE_FORMAT'] = 'Datumsformat';
 $TEXT['TIME_FORMAT'] = 'Zeitformat';
 $TEXT['RESULTS'] = 'Resultate';
 $TEXT['RESIZE'] = 'Gr&ouml;sse &auml;ndern';
-$TEXT['MANAGE'] = 'Verwalten Sie';
+$TEXT['MANAGE'] = 'Verwalte';
 $TEXT['CODE'] = 'Code';
 $TEXT['WIDTH'] = 'Breite';
 $TEXT['HEIGHT'] = 'H&ouml;he';
@@ -405,10 +405,10 @@ $TEXT['PUBL_START_DATE'] = 'Start Datum';
 $TEXT['PUBL_END_DATE'] = 'End Datum';
 $TEXT['CALENDAR'] = 'Kalender';
 $TEXT['DELETE_DATE'] = 'Datum l&ouml;schen';
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Bitte geben Sie eine Standard "VON" Adresse und einen Sendernamen an. Als Absender Adresse empfiehlt sich ein Format wie: <strong>admin@IhreWebseite.de</strong>. Manche E-Mail-Provider (z.B. <em>mail.de</em>) stellen keine E-Mails zu, die nicht &uuml;ber den Provider selbst verschickt wurden, in der Absenderadresse aber den Namen des E-Mail-Providers <em>name@mail.de</em> enthalten. Die Standard Werte werden nur verwendet, wenn keine anderen Werte von Website Baker gesetzt wurden. Wenn Ihr Service Provider <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> anbietet, sollten Sie diese Option f&uuml;r ausgehende E-Mails verwenden.';
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Bitte gib eine Standard "VON" Adresse und einen Sendernamen an. Als Absender Adresse empfiehlt sich ein Format wie: <strong>admin@DeineWebseite.de</strong>. Manche E-Mail-Provider (z.B. <em>mail.de</em>) stellen keine E-Mails zu, die nicht &uuml;ber den Provider selbst verschickt wurden, in der Absenderadresse aber den Namen des E-Mail-Providers <em>name@mail.de</em> enthalten. Die Standard Werte werden nur verwendet, wenn keine anderen Werte von Website Baker gesetzt wurden. Wenn dein Service Provider <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> anbietet, solltest du diese Option f&uuml;r ausgehende E-Mails verwenden.';
 $TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Standard "VON" Adresse';
 $TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Standard Absender Name';
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Maileinstellungen:</strong><br />Die nachfolgenden Einstellungen m&uuml;ssen nur angepasst werden, wenn Sie E-Mail &uuml;ber <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> verschicken wollen. Wenn Sie Ihren SMTP Server nicht kennen, oder Sie sich unsicher bei den Einstellungen sind, verwenden Sie einfach die Standard E-Mailroutine: PHP MAIL.';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Maileinstellungen:</strong><br />Die nachfolgenden Einstellungen m&uuml;ssen nur angepasst werden, wenn du E-Mails &uuml;ber <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> verschicken willst. Wenn du deinen SMTP Server nicht kennst, oder dir unsicher bei den Einstellungen bist, verwende einfach die Standard E-Mailroutine: PHP MAIL.';
 $TEXT['WBMAILER_FUNCTION'] = 'E-Mail Routine';
 $TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
 $TEXT['WBMAILER_PHP'] = 'PHP MAIL';
@@ -420,38 +420,38 @@ $TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Passwort';
 $TEXT['PLEASE_LOGIN'] = 'Bitte anmelden';
 
 // Success/error messages
-$MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sie sind nicht berechtigt, diese Seite zu sehen';
+$MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Du bist nicht berechtigt, diese Seite zu sehen';
 $MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Kein aktiver Inhalt auf dieser Seite vorhanden';
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Ungen&uuml;gende Zugangsberechtigungen';
 
-$MESSAGE['LOGIN']['BOTH_BLANK'] = 'Bitte geben Sie unten Ihren Benutzernamen und Passwort ein';
-$MESSAGE['LOGIN']['USERNAME_BLANK'] = 'Bitte geben Sie Ihren Benutzernamen ein';
-$MESSAGE['LOGIN']['PASSWORD_BLANK'] = 'Bitte geben Sie Ihr Passwort ein';
+$MESSAGE['LOGIN']['BOTH_BLANK'] = 'Bitte gib unten deinen Benutzernamen und Passwort ein';
+$MESSAGE['LOGIN']['USERNAME_BLANK'] = 'Bitte gebe deinen Benutzernamen ein';
+$MESSAGE['LOGIN']['PASSWORD_BLANK'] = 'Bitte gib dein Passwort ein';
 $MESSAGE['LOGIN']['USERNAME_TOO_SHORT'] = 'Der angegebene Benutzername ist zu kurz';
 $MESSAGE['LOGIN']['PASSWORD_TOO_SHORT'] = 'Das angegebene Passwort ist zu kurz';
 $MESSAGE['LOGIN']['USERNAME_TOO_LONG'] = 'Der angegebene Benutzername ist zu lang';
 $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Das angegebene Passwort ist zu lang';
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Der Benutzername oder das Passwort ist nicht korrekt';
 
-$MESSAGE['SIGNUP']['NO_EMAIL'] = 'Bitte geben Sie Ihre E-Mail-Adresse an';
+$MESSAGE['SIGNUP']['NO_EMAIL'] = 'Bitte gib deine E-Mail-Adresse an';
 
-$MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Bitte geben Sie nachfolgend Ihre E-Mail-Adresse an';
+$MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Bitte gib nachfolgend deine E-Mail-Adresse an';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'Die angegebene E-Mail-Adresse wurde nicht in der Datenbank gefunden';
-$MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'] = 'Das Passwort konnte nicht versendet werden, bitte kontaktieren Sie den Systemadministrator';
-$MESSAGE['FORGOT_PASS']['PASSWORD_RESET'] = 'Ihr Benutzername und Ihr Passwort wurden an Ihre E-Mail-Adresse gesendet';
+$MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'] = 'Das Passwort konnte nicht versendet werden, bitte kontaktiere den Systemadministrator';
+$MESSAGE['FORGOT_PASS']['PASSWORD_RESET'] = 'Dein Benutzername und Passwort wurde an deine E-Mail-Adresse gesendet';
 $MESSAGE['FORGOT_PASS']['ALREADY_RESET'] = 'Das Passwort kann nur einmal pro Stunde zur&uuml;ckgesetzt werden';
 
 $MESSAGE['START']['WELCOME_MESSAGE'] = 'Willkommen in der Website Baker Verwaltung';
 $MESSAGE['START']['INSTALL_DIR_EXISTS'] = 'Das Installations-Verzeichnis "/install" existiert noch! Dies stellt ein Sicherheitsrisiko dar. Bitte l&ouml;schen.';
-$MESSAGE['START']['CURRENT_USER'] = 'Sie sind momentan angemeldet als:';
+$MESSAGE['START']['CURRENT_USER'] = 'Du bist momentan angemeldet als:';
 
 $MESSAGE['SETTINGS']['UNABLE_OPEN_CONFIG'] = 'Konfigurationsdatei konnte nicht ge&ouml;ffnet werden';
 $MESSAGE['SETTINGS']['UNABLE_WRITE_CONFIG'] = 'Die Konfigurationsdatei konnte nicht geschrieben werden';
 $MESSAGE['SETTINGS']['SAVED'] = 'Die Optionen wurden erfolgreich gespeichert';
-$MESSAGE['SETTINGS']['MODE_SWITCH_WARNING'] = 'Bitte beachten Sie: Wenn Sie dieses Feld anklicken, werden alle ungespeicherten &Auml;nderungen zur&uuml;ckgesetzt';
-$MESSAGE['SETTINGS']['WORLD_WRITEABLE_WARNING'] = 'Bitte beachten Sie: Dies wird nur zu Testzwecken empfohlen';
-
+$MESSAGE['SETTINGS']['MODE_SWITCH_WARNING'] = 'Bitte beachte: Wenn du dieses Feld anklickst, werden alle ungespeicherten &Auml;nderungen zur&uuml;ckgesetzt';
+$MESSAGE['SETTINGS']['WORLD_WRITEABLE_WARNING'] = 'Bitte beachte: Dies wird nur zu Testzwecken empfohlen';
+//
 $MESSAGE['USERS']['ADDED'] = 'Der Benutzer wurde erfolgreich hinzugef&uuml;gt';
 $MESSAGE['USERS']['SAVED'] = 'Der Benutzer wurde erfolgreich gespeichert';
 $MESSAGE['USERS']['DELETED'] = 'Der Benutzer wurde erfolgreich gel&ouml;scht';
@@ -462,23 +462,23 @@ $MESSAGE['USERS']['PASSWORD_MISMATCH'] = 'Das angegebene Passwort ist ung&uuml;l
 $MESSAGE['USERS']['INVALID_EMAIL'] = 'Die angegebene E-Mail-Adresse ist ung&uuml;ltig';
 $MESSAGE['USERS']['EMAIL_TAKEN'] = 'Die angegebene E-Mail-Adresse wird bereits verwendet';
 $MESSAGE['USERS']['USERNAME_TAKEN'] = 'Der angegebene Benutzername wird bereits verwendet';
-$MESSAGE['USERS']['CHANGING_PASSWORD'] = 'Bitte beachten Sie: Sie sollten in die obigen Felder nur Werte eingeben, wenn Sie das Passwort dieses Benutzers &auml;ndern m&ouml;chten';
-$MESSAGE['USERS']['CONFIRM_DELETE'] = 'Sind Sie sicher, dass Sie den ausgew&auml;hlten Benutzer l&ouml;schen m&ouml;chten?';
+$MESSAGE['USERS']['CHANGING_PASSWORD'] = 'Bitte beachte: Du solltest in die obigen Felder nur Werte eingeben, wenn du das Passwort dieses Benutzers &auml;ndern m&ouml;chtest';
+$MESSAGE['USERS']['CONFIRM_DELETE'] = 'Bist du sicher, dass du den ausgew&auml;hlten Benutzer l&ouml;schen m&ouml;chtest?';
 
 $MESSAGE['GROUPS']['ADDED'] = 'Die Gruppe wurde erfolgreich hinzugef&uuml;gt';
 $MESSAGE['GROUPS']['SAVED'] = 'Die Gruppe wurde erfolgreich gespeichert';
 $MESSAGE['GROUPS']['DELETED'] = 'Die Gruppe wurde erfolgreich gel&ouml;scht';
 $MESSAGE['GROUPS']['GROUP_NAME_BLANK'] = 'Der Gruppenname wurde nicht angegeben';
-$MESSAGE['GROUPS']['CONFIRM_DELETE'] = 'Sind Sie sicher, dass Sie die ausgew&auml;hlte Gruppe l&ouml;schen m&ouml;chten (und alle Benutzer, die dazugeh&ouml;ren)?';
+$MESSAGE['GROUPS']['CONFIRM_DELETE'] = 'Bist du sicher, dass du die ausgew&auml;hlte Gruppe l&ouml;schen m&ouml;chtest (und alle Benutzer, die dazugeh&ouml;ren)?';
 $MESSAGE['GROUPS']['NO_GROUPS_FOUND'] = 'Keine Gruppen gefunden';
 $MESSAGE['GROUPS']['GROUP_NAME_EXISTS'] = 'Der Gruppenname existiert bereits';
 
 $MESSAGE['PREFERENCES']['DETAILS_SAVED'] = 'Pers&ouml;nliche Daten wurden erfolgreich gespeichert';
 $MESSAGE['PREFERENCES']['EMAIL_UPDATED'] = 'E-Mail-Einstellung ge&auml;ndert';
-$MESSAGE['PREFERENCES']['CURRENT_PASSWORD_INCORRECT'] = 'Das alte Passwort, das Sie angegeben haben, ist ung&uuml;ltig';
+$MESSAGE['PREFERENCES']['CURRENT_PASSWORD_INCORRECT'] = 'Das alte Passwort, das du angegeben hast, ist ung&uuml;ltig';
 $MESSAGE['PREFERENCES']['PASSWORD_CHANGED'] = 'Das Passwort wurde erfolgreich ge&auml;ndert';
 
-$MESSAGE['TEMPLATES']['CHANGE_TEMPLATE_NOTICE'] = "Bitte beachten Sie: Um eine andere Designvorlage auszuw&auml;hlen, benutzen Sie den Bereich 'Optionen'";
+$MESSAGE['TEMPLATES']['CHANGE_TEMPLATE_NOTICE'] = "Bitte beachte: Um eine andere Designvorlage auszuw&auml;hlen, benutze den Bereich 'Optionen'";
 
 $MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH'] = 'Der Verzeichnisname darf nicht ../ enthalten';
 $MESSAGE['MEDIA']['DIR_DOES_NOT_EXIST'] = 'Verzeichnis existiert nicht';
@@ -489,11 +489,11 @@ $MESSAGE['MEDIA']['NONE_FOUND'] = 'Im aktuellen Verzeichnis konnten keine Dateie
 $MESSAGE['MEDIA']['FILE_NOT_FOUND'] = 'Die Datei konnte nicht gefunden werden';
 $MESSAGE['MEDIA']['DELETED_FILE'] = 'Die Datei wurde gel&ouml;scht';
 $MESSAGE['MEDIA']['DELETED_DIR'] = 'Das Verzeichnis wurde gel&ouml;scht';
-$MESSAGE['MEDIA']['CONFIRM_DELETE'] = 'Sind Sie sicher, dass Sie die folgende Datei oder Verzeichnis l&ouml;schen m&ouml;chten?';
+$MESSAGE['MEDIA']['CONFIRM_DELETE'] = 'Bist du sicher, dass du die folgende Datei oder Verzeichnis l&ouml;schen m&ouml;chtest?';
 $MESSAGE['MEDIA']['CANNOT_DELETE_FILE'] = 'Die ausgew&auml;hlte Datei konnte nicht gel&ouml;scht werden';
 $MESSAGE['MEDIA']['CANNOT_DELETE_DIR'] = 'Das ausgew&auml;hlte Verzeichnis konnte nicht gel&ouml;scht werden';
-$MESSAGE['MEDIA']['BLANK_NAME'] = 'Sie haben keinen neuen Namen angegeben';
-$MESSAGE['MEDIA']['BLANK_EXTENSION'] = 'Sie haben keine Dateiendung angegeben';
+$MESSAGE['MEDIA']['BLANK_NAME'] = 'Du hast keinen neuen Namen angegeben';
+$MESSAGE['MEDIA']['BLANK_EXTENSION'] = 'Du hast keine Dateiendung angegeben';
 $MESSAGE['MEDIA']['RENAMED'] = 'Das Umbenennen war erfolgreich';
 $MESSAGE['MEDIA']['CANNOT_RENAME'] = 'Das Umbenennen war nicht erfolgreich';
 $MESSAGE['MEDIA']['FILE_EXISTS'] = 'Eine Datei mit dem angegebenen Namen existiert bereits';
@@ -512,24 +512,24 @@ $MESSAGE['PAGES']['NOT_FOUND'] = 'Die Seite konnte nicht gefunden werden';
 $MESSAGE['PAGES']['SAVED'] = 'Die Seite wurde erfolgreich gespeichert';
 $MESSAGE['PAGES']['SAVED_SETTINGS'] = 'Die Seiteneinstellungen wurden erfolgreich gespeichert';
 $MESSAGE['PAGES']['NOT_SAVED'] = 'Beim Speichern der Seite ist ein Fehler aufgetreten';
-$MESSAGE['PAGES']['DELETE_CONFIRM'] = 'Sind Sie sicher, dass Sie die ausgew&auml;hlte Seite l&ouml;schen m&ouml;chten';
+$MESSAGE['PAGES']['DELETE_CONFIRM'] = 'Bist du sicher, dass du die ausgew&auml;hlte Seite l&ouml;schen m&ouml;chtest';
 $MESSAGE['PAGES']['DELETED'] = 'Die Seite wurde erfolgreich gel&ouml;scht';
 $MESSAGE['PAGES']['RESTORED'] = 'Die Seite wurde erfolgreich wiederhergestellt';
-$MESSAGE['PAGES']['BLANK_PAGE_TITLE'] = 'Bitte geben Sie einen Titel f&uuml;r die Seite ein';
-$MESSAGE['PAGES']['BLANK_MENU_TITLE'] = 'Bitte geben Sie einen Men&uuml;titel ein';
+$MESSAGE['PAGES']['BLANK_PAGE_TITLE'] = 'Bitte gib einen Titel f&uuml;r die Seite ein';
+$MESSAGE['PAGES']['BLANK_MENU_TITLE'] = 'Bitte gib einen Men&uuml;titel ein';
 $MESSAGE['PAGES']['REORDERED'] = 'Die Seite wurde erfolgreich neu zusammengestellt';
 $MESSAGE['PAGES']['CANNOT_REORDER'] = 'Bei der Zusammenstellung der Seite ist ein Fehler aufgetreten';
-$MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS'] = 'Sie haben keine Berechtigung, diese Seite zu &auml;ndern';
+$MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS'] = 'Du hast keine Berechtigung, diese Seite zu &auml;ndern';
 $MESSAGE['PAGES']['INTRO_NOT_WRITABLE'] = 'Es konnte nicht in die Datei /pages/intro.php geschrieben werden (ungen&uuml;gende Zugangsrechte)';
 $MESSAGE['PAGES']['INTRO_SAVED'] = 'Eingangsseite wurde erfolgreich gespeichert';
 $MESSAGE['PAGES']['LAST_MODIFIED'] = 'Die letzte &Auml;nderung wurde durchgef&uuml;hrt von';
-$MESSAGE['PAGES']['INTRO_LINK'] = 'Bitte klicken Sie HIER um die Eingangsseite zu &auml;ndern';
+$MESSAGE['PAGES']['INTRO_LINK'] = 'Bitte klicke HIER um die Eingangsseite zu &auml;ndern';
 $MESSAGE['PAGES']['SECTIONS_PROPERTIES_SAVED'] = 'Einstellungen f&uuml;r diesen Abschnitt erfolgreich gespeichert';
 $MESSAGE['PAGES']['RETURN_TO_PAGES'] = 'Zur&uuml;ck zum Seitenmen&uuml;';
 
 $MESSAGE['GENERIC']['FILL_IN_ALL'] = 'Bitte alle Felder ausf&uuml;llen';
-$MESSAGE['GENERIC']['FILE_TYPE'] = 'Bitte beachten Sie, dass Sie nur den folgenden Dateityp ausw&auml;hlen k&ouml;nnen:';
-$MESSAGE['GENERIC']['FILE_TYPES'] = 'Bitte beachten Sie, dass Sie nur folgende Dateitypen ausw&auml;hlen k&ouml;nnen:';
+$MESSAGE['GENERIC']['FILE_TYPE'] = 'Bitte beachte, dass du nur den folgenden Dateityp ausw&auml;hlen kannst:';
+$MESSAGE['GENERIC']['FILE_TYPES'] = 'Bitte beachte, dass du nur folgende Dateitypen ausw&auml;hlen kannst:';
 $MESSAGE['GENERIC']['CANNOT_UPLOAD'] = 'Die Datei kann nicht &uuml;bertragen werden';
 $MESSAGE['GENERIC']['ALREADY_INSTALLED'] = 'Bereits installiert';
 $MESSAGE['GENERIC']['NOT_INSTALLED'] = 'Nicht installiert';
@@ -542,15 +542,15 @@ $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kann im Zielverzeichnis nicht schreibe
 $MESSAGE['GENERIC']['INVALID'] = 'Die &uuml;bertragene Datei ist ung&uuml;ltig';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Deinstallation nicht m&ouml;glich: Datei wird benutzt';
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Momentan in Bearbeitung';
-$MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Bitte versuchen Sie es sp&auml;ter noch einmal ...';
+$MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Bitte versuche es sp&auml;ter noch einmal ...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Die Datenbanksicherung kann je nach Gr&ouml;&szlig;e der Datenbank einige Zeit dauern.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Fehler beim &Ouml;ffnen der Datei.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Bitte folgende Angaben erg&auml;nzen';
-$MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Dieses Formular wurde zu oft aufgerufen. Bitte versuchen Sie es in einer Stunde noch einmal.';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Die eingegebene Pr&uuml;fziffer stimmt nicht &uuml;berein. Wenn Sie Probleme mit dem Lesen der Pr&uuml;fziffer haben, bitte schreiben Sie eine E-Mail an uns: '.SERVER_EMAIL;
+$MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Dieses Formular wurde zu oft aufgerufen. Bitte versuche es in einer Stunde noch einmal.';
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Die eingegebene Pr&uuml;fziffer stimmt nicht &uuml;berein. Wenn du Probleme mit dem Lesen der Pr&uuml;fziffer hast, schreibe bitte eine E-Mail an uns: '.SERVER_EMAIL;
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Bitte w&auml;hlen Sie aus, welche Erweiterungen neu geladen werden sollen';
+$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Bitte w&auml;hle aus, welche Erweiterungen neu geladen werden sollen';
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Module erfolgreich geladen';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Designvorlagen erfolgreich geladen';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Sprachen erfolgreich geladen';
