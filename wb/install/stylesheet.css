@@ -14,7 +14,7 @@ form {
 }
 
 input:focus, select:focus {
-	background: #FFFFE0;
+	background: #F1F8FD;
 }
 
 .wrong {

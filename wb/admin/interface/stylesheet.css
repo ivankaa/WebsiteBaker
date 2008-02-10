@@ -70,7 +70,7 @@ label {
 }
 .current a, .current a:link, .current a:active, .current a:visited {
 	background: #fff url(menuo.png) ;
-         background-repeat:repeat-x;
+    background-repeat:repeat-x;
 	color: #fff;
 }
 .content {
@@ -90,4 +90,8 @@ label {
 }
 .hide {
 	display: none;
+}
+
+input:focus, select:focus, textarea:focus {
+	background: #F1F8FD;
 }

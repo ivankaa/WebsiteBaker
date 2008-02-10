@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 10-Feb-2008 Christian Sommer
+!	added highlighting of active input elements to all WB backend areas; changed some colors
 !	removed hover highlighting of input fields to avoid possible confusion
 !	added visualization of wrong/empty input fields
 #	fixed a bug with re-enter admin password
