@@ -180,7 +180,7 @@ if($query_sections->numRows() > 0) {
 		$module_name=$database->get_one("SELECT name FROM ".TABLE_PREFIX."addons WHERE directory='".$section['module']."'");
 		if(!is_numeric(array_search($section['module'], $module_permissions))) {
 			?>
-			<tr onmouseover="this.style.backgroundColor = '#FFFFE0'" onmouseout="this.style.backgroundColor = '#FFF'">
+			<tr onmouseover="this.style.backgroundColor = '#F1F8DD'" onmouseout="this.style.backgroundColor = '#FFF'">
 				<td style="width: <?php if(SECTION_BLOCKS) print "120"; else print "200"; ?>px;"><a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>#<?php echo $section['section_id']; ?>"><?php echo $module_name; ?></a></td>
 				<?php if(SECTION_BLOCKS) { ?>
 				<td>

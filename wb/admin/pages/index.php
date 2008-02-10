@@ -164,7 +164,7 @@ function make_list($parent, $editable_pages) {
 			
 			<li id="p<?php echo $page['parent']; ?>" style="padding: 2px 0px 2px 0px;">
 			<table width="720" cellpadding="1" cellspacing="0" border="0" style="background-color: #ECF3F7;">
-			<tr onmouseover="this.style.backgroundColor = '#FFFFE0'" onmouseout="this.style.backgroundColor = '#ECF3F7'">
+			<tr onmouseover="this.style.backgroundColor = '#F1F8DD'" onmouseout="this.style.backgroundColor = '#ECF3F7'">
 				<td width="20" style="padding-left: <?php echo $page['level']*20; ?>px;">
 					<?php
 					if($display_plus == true) {
