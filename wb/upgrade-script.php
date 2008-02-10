@@ -37,14 +37,42 @@ require(WB_PATH.'/framework/functions.php');
 <head>
 <title>Upgrade-Script</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<style type="text/css">
+.red { background-color:#FF0000 }
+.green { background-color:#00FF00 }
+
+#warning {
+width: 90%; 
+padding: 10px; 
+margin-left: 5%; 
+margin-bottom: 5px; 
+border: 1px solid #FF0000; 
+background-color: #FFDBDB;
+}
+
+p { line-height:1.5em; }
+
+</style>
 </head>
 <body>
-<!--
-<style type="text/css">
-*.red { background-color:#FF0000 }
-*.green { background-color:#00FF00 }
-</style>
--->
+<?php
+/**
+	AT THIS POINT IN TIME THE UPGRADE SCRIPT IS NOT MATURE ENOUGH
+	SO PROVIDE A WARNING TO BACKUP THE DATABASE AND THE PAGES DIRECTORY
+	BEFORE EXECUTING THIS SCRIPT (doc)
+*/
+if(!isset($_GET['action']) || $_GET['action'] != 'upgrade') {
+?>
+<div id="warning">
+<strong>WARNING:</strong>
+<p>The actual WB 2.7 version is still a developer version. <strong>It is not recommended to use this release in a
+productive environment</strong>.<p>The upgrade-script is not sufficiently tested yet, so please <strong>backup your database and /pages directory before executing the upgrade script</strong>.<br />You may loose all your data if something goes wrong!!</p><p>If you want to start the upgrade-script, please click on: <a href="upgrade-script.php?action=upgrade" target="_self">execute upgrade-script</a></p>
+</div>
+<?php
+die;
+} ?>
+	
 <h2>Upgrade-script</h2>
 <p>
 will upgrade Website Baker 2.6.5 / 2.6.7 to version 2.7
