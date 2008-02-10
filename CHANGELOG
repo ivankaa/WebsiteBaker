@@ -17,6 +17,7 @@ Legend:
 10-Feb-2008 Thomas Hornik
 #	CAPTCHA: Wrong text for calc_ttf-captcha. 
 10-Feb-2008 Christian Sommer
+#	fixed E_NOTICE warning with already defined module frontend constants
 -	removed all stuff other than page_content from the blank template
 !	adapted color for onmouseover effect
 !	added disclaimer to the upgrade-script as the script is not sufficiently tested yet
