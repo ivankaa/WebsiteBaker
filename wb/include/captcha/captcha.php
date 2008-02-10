@@ -88,7 +88,7 @@ if(!function_exists('call_captcha')) {
 			// one special case
 			case 'text': // text-captcha
 				?><table class="captcha_table"><tr>
-				<td class="text_captcha"><?php include(WB_PATH.'/include/captcha/captchas/text.php'); ?></td>
+				<td class="text_captcha"><?php include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php'); ?></td>
 				<td><input type="text" name="captcha" maxlength="50"  style="width:150px" /></td>
 				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_QUEST']; ?></td>
 				</tr></table><?php
@@ -96,21 +96,21 @@ if(!function_exists('call_captcha')) {
 			// two special cases
 			case 'calc_text': // calculation as text
 				?><table class="captcha_table"><tr>
-				<td class="text_captcha"><?php include(WB_PATH.'/include/captcha/captchas/calc_text.php'); ?>&nbsp;=&nbsp;</td>
+				<td class="text_captcha"><?php include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php'); ?>&nbsp;=&nbsp;</td>
 				<td><input type="text" name="captcha" maxlength="10"  style="width:20px" /></td>
 				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
 				</tr></table><?php
 				break;
 			case 'calc_image': // calculation with image (old captcha)
+			case 'calc_ttf_image': // calculation with varying background and ttf-font
 				?><table class="captcha_table"><tr>
-				<td class="image_captcha"><img src="<?php echo WB_URL."/include/captcha/captchas/calc_image.php?t=$t"; ?>" alt="Captcha" /></td><td>&nbsp;=&nbsp;</td>
+				<td class="image_captcha"><img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" /></td><td>&nbsp;=&nbsp;</td>
 				<td><input type="text" name="captcha" maxlength="10" style="width:20px" /></td>
 				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
 				</tr></table><?php
 				break;
 			// normal images
 			case 'ttf_image': // captcha with varying background and ttf-font
-			case 'calc_ttf_image': // calculation with varying background and ttf-font
 			case 'old_image': // old captcha
 				?><table class="captcha_table"><tr>
 				<td class="image_captcha"><img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" /></td>

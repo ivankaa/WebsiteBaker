@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+10-Feb-2008 Thomas Hornik
+#	CAPTCHA: Wrong text for calc_ttf-captcha. 
 10-Feb-2008 Christian Sommer
 !	added highlighting of active input elements to all WB backend areas; changed some colors
 !	removed hover highlighting of input fields to avoid possible confusion
