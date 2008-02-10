@@ -14,6 +14,7 @@ Legend:
 10-Feb-2008 Thomas Hornik
 #	CAPTCHA: Wrong text for calc_ttf-captcha. 
 10-Feb-2008 Christian Sommer
+-	removed all stuff other than page_content from the blank template
 !	adapted color for onmouseover effect
 !	added disclaimer to the upgrade-script as the script is not sufficiently tested yet
 !	made Website Header field in Settings visible per default
