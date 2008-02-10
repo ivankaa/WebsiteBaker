@@ -97,12 +97,18 @@ form {
 	display: block;
 	padding: 2px;
 }
-.menu_main a:link, .menu_main a:visited, .menu_main a:active {
+.menu_default a:link, .menu_default a:visited, .menu_default a:active {
 	border-bottom: 1px dashed #999999;
 }
-.menu_main a:hover {
+.menu_default a:hover {
 	border-bottom: 1px dashed #333333;
 }
+
+.menu_current  {
+	border-bottom: 1px dashed #999999;
+	font-weight:bold;
+}
+
 .login_table {
 	border: 1px solid #D0D0D0;
 	margin-top: 20px;

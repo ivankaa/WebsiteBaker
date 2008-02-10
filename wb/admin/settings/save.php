@@ -24,7 +24,7 @@
 */
 
 // prevent this file from being accessed directly in the browser (would set all entries in DB settings table to '')
-if(!isset($_POST['default_language']) || $_POST['default_language'] == '') die("Cannot access this file directly");  
+if(!isset($_POST['default_language']) || $_POST['default_language'] == '') die(header('Location: index.php'));  
 
 // Find out if the user was view advanced options or not
 if($_POST['advanced'] == 'yes' ? $advanced = '?advanced=yes' : $advanced = '');

@@ -39,10 +39,15 @@ if(!defined('WB_URL')) {
 <link href="<?php echo TEMPLATE_DIR; ?>/screen.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo TEMPLATE_DIR; ?>/print.css" rel="stylesheet" type="text/css" media="print" />
 <?php
+// this allows to include the optional module files (frontend.css, frontend.js) into the head section
 if(function_exists('register_frontend_modfiles')) {
   register_frontend_modfiles('css');
   register_frontend_modfiles('js');
 } ?>
+<?php 
+// this allows to add custom information to the head section of your template (WB-->Settings-->Website Header)
+echo WEBSITE_HEADER; 
+?>
 </head>
 <body>
 
@@ -61,7 +66,7 @@ if(function_exists('register_frontend_modfiles')) {
 	<td class="menu">
 		<?php if(SHOW_MENU) { /* Only shown menu if we need to */ ?>	
 			Menu: <br />
-			<?php page_menu(); ?>
+			<?php show_menu(); ?>
 		<?php } ?>
 		
 		<?php if(SHOW_SEARCH) { /* Only show search box if search is enabled */ ?>

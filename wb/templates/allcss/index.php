@@ -39,10 +39,15 @@ if(!defined('WB_URL')) {
 <link href="<?php echo TEMPLATE_DIR; ?>/screen.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo TEMPLATE_DIR; ?>/print.css" rel="stylesheet" type="text/css" media="print" />
 <?php
+// this allows to include the optional module files (frontend.css, frontend.js) into the head section
 if(function_exists('register_frontend_modfiles')) {
   register_frontend_modfiles('css');
   register_frontend_modfiles('js');
 } ?>
+<?php 
+// this allows to add custom information to the head section of your template (WB-->Settings-->Website Header)
+echo WEBSITE_HEADER; 
+?>
 </head>
 <body>
 
@@ -67,9 +72,9 @@ if(function_exists('register_frontend_modfiles')) {
 	if(SHOW_MENU) {
 	?>	
 	<div class="menu">
-		<?php page_menu(0, 1, '<li class="menu_main"[class]>[a] [menu_title] [/a]</li>', '<ul>', '</ul>', '', ' style="font-weight: bold;"'); ?>
+		<?php 
+		show_menu();
 		
-		<?php
 		if(FRONTEND_LOGIN == 'enabled' AND VISIBILITY != 'private' AND $wb->get_session('USER_ID') == '') {
 		?>
 		<form name="login" action="<?php echo LOGIN_URL; ?>" method="post" class="login_table">

@@ -28,6 +28,38 @@ if(!defined('WB_URL')) {
 	exit(0);
 }
 
-page_content();
-
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title><?php page_title(); ?></title>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php if(defined('DEFAULT_CHARSET')) { echo DEFAULT_CHARSET; } else { echo 'utf-8'; }?>" />
+<meta name="description" content="<?php page_description(); ?>" />
+<meta name="keywords" content="<?php page_keywords(); ?>" />
+<link href="<?php echo TEMPLATE_DIR; ?>/screen.css" rel="stylesheet" type="text/css" media="screen" />
+<?php
+// this allows to include the optional module files (frontend.css, frontend.js) into the head section
+if(function_exists('register_frontend_modfiles')) {
+  register_frontend_modfiles('css');
+  register_frontend_modfiles('js');
+} ?>
+<?php 
+// this allows to add custom information to the head section of your template (WB-->Settings-->Website Header)
+echo WEBSITE_HEADER; 
+?>
+</head>
+
+
+<body>
+<?php 
+	// display menu
+	show_menu();
+	
+	// display page content
+	page_content(); 
+	
+	// display website footer
+	page_footer();
+?>
+</body>
+</html>

@@ -14,6 +14,8 @@ Legend:
 10-Feb-2008 Thomas Hornik
 #	CAPTCHA: Wrong text for calc_ttf-captcha. 
 10-Feb-2008 Christian Sommer
+!	made Website Header field in Settings visible per default
+!	modified all templates (display Website Header, use show_menu instead of page_menu)
 !	added highlighting of active input elements to all WB backend areas; changed some colors
 !	removed hover highlighting of input fields to avoid possible confusion
 !	added visualization of wrong/empty input fields
