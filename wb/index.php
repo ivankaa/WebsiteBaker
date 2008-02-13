@@ -59,22 +59,30 @@ $query_this_module = $database->query("SELECT module, block FROM ".TABLE_PREFIX.
 if($query_this_module->numRows() == 1) { // This is a menu_link. Get link of target-page and redirect
 	// get target_page_id
 	$table = TABLE_PREFIX.'mod_menu_link';
-	$query_tpid = $database->query("SELECT target_page_id, anchor FROM $table WHERE page_id = '$this_page_id'");
+	$query_tpid = $database->query("SELECT target_page_id, anchor, extern FROM $table WHERE page_id = '$this_page_id'");
 	if($query_tpid->numRows() == 1) {
 		$res=$query_tpid->fetchRow();
 		$target_page_id = $res['target_page_id'];
 		$anchor = $res['anchor'];
+		$extern = $res['extern'];
 		if($anchor != '0') $anchor = ''.$anchor;
 		else $anchor = FALSE;
-		// get link of target-page
-		$table = TABLE_PREFIX.'pages';
-		$query_link = $database->query("SELECT link FROM $table WHERE page_id = '$target_page_id'");
-		if($query_link->numRows() == 1) {
-			$res=$query_link->fetchRow();
-			$target_page_link = $res['link'];
-			// redirect
-			header('Location: '.WB_URL.PAGES_DIRECTORY.$target_page_link.PAGE_EXTENSION.($anchor?'#'.$anchor:''));
-			exit;
+		if($target_page_id == -1) {
+			if($extern!='') {
+				$extern=rtrim($extern, '/');
+				header("Location: $extern/".($anchor?'#'.$anchor:''));
+			}
+		} else {
+			// get link of target-page
+			$table = TABLE_PREFIX.'pages';
+			$query_link = $database->query("SELECT link FROM $table WHERE page_id = '$target_page_id'");
+			if($query_link->numRows() == 1) {
+				$res=$query_link->fetchRow();
+				$target_page_link = $res['link'];
+				// redirect
+				header('Location: '.WB_URL.PAGES_DIRECTORY.$target_page_link.PAGE_EXTENSION.($anchor?'#'.$anchor:''));
+				exit;
+			}
 		}
 	}
 }

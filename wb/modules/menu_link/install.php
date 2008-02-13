@@ -37,6 +37,7 @@ $database->query("
 		`page_id` INT(11) NOT NULL DEFAULT '0',
 		`target_page_id` INT(11) NOT NULL DEFAULT '0',
 		`anchor` VARCHAR(255) NOT NULL DEFAULT '0' ,
+		`extern` VARCHAR(255) NOT NULL DEFAULT '' ,
 		PRIMARY KEY (`section_id`)
 	)
 ");

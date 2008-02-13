@@ -34,11 +34,15 @@ if(isset($_POST['page_link'])) {
 	$foreign_page_id = $admin->add_slashes($_POST['page_link']);
 	$page_target = $admin->add_slashes($_POST['page_target']);
 	$url_target = $admin->add_slashes($_POST['target']);
+	if(isset($_POST['extern']))
+		$extern = $admin->add_slashes($_POST['extern']);
+	else
+		$extern='';
 
 	$table_pages = TABLE_PREFIX.'pages';
 	$table_mod = TABLE_PREFIX.'mod_menu_link';
 	$database->query("UPDATE $table_pages SET target = '$url_target' WHERE page_id = '$page_id'");
-	$database->query("UPDATE $table_mod SET target_page_id = '$foreign_page_id', anchor = '$page_target' WHERE page_id = '$page_id'");
+	$database->query("UPDATE $table_mod SET target_page_id = '$foreign_page_id', anchor = '$page_target', extern = '$extern' WHERE page_id = '$page_id'");
 }
 
 // Check if there is a database error, otherwise say successful

@@ -26,11 +26,21 @@
 // Must include code to stop this file being accessed directly
 if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
+// check if module language file exists for the language set by the user (e.g. DE, EN)
+if(!file_exists(WB_PATH .'/modules/menu_link/languages/'.LANGUAGE .'.php')) {
+	// no module language file exists for the language set by the user, include default module language file EN.php
+	require_once(WB_PATH .'/modules/menu_link/languages/EN.php');
+} else {
+	// a module language file exists for the language defined by the user, load it
+	require_once(WB_PATH .'/modules/menu_link/languages/'.LANGUAGE .'.php');
+}
+
 // get target page_id
 $table = TABLE_PREFIX.'mod_menu_link';
 $sql_result = $database->query("SELECT * FROM $table WHERE section_id = '$section_id'");
 $sql_row = $sql_result->fetchRow();
 $target_page_id = $sql_row['target_page_id'];
+$extern = $sql_row['extern'];
 $anchor = $sql_row['anchor'];
 $sel = ' selected';
 
@@ -84,13 +94,14 @@ $target = $page['target'];
 // script for target-select-box
 ?>
 <script type="text/javascript">
-	function populate()
-	{
+	function populate() {
 		o=document.getElementById('page_link');
 		d=document.getElementById('page_target');
+		e=document.getElementById('extern');
 		if(!d){return;}			
 		var mitems=new Array();
 		mitems['0']=[' ','0'];
+		mitems['-1']=[' ','0'];
 		<?php
 		foreach($links AS $pid=>$link) {
 			$str="mitems['$pid']=[";
@@ -117,10 +128,16 @@ $target = $page['target'];
 			d.options[j].text=cur[i];
 			d.options[j++].value=cur[i+1];
 		}
+		
+		if(o.value=='-1') {
+			e.disabled = false;
+		} else {
+			e.disabled = true;
+		}
 	}
 </script>
 
-<form action="<?php echo WB_URL ?>/modules/menu_link/save.php" method="post">
+<form name="menulink" action="<?php echo WB_URL ?>/modules/menu_link/save.php" method="post">
 <input type="hidden" name="page_id" value="<?php echo $page_id ?>" />
 <input type="hidden" name="section_id" value="<?php echo $section_id ?>" />
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -131,10 +148,13 @@ $target = $page['target'];
 	<td>
 		<select name="page_link" id="page_link" onchange="populate()" style="width:250px;" />
 			<option value="0"<?php echo $target_page_id=='0'?$sel:''?>><?php echo $TEXT['PLEASE_SELECT']; ?></option>
+			<option value="-1"<?php echo $target_page_id=='-1'?$sel:''?>><?php echo $MOD_MENU_LINK['EXTERNAL_LINK']; ?></option>
 			<?php foreach($links AS $pid=>$link) {
 				echo "<option value=\"$pid\" ".($target_page_id==$pid?$sel:'').">$link</option>";
 			} ?>
 		</select>
+		&nbsp;
+		<input type="text" name="extern" id="extern" value="<?php echo $extern; ?>" style="width:250px;" <?php if($target_page_id!='-1') echo 'disabled="disabled"'; ?> />
 	</td>
 </tr>
 <tr>

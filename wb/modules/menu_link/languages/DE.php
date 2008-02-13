@@ -31,5 +31,6 @@ $module_description 	= 'Dieses Modul erm&ouml;glicht die Anzeige eines Links im 
 
 // Ueberschriften und Textausgaben
 $MOD_MENU_LINK['TEXT']				= 'Klicken Sie HIER um zur Startseite zu gelangen';
+$MOD_MENU_LINK['EXTERNAL_LINK'] = 'Entfernte Adresse';
 
 ?>
