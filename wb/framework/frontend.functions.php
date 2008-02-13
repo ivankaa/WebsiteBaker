@@ -70,8 +70,9 @@ if (!function_exists('page_link')) {
 if (!function_exists('search_highlight')) {
 function search_highlight($foo='', $arr_string=array()) {
 	require_once(WB_PATH.'/framework/functions.php');
-	require_once(WB_PATH.'/search/search_convert.php');
-
+	static $string_ul_umlauts=array();
+	if($string_ul_umlauts == array())
+		require(WB_PATH.'/search/search_convert.php');
 	$foo = entities_to_umlauts($foo, 'UTF-8');
 	array_walk($arr_string, create_function('&$v,$k','$v = preg_quote($v, \'/\');'));
 	$search_string = implode("|", $arr_string);
