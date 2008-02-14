@@ -69,8 +69,7 @@ if($query_this_module->numRows() == 1) { // This is a menu_link. Get link of tar
 		else $anchor = FALSE;
 		if($target_page_id == -1) {
 			if($extern!='') {
-				$extern=rtrim($extern, '/');
-				header("Location: $extern/".($anchor?'#'.$anchor:''));
+				header("Location: $extern".($anchor?'#'.$anchor:''));
 			}
 		} else {
 			// get link of target-page
