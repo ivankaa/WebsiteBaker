@@ -231,6 +231,7 @@ $database->query("
 		`page_id` INT(11) NOT NULL DEFAULT '0',
 		`target_page_id` INT(11) NOT NULL DEFAULT '0',
 		`anchor` VARCHAR(255) NOT NULL DEFAULT '0' ,
+		`extern` VARCHAR(255) NOT NULL DEFAULT '' ,
 		PRIMARY KEY (`section_id`)
 	)
 ");
@@ -321,7 +322,12 @@ echo "found: $cur_link<br />";
 	if($query_pid = $database->query("SELECT page_id FROM $table_p WHERE page_id != '$page_id' AND link = '$link'")) {
 		$res = $query_pid->fetchRow();
 		$target_page_id = $res['page_id'];
-		$database->query("INSERT INTO $table_mm (page_id, section_id, target_page_id, anchor) VALUES ('$page_id', '$section_id', '$target_page_id', '0')");
+		$extern = '';
+		if(strpos($link, '://') !== FALSE || strpos($link, 'mailto:') !== FALSE) {
+			$target_page_id=-1;
+			$extern=addslashes($link);
+		}
+		$database->query("INSERT INTO $table_mm (page_id, section_id, target_page_id, anchor, extern) VALUES ('$page_id', '$section_id', '$target_page_id', '0', '$extern')");
 		echo (mysql_error()?'mySQL: '.mysql_error().'<br />':'');
 	}
 }
