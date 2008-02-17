@@ -26,10 +26,10 @@
 //Modulbeschreibung
 $module_description = 'Mit diesem Modul k&ouml;nnen sie ein beliebiges Formular f&uuml;r ihre Seite erzeugen';
 
-//Variablen für backend Texte
+//Variablen fuer backend Texte
 $MOD_FORM['SETTINGS'] = 'Formular Einstellungen';
 
-// Variablen für Textausgabe der frontend.css/backend.css Bearbeitung
+// Variablen fuer Textausgabe der frontend.css/backend.css Bearbeitung
 $CAP_EDIT_CSS = 'Bearbeite CSS';
 $CAP_TOGGLE_CSS = 'Wechsle zu ';
 $HEADING_CSS_FILE = 'Aktuelle Moduldatei: ';

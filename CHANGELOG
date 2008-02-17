@@ -14,6 +14,7 @@ Legend:
 17-Feb-2008	Matthias Gallas
 -	Removed colloquially german language files as the filename causes issues
 17-Feb-2008	Christian Sommer
+!	removed German Umlauts in some language file (PHP comments)
 #	fixed language bug (backend language switched to the pages language viewed in frontend)
 16-Feb-2008	Thomas Hornik
 !	updated upgrade-script (menulink)
