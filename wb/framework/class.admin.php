@@ -71,6 +71,19 @@ class admin extends wb {
 				die($MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES']);
 			}
 		}
+		
+		// Check if the backend language is also the selected language. If not, send headers again.
+		global $database;
+		$get_user_language = @$database->query("SELECT language FROM ".TABLE_PREFIX.
+			"users WHERE user_id = '" .(int) $this->get_user_id() ."'");
+		$user_language = ($get_user_language) ? $get_user_language->fetchRow() : '';
+		// prevent infinite loop if language file is not XX.php (e.g. DE_du.php)
+		$user_language = substr($user_language[0],0,2);
+		if((LANGUAGE != $user_language) && file_exists(WB_PATH .'/languages/' .$user_language .'.php')) {
+			header('Location: '.$_SERVER['PHP_SELF'].'?lang='.$user_language);
+			exit();
+		}
+
 		// Auto header code
 		if($auto_header == true) {
 			$this->print_header();

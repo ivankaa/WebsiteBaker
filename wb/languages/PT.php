@@ -29,7 +29,7 @@ if(!defined('LANGUAGE_LOADED')) {
 }
 
 // Set the language information
-$language_code = 'PT_br';
+$language_code = 'PT';
 $language_name = 'Portuguese (Brazil)';
 $language_version = '2.7';
 $language_platform = '2.7.x';
