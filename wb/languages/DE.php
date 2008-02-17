@@ -30,7 +30,7 @@ if(!defined('LANGUAGE_LOADED')) {
 
 // Set the language information
 $language_code = 'DE';
-$language_name = 'Deutsch (formal)';
+$language_name = 'Deutsch';
 $language_version = '2.7';
 $language_platform = '2.7.x';
 $language_author = 'Stefan Braunewell, Matthias Gallas, Dave Camenisch, Klaus Weitzel, Michael Tenschert';
