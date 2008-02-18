@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+18-Feb-2008 Thomas Hornik
++	Converted and added some old language-files (BG, CS, PL, RU)
 18-Feb-2008	Christian Sommer
 #	Fixed two broken links
 !	Modified news module to create a default index.php during installation (directory spoofing)
