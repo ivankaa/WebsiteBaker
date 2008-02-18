@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+18-Feb-2008	Christian Sommer
+!	Modified news module to create a default index.php during installation (directory spoofing)
 17-Feb-2008	Matthias Gallas
 -	Removed colloquially german language files as the filename causes issues
 17-Feb-2008	Christian Sommer
@@ -74,7 +76,7 @@ Legend:
 !	changed last remaining call to my_htmlspecialchars() to htmlspecialchars()
 #	fixed path in jscalendar-css
 01-Feb-2008 Christian Sommer
-#	Added default index.php to all folders to prevent directory spoofing
+#	Added default index.php to all folders (directory spoofing)
 01-Feb-2008 Thomas Hornik
 #	Added some missing add_slashes(), get_post_escaped(), and strip_tags() for $_POST, $_GET and $_REQUEST-data. Also for $_SERVER['PHP_SELF'].
 #	Fixed possible XSS-vulnerability in wb/search/search.php
