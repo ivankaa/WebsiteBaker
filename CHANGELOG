@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 18-Feb-2008	Christian Sommer
+#	Fixed two broken links
 !	Modified news module to create a default index.php during installation (directory spoofing)
 17-Feb-2008	Matthias Gallas
 -	Removed colloquially german language files as the filename causes issues
