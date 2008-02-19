@@ -133,7 +133,7 @@ $template->set_var(array(
 
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by directory");
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by name");
 if($result->numRows() > 0) {
 	while ($addon = $result->fetchRow()) {
 		// Insert code and name
