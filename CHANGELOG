@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 19-Feb-2008	Matthias Gallas
+!	Updated upgrade script
 !	Changed language sorting from directory to name (needs additional to be escaped!)
 +	added new languages to install script
 #	fixed some issues and typos in languagefiles

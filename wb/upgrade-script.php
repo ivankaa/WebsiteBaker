@@ -210,6 +210,7 @@ if($query->numRows() > 0) {
 	}
 }
 
+
 /**********************************************************
  *  - publish-by-date
  */
@@ -383,6 +384,7 @@ foreach($pages as $p) {
 // 
 // Should we really do this? - must be checked
 
+
 /**********************************************************
  *  - asp - Advanced Spam Protection
  */
@@ -406,6 +408,7 @@ $database->query("
 		('1', '1', 'calc_text')
 ");
 
+
 /**********************************************************
  *  - multi-group
  */
@@ -423,11 +426,51 @@ if($query_group = $database->query("SELECT user_id,group_id,groups_id FROM $tabl
 }
 
 
+/**********************************************************
+ *  -Javascript Admin
+ */
+echo "<br /><u>Adding table mod_jsadmin</u><br />";
+$table = TABLE_PREFIX ."mod_jsadmin";
+$database->query("DROP TABLE IF EXISTS `$table`");
 
-//******************************************************************************
-//Start of upgrade script for the form modul
-//******************************************************************************
+$database->query("
+	CREATE TABLE `$table` (
+    `id` INT(11) NOT NULL DEFAULT '0',
+		`name` VARCHAR(255) NOT NULL DEFAULT '0',
+		`value` INT(11) NOT NULL DEFAULT '0',
+   	PRIMARY KEY (`id`)
+	)
+");
 
+global $database;
+$database->query("INSERT INTO ".$table." (id,name,value) VALUES ('1','mod_jsadmin_persist_order','0')");
+$database->query("INSERT INTO ".$table." (id,name,value) VALUES ('2','mod_jsadmin_ajax_order_pages','0')");
+$database->query("INSERT INTO ".$table." (id,name,value) VALUES ('3','mod_jsadmin_ajax_order_sections','0')");
+
+
+/**********************************************************
+ *  - Output Filter
+ */
+echo "<br /><u>Adding table mod_outputfilter</u><br />";
+$table = TABLE_PREFIX .'mod_output_filter';
+$database->query("DROP TABLE IF EXISTS `$table`");
+
+$database->query("CREATE TABLE `$table` (
+	`email_filter` VARCHAR(1) NOT NULL DEFAULT '0',
+	`mailto_filter` VARCHAR(1) NOT NULL DEFAULT '0',
+	`at_replacement` VARCHAR(255) NOT NULL DEFAULT '(at)',
+	`dot_replacement` VARCHAR(255) NOT NULL DEFAULT '(dot)'
+	)"
+);
+
+// add default values to the module table
+$database->query("INSERT INTO ".TABLE_PREFIX
+	."mod_output_filter (email_filter, mailto_filter, at_replacement, dot_replacement) VALUES ('0', '0', '(at)', '(dot)')");
+	
+
+/**********************************************************
+ *  - Form Modul
+ */
 db_add_field('success_email_subject', 'mod_form_settings', "VARCHAR(255) NOT NULL AFTER `email_subject`");
 db_add_field('success_email_text', 'mod_form_settings', "TEXT NOT NULL AFTER `email_subject`");
 db_add_field('success_email_from', 'mod_form_settings', "VARCHAR(255) NOT NULL AFTER `email_subject`");
@@ -442,10 +485,6 @@ if($database->query("ALTER TABLE `".TABLE_PREFIX."mod_form_settings` DROP `succe
 	echo 'Database field success_message droped successfully<br>';
 }
 echo mysql_error().'<br />';
-
-
-// UPDATING DATA INTO FIELDS
-echo "<BR>";
 
 // These are the default setting
 $success_page = 'none';
@@ -497,19 +536,12 @@ while($result = $query_dates->fetchRow()) {
 	echo mysql_error().'<br />';
 }
 
-//******************************************************************************
-//End of upgrade script for the form modul
-//******************************************************************************
 
-//******************************************************************************
-//Start of upgrade script for the news modul
-//******************************************************************************
-
+/**********************************************************
+ *  - News Modul
+ */
 db_add_field('published_when', 'mod_news_posts', "INT NOT NULL AFTER `commenting`");
 db_add_field('published_until', 'mod_news_posts', "INT NOT NULL AFTER `published_when`");
-
-// UPDATING DATA INTO FIELDS
-echo "<BR>";
 
 // These are the default setting
 $header = '<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"98%\">';
@@ -590,13 +622,94 @@ while($result = $query_dates->fetchRow()) {
 	echo mysql_error().'<br />';
 }
 
-//******************************************************************************
-//End of upgrade script for the news modul
-//******************************************************************************
+
+/**********************************************************
+ *  - Add Admintools to Administrator group
+ */
+echo "<br /><u>Add Admintools to Adminsitrator group</u><br />";
+$full_system_permissions = 'pages,pages_view,pages_add,pages_add_l0,pages_settings,pages_modify,pages_intro,pages_delete,media,media_view,media_upload,media_rename,media_delete,media_create,addons,modules,modules_view,modules_install,modules_uninstall,templates,templates_view,templates_install,templates_uninstall,languages,languages_view,languages_install,languages_uninstall,settings,settings_basic,settings_advanced,access,users,users_view,users_add,users_modify,users_delete,groups,groups_view,groups_add,groups_modify,groups_delete,admintools';
+$database->query("UPDATE `".TABLE_PREFIX."groups` SET `system_permissions` = '$full_system_permissions' WHERE `name` = 'Administrators'");
 
 
+/**********************************************************
+ *  - Add Mailer Settings to settings table
+ */
+echo "<br /><u>Add Mailer Settings to settings table</u><br />";
+//delete rows to prevent double entries
+$database->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name = 'wbmailer_routine'");
+$database->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name = 'server_email'");
+$database->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name = 'wbmailer_default_sendername'");
+$database->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name = 'wbmailer_smtp_host'");
+$database->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name = 'wbmailer_smtp_auth'");
+$database->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name = 'wbmailer_smtp_username'");
+$database->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name = 'wbmailer_smtp_password'");
+//add new rows with default values
+$settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` "
+." (name, value) VALUES "
+." ('wbmailer_routine', 'phpmail'),"
+." ('server_email', 'admin@yourdomain.com'),"		// avoid that mail provider (e.g. mail.com) reject mails like yourname@mail.com
+." ('wbmailer_default_sendername', 'WB Mailer'),"
+." ('wbmailer_smtp_host', ''),"
+." ('wbmailer_smtp_auth', ''),"
+." ('wbmailer_smtp_username', ''),"
+." ('wbmailer_smtp_password', '')";
+$database->query($settings_rows);
 
 
+/**********************************************************
+ *  - Reload all addons
+ */
+
+//delete modules
+$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE type = 'module'");
+// Load all modules
+if($handle = opendir(WB_PATH.'/modules/')) {
+	while(false !== ($file = readdir($handle))) {
+		if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'admin.php' AND $file != 'index.php') {
+			load_module(WB_PATH.'/modules/'.$file);
+		}
+	}
+	closedir($handle);
+}
+echo '<br />Modules reloaded<br />';
+
+//delete templates		
+$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+// Load all templates
+if($handle = opendir(WB_PATH.'/templates/')) {
+	while(false !== ($file = readdir($handle))) {
+		if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'index.php') {
+			load_template(WB_PATH.'/templates/'.$file);
+		}
+	}
+	closedir($handle);
+}
+echo '<br />Templates reloaded<br />';
+
+//delete languages
+$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE type = 'language'");
+// Load all languages
+if($handle = opendir(WB_PATH.'/languages/')) {
+	while(false !== ($file = readdir($handle))) {
+		if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'index.php') {
+			load_language(WB_PATH.'/languages/'.$file);
+		}
+	}
+	closedir($handle);
+}
+echo '<br />Languages reloaded<br />';
+
+/**********************************************************
+ *  - Set Version to WB 2.7
+ */
+echo "<br /><u>Set Version number to 2.7</u><br />";
+$version = '2.7';
+$database->query("UPDATE `".TABLE_PREFIX."settings` SET `value` = '$version' WHERE `name` = 'wb_version'");
+
+
+/**********************************************************
+ *  - End of upgrade script
+ */
 echo "<br /><br />Done<br />";
 
 ?>
