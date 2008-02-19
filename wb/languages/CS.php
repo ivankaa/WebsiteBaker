@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2006, Ryan Djurovich
+ Copyright (C) 2004-2008, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -419,9 +419,9 @@ $TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username'; //needs to be translated
 $TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password'; //needs to be translated
 $TEXT['PLEASE_LOGIN'] = 'Please login'; //needs to be translated
 
-
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Nem&aacute;te opr&aacute;vn&#283;n&iacute; prohl&iacute;&#382;et tuto str&aacute;nku';
+$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display';
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Nedostate&#269;n&aacute; opr&aacute;vn&#283;n&iacute;';
 

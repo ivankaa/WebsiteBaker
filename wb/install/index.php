@@ -246,10 +246,10 @@ function change_os(type) {
 				<select <?php echo field_error('default_language');?> tabindex="3" name="default_language" style="width: 100%;">
 					<?php
 					$DEFAULT_LANGUAGE = array(
-						'CA'=>'Catalan', 'DA'=>'Danish', 'DE'=>'Deutsch (formal)', 'EN'=>'English',
+						'BG'=>'Bulgarian', 'CA'=>'Catalan', 'CS'=>'&#268;e&scaron;tina', 'DA'=>'Danish', 'DE'=>'Deutsch', 'EN'=>'English',
 						'ES'=>'Spanish', 'ET'=>'Eesti', 'FI'=>'Suomi', 'FR'=>'Fran&ccedil;ais',
 						'HR'=>'Hrvatski', 'HU'=>'Magyar','IT'=>'Italiano', 'LV'=>'Latviesu',
-						'NL'=>'Nederlands','PT'=>'Portuguese (Brazil)','SE'=>'Svenska', 'TR'=>'Turkish'
+						'NL'=>'Nederlands','PL'=>'Polski','PT'=>'Portuguese (Brazil)','RU'=>'Russian','SE'=>'Svenska', 'TR'=>'Turkish'
 					);
 					foreach($DEFAULT_LANGUAGE as $lang_id => $lang_title) {
 						?>

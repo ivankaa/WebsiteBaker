@@ -375,7 +375,7 @@ $TEXT['LAST_UPDATED_BY'] = 'zuletzt ge&auml;ndert von';
 $TEXT['RESULTS_FOR'] = 'Ergebnisse f&uuml;r';
 $TEXT['TIME'] = 'Zeit';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Stil';
-$TEXT['WYSIWYG_EDITOR'] = "WYSIWYG Editor";
+$TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor';
 $TEXT['SERVER_EMAIL'] = 'Server E-Mail';
 $TEXT['MENU'] = 'Men&uuml;';
 $TEXT['MANAGE_GROUPS'] = 'Gruppen verwalten';
@@ -478,7 +478,7 @@ $MESSAGE['PREFERENCES']['EMAIL_UPDATED'] = 'E-Mail-Einstellung ge&auml;ndert';
 $MESSAGE['PREFERENCES']['CURRENT_PASSWORD_INCORRECT'] = 'Das alte Passwort, das Sie angegeben haben, ist ung&uuml;ltig';
 $MESSAGE['PREFERENCES']['PASSWORD_CHANGED'] = 'Das Passwort wurde erfolgreich ge&auml;ndert';
 
-$MESSAGE['TEMPLATES']['CHANGE_TEMPLATE_NOTICE'] = "Bitte beachten Sie: Um eine andere Designvorlage auszuw&auml;hlen, benutzen Sie den Bereich 'Optionen'";
+$MESSAGE['TEMPLATES']['CHANGE_TEMPLATE_NOTICE'] = 'Bitte beachten Sie: Um eine andere Designvorlage auszuw&auml;hlen, benutzen Sie den Bereich "Optionen"';
 
 $MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH'] = 'Der Verzeichnisname darf nicht ../ enthalten';
 $MESSAGE['MEDIA']['DIR_DOES_NOT_EXIST'] = 'Verzeichnis existiert nicht';
