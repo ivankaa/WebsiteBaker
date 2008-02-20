@@ -74,7 +74,7 @@ if (file_exists(WB_PATH.'/framework/class.database.php')) {
 	// Start a session
 	if(!defined('SESSION_STARTED')) {
 		session_name(APP_NAME.'_session_id');
-		session_start();
+		@session_start();
 		define('SESSION_STARTED', true);
 	}
 	if(defined('ENABLED_ASP') && ENABLED_ASP && !isset($_SESSION['session_started']))

@@ -35,7 +35,7 @@ function status_msg($message, $class='check', $element='span') {
 function check_baseline_configuration() {
 	// check if config.php file exists and contains values
 	status_msg('config.php: ');
-	@include('config.php');
+	@include_once('config.php');
 	if(defined('WB_PATH')) {
 		status_msg('OK', 'ok');
 	} else {
@@ -50,8 +50,8 @@ function check_baseline_configuration() {
 
 	// check if the WB 2.7 installation files were already uploaded via FTP
 	status_msg(', WB 2.7 core files uploaded: ');
-	@include(WB_PATH .'/framework/functions.php');
-	@include(WB_PATH .'/admin/interface/version.php');
+	@include_once(WB_PATH .'/framework/functions.php');
+	@include_once(WB_PATH .'/admin/interface/version.php');
 	if(defined('VERSION') && VERSION == '2.7'
 		&& function_exists('get_variable_content') 
 		&& file_exists(WB_PATH .'/modules/menu_link/languages/DE.php') 
@@ -71,38 +71,23 @@ function check_baseline_configuration() {
 		return -1;
 	}
 
-	// check database connection
-	$wb_version = '';
+	// check database connection (try to extract a single value which should always exist)
+	$group_id = '';
 	status_msg(', Database connection: ');
 	if(class_exists('database')) {
 		$db = new database;
-		$table = TABLE_PREFIX .'settings';
-		$wb_version = @$db->get_one("SELECT value FROM $table WHERE name = 'wb_version' LIMIT 1");
+		$table = TABLE_PREFIX .'groups';
+		$group_id = @$db->get_one("SELECT group_id FROM $table WHERE group_id = '1' LIMIT 1");
 	}
-	if($wb_version) {
+	if($group_id == '1') {
 		status_msg('OK', 'ok');
 	} else {
 		// output error message and return error status
 		status_msg('FAILED', 'error');
-		status_msg('<strong>Error:</strong><br />Unable to obtain the WB version stored in the database of your existing installation.'
+		status_msg('<strong>Error:</strong><br />Unable to connect to your existing Website Baker database.'
 			.'<br />Make sure that the database class is available and the connection data in the config.php file is correct '
-			.'and your database is not corrupted.<br />To check if your database is corrupted, you can use a tool like '
+			.'and your database is not corrupt.<br />To check if your database is corrupt, you can use a tool like '
 			.'<a href="http://www.phpmyadmin.net/" target="_blank">phpMyAdmin</a>.'
-			.'<br /><br />You can not proceed before this error is fixed!!!'
-			, 'warning', 'div');
-		return -1;
-	}
-
-	// check WB version in database is 2.6.7
-	status_msg(', WB version (database): ');
-	if($wb_version == '2.6.7') {
-		status_msg('2.6.7 (OK)', 'ok');
-	} else {
-		// output a warning
-		status_msg($wb_version .' (required 2.6.7)', 'error');
-		status_msg('<strong>Warning:</strong><br />The extracted version number from the database is ' .$wb_version .' (required 2.6.7).'
-			.'<br />If the extracted database version is lower than 2.6.7, please upgrade first to Website Baker 2.6.7 and then to 2.7.'
-			.'<br />If the obtained database version is higher or equal to 2.7, you do not need to execute this script.'
 			.'<br /><br />You can not proceed before this error is fixed!!!'
 			, 'warning', 'div');
 		return -1;
@@ -116,7 +101,7 @@ function check_baseline_configuration() {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>Upgrade script from Website Baker v2.6.7 to Website Baker v2.7</title>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
 body {
 	margin:0;
@@ -209,8 +194,8 @@ if(isset($_POST['send'])) {
 /**
 	THE WEBSITE BAKER UPGRADE SCRIPT STARTS HERE
 **/
-require('config.php');
-require(WB_PATH.'/framework/functions.php');
+require_once('config.php');
+require_once(WB_PATH.'/framework/functions.php');
 ?>
 <h2>Step 3: Upgrading the existing Website Baker installation to WB 2.7</h2>
 <p>will upgrade Website Baker 2.6.5 / 2.6.7 to version 2.7</p>
