@@ -84,7 +84,7 @@ $search_path_SQL = "";
 $search_path = "";
 if(isset($_REQUEST['search_path'])) {
 	$search_path = $wb->add_slashes($_REQUEST['search_path']);
-	if(preg_match('/[\'"=()&+\\\\]/', $search_path))
+	if(!preg_match('~^[-a-zA-Z0-9_,/ ]+$~', $search_path))
 		$search_path = '';
 	if($search_path != '') {
 		$search_path_SQL = "AND ( ";
