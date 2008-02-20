@@ -26,6 +26,10 @@
   Authors: P. Widlund, S. Braunewell, M. Gallas (ruebenwurzel), Wouldlouper, C. Sommer (doc)
 	Started to track applied changes in info.php from 27.03.2007 onwards (cs)
  -----------------------------------------------------------------------------------------------------------
+	v2.82 (doc.. Christian Sommer; Feb 20, 2008)
+		+ added the connector fix found by the forum member Luisehahne
+		(see forum thread: http://forum.websitebaker2.org/index.php/topic,8240.msg51675.html#msg51675)
+
 	v2.81 (ruebenwurzel.. Matthias Gallas; Dez 24, 2007)
 		+ update to FCKEditor release v2.51
 	
@@ -91,9 +95,9 @@
 */
 
 $module_directory		= 'fckeditor';
-$module_name			= 'FCKeditor';
+$module_name				= 'FCKeditor';
 $module_function		= 'WYSIWYG';
-$module_version			= '2.81';
+$module_version			= '2.82';
 $module_platform		= '2.6.x';
 $module_author 			= 'Christian Sommer, P. Widlund, S. Braunewell, M. Gallas, Wouldlouper';
 $module_license 		= 'GNU General Public License';
