@@ -23,60 +23,197 @@
 
 */
 
-//
-// upgrade-script for Website Baker from version 2.6.7 to 2.7
-//
+/** 
+	PHP ROUTINES FOR THE UPGRADE SCRIPT
+**/
+// this function checks the basic configurations of an existing WB intallation
+function status_msg($message, $class='check', $element='span') {
+	// returns a status message
+	echo '<'.$element .' class="' .$class .'">' .$message .'</' .$element.'>';
+}
 
-require('config.php');
-require(WB_PATH.'/framework/functions.php');
+function check_baseline_configuration() {
+	// check if config.php file exists and contains values
+	status_msg('config.php: ');
+	@include('config.php');
+	if(defined('WB_PATH')) {
+		status_msg('OK', 'ok');
+	} else {
+		// output error message and return error status
+		status_msg('FAILED', 'error');
+		status_msg('<strong>Error:</strong><br />No valid config.php found in: "<em>'
+			.dirname(__FILE__).'</em>"<br />Please check if this script is placed in the WB root directory '
+			.'and check/correct the config.php file before proceeding.<br /><br />You can not proceed before this error is fixed!!!'
+			, 'warning', 'div');
+		return -1;
+	}
+
+	// check if the WB 2.7 installation files were already uploaded via FTP
+	status_msg(', WB 2.7 core files uploaded: ');
+	@include(WB_PATH .'/framework/functions.php');
+	@include(WB_PATH .'/admin/interface/version.php');
+	if(defined('VERSION') && VERSION == '2.7'
+		&& function_exists('get_variable_content') 
+		&& file_exists(WB_PATH .'/modules/menu_link/languages/DE.php') 
+		&& file_exists(WB_PATH .'/modules/output_filter/filter-routines.php') 
+		&& file_exists(WB_PATH .'/modules/captcha_control/languages/DE.php')
+		&& file_exists(WB_PATH .'/modules/jsadmin/jsadmin_backend_include.php')
+		&& file_exists(WB_PATH .'/admin/admintools/tool.php')
+		&& file_exists(WB_PATH .'/admin/interface/er_levels.php')) {
+		status_msg('OK','ok');
+	} else {
+		// output a warning and return error status
+		status_msg('FAILED','error');
+		status_msg('<strong>Error:</strong><br />Some of the Website Baker 2.7 core files were not found.'
+			.'<br />Please upload all core files (except config.php and folder /install) contained in the WB 2.7 installation package first.'
+			.'<br /><br />You can not proceed before this error is fixed!!!'
+			, 'warning', 'div');
+		return -1;
+	}
+
+	// check database connection
+	$wb_version = '';
+	status_msg(', Database connection: ');
+	if(class_exists('database')) {
+		$db = new database;
+		$table = TABLE_PREFIX .'settings';
+		$wb_version = @$db->get_one("SELECT value FROM $table WHERE name = 'wb_version' LIMIT 1");
+	}
+	if($wb_version) {
+		status_msg('OK', 'ok');
+	} else {
+		// output error message and return error status
+		status_msg('FAILED', 'error');
+		status_msg('<strong>Error:</strong><br />Unable to obtain the WB version stored in the database of your existing installation.'
+			.'<br />Make sure that the database class is available and the connection data in the config.php file is correct '
+			.'and your database is not corrupted.<br />To check if your database is corrupted, you can use a tool like '
+			.'<a href="http://www.phpmyadmin.net/" target="_blank">phpMyAdmin</a>.'
+			.'<br /><br />You can not proceed before this error is fixed!!!'
+			, 'warning', 'div');
+		return -1;
+	}
+
+	// check WB version in database is 2.6.7
+	status_msg(', WB version (database): ');
+	if($wb_version == '2.6.7') {
+		status_msg('2.6.7 (OK)', 'ok');
+	} else {
+		// output a warning
+		status_msg($wb_version .' (required 2.6.7)', 'error');
+		status_msg('<strong>Warning:</strong><br />The extracted version number from the database is ' .$wb_version .' (required 2.6.7).'
+			.'<br />If the extracted database version is lower than 2.6.7, please upgrade first to Website Baker 2.6.7 and then to 2.7.'
+			.'<br />If the obtained database version is higher or equal to 2.7, you do not need to execute this script.'
+			.'<br /><br />You can not proceed before this error is fixed!!!'
+			, 'warning', 'div');
+		return -1;
+	}
+	return 0;
+}
 
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>Upgrade-Script</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Upgrade script from Website Baker v2.6.7 to Website Baker v2.7</title>
 
 <style type="text/css">
-.red { background-color:#FF0000 }
-.green { background-color:#00FF00 }
+body {
+	margin:0;
+	padding:0;
+	border:0;
+	background: #EBF7FC;
+	color:#000;
+  font-family: 'Trebuchet MS', Verdana, Arial, Helvetica, Sans-Serif;
+	font-size: small;
+	height:101%;
+}
 
-#warning {
-width: 90%; 
-padding: 10px; 
-margin-left: 5%; 
-margin-bottom: 5px; 
-border: 1px solid #FF0000; 
-background-color: #FFDBDB;
+#container {
+	width:85%;
+	background: #9ACBF1 url(admin/interface/background.png) repeat-x;
+	border:1px solid #000;
+	color:#000;
+	margin:2em auto;
+	padding:0 15px;
+	min-height: 500px;
+	text-align:left;
 }
 
 p { line-height:1.5em; }
 
+h1,h2,h3,h4,h5,h6 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #369;
+	margin-top: 1.0em;
+	margin-bottom: 0.1em;
+}
+
+h1 { font-size:150%; }
+h2 { font-size: 130%; border-bottom: 1px #CCC solid; }
+h3 { font-size: 120%; }
+
+.ok, .error { font-weight:bold; }
+.ok { color:green; }
+.error { color:red; }
+.check { color:#555; }
+
+.red { background-color:#FF0000 }
+.green { background-color:#00FF00 }
+
+.warning {
+	width: 98%;
+	background:#FFDBDB;
+	padding:0.2em;
+	margin-top:0.5em;
+	border: 1px solid black;
+}
 </style>
 </head>
 <body>
+<div id="container">
+<img src="admin/interface/logo.png" alt="Website Baker Logo" />
+
+<h1>Website Baker Upgrade</h1>
+<p>This script is for <strong>upgrading an existing v2.6.7</strong> installation to the latest Website Baker <strong>version 2.7</strong>. The upgrade script checks the configuration of your installed Website Baker system and alters the existing WB database to reflect the changes introduced with WB 2.7.</p>
+
 <?php
-/**
-	AT THIS POINT IN TIME THE UPGRADE SCRIPT IS NOT MATURE ENOUGH
-	SO PROVIDE A WARNING TO BACKUP THE DATABASE AND THE PAGES DIRECTORY
-	BEFORE EXECUTING THIS SCRIPT (doc)
-*/
-if(!isset($_GET['action']) || $_GET['action'] != 'upgrade') {
+if(!isset($_POST['backup_confirmed'])) { 
 ?>
-<div id="warning">
-<strong>WARNING:</strong>
-<p>The actual WB 2.7 version is still a developer version. <strong>It is not recommended to use this release in a
-productive environment</strong>.<p>The upgrade-script is not sufficiently tested yet, so please <strong>backup your database and /pages directory before executing the upgrade script</strong>.<br />You may loose all your data if something goes wrong!!</p><p>If you want to start the upgrade-script, please click on: <a href="upgrade-script.php?action=upgrade" target="_self">execute upgrade-script</a></p>
-</div>
+<h2>Step 1: Check existing installation</h2>
+<p>Checking the configuration of your existing Website Baker installation:<br />
 <?php
-die;
-} ?>
-	
-<h2>Upgrade-script</h2>
-<p>
-will upgrade Website Baker 2.6.5 / 2.6.7 to version 2.7
-</p>
+// check the basic Website Baker installation before proceeding
+if(check_baseline_configuration() != 0) die;
+status_msg('<p>Congratulations: You have passed all the required pre-checks.', 'ok');
+?>
+
+<h2>Step 2: Create a backup of your existing data</h2>
+<p>It is highly recommended to <strong>create a manual backup</strong> of the entire <strong>/pages folder</strong> and the <strong>MySQL database</strong> before proceeding. The upgrade script is not sufficiently tested at the moment and should therefore only be used for testing purposes!!! Please confirm the disclaimer before starting this script.</p>
+
+<form name="send" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+<textarea cols="80" rows="5">DISCLAIMER: The Website Baker upgrade script is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. One needs to confirm that a manual backup of the /pages folder (including all files and subfolders contained in it) and backup of the entire Website Baker MySQL database was created before you can proceed.</textarea>
+<br /><br /><input name="backup_confirmed" type="checkbox" value="confirmed" />&nbsp;I confirm that a manual backup of the /pages folder and the MySQL database was created.
+<br /><br /><input name="send" type="submit" value="Start upgrade script" />
+</form>
+<br />
+
+<?php
+if(isset($_POST['send'])) {
+	status_msg('<strong>Notice:</strong><br />You need to confirm that you have created a manual backup of the /pages directory and the MySQL database before you can proceed.', 'warning', 'div');
+} 
+?>
+<br /><br />
+<?php
+} else {
+/**
+	THE WEBSITE BAKER UPGRADE SCRIPT STARTS HERE
+**/
+require('config.php');
+require(WB_PATH.'/framework/functions.php');
+?>
+<h2>Step 3: Upgrading the existing Website Baker installation to WB 2.7</h2>
+<p>will upgrade Website Baker 2.6.5 / 2.6.7 to version 2.7</p>
 <?php
 
 $OK   = '<span class="green">OK</span>';
@@ -125,7 +262,6 @@ function db_add_field($field, $table, $desc) {
 		echo "'$field' allready there. $OK.<br />";
 	}
 }
-
 
 echo "<br /><u>Adding module_order and max_excerpt to search-table</u><br />";
 // module_order - in which order to show the search-results
@@ -712,7 +848,8 @@ $database->query("UPDATE `".TABLE_PREFIX."settings` SET `value` = '$version' WHE
  */
 echo "<br /><br />Done<br />";
 
+}
 ?>
-
+</div>
 </body>
 </html>
