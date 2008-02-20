@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+20-Feb-2008 Thomas Hornik
+!	added workaround for language sorting-problem
 20-Feb-2008	Christian Sommer
 #	added the FCKEditor module PHP connector fix found by the forum member Luisehahne (thanks man)
 !	Updated upgrade script (added WB2.7 basic styles, pre-checks and disclaimer)

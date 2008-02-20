@@ -33,6 +33,7 @@ if(isset($_GET['advanced']) AND $_GET['advanced'] == 'yes') {
 
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
+require_once(WB_PATH.'/framework/functions-utf8.php');
 
 // Create new template object
 $template = new Template(ADMIN_PATH.'/settings');
@@ -135,14 +136,19 @@ $template->set_var(array(
 $template->set_block('main_block', 'language_list_block', 'language_list');
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by name");
 if($result->numRows() > 0) {
-	while ($addon = $result->fetchRow()) {
+	while($addon = $result->fetchRow()) {
+		$l_codes[$addon['name']] = $addon['directory'];
+		$l_names[$addon['name']] = entities_to_7bit($addon['name']); // sorting-problem workaround
+	}
+	asort($l_names);
+	foreach($l_names as $l_name=>$v) {
 		// Insert code and name
 		$template->set_var(array(
-								'CODE' => $addon['directory'],
-								'NAME' => $addon['name']
+								'CODE' => $l_codes[$l_name],
+								'NAME' => $l_name
 								));
 		// Check if it is selected
-		if(DEFAULT_LANGUAGE == $addon['directory']) {
+		if(DEFAULT_LANGUAGE == $l_codes[$l_name]) {
 			$template->set_var('SELECTED', ' selected');
 		} else {
 			$template->set_var('SELECTED', '');
