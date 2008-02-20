@@ -14,6 +14,7 @@ Legend:
 20-Feb-2008 Thomas Hornik
 !	added workaround for language sorting-problem
 20-Feb-2008	Christian Sommer
+!	added WYSIWYG DB update and missing WBMAILER settings to upgrade script (added some status messages)
 !	modified upgrade script and suppressed headers already send message (avoid issues with error reporting E_ALL)
 #	added the FCKEditor module PHP connector fix found by the forum member Luisehahne (thanks man)
 !	Updated upgrade script (added WB2.7 basic styles, pre-checks and disclaimer)
