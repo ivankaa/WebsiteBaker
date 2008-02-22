@@ -225,10 +225,21 @@ if(!isset($_POST['database_password'])) {
 if(!isset($_POST['database_name']) OR $_POST['database_name'] == '') {
 	set_error('Please enter a database name', 'database_name');
 } else {
+	// make sure only allowed characters are specified
+	if(preg_match('/[^a-z0-9_]+/i', $_POST['database_name'])) {
+		// contains invalid characters (only a-z, A-Z, 0-9 and _ allowed to avoid problems with table/field names)
+		set_error('Only characters a-z, A-Z, 0-9 and _ allowed as database name.', 'database_name');
+	}
 	$database_name = $_POST['database_name'];
 }
 // Get table prefix
-$table_prefix = $_POST['table_prefix'];
+if(preg_match('/[^a-z0-9_]+/i', $_POST['table_prefix'])) {
+	// contains invalid characters (only a-z, A-Z, 0-9 and _ allowed to avoid problems with table/field names)
+	set_error('Only characters a-z, A-Z, 0-9 and _ allowed as table_prefix.', 'table_prefix');
+} else {
+	$table_prefix = $_POST['table_prefix'];
+}
+
 // Find out if the user wants to install tables and data
 if(isset($_POST['install_tables']) AND $_POST['install_tables'] == 'true') {
 	$install_tables = true;

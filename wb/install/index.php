@@ -283,7 +283,7 @@ function change_os(type) {
 						World-writeable file permissions (777)
 					</label>
 					<br />
-					<font class="note">(Please note: this is only recommended for testing environments)</font>
+					<font class="note">(Please note: only recommended for testing environments)</font>
 				</div>
 			</td>
 		</tr>
@@ -304,7 +304,7 @@ function change_os(type) {
 			</td>
 		</tr>
 		<tr>
-			<td style="color: #666666;">Database Name:</td>
+			<td style="color: #666666;">Database Name:<br />[a-zA-Z0-9_]</td>
 			<td>
 				<input <?php echo field_error('database_name');?> type="text" tabindex="8" name="database_name" style="width: 98%;" value="<?php if(isset($_SESSION['database_name'])) { echo $_SESSION['database_name']; } else { echo 'wb'; } ?>" />
 			</td>
@@ -315,15 +315,15 @@ function change_os(type) {
 			</td>
 		</tr>
 		<tr>
-			<td style="color: #666666;">Table Prefix:</td>
+			<td style="color: #666666;">Table Prefix:<br />[a-zA-Z0-9_]</td>
 			<td>
-				<input type="text" tabindex="11" name="table_prefix" style="width: 250px;"<?php if(isset($_SESSION['table_prefix'])) { echo ' value = "'.$_SESSION['table_prefix'].'"'; } ?> />
+				<input <?php echo field_error('table_prefix');?> type="text" tabindex="11" name="table_prefix" style="width: 250px;"<?php if(isset($_SESSION['table_prefix'])) { echo ' value = "'.$_SESSION['table_prefix'].'"'; } ?> />
 			</td>
 			<td>&nbsp;</td>
 			<td colspan="2">
 				<input type="checkbox" tabindex="12" name="install_tables" id="install_tables" value="true"<?php if(!isset($_SESSION['install_tables'])) { echo ' checked'; } elseif($_SESSION['install_tables'] == 'true') { echo ' checked'; } ?> />
 				<label for="install_tables" style="color: #666666;">Install Tables</label>
-				<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<br />
 				<span style="font-size: 10px; color: #666666;">(Please note: May remove existing tables and data)</span></td>		
 			</td>
 		</tr>
