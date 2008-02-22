@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 22-Feb-2008 Christian Sommer
+#	some layout changes on the upgrade-script, fixed error in precheck
 #	restricted database name and table prefix to "a-zA-Z0-9_" (avoid problems with non quoted table/field names)
 20-Feb-2008 Thomas Hornik
 !	added workaround for language sorting-problem

@@ -72,14 +72,15 @@ function check_baseline_configuration() {
 	}
 
 	// check database connection (try to extract a single value which should always exist)
-	$group_id = '';
+	$matches = '';
 	status_msg(', Database connection: ');
 	if(class_exists('database')) {
-		$db = new database;
 		$table = TABLE_PREFIX .'groups';
-		$group_id = @$db->get_one("SELECT group_id FROM $table WHERE group_id = '1' LIMIT 1");
+		//$result = $database->query("SELECT group_id FROM $table WHERE group_id = '1' LIMIT 1");
+		$result = $database->query("SELECT name FROM $table WHERE group_id = '1' LIMIT 1");
+		$matches = ($result->numRows() > 0) ? $result->numRows() : '';
 	}
-	if($group_id == '1') {
+	if($matches == '1') {
 		status_msg('OK', 'ok');
 	} else {
 		// output error message and return error status
@@ -162,6 +163,17 @@ h3 { font-size: 120%; }
 <?php
 if(!isset($_POST['backup_confirmed'])) { 
 ?>
+<h2>Prerequisites</h2>
+<p>To upgrade from an existing WB 2.6.7 version, please perform the following steps in advance:
+<ol>
+<li>Backup the entire <strong>/pages</strong> folder (including all subfolder and files) of your existing WB installation</li>
+<li>Backup the entire <strong>Database</strong> of your existing WB installation (e.g. by the WB admin tool)</li>
+<li>Download the WB 2.7 installation package from the <a href="http://download.websitebaker.org/" target="_blank">official project site</a></li>
+<li>Upload all files contained in the WB 2.7 installation package (except config.php and the folder /install) via FTP over your existing installation</li>
+<li>start this script by typing the URL into your browser</li>
+</ol>
+<strong class="error">Note: </strong>If you have an version lower than 2.6.7, you need to upgrade to 2.6.7 first!! Instructions can be found on the <a href="http://help.websitebaker.org/pages/en/basic-docu/installation/upgrade.php" target="_blank">Website Baker Help portal</a>.</p>
+
 <h2>Step 1: Check existing installation</h2>
 <p>Checking the configuration of your existing Website Baker installation:<br />
 <?php
@@ -841,8 +853,21 @@ echo '<br />Languages reloaded<br />';
 /**********************************************************
  *  - End of upgrade script
  */
-echo "<p><strong>Upgrade script finished </strong></p><br />";
-
+echo '<p style="font-size:120%;"><strong>Congratulations: The upgrade script is finished ...</strong></p>';
+status_msg('<strong>Warning:</strong><br />Please delete the file <strong>upgrade-script.php</strong> via FTP before proceeding.<br />If you do not delete this script from your server, others can delete/overwritte database settings by executing this script again.', 'warning', 'div');
+// show buttons to go to the backend or frontend
+echo '<br />';
+if(defined('WB_URL')) {
+	echo '<form action="'.WB_URL.'" target="_self">';
+	echo '<input type="submit" value="kick me to the Frontend" style="float:left;"';
+	echo '</form>';
+}
+if(defined('ADMIN_URL')) {
+	echo '<form action="'.ADMIN_URL.'" target="_self">';
+	echo '&nbsp;<input type="submit" value="kick me to the Backend"';
+	echo '</form>';
+}
+echo '<p>&nbsp;</p>';
 }
 ?>
 </div>
