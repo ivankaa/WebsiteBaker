@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 23-Feb-2008 Christian Sommer
+!	suppressed warnings in initialize.php if constant already defined; modified upgrade script to make FCK the new default editor
 #	fixed bug in upgrade script (WBMailer setting)
 22-Feb-2008 Christian Sommer
 #	some layout changes on the upgrade-script, fixed error in precheck
@@ -45,7 +46,7 @@ Legend:
 #	fixed an highlighting-issue: highlighting a page with more than one sections mangled umlauts in the second to last section.
 10-Feb-2008 Matthias Gallas
 #	fixed some errors in standard german language file
-+	added new colloquially german language file (thanks to Michael Tenschert)
++	added new colloquially german language file
 10-Feb-2008 Thomas Hornik
 #	CAPTCHA: Wrong text for calc_ttf-captcha. 
 10-Feb-2008 Christian Sommer

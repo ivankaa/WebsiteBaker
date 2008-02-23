@@ -44,7 +44,7 @@ if (file_exists(WB_PATH.'/framework/class.database.php')) {
 			$setting_value=false;
 		if ($setting_value=='true')
 			$setting_value=true;
-		define($setting_name,$setting_value);
+		@define($setting_name,$setting_value);
 	}
 	$string_file_mode = STRING_FILE_MODE;
 	define('OCTAL_FILE_MODE',(int) octdec($string_file_mode));

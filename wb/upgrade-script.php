@@ -766,10 +766,14 @@ while($result = $query_dates->fetchRow()) {
 }
 
 /**********************************************************
- *  - Alter the WYSIWYG editor content from text to longtext
+ *  - Alter the WYSIWYG editor (longtext, default FCK)
  */
-echo "<br /><u>Alter WYSIWYG editor content field from text to longtext</u><br />Status: ";
+echo "<br /><u>Alter WYSIWYG editor settings</u><br />Alter field content from text to longtext: ";
 echo ($database->query("ALTER TABLE ".TABLE_PREFIX."mod_wysiwyg MODIFY content LONGTEXT NOT NULL")) ?" $OK<br />" : " $FAIL<br />";
+if(file_exists(WB_PATH .'/modules/fckeditor/include.php')) {
+	echo "Make FCKEditor the new default editor: ";
+	echo ($database->query("UPDATE ".TABLE_PREFIX."settings SET value='fckeditor' WHERE name='wysiwyg_editor'")) ?" $OK<br />" : " $FAIL<br />";
+}
 
 /**********************************************************
  *  - Add Admintools to Administrator group
