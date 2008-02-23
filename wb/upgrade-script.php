@@ -398,12 +398,12 @@ function list_files_dirs($dir, $depth=true, $files=array(), $dirs=array()) {
 				list($files, $dirs) = list_files_dirs($dir.'/'.$file, $depth, $files, $dirs);
 			}
 		} else {
-			$files[] = $dir.'/'.$file;
+			$newfile = $dir.'/'.$file;
+			if(filesize($newfile) <= 100)
+				$files[] = $newfile;
 		}
 	}
 	closedir($dh);
-	natcasesort($files);
-	natcasesort($dirs);
 	return(array($files, $dirs));
 }
 list($files, $dirs) = list_files_dirs(WB_PATH.PAGES_DIRECTORY);
@@ -489,13 +489,13 @@ foreach($pages as $p) {
 	}
 	// check if we need to create a subdir somewhere
 	$dirs = array();
-	while(dirname($link) != '/') {
+	while(dirname($link) != '/' && dirname($link) != '.') {
 		$link = dirname($link);
 		$dirs[] = WB_PATH.PAGES_DIRECTORY.$link;
 	}
 	foreach(array_reverse($dirs) as $dir) {
 		if(!file_exists($dir)) {
-			mkdir($dir, OCTAL_DIR_MODE);
+			@mkdir($dir, OCTAL_DIR_MODE);
 		}
 	}
 	// create new file in pages/

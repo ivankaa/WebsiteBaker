@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+23-Feb-2008 Thomas Hornik
+#	issue with menulink in upgrade-script. Fixed?
 23-Feb-2008 Christian Sommer
 !	suppressed warnings in initialize.php if constant already defined; modified upgrade script to make FCK the new default editor
 #	fixed bug in upgrade script (WBMailer setting)
