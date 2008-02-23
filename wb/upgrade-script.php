@@ -163,7 +163,13 @@ h3 { font-size: 120%; }
 <?php
 if(!isset($_POST['backup_confirmed'])) { 
 ?>
-<h2>Prerequisites</h2>
+<h2>Step 1: Check existing installation</h2>
+<p>Checking the configuration of your existing Website Baker installation:<br />
+<?php
+// check the basic Website Baker installation before proceeding
+if(check_baseline_configuration() != 0) {
+echo <<< EOT
+<h3>Checklist before upgrading:</h3>
 <p>To upgrade from an existing WB 2.6.7 version, please perform the following steps in advance:
 <ol>
 <li>Backup the entire <strong>/pages</strong> folder (including all subfolder and files) of your existing WB installation</li>
@@ -172,13 +178,11 @@ if(!isset($_POST['backup_confirmed'])) {
 <li>Upload all files contained in the WB 2.7 installation package (except config.php and the folder /install) via FTP over your existing installation</li>
 <li>start this script by typing the URL into your browser</li>
 </ol>
-<strong class="error">Note: </strong>If you have an version lower than 2.6.7, you need to upgrade to 2.6.7 first!! Instructions can be found on the <a href="http://help.websitebaker.org/pages/en/basic-docu/installation/upgrade.php" target="_blank">Website Baker Help portal</a>.</p>
-
-<h2>Step 1: Check existing installation</h2>
-<p>Checking the configuration of your existing Website Baker installation:<br />
-<?php
-// check the basic Website Baker installation before proceeding
-if(check_baseline_configuration() != 0) die;
+<strong class="error">Note: </strong>If you have an version lower than 2.6.7, you need to upgrade to 2.6.7 first!! Instructions can be found on the <a href="http://help.websitebaker.org/pages/en/basic-docu/installation/upgrade.php" target="_blank">Website Baker Help portal</a>.</p><p>&nbsp;</p>
+EOT;
+die;
+}
+// pre-checks passed, proceed
 status_msg('<p>Congratulations: You have passed all the required pre-checks.', 'ok');
 ?>
 
@@ -788,7 +792,7 @@ $database->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name = 'wbmailer_sm
 $database->query("DELETE FROM ".TABLE_PREFIX."settings WHERE name = 'wbmailer_smtp_password'");
 //add new rows with default values
 $wbmailer_smtp_host = (defined('WBMAILER_SMTP_HOST')) ? WBMAILER_SMTP_HOST : '';
-$wbmailer_routine = ($wbmailer_smtp_host = '') ? 'phpmail' : 'smtp';
+$wbmailer_routine = ($wbmailer_smtp_host == '') ? 'phpmail' : 'smtp';
 $settings_rows=	"INSERT INTO `".TABLE_PREFIX."settings` "
 ." (name, value) VALUES "
 ." ('wbmailer_routine', '$wbmailer_routine'),"
@@ -853,18 +857,19 @@ echo '<br />Languages reloaded<br />';
 /**********************************************************
  *  - End of upgrade script
  */
+$config_msg = ($wbmailer_smtp_host != '') ? '<br /><br />Note: Please remove the line: <strong>define(\'WBMAILER_SMTP_HOST\', \''.$wbmailer_smtp_host.'\');</strong> from file <strong>config.php</strong> before proceeding!' : '';
 echo '<p style="font-size:120%;"><strong>Congratulations: The upgrade script is finished ...</strong></p>';
-status_msg('<strong>Warning:</strong><br />Please delete the file <strong>upgrade-script.php</strong> via FTP before proceeding.<br />If you do not delete this script from your server, others can delete/overwritte database settings by executing this script again.', 'warning', 'div');
+status_msg('<strong>Warning:</strong><br />Please delete the file <strong>upgrade-script.php</strong> via FTP before proceeding.<br />If you do not delete this script from your server, others can delete/overwritte database settings by executing this script again.'.$config_msg, 'warning', 'div');
 // show buttons to go to the backend or frontend
 echo '<br />';
 if(defined('WB_URL')) {
 	echo '<form action="'.WB_URL.'" target="_self">';
-	echo '<input type="submit" value="kick me to the Frontend" style="float:left;"';
+	echo '<input type="submit" value="kick me to the Frontend" style="float:left;" />';
 	echo '</form>';
 }
 if(defined('ADMIN_URL')) {
 	echo '<form action="'.ADMIN_URL.'" target="_self">';
-	echo '&nbsp;<input type="submit" value="kick me to the Backend"';
+	echo '&nbsp;<input type="submit" value="kick me to the Backend" />';
 	echo '</form>';
 }
 echo '<p>&nbsp;</p>';
