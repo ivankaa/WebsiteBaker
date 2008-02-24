@@ -489,7 +489,7 @@ foreach($pages as $p) {
 	}
 	// check if we need to create a subdir somewhere
 	$dirs = array();
-	while(dirname($link) != '/' && dirname($link) != '.') {
+	while(dirname($link) != '/' && dirname($link) != '.' && dirname($link) != '\\') {
 		$link = dirname($link);
 		$dirs[] = WB_PATH.PAGES_DIRECTORY.$link;
 	}
@@ -509,15 +509,6 @@ foreach($pages as $p) {
 	}
 	
 }
-
-// some code missing to regenerate page_title from link/filename
-// for_all_pages: if filename($page_title) != basename($link) {
-//   rename $page_title to basename($link)
-// }
-// This must be done after menu_link-upgrade
-// 
-// Should we really do this? - must be checked
-
 
 /**********************************************************
  *  - asp - Advanced Spam Protection
