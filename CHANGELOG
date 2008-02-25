@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+25-Feb-2008	Matthias Gallas
++	added missing Dutch language files for core modules
 24-Feb-2008 Thomas Hornik
 #	issue with menulink in upgrade-script. Fixed.
 23-Feb-2008 Christian Sommer

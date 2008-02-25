@@ -21,18 +21,14 @@
  along with Website Baker; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+ -----------------------------------------------------------------------------------------
+  DUTCH LANGUAGE FILE FOR THE ADDON: BACKUP
+ -----------------------------------------------------------------------------------------
 */
 
-//Modul Description
-$module_description = 'Deze module makt het mogelijk om aangepaste online formulieren te maken zoals een feedback formulier. Met dank aan Rudolph Lartey voor het aanpassen van deze module.';
-
-//Variables for the  backend
-$MOD_FORM['SETTINGS'] = 'Formulier instellingen';
-
-// Variables for the module CSS edit outputs
-$CAP_EDIT_CSS = 'Wijzig CSS';
-$CAP_TOGGLE_CSS = 'Wijzig ';
-$HEADING_CSS_FILE = 'Actuele module bestand: ';
-$TXT_EDIT_CSS_FILE = 'Wijzig de CSS definities in het textveld hieronder.';
+// text outputs
+$MOD_BACKUP['BACKUP_ALL_TABLES'] 	= 	'Backup van alle tabellen in de database';
+$MOD_BACKUP['BACKUP_WB_SPECIFIC'] 	= 	'Backup enkel de WB specifieke tabellen';
+$TEXT['BACKUP_DATABASE']		=	'Backup Database';
 
 ?>

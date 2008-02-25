@@ -21,18 +21,18 @@
  along with Website Baker; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+ -----------------------------------------------------------------------------------------
+  DUTCH LANGUAGE FILE FOR THE ADDON: RELOAD ADDINS
+ -----------------------------------------------------------------------------------------
 */
 
-//Modul Description
-$module_description = 'Deze module makt het mogelijk om aangepaste online formulieren te maken zoals een feedback formulier. Met dank aan Rudolph Lartey voor het aanpassen van deze module.';
-
-//Variables for the  backend
-$MOD_FORM['SETTINGS'] = 'Formulier instellingen';
-
-// Variables for the module CSS edit outputs
-$CAP_EDIT_CSS = 'Wijzig CSS';
-$CAP_TOGGLE_CSS = 'Wijzig ';
-$HEADING_CSS_FILE = 'Actuele module bestand: ';
-$TXT_EDIT_CSS_FILE = 'Wijzig de CSS definities in het textveld hieronder.';
+// Headings and text outputs
+$MOD_RELOAD['PLEASE_SELECT'] 			= 'Selecteer welke add-ons je wenst te herladen';
+$MOD_RELOAD['MODULES'] 					= 'Modules';
+$MOD_RELOAD['TEMPLATES'] 				= 'Templates';
+$MOD_RELOAD['LANGUAGES'] 				= 'Talen';
+$MOD_RELOAD['MODULES_RELOADED'] 		= 'Modules met succes herladen';
+$MOD_RELOAD['TEMPLATES_RELOADED']	= 'Templates met succes herladen';
+$MOD_RELOAD['LANGUAGES_RELOADED']	= 'Talen met succes herladen';
 
 ?>
