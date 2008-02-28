@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+28-Feb-2008 Thomas Hornik
+#	fixed hebrew transliteration-table. Thanks to forum-member iti.
 28-Feb-2008	Christian Sommer
 #	added bugfix from the forum member tavitar to fix an issue with multiple groups (module permission do not add up properly)
 25-Feb-2008	Matthias Gallas
