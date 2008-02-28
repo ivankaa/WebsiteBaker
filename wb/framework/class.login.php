@@ -228,7 +228,7 @@ class login extends admin {
 			$_SESSION['TEMPLATE_PERMISSIONS'] = array();
 			$_SESSION['GROUP_NAME'] = array();
 
-
+			$first_group = true;
 			foreach (split(",", $this->get_session('GROUPS_ID')) as $cur_group_id) {
 				$query = "SELECT * FROM ".$this->GROUPS_TABLE." WHERE group_id = '".$cur_group_id."'";
 				$results = $database->query($query);
@@ -240,12 +240,21 @@ class login extends admin {
 				}
 				// Set module permissions
 				if($results_array['module_permissions'] != '') {
-					$_SESSION['MODULE_PERMISSIONS'] = array_merge($_SESSION['MODULE_PERMISSIONS'], explode(',', $results_array['module_permissions']));
+					if ($first_group) {
+          	$_SESSION['MODULE_PERMISSIONS'] = explode(',', $results_array['module_permissions']);
+          } else {
+          	$_SESSION['MODULE_PERMISSIONS'] = array_intersect($_SESSION['MODULE_PERMISSIONS'], explode(',', $results_array['module_permissions']));
+					}
 				}
 				// Set template permissions
 				if($results_array['template_permissions'] != '') {
-					$_SESSION['TEMPLATE_PERMISSIONS'] = array_merge($_SESSION['TEMPLATE_PERMISSIONS'], explode(',', $results_array['template_permissions']));
+					if ($first_group) {
+          	$_SESSION['TEMPLATE_PERMISSIONS'] = explode(',', $results_array['template_permissions']);
+          } else {
+          	$_SESSION['TEMPLATE_PERMISSIONS'] = array_intersect($_SESSION['TEMPLATE_PERMISSIONS'], explode(',', $results_array['template_permissions']));
+					}
 				}
+				$first_group = false;
 			}	
 
 			// Update the users table with current ip and timestamp
