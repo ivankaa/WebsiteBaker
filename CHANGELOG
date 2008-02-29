@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+29-Feb-2008 Thomas Hornik
+#	fixed issue in pagename generation if AddDefaultCharset is set (as work-around).
 28-Feb-2008 Thomas Hornik
 #	fixed hebrew transliteration-table. Thanks to forum-member iti.
 28-Feb-2008	Christian Sommer

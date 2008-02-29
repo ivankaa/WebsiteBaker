@@ -1034,6 +1034,8 @@ function utf8_to_charset($str, $charset_out=DEFAULT_CHARSET) {
 function entities_to_7bit($str) {
 	// convert to UTF-8
 	$str = charset_to_utf8($str);
+	if(!utf8_check($str))
+		return($str);
 	// replace some specials
 	$str = utf8_stripspecials($str, '_');
 	// translate non-ASCII characters to ASCII
