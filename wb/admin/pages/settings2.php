@@ -86,15 +86,15 @@ if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_adm
 
 // Setup admin groups
 $admin_groups[] = 1;
-if(!in_array(1, $admin->get_groups_id())) {
-	$admin_groups[] = implode(",",$admin->get_groups_id());
-}
+//if(!in_array(1, $admin->get_groups_id())) {
+//	$admin_groups[] = implode(",",$admin->get_groups_id());
+//}
 $admin_groups = implode(',', $admin_groups);
 // Setup viewing groups
 $viewing_groups[] = 1;
-if(!in_array(1, $admin->get_groups_id())) {
-	$viewing_groups[] = implode(",",$admin->get_groups_id());
-}
+//if(!in_array(1, $admin->get_groups_id())) {
+//	$viewing_groups[] = implode(",",$admin->get_groups_id());
+//}
 $viewing_groups = implode(',', $viewing_groups);
 
 // If needed, get new order

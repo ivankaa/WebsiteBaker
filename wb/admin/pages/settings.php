@@ -161,8 +161,8 @@ if($results_array['visibility'] == 'public') {
 		$flag_cursor =   'pointer';
 		$flag_color =    '';
 		if (in_array($group["group_id"], $admin->get_groups_id())) {
-			$flag_disabled = ' disabled';
-			$flag_checked =  ' checked';
+			$flag_disabled = ''; //' disabled';
+			$flag_checked =  ''; //' checked';
 			$flag_cursor =   'default';
 			$flag_color =    '000000';
 		}
@@ -217,8 +217,8 @@ if($results_array['visibility'] == 'public') {
 		$flag_cursor =   'pointer';
 		$flag_color =    '';
 		if (in_array($group["group_id"], $admin->get_groups_id())) {
-			$flag_disabled = ' disabled';
-			$flag_checked =  ' checked';
+			$flag_disabled = ''; //' disabled';
+			$flag_checked =  ''; //' checked';
 			$flag_cursor =   'default';
 			$flag_color =    '000000';
 		}

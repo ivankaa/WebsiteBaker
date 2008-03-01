@@ -11,7 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
-01-Feb-2008 Thomas Hornik
+01-Mar-2008 Thomas Hornik
+#	fixed ticket #562, applied changes from user tavitar with some own additions
 +	added check for AddDefaultCharset to install
 29-Feb-2008 Thomas Hornik
 #	fixed issue in pagename generation if AddDefaultCharset is set (as work-around).
