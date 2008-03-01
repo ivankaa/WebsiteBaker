@@ -54,6 +54,21 @@ if(!isset($_GET['sessions_checked']) OR $_GET['sessions_checked'] != 'true') {
 	}
 }
 
+// Check if AddDefaultCharset is set
+$e_adc=false;
+$sapi=php_sapi_name();
+if(strpos($sapi, 'apache')!==FALSE || strpos($sapi, 'nsapi')!==FALSE) {
+	flush();
+	$apache_rheaders=apache_response_headers();
+	foreach($apache_rheaders AS $h) {
+		if(strpos($h, 'html; charset')!==FALSE) {
+			preg_match('/charset\s*=\s*([a-zA-Z0-9- _]+)/', $h, $match);
+			$apache_charset=$match[1];
+			$e_adc=$apache_charset;
+		}
+	}
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -115,16 +130,16 @@ function change_os(type) {
 		?>
 		<table cellpadding="3" cellspacing="0" width="100%" align="center">
 		<tr>
-			<td colspan="8"><h1>Step 1</h1>Please check the following requirements are met before continuing...</td>
+			<td colspan="6"><h1>Step 1</h1>Please check the following requirements are met before continuing...</td>
 		</tr>
 		<?php if($session_support != '<font class="good">Enabled</font>') { ?>
 		<tr>
-			<td colspan="8" style="font-size: 10px;" class="bad">Please note: PHP Session Support may appear disabled if your browser does not support cookies.</td>
+			<td colspan="6" style="font-size: 10px;" class="bad">Please note: PHP Session Support may appear disabled if your browser does not support cookies.</td>
 		</tr>
 		<?php } ?>
 		<tr>
-			<td width="140" style="color: #666666;">PHP Version > 4.1.0</td>
-			<td width="35">
+			<td width="160" style="color: #666666;">PHP Version > 4.1.0</td>
+			<td width="60">
 				<?php
 				$phpversion = substr(PHP_VERSION, 0, 6);
 				if($phpversion > 4.1) {
@@ -135,8 +150,8 @@ function change_os(type) {
 				?>
 			</td>
 			<td width="140" style="color: #666666;">PHP Session Support</td>
-			<td width="115"><?php echo $session_support; ?></td>
-			<td width="105" style="color: #666666;">PHP Safe Mode</td>
+			<td width="105"><?php echo $session_support; ?></td>
+			<td width="115" style="color: #666666;">PHP Safe Mode</td>
 			<td>
 				<?php
 				if(ini_get('safe_mode')) {
@@ -147,6 +162,24 @@ function change_os(type) {
 				?>
 			</td>
 		</tr>
+		<tr>
+			<td width="160" style="color: #666666;">AddDefaultCharset unset</td>
+			<td width="60">
+				<?php
+					if($e_adc) {
+						?><font class="bad">No</font><?php
+					} else {
+						?><font class="good">Yes</font><?php
+					}
+				?>
+			</td>
+			<td colspan="4">&nbsp;</td>
+		</tr>
+		<?php if($e_adc) { ?>
+		<tr>
+			<td colspan="6" style="font-size: 10px;" class="bad">Please note: AddDefaultCharset is set to <?php echo $e_adc;?> in apache.conf.<br />If you have to use umlauts (e.g. &auml; &aacute;) please change this to Off. - Or use <?php echo $e_adc;?> inside website baker, too.</td>
+		</tr>
+		<?php } ?>
 		</table>
 		<table cellpadding="3" cellspacing="0" width="100%" align="center">
 		<tr>
