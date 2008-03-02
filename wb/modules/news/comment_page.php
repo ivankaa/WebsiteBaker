@@ -30,7 +30,6 @@ if(!defined('WB_URL')) {
 }
 
 require_once(WB_PATH.'/include/captcha/captcha.php');
-require_once(WB_PATH.'/include/captcha/asp.php');
 
 // Get comments page template details from db
 $query_settings = $database->query("SELECT comments_page,use_captcha,commenting FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
@@ -47,7 +46,7 @@ if($query_settings->numRows() == 0) {
 	<?php if(ENABLED_ASP) { // add some honeypot-fields
 	?>
 	<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
-	<p class="nixhier">
+	<p style="display:none;">
 	email address:
 	<label for="email">We dont want to know your email-address. Leave this field empty:</label>
 	<input id="email" name="email" size="60" value="" /><br />

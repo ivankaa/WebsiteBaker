@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+02-Mar-2008 Thomas Hornik
+-	removed include/captcha/asp.php
 01-Mar-2008 Thomas Hornik
 #	fixed ticket #562, applied changes from user tavitar with some own additions
 +	added check for AddDefaultCharset to install

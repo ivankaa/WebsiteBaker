@@ -28,7 +28,6 @@ if(!defined('WB_URL')) {
 	exit(0);
 }
 require_once(WB_PATH.'/include/captcha/captcha.php');
-require_once(WB_PATH.'/include/captcha/asp.php');
 ?>
 
 <style>
@@ -46,7 +45,7 @@ require_once(WB_PATH.'/include/captcha/asp.php');
 	<?php if(ENABLED_ASP) { // add some honeypot-fields
 	?>
 	<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
-	<p class="nixhier">
+	<p style="display:none;">
 	email-address:
 	<label for="email-address">Leave this field empty, dont enter your e-mail address:</label>
 	<input id="email-address" name="email-address" size="60" value="" /><br />
