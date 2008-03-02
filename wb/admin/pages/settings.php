@@ -36,6 +36,9 @@ require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_settings');
 
+// Include the WB functions file
+require_once(WB_PATH.'/framework/functions-utf8.php');
+
 // Get perms
 $database = new database();
 $results = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'");
@@ -368,24 +371,30 @@ foreach($menu AS $number => $name) {
 	$template->parse('menu_list', 'menu_list_block', true);
 }
 
-// Language list
-if($handle = opendir(WB_PATH.'/languages/')) {
-	$template->set_block('main_block', 'language_list_block', 'language_list');
-	while (false !== ($file = readdir($handle))) {
-		if($file != '.' AND $file != '..' AND $file != '.svn' AND $file != 'index.php') {
-			// Include the languages info file
-			require(WB_PATH.'/languages/'.$file);
-			// Work-out if this language is selected
-			if($language_code == $results_array['language']) { $selected = ' selected'; } else { $selected = ''; }
-			// Set the language info
-			$template->set_var(array('VALUE' => $language_code, 'SELECTED' => $selected, 'NAME' => $language_name));
-			// Parse row
-			$template->parse('language_list', 'language_list_block', true);
+// Insert language values
+$template->set_block('main_block', 'language_list_block', 'language_list');
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by name");
+if($result->numRows() > 0) {
+	while($addon = $result->fetchRow()) {
+		$l_codes[$addon['name']] = $addon['directory'];
+		$l_names[$addon['name']] = entities_to_7bit($addon['name']); // sorting-problem workaround
+	}
+	asort($l_names);
+	foreach($l_names as $l_name=>$v) {
+		// Insert code and name
+		$template->set_var(array(
+								'VALUE' => $l_codes[$l_name],
+								'NAME' => $l_name
+								));
+		// Check if it is selected
+		if($results_array['language'] == $l_codes[$l_name]) {
+			$template->set_var('SELECTED', ' selected');
+		} else {
+			$template->set_var('SELECTED', '');
 		}
+		$template->parse('language_list', 'language_list_block', true);
 	}
 }
-// Restore to original language
-require(WB_PATH.'/languages/'.LANGUAGE.'.php');
 
 // Select disabled if searching is disabled
 if($results_array['searching'] == 0) {
