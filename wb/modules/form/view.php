@@ -40,6 +40,7 @@ if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS
 } 
 
 require_once(WB_PATH.'/include/captcha/captcha.php');
+require_once(WB_PATH.'/include/captcha/asp.php');
 
 // Function for generating an optionsfor a select field
 if (!function_exists('make_option')) {
@@ -133,7 +134,7 @@ echo $header;
 if(ENABLED_ASP) { // first add some honeypot-fields
 ?>
 <input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
-<p style="display:none;">
+<p class="nixhier">
 email address:
 <label for="email">Your e-mail address is not relevant Leave this field blank:</label>
 <input id="email" name="email" size="56" value="" /><br />
