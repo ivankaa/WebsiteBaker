@@ -41,7 +41,9 @@ $admin_groups = $admin->get_post('admin_groups');
 $viewing_groups = $admin->get_post('viewing_groups');
 
 // work-around: $viewing_groups contains group-numbers for both private _and_ registered - keep group-numbers which appears twice only
-$view_groups=array(); 
+$view_groups=array();
+if($viewing_groups===NULL)
+	$viewing_groups=array();
 foreach($viewing_groups as $a) {
 	if(isset($view_groups[$a])) $view_groups[$a]++;
 	else $view_groups[$a] = 1;
