@@ -162,7 +162,7 @@ if($query_submissions->numRows() > 0) {
 		?>
 		<tr class="row_<?php echo $row; ?>" height="20">
 			<td width="20" style="padding-left: 5px;">
-				<a href="<?php echo WB_URL; ?>/modules/form/view_submission.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&submission_id=<?php echo $submission['submission_id']; ?>">
+				<a href="<?php echo WB_URL; ?>/modules/form/view_submission.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&submission_id=<?php echo $submission['submission_id']; ?>" title="<?php echo $TEXT['OPEN']; ?>">
 					<img src="<?php echo ADMIN_URL; ?>/images/folder_16.png" alt="<?php echo $TEXT['OPEN']; ?>" border="0" />
 				</a>
 			</td>
