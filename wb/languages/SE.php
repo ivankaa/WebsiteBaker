@@ -119,6 +119,7 @@ $HEADING['ADD_GROUP'] = 'Skapa ny grupp';
 $HEADING['MODIFY_GROUP'] = '&Auml;ndra grupp';
 
 // Other text
+$TEXT['OPEN'] = 'Open'; //needs to be translated
 $TEXT['ADD'] = 'L&auml;gg till';
 $TEXT['MODIFY'] = '&Auml;ndra';
 $TEXT['SETTINGS'] = 'Inst&auml;llningar';

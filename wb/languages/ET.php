@@ -119,6 +119,7 @@ $HEADING['ADD_GROUP'] = 'Lisa Grupp';
 $HEADING['MODIFY_GROUP'] = 'Muuda Gruppi';
 
 // Other text
+$TEXT['OPEN'] = 'Open'; //needs to be translated
 $TEXT['ADD'] = 'Lisa';
 $TEXT['MODIFY'] = 'Muuda';
 $TEXT['SETTINGS'] = 'Seaded';

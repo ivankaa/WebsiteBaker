@@ -119,6 +119,7 @@ $HEADING['ADD_GROUP'] = 'Grup Ekle';
 $HEADING['MODIFY_GROUP'] = 'Grup D&uuml;zenle';
 
 // Other text
+$TEXT['OPEN'] = 'Open'; //needs to be translated
 $TEXT['ADD'] = 'Ekle';
 $TEXT['MODIFY'] = 'D&uuml;zenle';
 $TEXT['SETTINGS'] = 'Ayarlar';

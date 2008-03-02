@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 02-Mar-2008 Thomas Hornik
+#	added missing text in language-files
 +	added missing sorting to language dropdown in admin/pages/settings.php
 -	removed include/captcha/asp.php
 01-Mar-2008 Thomas Hornik

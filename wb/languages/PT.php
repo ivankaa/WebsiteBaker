@@ -119,6 +119,7 @@ $HEADING['ADD_GROUP'] = 'Adicionar Grupo';
 $HEADING['MODIFY_GROUP'] = 'Modificar Grupo';
 
 // Other text
+$TEXT['OPEN'] = 'Open'; //needs to be translated
 $TEXT['ADD'] = 'Adicionar';
 $TEXT['MODIFY'] = 'Modificar';
 $TEXT['SETTINGS'] = 'Configura&ccdil;&otilde;es';

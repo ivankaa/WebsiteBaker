@@ -119,6 +119,7 @@ $HEADING['ADD_GROUP'] = 'Toevoegen groep';
 $HEADING['MODIFY_GROUP'] = 'Groepsgegevens';
 
 // Other text
+$TEXT['OPEN'] = 'Open'; //needs to be translated
 $TEXT['ADD'] = 'Toevoegen';
 $TEXT['MODIFY'] = 'Wijzigen';
 $TEXT['SETTINGS'] = 'Instellingen';

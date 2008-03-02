@@ -119,6 +119,7 @@ $HEADING['ADD_GROUP'] = 'Lis&auml;&auml; ryhm&auml;';
 $HEADING['MODIFY_GROUP'] = 'Muokkaa ryhm&auml;&auml;';
 
 // Other text
+$TEXT['OPEN'] = 'Open'; //needs to be translated
 $TEXT['ADD'] = 'Lis&auml;&auml;';
 $TEXT['MODIFY'] = 'Muokkaa';
 $TEXT['SETTINGS'] = 'Asetukset';

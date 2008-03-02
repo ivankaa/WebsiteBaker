@@ -119,6 +119,7 @@ $HEADING['ADD_GROUP'] = 'Add Group';
 $HEADING['MODIFY_GROUP'] = 'Modify Group';
 
 // Other text
+$TEXT['OPEN'] = 'Open';
 $TEXT['ADD'] = 'Add';
 $TEXT['MODIFY'] = 'Modify';
 $TEXT['SETTINGS'] = 'Settings';

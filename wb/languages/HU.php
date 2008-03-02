@@ -119,6 +119,7 @@ $HEADING['ADD_GROUP'] = 'Csoport m&oacute;dos&iacute;t&aacute;sa';
 $HEADING['MODIFY_GROUP'] = 'csoport m&oacute;dos&iacute;t&aacute;sa';
 
 // Other text
+$TEXT['OPEN'] = 'Open'; //needs to be translated
 $TEXT['ADD'] = 'Hozz&aacute;ad';
 $TEXT['MODIFY'] = 'M&oacute;dos&iacute;t&aacute;s';
 $TEXT['SETTINGS'] = 'Be&aacute;ll&iacute;t&aacute;s';

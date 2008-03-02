@@ -119,6 +119,7 @@ $HEADING['ADD_GROUP'] = 'Pievienot grupu';
 $HEADING['MODIFY_GROUP'] = 'Mainit grupu';
 
 // Other text
+$TEXT['OPEN'] = 'Open'; //needs to be translated
 $TEXT['ADD'] = 'Pievienot';
 $TEXT['MODIFY'] = 'Mainit';
 $TEXT['SETTINGS'] = 'Iestatijumi';
