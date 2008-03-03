@@ -84,7 +84,8 @@ function search_highlight($foo='', $arr_string=array()) {
 	// the highlighting
 	// match $string, but not inside <style>...</style>, <script>...</script>, <!--...--> or HTML-Tags
 	// split $string into pieces - "cut away" styles, scripts, comments, HTML-tags and eMail-addresses
-	$matches = preg_split("/(<style.*<\/style>|<script.*<\/script>|<!--.*-->|<.*>|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b)/iUs",$foo,-1,(PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY));
+	// for HTML-Tags use <(?:[^<]|<.*>)*> which will match strings like <input ... value="<b>value</b>" >
+	$matches = preg_split("/(<style.*<\/style>|<script.*<\/script>|<!--.*-->|<(?:[^<]|<.*>)*>|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b)/iUs",$foo,-1,(PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY));
 	if(is_array($matches) && $matches != array()) {
 		$foo = "";
 		$string = strtr($string, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));

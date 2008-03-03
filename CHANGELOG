@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+03-Mar-2008 Thomas Hornik
+#	fixed an issue with highlighting
 02-Mar-2008 Thomas Hornik
 #	added missing text in language-files
 +	added missing sorting to language dropdown in admin/pages/settings.php
