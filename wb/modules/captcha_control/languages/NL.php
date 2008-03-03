@@ -47,7 +47,7 @@ $MOD_CAPTCHA_CONTROL['TTF_IMAGE']         = 'Figuur met verschillende lettertype
 $MOD_CAPTCHA_CONTROL['OLD_IMAGE']         = 'Oude stijl (niet aan te raden)';
 $MOD_CAPTCHA_CONTROL['TEXT']              = 'Tekst-CAPTCHA';
 $MOD_CAPTCHA_CONTROL['CAPTCHA_ENTER_TEXT']= 'Vragen en antwoorden';
-$MOD_CAPTCHA_CONTROL['CAPTCHA_TEXT_DESC'] = "Wis dit om uw lijst in te geven\nof de wijzigingen zullen niet bewaard worden!\n### voorbeeld ###\nHier kan je vragen en antwoorden ingeven.\nGebruik:\n?Wat is de <b>voornaam</b> van <b>Claudia</b> Schiffer?\n!Claudia\n\n?Vraag 2\n!Antwoord 2\n...\nindien de taal geen rol speelt.\n\nOf, indien taal wel een rol speelt, gebruik:\n?EN:What's <b>Claudia</b> Schiffer's <b>first name</b>?\n!Claudia\n\n?EN:Question 2\n!Answer 2\n\n?DE:Wie ist der <b>Vorname</b> von <b>Claudia</b> Schiffer?\n!Claudia\n...\n### voorbeeld ###\n";
+$MOD_CAPTCHA_CONTROL['CAPTCHA_TEXT_DESC'] = "Wis dit om uw lijst in te geven\nof de wijzigingen zullen niet bewaard worden!\n### voorbeeld ###\nHier kan je vragen en antwoorden ingeven.\nGebruik:\n?Wat is de <b>voornaam</b> van <b>Claudia</b> Schiffer?\n!Claudia\n?Vraag 2\n!Antwoord 2\n...\nindien de taal geen rol speelt.\n\nOf, indien taal wel een rol speelt, gebruik:\n?EN:What's <b>Claudia</b> Schiffer's <b>first name</b>?\n!Claudia\n?EN:Question 2\n!Answer 2\n?DE:Wie ist der <b>Vorname</b> von <b>Claudia</b> Schiffer?\n!Claudia\n...\n### voorbeeld ###\n";
 
 $MOD_CAPTCHA['VERIFICATION']           = 'Verificatie';
 $MOD_CAPTCHA['ADDITION']               = 'plus';

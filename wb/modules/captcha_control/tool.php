@@ -54,7 +54,7 @@ if(isset($_POST['save_settings'])) {
 	// save text-captchas
 	if($captcha_type == 'text') { // ct_text
 		$text_qa=$admin->add_slashes($_POST['text_qa']);
-		if(strpos($text_qa, '### example ###') === FALSE) {
+		if(!preg_match('/### .*? ###/', $text_qa)) {
 			$database->query("UPDATE $table SET ct_text = '$text_qa'");
 		}
 	}

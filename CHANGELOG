@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 03-Mar-2008 Thomas Hornik
+#	fixed an issue with text-captcha (default text got saved). Changes default text.
 #	fixed an issue with highlighting
 02-Mar-2008 Thomas Hornik
 #	added missing text in language-files
