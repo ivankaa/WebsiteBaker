@@ -121,13 +121,13 @@ class admin extends wb {
 
 		$header_template->set_var(	array(
 													'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
-													'INTERFACE_DIR' => ADMIN_URL.'/interface',
 													'BODY_TAGS' => $body_tags,
 													'WEBSITE_TITLE' => ($title['value']),
 													'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
 													'CHARSET' => $charset,
 													'VERSION' => VERSION,
 													'WB_URL' => WB_URL,
+													'ADMIN_URL' => ADMIN_URL,
 													'TITLE_START' => $MENU['START'],
 													'TITLE_VIEW' => $MENU['VIEW'],
 													'TITLE_HELP' => $MENU['HELP'],

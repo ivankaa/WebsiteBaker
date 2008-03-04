@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+04-Mar-2008 Christian Sommer
+#	fixed issue with smart view URL link
 03-Mar-2008 Thomas Hornik
 #	fixed an issue with text-captcha (default text got saved). Changes default text.
 #	fixed an issue with highlighting

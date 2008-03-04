@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>{WEBSITE_TITLE} >> {TEXT_ADMINISTRATION} - {SECTION_NAME}</title>
-<link href="{INTERFACE_DIR}/stylesheet.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_URL}/interface/stylesheet.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="content-type" content="text/html; charset={CHARSET}" />
 {BACKEND_MODULE_CSS}
 {BACKEND_MODULE_JS}
@@ -17,14 +17,14 @@ function confirm_link(message, url) {
 <table cellpadding="0" cellspacing="0" border="0" width="770" align="center">
 <tr>
 	<td width="60" valign="top">
-		<a href="{WB_URL}/admin" title="{TITLE_START}"><img src="{INTERFACE_DIR}/logo.png" border="0" alt="Logo" /></a>
+		<a href="{ADMIN_URL}" title="{TITLE_START}"><img src="{ADMIN_URL}/interface/logo.png" border="0" alt="Logo" /></a>
 	</td>
 	<td width="5">&nbsp;</td>
 	<td style="font-size: 14px;" valign="top" align="right">
-         <a href="{WB_URL}/admin" title="{TITLE_START}"><img src="{WB_URL}/admin/images/home.png" border="0" alt="{TITLE_START}" /></a>
-         &nbsp;&nbsp;<a href="{URL_VIEW}/" target="_blank" title="{TITLE_VIEW}"><img src="{WB_URL}/admin/images/view.png" border="0" alt="{WB_URL}" /></a>
-	&nbsp; <a href="{URL_HELP}" target="_blank" title="{TITLE_HELP}"><img src="{WB_URL}/admin/images/help.png" border="0" alt="{TITLE_HELP}" /></a>
-         &nbsp; <a href="{WB_URL}/admin/logout" title="{TITLE_LOGOUT}"><img src="{WB_URL}/admin/images/dl.png" border="0" alt="{TITLE_LOGOUT}" /></a>
+         <a href="{ADMIN_URL}" title="{TITLE_START}"><img src="{ADMIN_URL}/images/home.png" border="0" alt="{TITLE_START}" /></a>
+         &nbsp;&nbsp;<a href="{URL_VIEW}" target="_blank" title="{TITLE_VIEW}"><img src="{ADMIN_URL}/images/view.png" border="0" alt="{WB_URL}" /></a>
+	&nbsp; <a href="{URL_HELP}" target="_blank" title="{TITLE_HELP}"><img src="{ADMIN_URL}/images/help.png" border="0" alt="{TITLE_HELP}" /></a>
+         &nbsp; <a href="{ADMIN_URL}/logout" title="{TITLE_LOGOUT}"><img src="{ADMIN_URL}/images/dl.png" border="0" alt="{TITLE_LOGOUT}" /></a>
 </td>
 	<td width="100" align="right" style="padding-top: 10px; padding-right: 15px; color: #fff;">
 	Version {VERSION}
