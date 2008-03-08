@@ -30,6 +30,10 @@ if(!defined('WB_URL')) { exit(header('Location: ../index.php')); }
 // strtotime() may fails with e.g. "dd.mm.yyyy" and PHP4
 function jscalendar_to_timestamp($str, $offset='') {
 	$str = trim($str);
+	if($str == '0' || $str == '')
+		return('0');
+	if($offset == '0')
+		$offset = '';
 	// convert to yyyy-mm-dd
 	// "dd.mm.yyyy"?
 	if(preg_match('/^\d{1,2}\.\d{1,2}\.\d{2}(\d{2})?/', $str)) {

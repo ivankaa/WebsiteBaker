@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+08-Mar-2008 Thomas Hornik
+#	fixed issue with news and end-date
 04-Mar-2008 Christian Sommer
 #	fixed issue with smart view URL link
 03-Mar-2008 Thomas Hornik
