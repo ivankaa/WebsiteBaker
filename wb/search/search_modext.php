@@ -213,7 +213,7 @@ function print_excerpt2($mod_vars, $func_vars) {
 	if($mod_text == "") // nothing to do
 		{ return false; }
 	if($mod_no_highlight) // no highlighting
-		{ $mod_page_link_target = "&nohighlight".$mod_page_link_target; }
+		{ $mod_page_link_target = "&amp;nohighlight=1".$mod_page_link_target; }
 
 	// prepare the text (part 1): remove lf and cr, convert \" to ", remove comments, style, scripting and unnecessary whitespace, convert to utf8
 	$mod_text = strtr($mod_text, array("\x0D\x0A" => ' ', "\x0D" => ' ', "\x0A" => ' ', '\"' => '"'));
@@ -231,14 +231,6 @@ function print_excerpt2($mod_vars, $func_vars) {
 	// prepare the text (part 2): convert some special tags to '.', strip tags
 	$mod_text = preg_replace('/<(br( \/)?|dt|\/dd|\/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>/i', '.', $mod_text);
 	$mod_text = strip_tags($mod_text);
-
-// unhtmlspecialchars
-//	$mod_text = strtr($mod_text, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));
-//	$tmp_words = array();
-//	foreach($func_search_words as $w) {
-//		$tmp_words[] = strtr($w, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));
-//	}
-//	$func_search_words = $tmp_words;
 
 	// Do a fast scan over $mod_text first. This will speedup things a lot.
 	if($func_search_match == 'all') {
