@@ -79,8 +79,12 @@ class admin extends wb {
 		$user_language = ($get_user_language) ? $get_user_language->fetchRow() : '';
 		// prevent infinite loop if language file is not XX.php (e.g. DE_du.php)
 		$user_language = substr($user_language[0],0,2);
-		if((LANGUAGE != $user_language) && file_exists(WB_PATH .'/languages/' .$user_language .'.php')) {
-			header('Location: '.$_SERVER['PHP_SELF'].'?lang='.$user_language);
+		if((LANGUAGE != $user_language) && file_exists(WB_PATH .'/languages/' .$user_language .'.php')
+				&& strpos($_SERVER['PHP_SELF'],'/admin/') !== false) {
+			// check if page_id is set
+			$page_id_url = (isset($_GET['page_id'])) ? '&page_id=' .(int) $_GET['page_id'] : '';
+			$section_id_url = (isset($_GET['section_id'])) ? '&section_id=' .(int) $_GET['section_id'] : '';
+			header('Location: '.$_SERVER['PHP_SELF'] .'?lang='.$user_language .$page_id_url .$section_id_url);
 			exit();
 		}
 
