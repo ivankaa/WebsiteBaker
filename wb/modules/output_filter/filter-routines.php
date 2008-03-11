@@ -141,9 +141,14 @@ if (!function_exists('filter_mail_addresses')) {
 			if(!in_array(OUTPUT_FILTER_MODE, array(2,3,6,7))) return $match[0];
 			
 			// check if last part of the a href link: >xxxx</a> contains a email address we need to filter
-			$pattern = '#\b[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4}\b#i';
-			if(preg_match($pattern, $match[5])) {
-				$match[5] = str_replace($search, $replace, $match[5]);
+			$pattern = '#[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4}#i';
+			if(preg_match_all($pattern, $match[5], $matches)) {
+				foreach($matches as $submatch) {
+					foreach($submatch as $value) {
+						// replace all . and all @ in email address parts by (dot) and (at) strings
+						$match[5] = str_replace($value, str_replace($search, $replace, $value), $match[5]);
+					}
+				}
 			}
 
 			// check if Javascript encryption routine is enabled
