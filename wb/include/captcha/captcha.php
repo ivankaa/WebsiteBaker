@@ -79,45 +79,98 @@ if(extension_loaded('gd') && function_exists('imagepng') && function_exists('ima
 }
 
 if(!function_exists('call_captcha')) {
-	function call_captcha() {
+	function call_captcha($action='all') {
 		global $MOD_CAPTCHA;
 		$t = time();
 		$_SESSION['captcha_time'] = $t;
-	
-		switch(CAPTCHA_TYPE) {
-			// one special case
-			case 'text': // text-captcha
-				?><table class="captcha_table"><tr>
-				<td class="text_captcha"><?php include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php'); ?></td>
-				<td><input type="text" name="captcha" maxlength="50"  style="width:150px" /></td>
-				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_QUEST']; ?></td>
-				</tr></table><?php
-				break;
-			// two special cases
-			case 'calc_text': // calculation as text
-				?><table class="captcha_table"><tr>
-				<td class="text_captcha"><?php include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php'); ?>&nbsp;=&nbsp;</td>
-				<td><input type="text" name="captcha" maxlength="10"  style="width:20px" /></td>
-				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
-				</tr></table><?php
-				break;
-			case 'calc_image': // calculation with image (old captcha)
-			case 'calc_ttf_image': // calculation with varying background and ttf-font
-				?><table class="captcha_table"><tr>
-				<td class="image_captcha"><img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" /></td><td>&nbsp;=&nbsp;</td>
-				<td><input type="text" name="captcha" maxlength="10" style="width:20px" /></td>
-				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
-				</tr></table><?php
-				break;
-			// normal images
-			case 'ttf_image': // captcha with varying background and ttf-font
-			case 'old_image': // old captcha
-				?><table class="captcha_table"><tr>
-				<td class="image_captcha"><img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" /></td>
-				<td><input type="text" name="captcha" maxlength="10" style="width:50px" /></td>
-				<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_TEXT']; ?></td>
-				</tr></table><?php
-				break;
+		
+		if($action=='all') {
+			switch(CAPTCHA_TYPE) {
+				// one special case
+				case 'text': // text-captcha
+					?><table class="captcha_table"><tr>
+					<td class="text_captcha"><?php include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php'); ?></td>
+					<td><input type="text" name="captcha" maxlength="50"  style="width:150px" /></td>
+					<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_QUEST']; ?></td>
+					</tr></table><?php
+					break;
+				// two special cases
+				case 'calc_text': // calculation as text
+					?><table class="captcha_table"><tr>
+					<td class="text_captcha"><?php include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php'); ?>&nbsp;=&nbsp;</td>
+					<td><input type="text" name="captcha" maxlength="10"  style="width:20px" /></td>
+					<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
+					</tr></table><?php
+					break;
+				case 'calc_image': // calculation with image (old captcha)
+				case 'calc_ttf_image': // calculation with varying background and ttf-font
+					?><table class="captcha_table"><tr>
+					<td class="image_captcha"><img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" /></td><td>&nbsp;=&nbsp;</td>
+					<td><input type="text" name="captcha" maxlength="10" style="width:20px" /></td>
+					<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_RES']; ?></td>
+					</tr></table><?php
+					break;
+				// normal images
+				case 'ttf_image': // captcha with varying background and ttf-font
+				case 'old_image': // old captcha
+					?><table class="captcha_table"><tr>
+					<td class="image_captcha"><img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" /></td>
+					<td><input type="text" name="captcha" maxlength="10" style="width:50px" /></td>
+					<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_TEXT']; ?></td>
+					</tr></table><?php
+					break;
+			}
+		} elseif($action=='image') {
+			switch(CAPTCHA_TYPE) {
+				case 'text': // text-captcha
+				case 'calc_text': // calculation as text
+					include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php');
+					break;
+				case 'calc_image': // calculation with image (old captcha)
+				case 'calc_ttf_image': // calculation with varying background and ttf-font
+				case 'ttf_image': // captcha with varying background and ttf-font
+				case 'old_image': // old captcha
+					echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t";
+					break;
+			}
+		} elseif($action=='input') {
+			switch(CAPTCHA_TYPE) {
+				case 'text': // text-captcha
+					?><input type="text" name="captcha" maxlength="50"  style="width:150px" /><?php
+					break;
+				case 'calc_text': // calculation as text
+					?><input type="text" name="captcha" maxlength="10"  style="width:20px" /><?php
+					break;
+				case 'calc_image': // calculation with image (old captcha)
+				case 'calc_ttf_image': // calculation with varying background and ttf-font
+					?><input type="text" name="captcha" maxlength="10" style="width:20px" /><?php
+					break;
+				// normal images
+				case 'ttf_image': // captcha with varying background and ttf-font
+				case 'old_image': // old captcha
+					?><input type="text" name="captcha" maxlength="10" style="width:50px" /><?php
+					break;
+			}
+		} elseif($action=='text') {
+			switch(CAPTCHA_TYPE) {
+				// one special case
+				case 'text': // text-captcha
+					echo $MOD_CAPTCHA['VERIFICATION_INFO_QUEST'];
+					break;
+				// two special cases
+				case 'calc_text': // calculation as text
+					echo $MOD_CAPTCHA['VERIFICATION_INFO_RES'];
+					break;
+				case 'calc_image': // calculation with image (old captcha)
+				case 'calc_ttf_image': // calculation with varying background and ttf-font
+					echo $MOD_CAPTCHA['VERIFICATION_INFO_RES'];
+					break;
+				// normal images
+				case 'ttf_image': // captcha with varying background and ttf-font
+				case 'old_image': // old captcha
+					echo $MOD_CAPTCHA['VERIFICATION_INFO_TEXT'];
+					break;
+			}
 		}
 	}
 }

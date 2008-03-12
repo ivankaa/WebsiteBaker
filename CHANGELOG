@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+12-Mar-2008 Thomas Hornik
++	CAPTCHA: added parameter to call_captcha (can be one of: 'image', 'input' or 'text')
 11-Mar-2008 Christian Sommer
 #	fixed issue with output filter (all .@ in descriptive mailto part: >xxxxx</a> were replaced; now restricted to emails)
 #	fixed issue with WYSIWYG pages (appears if backend language and page frontend language differs)
