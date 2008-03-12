@@ -119,7 +119,7 @@ body {
 
 #container {
 	width:85%;
-	background: #9ACBF1 url(<?php echo ADMIN_URL;?>/interface/background.png) repeat-x;
+	background: #A8BCCB url(<?php echo ADMIN_URL;?>/interface/background.png) repeat-x;
 	border:1px solid #000;
 	color:#000;
 	margin:2em auto;
