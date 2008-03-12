@@ -26,6 +26,8 @@
 /** 
 	PHP ROUTINES FOR THE UPGRADE SCRIPT
 **/
+@include_once('config.php');
+
 // this function checks the basic configurations of an existing WB intallation
 function status_msg($message, $class='check', $element='span') {
 	// returns a status message
@@ -34,9 +36,9 @@ function status_msg($message, $class='check', $element='span') {
 
 function check_baseline_configuration() {
 	// check if config.php file exists and contains values
+	global $database;
 	status_msg('config.php: ');
-	@include_once('config.php');
-	if(defined('WB_PATH')) {
+	if(defined('WB_PATH') && defined('ADMIN_PATH')) {
 		status_msg('OK', 'ok');
 	} else {
 		// output error message and return error status
@@ -51,15 +53,15 @@ function check_baseline_configuration() {
 	// check if the WB 2.7 installation files were already uploaded via FTP
 	status_msg(', WB 2.7 core files uploaded: ');
 	@include_once(WB_PATH .'/framework/functions.php');
-	@include_once(WB_PATH .'/admin/interface/version.php');
+	@include_once(ADMIN_PATH .'/interface/version.php');
 	if(defined('VERSION') && VERSION == '2.7'
 		&& function_exists('get_variable_content') 
 		&& file_exists(WB_PATH .'/modules/menu_link/languages/DE.php') 
 		&& file_exists(WB_PATH .'/modules/output_filter/filter-routines.php') 
 		&& file_exists(WB_PATH .'/modules/captcha_control/languages/DE.php')
 		&& file_exists(WB_PATH .'/modules/jsadmin/jsadmin_backend_include.php')
-		&& file_exists(WB_PATH .'/admin/admintools/tool.php')
-		&& file_exists(WB_PATH .'/admin/interface/er_levels.php')) {
+		&& file_exists(ADMIN_PATH .'/admintools/tool.php')
+		&& file_exists(ADMIN_PATH .'/interface/er_levels.php')) {
 		status_msg('OK','ok');
 	} else {
 		// output a warning and return error status
@@ -117,7 +119,7 @@ body {
 
 #container {
 	width:85%;
-	background: #9ACBF1 url(admin/interface/background.png) repeat-x;
+	background: #9ACBF1 url(<?php echo ADMIN_URL;?>/interface/background.png) repeat-x;
 	border:1px solid #000;
 	color:#000;
 	margin:2em auto;
@@ -155,7 +157,7 @@ h3 { font-size: 120%; }
 </head>
 <body>
 <div id="container">
-<img src="admin/interface/logo.png" alt="Website Baker Logo" />
+<img src="<?php echo ADMIN_URL;?>/interface/logo.png" alt="Website Baker Logo" />
 
 <h1>Website Baker Upgrade</h1>
 <p>This script is for <strong>upgrading an existing v2.6.7</strong> installation to the latest Website Baker <strong>version 2.7</strong>. The upgrade script checks the configuration of your installed Website Baker system and alters the existing WB database to reflect the changes introduced with WB 2.7.</p>

@@ -431,7 +431,7 @@ if($install_tables == true) {
 	       . ' )';
 	$database->query($pages);
 
-	require(WB_PATH.'/admin/interface/version.php');
+	require(ADMIN_PATH.'/interface/version.php');
 	
 	// Settings table
 	$settings='CREATE TABLE `'.TABLE_PREFIX.'settings` ( `setting_id` INT NOT NULL auto_increment,'

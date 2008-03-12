@@ -32,17 +32,20 @@
 // Direct access prevention
 defined('WB_PATH') OR die(header('Location: ../index.php'));
 
+// obtain the admin folder (e.g. /admin)
+$admin_folder = str_replace(WB_PATH, '', ADMIN_PATH);
+
 $JSADMIN_PATH = WB_URL.'/modules/jsadmin';
 $YUI_PATH = WB_URL.'/include/yui';
 $script = $_SERVER['SCRIPT_NAME'];
 if(!$script)
 	$script = $PHP_SELF;
 
-if(strstr($script, "/admin/pages/index.php"))
+if(strstr($script, $admin_folder."/pages/index.php"))
 	$page_type = 'pages';
-elseif(strstr($script, "/admin/pages/sections.php"))
+elseif(strstr($script, $admin_folder."/pages/sections.php"))
 	$page_type = 'sections';
-elseif(strstr($script, "/admin/settings/tool.php")
+elseif(strstr($script, $admin_folder."/settings/tool.php")
 	&& isset($_REQUEST["tool"]) && $_REQUEST["tool"] == 'jsadmin')
 	$page_type = 'config';
 else
