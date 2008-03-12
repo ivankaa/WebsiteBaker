@@ -26,6 +26,11 @@
   Authors: P. Widlund, S. Braunewell, M. Gallas (ruebenwurzel), Wouldlouper, C. Sommer (doc)
 	Started to track applied changes in info.php from 27.03.2007 onwards (cs)
  -----------------------------------------------------------------------------------------------------------
+	v2.83 (doc.. Christian Sommer; Mar 12, 2008)
+		+ added the WB home folder fix found by the forum member spawnferkel
+			(see forum thread: http://forum.websitebaker2.org/index.php/topic,8978.msg53107.html#msg53107)
+		+ defined <strong> and <em> instead of <b> and <i> per default
+
 	v2.82 (doc.. Christian Sommer; Feb 20, 2008)
 		+ added the connector fix found by the forum member Luisehahne
 		(see forum thread: http://forum.websitebaker2.org/index.php/topic,8240.msg51675.html#msg51675)
@@ -97,10 +102,10 @@
 $module_directory		= 'fckeditor';
 $module_name				= 'FCKeditor';
 $module_function		= 'WYSIWYG';
-$module_version			= '2.82';
+$module_version			= '2.83';
 $module_platform		= '2.6.x';
 $module_author 			= 'Christian Sommer, P. Widlund, S. Braunewell, M. Gallas, Wouldlouper';
 $module_license 		= 'GNU General Public License';
-$module_description 	= 'This module allows you to edit the contents of a page using <a href="http://www.fckeditor.net/" target="_blank">FCKeditor v2.51</a>.';
+$module_description = 'This module allows you to edit the contents of a page using <a href="http://www.fckeditor.net/" target="_blank">FCKeditor v2.51</a>.';
 
 ?>
