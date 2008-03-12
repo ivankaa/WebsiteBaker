@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 12-Mar-2008 Christian Sommer
+! 	set version number to 2.7 (RC2) for the upcoming second release candidate
 ! 	removed hardcoded /admin folder strings from WB core files where possible
 ! 	added WB home folder fix proposed by the forum member spawnferkel (thanks)
 ! 	defined <strong> and <em> instead of <b> and <i> as default tags
