@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+12-Mar-2008 Matthias Gallas
+# 	fixed loading time and some display issues in IE6 of the new admin interface
+!	tweaked the new admin interface a little bit
 12-Mar-2008 Christian Sommer
 ! 	set version number to 2.7 (RC2) for the upcoming second release candidate
 ! 	removed hardcoded /admin folder strings from WB core files where possible
