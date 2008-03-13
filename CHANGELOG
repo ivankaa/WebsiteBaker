@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+13-Mar-2008 Matthias Gallas
+! 	replaced one icon in admin interface
 12-Mar-2008 Matthias Gallas
 # 	fixed loading time and some display issues in IE6 of the new admin interface
 !	tweaked the new admin interface a little bit
