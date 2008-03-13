@@ -103,8 +103,7 @@ function change_os(type) {
 	</td>
 	<td width="5">&nbsp;</td>
 	<td style="font-size: 20px;">
-		<font style="color: #FFFFFF;">Website Baker</font> 
-		<font style="color: #DDDDDD;">Installation Wizard</font>
+		<font style="color: #FFF;">Installation Wizard</font>
 	</td>
 </tr>
 </table>

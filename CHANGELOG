@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+13-Mar-2008 Christian Sommer
+! 	adjusted error/warning templates to the updated backend layout
 13-Mar-2008 Matthias Gallas
 ! 	replaced one icon in admin interface
 12-Mar-2008 Matthias Gallas
