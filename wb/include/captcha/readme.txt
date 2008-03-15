@@ -20,27 +20,59 @@
 
 
 
-
-One can improve CAPTCHA-type "CAPTCHA with varying fonts and backgrounds"
+One can improve all CAPTCHA-types with varying fonts and backgrounds
 - by adding backgrounds (PNG-images, 140x40 pixels) to backgrounds/
 - and by adding TrueType-fonts to fonts/
 
 
 How to use:
-use 
-	require_once(WB_PATH.'/include/captcha/captcha.php'); // will output a table with 3 columns: |CAPTCHA|Input|Text|. The calc_image captcha have 4 columns |CAPTCHA|=|Input|Text|.
-and put 
-	<?php call_captcha(); ?>
+
+1.)
+put 
+  require_once(WB_PATH.'/include/captcha/captcha.php');
+in your file.
+
+
+2a.)
+put 
+  <?php call_captcha(); ?>
 into your form.
-
-
-The CAPTCHA-code is allways stored in $_SESSION['captcha']
-The user-input is in $_POST['captcha'] (or $_GET['captcha']).
-
-
-call_captcha() will output code like this
+This will output a table with varying columns (3 or 4) like this example:
 <table class="captcha_table"><tr>
-  <td><img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" /></td>
+  <td><img src="http://www.example.org/include/captcha/captchas/ttf.php?t=64241454" alt="Captcha" /></td>
   <td><input type="text" name="captcha" maxlength="5" style="width:50px" /></td>
-  <td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_TEXT']; ?></td>
+  <td class="captcha_expl">Fill in the result</td>
 </tr></table>
+
+
+2b.)
+If you want to use your own layout, use additional parameters to call_captcha():
+call_captcha('all') will output the whole table as above.
+
+call_captcha('image', $style); will output the <img>-tag for the image only (or the text for an text-style captcha):
+Examples:
+  call_captcha('image', 'style="...; title="captcha"');
+    <img style="...; title="captcha" src="http://www.example.org/include/captcha/captchas/captcha.php?t=46784246" />
+    or
+    <span style="...; title="captcha">4 add 6</span>
+	call_captcha('image');
+    <img src="http://www.example.org/include/captcha/captchas/captcha.php?t=46784246" />
+    or
+    4 add 6
+
+call_captcha('input', $style); will output the input-field:
+  call_captcha('input', 'style"...;"');
+    <input type="text" name="captcha" style="...;" />
+  call_captcha('input');
+    <input type="text" name="captcha" style="width:50px;" maxlength="10" />
+
+call_captcha('text', $style); will output a short "what to do"-text
+  call_captcha('text', 'style="...;"');
+	  <span style="...;">Fill in the result</span>
+  call_captcha('text');
+	  Fill in the result
+
+
+
+The CAPTCHA-code is allways stored in $_SESSION['captcha'] for verification with user-input.
+The user-input is in $_POST['captcha'] (or maybe $_GET['captcha']).

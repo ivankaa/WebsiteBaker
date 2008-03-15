@@ -13,6 +13,7 @@ Legend:
 ------------------------------------- 2.7.0 -------------------------------------
 15-Mar-2008 Thomas Hornik
 #	menulink: link can be menulink or subpage of menulink, too
+#	call_captcha: added parameter 'style', fixed some issue with parameter 'image' and text-style captchas
 13-Mar-2008 Christian Sommer
 ! 	adjusted error/warning templates to the updated backend layout
 13-Mar-2008 Matthias Gallas
