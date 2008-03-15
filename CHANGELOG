@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+15-Mar-2008 Thomas Hornik
+#	menulink: link can be menulink or subpage of menulink, too
 13-Mar-2008 Christian Sommer
 ! 	adjusted error/warning templates to the updated backend layout
 13-Mar-2008 Matthias Gallas

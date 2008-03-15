@@ -44,20 +44,20 @@ $extern = $sql_row['extern'];
 $anchor = $sql_row['anchor'];
 $sel = ' selected';
 
-// Get list of all visible page-links, except menu_links and actual page
+// Get list of all visible pages, except actual one
 $links = array();
 $table_p = TABLE_PREFIX."pages";
-$table_s = TABLE_PREFIX."sections";
-if($query_page = $database->query("SELECT DISTINCT p.* FROM $table_p AS p INNER JOIN $table_s AS s ON p.page_id=s.page_id WHERE s.module != 'menu_link' AND p.page_id != '$page_id' AND parent = '0' ORDER BY position")) {
+if($query_page = $database->query("SELECT * FROM $table_p WHERE parent = '0' ORDER BY position")) {
 	while($page = $query_page->fetchRow()) {
-		if($admin->page_is_visible($page)) {
+		$all_links[$page['page_id']]='/'.$page['menu_title'];
+		if($admin->page_is_visible($page) && $page['page_id']!=$page_id) {
 			$links[$page['page_id']]='/'.$page['menu_title'];
-			if($query_subpage = $database->query("SELECT DISTINCT p.* FROM $table_p AS p INNER JOIN $table_s AS s ON p.page_id=s.page_id WHERE s.module != 'menu_link' AND p.page_id != '$page_id' AND root_parent = '{$page['page_id']}' ORDER BY level")) {
-				while($sub = $query_subpage->fetchRow()) {
-					if($admin->page_is_visible($sub)) {
-						$parent_link = (array_key_exists($sub['parent'],$links))?$links[$sub['parent']]:"";
-						$links[$sub['page_id']]=$parent_link.'/'.$sub['page_title'];
-					}
+		}
+		if($query_subpage = $database->query("SELECT * FROM $table_p WHERE page_id != '$page_id' AND root_parent = '{$page['page_id']}' ORDER BY level")) {
+			while($sub = $query_subpage->fetchRow()) {
+				if($admin->page_is_visible($sub)) {
+					$parent_link = (array_key_exists($sub['parent'],$all_links))?$all_links[$sub['parent']]:"";
+					$links[$sub['page_id']]=$parent_link.'/'.$sub['page_title'];
 				}
 			}
 		}
@@ -70,6 +70,7 @@ $table_s = TABLE_PREFIX."sections";
 foreach($links as $pid=>$l) {
 	if($query_section = $database->query("SELECT section_id, module FROM $table_s WHERE page_id = '$pid' ORDER BY position")) {
 		while($section = $query_section->fetchRow()) {
+			// get section-anchor
 			$targets[$pid][] = "wb_section_{$section['section_id']}";
 			if($section['module'] == 'wysiwyg') {
 				if($query_page = $database->query("SELECT content FROM $table_mw WHERE section_id = '{$section['section_id']}' LIMIT 1")) {
