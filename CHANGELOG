@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+17-Mar-2008 Thomas Hornik
+#	fixed an issue with utf8_check() (too slow with many ~100KB pages)
 15-Mar-2008 Thomas Hornik
 #	menulink: link can be menulink or subpage of menulink, too
 #	call_captcha: added parameter 'style', fixed some issue with parameter 'image' and text-style captchas

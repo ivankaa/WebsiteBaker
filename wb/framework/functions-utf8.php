@@ -1070,7 +1070,7 @@ function entities_to_7bit($str) {
  */
 function entities_to_umlauts2($string, $charset_out=DEFAULT_CHARSET) {
 	$string = charset_to_utf8($string, DEFAULT_CHARSET);
-	if(utf8_check($string))
+	//if(utf8_check($string)) // this is to much time-consuming
 		$string = utf8_to_charset($string, $charset_out);
 	return ($string);
 }
@@ -1092,7 +1092,7 @@ function entities_to_umlauts2($string, $charset_out=DEFAULT_CHARSET) {
  */
 function umlauts_to_entities2($string, $charset_in=DEFAULT_CHARSET) {
 	$string = charset_to_utf8($string, $charset_in);
-	if(utf8_check($string))
+	//if(utf8_check($string)) // this is to much time-consuming
 		$string = utf8_umlauts_to_entities($string);
 	return($string);
 }
