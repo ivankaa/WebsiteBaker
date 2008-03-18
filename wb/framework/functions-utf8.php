@@ -63,13 +63,13 @@ require_once(WB_PATH.'/framework/charsets_table.php');
 /*
  * Checks if a string contains 7bit ASCII only
  *
- * @author Andreas Gohr <andi@splitbrain.org>
+ * @author thorn
  */
 function utf8_isASCII($str){
-  for($i=0; $i<strlen($str); $i++){
-    if(ord($str{$i}) >127) return false;
-  }
-  return true;
+	if(preg_match('/[\x80-\xFF]/', $str))
+		return false;
+	else
+		return true;
 }
 
 /*
