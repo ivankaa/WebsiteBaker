@@ -511,7 +511,7 @@ echo $footer;
 			}    
 		}
 	} else {
-		echo $TEXT['ERROR'];
+		echo '<br />'.$TEXT['ERROR'];
 	}
 	
 }
