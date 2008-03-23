@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+23-Mar-2008 Matthias Gallas
+! 	Updated form modul for valid output, removed all javascript (Big thanks to BerndJM)
 17-Mar-2008 Thomas Hornik
 #	fixed an issue with utf8_check() (too slow with many ~100KB pages)
 15-Mar-2008 Thomas Hornik
