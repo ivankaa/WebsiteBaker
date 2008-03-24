@@ -631,6 +631,7 @@ if($install_tables == true) {
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_search_keywords', 'true', '')");
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_search_description', 'true', '')");
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_show_description', 'true', '')");
+	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_enable_flush', 'false', '')");
 	// Search template
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` (name) VALUES ('template')");
 		

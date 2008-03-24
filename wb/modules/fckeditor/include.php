@@ -24,10 +24,7 @@
 */
 
 function reverse_htmlentities($mixed) {
-	$htmltable = get_html_translation_table(HTML_ENTITIES);
-	foreach($htmltable as $key => $value) {
-		$mixed = ereg_replace(addslashes($value),$key,$mixed);
-		}
+	$mixed = str_replace(array('&gt;','&lt;','&quot;','&amp;'), array('>','<','"','&'), $mixed);
 	return $mixed;
 }
 

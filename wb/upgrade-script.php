@@ -281,11 +281,13 @@ echo "<br /><u>Adding some internal config-elements to search-table</u><br />";
 // cfg_search_description - whether to search in page-description (true/false), def: true [only used while searching title/link/description/keywords]
 // cfg_search_keywords - whether to search in page-keywords (true/false), def: true [only used while searching title/link/description/keywords]
 // cfg_enable_old_search - use old search-method, too (true/false), def: true [use old method as fallback]
+// cfg_enable_flush - use "ob_flush();flush();" after every page on result page. Will speedup response of result page, but may break template
 $cfg = array(
 	'cfg_show_description' => 'true',
 	'cfg_search_description' => 'true',
 	'cfg_search_keywords' => 'true',
-	'cfg_enable_old_search' => 'true'
+	'cfg_enable_old_search' => 'true',
+	'cfg_enable_flush' => 'false'
 );
 foreach($cfg as $key=>$value) {
 	db_add_search_key_value($key, $value);

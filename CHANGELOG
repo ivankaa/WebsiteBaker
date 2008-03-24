@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+24-Mar-2008 Thomas Hornik
+#	search: great speed-up with large pages - requires PHP >= 4.3.3; small speed-up for PHP < 4.3.3
+#	FCK-Editor: loads large pages faster
 23-Mar-2008 Matthias Gallas
 ! 	Updated form modul for valid output, removed all javascript (Big thanks to BerndJM)
 17-Mar-2008 Thomas Hornik

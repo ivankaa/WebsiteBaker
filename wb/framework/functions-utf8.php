@@ -24,7 +24,7 @@
 */
 
 /*
- * A large part of this file is based on 'utf8.php' from the DokuWiki-project.
+ * A part of this file is based on 'utf8.php' from the DokuWiki-project.
  * (http://www.splitbrain.org/projects/dokuwiki):
  **
  * UTF8 helper functions
@@ -33,6 +33,9 @@
  **
  * modified for use with Website Baker
  * from thorn, Jan. 2008
+ *
+ * most of the original functions appeared to be to slow with large strings, so i replaced them with my own ones
+ * thorn, Mar. 2008
  */
 
 // Functions we use in Website Baker:
@@ -48,6 +51,7 @@ if(!defined('WB_URL')) {
 /*
  * check for mb_string support
  */
+//define('UTF8_NOMBSTRING',1); // uncomment this to forbid use of mb_string-functions
 if(!defined('UTF8_MBSTRING')){
   if(function_exists('mb_substr') && !defined('UTF8_NOMBSTRING')){
     define('UTF8_MBSTRING',1);
@@ -73,23 +77,6 @@ function utf8_isASCII($str){
 }
 
 /*
- * Strips all highbyte chars
- *
- * Returns a pure ASCII7 string
- *
- * @author Andreas Gohr <andi@splitbrain.org>
- */
-function utf8_strip($str){
-  $ascii = '';
-  for($i=0; $i<strlen($str); $i++){
-    if(ord($str{$i}) <128){
-      $ascii .= $str{$i};
-    }
-  }
-  return $ascii;
-}
-
-/*
  * Tries to detect if a string is in Unicode encoding
  *
  * @author <bmorel@ssi.fr>
@@ -111,214 +98,6 @@ function utf8_check($Str) {
   }
  }
  return true;
-}
-
-/*
- * Unicode aware replacement for strlen()
- *
- * utf8_decode() converts characters that are not in ISO-8859-1
- * to '?', which, for the purpose of counting, is alright - It's
- * even faster than mb_strlen.
- *
- * @author <chernyshevsky at hotmail dot com>
- * @see    strlen()
- * @see    utf8_decode()
- */
-function utf8_strlen($string){
-  return strlen(utf8_decode($string));
-}
-
-/*
- * UTF-8 aware alternative to substr
- *
- * Return part of a string given character offset (and optionally length)
- *
- * @author Harry Fuecks <hfuecks@gmail.com>
- * @author Chris Smith <chris@jalakai.co.uk>
- * @param string
- * @param integer number of UTF-8 characters offset (from left)
- * @param integer (optional) length in UTF-8 characters from offset
- * @return mixed string or false if failure
- */
-function utf8_substr($str, $offset, $length = null) {
-    if(UTF8_MBSTRING){
-        if( $length === null ){
-            return mb_substr($str, $offset);
-        }else{
-            return mb_substr($str, $offset, $length);
-        }
-    }
-
-    /*
-     * Notes:
-     *
-     * no mb string support, so we'll use pcre regex's with 'u' flag
-     * pcre only supports repetitions of less than 65536, in order to accept up to MAXINT values for
-     * offset and length, we'll repeat a group of 65535 characters when needed (ok, up to MAXINT-65536)
-     *
-     * substr documentation states false can be returned in some cases (e.g. offset > string length)
-     * mb_substr never returns false, it will return an empty string instead.
-     *
-     * calculating the number of characters in the string is a relatively expensive operation, so
-     * we only carry it out when necessary. It isn't necessary for +ve offsets and no specified length
-     */
-
-    // cast parameters to appropriate types to avoid multiple notices/warnings
-    $str = (string)$str;                          // generates E_NOTICE for PHP4 objects, but not PHP5 objects
-    $offset = (int)$offset;
-    if (!is_null($length)) $length = (int)$length;
-
-    // handle trivial cases
-    if ($length === 0) return '';
-    if ($offset < 0 && $length < 0 && $length < $offset) return '';
-
-    $offset_pattern = '';
-    $length_pattern = '';
-
-    // normalise -ve offsets (we could use a tail anchored pattern, but they are horribly slow!)
-    if ($offset < 0) {
-      $strlen = strlen(utf8_decode($str));        // see notes
-      $offset = $strlen + $offset;
-      if ($offset < 0) $offset = 0;
-    }
-
-    // establish a pattern for offset, a non-captured group equal in length to offset
-    if ($offset > 0) {
-      $Ox = (int)($offset/65535);
-      $Oy = $offset%65535;
-
-      if ($Ox) $offset_pattern = '(?:.{65535}){'.$Ox.'}';
-      $offset_pattern = '^(?:'.$offset_pattern.'.{'.$Oy.'})';
-    } else {
-      $offset_pattern = '^';                      // offset == 0; just anchor the pattern
-    }
-
-    // establish a pattern for length
-    if (is_null($length)) {
-      $length_pattern = '(.*)$';                  // the rest of the string
-    } else {
-
-      if (!isset($strlen)) $strlen = strlen(utf8_decode($str));    // see notes
-      if ($offset > $strlen) return '';           // another trivial case
-
-      if ($length > 0) {
-
-        $length = min($strlen-$offset, $length);  // reduce any length that would go passed the end of the string
-
-        $Lx = (int)($length/65535);
-        $Ly = $length%65535;
-
-        // +ve length requires ... a captured group of length characters
-        if ($Lx) $length_pattern = '(?:.{65535}){'.$Lx.'}';
-        $length_pattern = '('.$length_pattern.'.{'.$Ly.'})';
-
-      } else if ($length < 0) {
-
-        if ($length < ($offset - $strlen)) return '';
-
-        $Lx = (int)((-$length)/65535);
-        $Ly = (-$length)%65535;
-
-        // -ve length requires ... capture everything except a group of -length characters
-        //                         anchored at the tail-end of the string
-        if ($Lx) $length_pattern = '(?:.{65535}){'.$Lx.'}';
-        $length_pattern = '(.*)(?:'.$length_pattern.'.{'.$Ly.'})$';
-      }
-    }
-
-    if (!preg_match('#'.$offset_pattern.$length_pattern.'#us',$str,$match)) return '';
-    return $match[1];
-}
-
-/*
- * Unicode aware replacement for substr_replace()
- *
- * @author Andreas Gohr <andi@splitbrain.org>
- * @see    substr_replace()
- */
-function utf8_substr_replace($string, $replacement, $start , $length=0 ){
-  $ret = '';
-  if($start>0) $ret .= utf8_substr($string, 0, $start);
-  $ret .= $replacement;
-  $ret .= utf8_substr($string, $start+$length);
-  return $ret;
-}
-
-/*
- * Unicode aware replacement for ltrim()
- *
- * @author Andreas Gohr <andi@splitbrain.org>
- * @see    ltrim()
- * @return string
- */
-function utf8_ltrim($str,$charlist=''){
-  if($charlist == '') return ltrim($str);
-
-  //quote charlist for use in a characterclass
-  $charlist = preg_replace('!([\\\\\\-\\]\\[/])!','\\\${1}',$charlist);
-
-  return preg_replace('/^['.$charlist.']+/u','',$str);
-}
-
-/*
- * Unicode aware replacement for rtrim()
- *
- * @author Andreas Gohr <andi@splitbrain.org>
- * @see    rtrim()
- * @return string
- */
-function  utf8_rtrim($str,$charlist=''){
-  if($charlist == '') return rtrim($str);
-
-  //quote charlist for use in a characterclass
-  $charlist = preg_replace('!([\\\\\\-\\]\\[/])!','\\\${1}',$charlist);
-
-  return preg_replace('/['.$charlist.']+$/u','',$str);
-}
-
-/*
- * Unicode aware replacement for trim()
- *
- * @author Andreas Gohr <andi@splitbrain.org>
- * @see    trim()
- * @return string
- */
-function  utf8_trim($str,$charlist='') {
-  if($charlist == '') return trim($str);
-
-  return utf8_ltrim(utf8_rtrim($str,$charlist),$charlist);
-}
-
-/*
- * This is a unicode aware replacement for strtolower()
- *
- * Uses mb_string extension if available
- *
- * @author Leo Feyer <leo@typolight.org>
- * @see    strtolower()
- * @see    utf8_strtoupper()
- */
-function utf8_strtolower($string){
-  if(UTF8_MBSTRING) return mb_strtolower($string,'utf-8');
-
-  global $UTF8_UPPER_TO_LOWER;
-  return strtr($string,$UTF8_UPPER_TO_LOWER);
-}
-
-/*
- * This is a unicode aware replacement for strtoupper()
- *
- * Uses mb_string extension if available
- *
- * @author Leo Feyer <leo@typolight.org>
- * @see    strtoupper()
- * @see    utf8_strtoupper()
- */
-function utf8_strtoupper($string){
-  if(UTF8_MBSTRING) return mb_strtoupper($string,'utf-8');
-
-  global $UTF8_LOWER_TO_UPPER;
-  return strtr($string,$UTF8_LOWER_TO_UPPER);
 }
 
 /*
@@ -356,501 +135,81 @@ function utf8_stripspecials($string,$repl='',$additional=''){
 }
 
 /*
- * This is an Unicode aware replacement for strpos
- *
- * @author Leo Feyer <leo@typolight.org>
- * @see    strpos()
- * @param  string
- * @param  string
- * @param  integer
- * @return integer
- */
-function utf8_strpos($haystack, $needle, $offset=0){
-    $comp = 0;
-    $length = null;
-
-    while (is_null($length) || $length < $offset) {
-        $pos = strpos($haystack, $needle, $offset + $comp);
-
-        if ($pos === false)
-            return false;
-
-        $length = utf8_strlen(substr($haystack, 0, $pos));
-
-        if ($length < $offset)
-            $comp = $pos - $length;
-    }
-
-    return $length;
-}
-
-/*
- * Encodes UTF-8 characters to HTML entities
- *
- * @author Tom N Harris <tnharris@whoopdedo.org>
- * @author <vpribish at shopping dot com>
- * @link   http://www.php.net/manual/en/function.utf8-decode.php
- */
-function utf8_tohtml ($str) {
-    $ret = '';
-    foreach (utf8_to_unicode($str) as $cp) {
-        if ($cp < 0x80)
-            $ret .= chr($cp);
-        //elseif ($cp < 0x100)
-        //    $ret .= "&#$cp;";
-        else
-            $ret .= "&#$cp;";
-        //    $ret .= '&#x'.dechex($cp).';';
-    }
-    return $ret;
-}
-
-/*
- * Decodes HTML entities to UTF-8 characters
- *
- * Convert any &#..; entity to a codepoint,
- * The entities flag defaults to only decoding numeric entities.
- * Pass HTML_ENTITIES and named entities, including &amp; &lt; etc.
- * are handled as well. Avoids the problem that would occur if you
- * had to decode "&amp;#38;&#38;amp;#38;"
- *
- * unhtmlspecialchars(utf8_unhtml($s)) -> "&#38;&#38;"
- * utf8_unhtml(unhtmlspecialchars($s)) -> "&&amp#38;"
- * what it should be                   -> "&#38;&amp#38;"
- *
- * @author Tom N Harris <tnharris@whoopdedo.org>
- * @param  string  $str      UTF-8 encoded string
- * @param  boolean $entities Flag controlling decoding of named entities.
- * @return UTF-8 encoded string with numeric (and named) entities replaced.
- */
-function utf8_unhtml($str, $entities=null) {
-    static $decoder = null;
-    if (is_null($decoder))
-      $decoder = new utf8_entity_decoder();
-    if (is_null($entities))
-        return preg_replace_callback('/(&#([Xx])?([0-9A-Za-z]+);)/m',
-                                     'utf8_decode_numeric', $str);
-    else
-        return preg_replace_callback('/&(#)?([Xx])?([0-9A-Za-z]+);/m',
-                                     array(&$decoder, 'decode'), $str);
-}
-function utf8_decode_numeric($ent) {
-    switch ($ent[2]) {
-      case 'X':
-      case 'x':
-          $cp = hexdec($ent[3]);
-          break;
-      default:
-          $cp = intval($ent[3]);
-          break;
-    }
-    return unicode_to_utf8(array($cp));
-}
-class utf8_entity_decoder {
-    var $table;
-    function utf8_entity_decoder() {
-        $table = get_html_translation_table(HTML_ENTITIES);
-        $table = array_flip($table);
-        $this->table = array_map(array(&$this,'makeutf8'), $table);
-    }
-    function makeutf8($c) {
-        return unicode_to_utf8(array(ord($c)));
-    }
-    function decode($ent) {
-        if ($ent[1] == '#') {
-            return utf8_decode_numeric($ent);
-        } elseif (array_key_exists($ent[0],$this->table)) {
-            return $this->table[$ent[0]];
-        } else {
-            return $ent[0];
-        }
-    }
-}
-
-/*
- * Takes an UTF-8 string and returns an array of ints representing the
- * Unicode characters. Astral planes are supported ie. the ints in the
- * output can be > 0xFFFF. Occurrances of the BOM are ignored. Surrogates
- * are not allowed.
- *
- * If $strict is set to true the function returns false if the input
- * string isn't a valid UTF-8 octet sequence and raises a PHP error at
- * level E_USER_WARNING
- *
- * Note: this function has been modified slightly in this library to
- * trigger errors on encountering bad bytes
- *
- * @author <hsivonen@iki.fi>
- * @author Harry Fuecks <hfuecks@gmail.com>
- * @param  string  UTF-8 encoded string
- * @param  boolean Check for invalid sequences?
- * @return mixed array of unicode code points or false if UTF-8 invalid
- * @see    unicode_to_utf8
- * @link   http://hsivonen.iki.fi/php-utf8/
- * @link   http://sourceforge.net/projects/phputf8/
- */
-function utf8_to_unicode($str,$strict=false) {
-    $mState = 0;     // cached expected number of octets after the current octet
-                     // until the beginning of the next UTF8 character sequence
-    $mUcs4  = 0;     // cached Unicode character
-    $mBytes = 1;     // cached expected number of octets in the current sequence
-
-    $out = array();
-
-    $len = strlen($str);
-
-    for($i = 0; $i < $len; $i++) {
-
-        $in = ord($str{$i});
-
-        if ( $mState == 0) {
-
-            // When mState is zero we expect either a US-ASCII character or a
-            // multi-octet sequence.
-            if (0 == (0x80 & ($in))) {
-                // US-ASCII, pass straight through.
-                $out[] = $in;
-                $mBytes = 1;
-
-            } else if (0xC0 == (0xE0 & ($in))) {
-                // First octet of 2 octet sequence
-                $mUcs4 = ($in);
-                $mUcs4 = ($mUcs4 & 0x1F) << 6;
-                $mState = 1;
-                $mBytes = 2;
-
-            } else if (0xE0 == (0xF0 & ($in))) {
-                // First octet of 3 octet sequence
-                $mUcs4 = ($in);
-                $mUcs4 = ($mUcs4 & 0x0F) << 12;
-                $mState = 2;
-                $mBytes = 3;
-
-            } else if (0xF0 == (0xF8 & ($in))) {
-                // First octet of 4 octet sequence
-                $mUcs4 = ($in);
-                $mUcs4 = ($mUcs4 & 0x07) << 18;
-                $mState = 3;
-                $mBytes = 4;
-
-            } else if (0xF8 == (0xFC & ($in))) {
-                /* First octet of 5 octet sequence.
-                 *
-                 * This is illegal because the encoded codepoint must be either
-                 * (a) not the shortest form or
-                 * (b) outside the Unicode range of 0-0x10FFFF.
-                 * Rather than trying to resynchronize, we will carry on until the end
-                 * of the sequence and let the later error handling code catch it.
-                 */
-                $mUcs4 = ($in);
-                $mUcs4 = ($mUcs4 & 0x03) << 24;
-                $mState = 4;
-                $mBytes = 5;
-
-            } else if (0xFC == (0xFE & ($in))) {
-                // First octet of 6 octet sequence, see comments for 5 octet sequence.
-                $mUcs4 = ($in);
-                $mUcs4 = ($mUcs4 & 1) << 30;
-                $mState = 5;
-                $mBytes = 6;
-
-            } elseif($strict) {
-                /* Current octet is neither in the US-ASCII range nor a legal first
-                 * octet of a multi-octet sequence.
-                 */
-                trigger_error(
-                        'utf8_to_unicode: Illegal sequence identifier '.
-                            'in UTF-8 at byte '.$i,
-                        E_USER_WARNING
-                    );
-                return false;
-
-            }
-
-        } else {
-
-            // When mState is non-zero, we expect a continuation of the multi-octet
-            // sequence
-            if (0x80 == (0xC0 & ($in))) {
-
-                // Legal continuation.
-                $shift = ($mState - 1) * 6;
-                $tmp = $in;
-                $tmp = ($tmp & 0x0000003F) << $shift;
-                $mUcs4 |= $tmp;
-
-                /*
-                 * End of the multi-octet sequence. mUcs4 now contains the final
-                 * Unicode codepoint to be output
-                 */
-                if (0 == --$mState) {
-
-                    /*
-                     * Check for illegal sequences and codepoints.
-                     */
-                    // From Unicode 3.1, non-shortest form is illegal
-                    if (((2 == $mBytes) && ($mUcs4 < 0x0080)) ||
-                        ((3 == $mBytes) && ($mUcs4 < 0x0800)) ||
-                        ((4 == $mBytes) && ($mUcs4 < 0x10000)) ||
-                        (4 < $mBytes) ||
-                        // From Unicode 3.2, surrogate characters are illegal
-                        (($mUcs4 & 0xFFFFF800) == 0xD800) ||
-                        // Codepoints outside the Unicode range are illegal
-                        ($mUcs4 > 0x10FFFF)) {
-
-                        if($strict){
-                            trigger_error(
-                                    'utf8_to_unicode: Illegal sequence or codepoint '.
-                                        'in UTF-8 at byte '.$i,
-                                    E_USER_WARNING
-                                );
-
-                            return false;
-                        }
-
-                    }
-
-                    if (0xFEFF != $mUcs4) {
-                        // BOM is legal but we don't want to output it
-                        $out[] = $mUcs4;
-                    }
-
-                    //initialize UTF8 cache
-                    $mState = 0;
-                    $mUcs4  = 0;
-                    $mBytes = 1;
-                }
-
-            } elseif($strict) {
-                /*
-                 *((0xC0 & (*in) != 0x80) && (mState != 0))
-                 * Incomplete multi-octet sequence.
-                 */
-                trigger_error(
-                        'utf8_to_unicode: Incomplete multi-octet '.
-                        '   sequence in UTF-8 at byte '.$i,
-                        E_USER_WARNING
-                    );
-
-                return false;
-            }
-        }
-    }
-    return $out;
-}
-
-/*
- * Takes an array of ints representing the Unicode characters and returns
- * a UTF-8 string. Astral planes are supported ie. the ints in the
- * input can be > 0xFFFF. Occurrances of the BOM are ignored. Surrogates
- * are not allowed.
- *
- * If $strict is set to true the function returns false if the input
- * array contains ints that represent surrogates or are outside the
- * Unicode range and raises a PHP error at level E_USER_WARNING
- *
- * Note: this function has been modified slightly in this library to use
- * output buffering to concatenate the UTF-8 string (faster) as well as
- * reference the array by it's keys
- *
- * @param  array of unicode code points representing a string
- * @param  boolean Check for invalid sequences?
- * @return mixed UTF-8 string or false if array contains invalid code points
- * @author <hsivonen@iki.fi>
- * @author Harry Fuecks <hfuecks@gmail.com>
- * @see    utf8_to_unicode
- * @link   http://hsivonen.iki.fi/php-utf8/
- * @link   http://sourceforge.net/projects/phputf8/
- */
-function unicode_to_utf8($arr,$strict=false) {
-    if (!is_array($arr)) return '';
-    ob_start();
-
-    foreach (array_keys($arr) as $k) {
-
-        # ASCII range (including control chars)
-        if ( ($arr[$k] >= 0) && ($arr[$k] <= 0x007f) ) {
-
-            echo chr($arr[$k]);
-
-        # 2 byte sequence
-        } else if ($arr[$k] <= 0x07ff) {
-
-            echo chr(0xc0 | ($arr[$k] >> 6));
-            echo chr(0x80 | ($arr[$k] & 0x003f));
-
-        # Byte order mark (skip)
-        } else if($arr[$k] == 0xFEFF) {
-
-            // nop -- zap the BOM
-
-        # Test for illegal surrogates
-        } else if ($arr[$k] >= 0xD800 && $arr[$k] <= 0xDFFF) {
-
-            // found a surrogate
-            if($strict){
-                trigger_error(
-                    'unicode_to_utf8: Illegal surrogate '.
-                        'at index: '.$k.', value: '.$arr[$k],
-                    E_USER_WARNING
-                    );
-                return false;
-            }
-
-        # 3 byte sequence
-        } else if ($arr[$k] <= 0xffff) {
-
-            echo chr(0xe0 | ($arr[$k] >> 12));
-            echo chr(0x80 | (($arr[$k] >> 6) & 0x003f));
-            echo chr(0x80 | ($arr[$k] & 0x003f));
-
-        # 4 byte sequence
-        } else if ($arr[$k] <= 0x10ffff) {
-
-            echo chr(0xf0 | ($arr[$k] >> 18));
-            echo chr(0x80 | (($arr[$k] >> 12) & 0x3f));
-            echo chr(0x80 | (($arr[$k] >> 6) & 0x3f));
-            echo chr(0x80 | ($arr[$k] & 0x3f));
-
-        } elseif($strict) {
-
-            trigger_error(
-                'unicode_to_utf8: Codepoint out of Unicode range '.
-                    'at index: '.$k.', value: '.$arr[$k],
-                E_USER_WARNING
-                );
-
-            // out of range
-            return false;
-        }
-    }
-
-    $result = ob_get_contents();
-    ob_end_clean();
-    return $result;
-}
-
-/*
- * Replace bad bytes with an alternative character
- *
- * ASCII character is recommended for replacement char
- *
- * PCRE Pattern to locate bad bytes in a UTF-8 string
- * Comes from W3 FAQ: Multilingual Forms
- * Note: modified to include full ASCII range including control chars
- *
- * @author Harry Fuecks <hfuecks@gmail.com>
- * @see http://www.w3.org/International/questions/qa-forms-utf-8
- * @param string to search
- * @param string to replace bad bytes with (defaults to '?') - use ASCII
- * @return string
- */
-function utf8_bad_replace($str, $replace = '') {
-    $UTF8_BAD =
-     '([\x00-\x7F]'.                          # ASCII (including control chars)
-     '|[\xC2-\xDF][\x80-\xBF]'.               # non-overlong 2-byte
-     '|\xE0[\xA0-\xBF][\x80-\xBF]'.           # excluding overlongs
-     '|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}'.    # straight 3-byte
-     '|\xED[\x80-\x9F][\x80-\xBF]'.           # excluding surrogates
-     '|\xF0[\x90-\xBF][\x80-\xBF]{2}'.        # planes 1-3
-     '|[\xF1-\xF3][\x80-\xBF]{3}'.            # planes 4-15
-     '|\xF4[\x80-\x8F][\x80-\xBF]{2}'.        # plane 16
-     '|(.{1}))';                              # invalid byte
-    ob_start();
-    while (preg_match('/'.$UTF8_BAD.'/S', $str, $matches)) {
-        if ( !isset($matches[2])) {
-            echo $matches[0];
-        } else {
-            echo $replace;
-        }
-        $str = substr($str,strlen($matches[0]));
-    }
-    $result = ob_get_contents();
-    ob_end_clean();
-    return $result;
-}
-
-/*
- * URL-Encode a filename to allow unicodecharacters
- *
- * Slashes are not encoded
- *
- * When the second parameter is true the string will
- * be encoded only if non ASCII characters are detected -
- * This makes it safe to run it multiple times on the
- * same string (default is true)
- *
- * @author Andreas Gohr <andi@splitbrain.org>
- * @see    urlencode
- */
-function utf8_encodeFN($file,$safe=true){
-  if($safe && preg_match('#^[a-zA-Z0-9/_\-.%]+$#',$file)){
-    return $file;
-  }
-  $file = urlencode($file);
-  $file = str_replace('%2F','/',$file);
-  return $file;
-}
-
-/*
- * URL-Decode a filename
- *
- * This is just a wrapper around urldecode
- *
- * @author Andreas Gohr <andi@splitbrain.org>
- * @see    urldecode
- */
-function utf8_decodeFN($file){
-  $file = urldecode($file);
-  return $file;
-}
-
-/*
- * Moved some functions from framework/functions.php to here - thorn
+ * added functions - thorn
  */
 
 /*
- * Decode HTML entities to UTF-8 characters
- * 
- * Will replace all numeric and named entities, except
- * &gt; &lt; &apos; &quot; &#39; &nbsp;
- * 
- * @param  string UTF-8 or ASCII encoded string
- * @return string UTF-8 encoded string with numeric and named entities replaced.
+ * faster replacement for utf8_entities_to_umlauts()
+ * not all features of utf8_entities_to_umlauts() --> utf8_unhtml() are supported!
+ * @author thorn
  */
-function utf8_entities_to_umlauts($str) {
-	global $named_to_numbered_entities;
-	// we have to prevent "&#39;" from beeing decoded
-	$str = str_replace("&#39;", "&_#39;", $str);
-	$str = strtr($str, $named_to_numbered_entities);
-	$str = utf8_unhtml($str);
-	$str = str_replace("&_#39;", "&#39;", $str);
-
+function utf8_fast_entities_to_umlauts($str) {
+	if(UTF8_MBSTRING) {
+		// we need this for use with mb_convert_encoding
+		$str = str_replace(array('&amp;','&gt;','&lt;','&quot;','&#39;','&nbsp;'), array('&amp;amp;','&amp;gt;','&amp;lt;','&amp;quot;','&amp;#39;','&amp;nbsp;'), $str);
+		// we need two mb_convert_encoding()-calls - is this a bug?
+		// mb_convert_encoding("ö&ouml;", 'UTF-8', 'HTML-ENTITIES'); // with string in utf-8-encoding doesn't work. Result: "Ã¶ö"
+		// Work-around: convert all umlauts to entities first ("ö&ouml;"->"&ouml;&ouml;"), then all entities to umlauts ("&ouml;&ouml;"->"öö")
+		return(mb_convert_encoding(mb_convert_encoding($str, 'HTML-ENTITIES', 'UTF-8'),'UTF-8', 'HTML-ENTITIES'));
+	} else {
+		global $named_entities;global $numbered_entities;
+		$str = str_replace($named_entities, $numbered_entities, $str);
+		$str = preg_replace("/&#([0-9]+);/e", "code_to_utf8($1)", $str);
+	}
 	return($str);
 }
+// support-function for utf8_fast_entities_to_umlauts()
+function code_to_utf8($num) {
+	if ($num <= 0x7F) {
+		return chr($num);
+	} elseif ($num <= 0x7FF) {
+		return chr(($num >> 6) + 192) . chr(($num & 63) + 128);
+	} elseif ($num <= 0xFFFF) {
+		 return chr(($num >> 12) + 224) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
+	} elseif ($num <= 0x1FFFFF) {
+		return chr(($num >> 18) + 240) . chr((($num >> 12) & 63) + 128) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
+	}
+	return "?";
+}
 
 /*
- * Encode UTF-8 characters to HTML entities
- *
- * Will replace all UTF-8 encoded characters to numeric/named entities
- *
- * @param  string UTF-8 encoded string
- * @param  bool Replace numbered by named entities
- * @return string ASCII encoded string with all UTF-8 characters replaced by numeric/named entities
+ * faster replacement for utf8_umlauts_to_entities()
+ * not all features of utf8_umlauts_to_entities() --> utf8_tohtml() are supported!
+ * @author thorn
  */
-function utf8_umlauts_to_entities($str, $named_entities=true) {
-	global $numbered_to_named_entities;
-	$str = utf8_tohtml($str);
-	if($named_entities)
-		$str = strtr($str, $numbered_to_named_entities);
-	return($str);
+function utf8_fast_umlauts_to_entities($string, $named_entities=true) {
+	if(UTF8_MBSTRING)
+		return(mb_convert_encoding($string, 'HTML-ENTITIES', 'UTF-8'));
+	else {
+		global $named_entities;global $numbered_entities;
+		$new = "";
+		$i=0;
+		$len=strlen($string);
+		if($len==0) return $string;
+		do {
+			if(ord($string{$i}) <= 127) $ud = $string{$i++};
+			elseif(ord($string{$i}) <= 223) $ud = (ord($string{$i++})-192)*64 + (ord($string{$i++})-128);
+			elseif(ord($string{$i}) <= 239) $ud = (ord($string{$i++})-224)*4096 + (ord($string{$i++})-128)*64 + (ord($string{$i++})-128);
+			elseif(ord($string{$i}) <= 247) $ud = (ord($string{$i++})-240)*262144 + (ord($string{$i++})-128)*4096 + (ord($string{$i++})-128)*64 + (ord($string{$i++})-128);
+			else $ud = ord($string{$i++}); // error!
+			if($ud > 127) {
+				$new .= "&#$ud;";
+			} else {
+				$new .= $ud;
+			}
+		} while($i < $len);
+		$string = $new;
+		if($named_entities)
+			$string = str_replace($numbered_entities, $named_entities, $string);
+	}
+	return($string);
 }
 
 /*
  * Converts from various charsets to UTF-8
  *
  * Will convert a string from various charsets to UTF-8.
- * HTML-entities will be converted, too.
+ * HTML-entities may be converted, too.
  * In case of error the returned string is unchanged, and a message is emitted.
  * Supported charsets are:
  * direct: iso_8859_1 iso_8859_2 iso_8859_3 iso_8859_4 iso_8859_5
@@ -862,8 +221,9 @@ function utf8_umlauts_to_entities($str, $named_entities=true) {
  * @param  string  The charset to convert from, defaults to DEFAULT_CHARSET
  * @return string  A string in UTF-8-encoding, with all entities decoded, too.
  *                 String is unchanged in case of error.
+ * @author thorn
  */
-function charset_to_utf8($str, $charset_in=DEFAULT_CHARSET) {
+function charset_to_utf8($str, $charset_in=DEFAULT_CHARSET, $decode_entities=true) {
 	global $iso_8859_2_to_utf8, $iso_8859_3_to_utf8, $iso_8859_4_to_utf8, $iso_8859_5_to_utf8, $iso_8859_6_to_utf8, $iso_8859_7_to_utf8, $iso_8859_8_to_utf8, $iso_8859_9_to_utf8, $iso_8859_10_to_utf8, $iso_8859_11_to_utf8;
 	$charset_in = strtoupper($charset_in);
 	if ($charset_in == "") { $charset_in = 'UTF-8'; }
@@ -882,8 +242,8 @@ function charset_to_utf8($str, $charset_in=DEFAULT_CHARSET) {
 	// check if we have UTF-8 or a plain ASCII string
 	if($charset_in == 'UTF-8' || utf8_isASCII($str)) {
 		// we have utf-8. Just replace HTML-entities and return
-		if(preg_match('/&[#0-9a-zA-Z]+;/',$str))
-			return(utf8_entities_to_umlauts($str));
+		if($decode_entities && preg_match('/&[#0-9a-zA-Z]+;/',$str))
+			return(utf8_fast_entities_to_umlauts($str));
 		else // nothing to do
 			return($str);
 	}
@@ -920,10 +280,8 @@ function charset_to_utf8($str, $charset_in=DEFAULT_CHARSET) {
 	}
 	if($converted) {
 		// we have utf-8, now replace HTML-entities and return
-		if(preg_match('/&[#0-9a-zA-Z]+;/',$str))
-			$str = utf8_entities_to_umlauts($str);
-		// just to be sure, replace bad characters
-		$str = utf8_bad_replace($str, '?');
+		if($decode_entities && preg_match('/&[#0-9a-zA-Z]+;/',$str))
+			$str = utf8_fast_entities_to_umlauts($str);
 		return($str);
 	}
 	
@@ -940,7 +298,7 @@ function charset_to_utf8($str, $charset_in=DEFAULT_CHARSET) {
  * Converts from UTF-8 to various charsets
  *
  * Will convert a string from UTF-8 to various charsets.
- * HTML-entities will be converted, too.
+ * HTML-entities will not! be converted.
  * In case of error the returned string is unchanged, and a message is emitted.
  * Supported charsets are:
  * direct: iso_8859_1 iso_8859_2 iso_8859_3 iso_8859_4 iso_8859_5
@@ -952,6 +310,7 @@ function charset_to_utf8($str, $charset_in=DEFAULT_CHARSET) {
  * @param  string  The charset to convert to, defaults to DEFAULT_CHARSET
  * @return string  A string in a supported encoding, with all entities decoded, too.
  *                 String is unchanged in case of error.
+ * @author thorn
  */
 function utf8_to_charset($str, $charset_out=DEFAULT_CHARSET) {
 	global $utf8_to_iso_8859_2, $utf8_to_iso_8859_3, $utf8_to_iso_8859_4, $utf8_to_iso_8859_5, $utf8_to_iso_8859_6, $utf8_to_iso_8859_7, $utf8_to_iso_8859_8, $utf8_to_iso_8859_9, $utf8_to_iso_8859_10, $utf8_to_iso_8859_11;
@@ -968,9 +327,10 @@ function utf8_to_charset($str, $charset_out=DEFAULT_CHARSET) {
 		return($str);
 	}
 	
+	// the string comes from charset_to_utf8(), so we can skip this
 	// replace HTML-entities first
-	if(preg_match('/&[#0-9a-zA-Z]+;/',$str))
-		$str = utf8_entities_to_umlauts($str);
+	//if(preg_match('/&[#0-9a-zA-Z]+;/',$str))
+	//	$str = utf8_entities_to_umlauts($str);
 	
 	// check if we need to convert
 	if($charset_out == 'UTF-8' || utf8_isASCII($str)) {
@@ -1030,6 +390,7 @@ function utf8_to_charset($str, $charset_out=DEFAULT_CHARSET) {
  *
  * @param  string  Filename to convert (all encodings from charset_to_utf8() are allowed)
  * @return string  ASCII encoded string, to use as filename in wb's page_filename() and media_filename
+ * @author thorn
  */
 function entities_to_7bit($str) {
 	// convert to UTF-8
@@ -1042,7 +403,7 @@ function entities_to_7bit($str) {
 	$str = utf8_romanize($str);
 	// missed some? - Many UTF-8-chars can't be romanized
 	// convert to HTML-entities, and replace entites by hex-numbers
-	$str = utf8_umlauts_to_entities($str, false);
+	$str = utf8_fast_umlauts_to_entities($str, false);
 	$str = str_replace('&#39;', '&apos;', $str);
 	$str = preg_replace('/&#([0-9]+);/e', "dechex('$1')",  $str);
 	// maybe there are some &gt; &lt; &apos; &quot; &amp; &nbsp; left, replace them too
@@ -1057,20 +418,11 @@ function entities_to_7bit($str) {
  * 
  * Will replace all numeric and named entities except
  * &gt; &lt; &apos; &quot; &#39; &nbsp;
- * In case of error the returned string is unchanged, and a message is emitted.
- * Supported charsets are:
- * direct: iso_8859_1 iso_8859_2 iso_8859_3 iso_8859_4 iso_8859_5
- *         iso_8859_6 iso_8859_7 iso_8859_8 iso_8859_9 iso_8859_10 iso_8859_11
- * mb_convert_encoding: all wb charsets (except those from 'direct'); but not GB2312
- * iconv:  all wb charsets (except those from 'direct')
- * 
- * @param  string  A string in DEFAULT_CHARSET encoding
- * @return string  A string in $charset_out encoding with numeric and named entities replaced.
- *         The string is unchanged in case of error. 
+ * @author thorn
  */
 function entities_to_umlauts2($string, $charset_out=DEFAULT_CHARSET) {
-	$string = charset_to_utf8($string, DEFAULT_CHARSET);
-	//if(utf8_check($string)) // this is to much time-consuming
+	$string = charset_to_utf8($string, DEFAULT_CHARSET, true);
+	//if(utf8_check($string)) // this check is to much time-consuming (this may fail only if AddDefaultCharset is set)
 		$string = utf8_to_charset($string, $charset_out);
 	return ($string);
 }
@@ -1079,21 +431,12 @@ function entities_to_umlauts2($string, $charset_out=DEFAULT_CHARSET) {
  * Convert a string from mixed html-entities/umlauts to pure ASCII with HTML-entities
  * 
  * Will convert a string in $charset_in encoding to a pure ASCII string with HTML-entities.
- * In case of error the returned string is unchanged, and a message is emitted.
- * Supported charsets are:
- * direct: iso_8859_1 iso_8859_2 iso_8859_3 iso_8859_4 iso_8859_5
- *         iso_8859_6 iso_8859_7 iso_8859_8 iso_8859_9 iso_8859_10 iso_8859_11
- * mb_convert_encoding: all wb charsets (except those from 'direct'); but not GB2312
- * iconv:  all wb charsets (except those from 'direct')
- * 
- * @param  string  A string in $charset_in encoding
- * @return string  A string in ASCII encoding with numeric and named entities.
- *         The string is unchanged in case of error. 
+ * @author thorn
  */
 function umlauts_to_entities2($string, $charset_in=DEFAULT_CHARSET) {
-	$string = charset_to_utf8($string, $charset_in);
-	//if(utf8_check($string)) // this is to much time-consuming
-		$string = utf8_umlauts_to_entities($string);
+	$string = charset_to_utf8($string, $charset_in, false);
+	//if(utf8_check($string)) // this check is to much time-consuming (this may fail only if AddDefaultCharset is set)
+		$string = utf8_fast_umlauts_to_entities($string, false);
 	return($string);
 }
 

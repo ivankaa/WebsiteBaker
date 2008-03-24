@@ -30,7 +30,7 @@ function make_url_searchstring($search_match, $search_url_array) {
 		$str = implode(" ", $search_url_array);
 		$link = "?searchresult=1&amp;sstring=".urlencode($str);
 	} else {
-		$str = strtr($search_url_array[0], " ", "_");
+		$str = str_replace(' ', '_', $search_url_array[0]);
 		$link = "?searchresult=2&amp;sstring=".urlencode($str);
 	}
 	return $link;
@@ -77,7 +77,7 @@ function is_all_matched($text, $search_words) {
 // checks if _any_ of the searchwords matches
 function is_any_matched($text, $search_words) {
 	$any_matched = false;
-	$word = "(".implode("|", $search_words).")";
+	$word = '('.implode('|', $search_words).')';
 	if(preg_match('/'.$word.'/iu', $text)) {
 		$any_matched = true;
 	}
@@ -88,19 +88,37 @@ function is_any_matched($text, $search_words) {
 function get_excerpts($text, $search_words, $max_excerpt_num) {
 	$match_array = array();
 	$excerpt_array = array();
-	$word = "(".implode("|", $search_words).")";
-	
-	$text = strtr($text, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));
-	$word = strtr($word, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));
+	$word = '('.implode('|', $search_words).')';
 	// Build the regex-string
-	//...INVERTED EXCLAMATION MARK - INVERTED QUESTION MARK - DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
+	// start-sign: .!?; + INVERTED EXCLAMATION MARK - INVERTED QUESTION MARK - DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
 	$str1=".!?;"."\xC2\xA1"."\xC2\xBF"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
-	// ...DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
+	// stop-sign: .!?; + DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
 	$str2=".!?;"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
-	// "{0,200}?'.$word.'" : the '?' (ungreedy) is for performance-tuning; try a step-by-step-trace to see what i mean. 
-	if(preg_match_all('/(?:^|\b|['.$str1.'])([^'.$str1.']{0,200}?'.$word.'[^'.$str2.']{0,200}(?:['.$str2.']|\b|$))/isu', $text, $match_array)) {
-		foreach($match_array[1] AS $string) {
-			$excerpt_array[] = trim($string);
+	$regex='/(?:^|\b|['.$str1.'])([^'.$str1.']{0,200}?'.$word.'[^'.$str2.']{0,200}(?:['.$str2.']|\b|$))/Sisu';
+	if(version_compare(PHP_VERSION, '4.3.3', '>=') == 1) {
+		// jump from match to match, get excerpt, stop if $max_excerpt_num is reached
+		$last_end = 0; $offset = 0;
+		while(preg_match('/'.$word.'/Sisu', $text, $match_array, PREG_OFFSET_CAPTURE, $last_end)) {
+			$offset = ($match_array[0][1]-206 < $last_end)?$last_end:$match_array[0][1]-206;
+			if(preg_match($regex, $text, $matches, PREG_OFFSET_CAPTURE, $offset)) {
+				$last_end = $matches[1][1]+strlen($matches[1][0])-1;
+				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./S', $matches[1][0])) // skip excerpts with email-addresses
+					$excerpt_array[] = trim($matches[1][0]);
+				if(count($excerpt_array)>=$max_excerpt_num) {
+					$excerpt_array = array_unique($excerpt_array);
+					if(count($excerpt_array) >= $max_excerpt_num)
+						break;
+				}
+			} else { // problem - preg_match failed: can't find a start- or stop-sign
+				$last_end += 201; // jump forward and try again
+			}
+		}
+	} else { // compatile, but may be very slow with many large pages
+		if(preg_match_all($regex, $text, $match_array)) {
+			foreach($match_array[1] AS $string) {
+				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./S', $string)) // skip excerpts with email-addresses
+					$excerpt_array[] = trim($string);
+			}
 		}
 	}
 	return $excerpt_array;
@@ -121,16 +139,15 @@ function prepare_excerpts($excerpt_array, $search_words, $max_excerpt_num) {
 	}
 	// prepare search-string
 	$string = "(".implode("|", $search_words).")";
-	$string = strtr($string, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));
 	// we want markup on search-results page,
 	// but we need some 'magic' to prevent <br />, <b>... from being highlighted
 	$excerpt = '';
 	foreach($excerpt_array as $str) {
 		$excerpt .= '#,,#'.preg_replace("/($string)/iu","#,,,,#$1#,,,,,#",$str).'#,,,#';
 	}
-	$excerpt = strtr($excerpt, array('<'=>'&lt;', '>'=>'&gt;', '&'=>'&amp;', '"'=>'&quot;', '\''=>'&#39;'));
-	$excerpt = strtr($excerpt, array('#,,,,#'=>$EXCERPT_MARKUP_START, '#,,,,,#'=>$EXCERPT_MARKUP_END));
-	$excerpt = strtr($excerpt, array('#,,#'=>$EXCERPT_BEFORE, '#,,,#'=>$EXCERPT_AFTER));
+	$excerpt = str_replace(array('&','<','>','"','\'',"\xC2\xA0"), array('&amp;','&lt;','&gt;','&quot;','&#39;','&nbsp;'), $excerpt);
+	$excerpt = str_replace(array('#,,,,#','#,,,,,#'), array($EXCERPT_MARKUP_START,$EXCERPT_MARKUP_END), $excerpt);
+	$excerpt = str_replace(array('#,,#','#,,,#'), array($EXCERPT_BEFORE,$EXCERPT_AFTER), $excerpt);
 	// prepare to write out
 	if(DEFAULT_CHARSET != 'utf-8') {
 		$excerpt = umlauts_to_entities($excerpt, 'UTF-8');
@@ -138,19 +155,19 @@ function prepare_excerpts($excerpt_array, $search_words, $max_excerpt_num) {
 	return $excerpt;
 }
 
-// work out what the link-target should be
+// work out what the link-anchor should be
 function make_url_target($page_link_target, $text, $search_words) {
 	// 1. e.g. $page_link_target=="&monthno=5&year=2007" - module-dependent target. Do nothing.
 	// 2. $page_link_target=="#!wb_section_..." - the user wants the section-target, so do nothing.
 	// 3. $page_link_target=="#wb_section_..." - try to find a better target, use the section-target as fallback.
 	// 4. $page_link_target=="" - do nothing
-	if(version_compare(PHP_VERSION, '4.3.0', ">=") && substr($page_link_target,0,12)=='#wb_section_') {
+	if(version_compare(PHP_VERSION, '4.3.3', ">=") && substr($page_link_target,0,12)=='#wb_section_') {
 		$word = '('.implode('|', $search_words).')';
 		preg_match('/'.$word.'/iu', $text, $match, PREG_OFFSET_CAPTURE);
 		if($match && is_array($match[0])) {
-			$x=$match[0][1];
+			$x=$match[0][1]; // position of first match
 			// is there an anchor nearby?
-			if (preg_match_all('/<(?:[^>]+id|\s*a[^>]+name)\s*=\s*"(.*)"/iuU', $text, $match, PREG_OFFSET_CAPTURE)) {
+			if(preg_match_all('/<(?:[^>]+id|\s*a[^>]+name)\s*=\s*"(.*)"/SiU', substr($text,0,$x), $match, PREG_OFFSET_CAPTURE)) {
 				$anchor='';
 				foreach($match[1] AS $array) {
 					if($array[1] > $x) {
@@ -210,37 +227,35 @@ function print_excerpt2($mod_vars, $func_vars) {
 	if(!isset($mod_max_excerpt_num))    $mod_max_excerpt_num = $func_default_max_excerpt;
 	if(!isset($mod_pic_link))           $mod_pic_link = "";
 	if(!isset($mod_no_highlight))       $mod_no_highlight = false;
+	if(!isset($func_enable_flush))      $func_enable_flush = false; // set this in db: wb_search.cfg_enable_flush [READ THE DOC BEFORE]
 	if($mod_text == "") // nothing to do
 		{ return false; }
 	if($mod_no_highlight) // no highlighting
 		{ $mod_page_link_target = "&amp;nohighlight=1".$mod_page_link_target; }
 
-	// prepare the text (part 1): remove lf and cr, convert \" to ", remove comments, style, scripting and unnecessary whitespace, convert to utf8
-	$mod_text = strtr($mod_text, array("\x0D\x0A" => ' ', "\x0D" => ' ', "\x0A" => ' ', '\"' => '"'));
-	$mod_text = preg_replace('/(<!--.*?-->|<style.*?<\/style>|<script.*?<\/script>|\s+)/i', ' ', $mod_text);
-	// remove email-addresses
-	$mod_text = preg_replace('/\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\b/', ' ', $mod_text);
+	// clean the text:
+	$mod_text = str_replace(array("\x0D","\x0A"), ' ', $mod_text);
+	$mod_text = preg_replace('#<(!--.*--|style.*</style|script.*</script)>#SiU', ' ', $mod_text);
+	$mod_text = preg_replace('#<(br( /)?|dt|/dd|/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>#Si', '.', $mod_text);
 	$mod_text = entities_to_umlauts($mod_text, 'UTF-8');
-
-	// make the link from $mod_page_link, add target
-	$link = "";
-	$link = page_link($mod_page_link);
-	$link .= make_url_searchstring($func_search_match, $func_search_url_array);
-	$link .= make_url_target($mod_page_link_target, $mod_text, $func_search_words);
-
-	// prepare the text (part 2): convert some special tags to '.', strip tags
-	$mod_text = preg_replace('/<(br( \/)?|dt|\/dd|\/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>/i', '.', $mod_text);
+	// search for an better anchor - this have to be done before strip_tags() (may fail if search-string contains <, &, amp, gt, lt, ...)
+	$anchor =  make_url_target($mod_page_link_target, $mod_text, $func_search_words);
 	$mod_text = strip_tags($mod_text);
-
+	$mod_text = str_replace(array('&gt;','&lt;','&amp;','&quot;','&#39;','&apos;','&nbsp;'), array('>','<','&','"','\'','\'',"\xC2\xA0"), $mod_text);
 	// Do a fast scan over $mod_text first. This will speedup things a lot.
 	if($func_search_match == 'all') {
-		if(!is_all_matched($mod_text, $func_search_words)) {
+		if(!is_all_matched($mod_text, $func_search_words))
 			return false;
-		}
 	}
 	elseif(!is_any_matched($mod_text, $func_search_words)) {
 		return false;
 	}
+
+	// make the link from $mod_page_link, add anchor
+	$link = "";
+	$link = page_link($mod_page_link);
+	$link .= make_url_searchstring($func_search_match, $func_search_url_array);
+	$link .= $anchor;
 
 	// now get the excerpt
 	$excerpt = "";
@@ -252,9 +267,9 @@ function print_excerpt2($mod_vars, $func_vars) {
 		$excerpt = prepare_excerpts($excerpt_array, $func_search_words, $mod_max_excerpt_num);
 	}
 
-	// handle image
+	// handle thumbs - to deactivate this look in the module's search.php: $show_thumb (or maybe in the module's settings-page)
 	if($mod_pic_link != "") {
-		$excerpt = '<table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td width="110" valign="top"><a href="'.$link.'"><img src="'.WB_URL.'/'.MEDIA_DIRECTORY.$mod_pic_link.'" alt="" /></a></td><td>'.$excerpt.'</td></tr></tbody></table>';
+		$excerpt = '<table class="excerpt_thumb" width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td width="110" valign="top"><a href="'.$link.'"><img src="'.WB_URL.'/'.MEDIA_DIRECTORY.$mod_pic_link.'" alt="" /></a></td><td>'.$excerpt.'</td></tr></tbody></table>';
 	}
 
 	// print-out the excerpt
@@ -276,6 +291,9 @@ function print_excerpt2($mod_vars, $func_vars) {
 		$excerpt
 	);
 	echo str_replace($vars, $values, $func_results_loop_string);
+	if($func_enable_flush) { // ATTN: this will bypass output-filters and may break template-layout or -filters
+		ob_flush();flush();
+	}
 	return true;
 }
 
@@ -306,8 +324,8 @@ function list_files_dirs($dir, $depth=true, $files=array(), $dirs=array()) {
 
 // keeps only wanted entries in array $files. $str have to be an eregi()-compatible regex
 function clear_filelist($files, $str, $keep=true) {
-	// $keep = true  : remove all non-matching entries
-	// $keep = false : remove all matching entries
+	// options: $keep = true  : remove all non-matching entries
+	//          $keep = false : remove all matching entries
 	$c_filelist = array();
 	if($str == '')
 		return $files;

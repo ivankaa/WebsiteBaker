@@ -23,7 +23,12 @@
 
 */
 
-// most of this is still the same code as in 2.6.7, but rearranged heavily
+// we have to do some cleanup here, ASAP!
+
+// this is for testing only
+$overall_start_time = microtime(true);
+//xdebug_start_trace();
+//xdebug_enable();
 
 if(!defined('WB_URL')) { 
 	header('Location: index.php');
@@ -38,9 +43,6 @@ if(SHOW_SEARCH != true) {
 	echo $TEXT['SEARCH'].' '.$TEXT['DISABLED'];
 	return;
 }
-
-// this is for timing-tests only
-//$overall_start_time = microtime(true);
 
 // search-module-extension: get helper-functions
 require_once(WB_PATH.'/search/search_modext.php');
@@ -115,9 +117,9 @@ if(isset($_REQUEST['search_path'])) {
 //   in wb/modules/wysiwyg/save.php anymore, too. Change that back to $text=strip_tags($content);
 
 // Get search string
-$search_normal_string = 'unset';
-$search_entities_string = 'unset';
-$search_display_string = '';
+$search_normal_string = 'unset'; // for regex
+$search_entities_string = 'unset'; // for SQL's LIKE
+$search_display_string = ''; // for displaying
 $string = '';
 if(isset($_REQUEST['string'])) {
 	if ($match!='exact') {
@@ -127,18 +129,19 @@ if(isset($_REQUEST['string'])) {
 	}
 	// redo possible magic quotes
 	$string = $wb->strip_slashes($string);
-	$string = htmlspecialchars($string);
-	$search_display_string = $string;
-	$string = addslashes($string);
-	// remove some bad chars
-	$string = preg_replace("/(^|\s+)([.])+(?=\s+|$)/", "", $string);
-	// mySQL needs four backslashes to match one in LIKE comparisons)
-	$string = str_replace('\\\\', '\\\\\\\\', $string);
 	$string = trim($string);
-	// convert a copy of $string to HTML-ENTITIES
-	$string_entities = umlauts_to_entities($string);
-	$search_normal_string = $string;
-	$search_entities_string = $string_entities;
+	// remove some bad chars
+	$string = preg_replace('/(^|\s+)[|.]+(?=\s+|$)/', '', $string);
+	$search_display_string = htmlspecialchars($string);
+	// convert string to utf-8
+	$string = entities_to_umlauts($string, 'UTF-8');
+	$search_entities_string = addslashes(umlauts_to_entities(htmlspecialchars($string)));
+	// mySQL needs four backslashes to match one in LIKE comparisons)
+	$search_entities_string = str_replace('\\\\', '\\\\\\\\', $search_entities_string);
+	// quote ' " and /  -we need quoted / for regex
+	$search_url_string = $string;
+	$string = preg_quote($string);
+	$search_normal_string = str_replace(array('\'','"','/'), array('\\\'','\"','\/'), $string);
 }
 
 // Get list of usernames and display names
@@ -190,6 +193,11 @@ if($query->numRows() > 0) { $fetch_cfg_enable_old_search = $query->fetchRow();
 } else { $fetch_cfg_enable_old_search['value'] = 'true'; }
 if($fetch_cfg_enable_old_search['value'] == 'false') { $cfg_enable_old_search = false;
 } else { $cfg_enable_old_search = true; }
+$query = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = 'cfg_enable_flush' LIMIT 1");
+if($query->numRows() > 0) { $fetch_cfg_enable_flush = $query->fetchRow();
+} else { $fetch_cfg_enable_flush['value'] = 'false'; }
+if($fetch_cfg_enable_flush['value'] == 'false') { $cfg_enable_flush = false;
+} else { $cfg_enable_flush = true; }
 // Replace vars in search settings with values
 $vars = array('[SEARCH_STRING]', '[WB_URL]', '[PAGE_EXTENSION]', '[TEXT_RESULTS_FOR]');
 $values = array($search_display_string, WB_URL, PAGE_EXTENSION, $TEXT['RESULTS_FOR']);
@@ -240,18 +248,17 @@ if($match != 'exact') {
 	$exact_string=$search_entities_string;
 	$search_entities_array[]=$exact_string;
 }	
-// make an extra copy of $string_entities for use in a regex
+// make an extra copy of search-string for use in a regex and another one for url
 require_once(WB_PATH.'/search/search_convert.php');
 $search_words = array();
-foreach ($search_entities_array AS $str) {
-	$str = entities_to_umlauts($str, 'UTF-8');
-	$str = preg_quote($str, '/');
+foreach ($search_normal_array AS $str) {
 	$str = strtr($str, $string_ul_umlauts);
 	// special-feature: '|' means word-boundary (\b). Searching for 'the|' will find the, but not thema.
 	// this doesn't work correctly for unicode-chars: '|test' will work, but '|über' not.
 	$str = strtr($str, array('\\|'=>'\b'));
 	$search_words[] = $str;
 }
+$search_url_array=explode(' ', $search_url_string);
 
 // Do extra vars/values replacement
 $vars = array('[SEARCH_STRING]', '[WB_URL]', '[PAGE_EXTENSION]', '[TEXT_SEARCH]', '[TEXT_ALL_WORDS]', '[TEXT_ANY_WORDS]', '[TEXT_EXACT_MATCH]', '[TEXT_MATCH]', '[TEXT_MATCHING]', '[ALL_CHECKED]', '[ANY_CHECKED]', '[EXACT_CHECKED]', '[REFERRER_ID]', '[SEARCH_PATH]');
@@ -304,8 +311,6 @@ if($search_normal_string != '') {
 	// and even if setlocale() is set, it won't work for multi-linguale sites.
 	// Use the search-module-extension instead.
 	// This is somewhat slower than the orginial method.
-	// CHANGES WITH V1.3: before V1.3 we called [module]-search() for a given page only once and searched in all [module]-sections on this page;
-	// since V1.3 we call [module]-search() for very single section.
 	$seen_pages = array(); // seen pages per module.
 	$pages_listed = array(); // seen pages.
 	foreach($sorted_modules AS $module_name) {
@@ -326,8 +331,6 @@ if($search_normal_string != '') {
 		");
 		if($sections_query->numRows() > 0) {
 			while($res = $sections_query->fetchRow()) {
-				// TODO: add a "section is searchable: yes/no" config-element into "Manage Sections" - ???
-				//       and show this section only if section is searchable
 				// Only show this section if it is not "out of publication-date"
 				$now = time();
 				if( !( $now<$res['publ_end'] && ($now>$res['publ_start'] || $res['publ_start']==0) ||
@@ -348,9 +351,10 @@ if($search_normal_string != '') {
 					'users' => $users,
 					'search_words' => $search_words, // needed for preg_match_all
 					'search_match' => $match,
-					'search_url_array' => $search_normal_array, // needed for url-string only
+					'search_url_array' => $search_url_array, // needed for url-string only
 					'results_loop_string' => $fetch_results_loop['value'],
-					'default_max_excerpt' => $search_max_excerpt
+					'default_max_excerpt' => $search_max_excerpt,
+					'enable_flush' => $cfg_enable_flush
 				);
 				// Only show this page if we are allowed to see it
 				if($admin->page_is_visible($res) == false) {
@@ -400,9 +404,10 @@ if($search_normal_string != '') {
 				'users' => $users,
 				'search_words' => $search_words, // needed for preg_match_all
 				'search_match' => $match,
-				'search_url_array' => $search_normal_array, // needed for url-string only
+				'search_url_array' => $search_url_array, // needed for url-string only
 				'results_loop_string' => $fetch_results_loop['value'],
-				'default_max_excerpt' => $max_excerpt_num
+				'default_max_excerpt' => $max_excerpt_num,
+				'enable_flush' => $cfg_enable_flush
 			);
 			// Only show this page if we are allowed to see it
 			if($admin->page_is_visible($page) == false) {
@@ -630,7 +635,9 @@ echo $search_results_footer;
 // Show search footer
 echo $search_footer;
 
-//$overall_end_time = microtime(true); // for testing only
-//$time=$overall_end_time-$overall_start_time; print "<br />Timings - Overall: $time<br />";
+$overall_end_time = microtime(true); // for testing only
+$time=$overall_end_time-$overall_start_time; print "<br />Timings - Overall: $time<br />";
+//xdebug_stop_trace();
+//echo "<hr />"."peak memory-usage: ".xdebug_peak_memory_usage()."<br />"."time: ".xdebug_time_index()."<br />";
 
 ?>
