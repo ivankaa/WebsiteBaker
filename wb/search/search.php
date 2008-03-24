@@ -25,11 +25,6 @@
 
 // we have to do some cleanup here, ASAP!
 
-// this is for testing only
-$overall_start_time = microtime(true);
-//xdebug_start_trace();
-//xdebug_enable();
-
 if(!defined('WB_URL')) { 
 	header('Location: index.php');
 	exit(0);
@@ -634,10 +629,5 @@ if($search_normal_string != '') {
 echo $search_results_footer;
 // Show search footer
 echo $search_footer;
-
-$overall_end_time = microtime(true); // for testing only
-$time=$overall_end_time-$overall_start_time; print "<br />Timings - Overall: $time<br />";
-//xdebug_stop_trace();
-//echo "<hr />"."peak memory-usage: ".xdebug_peak_memory_usage()."<br />"."time: ".xdebug_time_index()."<br />";
 
 ?>
