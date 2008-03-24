@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 24-Mar-2008 Matthias Gallas
+!	Updated Danish Language file (Thanks to Achrist)
 ! 	Added class nixhier to frontend.css from form and news Modul (required for ASP)
 24-Mar-2008 Thomas Hornik
 +	Added RU-language-files, provided by user shlack; converted to entities.
