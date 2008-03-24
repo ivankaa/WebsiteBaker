@@ -40,7 +40,6 @@ if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS
 } 
 
 require_once(WB_PATH.'/include/captcha/captcha.php');
-require_once(WB_PATH.'/include/captcha/asp.php');
 
 // Function for generating an optionsfor a select field
 if (!function_exists('make_option')) {
@@ -130,16 +129,16 @@ if(ENABLED_ASP) { // first add some honeypot-fields
 <input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
 <p class="nixhier">
 email address:
-<label for="email">Your e-mail address is not relevant Leave this field blank:</label>
+<label for="email">Leave this field email-address blank:</label>
 <input id="email" name="email" size="56" value="" /><br />
 Homepage:
-<label for="homepage">Do not enter a homepage-url www.whatever.com here:</label>
+<label for="homepage">Leave this field homepage blank:</label>
 <input id="homepage" name="homepage" size="55" value="" /><br />
 URL:
-<label for="url">Don't write anything in this field:</label>
+<label for="url">Leave this field url blank:</label>
 <input id="url" name="url" size="61" value="" /><br />
 Comment:
-<label for="comment">Enter not your comment here:</label>
+<label for="comment">Leave this field comment blank:</label>
 <textarea id="comment" name="comment" cols="50" rows="10"></textarea><br />
 </p>
 

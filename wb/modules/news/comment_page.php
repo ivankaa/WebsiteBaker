@@ -30,7 +30,6 @@ if(!defined('WB_URL')) {
 }
 
 require_once(WB_PATH.'/include/captcha/captcha.php');
-require_once(WB_PATH.'/include/captcha/asp.php');
 
 // Get comments page template details from db
 $query_settings = $database->query("SELECT comments_page,use_captcha,commenting FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
@@ -49,16 +48,16 @@ if($query_settings->numRows() == 0) {
 	<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
 	<p class="nixhier">
 	email address:
-	<label for="email">We dont want to know your email-address. Leave this field empty:</label>
+	<label for="email">Leave this field email blank:</label>
 	<input id="email" name="email" size="60" value="" /><br />
 	Homepage:
-	<label for="homepage">Do not enter a homepage-url here, use field comment instead if you want:</label>
+	<label for="homepage">Leave this field homepage blank:</label>
 	<input id="homepage" name="homepage" size="60" value="" /><br />
 	URL:
-	<label for="url">Don't write anything in this url field:</label>
+	<label for="url">Leave this field url blank:</label>
 	<input id="url" name="url" size="60" value="" /><br />
 	Comment:
-	<label for="comment">Leave not your comment here:</label>
+	<label for="comment">Leave this field comment blank:</label>
 	<input id="comment" name="comment" size="60" value="" /><br />
 	</p>
 	<?php }

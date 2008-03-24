@@ -28,13 +28,15 @@ if(!defined('WB_URL')) {
 	exit(0);
 }
 require_once(WB_PATH.'/include/captcha/captcha.php');
-require_once(WB_PATH.'/include/captcha/asp.php');
-?>
 
-<style>
+?>
+<style type="text/css">
 .value_input input, .value_input text, .value_input select {
 	width: 300px;
 }
+<?php if(ENABLED_ASP) { ?>
+.nixhier { display:none; }
+<?php } ?>
 </style>
 
 <h1>&nbsp;<?php echo $TEXT['SIGNUP']; ?></h1>
@@ -48,13 +50,13 @@ require_once(WB_PATH.'/include/captcha/asp.php');
 	<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
 	<p class="nixhier">
 	email-address:
-	<label for="email-address">Leave this field empty, dont enter your e-mail address:</label>
+	<label for="email-address">Leave this field email-address blank:</label>
 	<input id="email-address" name="email-address" size="60" value="" /><br />
 	username (id):
-	<label for="name">Enter your user name or id not here:</label>
+	<label for="name">Leave this field name blank:</label>
 	<input id="name" name="name" size="60" value="" /><br />
 	Full Name:
-	<label for="full_name">This is to leave blank, dont enter your full name here:</label>
+	<label for="full_name">Leave this field full_name blank:</label>
 	<input id="full_name" name="full_name" size="60" value="" /><br />
 	</p>
 	<?php }
