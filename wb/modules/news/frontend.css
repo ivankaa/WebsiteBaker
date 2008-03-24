@@ -47,3 +47,7 @@
 	font-size: 14px;
 	text-align: center;
 }
+/*** Don't remove the class nixhier, this is required for ASP ***/
+.nixhier {
+	display:none;
+}
