@@ -549,7 +549,7 @@ $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Fejl ved &aring;bning af filen.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du SKAL udfylde f&oslash;lgende felter:';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Beklager! Denne formular er blevet afsendt for mange gange indenfor den sidste time, og du vil derfor blive afvist - Pr&oslash;v igen om en times tid!';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Verifikationstallene (ogs&aring; kaldet Captcha) er ikke korrekt indtastet. Brug af Captcha har til form&aring;l at undg&aring; spam. Hvis du har problemer m
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Verifikations tallene (ogs&aring; kendt som Captcha) som du tastede er ikke korrekte. Hvis du har problemer med at l&aelig;se Captha tallene, s&aring; kontakt venligst sidens Administrator p&aring; denne mailadresse: '.SERVER_EMAIL;
 
 $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'V&aelig;lg venligst hvilke add-ons du vil have opdateret';
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduler opdateret med succes';
