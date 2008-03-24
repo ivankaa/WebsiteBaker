@@ -14,6 +14,7 @@ Legend:
 24-Mar-2008 Matthias Gallas
 ! 	Added class nixhier to frontend.css from form and news Modul (required for ASP)
 24-Mar-2008 Thomas Hornik
++	Added RU-language-files, provided by user shlack; converted to entities.
 #	search: great speed-up with large pages - requires PHP >= 4.3.3; small speed-up for PHP < 4.3.3
 #	FCK-Editor: loads large pages faster
 -	removed include/captcha/asp.php. css have to be added to module's css-files.
