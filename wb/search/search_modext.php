@@ -296,14 +296,14 @@ function print_excerpt2($mod_vars, $func_vars) {
 	return true;
 }
 
-// list all files and dirs in $dir (recursive), omits '.' and '..'
+// list all files and dirs in $dir (recursive), omits '.', '..', and hidden files/dirs
 // returns an array of two arrays ($files[] and $dirs[]).
 // usage: list($files,$dirs) = list_files_dirs($directory);
 //        $depth: get subdirs (true/false)
 function list_files_dirs($dir, $depth=true, $files=array(), $dirs=array()) {
 	$dh=opendir($dir);
 	while(($file = readdir($dh)) !== false) {
-		if($file == '.' || $file == '..') {
+		if($file{0} == '.' || $file == '..') {
 			continue;
 		}
 		if(is_dir($dir.'/'.$file)) {
