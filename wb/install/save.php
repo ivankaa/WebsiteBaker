@@ -626,6 +626,10 @@ if($install_tables == true) {
 	$search_max_excerpt = addslashes('15');
 	$insert_search_max_excerpt = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'max_excerpt', '$search_max_excerpt', '')";
 	$database->query($insert_search_max_excerpt);
+	// max time to search per module
+	$search_time_limit = addslashes('0');
+	$insert_search_time_limit = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'time_limit', '$search_time_limit', '')";
+	$database->query($insert_search_time_limit);
 	// some config-elements
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_enable_old_search', 'true', '')");
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_search_keywords', 'true', '')");

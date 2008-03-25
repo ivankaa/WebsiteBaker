@@ -402,6 +402,7 @@ $TEXT['DEFAULT_CHARSET'] = 'Standard Zeichensatz';
 $TEXT['CHARSET'] = 'Zeichensatz';
 $TEXT['MODULE_ORDER'] = 'Modulreihenfolge f&uuml;r die Suche';
 $TEXT['MAX_EXCERPT'] = 'Max Anzahl Zitate pro Seite';
+$TEXT['TIME_LIMIT'] = 'Zeitlimit zur Erstellung der Zitate pro Modul';
 $TEXT['PUBL_START_DATE'] = 'Start Datum';
 $TEXT['PUBL_END_DATE'] = 'End Datum';
 $TEXT['CALENDAR'] = 'Kalender';

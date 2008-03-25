@@ -402,6 +402,7 @@ $TEXT['DEFAULT_CHARSET'] = 'Default Charset';
 $TEXT['CHARSET'] = 'Charset';
 $TEXT['MODULE_ORDER'] = 'Module-order for searching';
 $TEXT['MAX_EXCERPT'] = 'Max lines of excerpt';
+$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module';
 $TEXT['PUBL_START_DATE'] = 'Start date';
 $TEXT['PUBL_END_DATE'] = 'End date';
 $TEXT['CALENDAR'] = 'Calender';

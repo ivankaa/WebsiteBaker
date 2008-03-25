@@ -95,7 +95,7 @@ function get_excerpts($text, $search_words, $max_excerpt_num) {
 	// stop-sign: .!?; + DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
 	$str2=".!?;"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
 	$regex='/(?:^|\b|['.$str1.'])([^'.$str1.']{0,200}?'.$word.'[^'.$str2.']{0,200}(?:['.$str2.']|\b|$))/Sisu';
-	if(version_compare(PHP_VERSION, '4.3.3', '>=') == 1) {
+	if(version_compare(PHP_VERSION, '4.3.3', '>=')) {
 		// jump from match to match, get excerpt, stop if $max_excerpt_num is reached
 		$last_end = 0; $offset = 0;
 		while(preg_match('/'.$word.'/Sisu', $text, $match_array, PREG_OFFSET_CAPTURE, $last_end)) {
@@ -232,7 +232,6 @@ function print_excerpt2($mod_vars, $func_vars) {
 		{ return false; }
 	if($mod_no_highlight) // no highlighting
 		{ $mod_page_link_target = "&amp;nohighlight=1".$mod_page_link_target; }
-
 	// clean the text:
 	$mod_text = str_replace(array("\x0D","\x0A"), ' ', $mod_text);
 	$mod_text = preg_replace('#<(!--.*--|style.*</style|script.*</script)>#SiU', ' ', $mod_text);

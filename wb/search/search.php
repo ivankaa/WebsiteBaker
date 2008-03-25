@@ -193,6 +193,11 @@ if($query->numRows() > 0) { $fetch_cfg_enable_flush = $query->fetchRow();
 } else { $fetch_cfg_enable_flush['value'] = 'false'; }
 if($fetch_cfg_enable_flush['value'] == 'false') { $cfg_enable_flush = false;
 } else { $cfg_enable_flush = true; }
+$query = $database->query("SELECT value FROM ".TABLE_PREFIX."search WHERE name = 'time_limit' LIMIT 1"); // time-limit per module
+if($query->numRows() > 0) { $fetch_search_time_limit = $query->fetchRow();
+} else { $fetch_search_time_limit['value'] = 'false'; }
+$search_time_limit = (int)($fetch_search_time_limit['value']);
+if($search_time_limit < 1) $search_time_limit = 0;
 // Replace vars in search settings with values
 $vars = array('[SEARCH_STRING]', '[WB_URL]', '[PAGE_EXTENSION]', '[TEXT_RESULTS_FOR]');
 $values = array($search_display_string, WB_URL, PAGE_EXTENSION, $TEXT['RESULTS_FOR']);
@@ -309,6 +314,7 @@ if($search_normal_string != '') {
 	$seen_pages = array(); // seen pages per module.
 	$pages_listed = array(); // seen pages.
 	foreach($sorted_modules AS $module_name) {
+		$start_time = time();	// get start-time to check time-limit; not very accurate, but ok
 		$seen_pages[$module_name] = array();
 		if(!isset($search_funcs[$module_name])) {
 			continue; // there is no search_func for this module
@@ -326,6 +332,10 @@ if($search_normal_string != '') {
 		");
 		if($sections_query->numRows() > 0) {
 			while($res = $sections_query->fetchRow()) {
+				// check if time-limit is exceeded for this module
+				if($search_time_limit > 0 && (time()-$start_time > $search_time_limit)) {
+					break;
+				}
 				// Only show this section if it is not "out of publication-date"
 				$now = time();
 				if( !( $now<$res['publ_end'] && ($now>$res['publ_start'] || $res['publ_start']==0) ||

@@ -88,6 +88,10 @@ while($setting = $results->fetchRow()) {
 		case 'max_excerpt':
 			$template->set_var('SEARCH_MAX_EXCERPT', $setting_value);
 		break;
+		// time-limit
+		case 'time_limit':
+			$template->set_var('SEARCH_TIME_LIMIT', $setting_value);
+		break;
 		// Search template
 		case 'template':
 			$search_template = $setting_value;
@@ -615,7 +619,8 @@ $template->set_var(array(
 								'MODE_SWITCH_WARNING' => $MESSAGE['SETTINGS']['MODE_SWITCH_WARNING'],
 								'WORLD_WRITEABLE_WARNING' => $MESSAGE['SETTINGS']['WORLD_WRITEABLE_WARNING'],
 								'TEXT_MODULE_ORDER' => $TEXT['MODULE_ORDER'],
-								'TEXT_MAX_EXCERPT' => $TEXT['MAX_EXCERPT']
+								'TEXT_MAX_EXCERPT' => $TEXT['MAX_EXCERPT'],
+								'TEXT_TIME_LIMIT' => $TEXT['TIME_LIMIT']
 								)
 						);
 

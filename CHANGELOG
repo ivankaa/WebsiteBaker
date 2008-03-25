@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+25-Mar-2008 Thomas Hornik
++	search: added search_time_limit in settings (mainly for sites with PHP < 4.3.3 and slow search)
 25-Mar-2008 Matthias Gallas
 #	Fixed missing <body> tag in Admin Interface (ticket #572)
 24-Mar-2008 Matthias Gallas

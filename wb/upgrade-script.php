@@ -263,13 +263,14 @@ function db_add_field($field, $table, $desc) {
 	}
 }
 
-echo "<br /><u>Adding module_order and max_excerpt to search-table</u><br />";
+echo "<br /><u>Adding module_order, max_excerpt and time_limit to search-table</u><br />";
 // module_order - in which order to show the search-results
 // max_excerpt - how many lines of excerpt to print per matching page
-
+// time_limit - time-limit for searching per module
 $cfg = array(
 	'module_order' => 'faqbaker,manual,wysiwyg',
-	'max_excerpt' => '15'
+	'max_excerpt' => '15',
+	'time_limit' => '0'
 );
 foreach($cfg as $key=>$value) {
 	db_add_search_key_value($key, $value);

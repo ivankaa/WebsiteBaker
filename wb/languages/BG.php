@@ -402,6 +402,7 @@ $TEXT['DEFAULT_CHARSET'] = '&#1050;&#1086;&#1076;&#1086;&#1074;&#1072; &#1090;&#
 $TEXT['CHARSET'] = '&#1050;&#1086;&#1076;&#1086;&#1074;&#1072; &#1090;&#1072;&#1073;&#1083;&#1080;&#1094;&#1072;';
 $TEXT['MODULE_ORDER'] = 'Module-order for searching'; //needs to be translated
 $TEXT['MAX_EXCERPT'] = 'Max lines of excerpt'; //needs to be translated
+$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module'; //needs to be translated
 $TEXT['PUBL_START_DATE'] = 'Start date'; //needs to be translated
 $TEXT['PUBL_END_DATE'] = 'End date'; //needs to be translated
 $TEXT['CALENDAR'] = 'Calender'; //needs to be translated
