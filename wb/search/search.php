@@ -43,7 +43,7 @@ if(SHOW_SEARCH != true) {
 require_once(WB_PATH.'/search/search_modext.php');
 // search-module-extension: Get "search.php" for each module, if present
 // looks in modules/module/ and modules/module_searchext/
-$search_funcs = array();
+$search_funcs = array();$search_funcs['__before'] = array();$search_funcs['__after'] = array();
 $query = $database->query("SELECT DISTINCT directory FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND directory NOT LIKE '%_searchext'");
 if($query->numRows() > 0) {
 	while($module = $query->fetchRow()) {
