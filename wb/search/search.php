@@ -47,7 +47,6 @@ $search_funcs = array();
 $query = $database->query("SELECT DISTINCT directory FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND directory NOT LIKE '%_searchext'");
 if($query->numRows() > 0) {
 	while($module = $query->fetchRow()) {
-		$func_name = $module['directory']."_search";
 		$file = WB_PATH.'/modules/'.$module['directory'].'/search.php';
 		if(!file_exists($file)) {
 			$file = WB_PATH.'/modules/'.$module['directory'].'_searchext/search.php';
@@ -58,7 +57,13 @@ if($query->numRows() > 0) {
 		if($file!='') {
 			include_once($file);
 			if(function_exists($module['directory']."_search")) {
-				$search_funcs[$module['directory']] = $func_name;
+				$search_funcs[$module['directory']] = $module['directory']."_search";
+			}
+			if(function_exists($module['directory']."_search_before")) {
+				$search_funcs['__before'][] = $module['directory']."_search_before";
+			}
+			if(function_exists($module['directory']."_search_after")) {
+				$search_funcs['__after'][] = $module['directory']."_search_after";
 			}
 		}
 	}
@@ -311,6 +316,22 @@ if($search_normal_string != '') {
 	// and even if setlocale() is set, it won't work for multi-linguale sites.
 	// Use the search-module-extension instead.
 	// This is somewhat slower than the orginial method.
+	
+	// call $search_funcs['__before'] first
+	$search_func_vars = array(
+		'database' => $database, // database-handle
+		'users' => $users, // array of known user-id/user-name
+		'search_words' => $search_words, // search-string, prepared for regex
+		'search_match' => $match, // match-type
+		'search_url_array' => $search_url_array, // original search-string. ATTN: string is not quoted!
+		'results_loop_string' => $fetch_results_loop['value'],
+		'default_max_excerpt' => $search_max_excerpt,
+		'time_limit' => $search_time_limit // time-limit in secs
+	);
+	foreach($search_funcs['__before'] as $func) {
+		$uf_res = call_user_func($func, $search_func_vars);
+	}
+	// now call module-based $search_funcs[]
 	$seen_pages = array(); // seen pages per module.
 	$pages_listed = array(); // seen pages.
 	foreach($sorted_modules AS $module_name) {
@@ -380,6 +401,21 @@ if($search_normal_string != '') {
 			}
 		}
 	}
+	// now call $search_funcs['__after']
+	$search_func_vars = array(
+		'database' => $database, // database-handle
+		'users' => $users, // array of known user-id/user-name
+		'search_words' => $search_words, // search-string, prepared for regex
+		'search_match' => $match, // match-type
+		'search_url_array' => $search_url_array, // original search-string. ATTN: string is not quoted!
+		'results_loop_string' => $fetch_results_loop['value'],
+		'default_max_excerpt' => $search_max_excerpt,
+		'time_limit' => $search_time_limit // time-limit in secs
+	);
+	foreach($search_funcs['__after'] as $func) {
+		$uf_res = call_user_func($func, $search_func_vars);
+	}
+
 
 	// Search page details only, such as description, keywords, etc, but only of unseen pages.
 	$max_excerpt_num = 0; // we don't want excerpt here
