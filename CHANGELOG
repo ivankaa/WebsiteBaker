@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+25-Mar-2008 Matthias Gallas
+#	Fixed missing <body> tag in Admin Interface (ticket #572)
 24-Mar-2008 Matthias Gallas
 !	Updated Danish Language file (Thanks to Achrist)
 ! 	Added class nixhier to frontend.css from form and news Modul (required for ASP)
