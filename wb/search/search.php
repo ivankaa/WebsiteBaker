@@ -320,13 +320,23 @@ if($search_normal_string != '') {
 	// call $search_funcs['__before'] first
 	$search_func_vars = array(
 		'database' => $database, // database-handle
+		'page_id' => 0,
+		'section_id' => 0,
+		'page_title' => '',
+		'page_menu_title' => '',
+		'page_description' => '',
+		'page_keywords' => '',
+		'page_link' => '',
+		'page_modified_when' => 0,
+		'page_modified_by' => 0,
 		'users' => $users, // array of known user-id/user-name
 		'search_words' => $search_words, // search-string, prepared for regex
 		'search_match' => $match, // match-type
 		'search_url_array' => $search_url_array, // original search-string. ATTN: string is not quoted!
 		'results_loop_string' => $fetch_results_loop['value'],
 		'default_max_excerpt' => $search_max_excerpt,
-		'time_limit' => $search_time_limit // time-limit in secs
+		'time_limit' => $search_time_limit, // time-limit in secs
+		'search_path' => $search_path // see docu
 	);
 	foreach($search_funcs['__before'] as $func) {
 		$uf_res = call_user_func($func, $search_func_vars);
@@ -404,13 +414,23 @@ if($search_normal_string != '') {
 	// now call $search_funcs['__after']
 	$search_func_vars = array(
 		'database' => $database, // database-handle
+		'page_id' => 0,
+		'section_id' => 0,
+		'page_title' => '',
+		'page_menu_title' => '',
+		'page_description' => '',
+		'page_keywords' => '',
+		'page_link' => '',
+		'page_modified_when' => 0,
+		'page_modified_by' => 0,
 		'users' => $users, // array of known user-id/user-name
 		'search_words' => $search_words, // search-string, prepared for regex
 		'search_match' => $match, // match-type
 		'search_url_array' => $search_url_array, // original search-string. ATTN: string is not quoted!
 		'results_loop_string' => $fetch_results_loop['value'],
 		'default_max_excerpt' => $search_max_excerpt,
-		'time_limit' => $search_time_limit // time-limit in secs
+		'time_limit' => $search_time_limit, // time-limit in secs
+		'search_path' => $search_path // see docu
 	);
 	foreach($search_funcs['__after'] as $func) {
 		$uf_res = call_user_func($func, $search_func_vars);
