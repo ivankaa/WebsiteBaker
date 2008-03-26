@@ -97,7 +97,8 @@ switch ($module['function']) {
 	case 'administration':
 		$type_name = $TEXT['ADMINISTRATION'];
 	break;
-	$type_name = $TEXT['unknown'];
+	default:
+	$type_name = $TEXT['UNKNOWN'];
 }
 $template->set_var('TYPE', $type_name);
 

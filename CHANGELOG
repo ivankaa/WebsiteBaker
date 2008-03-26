@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+26-Mar-2008 Tomas Hornik
+# fixed E_NOTICE-message in admin/modules/details.php
 25-Mar-2008 Thomas Hornik
 +	search: added search_time_limit in settings (mainly for sites with PHP < 4.3.3 and slow search)
 +	search: added missing code to allow query of external data and to process the search data itself
