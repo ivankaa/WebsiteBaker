@@ -66,7 +66,7 @@ function get_page_modified_by($page_modified_by, $users) {
 function is_all_matched($text, $search_words) {
 	$all_matched = true;
 	foreach ($search_words AS $word) {
-		if(!preg_match('/'.$word.'/iu', $text)) {
+		if(!preg_match('/'.$word.'/i', $text)) {
 			$all_matched = false;
 			break;
 		}
@@ -78,7 +78,7 @@ function is_all_matched($text, $search_words) {
 function is_any_matched($text, $search_words) {
 	$any_matched = false;
 	$word = '('.implode('|', $search_words).')';
-	if(preg_match('/'.$word.'/iu', $text)) {
+	if(preg_match('/'.$word.'/i', $text)) {
 		$any_matched = true;
 	}
 	return $any_matched;
@@ -163,7 +163,7 @@ function make_url_target($page_link_target, $text, $search_words) {
 	// 4. $page_link_target=="" - do nothing
 	if(version_compare(PHP_VERSION, '4.3.3', ">=") && substr($page_link_target,0,12)=='#wb_section_') {
 		$word = '('.implode('|', $search_words).')';
-		preg_match('/'.$word.'/iu', $text, $match, PREG_OFFSET_CAPTURE);
+		preg_match('/'.$word.'/i', $text, $match, PREG_OFFSET_CAPTURE);
 		if($match && is_array($match[0])) {
 			$x=$match[0][1]; // position of first match
 			// is there an anchor nearby?
@@ -237,8 +237,7 @@ function print_excerpt2($mod_vars, $func_vars) {
 	$mod_text = preg_replace('#<(!--.*--|style.*</style|script.*</script)>#SiU', ' ', $mod_text);
 	$mod_text = preg_replace('#<(br( /)?|dt|/dd|/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>#Si', '.', $mod_text);
 	$mod_text = entities_to_umlauts($mod_text, 'UTF-8');
-	// search for an better anchor - this have to be done before strip_tags() (may fail if search-string contains <, &, amp, gt, lt, ...)
-	$anchor =  make_url_target($mod_page_link_target, $mod_text, $func_search_words);
+	$anchor_text = $mod_text; // make an copy containing html-tags
 	$mod_text = strip_tags($mod_text);
 	$mod_text = str_replace(array('&gt;','&lt;','&amp;','&quot;','&#39;','&apos;','&nbsp;'), array('>','<','&','"','\'','\'',"\xC2\xA0"), $mod_text);
 	// Do a fast scan over $mod_text first. This will speedup things a lot.
@@ -249,6 +248,8 @@ function print_excerpt2($mod_vars, $func_vars) {
 	elseif(!is_any_matched($mod_text, $func_search_words)) {
 		return false;
 	}
+	// search for an better anchor - this have to be done before strip_tags() (may fail if search-string contains <, &, amp, gt, lt, ...)
+	$anchor =  make_url_target($mod_page_link_target, $anchor_text, $func_search_words);
 
 	// make the link from $mod_page_link, add anchor
 	$link = "";
