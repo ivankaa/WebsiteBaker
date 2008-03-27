@@ -415,14 +415,14 @@ $TEXT['WBMAILER_FUNCTION'] = 'Mail Routine';
 $TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host'; 
 $TEXT['WBMAILER_PHP'] = 'PHP MAIL'; 
 $TEXT['WBMAILER_SMTP'] = 'SMTP'; 
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP aanmalding'; 
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'Enkel activeren indien er moet aangemeld worden op de SMTP host '; 
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP authenticatie'; 
+$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'Enkel wanneer men zich dient aan te melden op de SMTP Host'; 
 $TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP gebruikersnaam'; 
 $TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Paswoord'; 
 $TEXT['PLEASE_LOGIN'] = 'Inloggen aub'; 
 
 // Success/error messages
-$MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, u hebt niet de bevoegdheden om deze pagina te zien';
+$MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, u heeft geen bevoegdheden om deze pagina te bekijken';
 $MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, niets om af te beelden'; 
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Onvoldoende rechten om hier te zijn';
@@ -451,7 +451,7 @@ $MESSAGE['START']['CURRENT_USER'] = 'U bent ingelogd als';
 $MESSAGE['SETTINGS']['UNABLE_OPEN_CONFIG'] = 'Het configuratiebestand kan niet worden geopend';
 $MESSAGE['SETTINGS']['UNABLE_WRITE_CONFIG'] = 'Kan niet wegschrijven naar het configuratiebestand';
 $MESSAGE['SETTINGS']['SAVED'] = 'Instellingen succesvol opgeslagen';
-$MESSAGE['SETTINGS']['MODE_SWITCH_WARNING'] = 'Opgelet: sla eerst wijzigingen op die u eventueel zojuist heeft aangebracht!';
+$MESSAGE['SETTINGS']['MODE_SWITCH_WARNING'] = 'Opgelet: sla eerst de wijzigingen op die u eventueel zojuist heeft aangebracht!';
 $MESSAGE['SETTINGS']['WORLD_WRITEABLE_WARNING'] = 'Opgelet: dit is alleen bedoeld voor testdoeleinden!';
 
 $MESSAGE['USERS']['ADDED'] = 'Gebruiker succesvol toegevoegd';
