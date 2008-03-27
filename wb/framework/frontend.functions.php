@@ -76,8 +76,7 @@ function search_highlight($foo='', $arr_string=array()) {
 	$foo = entities_to_umlauts($foo, 'UTF-8');
 	array_walk($arr_string, create_function('&$v,$k','$v = preg_quote($v, \'/\');'));
 	$search_string = implode("|", $arr_string);
-	$string = entities_to_umlauts($search_string, 'UTF-8');
-	$string = strtr($string, $string_ul_umlauts);
+	$string = strtr($search_string, $string_ul_umlauts);
 	// special-feature: '|' means word-boundary (\b). Searching for 'the|' will find 'the', but not 'thema'.
 	$string = strtr($string, array('\\|'=>'\b'));
 	// the highlighting
