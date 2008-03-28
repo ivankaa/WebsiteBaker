@@ -37,7 +37,7 @@ $language_author = 'Media-Studio en Argos Media Solutions';
 $language_license = 'GNU General Public License';
 
 // Menu titles
-$MENU['START'] = 'Naar de hoofdmenu'; 
+$MENU['START'] = 'Naar het hoofdmenu'; 
 $MENU['PAGES'] = 'Pagina&#8217;s';
 $MENU['MEDIA'] = 'Media'; 
 $MENU['ADDONS'] = 'Extra&#8217;s';
@@ -407,10 +407,10 @@ $TEXT['PUBL_START_DATE'] = 'Start datum';
 $TEXT['PUBL_END_DATE'] = 'Eind datum'; 
 $TEXT['CALENDAR'] = 'Kalender'; 
 $TEXT['DELETE_DATE'] = 'Wis datum'; 
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Specifieer hieronder een standaard "VAN" adres en "AFZENDER" naam. Het is aanbevolen om een VAN adres zoals: <strong>admin@yourdomain.com</strong> te gebruiken. Om spam te verhinderen kunnen sommige mail providers (vb <em>mail.com</em>) mails verwerpen met een VAN: adres zoals <em>name@mail.com</em>, die verzonden worden vanaf een vreemde relay-server.<br /><br />Onderstaande standaardwaarden worden enkel gebruikt indien geen andere waarden gespecifieerd worden door Website Baker. Indien je server <acronym title="Simple mail transfer protocol">SMTP</acronym> ondersteund kan je deze optie gebruiken voor het versturen van uitgaande mails.'; 
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Specifieer hieronder een standaard "VAN" adres en "AFZENDER" naam. Het is aanbevolen om een VAN adres zoals: <strong>admin@yourdomain.com</strong> te gebruiken. Om spam te verhinderen kunnen sommige mailproviders (vb <em>mail.com</em>) mails verwerpen met een VAN: adres zoals <em>name@mail.com</em>, die verzonden worden vanaf een vreemde relay-server.<br /><br />Onderstaande standaardwaarden worden enkel gebruikt indien geen andere waarden gespecifieerd worden door Website Baker. Indien uw server <acronym title="Simple mail transfer protocol">SMTP</acronym> ondersteunt kunt u deze optie gebruiken voor het versturen van uitgaande mails.'; 
 $TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Standaard mail Van'; 
 $TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Standaard Afzender Naam'; 
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Instellingen:</strong><br />Onderstaande instellingen zijn enkel van toepassing indien je mails wenst te verzenden via <acronym title="Simple mail transfer protocol">SMTP</acronym>. Indien je de naam of instellingen van de SMTP server niet kent, selecteer dan bij de standaard mail routine: PHP MAIL.'; 
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Instellingen:</strong><br />Onderstaande instellingen zijn enkel van toepassing indien u mails wenst te verzenden via <acronym title="Simple mail transfer protocol">SMTP</acronym>. Indien u de naam of instellingen van de SMTP server niet kent, selecteer dan bij de standaard mail routine: PHP MAIL.'; 
 $TEXT['WBMAILER_FUNCTION'] = 'Mail Routine'; 
 $TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host'; 
 $TEXT['WBMAILER_PHP'] = 'PHP MAIL'; 
