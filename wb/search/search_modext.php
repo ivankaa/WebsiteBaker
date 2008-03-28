@@ -233,7 +233,7 @@ function print_excerpt2($mod_vars, $func_vars) {
 	if($mod_no_highlight) // no highlighting
 		{ $mod_page_link_target = "&amp;nohighlight=1".$mod_page_link_target; }
 	// clean the text:
-	$mod_text = str_replace(array("\x0D","\x0A"), ' ', $mod_text);
+	$mod_text = preg_replace('/\s+/', ' ', $mod_text);
 	$mod_text = preg_replace('#<(!--.*--|style.*</style|script.*</script)>#SiU', ' ', $mod_text);
 	$mod_text = preg_replace('#<(br( /)?|dt|/dd|/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>#Si', '.', $mod_text);
 	$mod_text = entities_to_umlauts($mod_text, 'UTF-8');

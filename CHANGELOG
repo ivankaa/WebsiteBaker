@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+28-Mar-2008 Thomas Hornik
+!	Some cleanup in search.php
 25-Mar-2008 Matthias Gallas
 !	Updated Dutch language file (Thanks to Bramus)
 26-Mar-2008 Tomas Hornik
