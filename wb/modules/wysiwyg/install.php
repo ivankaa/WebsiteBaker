@@ -31,7 +31,7 @@ if(defined('WB_URL')) {
 		. ' `section_id` INT NOT NULL DEFAULT \'0\','
 		. ' `page_id` INT NOT NULL DEFAULT \'0\','
 		. ' `content` LONGTEXT NOT NULL ,'
-		. ' `text` TEXT NOT NULL ,'
+		. ' `text` LONGTEXT NOT NULL ,'
 		. ' PRIMARY KEY ( `section_id` ) '
 		. ' )';
 	$database->query($mod_wysiwyg);
