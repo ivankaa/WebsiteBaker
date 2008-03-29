@@ -33,7 +33,7 @@ $language_code = 'NL';
 $language_name = 'Nederlands';
 $language_version = '2.7';
 $language_platform = '2.7.x';
-$language_author = 'Media-Studio en Argos Media Solutions';
+$language_author = 'Bramus, CodeALot';
 $language_license = 'GNU General Public License';
 
 // Menu titles
@@ -402,7 +402,7 @@ $TEXT['DEFAULT_CHARSET'] = 'Standaard tekenset';
 $TEXT['CHARSET'] = 'Tekenset';
 $TEXT['MODULE_ORDER'] = 'Module volgorde om te zoeken'; 
 $TEXT['MAX_EXCERPT'] = 'Max lijnen per zoeksessie'; 
-$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module'; //needs to be translated
+$TEXT['TIME_LIMIT'] = 'Max tijd om gegevens te zoeken per module';
 $TEXT['PUBL_START_DATE'] = 'Start datum'; 
 $TEXT['PUBL_END_DATE'] = 'Eind datum'; 
 $TEXT['CALENDAR'] = 'Kalender'; 

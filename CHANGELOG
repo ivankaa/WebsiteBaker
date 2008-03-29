@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+29-Mar-2008 Christian Sommer
+!	added missing translation to Dutch language file (thanks Bramus)
 28-Mar-2008 Thomas Hornik
 !	Some cleanup in search.php
 !	WYSIWYG: changed field text to LONGTEXT, too.
