@@ -161,8 +161,10 @@ if (!function_exists('filter_mail_addresses')) {
 				$decryption_key = chr($char_shift+97);						// ASCII a:=97
 		
 				// prepare mailto string for encryption (mail protocol, decryption key, mail address)
-				$email_address = "mailto:" .$decryption_key .$match[2] .$match[3];
-		
+				// match[3] contains the optional email subject and body text
+				// convert %XX values into characters and remove HTML entities like &amp; into it´s expression like &
+				$email_address = "mailto:" .$decryption_key .$match[2] .html_entity_decode(rawurldecode($match[3]));
+
 				// encrypt email address by shifting characters
 		  	$encrypted_email = "";
 				for($i=0; $i<strlen($email_address); $i++) {

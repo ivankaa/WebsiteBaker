@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+31-Mar-2008 Christian Sommer
+#	fixed bug in output filter (mailto links with HTML entities in optional part)
 29-Mar-2008 Christian Sommer
 !	added missing translation to Dutch language file (thanks Bramus)
 28-Mar-2008 Thomas Hornik
