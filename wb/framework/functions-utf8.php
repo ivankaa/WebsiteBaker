@@ -230,7 +230,7 @@ function charset_to_utf8($str, $charset_in=DEFAULT_CHARSET, $decode_entities=tru
 	$wrong_ISO8859 = false;
 	$converted = false;
 
-	if((!function_exists('iconv') && !UTF8_MBSTRING && ($charset_in=='big5' || $charset_in=='iso-2022-jp' || $charset_in=='iso-2022-kr')) || (!function_exists('iconv') && $charset_in=='gb2312')) {
+	if((!function_exists('iconv') && !UTF8_MBSTRING && ($charset_in=='BIG5' || $charset_in=='ISO-2022-JP' || $charset_in=='ISO-2022-KR')) || (!function_exists('iconv') && $charset_in=='GB2312')) {
 		// Nothing we can do here :-(
 		// Charset is one of those obscure ISO-2022... or BIG5, GB2312 or something
 		// and we can't use mb_convert_encoding() or iconv();
@@ -318,7 +318,7 @@ function utf8_to_charset($str, $charset_out=DEFAULT_CHARSET) {
 	$wrong_ISO8859 = false;
 	$converted = false;
 
-	if((!function_exists('iconv') && !UTF8_MBSTRING && ($charset_out=='big5' || $charset_out=='iso-2022-jp' || $charset_out=='iso-2022-kr')) || (!function_exists('iconv') && $charset_out=='gb2312')) {
+	if((!function_exists('iconv') && !UTF8_MBSTRING && ($charset_out=='BIG5' || $charset_out=='ISO-2022-JP' || $charset_out=='ISO-2022-KR')) || (!function_exists('iconv') && $charset_out=='GB2312')) {
 		// Nothing we can do here :-(
 		// Charset is one of those obscure ISO-2022... or BIG5, GB2312 or something
 		// and we can't use mb_convert_encoding() or iconv();
