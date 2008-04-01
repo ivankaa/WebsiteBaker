@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+01-Apr-2008 Christian Sommer
+!	added updated edit CSS functions to the Form module
 31-Mar-2008 Christian Sommer
 #	fixed bug in output filter (mailto links with HTML entities in optional part)
 29-Mar-2008 Christian Sommer

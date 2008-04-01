@@ -27,21 +27,42 @@
 require('../../config.php');
 require(WB_PATH.'/modules/admin.php');
 
+/**
+	DEFINE LANGUAGE DEPENDING OUTPUTS FOR THE EDIT CSS PART
+*/
+$lang_dir = WB_PATH .'/modules/' .$_POST['mod_dir'] .'/languages/';
+if(file_exists($lang_dir .LANGUAGE .'.php')) {
+	// try to include custom language file if exists
+	require_once($lang_dir .LANGUAGE .'.php');
+} elseif(file_exists($lang_dir .'EN.php')) {
+	// try to include default module language file
+	require_once($lang_dir .'EN.php');
+}
+
+// set defaults if output varibles are not set in the languages files
+if(!isset($CAP_EDIT_CSS)) $CAP_EDIT_CSS	= 'Edit CSS';
+if(!isset($HEADING_CSS_FILE))	$HEADING_CSS_FILE = 'Actual module file: ';
+if(!isset($TXT_EDIT_CSS_FILE)) $TXT_EDIT_CSS_FILE = 'Edit the CSS definitions in the textarea below.';
+
 // include functions to edit the optional module CSS files (frontend.css, backend.css)
 require_once('css.functions.php');
 
+// check if the module directory is valid
+$mod_dir = check_module_dir($_POST['mod_dir']);
+if($mod_dir == '') die(header('Location: index.php'));
+
 // check if action is: save or edit
-if(isset($_GET['action']) && $_GET['action'] == 'save' && 
-		isset($_POST['edit_file']) && mod_file_exists($_POST['edit_file'])) {
+if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file'])) {
 	/** 
-	SAVE THE UPDATED CONTENTS TO THE CSS FILE
+		SAVE THE UPDATED CONTENTS TO THE CSS FILE
 	*/
+
 	$css_content = '';
 	if(isset($_POST['css_codepress']) && strlen($_POST['css_codepress']) > 0) {
-		// if Javascript is enabled, take contents from hidden field: css_codepress
+		// Javascript is enabled so take contents from hidden field: css_codepress
 		$css_content = stripslashes($_POST['css_codepress']);
 	} elseif(isset($_POST['css_data']) && strlen($_POST['css_data']) > 0) {
-		// if Javascript is disabled, take contens from textarea: css_data
+		// Javascript disabled, take contens from textarea: css_data
 		$css_content = stripslashes($_POST['css_data']);
 	}
 
@@ -62,14 +83,20 @@ if(isset($_GET['action']) && $_GET['action'] == 'save' &&
 		$admin->print_success($TEXT['SUCCESS'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
 	}
 
+
 } else {
 	/** 
-	MODIFY CONTENTS OF THE CSS FILE VIA TEXT AREA 
+		MODIFY CONTENTS OF THE CSS FILE VIA TEXT AREA 
 	*/
-	
+	// include the backend.css file if exists
+	if(file_exists(WB_PATH .'/modules/' .$mod_dir .'/backend.css')) {
+		echo '<style type="text/css">';
+		include(WB_PATH .'/modules/' .$mod_dir .'/backend.css');
+		echo "\n</style>\n";
+	}
+
 	// check which module file to edit (frontend.css, backend.css or '')
-	$css_file = '';
-	if(isset($_GET['edit_file'])) $css_file = edit_mod_file($_GET['edit_file']);
+	$css_file = (in_array($_POST['edit_file'], array('frontend.css', 'backend.css'))) ? $_POST['edit_file'] : '';
 
 	// display output
 	if($css_file == '') {
@@ -79,10 +106,10 @@ if(isset($_GET['action']) && $_GET['action'] == 'save' &&
 		$output  = "<a href=\"#\" onclick=\"javascript: window.location = '";
 		$output .= ADMIN_URL ."/pages/modify.php?page_id=" .$page_id ."'\">back</a>";
 		echo $output;
+	
 	} else {
 		// store content of the module file in variable
 		$css_content = @file_get_contents(dirname(__FILE__) .'/' .$css_file);
-	  	// output content of module file to textareas
 
 		// make sure that codepress stuff is only used if the framework is available
 		$CODEPRESS['CLASS'] = '';
@@ -91,20 +118,23 @@ if(isset($_GET['action']) && $_GET['action'] == 'save' &&
 			$CODEPRESS['CLASS'] = 'class="codepress css" ';
 			$CODEPRESS['JS'] = 'onclick="javascript: css_codepress.value = area_codepress.getCode();"';
 		}
-			
+
+		// write out heading
+		echo '<h2>' .$HEADING_CSS_FILE .'"' .$css_file .'"</h2>';
+		// include button to switch between frontend.css and backend.css (only shown if both files exists)
+		toggle_css_file($mod_dir, $css_file); 
+	  echo '<p>' .$TXT_EDIT_CSS_FILE .'</p>';
+
+		// output content of module file to textareas
 	?>
-		<form name="edit_module_file" action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])) .'?action=save';?>" method="post" style="margin: 0;">
-	  		<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
-	  		<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
+		<form name="edit_module_file" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" style="margin: 0;">
 			<input type="hidden" name="css_codepress" value="" />
+	  	<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
+	  	<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
+	  	<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>">
 			<input type="hidden" name="edit_file" value="<?php echo $css_file; ?>" />
-	
-			<h2><?php echo $HEADING_CSS_FILE .'"' .$css_file; ?>"</h2>
-			<?php 
-				// include the toggle button to switch between frontend.css and backend.css (if both files exists)
-				toggle_css_file($css_file); 
-			?>
-	  		<p><?php echo $TXT_EDIT_CSS_FILE; ?></p> 
+	  	<input type="hidden" name="action" value="save">
+
 			<textarea id="area_codepress" name="css_data" <?php echo $CODEPRESS['CLASS'];?>cols="115" rows="25" wrap="VIRTUAL" 
 				style="margin:2px;"><?php echo $css_content; ?></textarea>
 

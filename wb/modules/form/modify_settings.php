@@ -63,9 +63,10 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 ?>
 <h2><?php echo $MOD_FORM['SETTINGS']; ?></h2>
 <?php
-	// include the button to edit the optionla module CSS files
+	// include the button to edit the optional module CSS files
 	// Note: CSS styles for the button are defined in backend.css (div class="mod_moduledirectory_edit_css")
-	css_edit();
+	// Place this call outside of any <form></form> construct!!!
+	css_edit('form');
 ?>
 
 <form name="edit" action="<?php echo WB_URL; ?>/modules/form/save_settings.php" method="post" style="margin: 0;">

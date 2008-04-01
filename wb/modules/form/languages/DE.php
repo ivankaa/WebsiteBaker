@@ -31,7 +31,6 @@ $MOD_FORM['SETTINGS'] = 'Formular Einstellungen';
 
 // Variablen fuer Textausgabe der frontend.css/backend.css Bearbeitung
 $CAP_EDIT_CSS = 'Bearbeite CSS';
-$CAP_TOGGLE_CSS = 'Wechsle zu ';
 $HEADING_CSS_FILE = 'Aktuelle Moduldatei: ';
 $TXT_EDIT_CSS_FILE = 'Bearbeite die CSS Definitionen im nachfolgenden Textfeld.';
 

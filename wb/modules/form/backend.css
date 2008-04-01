@@ -5,16 +5,18 @@
 	border-top: 1px dashed #fff;
 }
 
-div.mod_form_edit_css {
-  width: 100%;
-  margin-top: -20px;
-  margin-bottom: 15px;
-  text-align: right;
-}
-
-div.mod_form_edit_css a {
-  width: 100px;
-  padding: 5px;
-  border: 1px solid;
+/* 
+  The definitions below provide the style for the edit CSS button 
+  Required CSS class name: input.mod_moduledirectory_edit_css
+*/
+input.mod_form_edit_css {
+  color: #000;
   background-color: #F0F0F0;
+  border: 1px solid gray;
+  padding: 2px;
+  margin: 0;
+  margin-left: 625px;
+  margin-top: -20px;
+  margin-bottom: 5px;
+  width: 110px;
 }
