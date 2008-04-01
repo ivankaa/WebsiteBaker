@@ -31,7 +31,6 @@ $MOD_NEWS['SETTINGS'] = 'News Settings';
 
 // Variables for the module CSS edit outputs
 $CAP_EDIT_CSS = 'Edit CSS';
-$CAP_TOGGLE_CSS = 'Edit ';
 $HEADING_CSS_FILE = 'Actual module file: ';
 $TXT_EDIT_CSS_FILE = 'Edit the CSS definitions in the textarea below.';
 

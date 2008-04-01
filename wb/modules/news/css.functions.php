@@ -23,85 +23,85 @@
 
 */
 
-// DEFINE LANGUAGE DEPENDING OUTPUTS FOR THE EDIT CSS PART
-$lang_dir = WB_PATH .'/modules/' .basename(dirname(__FILE__)) .'/languages/';
-if(file_exists($lang_dir .LANGUAGE .'.php')) {
-	// try to include custom language file if exists
-	require_once($lang_dir .LANGUAGE .'.php');
-} elseif(file_exists($lang_dir .'EN.php')) {
-	// try to include default module language file
-	require_once($lang_dir .'EN.php');
-}
+// prevent this file from being accessed directly
+if(!defined('WB_PATH')) die(header('Location: index.php'));  
 
-// set defaults if output varibles are not set in the languages files
-if(!isset($CAP_EDIT_CSS)) $CAP_EDIT_CSS	= 'Edit CSS';
-if(!isset($CAP_TOGGLE_CSS)) $CAP_TOGGLE_CSS	= 'Switch to ';
-if(!isset($HEADING_CSS_FILE))	$HEADING_CSS_FILE = 'Actual module file: ';
-if(!isset($TXT_EDIT_CSS_FILE)) $TXT_EDIT_CSS_FILE = 'Edit the CSS definitions in the textarea below.';
+// this function checks the validity of the specified module directory
+if(!function_exists('check_module_dir')) {
+	function check_module_dir($mod_dir) {
+		// check if module directory is formal correct (only characters: "a-z,0-9,_,-")
+		if(!preg_match('/^[a-z0-9_-]+$/iD', $mod_dir)) return '';
+		// check if the module folder contains the required info.php file
+		return (file_exists(WB_PATH .'/modules/' .$mod_dir .'/info.php')) ? $mod_dir : '';
+	}
+}
 
 // this function checks if the specified optional module file exists
 if (!function_exists('mod_file_exists')) {
-	function mod_file_exists($mod_file='frontend.css') {
-		// extract the module directory
-		$mod_dir = basename(dirname(__FILE__)) .'/' .$mod_file;
-		return file_exists(WB_PATH .'/modules/' .$mod_dir);
+	function mod_file_exists($mod_dir, $mod_file='frontend.css') {
+  	// check if the module file exists
+		return file_exists(WB_PATH .'/modules/' .$mod_dir .'/' .$mod_file);
 	}
 }
 
-// this function displays a "Edit CSS" button in modify.php 
-// if the optional module files (module.css, module.js) if exists
+// this function displays the "Edit CSS" button in modify.php 
 if (!function_exists('css_edit')) {
-	function css_edit() {
+	function css_edit($mod_dir) {
 		global $page_id, $section_id, $CAP_EDIT_CSS;
-		// extract the module directory
-		$mod_dir = basename(dirname(__FILE__));
-		$frontend_css = mod_file_exists('frontend.css');
-		$backend_css = mod_file_exists('backend.css');
+		// check if specified module directory is valid
+		if(check_module_dir($mod_dir) == '') return;
+		
+		// check if frontend.css or backend.css exist
+		$frontend_css = mod_file_exists($mod_dir, 'frontend.css');
+		$backend_css = mod_file_exists($mod_dir, 'backend.css');
+		
+		// output the edit CSS submtin button if required
 		if($frontend_css || $backend_css) {
-			// display link to edit the optional CSS module files
-			$file = $frontend_css ? 'frontend.css' : 'backend.css';
-			$output  = '<div class="mod_' .$mod_dir .'_edit_css"><a href="' .WB_URL .'/modules/' .$mod_dir .'/edit_css.php';
-			$output .= '?page_id=' .$page_id .'&section_id=' .$section_id .'&edit_file=' .$file .'">';
-			$output .= $CAP_EDIT_CSS .'</a></div>';
-			echo $output;
-		}
-	}
+			// default text used for the edit CSS routines if not defined in the modules language file
+			if(!isset($CAP_EDIT_CSS)) $CAP_EDIT_CSS	= 'Edit CSS';
+			if(!isset($HEADING_CSS_FILE)) $HEADING_CSS_FILE	= 'Actual module file: ';
+			if(!isset($TXT_EDIT_CSS_FILE)) $TXT_EDIT_CSS_FILE = 'Edit the CSS definitions in the textarea below.';
+			?>
+			<form name="edit_module_file" action="<?php echo WB_URL .'/modules/' .$mod_dir .
+				'/edit_css.php';?>" method="post" style="margin: 0; align:right;">
+				<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
+				<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
+				<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>">
+				<input type="hidden" name="edit_file" value="<?php echo ($frontend_css) ?'frontend.css' : 'backend.css';?>">
+				<input type="hidden" name="action" value="edit">
+				<input type="submit" value="<?php echo $CAP_EDIT_CSS;?>" class="mod_<?php echo $mod_dir;?>_edit_css">
+			</form>
+			<?php
+    }
+  }
 }
 
-// this function returns a secure module file from $_GET['edit_file']
-if (!function_exists('edit_mod_file')) {
-	function edit_mod_file() {
-		$allowed_files = array('frontend.css', 'backend.css');
-		if(isset($_GET['edit_file']) && in_array($_GET['edit_file'], $allowed_files)) {
-			return $_GET['edit_file'];
-		} elseif(mod_file_exists('frontend.css')) {
-			return 'frontend.css';
-		} elseif(mod_file_exists('backend_css')) {
-			return 'backend.css';
-		} else {
-			return '';
-		}
-	}
-}	
-
-// this function displays a button to toggle between the optional module CSS files
-// function is invoked from edit_css.php file
+// this function displays a button to toggle between CSS files (invoked from edit_css.php)
 if (!function_exists('toggle_css_file')) {
-	function toggle_css_file($base_css_file = 'frontend.css') {
-		$allowed_mod_files = array('frontend.css', 'backend.css');
-		if(!in_array($base_css_file, $allowed_mod_files)) return;
+	function toggle_css_file($mod_dir, $base_css_file = 'frontend.css') {
 		global $page_id, $section_id, $CAP_TOGGLE_CSS;
-		// extract the module directory
-		$mod_dir = basename(dirname(__FILE__));
+		// check if specified module directory is valid
+		if(check_module_dir($mod_dir) == '') return;
+
+		// do sanity check of specified css file
+		if(!in_array($base_css_file, array('frontend.css', 'backend.css'))) return;
+		
+		// display button to toggle between the two CSS files: frontend.css, backend.css
 		$toggle_file = ($base_css_file == 'frontend.css') ? 'backend.css' : 'frontend.css';
-		if(mod_file_exists($toggle_file)) {
-			// display button to toggle between the two CSS files: frontend.css, backend.css
-			$output  = '<div class="mod_' .$mod_dir .'_edit_css"><a href="' .WB_URL .'/modules/' .$mod_dir .'/edit_css.php';
-			$output .= '?page_id=' .$page_id .'&section_id=' .$section_id .'&edit_file=' .$toggle_file .'">';
-			$output .= $CAP_TOGGLE_CSS .$toggle_file .'</a></div>';
-			echo $output;
+		if(mod_file_exists($mod_dir, $toggle_file)) {
+			?>
+			<form name="toggle_module_file" action="<?php echo WB_URL .'/modules/' .$mod_dir .
+				'/edit_css.php';?>" method="post" style="margin: 0; align:right;">
+				<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
+				<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
+				<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>">
+				<input type="hidden" name="edit_file" value="<?php echo $toggle_file; ?>">
+				<input type="hidden" name="action" value="edit">
+				<input type="submit" value="<?php echo ucwords($toggle_file);?>" class="mod_<?php echo $mod_dir;?>_edit_css">
+			</form>
+			<?php
 		}
-	}
+  }
 }
 
 ?>
