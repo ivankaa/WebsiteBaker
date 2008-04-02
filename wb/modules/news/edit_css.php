@@ -40,7 +40,6 @@ if(file_exists($lang_dir .LANGUAGE .'.php')) {
 }
 
 // set defaults if output varibles are not set in the languages files
-if(!isset($CAP_EDIT_CSS)) $CAP_EDIT_CSS	= 'Edit CSS';
 if(!isset($HEADING_CSS_FILE))	$HEADING_CSS_FILE = 'Actual module file: ';
 if(!isset($TXT_EDIT_CSS_FILE)) $TXT_EDIT_CSS_FILE = 'Edit the CSS definitions in the textarea below.';
 

@@ -59,8 +59,6 @@ if (!function_exists('css_edit')) {
 		if($frontend_css || $backend_css) {
 			// default text used for the edit CSS routines if not defined in the modules language file
 			if(!isset($CAP_EDIT_CSS)) $CAP_EDIT_CSS	= 'Edit CSS';
-			if(!isset($HEADING_CSS_FILE)) $HEADING_CSS_FILE	= 'Actual module file: ';
-			if(!isset($TXT_EDIT_CSS_FILE)) $TXT_EDIT_CSS_FILE = 'Edit the CSS definitions in the textarea below.';
 			?>
 			<form name="edit_module_file" action="<?php echo WB_URL .'/modules/' .$mod_dir .
 				'/edit_css.php';?>" method="post" style="margin: 0; align:right;">
