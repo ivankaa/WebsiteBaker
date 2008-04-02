@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+02-Apr-2008 Christian Sommer
+#	fixed bug in the mailto Javascript encryption code of the Output-Filter module
 01-Apr-2008 Christian Sommer
 !	removed typo in English language file
 !	added updated edit CSS functions to the News module

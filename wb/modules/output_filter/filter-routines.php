@@ -155,35 +155,36 @@ if (!function_exists('filter_mail_addresses')) {
 			if(in_array(OUTPUT_FILTER_MODE, array(6,7))) {
 				/** USE JAVASCRIPT ENCRYPTION FOR MAILTO LINKS **/
 
-				// create random encryption key
-				mt_srand((double)microtime()*1000000);						// initialize the randomizer (PHP < 4.2.0)
-				$char_shift = mt_rand(1, 5);											// shift:=1; a->b, shift:=5; a-->f
-				$decryption_key = chr($char_shift+97);						// ASCII a:=97
-		
-				// prepare mailto string for encryption (mail protocol, decryption key, mail address)
-				// match[3] contains the optional email subject and body text
-				// convert %XX values into characters and remove HTML entities like &amp; into it´s expression like &
-				$email_address = "mailto:" .$decryption_key .$match[2] .html_entity_decode(rawurldecode($match[3]));
-
-				// encrypt email address by shifting characters
+				// preprocess mailto link parts for further usage
+				$search = array('@', '.', '_', '-'); $replace = array('F', 'Z', 'X', 'K');
+				$email_address = str_replace($search, $replace, strtolower($match[2]));
+				$email_subject = rawurlencode(html_entity_decode($match[3]));
+				
+				// create a random encryption key for the Caesar cipher
+				mt_srand((double)microtime()*1000000);	// (PHP < 4.2.0)
+				$shift = mt_rand(1, 25);
+				
+				// encrypt the email using an adapted Caesar cipher
 		  	$encrypted_email = "";
-				for($i=0; $i<strlen($email_address); $i++) {
-					$encrypted_email .= chr(ord($email_address[$i]) + $char_shift);
+				for($i = strlen($email_address) -1; $i > -1; $i--) {
+					if(in_array($email_address[$i], array('F', 'Z', 'X', 'K'))) {
+						$encrypted_email .= $email_address[$i];
+					} else {
+						$encrypted_email .= chr((ord($email_address[$i]) -97 + $shift) % 26 + 97);
+					}
 				}
-				$encrypted_email[7] = $decryption_key;						// replace first character after mailto: with decryption key 
-				$encrypted_email = rawurlencode($encrypted_email);
+				$encrypted_email .= chr($shift + 97);
 
-				// return encrypted javascript mailto link
-				$mailto_link  = "<a href=\"javascript:mdcr('";		// a href part with javascript function to decrypt the email address
-				$mailto_link .= "$encrypted_email')\">";					// add encrypted email address as paramter to JS function mdcr
-				$mailto_link .= $match[5] ."</a>";								// add email link text and closing </a> tag
+				// build the encrypted Javascript mailto link
+				$mailto_link  = "<a href=\"javascript:mdcr('$encrypted_email','$email_subject')\">" .$match[5] ."</a>";
+				
 				return $mailto_link;	
 
 			} else {
 				/** DO NOT USE JAVASCRIPT ENCRYPTION FOR MAILTO LINKS **/
 
 				// as minimum protection, replace replace @ in the mailto part by (at)
-				// dots are not transformed as this would required as my.name@domain.com would look like: my(dot)name(at)domain(dot)com
+				// dots are not transformed as this would transform my.name@domain.com into: my(dot)name(at)domain(dot)com
 				
 				// rebuild the mailto link from the subpatterns (at the missing characters " and </a>")
 				return $match[1] .str_replace('@', OUTPUT_FILTER_AT_REPLACEMENT, $match[2]) .$match[3] .'"' .$match[4] .$match[5] .'</a>';
