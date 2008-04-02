@@ -14,6 +14,7 @@ Legend:
 02-Apr-2008 Matthias Gallas
 #	fixed bug with registration of users are not added to signup group
 02-Apr-2008 Christian Sommer
+#	added handling of missing characters to mailto encryption routines
 !	some code clean-up in News module
 !	fixed some layout issues with Form module (combination with Output-filter)
 !	fixed layout issue with optional subject/body text of encrypted mailto links

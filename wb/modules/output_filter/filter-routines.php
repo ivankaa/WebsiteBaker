@@ -167,7 +167,7 @@ if (!function_exists('filter_mail_addresses')) {
 				// encrypt the email using an adapted Caesar cipher
 		  	$encrypted_email = "";
 				for($i = strlen($email_address) -1; $i > -1; $i--) {
-					if(in_array($email_address[$i], array('F', 'Z', 'X', 'K'))) {
+					if(preg_match('#[FZXK0-9]#', $email_address[$i], $characters)) {
 						$encrypted_email .= $email_address[$i];
 					} else {
 						$encrypted_email .= chr((ord($email_address[$i]) -97 + $shift) % 26 + 97);
