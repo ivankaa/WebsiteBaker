@@ -41,6 +41,15 @@ if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS
 
 require_once(WB_PATH.'/include/captcha/captcha.php');
 
+// obtain the settings of the output filter module
+if(file_exists(WB_PATH.'/modules/output_filter/filter-routines.php')) {
+	include_once(WB_PATH.'/modules/output_filter/filter-routines.php');
+	$filter_settings = get_output_filter_settings();
+} else {
+	// no output filter used, define default settings
+	$filter_settings['email_filter'] = 0;
+}
+
 // Function for generating an optionsfor a select field
 if (!function_exists('make_option')) {
 function make_option(&$n, $k, $values) {
@@ -221,6 +230,16 @@ if($use_captcha) { ?>
 // Print footer
 echo $footer;
 
+/**
+	NOTE: comment out the line ob_end_flush() if you indicate problems (e.g. when using ob_start in the index.php of your template)
+	With ob_end_flush(): output filter will be disabled for this page (and all sections embedded on this page)
+	Without ob_end_flush(): emails are rewritten (e.g. name@domain.com --> name(at)domain(dot)com) if output filter is enabled
+	All replacements made by the Output-Filter module will be reverted before the email is send out
+*/
+if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@' && $filter_settings['dot_replacement']=='.')) { 
+	ob_end_flush();
+}
+
 // Add form end code
 ?>
 </form>
@@ -304,6 +323,14 @@ echo $footer;
 							$_SESSION['field'.$field['field_id']] = $_POST['field'.$field['field_id']];
 						} else {
 							$_SESSION['field'.$field['field_id']] = htmlspecialchars($_POST['field'.$field['field_id']]);
+						}
+						// if the output filter is active, we need to revert (dot) to . and (at) to @ (using current filter settings)
+						// otherwise the entered mail will not be accepted and the recipient would see (dot), (at) etc.
+						if ($filter_settings['email_filter']) {
+							$field_value = $_POST['field'.$field['field_id']];
+							$field_value = str_replace($filter_settings['at_replacement'], '@', $field_value);
+							$field_value = str_replace($filter_settings['dot_replacement'], '.', $field_value);
+							$_POST['field'.$field['field_id']] = $field_value;
 						}
 						if($field['type'] == 'email' AND $admin->validate_email($_POST['field'.$field['field_id']]) == false) {
 							$email_error = $MESSAGE['USERS']['INVALID_EMAIL'];

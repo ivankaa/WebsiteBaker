@@ -92,10 +92,10 @@ if(file_exists(WB_PATH .'/modules/output_filter/filter-routines.php')) {
 	
 	if(function_exists('filter_frontend_output')) {
 		// store output in variable for filtering
-		ob_start();
+		@ob_start();
 		require(WB_PATH.'/templates/'.TEMPLATE.'/index.php');
 		$frontend_output = ob_get_contents();
-		ob_end_clean();
+		@ob_end_clean();
 		// Display the filtered output on the frontend
 		echo filter_frontend_output($frontend_output);
 		die;
