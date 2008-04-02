@@ -22,5 +22,5 @@ function sdcr(a,f) {
       c+=String.fromCharCode(e+97);
     }
   }
-  return "mailto:"+c+unescape(f);
+  return "mailto:"+c+f;
 }

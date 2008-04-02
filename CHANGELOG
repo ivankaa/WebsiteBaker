@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 02-Apr-2008 Christian Sommer
+!	fixed layout issue with optional subject/body text of encrypted mailto links
 #	fixed bug in the mailto Javascript encryption code of the Output-Filter module
 01-Apr-2008 Christian Sommer
 !	removed typo in English language file
