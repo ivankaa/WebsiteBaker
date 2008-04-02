@@ -35,7 +35,7 @@ $wb = new wb('Start', 'start', false, false);
 $database = new database();
 
 // Get details entered
-$group_id = FRONTEND_SIGNUP;
+$groups_id = FRONTEND_SIGNUP;
 $active = 1;
 $username = strtolower(strip_tags($wb->get_post_escaped('username')));
 $display_name = strip_tags($wb->get_post_escaped('display_name'));
@@ -45,7 +45,7 @@ $email = $wb->get_post('email');
 $js_back = "javascript: history.go(-1);";
 
 // Check values
-if($group_id == "") {
+if($groups_id == "") {
 	$wb->print_error($MESSAGE['USERS']['NO_GROUP'], $js_back, false);
 }
 if(strlen($username) < 3) {
@@ -107,7 +107,7 @@ if($results->numRows() > 0) {
 $md5_password = md5($new_pass);
 
 // Inser the user into the database
-$query = "INSERT INTO ".TABLE_PREFIX."users (group_id,active,username,password,display_name,email) VALUES ('$group_id', '$active', '$username','$md5_password','$display_name','$email')";
+$query = "INSERT INTO ".TABLE_PREFIX."users (groups_id,active,username,password,display_name,email) VALUES ('$groups_id', '$active', '$username','$md5_password','$display_name','$email')";
 $database->query($query);
 
 if($database->is_error()) {

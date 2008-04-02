@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+02-Apr-2008 Matthias Gallas
+#	fixed bug with registration of users are not added to signup group
 02-Apr-2008 Christian Sommer
 !	some code clean-up in News module
 !	fixed some layout issues with Form module (combination with Output-filter)
