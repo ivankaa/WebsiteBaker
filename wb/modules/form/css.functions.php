@@ -61,7 +61,7 @@ if (!function_exists('css_edit')) {
 			if(!isset($CAP_EDIT_CSS)) $CAP_EDIT_CSS	= 'Edit CSS';
 			?>
 			<form name="edit_module_file" action="<?php echo WB_URL .'/modules/' .$mod_dir .
-				'/edit_css.php';?>" method="post" style="margin: 0; align:right;">
+ 				'/edit_css.php?page_id='.$page_id;?>" method="post" style="margin: 0; align:right;">
 				<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
 				<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
 				<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>">

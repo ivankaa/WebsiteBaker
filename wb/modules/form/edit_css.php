@@ -87,8 +87,9 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	/** 
 		MODIFY CONTENTS OF THE CSS FILE VIA TEXT AREA 
 	*/
-	// include the backend.css file if exists
-	if(file_exists(WB_PATH .'/modules/' .$mod_dir .'/backend.css')) {
+	// check if module backend.css file needs to be included into the <body>
+	if((!method_exists($admin, 'register_backend_modfiles') || !isset($_GET['page_id']))
+			&& file_exists(WB_PATH .'/modules/'.$mod_dir.'/backend.css')) {
 		echo '<style type="text/css">';
 		include(WB_PATH .'/modules/' .$mod_dir .'/backend.css');
 		echo "\n</style>\n";

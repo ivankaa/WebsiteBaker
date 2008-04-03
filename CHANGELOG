@@ -11,7 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
-02-Apr-2008 Christian Sommer
+03-Apr-2008 Christian Sommer
+!	updated edit module CSS functions to include backend.css into head if possible
 #	fixed bug in Javascript decryption routines of the Output-Filter module
 02-Apr-2008 Matthias Gallas
 #	fixed bug with registration of users are not added to signup group
