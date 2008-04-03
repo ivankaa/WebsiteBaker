@@ -77,7 +77,7 @@ if (!function_exists('css_edit')) {
 // this function displays a button to toggle between CSS files (invoked from edit_css.php)
 if (!function_exists('toggle_css_file')) {
 	function toggle_css_file($mod_dir, $base_css_file = 'frontend.css') {
-		global $page_id, $section_id, $CAP_TOGGLE_CSS;
+		global $page_id, $section_id;
 		// check if specified module directory is valid
 		if(check_module_dir($mod_dir) == '') return;
 
