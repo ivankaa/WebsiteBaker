@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 03-Apr-2008 Christian Sommer
+!	small adaption of the edit CSS function file css.functions.php
 !	updated edit module CSS functions to include backend.css into head if possible
 #	fixed bug in Javascript decryption routines of the Output-Filter module
 02-Apr-2008 Matthias Gallas
