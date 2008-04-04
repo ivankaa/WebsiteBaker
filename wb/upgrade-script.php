@@ -54,7 +54,7 @@ function check_baseline_configuration() {
 	status_msg(', WB 2.7 core files uploaded: ');
 	@include_once(WB_PATH .'/framework/functions.php');
 	@include_once(ADMIN_PATH .'/interface/version.php');
-	if(defined('VERSION') && VERSION == '2.7 (RC2)'
+	if(defined('VERSION') && VERSION == '2.7 (RC3)'
 		&& function_exists('get_variable_content') 
 		&& file_exists(WB_PATH .'/modules/menu_link/languages/DE.php') 
 		&& file_exists(WB_PATH .'/modules/output_filter/filter-routines.php') 
@@ -213,7 +213,7 @@ require_once('config.php');
 require_once(WB_PATH.'/framework/functions.php');
 ?>
 <h2>Step 3: Upgrading the existing Website Baker installation to WB 2.7</h2>
-<p>will upgrade Website Baker 2.6.5 / 2.6.7 to version 2.7</p>
+<p>will upgrade Website Baker 2.6.7 to version 2.7</p>
 <?php
 
 $OK   = '<span class="ok">OK</span>';
@@ -859,7 +859,7 @@ echo '<br />Languages reloaded<br />';
  */
 $config_msg = ($wbmailer_smtp_host != '') ? '<br /><br />Note: Please remove the line: <strong>define(\'WBMAILER_SMTP_HOST\', \''.$wbmailer_smtp_host.'\');</strong> from file <strong>config.php</strong> before proceeding!' : '';
 echo '<p style="font-size:120%;"><strong>Congratulations: The upgrade script is finished ...</strong></p>';
-status_msg('<strong>Warning:</strong><br />Please delete the file <strong>upgrade-script.php</strong> via FTP before proceeding.<br />If you do not delete this script from your server, others can delete/overwritte database settings by executing this script again.'.$config_msg, 'warning', 'div');
+status_msg('<strong>Warning:</strong><br />Please delete the file <strong>upgrade-script.php</strong> via FTP before proceeding.<br />If you do not delete this script from your server, others can delete/overwritte database settings by executing this script again. <br /><br />If you are using Admin tools, please update them with the latest version on the WB Add-ons repository to avoid problems.'.$config_msg, 'warning', 'div');
 // show buttons to go to the backend or frontend
 echo '<br />';
 if(defined('WB_URL')) {

@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+04-Apr-2008 Christian Sommer
+!	set WB version to 2.7 (RC3) for the next upcoming release candidate
 03-Apr-2008 Christian Sommer
 !	some code clean up in news/form module
 !	small adaption of the edit CSS function file css.functions.php
