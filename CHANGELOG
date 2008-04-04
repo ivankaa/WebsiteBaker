@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+04-Apr-2008 Thomas Hornik
+#	fixed: Language-redirect removed query-string from URL
 04-Apr-2008 Christian Sommer
 !	set WB version to 2.7 (RC3) for the next upcoming release candidate
 03-Apr-2008 Christian Sommer
