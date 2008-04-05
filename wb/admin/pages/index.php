@@ -41,14 +41,11 @@ function writeSessionCookie (cookieName, cookieValue) {
 <script type="text/javascript" language="javascript">
 function toggle_viewers() {
 	if(document.add.visibility.value == 'private') {
-		document.getElementById('private_viewers').style.display = 'block';
-		document.getElementById('registered_viewers').style.display = 'none';
+		document.getElementById('viewers').style.display = 'block';
 	} else if(document.add.visibility.value == 'registered') {
-		document.getElementById('private_viewers').style.display = 'none';
-		document.getElementById('registered_viewers').style.display = 'block';
+		document.getElementById('viewers').style.display = 'block';
 	} else {
-		document.getElementById('private_viewers').style.display = 'none';
-		document.getElementById('registered_viewers').style.display = 'none';
+		document.getElementById('viewers').style.display = 'none';
 	}
 }
 function toggle_visibility(id){

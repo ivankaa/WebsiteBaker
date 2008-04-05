@@ -40,18 +40,12 @@ $visibility = $admin->get_post('visibility');
 $admin_groups = $admin->get_post('admin_groups');
 $viewing_groups = $admin->get_post('viewing_groups');
 
-// work-around: $viewing_groups contains group-numbers for both private _and_ registered - keep group-numbers which appears twice only
-$view_groups=array();
-if($viewing_groups===NULL)
-	$viewing_groups=array();
-foreach($viewing_groups as $a) {
-	if(isset($view_groups[$a])) $view_groups[$a]++;
-	else $view_groups[$a] = 1;
-}
-$viewing_groups=array();
-foreach($view_groups as $k=>$v) {
-	if($v==2)
-		$viewing_groups[]=$k;
+// add Admin to admin and viewing-groups
+$admin_groups[] = 1;
+if($visibility == 'private' || $visibility == 'registered') {
+	$viewing_groups[] = 1;
+} else {
+	$viewing_groups = array(1);
 }
 
 if ($parent!=0) {
@@ -65,17 +59,6 @@ if ($parent!=0) {
 if($title == '' || substr($title,0,1)=='.') {
 	$admin->print_error($MESSAGE['PAGES']['BLANK_PAGE_TITLE']);
 }
-
-// Setup admin groups
-$admin_groups[] = 1;
-//if(!in_array(1, $admin->get_groups_id())) {
-//	$admin_groups[] = implode(",",$admin->get_groups_id());
-//}
-// Setup viewing groups
-$viewing_groups[] = 1;
-//if(!in_array(1, $admin->get_groups_id())) {
-//	$viewing_groups[] = implode(",",$admin->get_groups_id());
-//}
 
 // Check to see if page created has needed permissions
 if(!in_array(1, $admin->get_groups_id())) {
