@@ -419,7 +419,10 @@ $TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP authenticatie';
 $TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'Enkel wanneer men zich dient aan te melden op de SMTP Host'; 
 $TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP gebruikersnaam'; 
 $TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Paswoord'; 
-$TEXT['PLEASE_LOGIN'] = 'Inloggen aub'; 
+$TEXT['PLEASE_LOGIN'] = 'Inloggen aub';
+$TEXT['CAP_EDIT_CSS'] = 'Wijzig CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Actuele module bestand: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Wijzig de CSS definities in het textveld hieronder.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, u heeft geen bevoegdheden om deze pagina te bekijken';

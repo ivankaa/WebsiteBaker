@@ -420,6 +420,9 @@ $TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires a
 $TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username';
 $TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password';
 $TEXT['PLEASE_LOGIN'] = 'Please login';
+$TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, you do not have permissions to view this page';

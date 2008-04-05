@@ -420,6 +420,9 @@ $TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'nur aktivieren, wenn SMTP Authentifikation
 $TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Benutzername';
 $TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Passwort';
 $TEXT['PLEASE_LOGIN'] = 'Bitte anmelden';
+$TEXT['CAP_EDIT_CSS'] = 'Bearbeite CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Aktuelle Moduldatei: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Bearbeite die CSS Definitionen im nachfolgenden Textfeld.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sie sind nicht berechtigt, diese Seite zu sehen';

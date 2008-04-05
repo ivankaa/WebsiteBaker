@@ -420,6 +420,9 @@ $TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'aktiveres kun hvis din SMTP v&aelig;rt kre
 $TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Brukernavn';
 $TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Passord';
 $TEXT['PLEASE_LOGIN'] = 'Venligst log p&aring;';
+$TEXT['CAP_EDIT_CSS'] = 'Rediger CSS koden';
+$TEXT['HEADING_CSS_FILE'] = 'Faktisk modul fil: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Rediger  CSS koden i tekst viduet nedenfor.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Beklager, du har ikke adgang til &aring; se denne siden';

@@ -419,7 +419,10 @@ $TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP brugeradgangskontrol';
 $TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = '- skal kun anvendes hvis din SMTP-v&aelig;rt bruger adgangskontrol'; 
 $TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP brugernavn'; 
 $TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP adgangskode'; 
-$TEXT['PLEASE_LOGIN'] = 'Log ind'; 
+$TEXT['PLEASE_LOGIN'] = 'Log ind';
+$TEXT['CAP_EDIT_CSS'] = 'Edit CSS'; //needs to be translated
+$TEXT['HEADING_CSS_FILE'] = 'Actual module file: '; //needs to be translated
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.'; //needs to be translated 
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Beklager - du har ikke adgang til at se denne side';

@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 05-Apr-2008 Matthias Gallas
+!	Moved language variables for edit module CSS from modules language files to core language files
 +	Added norwegian translation (Thanks OEH)
 05-Apr-2008 Thomas Hornik
 !	some small fixes: group_id/groups_id-handling, safe_mode-query in install, better work-around for issue with phplib and code-module (removed {})
