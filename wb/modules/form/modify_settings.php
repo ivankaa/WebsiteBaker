@@ -33,8 +33,8 @@ require('../../config.php');
 // Include WB admin wrapper script
 require(WB_PATH.'/modules/admin.php');
 
-// include functions to edit the optional module CSS files (frontend.css, backend.css)
-require_once('css.functions.php');
+// include core functions of WB 2.7 to edit the optional module CSS files (frontend.css, backend.css)
+@include_once(WB_PATH .'/framework/module.functions.php');
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
 if(!file_exists(WB_PATH .'/modules/form/languages/'.LANGUAGE .'.php')) {
@@ -63,10 +63,12 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 ?>
 <h2><?php echo $MOD_FORM['SETTINGS']; ?></h2>
 <?php
-	// include the button to edit the optional module CSS files
-	// Note: CSS styles for the button are defined in backend.css (div class="mod_moduledirectory_edit_css")
-	// Place this call outside of any <form></form> construct!!!
-	css_edit('form');
+// include the button to edit the optional module CSS files
+// Note: CSS styles for the button are defined in backend.css (div class="mod_moduledirectory_edit_css")
+// Place this call outside of any <form></form> construct!!!
+if(function_exists('edit_module_css')) {
+	edit_module_css('form');
+}
 ?>
 
 <form name="edit" action="<?php echo WB_URL; ?>/modules/form/save_settings.php" method="post" style="margin: 0;">
