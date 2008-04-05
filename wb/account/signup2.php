@@ -107,7 +107,7 @@ if($results->numRows() > 0) {
 $md5_password = md5($new_pass);
 
 // Inser the user into the database
-$query = "INSERT INTO ".TABLE_PREFIX."users (groups_id,active,username,password,display_name,email) VALUES ('$groups_id', '$active', '$username','$md5_password','$display_name','$email')";
+$query = "INSERT INTO ".TABLE_PREFIX."users (group_id,groups_id,active,username,password,display_name,email) VALUES ('$groups_id', '$groups_id', '$active', '$username','$md5_password','$display_name','$email')";
 $database->query($query);
 
 if($database->is_error()) {

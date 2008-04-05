@@ -33,6 +33,7 @@ $database = new database();
 
 // Get details entered
 $groups_id = implode(",", $admin->add_slashes($_POST['groups'])); //should check permissions
+$groups_id = trim($groups_id, ','); // there will be an additional ',' when "Please Choose" was selected, too
 $active = $admin->add_slashes($_POST['active'][0]);
 $username_fieldname = $admin->get_post_escaped('username_fieldname');
 $username = strtolower($admin->get_post_escaped($username_fieldname));
@@ -44,10 +45,10 @@ $home_folder = $admin->get_post_escaped('home_folder');
 $default_language = DEFAULT_LANGUAGE;
 
 // Create a javascript back link
-$js_back = "javascript: history.go(-1);";
+$js_back = 'javascript: history.go(-1);';
 
 // Check values
-if($groups_id == "") {
+if($groups_id == '') {
 	$admin->print_error($MESSAGE['USERS']['NO_GROUP'], $js_back);
 }
 if(strlen($username) < 2) {
@@ -59,11 +60,17 @@ if(strlen($password) < 2) {
 if($password != $password2) {
 	$admin->print_error($MESSAGE['USERS']['PASSWORD_MISMATCH'], $js_back);
 }
-if($email != "") {
+if($email != '') {
 	if($admin->validate_email($email) == false) {
 		$admin->print_error($MESSAGE['USERS']['INVALID_EMAIL'], $js_back);
 	}
 }
+
+// choose group_id from groups_id - workaround for still remaining calls to group_id (to be cleaned-up)
+$gid_tmp = explode(',', $groups_id);
+if(in_array('1', $gid_tmp)) $group_id = '1'; // if user is in administrator-group, get this group
+else $group_id = $gid_tmp[0]; // else just get the first one
+unset($gid_tmp);
 
 // Check if username already exists
 $results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE username = '$username'");

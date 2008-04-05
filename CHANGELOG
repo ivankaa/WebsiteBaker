@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+05-Apr-2008 Thomas Hornik
+!	some small fixes: group_id/groups_id-handling, safe_mode-query in install, better work-around for issue with phplib and code-module (removed {})
 05-Apr-2008 Christian Sommer
 !	added workaround for template parser class
 !	moved functions to edit module CSS files into the WB core to avoid duplication of code
