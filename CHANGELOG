@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 05-Apr-2008 Christian Sommer
+!	added workaround for template parser class
 !	moved functions to edit module CSS files into the WB core to avoid duplication of code
 !	minor layout change
 !	allowed the character "-" to be used in database names
