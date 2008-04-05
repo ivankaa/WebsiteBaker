@@ -336,7 +336,7 @@ function change_os(type) {
 			</td>
 		</tr>
 		<tr>
-			<td style="color: #666666;">Database Name:<br />[a-zA-Z0-9_]</td>
+			<td style="color: #666666;">Database Name:<br />[a-zA-Z0-9_-]</td>
 			<td>
 				<input <?php echo field_error('database_name');?> type="text" tabindex="8" name="database_name" style="width: 98%;" value="<?php if(isset($_SESSION['database_name'])) { echo $_SESSION['database_name']; } else { echo 'wb'; } ?>" />
 			</td>
