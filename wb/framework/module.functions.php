@@ -101,8 +101,7 @@ if (!function_exists('toggle_css_file')) {
 		$toggle_file = ($base_css_file == 'frontend.css') ? 'backend.css' : 'frontend.css';
 		if(mod_file_exists($mod_dir, $toggle_file)) {
 			?>
-			<form name="toggle_module_file" action="<?php echo WB_URL .'/modules/edit_module_files.php?page_id='.$page_id;?>" 
-				method="post" style="margin: 0; align:right;">
+			<form name="toggle_module_file" action="<?php echo WB_URL .'/modules/edit_module_files.php?page_id='.$page_id;?>" method="post" style="margin: 0; align:right;">
 				<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
 				<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
 				<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>">
