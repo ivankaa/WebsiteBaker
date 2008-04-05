@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 05-Apr-2008 Christian Sommer
+!	minor layout change
 !	allowed the character "-" to be used in database names
 04-Apr-2008 Thomas Hornik
 #	fixed: Language-redirect removed query-string from URL
