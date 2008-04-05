@@ -14,6 +14,7 @@ Legend:
 05-Apr-2008 Thomas Hornik
 !	some small fixes: group_id/groups_id-handling, safe_mode-query in install, better work-around for issue with phplib and code-module (removed {})
 #	fixed viewing_groups-handling in /admin/pages/add.php
+!	imported new russian translation from User shlack. Many Thanks
 05-Apr-2008 Christian Sommer
 !	added workaround for template parser class
 !	moved functions to edit module CSS files into the WB core to avoid duplication of code
