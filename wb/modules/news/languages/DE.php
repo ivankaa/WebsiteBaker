@@ -29,9 +29,4 @@ $module_description = 'Mit diesem Modul k&ouml;nnen sie eine News Seite ihrer Se
 //Variablen fuer backend Texte
 $MOD_NEWS['SETTINGS'] = 'News Einstellungen';
 
-// Variablen fuer Textausgabe der frontend.css/backend.css Bearbeitung
-$CAP_EDIT_CSS = 'Bearbeite CSS';
-$HEADING_CSS_FILE = 'Aktuelle Moduldatei: ';
-$TXT_EDIT_CSS_FILE = 'Bearbeite die CSS Definitionen im nachfolgenden Textfeld.';
-
 ?>

@@ -29,9 +29,4 @@ $module_description = 'Met deze module maak je een nieuwspagina.';
 //Variables for the  backend
 $MOD_NEWS['SETTINGS'] = 'Eigenschappen van de Nieuwsmodule';
 
-// Variables for the module CSS edit outputs
-$CAP_EDIT_CSS = 'Wijzig CSS';
-$HEADING_CSS_FILE = 'Actuele module bestand: ';
-$TXT_EDIT_CSS_FILE = 'Wijzig de CSS definities in het textveld hieronder.';
-
 ?>

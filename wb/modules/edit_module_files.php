@@ -40,25 +40,13 @@ require(WB_PATH.'/modules/admin.php');
 
 // leave if the required module.functions.php file does not exist
 if(!file_exists(WB_PATH .'/framework/module.functions.php')) {
-	echo 'Uups, the required file: /framework/module.functions.php is missing - script stopped.';
+	echo 'The required file: /framework/module.functions.php is missing - script stopped.';
 	die;
 }
 
-/**
-	DEFINE LANGUAGE DEPENDING OUTPUTS FOR THE EDIT CSS PART
-*/
-$lang_dir = WB_PATH .'/modules/' .$_POST['mod_dir'] .'/languages/';
-if(file_exists($lang_dir .LANGUAGE .'.php')) {
-	// try to include custom language file if exists
-	require_once($lang_dir .LANGUAGE .'.php');
-} elseif(file_exists($lang_dir .'EN.php')) {
-	// try to include default module language file
-	require_once($lang_dir .'EN.php');
-}
-
-// set defaults if output varibles are not set in the languages files
-if(!isset($HEADING_CSS_FILE))	$HEADING_CSS_FILE = 'Actual module file: ';
-if(!isset($TXT_EDIT_CSS_FILE)) $TXT_EDIT_CSS_FILE = 'Edit the CSS definitions in the textarea below.';
+// set default text output if varibles are not defined in the global WB language files
+$HEADING_CSS_FILE = (isset($GLOBALS['TEXT']['HEADING_CSS_FILE'])) ?$GLOBALS['TEXT']['HEADING_CSS_FILE'] :'Actual module file: ';
+$TXT_EDIT_CSS_FILE = (isset($GLOBALS['TEXT']['TXT_EDIT_CSS_FILE'])) ?$GLOBALS['TEXT']['TXT_EDIT_CSS_FILE'] :'Edit the CSS definitions in the textarea below.';
 
 // include functions to edit the optional module CSS files (frontend.css, backend.css)
 require_once(WB_PATH .'/framework/module.functions.php');

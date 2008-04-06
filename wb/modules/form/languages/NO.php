@@ -29,9 +29,4 @@ $module_description = 'Med denne modulen kan du lage d&iacute;ne egne spesialtil
 //Variables for the  backend
 $MOD_FORM['SETTINGS'] = 'Skjema Innstillinger';
   
-// Variables for the module CSS edit outputs
-$CAP_EDIT_CSS = 'Rediger CSS koden';
-$HEADING_CSS_FILE = 'Faktisk modul fil: ';
-$TXT_EDIT_CSS_FILE = 'Rediger  CSS koden i tekst viduet nedenfor.';
-  
 ?>

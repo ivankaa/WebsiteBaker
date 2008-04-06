@@ -54,7 +54,8 @@ if (!function_exists('mod_file_exists')) {
 // this function displays the "Edit CSS" button in modify.php 
 if (!function_exists('edit_module_css')) {
 	function edit_module_css($mod_dir) {
-		global $page_id, $section_id, $CAP_EDIT_CSS;
+		global $page_id, $section_id;
+				
 		// check if the required edit_module_css.php file exists
 		if(!file_exists(WB_PATH .'/modules/edit_module_files.php')) return;
 		
@@ -67,8 +68,8 @@ if (!function_exists('edit_module_css')) {
 		
 		// output the edit CSS submtin button if required
 		if($frontend_css || $backend_css) {
-			// default text used for the edit CSS routines if not defined in the modules language file
-			if(!isset($CAP_EDIT_CSS)) $CAP_EDIT_CSS	= 'Edit CSS';
+			// default text used for the edit CSS routines if not defined in the WB core language files
+			$edit_css_caption = (isset($GLOBALS['TEXT']['CAP_EDIT_CSS'])) ?$GLOBALS['TEXT']['CAP_EDIT_CSS'] :'Edit CSS';
 			?>
 			<form name="edit_module_file" action="<?php echo WB_URL .'/modules/edit_module_files.php?page_id='.$page_id;?>" 
 				method="post" style="margin: 0; align:right;">
@@ -77,7 +78,7 @@ if (!function_exists('edit_module_css')) {
 				<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>">
 				<input type="hidden" name="edit_file" value="<?php echo ($frontend_css) ?'frontend.css' : 'backend.css';?>">
 				<input type="hidden" name="action" value="edit">
-				<input type="submit" value="<?php echo $CAP_EDIT_CSS;?>" class="mod_<?php echo $mod_dir;?>_edit_css">
+				<input type="submit" value="<?php echo $edit_css_caption;?>" class="mod_<?php echo $mod_dir;?>_edit_css">
 			</form>
 			<?php
     }

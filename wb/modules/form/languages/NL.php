@@ -29,9 +29,4 @@ $module_description = 'Deze module makt het mogelijk om aangepaste online formul
 //Variables for the  backend
 $MOD_FORM['SETTINGS'] = 'Formulier instellingen';
 
-// Variables for the module CSS edit outputs
-$CAP_EDIT_CSS = 'Wijzig CSS';
-$HEADING_CSS_FILE = 'Actuele module bestand: ';
-$TXT_EDIT_CSS_FILE = 'Wijzig de CSS definities in het textveld hieronder.';
-
 ?>

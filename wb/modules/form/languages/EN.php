@@ -29,9 +29,4 @@ $module_description = 'This module allows you to create customised online forms,
 //Variables for the  backend
 $MOD_FORM['SETTINGS'] = 'Form Settings';
 
-// Variables for the module CSS edit outputs
-$CAP_EDIT_CSS = 'Edit CSS';
-$HEADING_CSS_FILE = 'Actual module file: ';
-$TXT_EDIT_CSS_FILE = 'Edit the CSS definitions in the textarea below.';
-
 ?>

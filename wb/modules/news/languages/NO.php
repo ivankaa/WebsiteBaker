@@ -29,9 +29,4 @@ $module_description = 'Denne sidetypen er ment for &aring; kunne lage Nyhets sid
 //Variables for the  backend
 $MOD_NEWS['SETTINGS'] = 'Innstillinger for Nyheter';
   
-// Variables for the module CSS edit outputs
-$CAP_EDIT_CSS = 'Rediger CSS koden';
-$HEADING_CSS_FILE = 'Faktisk modul fil: ';
-$TXT_EDIT_CSS_FILE = 'Rediger  CSS koden i tekst viduet nedenfor.';
-
 ?>
