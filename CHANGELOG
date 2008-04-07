@@ -14,6 +14,7 @@ Legend:
 07-Apr-2008 Matthias Gallas
 #	fixed error in german laguage file
 07-Apr-2008 Christian Sommer
++	added the latest FCKEditor v2.60
 -	removed the outdated FCKEditor v2.51
 !	set version from 2.7 (RC3) to 2.7 (RC3a)
 07-Apr-2008 Thomas Hornik
