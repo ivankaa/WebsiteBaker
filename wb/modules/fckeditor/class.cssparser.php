@@ -28,7 +28,7 @@
  *
  * See the readme file : http://www.phpclasses.org/browse/file/4685.html
  *
- * $Id: class.cssparser.php 559 2008-01-18 19:12:51Z Ruebenwurzel $
+ * $Id$
  *
  * @author http://www.phpclasses.org/browse/package/1289.html
  * @package PhpGedView
