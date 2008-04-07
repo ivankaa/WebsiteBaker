@@ -153,7 +153,7 @@ function change_os(type) {
 			<td width="115" style="color: #666666;">PHP Safe Mode</td>
 			<td>
 				<?php
-				if(ini_get('safe_mode')=='' || stripos(ini_get('safe_mode'), 'off')!==FALSE || ini_get('safe_mode')==0) {
+				if(ini_get('safe_mode')=='' || strpos(strtolower(ini_get('safe_mode')), 'off')!==FALSE || ini_get('safe_mode')==0) {
 					?><font class="good">Disabled</font><?php
 				} else {
 					?><font class="bad">Enabled</font><?php
