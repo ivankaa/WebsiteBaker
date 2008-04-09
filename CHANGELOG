@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+07-Apr-2008 Christian Sommer
+!	modified FCKEditor WB-Link Plugin to work also with WB versions below 2.7
 07-Apr-2008 Matthias Gallas
 #	fixed error in german laguage file
 07-Apr-2008 Christian Sommer
