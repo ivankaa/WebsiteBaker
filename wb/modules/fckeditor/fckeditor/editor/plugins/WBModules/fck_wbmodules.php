@@ -40,7 +40,8 @@ function gen_page_list($parent) {
 	global $template, $database, $admin;
 	$get_pages = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent'");
 	while($page = $get_pages->fetchRow()) {
-		if(!$admin->page_is_visible($page))
+		// method page_is_visible was introduced with WB 2.7
+		if(method_exists($admin, 'page_is_visible') && !$admin->page_is_visible($page))
 			continue;
 		$title = stripslashes($page['menu_title']);
 		// Add leading -'s so we can tell what level a page is at

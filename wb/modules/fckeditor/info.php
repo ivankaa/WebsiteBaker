@@ -26,7 +26,9 @@
   Authors: P. Widlund, S. Braunewell, M. Gallas (ruebenwurzel), Wouldlouper, C. Sommer (doc)
 	Started to track applied changes in info.php from 27.03.2007 onwards (cs)
  -----------------------------------------------------------------------------------------------------------
-	
+	v2.85 (doc.. Christian Sommer; Apr 10, 2008)
+		+	fixed WB-Link Plugin to work with WB versions below 2.7 ($admin->page_is_visible() only available in WB 2.7)
+
 	v2.84 (doc.. Christian Sommer; Apr 7, 2008)
 		+ update to FCKEditor release v2.6
 	
@@ -106,7 +108,7 @@
 $module_directory		= 'fckeditor';
 $module_name				= 'FCKeditor';
 $module_function		= 'WYSIWYG';
-$module_version			= '2.84';
+$module_version			= '2.85';
 $module_platform		= '2.6.x';
 $module_author 			= 'Christian Sommer, P. Widlund, S. Braunewell, M. Gallas, Wouldlouper';
 $module_license 		= 'GNU General Public License';
