@@ -4,28 +4,30 @@
 
 /*
 
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+Website Baker Project <http://www.websitebaker.org/>
+Copyright (C) 2004-2008, Ryan Djurovich
 
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Website Baker is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Website Baker is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with Website Baker; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
+// use languageedit-module to modify this file
+
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
-	define('LANGUAGE_LOADED', true);
+define('LANGUAGE_LOADED', true);
 }
 
 // Set the language information
@@ -46,7 +48,7 @@ $MENU['TEMPLATES'] = 'Skabeloner';
 $MENU['LANGUAGES'] = 'Sprog';
 $MENU['PREFERENCES'] = 'Pr&aelig;ferencer';
 $MENU['SETTINGS'] = 'Indstillinger';
-$MENU['ADMINTOOLS'] = 'Admin-v&aelig;rkt&aring;jer'; 
+$MENU['ADMINTOOLS'] = 'Admin-v&aelig;rkt&aring;jer';
 $MENU['ACCESS'] = 'Adgang';
 $MENU['USERS'] = 'Brugere';
 $MENU['GROUPS'] = 'Grupper';
@@ -69,7 +71,7 @@ $OVERVIEW['USERS'] = 'Administr&eacute;r brugere som kan logge ind p&aring; Webs
 $OVERVIEW['GROUPS'] = 'Administr&eacute;r brugergrupper og deres systemrettigheder...';
 $OVERVIEW['HELP'] = 'Sp&oslash;rgsm&aring;l? Find dine svar her...';
 $OVERVIEW['VIEW'] = 'Hurtig visning og gennemsyn af dit Websted i et nyt vindue..';
-$OVERVIEW['ADMINTOOLS'] = 'Website Baker administrationsv&aelig;rkt&oslash;jer...'; 
+$OVERVIEW['ADMINTOOLS'] = 'Website Baker administrationsv&aelig;rkt&oslash;jer...';
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Ret/slet side';
@@ -338,7 +340,7 @@ $TEXT['START'] = 'Start';
 $TEXT['SECTION_BLOCKS'] = 'Sektionsblokke';
 $TEXT['REGISTERED_VIEWERS'] = 'Registrerede brugere';
 $TEXT['ALLOWED_VIEWERS'] = 'Tilladte brugere';
-$TEXT['SUBMISSION_ID'] ='Tilmeldings-ID';
+$TEXT['SUBMISSION_ID'] = 'Tilmeldings-ID';
 $TEXT['SUBMISSIONS'] = 'Indsendte bidrag';
 $TEXT['SUBMITTED'] = 'Indsendt';
 $TEXT['MAX_SUBMISSIONS_PER_HOUR'] = 'Max. indsendte bidrag pr. time';
@@ -376,7 +378,7 @@ $TEXT['LAST_UPDATED_BY'] = 'Sidst opdateret af:';
 $TEXT['RESULTS_FOR'] = 'Resultater for';
 $TEXT['TIME'] = 'Tid';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG-stil';
-$TEXT['WYSIWYG_EDITOR'] = "WYSIWYG-editor";
+$TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG-editor';
 $TEXT['SERVER_EMAIL'] = 'Server email';
 $TEXT['MENU'] = 'Menu';
 $TEXT['MANAGE_GROUPS'] = 'Administr&eacute;r grupper';
@@ -402,31 +404,31 @@ $TEXT['DEFAULT_CHARSET'] = 'Standard tegns&aelig;t';
 $TEXT['CHARSET'] = 'Tegns&aelig;t';
 $TEXT['MODULE_ORDER'] = 'Modul-r&aelig;kkef&oslash;lge ved s&oslash;gning';
 $TEXT['MAX_EXCERPT'] = 'Max linier i uddrag';
-$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module'; //needs to be translated
+$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module';
 $TEXT['PUBL_START_DATE'] = 'Startdato';
-$TEXT['PUBL_END_DATE'] = 'Slutdato'; 
-$TEXT['CALENDAR'] = 'Kalender'; 
-$TEXT['DELETE_DATE'] = 'Slettet-dato'; 
+$TEXT['PUBL_END_DATE'] = 'Slutdato';
+$TEXT['CALENDAR'] = 'Kalender';
+$TEXT['DELETE_DATE'] = 'Slettet-dato';
 $TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Angiv standard "FRA"-adresse og "AFSENDER"-navn nedenfor. Det anbefales at angive FRA-adresse som: <strong>admin@dit-dom&aelig;ne.dk</strong>. Nogle udbydere (f.eks. <em>mail.com</em>) kan afvise emails med en FRA-adresse som <em>navn@mail.com</em>, hvis de er sendt via en anden udbyger, for at undg&aring; spam.<br /><br />Standardv&aelig;rdierne benyttes kun hvis ingen andre v&aelig;rdier angives i Website Baker. Hvis din server underst&oslash;tter <acronym title="Simple mail transfer protocol">SMTP</acronym>, kan du v&aelig;lge at bruge denne til udg&aring;ende emails.';
-$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Standard fra-adresse'; 
-$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Standard afsendernavn'; 
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP mail-program indstillinger:</strong><br />Indstillingerne nedenfor er kun n&oslash;dvendige, hvis du vil sende emails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. Hvis du ikke kender adressen p&aring; sin SMTP-v&aelig;rt eller de kr&aelig;vede indstillinger, s&aring; hold dig til standardprogrammet, PHP MAIL.'; 
-$TEXT['WBMAILER_FUNCTION'] = 'Mailprogram'; 
-$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP-v&aelig;rt'; 
-$TEXT['WBMAILER_PHP'] = 'PHP MAIL'; 
-$TEXT['WBMAILER_SMTP'] = 'SMTP'; 
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP brugeradgangskontrol'; 
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = '- skal kun anvendes hvis din SMTP-v&aelig;rt bruger adgangskontrol'; 
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP brugernavn'; 
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP adgangskode'; 
+$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Standard fra-adresse';
+$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Standard afsendernavn';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP mail-program indstillinger:</strong><br />Indstillingerne nedenfor er kun n&oslash;dvendige, hvis du vil sende emails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. Hvis du ikke kender adressen p&aring; sin SMTP-v&aelig;rt eller de kr&aelig;vede indstillinger, s&aring; hold dig til standardprogrammet, PHP MAIL.';
+$TEXT['WBMAILER_FUNCTION'] = 'Mailprogram';
+$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP-v&aelig;rt';
+$TEXT['WBMAILER_PHP'] = 'PHP MAIL';
+$TEXT['WBMAILER_SMTP'] = 'SMTP';
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP brugeradgangskontrol';
+$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = '- skal kun anvendes hvis din SMTP-v&aelig;rt bruger adgangskontrol';
+$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP brugernavn';
+$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP adgangskode';
 $TEXT['PLEASE_LOGIN'] = 'Log ind';
-$TEXT['CAP_EDIT_CSS'] = 'Edit CSS'; //needs to be translated
-$TEXT['HEADING_CSS_FILE'] = 'Actual module file: '; //needs to be translated
-$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.'; //needs to be translated 
+$TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Beklager - du har ikke adgang til at se denne side';
-$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Beklager - intet aktivit indhold at vise'; 
+$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Beklager - intet aktivit indhold at vise';
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Du har ikke den forn&oslash;dne adgang til dette omr&aring;de';
 
@@ -546,14 +548,14 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Afinstalleret';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kan ikke skrive i det valgte modtagebibliotek';
 $MESSAGE['GENERIC']['INVALID'] = 'Filen du uploadede er fejlbeh&aelig;ftet';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kan ikke afinstallere: Den valgte fil er i brug!';
-$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'] = 'Hjemmesiden er under opbygning';
+$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Kom venligst igen senere...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'V&aelig;r venligst t&aring;lmodig, dette kan godt vare et stykke tid.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Fejl ved &aring;bning af filen.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du SKAL udfylde f&oslash;lgende felter:';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Beklager! Denne formular er blevet afsendt for mange gange indenfor den sidste time, og du vil derfor blive afvist - Pr&oslash;v igen om en times tid!';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Verifikations tallene (ogs&aring; kendt som Captcha) som du tastede er ikke korrekte. Hvis du har problemer med at l&aelig;se Captha tallene, s&aring; kontakt venligst sidens Administrator p&aring; denne mailadresse: '.SERVER_EMAIL;
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Verifikations tallene (ogs&aring; kendt som Captcha) som du tastede er ikke korrekte. Hvis du har problemer med at l&aelig;se Captha tallene, s&aring; kontakt venligst sidens Administrator p&aring; denne mailadresse: '.SERVER_EMAIL.'';
 
 $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'V&aelig;lg venligst hvilke add-ons du vil have opdateret';
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduler opdateret med succes';

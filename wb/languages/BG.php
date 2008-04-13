@@ -4,28 +4,30 @@
 
 /*
 
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+Website Baker Project <http://www.websitebaker.org/>
+Copyright (C) 2004-2008, Ryan Djurovich
 
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Website Baker is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Website Baker is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with Website Baker; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
+// use languageedit-module to modify this file
+
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
-	define('LANGUAGE_LOADED', true);
+define('LANGUAGE_LOADED', true);
 }
 
 // Set the language information
@@ -46,7 +48,7 @@ $MENU['TEMPLATES'] = '&#1064;&#1072;&#1073;&#1083;&#1086;&#1085;&#1080;';
 $MENU['LANGUAGES'] = '&#1045;&#1079;&#1080;&#1094;&#1080;';
 $MENU['PREFERENCES'] = '&#1055;&#1088;&#1077;&#1076;&#1087;&#1086;&#1095;&#1080;&#1090;&#1072;&#1085;&#1080;&#1103;';
 $MENU['SETTINGS'] = '&#1053;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080;';
-$MENU['ADMINTOOLS'] = 'Admin-Tools'; //needs to be translated
+$MENU['ADMINTOOLS'] = 'Admin-Tools';
 $MENU['ACCESS'] = '&#1044;&#1086;&#1089;&#1090;&#1098;&#1087;';
 $MENU['USERS'] = '&#1055;&#1086;&#1090;&#1088;&#1077;&#1073;&#1080;&#1090;&#1077;&#1083;&#1080;';
 $MENU['GROUPS'] = '&#1043;&#1088;&#1091;&#1087;&#1080;';
@@ -68,8 +70,8 @@ $OVERVIEW['SETTINGS'] = '&#1057;&#1084;&#1077;&#1085;&#1080; &#1085;&#1072;&#108
 $OVERVIEW['USERS'] = '&#1059;&#1087;&#1088;&#1072;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077; &#1085;&#1072; &#1087;&#1086;&#1090;&#1088;&#1077;&#1073;&#1080;&#1090;&#1077;&#1083;&#1080;&#1090;&#1077; &#1084;&#1086;&#1078;&#1077;&#1097;&#1080; &#1076;&#1072; &#1074;&#1083;&#1103;&#1079;&#1072;&#1090; &#1074; Website Baker...';
 $OVERVIEW['GROUPS'] = '&#1059;&#1087;&#1088;&#1072;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077; &#1085;&#1072; &#1087;&#1086;&#1090;&#1088;&#1077;&#1073;&#1080;&#1090;&#1077;&#1083;&#1089;&#1082;&#1080;&#1090;&#1077; &#1075;&#1088;&#1091;&#1087;&#1080; &#1080; &#1090;&#1103;&#1093;&#1085;&#1080;&#1090;&#1077; &#1087;&#1088;&#1072;&#1074;&#1072;...';
 $OVERVIEW['HELP'] = '&#1048;&#1084;&#1072;&#1090;&#1077; &#1074;&#1098;&#1087;&#1088;&#1086;&#1089;&#1080;? &#1053;&#1072;&#1084;&#1077;&#1088;&#1077;&#1090;&#1077; &#1086;&#1090;&#1075;&#1086;&#1074;&#1086;&#1088;...';
-$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
 $OVERVIEW['VIEW'] = '&#1042;&#1080;&#1078; &#1089;&#1074;&#1086;&#1103; &#1089;&#1072;&#1081;&#1090; &#1074; &#1085;&#1086;&#1074; &#1087;&#1088;&#1086;&#1079;&#1086;&#1088;&#1077;&#1094;...';
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...';
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = '&#1055;&#1088;&#1086;&#1084;&#1077;&#1085;&#1080;/&#1048;&#1079;&#1090;&#1088;&#1080;&#1081; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1072;';
@@ -107,7 +109,7 @@ $HEADING['DEFAULT_SETTINGS'] = '&#1053;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081
 $HEADING['SEARCH_SETTINGS'] = '&#1053;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080; &#1090;&#1098;&#1088;&#1089;&#1077;&#1085;&#1077;';
 $HEADING['FILESYSTEM_SETTINGS'] = '&#1053;&#1072;&#1089;&#1090;&#1088;&#1081;&#1082;&#1080; &#1092;&#1072;&#1081;&#1083;&#1086;&#1074;&#1072; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084;&#1072;';
 $HEADING['SERVER_SETTINGS'] = '&#1053;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080; &#1089;&#1098;&#1088;&#1074;&#1098;&#1088;';
-$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings'; //needs to be translated
+$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings';
 $HEADING['ADMINISTRATION_TOOLS'] = '&#1040;&#1076;&#1084;&#1080;&#1085;&#1080;&#1089;&#1090;&#1088;&#1072;&#1090;&#1080;&#1074;&#1085;&#1080; &#1080;&#1085;&#1089;&#1090;&#1088;&#1091;&#1084;&#1077;&#1085;&#1090;&#1080;';
 
 $HEADING['MODIFY_DELETE_USER'] = '&#1055;&#1088;&#1086;&#1084;&#1077;&#1085;&#1080;/&#1048;&#1079;&#1090;&#1088;&#1080;&#1081; &#1087;&#1086;&#1090;&#1088;&#1077;&#1073;&#1080;&#1090;&#1077;&#1083;';
@@ -119,7 +121,7 @@ $HEADING['ADD_GROUP'] = '&#1044;&#1086;&#1073;&#1072;&#1074;&#1080; &#1075;&#108
 $HEADING['MODIFY_GROUP'] = '&#1055;&#1088;&#1086;&#1084;&#1077;&#1085;&#1080; &#1075;&#1088;&#1091;&#1087;&#1072;';
 
 // Other text
-$TEXT['OPEN'] = 'Open'; //needs to be translated
+$TEXT['OPEN'] = 'Open';
 $TEXT['ADD'] = '&#1044;&#1086;&#1073;&#1072;&#1074;&#1080;';
 $TEXT['MODIFY'] = '&#1055;&#1088;&#1086;&#1084;&#1077;&#1085;&#1080;';
 $TEXT['SETTINGS'] = '&#1053;&#1072;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1080;';
@@ -225,7 +227,7 @@ $TEXT['WELCOME_BACK'] = '&#1044;&#1086;&#1073;&#1088;&#1077; &#1076;&#1086;&#109
 $TEXT['FULL_NAME'] = '&#1055;&#1098;&#1083;&#1085;&#1086; &#1080;&#1084;&#1077;';
 $TEXT['ACCOUNT_SIGNUP'] = '&#1056;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1072;&#1094;&#1080;&#1103;';
 $TEXT['LINK'] = '&#1042;&#1088;&#1098;&#1079;&#1082;&#1072;';
-$TEXT['ANCHOR'] = 'Anchor'; //needs to be translated
+$TEXT['ANCHOR'] = 'Anchor';
 $TEXT['TARGET'] = '&#1062;&#1077;&#1083;';
 $TEXT['NEW_WINDOW'] = '&#1053;&#1086;&#1074; &#1087;&#1088;&#1086;&#1079;&#1086;&#1088;&#1077;&#1094;';
 $TEXT['SAME_WINDOW'] = '&#1057;&#1098;&#1097;&#1080;&#1103; &#1087;&#1088;&#1086;&#1079;&#1086;&#1088;&#1077;&#1094;';
@@ -400,29 +402,29 @@ $TEXT['CAPTCHA_VERIFICATION'] = 'Captcha &#1087;&#1088;&#1086;&#1074;&#1077;&#10
 $TEXT['VERIFICATION'] = '&#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1072;';
 $TEXT['DEFAULT_CHARSET'] = '&#1050;&#1086;&#1076;&#1086;&#1074;&#1072; &#1090;&#1072;&#1073;&#1083;&#1080;&#1094;&#1072; &#1087;&#1086; &#1087;&#1086;&#1076;&#1088;&#1072;&#1079;&#1073;&#1080;&#1088;&#1072;&#1085;&#1077;';
 $TEXT['CHARSET'] = '&#1050;&#1086;&#1076;&#1086;&#1074;&#1072; &#1090;&#1072;&#1073;&#1083;&#1080;&#1094;&#1072;';
-$TEXT['MODULE_ORDER'] = 'Module-order for searching'; //needs to be translated
-$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt'; //needs to be translated
-$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module'; //needs to be translated
-$TEXT['PUBL_START_DATE'] = 'Start date'; //needs to be translated
-$TEXT['PUBL_END_DATE'] = 'End date'; //needs to be translated
-$TEXT['CALENDAR'] = 'Calender'; //needs to be translated
-$TEXT['DELETE_DATE'] = 'Delete date'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name'; //needs to be translated
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.'; //needs to be translated
-$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine'; //needs to be translated
-$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host'; //needs to be translated
-$TEXT['WBMAILER_PHP'] = 'PHP MAIL'; //needs to be translated
-$TEXT['WBMAILER_SMTP'] = 'SMTP'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username'; //needs to be translated
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password'; //needs to be translated
-$TEXT['PLEASE_LOGIN'] = 'Please login'; //needs to be translated
-$TEXT['CAP_EDIT_CSS'] = 'Edit CSS'; //needs to be translated
-$TEXT['HEADING_CSS_FILE'] = 'Actual module file: '; //needs to be translated
-$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.'; //needs to be translated 
+$TEXT['MODULE_ORDER'] = 'Module-order for searching';
+$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt';
+$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module';
+$TEXT['PUBL_START_DATE'] = 'Start date';
+$TEXT['PUBL_END_DATE'] = 'End date';
+$TEXT['CALENDAR'] = 'Calender';
+$TEXT['DELETE_DATE'] = 'Delete date';
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.';
+$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail';
+$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.';
+$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine';
+$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
+$TEXT['WBMAILER_PHP'] = 'PHP MAIL';
+$TEXT['WBMAILER_SMTP'] = 'SMTP';
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification';
+$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification';
+$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username';
+$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password';
+$TEXT['PLEASE_LOGIN'] = 'Please login';
+$TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = '&#1057;&#1098;&#1078;&#1072;&#1083;&#1103;&#1074;&#1072;&#1084;&#1077; ,&#1085;&#1086; &#1085;&#1103;&#1084;&#1072;&#1090;&#1077; &#1088;&#1072;&#1079;&#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1076;&#1072; &#1074;&#1080;&#1076;&#1080;&#1090;&#1077; &#1090;&#1072;&#1079;&#1080; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1072;';
@@ -553,11 +555,11 @@ $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = '&#1043;&#1088;&#1077;&#1096;&#1082;
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = '&#1058;&#1088;&#1103;&#1073;&#1074;&#1072; &#1076;&#1072; &#1087;&#1086;&#1087;&#1098;&#1083;&#1085;&#1080;&#1090;&#1077; &#1089;&#1083;&#1077;&#1076;&#1085;&#1080;&#1090;&#1077; &#1087;&#1086;&#1083;&#1077;&#1090;&#1072;';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = '&#1057;&#1098;&#1078;&#1072;&#1083;&#1103;&#1074;&#1072;&#1084;&#1077;, &#1090;&#1086;&#1079;&#1080; &#1092;&#1086;&#1088;&#1091;&#1083;&#1103;&#1088; &#1077; &#1087;&#1086;&#1076;&#1072;&#1076;&#1077;&#1085; &#1087;&#1086;&#1074;&#1077;&#1095;&#1077; &#1087;&#1098;&#1090;&#1080; &#1086;&#1090; &#1087;&#1086;&#1079;&#1074;&#1086;&#1083;&#1077;&#1085;&#1086;&#1090;&#1086; &#1087;&#1088;&#1077;&#1079; &#1090;&#1086;&#1079;&#1080; &#1095;&#1072;&#1089;. &#1054;&#1087;&#1080;&#1090;&#1072;&#1081;&#1090;&#1077; &#1086;&#1090;&#1085;&#1086;&#1074;&#1077; &#1087;&#1086; &#1074;&#1088;&#1077;&#1084;&#1077; &#1085;&#1072; &#1089;&#1083;&#1077;&#1076;&#1074;&#1072;&#1097;&#1080; &#1095;&#1072;&#1089;.';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = '&#1050;&#1086;&#1085;&#1090;&#1088;&#1086;&#1083;&#1085;&#1080;&#1103; &#1085;&#1086;&#1084;&#1077;&#1088; (&#1087;&#1086;&#1079;&#1072;&#1085;&#1090; &#1082;&#1072;&#1090;&#1086; Captcha) &#1077; &#1075;&#1088;&#1077;&#1096;&#1077;&#1085;. &#1040;&#1082;&#1086; &#1080;&#1084;&#1072;&#1090;&#1077; &#1087;&#1088;&#1086;&#1073;&#1083;&#1077;&#1084; &#1089; &#1095;&#1077;&#1090;&#1077;&#1085;&#1077;&#1090;&#1086; &#1085;&#1072; Captcha, &#1080;&#1079;&#1087;&#1088;&#1072;&#1090;&#1077;&#1090;&#1077; e-mail &#1085;&#1072;: '.SERVER_EMAIL;
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = '&#1050;&#1086;&#1085;&#1090;&#1088;&#1086;&#1083;&#1085;&#1080;&#1103; &#1085;&#1086;&#1084;&#1077;&#1088; (&#1087;&#1086;&#1079;&#1072;&#1085;&#1090; &#1082;&#1072;&#1090;&#1086; Captcha) &#1077; &#1075;&#1088;&#1077;&#1096;&#1077;&#1085;. &#1040;&#1082;&#1086; &#1080;&#1084;&#1072;&#1090;&#1077; &#1087;&#1088;&#1086;&#1073;&#1083;&#1077;&#1084; &#1089; &#1095;&#1077;&#1090;&#1077;&#1085;&#1077;&#1090;&#1086; &#1085;&#1072; Captcha, &#1080;&#1079;&#1087;&#1088;&#1072;&#1090;&#1077;&#1090;&#1077; e-mail &#1085;&#1072;: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you would like to have reloaded'; //needs to be translated
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully'; //needs to be translated
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully'; //needs to be translated
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully'; //needs to be translated
+$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you would like to have reloaded';
+$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully';
+$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully';
+$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully';
 
 ?>

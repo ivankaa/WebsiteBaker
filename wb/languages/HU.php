@@ -4,28 +4,30 @@
 
 /*
 
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+Website Baker Project <http://www.websitebaker.org/>
+Copyright (C) 2004-2008, Ryan Djurovich
 
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Website Baker is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Website Baker is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with Website Baker; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
+// use languageedit-module to modify this file
+
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
-	define('LANGUAGE_LOADED', true);
+define('LANGUAGE_LOADED', true);
 }
 
 // Set the language information
@@ -46,7 +48,7 @@ $MENU['TEMPLATES'] = 'Sablonok';
 $MENU['LANGUAGES'] = 'Nyelvek';
 $MENU['PREFERENCES'] = 'Saj&aacute;t adatok';
 $MENU['SETTINGS'] = 'Param&eacute;terek';
-$MENU['ADMINTOOLS'] = 'Admin-Tools'; //needs to be translated
+$MENU['ADMINTOOLS'] = 'Admin-Tools';
 $MENU['ACCESS'] = 'Jogosults&aacute;gok';
 $MENU['USERS'] = 'Felhaszn&aacute;l&oacute;k';
 $MENU['GROUPS'] = 'Csoportok';
@@ -69,7 +71,7 @@ $OVERVIEW['USERS'] = 'Felhaszn&aacute;l&oacute;k bejelentkez&eacute;si enged&eac
 $OVERVIEW['GROUPS'] = 'Csoportok &eacute;s azok rendszer jogainak kezel&eacute;se...';
 $OVERVIEW['HELP'] = 'K&eacute;rd&eacute;sed van? itt tal&aacute;lsz v&aacute;laszt...  (Angol)';
 $OVERVIEW['VIEW'] = 'A k&eacute;sz Port&aacute;l megtekint&eacute;se &uacute;j ablakban...';
-$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...';
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Lap m&oacute;dos&iacute;t&aacute;sa/T&ouml;rl&eacute;se';
@@ -106,9 +108,9 @@ $HEADING['GENERAL_SETTINGS'] = '&Aacute;ltal&aacute;nos be&aacute;ll&iacute;t&aa
 $HEADING['DEFAULT_SETTINGS'] = 'Alap&eacute;rtelmezett Be&aacute;ll&iacute;t&aacute;sok';
 $HEADING['SEARCH_SETTINGS'] = 'Keres&eacute;si be&aacute;ll&iacute;t&aacute;sok';
 $HEADING['FILESYSTEM_SETTINGS'] = 'Filerendszer';
-$HEADING['SERVER_SETTINGS'] = 'Server Settings'; //needs to be translated
-$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings'; //needs to be translated
-$HEADING['ADMINISTRATION_TOOLS'] = 'Administration Tools'; //needs to be translated
+$HEADING['SERVER_SETTINGS'] = 'Server Settings';
+$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings';
+$HEADING['ADMINISTRATION_TOOLS'] = 'Administration Tools';
 
 $HEADING['MODIFY_DELETE_USER'] = 'Felhaszn&aacute;l&oacute; m&oacute;dos&iacute;t&aacute;sa/t&ouml;rl&eacute;se';
 $HEADING['ADD_USER'] = 'Felhaszn&aacute;l&oacute; hozz&aacute;ad&aacute;sa';
@@ -119,7 +121,7 @@ $HEADING['ADD_GROUP'] = 'Csoport m&oacute;dos&iacute;t&aacute;sa';
 $HEADING['MODIFY_GROUP'] = 'csoport m&oacute;dos&iacute;t&aacute;sa';
 
 // Other text
-$TEXT['OPEN'] = 'Open'; //needs to be translated
+$TEXT['OPEN'] = 'Open';
 $TEXT['ADD'] = 'Hozz&aacute;ad';
 $TEXT['MODIFY'] = 'M&oacute;dos&iacute;t&aacute;s';
 $TEXT['SETTINGS'] = 'Be&aacute;ll&iacute;t&aacute;s';
@@ -163,9 +165,9 @@ $TEXT['PASSWORD'] = 'Jelsz&oacute;';
 $TEXT['HOME'] = 'Kezd&otilde;lap';
 $TEXT['TARGET_FOLDER'] = 'C&eacute;l k&ouml;nyvt&aacute;r';
 $TEXT['OVERWRITE_EXISTING'] = 'Megl&eacute;v&otilde; fel&uuml;l&iacute;r&aacute;sa';
-$TEXT['FILE'] = 'File'; //needs to be translated
+$TEXT['FILE'] = 'File';
 $TEXT['FILES'] = 'File-ok';
-$TEXT['FOLDER'] = 'Folder'; //needs to be translated
+$TEXT['FOLDER'] = 'Folder';
 $TEXT['FOLDERS'] = 'K&ouml;nyvt&aacute;rak';
 $TEXT['CREATE_FOLDER'] = 'K&ouml;nyvt&aacute;r l&eacute;trehoz&aacute;sa';
 $TEXT['UPLOAD_FILES'] = 'File felt&ouml;lt&eacute;s';
@@ -206,14 +208,14 @@ $TEXT['FOOTER'] = 'L&aacute;bl&eacute;c';
 $TEXT['TEMPLATE'] = 'Sablon';
 $TEXT['INSTALLATION'] = 'Telep&iacute;t&eacute;s';
 $TEXT['DATABASE'] = 'Adatb&aacute;zis';
-$TEXT['HOST'] = 'Host'; //needs to be translated
+$TEXT['HOST'] = 'Host';
 $TEXT['INTRO'] = 'Bevezet&otilde;';
 $TEXT['PAGE'] = 'Lap';
 $TEXT['SIGNUP'] = 'Regisztr&aacute;l&aacute;s...';
 $TEXT['PHP_ERROR_LEVEL'] = 'PHP hibajelent&eacute;si szint';
-$TEXT['ADMIN'] = 'Admin'; //needs to be translated
-$TEXT['PATH'] = 'Path'; //needs to be translated
-$TEXT['URL'] = 'URL'; //needs to be translated
+$TEXT['ADMIN'] = 'Admin';
+$TEXT['PATH'] = 'Path';
+$TEXT['URL'] = 'URL';
 $TEXT['FRONTEND'] = 'Megjelen&otilde; fel&uuml;let';
 $TEXT['EXTENSION'] = 'kiterjeszt&eacute;s';
 $TEXT['TABLE_PREFIX'] = 'T&aacute;bla el&otilde;tag';
@@ -223,13 +225,13 @@ $TEXT['FORGOT_DETAILS'] = 'Elfelejtettem a jelsz&oacute;t.';
 $TEXT['LOGGED_IN'] = 'Bejelentkezve';
 $TEXT['WELCOME_BACK'] = '&Uuml;dv';
 $TEXT['FULL_NAME'] = 'Teljes n&eacute;v';
-$TEXT['ACCOUNT_SIGNUP'] = 'Account Sign-Up'; //needs to be translated
-$TEXT['LINK'] = 'Link'; //needs to be translated
-$TEXT['ANCHOR'] = 'Anchor'; //needs to be translated
+$TEXT['ACCOUNT_SIGNUP'] = 'Account Sign-Up';
+$TEXT['LINK'] = 'Link';
+$TEXT['ANCHOR'] = 'Anchor';
 $TEXT['TARGET'] = 'c&eacute;l';
 $TEXT['NEW_WINDOW'] = '&Uacute;j ablak';
 $TEXT['SAME_WINDOW'] = 'Azonos Ablak';
-$TEXT['TOP_FRAME'] = 'Top Frame'; //needs to be translated
+$TEXT['TOP_FRAME'] = 'Top Frame';
 $TEXT['PAGE_LEVEL_LIMIT'] = 'Lap szint limit';
 $TEXT['SUCCESS'] = 'Sikeres';
 $TEXT['ERROR'] = 'Hiba';
@@ -334,10 +336,10 @@ $TEXT['HOMEPAGE_REDIRECTION'] = 'Honlap &aacute;tir&aacute;ny&iacute;t&aacute;s'
 $TEXT['HEADING'] = 'C&iacute;msor';
 $TEXT['MULTIPLE_MENUS'] = 'T&ouml;bbszint&ucirc; men&uuml;';
 $TEXT['REGISTERED'] = 'Regisztr&aacute;lva';
-$TEXT['START'] = 'Start'; //needs to be translated
+$TEXT['START'] = 'Start';
 $TEXT['SECTION_BLOCKS'] = 'Szakaszok';
 $TEXT['REGISTERED_VIEWERS'] = 'Regisztr&aacute;lt l&aacute;togat&oacute;k';
-$TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers'; //needs to be translated
+$TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers';
 $TEXT['SUBMISSION_ID'] = 'Bek&uuml;ld&eacute;s azonos&iacute;t&oacute;';
 $TEXT['SUBMISSIONS'] = 'Bek&uuml;ld&eacute;sek';
 $TEXT['SUBMITTED'] = 'Elk&uuml;ldve';
@@ -345,11 +347,11 @@ $TEXT['MAX_SUBMISSIONS_PER_HOUR'] = 'Max. bek&uuml;ld&eacute;s &oacute;r&aacute;
 $TEXT['SUBMISSIONS_STORED_IN_DATABASE'] = 'T&aacute;rolva az adatb&aacute;zisban';
 $TEXT['EMAIL_ADDRESS'] = 'E-mail C&iacute;m';
 $TEXT['CUSTOM'] = 'Egy&eacute;ni';
-$TEXT['ANONYMOUS'] = 'Anonymous'; //needs to be translated
+$TEXT['ANONYMOUS'] = 'Anonymous';
 $TEXT['SERVER_OPERATING_SYSTEM'] = 'Szerver Oper&aacute;ci&oacute;s Rendszer';
 $TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'] = 'Mindenki &aacute;ltal &iacute;rhat&oacute; file jogok';
 $TEXT['LINUX_UNIX_BASED'] = 'Linux/Unix';
-$TEXT['WINDOWS'] = 'Windows'; //needs to be translated
+$TEXT['WINDOWS'] = 'Windows';
 $TEXT['HOME_FOLDER'] = 'Home K&ouml;nyvt&aacute;r';
 $TEXT['HOME_FOLDERS'] = 'Home K&ouml;nyvt&aacute;rak';
 $TEXT['PAGE_TRASH'] = 'Lap kuka';
@@ -375,8 +377,8 @@ $TEXT['ON'] = 'Be';
 $TEXT['LAST_UPDATED_BY'] = 'M&oacute;dos&iacute;totta';
 $TEXT['RESULTS_FOR'] = 'Keresett';
 $TEXT['TIME'] = 'Id&otilde;';
-$TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Style'; //needs to be translated
-$TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor'; //needs to be translated
+$TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Style';
+$TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor';
 $TEXT['SERVER_EMAIL'] = 'Port&aacute;l E-mail c&iacute;me';
 $TEXT['MENU'] = 'Men&uuml;';
 $TEXT['MANAGE_GROUPS'] = 'Csoportok kezel&eacute;se';
@@ -384,49 +386,49 @@ $TEXT['MANAGE_USERS'] = 'Felhaszn&aacute;l&oacute;k kezel&eacute;se';
 $TEXT['PAGE_LANGUAGES'] = 'Lap nyelv';
 $TEXT['HIDDEN'] = 'Rejtett';
 $TEXT['MAIN'] = 'F&otilde;';
-$TEXT['RENAME_FILES_ON_UPLOAD'] = 'Rename Files On Upload'; //needs to be translated
-$TEXT['APP_NAME'] = 'Application Name'; //needs to be translated
-$TEXT['SESSION_IDENTIFIER'] = 'Session Identifier'; //needs to be translated
-$TEXT['BACKUP'] = 'Backup'; //needs to be translated
-$TEXT['RESTORE'] = 'Restore'; //needs to be translated
-$TEXT['BACKUP_DATABASE'] = 'Backup Database'; //needs to be translated
-$TEXT['RESTORE_DATABASE'] = 'Restore Database'; //needs to be translated
-$TEXT['BACKUP_ALL_TABLES'] = 'Backup all tables in database'; //needs to be translated
-$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup only WB-specific tables'; //needs to be translated
-$TEXT['BACKUP_MEDIA'] = 'Backup Media'; //needs to be translated
-$TEXT['RESTORE_MEDIA'] = 'Restore Media'; //needs to be translated
-$TEXT['ADMINISTRATION_TOOL'] = 'Administration tool'; //needs to be translated
-$TEXT['CAPTCHA_VERIFICATION'] = 'Captcha Verification'; //needs to be translated
-$TEXT['VERIFICATION'] = 'Verification'; //needs to be translated
-$TEXT['DEFAULT_CHARSET'] = 'Default Charset'; //needs to be translated
-$TEXT['CHARSET'] = 'Charset'; //needs to be translated
-$TEXT['MODULE_ORDER'] = 'Module-order for searching'; //needs to be translated
-$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt'; //needs to be translated
-$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module'; //needs to be translated
-$TEXT['PUBL_START_DATE'] = 'Start date'; //needs to be translated
-$TEXT['PUBL_END_DATE'] = 'End date'; //needs to be translated
-$TEXT['CALENDAR'] = 'Calender'; //needs to be translated
-$TEXT['DELETE_DATE'] = 'Delete date'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name'; //needs to be translated
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.'; //needs to be translated
-$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine'; //needs to be translated
-$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host'; //needs to be translated
-$TEXT['WBMAILER_PHP'] = 'PHP MAIL'; //needs to be translated
-$TEXT['WBMAILER_SMTP'] = 'SMTP'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username'; //needs to be translated
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password'; //needs to be translated
-$TEXT['PLEASE_LOGIN'] = 'Please login'; //needs to be translated
-$TEXT['CAP_EDIT_CSS'] = 'Edit CSS'; //needs to be translated
-$TEXT['HEADING_CSS_FILE'] = 'Actual module file: '; //needs to be translated
-$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.'; //needs to be translated 
+$TEXT['RENAME_FILES_ON_UPLOAD'] = 'Rename Files On Upload';
+$TEXT['APP_NAME'] = 'Application Name';
+$TEXT['SESSION_IDENTIFIER'] = 'Session Identifier';
+$TEXT['BACKUP'] = 'Backup';
+$TEXT['RESTORE'] = 'Restore';
+$TEXT['BACKUP_DATABASE'] = 'Backup Database';
+$TEXT['RESTORE_DATABASE'] = 'Restore Database';
+$TEXT['BACKUP_ALL_TABLES'] = 'Backup all tables in database';
+$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup only WB-specific tables';
+$TEXT['BACKUP_MEDIA'] = 'Backup Media';
+$TEXT['RESTORE_MEDIA'] = 'Restore Media';
+$TEXT['ADMINISTRATION_TOOL'] = 'Administration tool';
+$TEXT['CAPTCHA_VERIFICATION'] = 'Captcha Verification';
+$TEXT['VERIFICATION'] = 'Verification';
+$TEXT['DEFAULT_CHARSET'] = 'Default Charset';
+$TEXT['CHARSET'] = 'Charset';
+$TEXT['MODULE_ORDER'] = 'Module-order for searching';
+$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt';
+$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module';
+$TEXT['PUBL_START_DATE'] = 'Start date';
+$TEXT['PUBL_END_DATE'] = 'End date';
+$TEXT['CALENDAR'] = 'Calender';
+$TEXT['DELETE_DATE'] = 'Delete date';
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.';
+$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail';
+$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.';
+$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine';
+$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
+$TEXT['WBMAILER_PHP'] = 'PHP MAIL';
+$TEXT['WBMAILER_SMTP'] = 'SMTP';
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification';
+$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification';
+$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username';
+$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password';
+$TEXT['PLEASE_LOGIN'] = 'Please login';
+$TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sajn&aacute;ljuk, de a megjelen&iacute;t&eacute;shez nincs jogosults&aacute;ga!';
-$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display'; //needs to be translated
+$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display';
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Itt nincs elegend&otilde; jogosults&aacute;god!';
 
@@ -476,7 +478,7 @@ $MESSAGE['GROUPS']['DELETED'] = 'Csoport t&ouml;r&ouml;lve';
 $MESSAGE['GROUPS']['GROUP_NAME_BLANK'] = '&Uuml;res a csoportn&eacute;v';
 $MESSAGE['GROUPS']['CONFIRM_DELETE'] = 'Biztos, hogy t&ouml;r&ouml;lni akarja a kijel&ouml;lt csoportot? (Minden felhaszn&aacute;l&oacute;ja t&ouml;rl&otilde;dik)';
 $MESSAGE['GROUPS']['NO_GROUPS_FOUND'] = 'Nincs csoport';
-$MESSAGE['GROUPS']['GROUP_NAME_EXISTS'] = 'Group name already exists'; //needs to be translated
+$MESSAGE['GROUPS']['GROUP_NAME_EXISTS'] = 'Group name already exists';
 
 $MESSAGE['PREFERENCES']['DETAILS_SAVED'] = 'Sikeres ment&eacute;s';
 $MESSAGE['PREFERENCES']['EMAIL_UPDATED'] = 'E-mail friss&iacute;tve';
@@ -487,7 +489,7 @@ $MESSAGE['TEMPLATES']['CHANGE_TEMPLATE_NOTICE'] = 'Figyelem: A sablon megv&aacut
 
 $MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH'] = 'Nem tartalmazhat ../ -t a k&ouml;nyvt&aacute;r n&eacute;v';
 $MESSAGE['MEDIA']['DIR_DOES_NOT_EXIST'] = 'Nem lehet ../ a c&eacute;l mez&otilde;ben';
-$MESSAGE['MEDIA']['TARGET_DOT_DOT_SLASH'] = 'Cannot have ../ in the folder target'; //needs to be translated
+$MESSAGE['MEDIA']['TARGET_DOT_DOT_SLASH'] = 'Cannot have ../ in the folder target';
 $MESSAGE['MEDIA']['NAME_DOT_DOT_SLASH'] = 'Nem lehet ../ a n&eacute;vben';
 $MESSAGE['MEDIA']['NAME_INDEX_PHP'] = 'Nem lehet index.php a n&eacute;v';
 $MESSAGE['MEDIA']['NONE_FOUND'] = 'Nem tal&aacute;lhat&oacute; semmilyen m&eacute;dia file az aktu&aacute;lis k&ouml;nyvt&aacute;rban';
@@ -541,23 +543,23 @@ $MESSAGE['GENERIC']['NOT_INSTALLED'] = 'Nincs telp&iacute;tve';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL'] = 'Nem lehet elt&aacute;vol&iacute;tani';
 $MESSAGE['GENERIC']['CANNOT_UNZIP'] = 'Kicsomagol&aacute;s nem lehets&eacute;ges';
 $MESSAGE['GENERIC']['INSTALLED'] = 'Telep&iacute;t&eacute;s sikeres';
-$MESSAGE['GENERIC']['UPGRADED'] = 'Upgraded successfully'; //needs to be translated
+$MESSAGE['GENERIC']['UPGRADED'] = 'Upgraded successfully';
 $MESSAGE['GENERIC']['UNINSTALLED'] = 'Elt&aacute;vol&iacute;t&aacute;s sikeres';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'A c&eacute;l k&ouml;nyvt&aacute;r nem &iacute;rhat&oacute;';
 $MESSAGE['GENERIC']['INVALID'] = 'A felt&ouml;lt&ouml;tt file nem megfelel&otilde;';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Nem lehet elt&aacute;volt&iacute;tani! A file haszn&aacute;latban van.';
-$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'] = 'A weblap fejleszt&eacute;s alatt!';
+$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'K&eacute;rem t&eacute;rjen vissza k&eacute;s&otilde;bb!';
-$MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.'; //needs to be translated
-$MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Error opening file.'; //needs to be translated
+$MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.';
+$MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Error opening file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'A k&ouml;vetkez&otilde; mez&otilde;ket k&ouml;telez&otilde; kit&ouml;ltenie';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sajn&aacute;ljuk, de ez az &ucirc;rlap t&uacute;l sokszor lett kit&ouml;ltve egy &oacute;ran bel&uuml;l! K&eacute;rem pr&oacute;b&aacute;lja meg egy &oacute;ra m&uacute;lva.';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'The verification number (also known as Captcha) that you entered is incorrect. If you are having problems reading the Captcha, please email: '.SERVER_EMAIL; //needs to be translated
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'The verification number (also known as Captcha) that you entered is incorrect. If you are having problems reading the Captcha, please email: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you would like to have reloaded'; //needs to be translated
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully'; //needs to be translated
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully'; //needs to be translated
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully'; //needs to be translated
+$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you would like to have reloaded';
+$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully';
+$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully';
+$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully';
 
 ?>

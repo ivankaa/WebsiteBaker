@@ -4,24 +4,26 @@
 
 /*
 
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+Website Baker Project <http://www.websitebaker.org/>
+Copyright (C) 2004-2008, Ryan Djurovich
 
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Website Baker is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Website Baker is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with Website Baker; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
+
+// use languageedit-module to modify this file
 
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
@@ -376,7 +378,7 @@ $TEXT['LAST_UPDATED_BY'] = 'Sist Endret Av';
 $TEXT['RESULTS_FOR'] = 'Resultat For';
 $TEXT['TIME'] = 'Tid';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Stil';
-$TEXT['WYSIWYG_EDITOR'] = "WYSIWYG Editor";
+$TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor';
 $TEXT['SERVER_EMAIL'] = 'Server Epost';
 $TEXT['MENU'] = 'Meny';
 $TEXT['MANAGE_GROUPS'] = 'Administrer Grupper';
@@ -546,14 +548,14 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Lykkes &aring; avinstallere';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kunne ikke skrive til m&aring;l katalogen';
 $MESSAGE['GENERIC']['INVALID'] = 'Filen du lastet opp er ikke gyldig';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kan ikke avinstallere: Valgte fil er i bruk';
-$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'] = 'Nettsted er under konstruksjon';
+$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Vennligst kom tilbake p&aring; et annet tidspunkt...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Vennligst v&aelig;r t&aring;lmodig, dette kan ta en stund.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Feil ved &aring;pningen av filen.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du m&aring; skrive inn detaljer for f&oslash;lgende felt';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Beklager, denne form har blitt sendt for mange ganger denne timen. Vennligst pr&oslash;v igjen neste time.';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Bekreftelsesnummeret (ogs&aring; kjent som Captcha) som du skrev inn er feil. Hvis du har problemer med &aring; lese Captcha, vennligst kontakt: '.SERVER_EMAIL;
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Bekreftelsesnummeret (ogs&aring; kjent som Captcha) som du skrev inn er feil. Hvis du har problemer med &aring; lese Captcha, vennligst kontakt: '.SERVER_EMAIL.'';
 
 $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Vennligst velg hvilket tillegg du vil oppdatere';
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Lykkes i &aring; oppdatere moduler';

@@ -4,28 +4,30 @@
 
 /*
 
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+Website Baker Project <http://www.websitebaker.org/>
+Copyright (C) 2004-2008, Ryan Djurovich
 
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Website Baker is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Website Baker is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with Website Baker; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
+// use languageedit-module to modify this file
+
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
-	define('LANGUAGE_LOADED', true);
+define('LANGUAGE_LOADED', true);
 }
 
 // Set the language information
@@ -37,20 +39,20 @@ $language_author = 'Bramus, CodeALot';
 $language_license = 'GNU General Public License';
 
 // Menu titles
-$MENU['START'] = 'Naar het hoofdmenu'; 
-$MENU['PAGES'] = 'Pagina&#8217;s';
-$MENU['MEDIA'] = 'Media'; 
-$MENU['ADDONS'] = 'Extra&#8217;s';
-$MENU['MODULES'] = 'Modules'; 
-$MENU['TEMPLATES'] = 'Templates'; 
+$MENU['START'] = 'Naar het hoofdmenu';
+$MENU['PAGES'] = 'Pagina&rsquo;s';
+$MENU['MEDIA'] = 'Media';
+$MENU['ADDONS'] = 'Extra&rsquo;s';
+$MENU['MODULES'] = 'Modules';
+$MENU['TEMPLATES'] = 'Templates';
 $MENU['LANGUAGES'] = 'Talen';
 $MENU['PREFERENCES'] = 'Profiel';
 $MENU['SETTINGS'] = 'Instellingen';
-$MENU['ADMINTOOLS'] = 'Beheerinstellingen'; 
+$MENU['ADMINTOOLS'] = 'Beheerinstellingen';
 $MENU['ACCESS'] = 'Toegang';
 $MENU['USERS'] = 'Gebruikers';
 $MENU['GROUPS'] = 'Groepen';
-$MENU['HELP'] = 'Help'; 
+$MENU['HELP'] = 'Help';
 $MENU['VIEW'] = 'Website';
 $MENU['LOGOUT'] = 'Uitloggen';
 $MENU['LOGIN'] = 'Inloggen';
@@ -58,7 +60,7 @@ $MENU['FORGOT'] = 'Inlog-gegevens opnieuw aanvragen';
 
 // Section overviews
 $OVERVIEW['START'] = 'Website-beheer';
-$OVERVIEW['PAGES'] = 'Aanmaken en beheren van de site-structuur en pagina&#8217;s.';
+$OVERVIEW['PAGES'] = 'Aanmaken en beheren van de site-structuur en pagina&rsquo;s.';
 $OVERVIEW['MEDIA'] = 'Beheren van bestanden in de Media-folder.';
 $OVERVIEW['MODULES'] = 'Beheren van modules die extra functies toevoegen aan uw site.';
 $OVERVIEW['TEMPLATES'] = 'Beheren van de website-designs die u kunt toepassen.';
@@ -69,11 +71,11 @@ $OVERVIEW['USERS'] = 'Beheren van de gebruikers van uw website.';
 $OVERVIEW['GROUPS'] = 'Beheren van de gebruikersgroepen en hun rechten.';
 $OVERVIEW['HELP'] = 'Uitgebreide (Engelstalige) hulp voor het gebruik van dit systeem.';
 $OVERVIEW['VIEW'] = 'Bekijk uw website zoals deze voor bezoekers te zien is (nieuw scherm).';
-$OVERVIEW['ADMINTOOLS'] = 'Wijzig diverse beheerinstellingen...'; 
+$OVERVIEW['ADMINTOOLS'] = 'Wijzig diverse beheerinstellingen...';
 
 // Headings
-$HEADING['MODIFY_DELETE_PAGE'] = 'Beheer bestaande pagina&#8217;s';
-$HEADING['DELETED_PAGES'] = 'Gewiste pagina&#8217;s';
+$HEADING['MODIFY_DELETE_PAGE'] = 'Beheer bestaande pagina&rsquo;s';
+$HEADING['DELETED_PAGES'] = 'Gewiste pagina&rsquo;s';
 $HEADING['ADD_PAGE'] = 'Toevoegen nieuwe pagina';
 $HEADING['ADD_HEADING'] = 'Toevoegen Heading';
 $HEADING['MODIFY_PAGE'] = 'Aanpassen pagina';
@@ -119,7 +121,7 @@ $HEADING['ADD_GROUP'] = 'Toevoegen groep';
 $HEADING['MODIFY_GROUP'] = 'Groepsgegevens';
 
 // Other text
-$TEXT['OPEN'] = 'Open'; //needs to be translated
+$TEXT['OPEN'] = 'Open';
 $TEXT['ADD'] = 'Toevoegen';
 $TEXT['MODIFY'] = 'Wijzigen';
 $TEXT['SETTINGS'] = 'Instellingen';
@@ -133,7 +135,7 @@ $TEXT['NAME'] = 'Naam';
 $TEXT['PLEASE_SELECT'] = 'Selecteer';
 $TEXT['TITLE'] = 'Titel';
 $TEXT['PARENT'] = 'Ouder';
-$TEXT['TYPE'] = 'Type'; 
+$TEXT['TYPE'] = 'Type';
 $TEXT['VISIBILITY'] = 'Zichtbaarheid';
 $TEXT['PRIVATE'] = 'Alleen aangemelde bezoekers';
 $TEXT['PUBLIC'] = 'Iedereen';
@@ -160,7 +162,7 @@ $TEXT['NEED_TO_LOGIN'] = 'Inloggen?';
 $TEXT['SEND_DETAILS'] = 'Stuur gegevens';
 $TEXT['USERNAME'] = 'Gebruikersnaam';
 $TEXT['PASSWORD'] = 'Wachtwoord';
-$TEXT['HOME'] = 'Home'; 
+$TEXT['HOME'] = 'Home';
 $TEXT['TARGET_FOLDER'] = 'Doelmap';
 $TEXT['OVERWRITE_EXISTING'] = 'Overschrijf bestaand(e)';
 $TEXT['FILE'] = 'Bestand';
@@ -190,30 +192,30 @@ $TEXT['ACTIVE'] = 'Actief';
 $TEXT['DISABLED'] = 'Uit';
 $TEXT['ENABLED'] = 'Aan';
 $TEXT['RETYPE_PASSWORD'] = 'Herhaal wachtwoord';
-$TEXT['GROUP'] = 'Groep'; 
+$TEXT['GROUP'] = 'Groep';
 $TEXT['SYSTEM_PERMISSIONS'] = 'Systeembevoegdheden';
 $TEXT['MODULE_PERMISSIONS'] = 'Modulebevoegdheden';
 $TEXT['SHOW_ADVANCED'] = 'Bekijk geavanceerde opties';
 $TEXT['HIDE_ADVANCED'] = 'Verberg geavanceerde opties';
 $TEXT['BASIC'] = 'Basis';
 $TEXT['ADVANCED'] = 'Geavanceerd';
-$TEXT['WEBSITE'] = 'Website'; 
+$TEXT['WEBSITE'] = 'Website';
 $TEXT['DEFAULT'] = 'Standaard';
 $TEXT['KEYWORDS'] = 'Zoektermen';
 $TEXT['TEXT'] = 'Tekst';
-$TEXT['HEADER'] = 'Koptekst'; 
-$TEXT['FOOTER'] = 'Voettekst'; 
-$TEXT['TEMPLATE'] = 'Template'; 
+$TEXT['HEADER'] = 'Koptekst';
+$TEXT['FOOTER'] = 'Voettekst';
+$TEXT['TEMPLATE'] = 'Template';
 $TEXT['INSTALLATION'] = 'Installatie';
-$TEXT['DATABASE'] = 'Database'; 
-$TEXT['HOST'] = 'Host'; 
+$TEXT['DATABASE'] = 'Database';
+$TEXT['HOST'] = 'Host';
 $TEXT['INTRO'] = 'Introductie';
 $TEXT['PAGE'] = 'Pagina';
 $TEXT['SIGNUP'] = 'Aanmelden';
 $TEXT['PHP_ERROR_LEVEL'] = 'PHP-foutmeldingsniveau';
 $TEXT['ADMIN'] = 'Beheerder';
 $TEXT['PATH'] = 'Pad';
-$TEXT['URL'] = 'URL'; 
+$TEXT['URL'] = 'URL';
 $TEXT['FRONTEND'] = 'Bezoekersversie van website';
 $TEXT['EXTENSION'] = 'Extensie';
 $TEXT['TABLE_PREFIX'] = 'Tabelvoorvoegsel';
@@ -224,12 +226,12 @@ $TEXT['LOGGED_IN'] = 'Ingelogd';
 $TEXT['WELCOME_BACK'] = 'Welkom terug';
 $TEXT['FULL_NAME'] = 'Volledige naam';
 $TEXT['ACCOUNT_SIGNUP'] = 'Aanmelden als gebruiker';
-$TEXT['LINK'] = 'Link'; 
-$TEXT['ANCHOR'] = 'Anker'; 
+$TEXT['LINK'] = 'Link';
+$TEXT['ANCHOR'] = 'Anker';
 $TEXT['TARGET'] = 'Doel';
 $TEXT['NEW_WINDOW'] = 'Nieuw scherm';
 $TEXT['SAME_WINDOW'] = 'Zelfde scherm';
-$TEXT['TOP_FRAME'] = 'Bovenste Frame'; 
+$TEXT['TOP_FRAME'] = 'Bovenste Frame';
 $TEXT['PAGE_LEVEL_LIMIT'] = 'Paginaniveaulimiet';
 $TEXT['SUCCESS'] = 'Succes';
 $TEXT['ERROR'] = 'Fout';
@@ -265,7 +267,7 @@ $TEXT['HIDE'] = 'Verbergen';
 $TEXT['START_PUBLISHING'] = 'Start publicatie';
 $TEXT['FINISH_PUBLISHING'] = 'Einde publicatie';
 $TEXT['DATE'] = 'Datum';
-$TEXT['START'] = 'Start'; 
+$TEXT['START'] = 'Start';
 $TEXT['END'] = 'Einde';
 $TEXT['IMAGE'] = 'Afbeelding';
 $TEXT['ICON'] = 'Icoon';
@@ -275,7 +277,7 @@ $TEXT['TIME_FORMAT'] = 'Tijdweergave';
 $TEXT['RESULTS'] = 'Resultaten';
 $TEXT['RESIZE'] = 'Veranderen grootte';
 $TEXT['MANAGE'] = 'Beheren';
-$TEXT['CODE'] = 'Code'; 
+$TEXT['CODE'] = 'Code';
 $TEXT['WIDTH'] = 'Breedte';
 $TEXT['HEIGHT'] = 'Hoogte';
 $TEXT['MORE'] = 'Meer';
@@ -301,18 +303,18 @@ $TEXT['NOT_FOUND'] = 'Niet gevonden';
 $TEXT['PAGE_SPACER'] = 'Pagina-spacer';
 $TEXT['MATCHING'] = 'Overeenkomend';
 $TEXT['TEMPLATE_PERMISSIONS'] = 'Template-bevoegdheden';
-$TEXT['PAGES_DIRECTORY'] = 'Pagina&#8217;s directory';
+$TEXT['PAGES_DIRECTORY'] = 'Pagina&rsquo;s directory';
 $TEXT['MEDIA_DIRECTORY'] = 'Media-directory';
 $TEXT['FILE_MODE'] = 'Bestandsmodus';
-$TEXT['USER'] = 'Gebruiker'; 
-$TEXT['OTHERS'] = 'Anderen'; 
-$TEXT['READ'] = 'Lees'; 
-$TEXT['WRITE'] = 'Schrijf'; 
-$TEXT['EXECUTE'] = 'Uitvoeren'; 
+$TEXT['USER'] = 'Gebruiker';
+$TEXT['OTHERS'] = 'Anderen';
+$TEXT['READ'] = 'Lees';
+$TEXT['WRITE'] = 'Schrijf';
+$TEXT['EXECUTE'] = 'Uitvoeren';
 $TEXT['SMART_LOGIN'] = 'Slim inloggen';
 $TEXT['REMEMBER_ME'] = 'Onthoud mijn gegevens.';
 $TEXT['FILESYSTEM_PERMISSIONS'] = 'Bestandssysteembevoegdheden';
-$TEXT['DIRECTORIES'] = 'Mappen'; 
+$TEXT['DIRECTORIES'] = 'Mappen';
 $TEXT['DIRECTORY_MODE'] = 'Directory-modus';
 $TEXT['LIST_OPTIONS'] = 'Lijstopties';
 $TEXT['OPTION'] = 'Opties';
@@ -332,12 +334,12 @@ $TEXT['SHORT_TEXT'] = 'Korte tekst';
 $TEXT['LONG_TEXT'] = 'Lange tekst';
 $TEXT['HOMEPAGE_REDIRECTION'] = 'Homepage redirection';
 $TEXT['HEADING'] = 'Titel';
-$TEXT['MULTIPLE_MENUS'] = 'Meervoudige menu&#8217;s';
+$TEXT['MULTIPLE_MENUS'] = 'Meervoudige menu&rsquo;s';
 $TEXT['REGISTERED'] = 'Geregistreerd';
-$TEXT['START'] = 'Start'; 
+$TEXT['START'] = 'Start';
 $TEXT['SECTION_BLOCKS'] = 'Sectieblokken';
 $TEXT['REGISTERED_VIEWERS'] = 'Geregistreerde bezoekers';
-$TEXT['ALLOWED_VIEWERS'] = 'Toegestane kijkers'; 
+$TEXT['ALLOWED_VIEWERS'] = 'Toegestane kijkers';
 $TEXT['SUBMISSION_ID'] = 'Toegevoegd bericht';
 $TEXT['SUBMISSIONS'] = 'Toevoegingen';
 $TEXT['SUBMITTED'] = 'Toegevoegd';
@@ -349,14 +351,14 @@ $TEXT['ANONYMOUS'] = 'Anoniem';
 $TEXT['SERVER_OPERATING_SYSTEM'] = 'Server-besturingssysteem';
 $TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'] = 'Volledig veranderbare bestandspermissies';
 $TEXT['LINUX_UNIX_BASED'] = 'Linux/Unix-gebaseerd';
-$TEXT['WINDOWS'] = 'Windows'; 
+$TEXT['WINDOWS'] = 'Windows';
 $TEXT['HOME_FOLDER'] = 'Home-map';
 $TEXT['HOME_FOLDERS'] = 'Home-mappen';
 $TEXT['PAGE_TRASH'] = 'Pagina-prullenbak';
 $TEXT['INLINE'] = 'Inline';
 $TEXT['SEPARATE'] = 'Gescheiden';
 $TEXT['DELETED'] = 'Gewist';
-$TEXT['VIEW_DELETED_PAGES'] = 'Bekijk gewiste pagina&#8217;s';
+$TEXT['VIEW_DELETED_PAGES'] = 'Bekijk gewiste pagina&rsquo;s';
 $TEXT['EMPTY_TRASH'] = 'Legen prullenbak';
 $TEXT['TRASH_EMPTIED'] = 'Prullenbak geleegd';
 $TEXT['ADD_SECTION'] = 'Toevoegen sectie';
@@ -378,7 +380,7 @@ $TEXT['TIME'] = 'Tijd';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG-stijl';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG-editor';
 $TEXT['SERVER_EMAIL'] = 'Server e-mail';
-$TEXT['MENU'] = 'Menu'; 
+$TEXT['MENU'] = 'Menu';
 $TEXT['MANAGE_GROUPS'] = 'Beheer groepen';
 $TEXT['MANAGE_USERS'] = 'Beheer gebruikers';
 $TEXT['PAGE_LANGUAGES'] = 'Talen';
@@ -391,8 +393,8 @@ $TEXT['BACKUP'] = 'Backup maken';
 $TEXT['RESTORE'] = 'Backup terugzetten';
 $TEXT['BACKUP_DATABASE'] = 'Database-backup maken';
 $TEXT['RESTORE_DATABASE'] = 'Database-backup terugzetten';
-$TEXT['BACKUP_ALL_TABLES'] = 'Backup van alle tabellen in de database'; 
-$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup van enkel WB-gerelateerde tabellen'; 
+$TEXT['BACKUP_ALL_TABLES'] = 'Backup van alle tabellen in de database';
+$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup van enkel WB-gerelateerde tabellen';
 $TEXT['BACKUP_MEDIA'] = 'Backuppen Media-folder';
 $TEXT['RESTORE_MEDIA'] = 'Terugzetten Media-folder';
 $TEXT['ADMINISTRATION_TOOL'] = 'Beheeropties';
@@ -400,25 +402,25 @@ $TEXT['CAPTCHA_VERIFICATION'] = 'Captcha-verificatie';
 $TEXT['VERIFICATION'] = 'Verificatie';
 $TEXT['DEFAULT_CHARSET'] = 'Standaard tekenset';
 $TEXT['CHARSET'] = 'Tekenset';
-$TEXT['MODULE_ORDER'] = 'Module volgorde om te zoeken'; 
-$TEXT['MAX_EXCERPT'] = 'Max lijnen per zoeksessie'; 
+$TEXT['MODULE_ORDER'] = 'Module volgorde om te zoeken';
+$TEXT['MAX_EXCERPT'] = 'Max lijnen per zoeksessie';
 $TEXT['TIME_LIMIT'] = 'Max tijd om gegevens te zoeken per module';
-$TEXT['PUBL_START_DATE'] = 'Start datum'; 
-$TEXT['PUBL_END_DATE'] = 'Eind datum'; 
-$TEXT['CALENDAR'] = 'Kalender'; 
-$TEXT['DELETE_DATE'] = 'Wis datum'; 
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Specifieer hieronder een standaard "VAN" adres en "AFZENDER" naam. Het is aanbevolen om een VAN adres zoals: <strong>admin@yourdomain.com</strong> te gebruiken. Om spam te verhinderen kunnen sommige mailproviders (vb <em>mail.com</em>) mails verwerpen met een VAN: adres zoals <em>name@mail.com</em>, die verzonden worden vanaf een vreemde relay-server.<br /><br />Onderstaande standaardwaarden worden enkel gebruikt indien geen andere waarden gespecifieerd worden door Website Baker. Indien uw server <acronym title="Simple mail transfer protocol">SMTP</acronym> ondersteunt kunt u deze optie gebruiken voor het versturen van uitgaande mails.'; 
-$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Standaard mail Van'; 
-$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Standaard Afzender Naam'; 
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Instellingen:</strong><br />Onderstaande instellingen zijn enkel van toepassing indien u mails wenst te verzenden via <acronym title="Simple mail transfer protocol">SMTP</acronym>. Indien u de naam of instellingen van de SMTP server niet kent, selecteer dan bij de standaard mail routine: PHP MAIL.'; 
-$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine'; 
-$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host'; 
-$TEXT['WBMAILER_PHP'] = 'PHP MAIL'; 
-$TEXT['WBMAILER_SMTP'] = 'SMTP'; 
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP authenticatie'; 
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'Enkel wanneer men zich dient aan te melden op de SMTP Host'; 
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP gebruikersnaam'; 
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Paswoord'; 
+$TEXT['PUBL_START_DATE'] = 'Start datum';
+$TEXT['PUBL_END_DATE'] = 'Eind datum';
+$TEXT['CALENDAR'] = 'Kalender';
+$TEXT['DELETE_DATE'] = 'Wis datum';
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Specifieer hieronder een standaard "VAN" adres en "AFZENDER" naam. Het is aanbevolen om een VAN adres zoals: <strong>admin@yourdomain.com</strong> te gebruiken. Om spam te verhinderen kunnen sommige mailproviders (vb <em>mail.com</em>) mails verwerpen met een VAN: adres zoals <em>name@mail.com</em>, die verzonden worden vanaf een vreemde relay-server.<br /><br />Onderstaande standaardwaarden worden enkel gebruikt indien geen andere waarden gespecifieerd worden door Website Baker. Indien uw server <acronym title="Simple mail transfer protocol">SMTP</acronym> ondersteunt kunt u deze optie gebruiken voor het versturen van uitgaande mails.';
+$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Standaard mail Van';
+$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Standaard Afzender Naam';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Instellingen:</strong><br />Onderstaande instellingen zijn enkel van toepassing indien u mails wenst te verzenden via <acronym title="Simple mail transfer protocol">SMTP</acronym>. Indien u de naam of instellingen van de SMTP server niet kent, selecteer dan bij de standaard mail routine: PHP MAIL.';
+$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine';
+$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
+$TEXT['WBMAILER_PHP'] = 'PHP MAIL';
+$TEXT['WBMAILER_SMTP'] = 'SMTP';
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP authenticatie';
+$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'Enkel wanneer men zich dient aan te melden op de SMTP Host';
+$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP gebruikersnaam';
+$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Paswoord';
 $TEXT['PLEASE_LOGIN'] = 'Inloggen aub';
 $TEXT['CAP_EDIT_CSS'] = 'Wijzig CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actuele module bestand: ';
@@ -426,7 +428,7 @@ $TEXT['TXT_EDIT_CSS_FILE'] = 'Wijzig de CSS definities in het textveld hieronder
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, u heeft geen bevoegdheden om deze pagina te bekijken';
-$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, niets om af te beelden'; 
+$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, niets om af te beelden';
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Onvoldoende rechten om hier te zijn';
 
@@ -517,7 +519,7 @@ $MESSAGE['PAGES']['NOT_FOUND'] = 'Pagina niet gevonden';
 $MESSAGE['PAGES']['SAVED'] = 'Pagina succesvol opgeslagen';
 $MESSAGE['PAGES']['SAVED_SETTINGS'] = 'Pagina-instellingen succesvol opgeslagen';
 $MESSAGE['PAGES']['NOT_SAVED'] = 'Fout tijdens opslaan pagina';
-$MESSAGE['PAGES']['DELETE_CONFIRM'] = 'Weet u zeker dat u deze pagina wilt verwijderen (en al zijn subpagina&#8217;s)';
+$MESSAGE['PAGES']['DELETE_CONFIRM'] = 'Weet u zeker dat u deze pagina wilt verwijderen (en al zijn subpagina&rsquo;s)';
 $MESSAGE['PAGES']['DELETED'] = 'Pagina succesvol verwijderd';
 $MESSAGE['PAGES']['RESTORED'] = 'Pagina succesvol teruggehaald';
 $MESSAGE['PAGES']['BLANK_PAGE_TITLE'] = 'Vul aub een paginatitel in';
@@ -530,7 +532,7 @@ $MESSAGE['PAGES']['INTRO_SAVED'] = 'Introductiepagina succesvol opgeslagen';
 $MESSAGE['PAGES']['LAST_MODIFIED'] = 'Als laatste aangepast door';
 $MESSAGE['PAGES']['INTRO_LINK'] = 'Klik hier om de introductiepagina aan te passen';
 $MESSAGE['PAGES']['SECTIONS_PROPERTIES_SAVED'] = 'Sectie-instellingen succesvol opgeslagen';
-$MESSAGE['PAGES']['RETURN_TO_PAGES'] = 'Keer terug naar pagina&#8217;s';
+$MESSAGE['PAGES']['RETURN_TO_PAGES'] = 'Keer terug naar pagina&rsquo;s';
 
 $MESSAGE['GENERIC']['FILL_IN_ALL'] = 'Niet alle velden zijn ingevuld. Probeert u het nog eens';
 $MESSAGE['GENERIC']['FILE_TYPE'] = 'Let op: het bestand moet het volgende formaat hebben:';
@@ -546,16 +548,16 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'De&iuml;nstallatie succesvol';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kan niet schrijven naar doelmap';
 $MESSAGE['GENERIC']['INVALID'] = 'Ongeldig bestand';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kan niet de&iuml;nstalleren: het geselecteerde bestand is in gebruik';
-$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'] = 'Website in bewerking';
+$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Probeert u aub het binnenkort nog eens.';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Even geduld aub, dit kan even duren.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Kan bestand niet openen.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'De volgende velden zijn verplicht';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sorry, dit formulier is te vaak verstuurd binnen dit uur. Probeert u het over een uur nog eens.';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Het verificatienummer (ook wel Captcha genoemd) dat u hebt ingevoerd is incorrect. Als u de Captcha niet goed kunt lezen, stuur dan een e-mail naar: '.SERVER_EMAIL;
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Het verificatienummer (ook wel Captcha genoemd) dat u hebt ingevoerd is incorrect. Als u de Captcha niet goed kunt lezen, stuur dan een e-mail naar: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Selecteer de extra&#8217;s die u opnieuw wilt laden';
+$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Selecteer de extra&rsquo;s die u opnieuw wilt laden';
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules succesvol herladen';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates succesvol herladen';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Taalbestanden succesvol herladen';

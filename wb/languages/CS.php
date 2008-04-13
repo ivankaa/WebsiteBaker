@@ -4,28 +4,30 @@
 
 /*
 
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+Website Baker Project <http://www.websitebaker.org/>
+Copyright (C) 2004-2008, Ryan Djurovich
 
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Website Baker is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Website Baker is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with Website Baker; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
+// use languageedit-module to modify this file
+
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
-	define('LANGUAGE_LOADED', true);
+define('LANGUAGE_LOADED', true);
 }
 
 // Set the language information
@@ -46,7 +48,7 @@ $MENU['TEMPLATES'] = '&Scaron;ablony';
 $MENU['LANGUAGES'] = 'Jazyky';
 $MENU['PREFERENCES'] = 'Mo&#382;nosti';
 $MENU['SETTINGS'] = 'Nastaven&iacute;';
-$MENU['ADMINTOOLS'] = 'Admin-Tools'; //needs to be translated
+$MENU['ADMINTOOLS'] = 'Admin-Tools';
 $MENU['ACCESS'] = 'P&#345;&iacute;stup';
 $MENU['USERS'] = 'U&#382;ivatel&eacute;';
 $MENU['GROUPS'] = 'Skupiny';
@@ -69,7 +71,7 @@ $OVERVIEW['USERS'] = 'Spravovat u&#382;ivate Website Bakeru...';
 $OVERVIEW['GROUPS'] = 'Spravovat skupiny u&#382;ivatel&#367; a jejich opr&aacute;vn&#283;n&iacute;...';
 $OVERVIEW['HELP'] = 'M&aacute;te ot&aacute;zku? Hledejte odpov&#283;&#271;...';
 $OVERVIEW['VIEW'] = 'Rychle prohl&eacute;dhout str&aacute;nky v nov&eacute;m okn&#283;...';
-$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...';
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Zm&#283;nit/Smazat str&aacute;nku';
@@ -107,7 +109,7 @@ $HEADING['DEFAULT_SETTINGS'] = 'Implicitn&iacute; nastaven&iacute;';
 $HEADING['SEARCH_SETTINGS'] = 'Nastaven&iacute; vyhled&aacute;v&aacute;n&iacute;';
 $HEADING['FILESYSTEM_SETTINGS'] = 'Nastaven&iacute; syst&eacute;mu soubor&#367;';
 $HEADING['SERVER_SETTINGS'] = 'Nastaven&iacute; serveru';
-$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings'; //needs to be translated
+$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings';
 $HEADING['ADMINISTRATION_TOOLS'] = 'N&aacute;stroje administrace';
 
 $HEADING['MODIFY_DELETE_USER'] = 'Zm&#283;nit/Smazat u&#382;ivatele';
@@ -119,7 +121,7 @@ $HEADING['ADD_GROUP'] = 'P&#345;idat skupinu';
 $HEADING['MODIFY_GROUP'] = 'Zm&#283;nit skupinu';
 
 // Other text
-$TEXT['OPEN'] = 'Open'; //needs to be translated
+$TEXT['OPEN'] = 'Open';
 $TEXT['ADD'] = 'P&#345;idat';
 $TEXT['MODIFY'] = 'Zm&#283;nit';
 $TEXT['SETTINGS'] = 'Nastaven&iacute;';
@@ -225,7 +227,7 @@ $TEXT['WELCOME_BACK'] = 'V&iacute;tejte';
 $TEXT['FULL_NAME'] = 'Cel&eacute; jm&eacute;no';
 $TEXT['ACCOUNT_SIGNUP'] = 'Registrace &uacute;&#269;tu';
 $TEXT['LINK'] = 'Odkaz';
-$TEXT['ANCHOR'] = 'Anchor'; //needs to be translated
+$TEXT['ANCHOR'] = 'Anchor';
 $TEXT['TARGET'] = 'Sm&#283;&#345;uje do';
 $TEXT['NEW_WINDOW'] = 'nov&eacute;ho okna';
 $TEXT['SAME_WINDOW'] = 'p&#367;vodn&iacute;ho okna';
@@ -400,29 +402,29 @@ $TEXT['CAPTCHA_VERIFICATION'] = 'Kontrola obr. k&oacute;dem';
 $TEXT['VERIFICATION'] = 'Verifikace';
 $TEXT['DEFAULT_CHARSET'] = 'V&yacute;choz&iacute; k&oacute;dov&aacute; str&aacute;nka';
 $TEXT['CHARSET'] = 'K&oacute;dov&aacute; str&aacute;nka';
-$TEXT['MODULE_ORDER'] = 'Module-order for searching'; //needs to be translated
-$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt'; //needs to be translated
-$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module'; //needs to be translated
-$TEXT['PUBL_START_DATE'] = 'Start date'; //needs to be translated
-$TEXT['PUBL_END_DATE'] = 'End date'; //needs to be translated
-$TEXT['CALENDAR'] = 'Calender'; //needs to be translated
-$TEXT['DELETE_DATE'] = 'Delete date'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name'; //needs to be translated
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.'; //needs to be translated
-$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine'; //needs to be translated
-$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host'; //needs to be translated
-$TEXT['WBMAILER_PHP'] = 'PHP MAIL'; //needs to be translated
-$TEXT['WBMAILER_SMTP'] = 'SMTP'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username'; //needs to be translated
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password'; //needs to be translated
-$TEXT['PLEASE_LOGIN'] = 'Please login'; //needs to be translated
-$TEXT['CAP_EDIT_CSS'] = 'Edit CSS'; //needs to be translated
-$TEXT['HEADING_CSS_FILE'] = 'Actual module file: '; //needs to be translated
-$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.'; //needs to be translated 
+$TEXT['MODULE_ORDER'] = 'Module-order for searching';
+$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt';
+$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module';
+$TEXT['PUBL_START_DATE'] = 'Start date';
+$TEXT['PUBL_END_DATE'] = 'End date';
+$TEXT['CALENDAR'] = 'Calender';
+$TEXT['DELETE_DATE'] = 'Delete date';
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.';
+$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail';
+$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.';
+$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine';
+$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
+$TEXT['WBMAILER_PHP'] = 'PHP MAIL';
+$TEXT['WBMAILER_SMTP'] = 'SMTP';
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification';
+$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification';
+$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username';
+$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password';
+$TEXT['PLEASE_LOGIN'] = 'Please login';
+$TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Nem&aacute;te opr&aacute;vn&#283;n&iacute; prohl&iacute;&#382;et tuto str&aacute;nku';
@@ -553,7 +555,7 @@ $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Do&scaron;lo k chyb&#283; p&#345;i 
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Mus&iacute;te vyplnit n&aacute;sleduj&iacute;c&iacute; pole';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Omlouv&aacute;me se, ale tento formul&aacute;&#345; dos&aacute;hl limitu povolen&yacute;ch odesl&aacute;n&iacute; pro tuto hodinu. Pros&iacute;m zkuste to znovu v dal&scaron;&iacute; hodin&#283;..';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Kontroln&iacute; k&oacute;d (zn&aacute;m&yacute; jako Captcha) neodpov&iacute;d&aacute;. Pokud m&aacute;te probl&eacute;my s p&#345;e&#269;ten&iacute;m tohoto k&oacute;du, kontaktujte '.SERVER_EMAIL;
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Kontroln&iacute; k&oacute;d (zn&aacute;m&yacute; jako Captcha) neodpov&iacute;d&aacute;. Pokud m&aacute;te probl&eacute;my s p&#345;e&#269;ten&iacute;m tohoto k&oacute;du, kontaktujte '.SERVER_EMAIL.'';
 
 $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Vyberte kter&aacute; roz&scaron;&iacute;&#345;en&iacute; si p&#345;ejete p&#345;ehr&aacute;t';
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduly byly &uacute;sp&#283;&scaron;n&#283; p&#345;ehr&aacute;ny';

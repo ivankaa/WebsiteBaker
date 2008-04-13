@@ -4,28 +4,30 @@
 
 /*
 
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+Website Baker Project <http://www.websitebaker.org/>
+Copyright (C) 2004-2008, Ryan Djurovich
 
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Website Baker is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Website Baker is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with Website Baker; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
+// use languageedit-module to modify this file
+
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
-	define('LANGUAGE_LOADED', true);
+define('LANGUAGE_LOADED', true);
 }
 
 // Set the language information
@@ -46,7 +48,7 @@ $MENU['TEMPLATES'] = 'Sivupohjat';
 $MENU['LANGUAGES'] = 'Kielet';
 $MENU['PREFERENCES'] = 'Omat tiedot';
 $MENU['SETTINGS'] = 'Asetukset';
-$MENU['ADMINTOOLS'] = 'Admin-Tools'; //needs to be translated
+$MENU['ADMINTOOLS'] = 'Admin-Tools';
 $MENU['ACCESS'] = 'K&auml;ytt&auml;j&auml;t';
 $MENU['USERS'] = 'K&auml;ytt&auml;j&auml;t';
 $MENU['GROUPS'] = 'Ryhm&auml;';
@@ -69,7 +71,7 @@ $OVERVIEW['USERS'] = 'K&auml;ytt&auml;j&auml;hallinta...';
 $OVERVIEW['GROUPS'] = 'k&auml;ytt&auml;j&auml;ryhm&auml;t...';
 $OVERVIEW['HELP'] = 'Kysymykset, vastaukset...';
 $OVERVIEW['VIEW'] = 'Tarkastele sivuja...';
-$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...';
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Muokka/poista sivu';
@@ -119,7 +121,7 @@ $HEADING['ADD_GROUP'] = 'Lis&auml;&auml; ryhm&auml;';
 $HEADING['MODIFY_GROUP'] = 'Muokkaa ryhm&auml;&auml;';
 
 // Other text
-$TEXT['OPEN'] = 'Open'; //needs to be translated
+$TEXT['OPEN'] = 'Open';
 $TEXT['ADD'] = 'Lis&auml;&auml;';
 $TEXT['MODIFY'] = 'Muokkaa';
 $TEXT['SETTINGS'] = 'Asetukset';
@@ -211,21 +213,21 @@ $TEXT['INTRO'] = 'Esisivu';
 $TEXT['PAGE'] = 'Sivu';
 $TEXT['SIGNUP'] = 'Rekister&ouml;ityminen';
 $TEXT['PHP_ERROR_LEVEL'] = 'PHP:n virheraportointitapa';
-$TEXT['ADMIN'] = 'Admin';  //needs to be translated
+$TEXT['ADMIN'] = 'Admin';
 $TEXT['PATH'] = 'Polku';
-$TEXT['URL'] = 'URL';  //needs to be translated
+$TEXT['URL'] = 'URL';
 $TEXT['FRONTEND'] = 'Johdanto';
 $TEXT['EXTENSION'] = 'Liite';
 $TEXT['TABLE_PREFIX'] = 'Taulukon ominaisuudet';
 $TEXT['CHANGES'] = 'Muutokset';
-$TEXT['ADMINISTRATION'] = 'Administration';  //needs to be translated
+$TEXT['ADMINISTRATION'] = 'Administration';
 $TEXT['FORGOT_DETAILS'] = 'Peruuta tiedot?';
 $TEXT['LOGGED_IN'] = 'Kirjautunut';
 $TEXT['WELCOME_BACK'] = 'N&auml;kemiin';
 $TEXT['FULL_NAME'] = 'Nimi';
 $TEXT['ACCOUNT_SIGNUP'] = 'Kirjaunut';
 $TEXT['LINK'] = 'Linkki';
-$TEXT['ANCHOR'] = 'Anchor';  //needs to be translated
+$TEXT['ANCHOR'] = 'Anchor';
 $TEXT['TARGET'] = 'Kohde';
 $TEXT['NEW_WINDOW'] = 'Uuteen ikkunaan';
 $TEXT['SAME_WINDOW'] = 'Nykyiseen ikkunaan';
@@ -337,7 +339,7 @@ $TEXT['REGISTERED'] = 'Rekister&ouml;itynyt';
 $TEXT['START'] = 'Alku';
 $TEXT['SECTION_BLOCKS'] = 'Osa';
 $TEXT['REGISTERED_VIEWERS'] = 'Rekister&ouml;ity';
-$TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers'; //needs to be translated
+$TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers';
 $TEXT['SUBMISSION_ID'] = 'Alasivun ID';
 $TEXT['SUBMISSIONS'] = 'Alasivu';
 $TEXT['SUBMITTED'] = 'Siirretty alisivuksi';
@@ -349,7 +351,7 @@ $TEXT['ANONYMOUS'] = 'Anonyymi';
 $TEXT['SERVER_OPERATING_SYSTEM'] = 'Palvelimen k&auml;ytt&ouml;j&auml;rjestelm&auml;';
 $TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'] = 'Kirjoitusoikeudet';
 $TEXT['LINUX_UNIX_BASED'] = 'Linux/Unix';
-$TEXT['WINDOWS'] = 'Windows'; //needs to be translated
+$TEXT['WINDOWS'] = 'Windows';
 $TEXT['HOME_FOLDER'] = 'Kotikansio';
 $TEXT['HOME_FOLDERS'] = 'Kotikansiot';
 $TEXT['PAGE_TRASH'] = 'Roskakori';
@@ -365,13 +367,13 @@ $TEXT['POST_FOOTER'] = 'Lis&auml;alaviite';
 $TEXT['POSTS_PER_PAGE'] = 'Osaa sivulla';
 $TEXT['RESIZE_IMAGE_TO'] = 'Muuta kuvan koko';
 $TEXT['UNLIMITED'] = 'Rajaton';
-$TEXT['OF'] = 'Of'; //needs to be translated
-$TEXT['OUT_OF'] = 'Out Of'; //needs to be translated
+$TEXT['OF'] = 'Of';
+$TEXT['OUT_OF'] = 'Out Of';
 $TEXT['NEXT'] = 'Seuraava';
 $TEXT['PREVIOUS'] = 'Edellinen';
 $TEXT['NEXT_PAGE'] = 'Seuraava sivu';
 $TEXT['PREVIOUS_PAGE'] = 'Edellinen sivu';
-$TEXT['ON'] = 'On'; //needs to be translated
+$TEXT['ON'] = 'On';
 $TEXT['LAST_UPDATED_BY'] = 'P&auml;ivitetty';
 $TEXT['RESULTS_FOR'] = 'Tulokset';
 $TEXT['TIME'] = 'Aika';
@@ -391,8 +393,8 @@ $TEXT['BACKUP'] = 'Varmuuskopioi';
 $TEXT['RESTORE'] = 'Palauta';
 $TEXT['BACKUP_DATABASE'] = 'Varmista tietokanta';
 $TEXT['RESTORE_DATABASE'] = 'Palauta tietokanta';
-$TEXT['BACKUP_ALL_TABLES'] = 'Backup all tables in database'; //needs to be translated
-$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup only WB-specific tables'; //needs to be translated
+$TEXT['BACKUP_ALL_TABLES'] = 'Backup all tables in database';
+$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup only WB-specific tables';
 $TEXT['BACKUP_MEDIA'] = 'Varmista...';
 $TEXT['RESTORE_MEDIA'] = 'Palauta...';
 $TEXT['ADMINISTRATION_TOOL'] = 'Ty&ouml;kalu';
@@ -400,33 +402,33 @@ $TEXT['CAPTCHA_VERIFICATION'] = 'Captcha varmistus';
 $TEXT['VERIFICATION'] = 'Varmistus';
 $TEXT['DEFAULT_CHARSET'] = 'Oletusmerkrkist&ouml;';
 $TEXT['CHARSET'] = 'Merkist&ouml;';
-$TEXT['MODULE_ORDER'] = 'Module-order for searching'; //needs to be translated
-$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt'; //needs to be translated
-$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module'; //needs to be translated
-$TEXT['PUBL_START_DATE'] = 'Start date'; //needs to be translated
-$TEXT['PUBL_END_DATE'] = 'End date'; //needs to be translated
-$TEXT['CALENDAR'] = 'Calender'; //needs to be translated
-$TEXT['DELETE_DATE'] = 'Delete date'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name'; //needs to be translated
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.'; //needs to be translated
-$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine'; //needs to be translated
-$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host'; //needs to be translated
-$TEXT['WBMAILER_PHP'] = 'PHP MAIL'; //needs to be translated
-$TEXT['WBMAILER_SMTP'] = 'SMTP'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username'; //needs to be translated
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password'; //needs to be translated
-$TEXT['PLEASE_LOGIN'] = 'Please login'; //needs to be translated
-$TEXT['CAP_EDIT_CSS'] = 'Edit CSS'; //needs to be translated
-$TEXT['HEADING_CSS_FILE'] = 'Actual module file: '; //needs to be translated
-$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.'; //needs to be translated 
+$TEXT['MODULE_ORDER'] = 'Module-order for searching';
+$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt';
+$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module';
+$TEXT['PUBL_START_DATE'] = 'Start date';
+$TEXT['PUBL_END_DATE'] = 'End date';
+$TEXT['CALENDAR'] = 'Calender';
+$TEXT['DELETE_DATE'] = 'Delete date';
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.';
+$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail';
+$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.';
+$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine';
+$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
+$TEXT['WBMAILER_PHP'] = 'PHP MAIL';
+$TEXT['WBMAILER_SMTP'] = 'SMTP';
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification';
+$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification';
+$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username';
+$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password';
+$TEXT['PLEASE_LOGIN'] = 'Please login';
+$TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Oikeutesi eiv&auml;t riit&auml;...';
-$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display'; //needs to be translated
+$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display';
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Oikeutesi eiv&auml;t riit&auml;...';
 
@@ -546,7 +548,7 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Poistettu';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kohdekansioon ei voi kirjoittaa';
 $MESSAGE['GENERIC']['INVALID'] = 'Ladatussa tiedostossa virhe';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Tiedosto k&auml;yt&ouml;ss&auml;, tiedostoa ei voi poistaa';
-$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'] = 'Sivusto valmisteilla';
+$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Tervetuluoa my&ouml;hemmin...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Hetkinen...';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Virhe tiedostoa avattaessa.';

@@ -4,28 +4,30 @@
 
 /*
 
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+Website Baker Project <http://www.websitebaker.org/>
+Copyright (C) 2004-2008, Ryan Djurovich
 
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Website Baker is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Website Baker is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with Website Baker; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
+// use languageedit-module to modify this file
+
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
-	define('LANGUAGE_LOADED', true);
+define('LANGUAGE_LOADED', true);
 }
 
 // Set the language information
@@ -37,7 +39,7 @@ $language_author = 'Heiko H&auml;ng';
 $language_license = 'GNU General Public License';
 
 // Menu titles
-$MENU['START'] = 'Start'; //needs to be translated
+$MENU['START'] = 'Start';
 $MENU['PAGES'] = 'Lehed';
 $MENU['MEDIA'] = 'Meedia';
 $MENU['ADDONS'] = 'Lisad';
@@ -46,7 +48,7 @@ $MENU['TEMPLATES'] = 'Kujundused';
 $MENU['LANGUAGES'] = 'Keeled';
 $MENU['PREFERENCES'] = 'Valikud';
 $MENU['SETTINGS'] = 'Seaded';
-$MENU['ADMINTOOLS'] = 'Admin-Tools'; //needs to be translated
+$MENU['ADMINTOOLS'] = 'Admin-Tools';
 $MENU['ACCESS'] = 'Ligip&auml;&auml;s';
 $MENU['USERS'] = 'Kasutajad';
 $MENU['GROUPS'] = 'Grupid';
@@ -54,14 +56,14 @@ $MENU['HELP'] = 'Abi';
 $MENU['VIEW'] = 'Vaata';
 $MENU['LOGOUT'] = 'Logi V&auml;lja';
 $MENU['LOGIN'] = 'Logi Sisse';
-$MENU['FORGOT'] = 'Retrieve Login Details'; //needs to be translated
+$MENU['FORGOT'] = 'Retrieve Login Details';
 
 // Section overviews
 $OVERVIEW['START'] = 'Administratsiooni &uuml;levaade';
 $OVERVIEW['PAGES'] = 'Halda oma veebisaidi lehek&uuml;lgi...';
 $OVERVIEW['MEDIA'] = 'Halda faile mis on media kaustas...';
 $OVERVIEW['MODULES'] = 'Halda Website Bakeri mooduleid...';
-$OVERVIEW['TEMPLATES'] = 'Change the look and feel of your website with templates...'; //needs to be translated
+$OVERVIEW['TEMPLATES'] = 'Change the look and feel of your website with templates...';
 $OVERVIEW['LANGUAGES'] = 'Halda Website Bakeri keeli...';
 $OVERVIEW['PREFERENCES'] = 'Muuda eelistusi nagu emaili aadress, parool, jne... ';
 $OVERVIEW['SETTINGS'] = 'Muuda seadeid Website Bakeri jaoks...';
@@ -69,13 +71,13 @@ $OVERVIEW['USERS'] = 'Halda kasutajaid kes saavad logida Website Bakerisse...';
 $OVERVIEW['GROUPS'] = 'Halda kasutajate gruppe ja nende &otilde;iguseid...';
 $OVERVIEW['HELP'] = 'On k&uuml;simusi? Leia oma vastus...';
 $OVERVIEW['VIEW'] = 'Kiirelt vaata ja lehitse oma veebisaiti uues aknas...';
-$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...';
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Muuda/Kustuta Leht';
 $HEADING['DELETED_PAGES'] = 'Kustutatud Lehed';
 $HEADING['ADD_PAGE'] = 'Lisa Leht';
-$HEADING['ADD_HEADING'] = 'Add Heading'; //needs to be translated
+$HEADING['ADD_HEADING'] = 'Add Heading';
 $HEADING['MODIFY_PAGE'] = 'Muuda Lehte';
 $HEADING['MODIFY_PAGE_SETTINGS'] = 'Muuda Lehe Seadeid';
 $HEADING['MODIFY_ADVANCED_PAGE_SETTINGS'] = 'Muuda Arenenud Lehe Seadeid';
@@ -106,9 +108,9 @@ $HEADING['GENERAL_SETTINGS'] = '&Uuml;ldised Seaded';
 $HEADING['DEFAULT_SETTINGS'] = 'Vaikimisi Seaded';
 $HEADING['SEARCH_SETTINGS'] = 'Otsingu Seaded';
 $HEADING['FILESYSTEM_SETTINGS'] = 'Failis&uuml;steemi Seaded';
-$HEADING['SERVER_SETTINGS'] = 'Server Settings'; //needs to be translated
-$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings'; //needs to be translated
-$HEADING['ADMINISTRATION_TOOLS'] = 'Administration Tools'; //needs to be translated
+$HEADING['SERVER_SETTINGS'] = 'Server Settings';
+$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings';
+$HEADING['ADMINISTRATION_TOOLS'] = 'Administration Tools';
 
 $HEADING['MODIFY_DELETE_USER'] = 'Muuda/Kustuta Kasutaja';
 $HEADING['ADD_USER'] = 'Lisa Kasutaja';
@@ -119,7 +121,7 @@ $HEADING['ADD_GROUP'] = 'Lisa Grupp';
 $HEADING['MODIFY_GROUP'] = 'Muuda Gruppi';
 
 // Other text
-$TEXT['OPEN'] = 'Open'; //needs to be translated
+$TEXT['OPEN'] = 'Open';
 $TEXT['ADD'] = 'Lisa';
 $TEXT['MODIFY'] = 'Muuda';
 $TEXT['SETTINGS'] = 'Seaded';
@@ -180,7 +182,7 @@ $TEXT['AUTHOR'] = 'Autor';
 $TEXT['VERSION'] = 'Versioon';
 $TEXT['DESIGNED_FOR'] = 'Kavandatud';
 $TEXT['DESCRIPTION'] = 'Kirjeldus';
-$TEXT['EMAIL'] = 'Email'; //needs to be translated
+$TEXT['EMAIL'] = 'Email';
 $TEXT['LANGUAGE'] = 'Keel';
 $TEXT['TIMEZONE'] = 'Ajatsoon';
 $TEXT['CURRENT_PASSWORD'] = 'Praegune Parool';
@@ -207,13 +209,13 @@ $TEXT['TEMPLATE'] = 'Kujundus';
 $TEXT['INSTALLATION'] = 'Installatsioon';
 $TEXT['DATABASE'] = 'Andmebaas';
 $TEXT['HOST'] = 'Hostia';
-$TEXT['INTRO'] = 'Intro'; //needs to be translated
+$TEXT['INTRO'] = 'Intro';
 $TEXT['PAGE'] = 'Lehek&uuml;lg';
 $TEXT['SIGNUP'] = 'Registreeri';
 $TEXT['PHP_ERROR_LEVEL'] = 'PHP Vea Esitamise Tase';
-$TEXT['ADMIN'] = 'Admin'; //needs to be translated
+$TEXT['ADMIN'] = 'Admin';
 $TEXT['PATH'] = 'Rada';
-$TEXT['URL'] = 'URL'; //needs to be translated
+$TEXT['URL'] = 'URL';
 $TEXT['FRONTEND'] = 'Frondi-l&otilde;pp';
 $TEXT['EXTENSION'] = 'Ulatus';
 $TEXT['TABLE_PREFIX'] = 'Tabelite Prefiks';
@@ -224,12 +226,12 @@ $TEXT['LOGGED_IN'] = 'Sisse Logitud';
 $TEXT['WELCOME_BACK'] = 'Teretulemast tagasi';
 $TEXT['FULL_NAME'] = 'T&auml;isnimi';
 $TEXT['ACCOUNT_SIGNUP'] = 'Registreerimine';
-$TEXT['LINK'] = 'Link'; //needs to be translated
-$TEXT['ANCHOR'] = 'Anchor'; //needs to be translated
+$TEXT['LINK'] = 'Link';
+$TEXT['ANCHOR'] = 'Anchor';
 $TEXT['TARGET'] = 'Sihtm&auml;rk';
 $TEXT['NEW_WINDOW'] = 'Uus Aken';
 $TEXT['SAME_WINDOW'] = 'Sama Aken';
-$TEXT['TOP_FRAME'] = 'Top Frame'; //needs to be translated
+$TEXT['TOP_FRAME'] = 'Top Frame';
 $TEXT['PAGE_LEVEL_LIMIT'] = 'Lehek&uuml;lje Taseme Limiit';
 $TEXT['SUCCESS'] = 'Edu';
 $TEXT['ERROR'] = 'Viga';
@@ -239,12 +241,12 @@ $TEXT['NO'] = 'Ei';
 $TEXT['SYSTEM_DEFAULT'] = 'S&uuml;steemi Vaikimisi Valik';
 $TEXT['PAGE_TITLE'] = 'Lehek&uuml;lje Pealkiri';
 $TEXT['MENU_TITLE'] = 'Men&uuml;&uuml; Pealkiri';
-$TEXT['ACTIONS'] = 'Actions'; //needs to be translated
+$TEXT['ACTIONS'] = 'Actions';
 $TEXT['UNKNOWN'] = 'Teadmata';
 $TEXT['BLOCK'] = 'Blokeeri';
 $TEXT['SEARCH'] = 'Otsi';
 $TEXT['SEARCHING'] = 'Otsib';
-$TEXT['POST'] = 'Post'; //needs to be translated
+$TEXT['POST'] = 'Post';
 $TEXT['COMMENT'] = 'Kommentaar';
 $TEXT['COMMENTS'] = 'Kommentaarid';
 $TEXT['COMMENTING'] = 'Kommenteerimine';
@@ -252,7 +254,7 @@ $TEXT['SHORT'] = 'L&uuml;hike';
 $TEXT['LONG'] = 'Pikk';
 $TEXT['LOOP'] = 'Ts&uuml;kkel';
 $TEXT['FIELD'] = 'V&auml;li';
-$TEXT['REQUIRED'] = 'Required'; //needs to be translated
+$TEXT['REQUIRED'] = 'Required';
 $TEXT['LENGTH'] = 'Pikkus';
 $TEXT['MESSAGE'] = 'Teade';
 $TEXT['SUBJECT'] = 'Pealkiri';
@@ -273,7 +275,7 @@ $TEXT['SECTION'] = 'Sektsioon';
 $TEXT['DATE_FORMAT'] = 'Kuup&auml;eva Formaat';
 $TEXT['TIME_FORMAT'] = 'Aja Formaat';
 $TEXT['RESULTS'] = 'Tulemused';
-$TEXT['RESIZE'] = 'Re-size'; //needs to be translated
+$TEXT['RESIZE'] = 'Re-size';
 $TEXT['MANAGE'] = 'Halda';
 $TEXT['CODE'] = 'Kood';
 $TEXT['WIDTH'] = 'Laius';
@@ -336,8 +338,8 @@ $TEXT['MULTIPLE_MENUS'] = 'Arvukas Men&uuml;&uuml;\'s';
 $TEXT['REGISTERED'] = 'Registreeritud';
 $TEXT['START'] = 'Alusta';
 $TEXT['SECTION_BLOCKS'] = 'Sektsiooni Blokid';
-$TEXT['REGISTERED_VIEWERS'] = 'Registered Viewers'; //needs to be translated
-$TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers'; //needs to be translated
+$TEXT['REGISTERED_VIEWERS'] = 'Registered Viewers';
+$TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers';
 $TEXT['SUBMISSION_ID'] = 'Kaast&ouml;&ouml; ID';
 $TEXT['SUBMISSIONS'] = 'Kaast&ouml;&ouml;d';
 $TEXT['SUBMITTED'] = 'Saadetud';
@@ -347,9 +349,9 @@ $TEXT['EMAIL_ADDRESS'] = 'Emaili Aadress';
 $TEXT['CUSTOM'] = 'Tava';
 $TEXT['ANONYMOUS'] = 'Anon&uuml;&uuml;mne';
 $TEXT['SERVER_OPERATING_SYSTEM'] = 'Serveri Operatsioonis&uuml;steem';
-$TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'] = 'World-writeable file permissions'; //needs to be translated
+$TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'] = 'World-writeable file permissions';
 $TEXT['LINUX_UNIX_BASED'] = 'Linux/Unix tuginev';
-$TEXT['WINDOWS'] = 'Windows'; //needs to be translated
+$TEXT['WINDOWS'] = 'Windows';
 $TEXT['HOME_FOLDER'] = 'Kodu Kaust';
 $TEXT['HOME_FOLDERS'] = 'Kodu Kaustad';
 $TEXT['PAGE_TRASH'] = 'Lehek&uuml;lje Pr&uuml;gi';
@@ -363,10 +365,10 @@ $TEXT['ADD_SECTION'] = 'Lisa Sektsioon';
 $TEXT['POST_HEADER'] = 'Posti P&auml;is';
 $TEXT['POST_FOOTER'] = 'Posti Jalus';
 $TEXT['POSTS_PER_PAGE'] = 'Postitusi Lehele';
-$TEXT['RESIZE_IMAGE_TO'] = 'Resize Image To'; //needs to be translated
+$TEXT['RESIZE_IMAGE_TO'] = 'Resize Image To';
 $TEXT['UNLIMITED'] = 'Piiramatu';
-$TEXT['OF'] = 'Of'; //needs to be translated
-$TEXT['OUT_OF'] = 'Out Of'; //needs to be translated
+$TEXT['OF'] = 'Of';
+$TEXT['OUT_OF'] = 'Out Of';
 $TEXT['NEXT'] = 'J&auml;rgmine';
 $TEXT['PREVIOUS'] = 'Eelmine';
 $TEXT['NEXT_PAGE'] = 'J&auml;rgmine Lehek&uuml;lg';
@@ -376,7 +378,7 @@ $TEXT['LAST_UPDATED_BY'] = 'Viimati Uuendatud';
 $TEXT['RESULTS_FOR'] = 'Tulemused';
 $TEXT['TIME'] = 'Aeg';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Stiil';
-$TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor'; //needs to be translated
+$TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor';
 $TEXT['SERVER_EMAIL'] = 'Serveri Email';
 $TEXT['MENU'] = 'Men&uuml;&uuml;';
 $TEXT['MANAGE_GROUPS'] = 'Halda Gruppe';
@@ -384,51 +386,51 @@ $TEXT['MANAGE_USERS'] = 'Halda Kasutajaid';
 $TEXT['PAGE_LANGUAGES'] = 'Lehek&uuml;lje Keeled';
 $TEXT['HIDDEN'] = 'Varjatud';
 $TEXT['MAIN'] = 'Peamine';
-$TEXT['RENAME_FILES_ON_UPLOAD'] = 'Rename Files On Upload'; //needs to be translated
-$TEXT['APP_NAME'] = 'Application Name'; //needs to be translated
-$TEXT['SESSION_IDENTIFIER'] = 'Session Identifier'; //needs to be translated
-$TEXT['BACKUP'] = 'Backup'; //needs to be translated
-$TEXT['RESTORE'] = 'Restore'; //needs to be translated
-$TEXT['BACKUP_DATABASE'] = 'Backup Database'; //needs to be translated
-$TEXT['RESTORE_DATABASE'] = 'Restore Database'; //needs to be translated
-$TEXT['BACKUP_ALL_TABLES'] = 'Backup all tables in database'; //needs to be translated
-$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup only WB-specific tables'; //needs to be translated
-$TEXT['BACKUP_MEDIA'] = 'Backup Media'; //needs to be translated
-$TEXT['RESTORE_MEDIA'] = 'Restore Media'; //needs to be translated
-$TEXT['ADMINISTRATION_TOOL'] = 'Administration tool'; //needs to be translated
-$TEXT['CAPTCHA_VERIFICATION'] = 'Captcha Verification'; //needs to be translated
-$TEXT['VERIFICATION'] = 'Verification'; //needs to be translated
-$TEXT['DEFAULT_CHARSET'] = 'Default Charset'; //needs to be translated
-$TEXT['CHARSET'] = 'Charset'; //needs to be translated
-$TEXT['MODULE_ORDER'] = 'Module-order for searching'; //needs to be translated
-$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt'; //needs to be translated
-$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module'; //needs to be translated
-$TEXT['PUBL_START_DATE'] = 'Start date'; //needs to be translated
-$TEXT['PUBL_END_DATE'] = 'End date'; //needs to be translated
-$TEXT['CALENDAR'] = 'Calender'; //needs to be translated
-$TEXT['DELETE_DATE'] = 'Delete date'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name'; //needs to be translated
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.'; //needs to be translated
-$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine'; //needs to be translated
-$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host'; //needs to be translated
-$TEXT['WBMAILER_PHP'] = 'PHP MAIL'; //needs to be translated
-$TEXT['WBMAILER_SMTP'] = 'SMTP'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username'; //needs to be translated
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password'; //needs to be translated
-$TEXT['PLEASE_LOGIN'] = 'Please login'; //needs to be translated
-$TEXT['CAP_EDIT_CSS'] = 'Edit CSS'; //needs to be translated
-$TEXT['HEADING_CSS_FILE'] = 'Actual module file: '; //needs to be translated
-$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.'; //needs to be translated 
+$TEXT['RENAME_FILES_ON_UPLOAD'] = 'Rename Files On Upload';
+$TEXT['APP_NAME'] = 'Application Name';
+$TEXT['SESSION_IDENTIFIER'] = 'Session Identifier';
+$TEXT['BACKUP'] = 'Backup';
+$TEXT['RESTORE'] = 'Restore';
+$TEXT['BACKUP_DATABASE'] = 'Backup Database';
+$TEXT['RESTORE_DATABASE'] = 'Restore Database';
+$TEXT['BACKUP_ALL_TABLES'] = 'Backup all tables in database';
+$TEXT['BACKUP_WB_SPECIFIC'] = 'Backup only WB-specific tables';
+$TEXT['BACKUP_MEDIA'] = 'Backup Media';
+$TEXT['RESTORE_MEDIA'] = 'Restore Media';
+$TEXT['ADMINISTRATION_TOOL'] = 'Administration tool';
+$TEXT['CAPTCHA_VERIFICATION'] = 'Captcha Verification';
+$TEXT['VERIFICATION'] = 'Verification';
+$TEXT['DEFAULT_CHARSET'] = 'Default Charset';
+$TEXT['CHARSET'] = 'Charset';
+$TEXT['MODULE_ORDER'] = 'Module-order for searching';
+$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt';
+$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module';
+$TEXT['PUBL_START_DATE'] = 'Start date';
+$TEXT['PUBL_END_DATE'] = 'End date';
+$TEXT['CALENDAR'] = 'Calender';
+$TEXT['DELETE_DATE'] = 'Delete date';
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.';
+$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail';
+$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.';
+$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine';
+$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
+$TEXT['WBMAILER_PHP'] = 'PHP MAIL';
+$TEXT['WBMAILER_SMTP'] = 'SMTP';
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification';
+$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification';
+$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username';
+$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password';
+$TEXT['PLEASE_LOGIN'] = 'Please login';
+$TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Vabandame, sul ei ole &otilde;igusi selle lehe vaatamiseks';
-$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display'; //needs to be translated
+$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display';
 
-$MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Insufficient privelliges to be here'; //needs to be translated
+$MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Insufficient privelliges to be here';
 
 $MESSAGE['LOGIN']['BOTH_BLANK'] = 'Palun sisesta oma kasutajanimi ja parool allapoole';
 $MESSAGE['LOGIN']['USERNAME_BLANK'] = 'Palun sisesta kasutajanimi';
@@ -476,7 +478,7 @@ $MESSAGE['GROUPS']['DELETED'] = 'Grupp edukalt kustutatud';
 $MESSAGE['GROUPS']['GROUP_NAME_BLANK'] = 'Grupi nimi on t&uuml;hi';
 $MESSAGE['GROUPS']['CONFIRM_DELETE'] = 'Oled sa kindel et tahad seda gruppi kustutada (ja k&otilde;ik kasutajad mis kuuluvad selle alla)?';
 $MESSAGE['GROUPS']['NO_GROUPS_FOUND'] = 'Gruppe ei leitud';
-$MESSAGE['GROUPS']['GROUP_NAME_EXISTS'] = 'Group name already exists'; //needs to be translated
+$MESSAGE['GROUPS']['GROUP_NAME_EXISTS'] = 'Group name already exists';
 
 $MESSAGE['PREFERENCES']['DETAILS_SAVED'] = 'Detailid edukalt salvestatud';
 $MESSAGE['PREFERENCES']['EMAIL_UPDATED'] = 'Email edukalt uuendatud';
@@ -486,8 +488,8 @@ $MESSAGE['PREFERENCES']['PASSWORD_CHANGED'] = 'Parool edukalt muudetud';
 $MESSAGE['TEMPLATES']['CHANGE_TEMPLATE_NOTICE'] = 'M&auml;rge: kujunduse muutmiseks sa pead minema Seadete sektsiooni';
 
 $MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH'] = 'Ei saa sisaldada ../ kausta nimes';
-$MESSAGE['MEDIA']['TARGET_DOT_DOT_SLASH'] = 'Ei saa omada ../ kausta sihtm&auml;rgis';
-$MESSAGE['MEDIA']['TARGET_DOT_DOT_SLASH'] = 'Cannot have ../ in the folder target'; //needs to be translated
+$MESSAGE['MEDIA']['DIR_DOES_NOT_EXIST'] = 'Directory does not exist';
+$MESSAGE['MEDIA']['TARGET_DOT_DOT_SLASH'] = 'Cannot have ../ in the folder target';
 $MESSAGE['MEDIA']['NAME_DOT_DOT_SLASH'] = 'Ei saa sisaldada ../ nimes';
 $MESSAGE['MEDIA']['NAME_INDEX_PHP'] = 'Ei saa kasutada index.php nimena';
 $MESSAGE['MEDIA']['NONE_FOUND'] = 'Meediat ei leitud praeguses kataloogis';
@@ -538,26 +540,26 @@ $MESSAGE['GENERIC']['FILE_TYPES'] = 'Pea meeles et &uuml;les laetavad failid pea
 $MESSAGE['GENERIC']['CANNOT_UPLOAD'] = 'Ei saa faili &uuml;les laadida';
 $MESSAGE['GENERIC']['ALREADY_INSTALLED'] = 'Juba paigaldatud';
 $MESSAGE['GENERIC']['NOT_INSTALLED'] = 'Ei ole paigaldatud';
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL'] = 'Cannot uninstall'; //needs to be translated
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL'] = 'Cannot uninstall';
 $MESSAGE['GENERIC']['CANNOT_UNZIP'] = 'Ei saa faili lahti pakkida';
 $MESSAGE['GENERIC']['INSTALLED'] = 'Edukalt paigaldatud';
-$MESSAGE['GENERIC']['UPGRADED'] = 'Upgraded successfully'; //needs to be translated
+$MESSAGE['GENERIC']['UPGRADED'] = 'Upgraded successfully';
 $MESSAGE['GENERIC']['UNINSTALLED'] = 'Edukalt eemaldatud';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'V&otilde;imetu kirjutama siht kataloogi';
 $MESSAGE['GENERIC']['INVALID'] = '&Uuml;les laetud fail on vigane';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Ei saa eemaldada: selekteeritud fail on kasutuses';
-$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'] = 'Veebisait Ehitamisel';
+$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'K&uuml;lasta hiljem uuesti...';
-$MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.'; //needs to be translated
-$MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Error opening file.'; //needs to be translated
+$MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.';
+$MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Error opening file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Sa pead detailid sisestama j&auml;rgnevatesse lahtritesse';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Vabandame, see vorm on juba liiga palju kordi selle tunni jooksul saadetud. Palun proovi j&auml;rgmine tund uuesti.';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'The verification number (also known as Captcha) that you entered is incorrect. If you are having problems reading the Captcha, please email: '.SERVER_EMAIL; //needs to be translated
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'The verification number (also known as Captcha) that you entered is incorrect. If you are having problems reading the Captcha, please email: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you would like to have reloaded'; //needs to be translated
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully'; //needs to be translated
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully'; //needs to be translated
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully'; //needs to be translated
+$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you would like to have reloaded';
+$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully';
+$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully';
+$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully';
 
 ?>

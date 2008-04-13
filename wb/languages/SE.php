@@ -4,28 +4,30 @@
 
 /*
 
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+Website Baker Project <http://www.websitebaker.org/>
+Copyright (C) 2004-2008, Ryan Djurovich
 
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Website Baker is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Website Baker is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with Website Baker; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
+// use languageedit-module to modify this file
+
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
-	define('LANGUAGE_LOADED', true);
+define('LANGUAGE_LOADED', true);
 }
 
 // Set the language information
@@ -46,7 +48,7 @@ $MENU['TEMPLATES'] = 'Mallar';
 $MENU['LANGUAGES'] = 'Spr&aring;k';
 $MENU['PREFERENCES'] = 'Mina uppgifter';
 $MENU['SETTINGS'] = 'Inst&auml;llningar';
-$MENU['ADMINTOOLS'] = 'Admin-Tools'; //needs to be translated
+$MENU['ADMINTOOLS'] = 'Admin-Tools';
 $MENU['ACCESS'] = 'R&auml;ttigheter';
 $MENU['USERS'] = 'Anv&auml;ndare';
 $MENU['GROUPS'] = 'Grupper';
@@ -69,7 +71,7 @@ $OVERVIEW['USERS'] = 'Behandla anv&auml;ndare som kan logga in till Website Bake
 $OVERVIEW['GROUPS'] = 'Behandla anv&auml;ndargrupper och deras system&aring;tkomst...';
 $OVERVIEW['HELP'] = 'Hitta svar p&aring; dina fr&aring;gor (p&aring; engelska)...';
 $OVERVIEW['VIEW'] = 'Titta p&aring; dina sidor i ett nytt f&ouml;nster...';
-$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...';
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = '&Auml;ndra/radera sida';
@@ -107,7 +109,7 @@ $HEADING['DEFAULT_SETTINGS'] = 'Standardinst&auml;llningar';
 $HEADING['SEARCH_SETTINGS'] = 'S&ouml;kinst&auml;llningar';
 $HEADING['FILESYSTEM_SETTINGS'] = 'Inst&auml;llningar f&ouml;r Filsystem';
 $HEADING['SERVER_SETTINGS'] = 'Server Inst&auml;llningar';
-$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings'; //needs to be translated
+$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings';
 $HEADING['ADMINISTRATION_TOOLS'] = 'Administrationsverktyg';
 
 $HEADING['MODIFY_DELETE_USER'] = '&Auml;ndra/radera anv&auml;ndare';
@@ -119,7 +121,7 @@ $HEADING['ADD_GROUP'] = 'Skapa ny grupp';
 $HEADING['MODIFY_GROUP'] = '&Auml;ndra grupp';
 
 // Other text
-$TEXT['OPEN'] = 'Open'; //needs to be translated
+$TEXT['OPEN'] = 'Open';
 $TEXT['ADD'] = 'L&auml;gg till';
 $TEXT['MODIFY'] = '&Auml;ndra';
 $TEXT['SETTINGS'] = 'Inst&auml;llningar';
@@ -177,7 +179,7 @@ $TEXT['UNINSTALL'] = 'Avinstallera';
 $TEXT['VIEW_DETAILS'] = 'Visa detaljer';
 $TEXT['DISPLAY_NAME'] = 'Visa namn';
 $TEXT['AUTHOR'] = 'F&ouml;rfattare';
-$TEXT['VERSION'] = 'Version'; //needs to be translated
+$TEXT['VERSION'] = 'Version';
 $TEXT['DESIGNED_FOR'] = 'Skapad f&ouml;r';
 $TEXT['DESCRIPTION'] = 'Beskrivning';
 $TEXT['EMAIL'] = 'E-post';
@@ -200,32 +202,32 @@ $TEXT['ADVANCED'] = 'Avancerat';
 $TEXT['WEBSITE'] = 'Websida';
 $TEXT['DEFAULT'] = 'Standard';
 $TEXT['KEYWORDS'] = 'Nyckelord';
-$TEXT['TEXT'] = 'Text'; //needs to be translated
+$TEXT['TEXT'] = 'Text';
 $TEXT['HEADER'] = 'Huvud';
 $TEXT['FOOTER'] = 'Fot';
 $TEXT['TEMPLATE'] = 'Mall';
-$TEXT['INSTALLATION'] = 'Installation'; //needs to be translated
+$TEXT['INSTALLATION'] = 'Installation';
 $TEXT['DATABASE'] = 'Databas';
-$TEXT['HOST'] = 'Host'; //needs to be translated
+$TEXT['HOST'] = 'Host';
 $TEXT['INTRO'] = 'Inledning';
 $TEXT['PAGE'] = 'Sida';
 $TEXT['SIGNUP'] = 'Registrera';
 $TEXT['PHP_ERROR_LEVEL'] = 'PHP felrapport niv&aring;';
-$TEXT['ADMIN'] = 'Admin'; //needs to be translated
+$TEXT['ADMIN'] = 'Admin';
 $TEXT['PATH'] = 'S&ouml;kv&auml;g';
-$TEXT['URL'] = 'URL'; //needs to be translated
-$TEXT['FRONTEND'] = 'Front-end'; //needs to be translated
+$TEXT['URL'] = 'URL';
+$TEXT['FRONTEND'] = 'Front-end';
 $TEXT['EXTENSION'] = '&Auml;ndelse';
 $TEXT['TABLE_PREFIX'] = 'Tabell prefix';
 $TEXT['CHANGES'] = '&Auml;ndringar';
-$TEXT['ADMINISTRATION'] = 'Administration'; //needs to be translated
+$TEXT['ADMINISTRATION'] = 'Administration';
 $TEXT['FORGOT_DETAILS'] = 'Gl&ouml;mt dina uppgifter?';
 $TEXT['LOGGED_IN'] = 'Inloggad';
 $TEXT['WELCOME_BACK'] = 'V&auml;lkommen tillbaka';
 $TEXT['FULL_NAME'] = 'Ditt hela namn';
 $TEXT['ACCOUNT_SIGNUP'] = 'Kontoregistrering';
-$TEXT['LINK'] = 'Link'; //needs to be translated
-$TEXT['ANCHOR'] = 'Anchor'; //needs to be translated
+$TEXT['LINK'] = 'Link';
+$TEXT['ANCHOR'] = 'Anchor';
 $TEXT['TARGET'] = 'M&aring;lf&ouml;nster';
 $TEXT['NEW_WINDOW'] = 'Nytt f&ouml;nster';
 $TEXT['SAME_WINDOW'] = 'Samma f&ouml;nster';
@@ -241,7 +243,7 @@ $TEXT['PAGE_TITLE'] = 'Sidans titel';
 $TEXT['MENU_TITLE'] = 'Menyns titel';
 $TEXT['ACTIONS'] = '&Aring;tg&auml;rder';
 $TEXT['UNKNOWN'] = 'Ok&auml;nd';
-$TEXT['BLOCK'] = 'Block'; //needs to be translated
+$TEXT['BLOCK'] = 'Block';
 $TEXT['SEARCH'] = 'S&ouml;k';
 $TEXT['SEARCHING'] = 'S&ouml;ker';
 $TEXT['POST'] = 'Nyhet';
@@ -250,7 +252,7 @@ $TEXT['COMMENTS'] = 'Kommentarer';
 $TEXT['COMMENTING'] = 'Kommenterar';
 $TEXT['SHORT'] = 'Ingress';
 $TEXT['LONG'] = 'Br&ouml;dtext';
-$TEXT['LOOP'] = 'Loop'; //needs to be translated
+$TEXT['LOOP'] = 'Loop';
 $TEXT['FIELD'] = 'F&auml;lt';
 $TEXT['REQUIRED'] = 'Obligatoriskt';
 $TEXT['LENGTH'] = 'L&auml;ngd';
@@ -265,10 +267,10 @@ $TEXT['HIDE'] = 'G&ouml;m';
 $TEXT['START_PUBLISHING'] = 'Starta publicering';
 $TEXT['FINISH_PUBLISHING'] = 'Avsluta publicering';
 $TEXT['DATE'] = 'Datum';
-$TEXT['START'] = 'Start'; //needs to be translated
+$TEXT['START'] = 'Start';
 $TEXT['END'] = 'Stopp';
 $TEXT['IMAGE'] = 'Bild';
-$TEXT['ICON'] = 'Icon'; //needs to be translated
+$TEXT['ICON'] = 'Icon';
 $TEXT['SECTION'] = 'Sektion';
 $TEXT['DATE_FORMAT'] = 'Datumformat';
 $TEXT['TIME_FORMAT'] = 'Tidsformat';
@@ -284,7 +286,7 @@ $TEXT['CHANGE_SETTINGS'] = '&Auml;ndra inst&auml;llningar';
 $TEXT['CURRENT_PAGE'] = 'Nuvarande sida';
 $TEXT['CLOSE'] = 'St&auml;ng';
 $TEXT['INTRO_PAGE'] = 'F&ouml;rstasida';
-$TEXT['INSTALLATION_URL'] = 'Installation URL'; //needs to be translated
+$TEXT['INSTALLATION_URL'] = 'Installation URL';
 $TEXT['INSTALLATION_PATH'] = 'Installation s&ouml;kv&auml;g';
 $TEXT['PAGE_EXTENSION'] = 'Sidors fil&auml;ndelse';
 $TEXT['NO_RESULTS'] = 'Inget resultat';
@@ -299,7 +301,7 @@ $TEXT['RESULTS_FOOTER'] = 'Resultat fot';
 $TEXT['LEVEL'] = 'Niv&aring;';
 $TEXT['NOT_FOUND'] = 'Hittades inte';
 $TEXT['PAGE_SPACER'] = 'Mellanrum sida';
-$TEXT['MATCHING'] = 'Matching'; //needs to be translated
+$TEXT['MATCHING'] = 'Matching';
 $TEXT['TEMPLATE_PERMISSIONS'] = 'Till&aring;telse mallar';
 $TEXT['PAGES_DIRECTORY'] = 'Sidors mapp';
 $TEXT['MEDIA_DIRECTORY'] = 'Media mapp';
@@ -324,7 +326,7 @@ $TEXT['CHECKBOX_GROUP'] = 'Valruta flera';
 $TEXT['RADIO_BUTTON_GROUP'] = 'Radioknapp flera';
 $TEXT['SIZE'] = 'Storlek';
 $TEXT['DEFAULT_TEXT'] = 'Standardtext';
-$TEXT['SEPERATOR'] = 'Separator'; //needs to be translated
+$TEXT['SEPERATOR'] = 'Separator';
 $TEXT['BACK'] = 'Tillbaka';
 $TEXT['UNDER_CONSTRUCTION'] = 'Under uppbygnad.... Kommer snart';
 $TEXT['MULTISELECT'] = 'Flerval';
@@ -349,7 +351,7 @@ $TEXT['ANONYMOUS'] = 'Anonym';
 $TEXT['SERVER_OPERATING_SYSTEM'] = 'Serveroperativsystem';
 $TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'] = 'Skrivr&auml;ttigheter filer';
 $TEXT['LINUX_UNIX_BASED'] = 'Linux/Unix';
-$TEXT['WINDOWS'] = 'Windows'; //needs to be translated
+$TEXT['WINDOWS'] = 'Windows';
 $TEXT['HOME_FOLDER'] = 'Hemmapp';
 $TEXT['HOME_FOLDERS'] = 'Hemmappar';
 $TEXT['PAGE_TRASH'] = 'Papperskorg';
@@ -387,7 +389,7 @@ $TEXT['MAIN'] = 'Huvudmenyn';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = '&Auml;ndra filnamn vid uppladdning';
 $TEXT['APP_NAME'] = 'Namn p&aring; applikation';
 $TEXT['SESSION_IDENTIFIER'] = 'Sessionsidentifierare';
-$TEXT['BACKUP'] = 'Backup'; //needs to be translated
+$TEXT['BACKUP'] = 'Backup';
 $TEXT['RESTORE'] = '&Aring;terst&auml;ll';
 $TEXT['BACKUP_DATABASE'] = 'Backup av databas';
 $TEXT['RESTORE_DATABASE'] = '&Aring;terst&auml;ll databas';
@@ -400,33 +402,33 @@ $TEXT['CAPTCHA_VERIFICATION'] = 'Captchaverifiering (&auml;ven kallat verifierin
 $TEXT['VERIFICATION'] = 'Verifikation';
 $TEXT['DEFAULT_CHARSET'] = 'Standardtypsnitt';
 $TEXT['CHARSET'] = 'Typsnitt';
-$TEXT['MODULE_ORDER'] = 'Module-order for searching'; //needs to be translated
-$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt'; //needs to be translated
-$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module'; //needs to be translated
-$TEXT['PUBL_START_DATE'] = 'Start date'; //needs to be translated
-$TEXT['PUBL_END_DATE'] = 'End date'; //needs to be translated
-$TEXT['CALENDAR'] = 'Calender'; //needs to be translated
-$TEXT['DELETE_DATE'] = 'Delete date'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name'; //needs to be translated
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.'; //needs to be translated
-$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine'; //needs to be translated
-$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host'; //needs to be translated
-$TEXT['WBMAILER_PHP'] = 'PHP MAIL'; //needs to be translated
-$TEXT['WBMAILER_SMTP'] = 'SMTP'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username'; //needs to be translated
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password'; //needs to be translated
-$TEXT['PLEASE_LOGIN'] = 'Please login'; //needs to be translated
-$TEXT['CAP_EDIT_CSS'] = 'Edit CSS'; //needs to be translated
-$TEXT['HEADING_CSS_FILE'] = 'Actual module file: '; //needs to be translated
-$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.'; //needs to be translated 
+$TEXT['MODULE_ORDER'] = 'Module-order for searching';
+$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt';
+$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module';
+$TEXT['PUBL_START_DATE'] = 'Start date';
+$TEXT['PUBL_END_DATE'] = 'End date';
+$TEXT['CALENDAR'] = 'Calender';
+$TEXT['DELETE_DATE'] = 'Delete date';
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.';
+$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail';
+$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.';
+$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine';
+$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
+$TEXT['WBMAILER_PHP'] = 'PHP MAIL';
+$TEXT['WBMAILER_SMTP'] = 'SMTP';
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification';
+$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification';
+$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username';
+$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password';
+$TEXT['PLEASE_LOGIN'] = 'Please login';
+$TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Tyv&auml;rr, du har inte till&aring;telse att titta p&aring; denna sida';
-$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display'; //needs to be translated
+$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display';
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Du har inte till&aring;telse att vara h&auml;r';
 
@@ -546,14 +548,14 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Avinstallerat';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kan inte skriva i m&aring;lmappen';
 $MESSAGE['GENERIC']['INVALID'] = 'Filen du laddade upp &auml;r ogilltig';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kan inte avinstallera: filen anv&auml;nds just nu';
-$MESSAGE['GENERIC']['WEBSITE_UNDER_CONTRUCTION'] = 'Websidan &auml;r under uppbygnad';
+$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'V&auml;nligen kom tillbaka snart...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'V&auml;nligen ha t&aring;lamod, det h&auml;r kan ta en stund.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Fel vid &ouml;ppnande av fil.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du m&aring;ste fylla i f&ouml;ljande f&auml;lt';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Tyv&auml;rr, detta formul&auml;r har skickats f&ouml;r m&aring;nga g&aring;nger inom denna timme. F&ouml;rs&ouml;k igen om ett tag.';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Verifieringsnumret (ocks&aring; k&auml;nt som Captcha) som du angav &auml;r felaktigt. Om du har problem med att l&auml;sa ut Captcha, v&auml;nligen s&auml;nd email till: '.SERVER_EMAIL;
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Verifieringsnumret (ocks&aring; k&auml;nt som Captcha) som du angav &auml;r felaktigt. Om du har problem med att l&auml;sa ut Captcha, v&auml;nligen s&auml;nd email till: '.SERVER_EMAIL.'';
 
 $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'V&auml;nligen v&auml;lj vilka till&auml;gg du vill ladda om';
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduler laddades om';

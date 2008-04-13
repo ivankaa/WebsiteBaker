@@ -4,28 +4,30 @@
 
 /*
 
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+Website Baker Project <http://www.websitebaker.org/>
+Copyright (C) 2004-2008, Ryan Djurovich
 
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Website Baker is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Website Baker is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with Website Baker; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
+// use languageedit-module to modify this file
+
 // Define that this file is loaded
 if(!defined('LANGUAGE_LOADED')) {
-	define('LANGUAGE_LOADED', true);
+define('LANGUAGE_LOADED', true);
 }
 
 // Set the language information
@@ -40,20 +42,20 @@ $language_license = 'GNU General Public License';
 $MENU['START'] = 'In&iacute;cio';
 $MENU['PAGES'] = 'P&aacute;ginas';
 $MENU['MEDIA'] = 'M&iacute;dia';
-$MENU['ADDONS'] = 'Add-ons'; //needs to be translated
+$MENU['ADDONS'] = 'Add-ons';
 $MENU['MODULES'] = 'M&oacute;dulos';
 $MENU['TEMPLATES'] = 'Temas (Templates)';
 $MENU['LANGUAGES'] = 'Idiomas';
 $MENU['PREFERENCES'] = 'Prefer&ecirc;ncias';
 $MENU['SETTINGS'] = 'Configura&ccdil;&otilde;es';
-$MENU['ADMINTOOLS'] = 'Admin-Tools'; //needs to be translated
+$MENU['ADMINTOOLS'] = 'Admin-Tools';
 $MENU['ACCESS'] = 'Acessos';
 $MENU['USERS'] = 'Usu&aacute;rios';
 $MENU['GROUPS'] = 'Grupos';
 $MENU['HELP'] = 'Ajuda';
 $MENU['VIEW'] = 'Visualizar';
-$MENU['LOGOUT'] = 'Log-out'; //needs to be translated
-$MENU['LOGIN'] = 'Login'; //needs to be translated
+$MENU['LOGOUT'] = 'Log-out';
+$MENU['LOGIN'] = 'Login';
 $MENU['FORGOT'] = 'Receber Detalhes do Login';
 
 // Section overviews
@@ -69,7 +71,7 @@ $OVERVIEW['USERS'] = 'Gerencie os usu&aacute;rios que podem logar no Website Bak
 $OVERVIEW['GROUPS'] = 'Gerencie os grupos de usu&aacute;rios e suas permiss&otilde;es de sistema...';
 $OVERVIEW['HELP'] = 'D&uacute;vidas? Encontre respostas...';
 $OVERVIEW['VIEW'] = 'Visualize e navegue em seu website atrav&eacute;s de uma nova janela...';
-$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...'; //needs to be translated
+$OVERVIEW['ADMINTOOLS'] = 'Access the Website Baker administration tools...';
 
 // Headings
 $HEADING['MODIFY_DELETE_PAGE'] = 'Modificar/Apagar P&aacute;gina';
@@ -107,7 +109,7 @@ $HEADING['DEFAULT_SETTINGS'] = 'Configura&ccdil;&otilde;es Padr&atilde;o';
 $HEADING['SEARCH_SETTINGS'] = 'Configura&ccdil;&otilde;es de Busca';
 $HEADING['FILESYSTEM_SETTINGS'] = 'Configura&ccdil;&otilde;es de Sistema de Arquivos';
 $HEADING['SERVER_SETTINGS'] = 'Configura&ccdil;&otilde;es do Servidor';
-$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings'; //needs to be translated
+$HEADING['WBMAILER_SETTINGS'] = 'Mailer Settings';
 $HEADING['ADMINISTRATION_TOOLS'] = 'Ferramentas de Administra&ccdil;&atilde;o';
 
 $HEADING['MODIFY_DELETE_USER'] = 'Modificar/Apagar Usu&aacute;rio';
@@ -119,20 +121,20 @@ $HEADING['ADD_GROUP'] = 'Adicionar Grupo';
 $HEADING['MODIFY_GROUP'] = 'Modificar Grupo';
 
 // Other text
-$TEXT['OPEN'] = 'Open'; //needs to be translated
+$TEXT['OPEN'] = 'Open';
 $TEXT['ADD'] = 'Adicionar';
 $TEXT['MODIFY'] = 'Modificar';
 $TEXT['SETTINGS'] = 'Configura&ccdil;&otilde;es';
 $TEXT['DELETE'] = 'Apagar';
 $TEXT['SAVE'] = 'Salvar';
 $TEXT['RESET'] = 'Redefinir';
-$TEXT['LOGIN'] = 'Login'; //needs to be translated
+$TEXT['LOGIN'] = 'Login';
 $TEXT['RELOAD'] = 'Recarregar';
 $TEXT['CANCEL'] = 'Cancelar';
 $TEXT['NAME'] = 'Nome';
 $TEXT['PLEASE_SELECT'] = 'Por Favor escolha';
 $TEXT['TITLE'] = 'T&iacute;tulo';
-$TEXT['PARENT'] = 'Parent'; //needs to be translated
+$TEXT['PARENT'] = 'Parent';
 $TEXT['TYPE'] = 'Tipo';
 $TEXT['VISIBILITY'] = 'Visibilidade';
 $TEXT['PRIVATE'] = 'Privado';
@@ -141,13 +143,13 @@ $TEXT['NONE'] = 'Nenhum';
 $TEXT['NONE_FOUND'] = 'Nada Encontrado';
 $TEXT['CURRENT'] = 'Atual';
 $TEXT['CHANGE'] = 'Alterar';
-$TEXT['WINDOW'] = 'Window'; //needs to be translated
+$TEXT['WINDOW'] = 'Window';
 $TEXT['DESCRIPTION'] = 'Descri&ccdil;&atilde;o';
-$TEXT['KEYWORDS'] = 'Keywords (Palavras-Chave)';
-$TEXT['ADMINISTRATORS'] = 'Administrators'; //needs to be translated
-$TEXT['PRIVATE_VIEWERS'] = 'Private Viewers'; //needs to be translated
-$TEXT['EXPAND'] = 'Expand'; //needs to be translated
-$TEXT['COLLAPSE'] = 'Collapse'; //needs to be translated
+$TEXT['KEYWORDS'] = 'Keywords';
+$TEXT['ADMINISTRATORS'] = 'Administrators';
+$TEXT['PRIVATE_VIEWERS'] = 'Private Viewers';
+$TEXT['EXPAND'] = 'Expand';
+$TEXT['COLLAPSE'] = 'Collapse';
 $TEXT['MOVE_UP'] = 'Mover para Cima';
 $TEXT['MOVE_DOWN'] = 'Mover para Baixo';
 $TEXT['RENAME'] = 'Renomear';
@@ -160,7 +162,7 @@ $TEXT['NEED_TO_LOGIN'] = 'Precisar fazer log-in?';
 $TEXT['SEND_DETAILS'] = 'Enviar credenciais';
 $TEXT['USERNAME'] = 'Usu&aacute;rio';
 $TEXT['PASSWORD'] = 'Senha';
-$TEXT['HOME'] = 'Home'; //needs to be translated
+$TEXT['HOME'] = 'Home';
 $TEXT['TARGET_FOLDER'] = 'Pasta Alvo';
 $TEXT['OVERWRITE_EXISTING'] = 'Substituir Existente';
 $TEXT['FILE'] = 'Arquivo';
@@ -180,7 +182,7 @@ $TEXT['AUTHOR'] = 'Autor';
 $TEXT['VERSION'] = 'Vers&atilde;o';
 $TEXT['DESIGNED_FOR'] = 'Designado para';
 $TEXT['DESCRIPTION'] = 'Descri&ccdil;&atilde;o';
-$TEXT['EMAIL'] = 'Email'; //needs to be translated
+$TEXT['EMAIL'] = 'Email';
 $TEXT['LANGUAGE'] = 'Idioma';
 $TEXT['TIMEZONE'] = 'Fuso Hor&aacute;rio';
 $TEXT['CURRENT_PASSWORD'] = 'Senha Atual';
@@ -197,24 +199,24 @@ $TEXT['SHOW_ADVANCED'] = 'Exibir Op&ccdil;&otilde;es Avan&ccdil;adas';
 $TEXT['HIDE_ADVANCED'] = 'Ocultar Op&ccdil;&otilde;es Avan&ccdil;adas';
 $TEXT['BASIC'] = 'B&aacute;sico';
 $TEXT['ADVANCED'] = 'Avan&ccdil;ado';
-$TEXT['WEBSITE'] = 'Website'; //needs to be translated
+$TEXT['WEBSITE'] = 'Website';
 $TEXT['DEFAULT'] = 'Padr&atilde;o';
-$TEXT['KEYWORDS'] = 'Keywords'; //needs to be translated
+$TEXT['KEYWORDS'] = 'Keywords';
 $TEXT['TEXT'] = 'Texto';
 $TEXT['HEADER'] = 'Cabe&ccdil;alho';
 $TEXT['FOOTER'] = 'Rodap&eacute;';
 $TEXT['TEMPLATE'] = 'Tema (Template)';
 $TEXT['INSTALLATION'] = 'Instala&ccdil;&atilde;o';
 $TEXT['DATABASE'] = 'Banco de Dados';
-$TEXT['HOST'] = 'Host'; //needs to be translated
+$TEXT['HOST'] = 'Host';
 $TEXT['INTRO'] = 'Introdu&ccdil;&atilde;o';
 $TEXT['PAGE'] = 'P&aacute;gina';
 $TEXT['SIGNUP'] = 'Inscrever';
-$TEXT['PHP_ERROR_LEVEL'] = 'PHP Error Reporting Level'; //needs to be translated
-$TEXT['ADMIN'] = 'Admin'; //needs to be translated
+$TEXT['PHP_ERROR_LEVEL'] = 'PHP Error Reporting Level';
+$TEXT['ADMIN'] = 'Admin';
 $TEXT['PATH'] = 'Caminho';
-$TEXT['URL'] = 'URL'; //needs to be translated
-$TEXT['FRONTEND'] = 'Front-end'; //needs to be translated
+$TEXT['URL'] = 'URL';
+$TEXT['FRONTEND'] = 'Front-end';
 $TEXT['EXTENSION'] = 'Extens&atilde;o';
 $TEXT['TABLE_PREFIX'] = 'Prefixo da Tabela';
 $TEXT['CHANGES'] = 'Altera&ccdil;&otilde;es';
@@ -224,12 +226,12 @@ $TEXT['LOGGED_IN'] = 'Logado';
 $TEXT['WELCOME_BACK'] = 'Bem-Vindo';
 $TEXT['FULL_NAME'] = 'Nome Completo';
 $TEXT['ACCOUNT_SIGNUP'] = 'Assinatura de Conta';
-$TEXT['LINK'] = 'Link'; //needs to be translated
-$TEXT['ANCHOR'] = 'Anchor'; //needs to be translated
-$TEXT['TARGET'] = 'Target'; //needs to be translated
-$TEXT['NEW_WINDOW'] = 'New Window'; //needs to be translated
-$TEXT['SAME_WINDOW'] = 'Same Window'; //needs to be translated
-$TEXT['TOP_FRAME'] = 'Top Frame'; //needs to be translated
+$TEXT['LINK'] = 'Link';
+$TEXT['ANCHOR'] = 'Anchor';
+$TEXT['TARGET'] = 'Target';
+$TEXT['NEW_WINDOW'] = 'New Window';
+$TEXT['SAME_WINDOW'] = 'Same Window';
+$TEXT['TOP_FRAME'] = 'Top Frame';
 $TEXT['PAGE_LEVEL_LIMIT'] = 'Limite de N&iacute;veis de P&aacute;gina';
 $TEXT['SUCCESS'] = 'Sucesso';
 $TEXT['ERROR'] = 'Erro';
@@ -241,10 +243,10 @@ $TEXT['PAGE_TITLE'] = 'T&iacute;tulo da P&aacute;gina';
 $TEXT['MENU_TITLE'] = 'T&iacute;tulo do Menu';
 $TEXT['ACTIONS'] = 'A&ccdil;&otilde;es';
 $TEXT['UNKNOWN'] = 'Desconhecido';
-$TEXT['BLOCK'] = 'Block'; //needs to be translated
+$TEXT['BLOCK'] = 'Block';
 $TEXT['SEARCH'] = 'Busca';
 $TEXT['SEARCHING'] = 'Buscando';
-$TEXT['POST'] = 'Post'; //needs to be translated
+$TEXT['POST'] = 'Post';
 $TEXT['COMMENT'] = 'Coment&aacute;rio';
 $TEXT['COMMENTS'] = 'Coment&aacute;rios';
 $TEXT['COMMENTING'] = 'Coment&aacute;rios';
@@ -262,8 +264,8 @@ $TEXT['ANY_WORDS'] = 'Qualquer Palavra';
 $TEXT['EXACT_MATCH'] = 'Express&atilde;o Exata';
 $TEXT['SHOW'] = 'Exibir';
 $TEXT['HIDE'] = 'Ocultar';
-$TEXT['START_PUBLISHING'] = 'Start Publishing'; //needs to be translated
-$TEXT['FINISH_PUBLISHING'] = 'Finish Publishing'; //needs to be translated
+$TEXT['START_PUBLISHING'] = 'Start Publishing';
+$TEXT['FINISH_PUBLISHING'] = 'Finish Publishing';
 $TEXT['DATE'] = 'Data';
 $TEXT['START'] = 'In&iacute;cio';
 $TEXT['END'] = 'Fim';
@@ -290,7 +292,7 @@ $TEXT['PAGE_EXTENSION'] = 'Extens&atilde;o da P&aacute;gina';
 $TEXT['NO_RESULTS'] = 'Sem Resultados';
 $TEXT['WEBSITE_TITLE'] = 'T&iacute;tulo do Website';
 $TEXT['WEBSITE_DESCRIPTION'] = 'Descri&ccdil;&atilde;o do Website';
-$TEXT['WEBSITE_KEYWORDS'] = 'Website Keywords'; //needs to be translated
+$TEXT['WEBSITE_KEYWORDS'] = 'Website Keywords';
 $TEXT['WEBSITE_HEADER'] = 'Cabe&ccdil;alho do Website';
 $TEXT['WEBSITE_FOOTER'] = 'Rodap&eacute; do Website';
 $TEXT['RESULTS_HEADER'] = 'Cabe&ccdil;alho dos Resultados';
@@ -299,7 +301,7 @@ $TEXT['RESULTS_FOOTER'] = 'Rodap&eacute; dos Resultados';
 $TEXT['LEVEL'] = 'N&iacute;vel';
 $TEXT['NOT_FOUND'] = 'N&atilde;o Encotnrado';
 $TEXT['PAGE_SPACER'] = 'Espa&ccdil;ador de P&aacute;gina';
-$TEXT['MATCHING'] = 'Matching'; //needs to be translated
+$TEXT['MATCHING'] = 'Matching';
 $TEXT['TEMPLATE_PERMISSIONS'] = 'Permiss&otilde;es do Tema (Template)';
 $TEXT['PAGES_DIRECTORY'] = 'Diret&oacute;rio de P&aacute;ginas';
 $TEXT['MEDIA_DIRECTORY'] = 'Diret&oacute;rio de M&iacute;dia';
@@ -317,11 +319,11 @@ $TEXT['DIRECTORY_MODE'] = 'Modo de Diret&oacute;rio';
 $TEXT['LIST_OPTIONS'] = 'Op&ccdil;&otilde;es de Lista';
 $TEXT['OPTION'] = 'Op&ccdil;&atilde;o';
 $TEXT['ALLOW_MULTIPLE_SELECTIONS'] = 'Permitir Multipla Sele&ccdil;&atilde;o';
-$TEXT['TEXTFIELD'] = 'Textfield'; //needs to be translated
-$TEXT['TEXTAREA'] = 'Textarea'; //needs to be translated
-$TEXT['SELECT_BOX'] = 'Select Box'; //needs to be translated
-$TEXT['CHECKBOX_GROUP'] = 'Checkbox Group'; //needs to be translated
-$TEXT['RADIO_BUTTON_GROUP'] = 'Radio Button Group'; //needs to be translated
+$TEXT['TEXTFIELD'] = 'Textfield';
+$TEXT['TEXTAREA'] = 'Textarea';
+$TEXT['SELECT_BOX'] = 'Select Box';
+$TEXT['CHECKBOX_GROUP'] = 'Checkbox Group';
+$TEXT['RADIO_BUTTON_GROUP'] = 'Radio Button Group';
 $TEXT['SIZE'] = 'Tamanho';
 $TEXT['DEFAULT_TEXT'] = 'Testo Padr&atilde;o';
 $TEXT['SEPERATOR'] = 'Separador';
@@ -335,10 +337,10 @@ $TEXT['HEADING'] = 'Cabe&ccdil;alho';
 $TEXT['MULTIPLE_MENUS'] = 'M&uacute;ltiplos Menus';
 $TEXT['REGISTERED'] = 'Registrado';
 $TEXT['START'] = 'In&iacute;cio';
-$TEXT['SECTION_BLOCKS'] = 'Section Blocks'; //needs to be translated
-$TEXT['REGISTERED_VIEWERS'] = 'Registered Viewers'; //needs to be translated
-$TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers'; //needs to be translated
-$TEXT['SUBMISSION_ID'] = 'Submission ID'; //needs to be translated
+$TEXT['SECTION_BLOCKS'] = 'Section Blocks';
+$TEXT['REGISTERED_VIEWERS'] = 'Registered Viewers';
+$TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers';
+$TEXT['SUBMISSION_ID'] = 'Submission ID';
 $TEXT['SUBMISSIONS'] = 'Submiss&otilde;es';
 $TEXT['SUBMITTED'] = 'Submetido';
 $TEXT['MAX_SUBMISSIONS_PER_HOUR'] = 'Max. Submiss&otilde;es por Hora';
@@ -347,13 +349,13 @@ $TEXT['EMAIL_ADDRESS'] = 'Endre&ccdil;or de Email';
 $TEXT['CUSTOM'] = 'Pr&oacute;prio';
 $TEXT['ANONYMOUS'] = 'An&ocirc;nimo';
 $TEXT['SERVER_OPERATING_SYSTEM'] = 'Sistema Operacional do Servidor';
-$TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'] = 'World-writeable file permissions'; //needs to be translated
-$TEXT['LINUX_UNIX_BASED'] = 'Linux/Unix based'; //needs to be translated
-$TEXT['WINDOWS'] = 'Windows'; //needs to be translated
-$TEXT['HOME_FOLDER'] = 'Home Folder'; //needs to be translated
-$TEXT['HOME_FOLDERS'] = 'Home Folders'; //needs to be translated
-$TEXT['PAGE_TRASH'] = 'Page Trash'; //needs to be translated
-$TEXT['INLINE'] = 'In-line'; //needs to be translated
+$TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'] = 'World-writeable file permissions';
+$TEXT['LINUX_UNIX_BASED'] = 'Linux/Unix based';
+$TEXT['WINDOWS'] = 'Windows';
+$TEXT['HOME_FOLDER'] = 'Home Folder';
+$TEXT['HOME_FOLDERS'] = 'Home Folders';
+$TEXT['PAGE_TRASH'] = 'Page Trash';
+$TEXT['INLINE'] = 'In-line';
 $TEXT['SEPARATE'] = 'Separado';
 $TEXT['DELETED'] = 'Apagado';
 $TEXT['VIEW_DELETED_PAGES'] = 'Exibir P&aacute;ginas Exclu&iacute;das';
@@ -366,19 +368,19 @@ $TEXT['POSTS_PER_PAGE'] = 'Posts por P&aacute;gina';
 $TEXT['RESIZE_IMAGE_TO'] = 'Redimensionar Imagem Para';
 $TEXT['UNLIMITED'] = 'Ilimitado';
 $TEXT['OF'] = 'de';
-$TEXT['OUT_OF'] = 'Out Of'; //needs to be translated
+$TEXT['OUT_OF'] = 'Out Of';
 $TEXT['NEXT'] = 'Pr&oacute;ximo';
 $TEXT['PREVIOUS'] = 'Anterior';
 $TEXT['NEXT_PAGE'] = 'Pr&oacute;xima P&aacute;gina';
 $TEXT['PREVIOUS_PAGE'] = 'P&aacute;gina Anterior';
-$TEXT['ON'] = 'On'; //needs to be translated
+$TEXT['ON'] = 'On';
 $TEXT['LAST_UPDATED_BY'] = '&Uacute;ltima atualiza&ccdil;&atilde;o por';
 $TEXT['RESULTS_FOR'] = 'Resultados para';
 $TEXT['TIME'] = 'Hora';
-$TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Style'; //needs to be translated
-$TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor'; //needs to be translated
+$TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Style';
+$TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor';
 $TEXT['SERVER_EMAIL'] = 'Servidor de Email';
-$TEXT['MENU'] = 'Menu'; //needs to be translated
+$TEXT['MENU'] = 'Menu';
 $TEXT['MANAGE_GROUPS'] = 'Gerenciar Grupos';
 $TEXT['MANAGE_USERS'] = 'Gerenciar Usu&aacute;rios';
 $TEXT['PAGE_LANGUAGES'] = 'Idioma da P&aacute;gina';
@@ -387,7 +389,7 @@ $TEXT['MAIN'] = 'Principal';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Renomear Arquivos ao Enviar';
 $TEXT['APP_NAME'] = 'Nome da Aplica&ccdil;&atilde;o';
 $TEXT['SESSION_IDENTIFIER'] = 'Identificador de Sess&atilde;o';
-$TEXT['BACKUP'] = 'Backup'; //needs to be translated
+$TEXT['BACKUP'] = 'Backup';
 $TEXT['RESTORE'] = 'Restaurar';
 $TEXT['BACKUP_DATABASE'] = 'Backup do Banco de Dados';
 $TEXT['RESTORE_DATABASE'] = 'Restaurar Banco de Dados';
@@ -399,34 +401,34 @@ $TEXT['ADMINISTRATION_TOOL'] = 'Ferramenta de Administra&ccdil;&atilde;o';
 $TEXT['CAPTCHA_VERIFICATION'] = 'Verifica&ccdil;&atilde;o Captcha';
 $TEXT['VERIFICATION'] = 'Verifica&ccdil;&atilde;o';
 $TEXT['DEFAULT_CHARSET'] = 'Codifica&ccdil;&atilde;o Padr&atilde;o';
-$TEXT['CHARSET'] = 'Charset'; //needs to be translated
-$TEXT['MODULE_ORDER'] = 'Module-order for searching'; //needs to be translated
-$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt'; //needs to be translated
-$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module'; //needs to be translated
-$TEXT['PUBL_START_DATE'] = 'Start date'; //needs to be translated
-$TEXT['PUBL_END_DATE'] = 'End date'; //needs to be translated
-$TEXT['CALENDAR'] = 'Calender'; //needs to be translated
-$TEXT['DELETE_DATE'] = 'Delete date'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail'; //needs to be translated
-$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name'; //needs to be translated
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.'; //needs to be translated
-$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine'; //needs to be translated
-$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host'; //needs to be translated
-$TEXT['WBMAILER_PHP'] = 'PHP MAIL'; //needs to be translated
-$TEXT['WBMAILER_SMTP'] = 'SMTP'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification'; //needs to be translated
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username'; //needs to be translated
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password'; //needs to be translated
-$TEXT['PLEASE_LOGIN'] = 'Please login'; //needs to be translated
-$TEXT['CAP_EDIT_CSS'] = 'Edit CSS'; //needs to be translated
-$TEXT['HEADING_CSS_FILE'] = 'Actual module file: '; //needs to be translated
-$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.'; //needs to be translated 
+$TEXT['CHARSET'] = 'Charset';
+$TEXT['MODULE_ORDER'] = 'Module-order for searching';
+$TEXT['MAX_EXCERPT'] = 'Max lines of excerpt';
+$TEXT['TIME_LIMIT'] = 'Max time to gather excerpts per module';
+$TEXT['PUBL_START_DATE'] = 'Start date';
+$TEXT['PUBL_END_DATE'] = 'End date';
+$TEXT['CALENDAR'] = 'Calender';
+$TEXT['DELETE_DATE'] = 'Delete date';
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Please specify a default "FROM" address and "SENDER" name below. It is recommended to use a FROM address like: <strong>admin@yourdomain.com</strong>. Some mail provider (e.g. <em>mail.com</em>) may reject mails with a FROM: address like <em>name@mail.com</em> sent via a foreign relay to avoid spam.<br /><br />The default values are only used if no other values are specified by Website Baker. If your server supports <acronym title="Simple mail transfer protocol">SMTP</acronym>, you may want use this option for outgoing mails.';
+$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Default From Mail';
+$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Default Sender Name';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Settings:</strong><br />The settings below are only required if you want to send mails via <acronym title="Simple mail transfer protocol">SMTP</acronym>. If you do not know your SMTP host or you are not sure about the required settings, simply stay with the default mail routine: PHP MAIL.';
+$TEXT['WBMAILER_FUNCTION'] = 'Mail Routine';
+$TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
+$TEXT['WBMAILER_PHP'] = 'PHP MAIL';
+$TEXT['WBMAILER_SMTP'] = 'SMTP';
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP Authentification';
+$TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'only activate if your SMTP host requires authentification';
+$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP Username';
+$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Password';
+$TEXT['PLEASE_LOGIN'] = 'Please login';
+$TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
+$TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Desculpe, voc&ecirc; n&atilde;o tem permiss&atilde;o para ver essa p&aacute;gina';
-$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display'; //needs to be translated
+$MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Sorry, no active content to display';
 
 $MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Privil&eacute;gios Insuficientes para estar aqui';
 
@@ -553,7 +555,7 @@ $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Erro ao abrir o arquivo.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Voc&ecirc; precisa preencher os seguintes campos';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Desculpe, este formul&aacute;rio foi submetido v&aacute;rias vezes nessa hora. Favor tentar novamente dentro de uma hora.';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'O N&uacute;mero de Verifica&ccdil;&atilde;o (conhecido como Captcha) que voc&ecirc; entrou, &eacute; inv&aacute;lido. Se estiver tendo problemas usando o Captcha, envie uma mensagem para: '.SERVER_EMAIL;
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'O N&uacute;mero de Verifica&ccdil;&atilde;o (conhecido como Captcha) que voc&ecirc; entrou, &eacute; inv&aacute;lido. Se estiver tendo problemas usando o Captcha, envie uma mensagem para: '.SERVER_EMAIL.'';
 
 $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Favor selecionar quais add-ons deseja recarregar';
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'M&oacute;dulos recarregados com sucesso';
