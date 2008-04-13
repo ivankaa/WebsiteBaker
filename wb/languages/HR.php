@@ -336,7 +336,6 @@ $TEXT['HOMEPAGE_REDIRECTION'] = 'Redirekcija po&egrave;etne stranice';
 $TEXT['HEADING'] = 'Zaglavlje';
 $TEXT['MULTIPLE_MENUS'] = 'Ve&scaron;estruki menii';
 $TEXT['REGISTERED'] = 'Registriran';
-$TEXT['START'] = 'Start';
 $TEXT['SECTION_BLOCKS'] = 'Kvadrati sekcije';
 $TEXT['REGISTERED_VIEWERS'] = 'Registrirani promatra&egrave;i';
 $TEXT['ALLOWED_VIEWERS'] = 'Dopu&scaron;teni promatra&egrave;i';

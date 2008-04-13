@@ -336,7 +336,6 @@ $TEXT['HOMEPAGE_REDIRECTION'] = 'P&#345;esm&#283;rov&aacute;n&iacute; homepage';
 $TEXT['HEADING'] = 'Z&aacute;hlav&iacute;';
 $TEXT['MULTIPLE_MENUS'] = 'V&iacute;cen&aacute;sobn&aacute; menu';
 $TEXT['REGISTERED'] = 'Pro registrovan&eacute;';
-$TEXT['START'] = 'Start';
 $TEXT['SECTION_BLOCKS'] = 'Bloky sekc&iacute;';
 $TEXT['REGISTERED_VIEWERS'] = 'Opr&aacute;vn&#283;n&iacute; k prohl&iacute;&#382;en&iacute;';
 $TEXT['ALLOWED_VIEWERS'] = 'Opr&aacute;vn&#283;n&iacute; k prohl&iacute;&#382;en&iacute;';

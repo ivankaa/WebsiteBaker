@@ -336,7 +336,6 @@ $TEXT['HOMEPAGE_REDIRECTION'] = 'Redirekcija';
 $TEXT['HEADING'] = 'Virsraksts';
 $TEXT['MULTIPLE_MENUS'] = 'Vairakas izvelnes';
 $TEXT['REGISTERED'] = 'Registrets';
-$TEXT['START'] = 'Sakums';
 $TEXT['SECTION_BLOCKS'] = 'Sadalu bloki';
 $TEXT['REGISTERED_VIEWERS'] = 'Registreti lukotaji';
 $TEXT['ALLOWED_VIEWERS'] = 'Atlauti lukotaji';

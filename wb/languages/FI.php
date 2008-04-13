@@ -336,7 +336,6 @@ $TEXT['HOMEPAGE_REDIRECTION'] = 'Kotisivun uudelleen ohjaus';
 $TEXT['HEADING'] = 'Otsikko';
 $TEXT['MULTIPLE_MENUS'] = 'Monivalikko';
 $TEXT['REGISTERED'] = 'Rekister&ouml;itynyt';
-$TEXT['START'] = 'Alku';
 $TEXT['SECTION_BLOCKS'] = 'Osa';
 $TEXT['REGISTERED_VIEWERS'] = 'Rekister&ouml;ity';
 $TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers';

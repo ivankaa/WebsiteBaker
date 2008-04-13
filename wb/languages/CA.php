@@ -336,7 +336,6 @@ $TEXT['HOMEPAGE_REDIRECTION'] = 'Redirecci&oacute; de P&agrave;gina Inicial';
 $TEXT['HEADING'] = 'Encap&ccedil;alament';
 $TEXT['MULTIPLE_MENUS'] = 'Diversos Men&uacute;s';
 $TEXT['REGISTERED'] = 'Registrat';
-$TEXT['START'] = 'Inici';
 $TEXT['SECTION_BLOCKS'] = 'Blocs de la Secci&oacute;';
 $TEXT['REGISTERED_VIEWERS'] = 'Visualitzadors Registrats';
 $TEXT['ALLOWED_VIEWERS'] = 'Allowed Viewers';

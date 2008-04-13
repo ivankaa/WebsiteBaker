@@ -336,7 +336,6 @@ $TEXT['HOMEPAGE_REDIRECTION'] = 'Homepage redirection';
 $TEXT['HEADING'] = 'Titel';
 $TEXT['MULTIPLE_MENUS'] = 'Meervoudige menu&rsquo;s';
 $TEXT['REGISTERED'] = 'Geregistreerd';
-$TEXT['START'] = 'Start';
 $TEXT['SECTION_BLOCKS'] = 'Sectieblokken';
 $TEXT['REGISTERED_VIEWERS'] = 'Geregistreerde bezoekers';
 $TEXT['ALLOWED_VIEWERS'] = 'Toegestane kijkers';

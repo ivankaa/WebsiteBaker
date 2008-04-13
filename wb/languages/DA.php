@@ -336,7 +336,6 @@ $TEXT['HOMEPAGE_REDIRECTION'] = 'Viderestilling af hjemmeside';
 $TEXT['HEADING'] = 'Overskrift';
 $TEXT['MULTIPLE_MENUS'] = 'Flere menuer';
 $TEXT['REGISTERED'] = 'Registrerede';
-$TEXT['START'] = 'Start';
 $TEXT['SECTION_BLOCKS'] = 'Sektionsblokke';
 $TEXT['REGISTERED_VIEWERS'] = 'Registrerede brugere';
 $TEXT['ALLOWED_VIEWERS'] = 'Tilladte brugere';
