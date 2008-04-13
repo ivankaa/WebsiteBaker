@@ -407,7 +407,7 @@ function entities_to_7bit($str) {
 	$str = str_replace('&#39;', '&apos;', $str);
 	$str = preg_replace('/&#([0-9]+);/e', "dechex('$1')",  $str);
 	// maybe there are some &gt; &lt; &apos; &quot; &amp; &nbsp; left, replace them too
-	$entities = array('&gt;'=>'_','&lt;'=>'_','&apos;'=>'_','&quot;'=>'_','&amp;'=>'_','&nbsp;'=>' ');
+	$entities = array('&gt;'=>'','&lt;'=>'','&apos;'=>'','\''=>'','&quot;'=>'','&amp;'=>'','&nbsp;'=>' ');
 	$str = strtr($str, $entities);
 	
 	return($str);

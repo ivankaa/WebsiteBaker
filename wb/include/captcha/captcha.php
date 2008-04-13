@@ -26,11 +26,6 @@
 // Must include code to stop this file being accessed directly
 if(!defined('WB_PATH')) { exit("Cannot access this file directly"); }
 
-if(!isset($admin)) {
-	require_once(WB_PATH.'/framework/class.wb.php');
-	$admin = new wb;
-}
-
 // check if module language file exists for the language set by the user (e.g. DE, EN)
 global $MOD_CAPTCHA;
 if(!file_exists(WB_PATH.'/modules/captcha_control/languages/'.LANGUAGE .'.php')) {

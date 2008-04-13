@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+13-Apr-2008 Thomas Hornik
+!	ASP: off per default. CAPTCHA: removed unneeded $admin. Filename: just convert chars like quote, doublequote, < > & to empty string.
 10-Apr-2008 Christian Sommer
 !	fixed WB-Link Plugin to work with WB versions below 2.7 ($admin->page_is_visible() only available in WB 2.7)
 09-Apr-2008 Christian Sommer

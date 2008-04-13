@@ -26,7 +26,6 @@
 // Must include code to stop this file being accessed directly
 if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
-global $admin;
 global $database;
 $name = 'text';
 $file = WB_PATH."/temp/.captcha_$name.php";

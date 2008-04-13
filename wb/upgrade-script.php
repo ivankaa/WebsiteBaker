@@ -54,7 +54,7 @@ function check_baseline_configuration() {
 	status_msg(', WB 2.7 core files uploaded: ');
 	@include_once(WB_PATH .'/framework/functions.php');
 	@include_once(ADMIN_PATH .'/interface/version.php');
-	if(defined('VERSION') && VERSION == '2.7 (RC3a)'
+	if(defined('VERSION') && VERSION == '2.7 (RC3)'
 		&& function_exists('get_variable_content') 
 		&& file_exists(WB_PATH .'/modules/menu_link/languages/DE.php') 
 		&& file_exists(WB_PATH .'/modules/output_filter/filter-routines.php') 
@@ -523,7 +523,7 @@ $table = TABLE_PREFIX.'mod_captcha_control';
 $database->query("DROP TABLE IF EXISTS `$table`");
 $database->query("CREATE TABLE `$table` (
 	`enabled_captcha` VARCHAR(1) NOT NULL DEFAULT '1',
-	`enabled_asp` VARCHAR(1) NOT NULL DEFAULT '1',
+	`enabled_asp` VARCHAR(1) NOT NULL DEFAULT '0',
 	`captcha_type` VARCHAR(255) NOT NULL DEFAULT 'calc_text',
 	`asp_session_min_age` INT(11) NOT NULL DEFAULT '20',
 	`asp_view_min_age` INT(11) NOT NULL DEFAULT '10',

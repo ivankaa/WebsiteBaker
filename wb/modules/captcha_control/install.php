@@ -31,7 +31,7 @@ $database->query("DROP TABLE IF EXISTS `$table`");
 
 $database->query("CREATE TABLE `$table` (
 	`enabled_captcha` VARCHAR(1) NOT NULL DEFAULT '1',
-	`enabled_asp` VARCHAR(1) NOT NULL DEFAULT '1',
+	`enabled_asp` VARCHAR(1) NOT NULL DEFAULT '0',
 	`captcha_type` VARCHAR(255) NOT NULL DEFAULT 'calc_text',
 	`asp_session_min_age` INT(11) NOT NULL DEFAULT '20',
 	`asp_view_min_age` INT(11) NOT NULL DEFAULT '10',
