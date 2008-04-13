@@ -28,7 +28,7 @@ NORWEGIAN LANGUAGE FILE FOR THE CAPTCHA-CONTROL ADMIN TOOL
 
 // Headings and text outputs
 $MOD_CAPTCHA_CONTROL['HEADING']           = 'Captcha og ASP kontroll';
-$MOD_CAPTCHA_CONTROL['HOWTO']             = 'Her kan du kontrolere hvordan du vil at ";CAPTCHA"; og ";Avansert Spam Beskyttelse"; (ASP) skal virke. For &aring; f&aring; ASP til &aring; fungere med en sesifik modul, m&aring; denne tilpasses for bruk sammen med ASP. ASP vil ellers ikke fungere med moduler hvor denne endringen ikker er gjort.';
+$MOD_CAPTCHA_CONTROL['HOWTO']             = 'Her kan du kontrolere hvordan du vil at "CAPTCHA" og "Avansert Spam Beskyttelse" (ASP) skal virke. For &aring; f&aring; ASP til &aring; fungere med en sesifik modul, m&aring; denne tilpasses for bruk sammen med ASP. ASP vil ellers ikke fungere med moduler hvor denne endringen ikker er gjort.';
 
 // Text and captions of form elements
 $MOD_CAPTCHA_CONTROL['CAPTCHA_CONF']      = 'CAPTCHA Konfigurasjon';
@@ -47,7 +47,7 @@ $MOD_CAPTCHA_CONTROL['TTF_IMAGE']         = 'Bilde med varierende fonter og bakg
 $MOD_CAPTCHA_CONTROL['OLD_IMAGE']         = 'Gammel Type (Anbefales ikke!)';
 $MOD_CAPTCHA_CONTROL['TEXT']              = 'Tekst-CAPTCHA';
 $MOD_CAPTCHA_CONTROL['CAPTCHA_ENTER_TEXT']= 'Sp&oslash;rsm&aring;l og svar';
-$MOD_CAPTCHA_CONTROL['CAPTCHA_TEXT_DESC'] = "Slett atlt dette for &aring; legge til dine egne innlegg\ellers vil ikke endringene bli lagret!\n### eksempel ###\nHer kan du legge inn Sp&oslash;rsm&aring;l og Svar.\nBruk:\n?Hva er <b>Claudia</b> Schiffer's <b>fornavn</b>?\n!Claudia\n?Sp&oslash;rsm&aring;l 2\n!Svar 2\n...\nom type spr&aring;k ikke er av betydning.\n\nEller, om spr&aring;k er av betydning, bruk:\n?NO:Hva er <b>Claudia</b> Schiffer's <b>fornavn</b>?\n!Claudia\n?NO:Sp&oslash;rsm&aring;l 2\n!Svar 2\n?EN:What's <b>Claudia</b> Schiffer's <b>first name</b>?\n!Claudia\n?EN:Question 2\n!Answer 2\n?DE:Wie ist der <b>Vorname</b> von <b>Claudia</b> Schiffer?\n!Claudia\n...\n### Eksempel ###\n";
+$MOD_CAPTCHA_CONTROL['CAPTCHA_TEXT_DESC'] = 'Slett atlt dette for &aring; legge til dine egne innlegg\ellers vil ikke endringene bli lagret!\n### eksempel ###\nHer kan du legge inn Sp&oslash;rsm&aring;l og Svar.\nBruk:\n?Hva er <b>Claudia</b> Schiffer\'s <b>fornavn</b>?\n!Claudia\n?Sp&oslash;rsm&aring;l 2\n!Svar 2\n...\nom type spr&aring;k ikke er av betydning.\n\nEller, om spr&aring;k er av betydning, bruk:\n?NO:Hva er <b>Claudia</b> Schiffer\'s <b>fornavn</b>?\n!Claudia\n?NO:Sp&oslash;rsm&aring;l 2\n!Svar 2\n?EN:What\'s <b>Claudia</b> Schiffer\'s <b>first name</b>?\n!Claudia\n?EN:Question 2\n!Answer 2\n?DE:Wie ist der <b>Vorname</b> von <b>Claudia</b> Schiffer?\n!Claudia\n...\n### Eksempel ###\n';
 
 $MOD_CAPTCHA['VERIFICATION']           = 'Verifikasjon';
 $MOD_CAPTCHA['ADDITION']               = 'legg til';

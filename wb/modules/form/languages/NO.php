@@ -24,7 +24,7 @@
 */
 
 //Modul Description
-$module_description = 'Med denne modulen kan du lage d&iacute;ne egne spesialtilpassede elektroniske skjemaer, som for eksempe et tilbakemeldings skjema. '.'En stor takk til Rudolph Lartey for hjelpen med &aring; videreutvikkle denne modulen, og for bidrag med koding av ekstra felt typer , osv.';
+$module_description = 'Med denne modulen kan du lage d&iacute;ne egne spesialtilpassede elektroniske skjemaer, som for eksempe et tilbakemeldings skjema. En stor takk til Rudolph Lartey for hjelpen med &aring; videreutvikkle denne modulen, og for bidrag med koding av ekstra felt typer , osv.';
   
 //Variables for the  backend
 $MOD_FORM['SETTINGS'] = 'Skjema Innstillinger';

@@ -24,7 +24,7 @@
 */
 
 //Modul Description
-$module_description = 'This module allows you to create customised online forms, such as a feedback form. '.'Thank-you to Rudolph Lartey who help enhance this module, providing code for extra field types, etc.';
+$module_description = 'This module allows you to create customised online forms, such as a feedback form. Thank-you to Rudolph Lartey who help enhance this module, providing code for extra field types, etc.';
 
 //Variables for the  backend
 $MOD_FORM['SETTINGS'] = 'Form Settings';
