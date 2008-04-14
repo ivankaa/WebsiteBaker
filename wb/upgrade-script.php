@@ -54,7 +54,7 @@ function check_baseline_configuration() {
 	status_msg(', WB 2.7 core files uploaded: ');
 	@include_once(WB_PATH .'/framework/functions.php');
 	@include_once(ADMIN_PATH .'/interface/version.php');
-	if(defined('VERSION') && VERSION == '2.7 (RC3)'
+	if(defined('VERSION') && VERSION == '2.7 (RC3a)'
 		&& function_exists('get_variable_content') 
 		&& file_exists(WB_PATH .'/modules/menu_link/languages/DE.php') 
 		&& file_exists(WB_PATH .'/modules/output_filter/filter-routines.php') 
