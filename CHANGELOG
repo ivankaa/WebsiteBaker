@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+14-Apr-2008 Christian Sommer
+!	allowed tags for multi-lingual module descriptions
 14-Apr-2008 Thomas Hornik
 #	fixed issue with multigroups (level 0 page-creation)
 13-Apr-2008 Thomas Hornik
