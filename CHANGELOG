@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+14-Apr-2008 Thomas Hornik
+#	fixed issue with multigroups (level 0 page-creation)
 13-Apr-2008 Thomas Hornik
 !	ASP: off per default. CAPTCHA: removed unneeded $admin. Filename: just convert chars like quote, doublequote, < > & to empty string.
 #	fixed language-files

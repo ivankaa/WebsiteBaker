@@ -42,11 +42,7 @@ $viewing_groups = $admin->get_post('viewing_groups');
 
 // add Admin to admin and viewing-groups
 $admin_groups[] = 1;
-if($visibility == 'private' || $visibility == 'registered') {
-	$viewing_groups[] = 1;
-} else {
-	$viewing_groups = array(1);
-}
+$viewing_groups[] = 1;
 
 if ($parent!=0) {
 	if (!$admin->get_page_permission($parent,'admin'))
