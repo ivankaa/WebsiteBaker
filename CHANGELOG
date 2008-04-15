@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+15-Apr-2008 Thomas Hornik
+!	revert back to pagename-creation from $page_menu, instead of $page_title
 15-Apr-2008 Christian Sommer
 #	fixed bug introduced with Changeset 826
 14-Apr-2008 Christian Sommer

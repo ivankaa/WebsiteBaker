@@ -57,7 +57,7 @@ if($query_page = $database->query("SELECT * FROM $table_p WHERE parent = '0' ORD
 			while($sub = $query_subpage->fetchRow()) {
 				if($admin->page_is_visible($sub)) {
 					$parent_link = (array_key_exists($sub['parent'],$all_links))?$all_links[$sub['parent']]:"";
-					$links[$sub['page_id']]=$parent_link.'/'.$sub['page_title'];
+					$links[$sub['page_id']]=$parent_link.'/'.$sub['menu_title'];
 				}
 			}
 		}
