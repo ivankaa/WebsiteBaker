@@ -64,7 +64,11 @@ if(function_exists('file_get_contents') && file_exists(WB_PATH.'/modules/'.$file
 	// use regular expressions to fetch the content of the variable from the string
 	$tool_description = get_variable_content('module_description', $data, false, false);
 	// replace optional placeholder {WB_URL} with value stored in config.php
-	$tool_description = str_replace('{WB_URL}', WB_URL, $tool_description);
+	if($tool_description !== false && strlen(trim($tool_description)) != 0) {
+		$tool_description = str_replace('{WB_URL}', WB_URL, $tool_description);
+	} else {
+		$tool_description = false;
+	}
 }		
 if($tool_description !== false) {
 	// Override the module-description with correct desription in users language

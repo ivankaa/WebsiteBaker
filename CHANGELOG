@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+15-Apr-2008 Christian Sommer
+#	fixed bug introduced with Changeset 826
 14-Apr-2008 Christian Sommer
 +	added show_menu2() to pre-installed WB modules (many thanks to Brodie Thiesfield for this great menu function replacment)
 !	allowed tags for multi-lingual module descriptions
