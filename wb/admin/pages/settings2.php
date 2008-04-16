@@ -123,7 +123,13 @@ else {
 // Work-out what the link should be
 if($parent == '0') {
 	$link = '/'.page_filename($menu_title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($menu_title).PAGE_EXTENSION; 
+	// rename menu titles: index && intro to prevent clashes with intro page feature and WB core file /pages/index.php
+	if($link == '/index' || $link == '/intro') {
+		$link .= '_' .$page_id;
+		$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($menu_title).'_'.$page_id .PAGE_EXTENSION; 
+	} else {
+		$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($menu_title).PAGE_EXTENSION; 
+	}
 } else {
 	$parent_section = '';
 	$parent_titles = array_reverse(get_parent_titles($parent));

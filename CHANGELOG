@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+16-Apr-2008 Christian Sommer
+#	fixed possible clashes with intro page feature and WB core file /pages/index.php
 15-Apr-2008 Thomas Hornik
 !	revert back to pagename-creation from $page_menu, instead of $page_title
 15-Apr-2008 Christian Sommer

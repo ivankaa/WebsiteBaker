@@ -84,7 +84,13 @@ $viewing_groups = implode(',', $viewing_groups);
 // Work-out what the link and page filename should be
 if($parent == '0') {
 	$link = '/'.page_filename($title);
-	$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($title).PAGE_EXTENSION;
+	// rename menu titles: index && intro to prevent clashes with intro page feature and WB core file /pages/index.php
+	if($link == '/index' || $link == '/intro') {
+		$link .= '_0';
+		$filename = WB_PATH .PAGES_DIRECTORY .'/' .page_filename($title) .'_0' .PAGE_EXTENSION;
+	} else {
+		$filename = WB_PATH.PAGES_DIRECTORY.'/'.page_filename($title).PAGE_EXTENSION;
+	}
 } else {
 	$parent_section = '';
 	$parent_titles = array_reverse(get_parent_titles($parent));
