@@ -13,11 +13,11 @@
 // full day names
 Calendar._DN = new Array
 ("Domenica",
- "Lunedì",
- "Martedì",
- "Mercoledì",
- "Giovedì",
- "Venerdì",
+ "Luned\u00ec",
+ "Marted\u00ec",
+ "Mercoled\u00ec",
+ "Gioved\u00ec",
+ "Venerd\u00ec",
  "Sabato",
  "Domenica");
 
@@ -94,11 +94,11 @@ Calendar._TT["ABOUT_TIME"] = "\n\n" +
 "- o Shift+click per decrementarlo\n" +
 "- o click e sinistra o destra per variarlo.";
 
-Calendar._TT["PREV_YEAR"] = "Anno prec.(clicca a lungo per il menù)";
-Calendar._TT["PREV_MONTH"] = "Mese prec. (clicca a lungo per il menù)";
+Calendar._TT["PREV_YEAR"] = "Anno prec.(clicca a lungo per il men\u00f9)";
+Calendar._TT["PREV_MONTH"] = "Mese prec. (clicca a lungo per il men\u00f9)";
 Calendar._TT["GO_TODAY"] = "Oggi";
-Calendar._TT["NEXT_MONTH"] = "Pross. mese (clicca a lungo per il menù)";
-Calendar._TT["NEXT_YEAR"] = "Pross. anno (clicca a lungo per il menù)";
+Calendar._TT["NEXT_MONTH"] = "Pross. mese (clicca a lungo per il men\u00f9)";
+Calendar._TT["NEXT_YEAR"] = "Pross. anno (clicca a lungo per il men\u00f9)";
 Calendar._TT["SEL_DATE"] = "Seleziona data";
 Calendar._TT["DRAG_TO_MOVE"] = "Trascina per spostarlo";
 Calendar._TT["PART_TODAY"] = " (oggi)";

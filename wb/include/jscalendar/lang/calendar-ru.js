@@ -11,14 +11,14 @@
 
 // full day names
 Calendar._DN = new Array
-("воскресенье",
- "понедельник",
- "вторник",
- "среда",
- "четверг",
- "пятница",
- "суббота",
- "воскресенье");
+("\u0432\u043e\u0441\u043a\u0440\u0435\u0441\u0435\u043d\u044c\u0435",
+ "\u043f\u043e\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a",
+ "\u0432\u0442\u043e\u0440\u043d\u0438\u043a",
+ "\u0441\u0440\u0435\u0434\u0430",
+ "\u0447\u0435\u0442\u0432\u0435\u0440\u0433",
+ "\u043f\u044f\u0442\u043d\u0438\u0446\u0430",
+ "\u0441\u0443\u0431\u0431\u043e\u0442\u0430",
+ "\u0432\u043e\u0441\u043a\u0440\u0435\u0441\u0435\u043d\u044c\u0435");
 
 // Please note that the following array of short day names (and the same goes
 // for short month names, _SMN) isn't absolutely necessary.  We give it here
@@ -34,48 +34,48 @@ Calendar._DN = new Array
 
 // short day names
 Calendar._SDN = new Array
-("вск",
- "пон",
- "втр",
- "срд",
- "чет",
- "пят",
- "суб",
- "вск");
+("\u0432\u0441\u043a",
+ "\u043f\u043e\u043d",
+ "\u0432\u0442\u0440",
+ "\u0441\u0440\u0434",
+ "\u0447\u0435\u0442",
+ "\u043f\u044f\u0442",
+ "\u0441\u0443\u0431",
+ "\u0432\u0441\u043a");
 
 // full month names
 Calendar._MN = new Array
-("январь",
- "февраль",
- "март",
- "апрель",
- "май",
- "июнь",
- "июль",
- "август",
- "сентябрь",
- "октябрь",
- "ноябрь",
- "декабрь");
+("\u044f\u043d\u0432\u0430\u0440\u044c",
+ "\u0444\u0435\u0432\u0440\u0430\u043b\u044c",
+ "\u043c\u0430\u0440\u0442",
+ "\u0430\u043f\u0440\u0435\u043b\u044c",
+ "\u043c\u0430\u0439",
+ "\u0438\u044e\u043d\u044c",
+ "\u0438\u044e\u043b\u044c",
+ "\u0430\u0432\u0433\u0443\u0441\u0442",
+ "\u0441\u0435\u043d\u0442\u044f\u0431\u0440\u044c",
+ "\u043e\u043a\u0442\u044f\u0431\u0440\u044c",
+ "\u043d\u043e\u044f\u0431\u0440\u044c",
+ "\u0434\u0435\u043a\u0430\u0431\u0440\u044c");
 
 // short month names
 Calendar._SMN = new Array
-("янв",
- "фев",
- "мар",
- "апр",
- "май",
- "июн",
- "июл",
- "авг",
- "сен",
- "окт",
- "ноя",
- "дек");
+("\u044f\u043d\u0432",
+ "\u0444\u0435\u0432",
+ "\u043c\u0430\u0440",
+ "\u0430\u043f\u0440",
+ "\u043c\u0430\u0439",
+ "\u0438\u044e\u043d",
+ "\u0438\u044e\u043b",
+ "\u0430\u0432\u0433",
+ "\u0441\u0435\u043d",
+ "\u043e\u043a\u0442",
+ "\u043d\u043e\u044f",
+ "\u0434\u0435\u043a");
 
 // tooltips
 Calendar._TT = {};
-Calendar._TT["INFO"] = "О календаре...";
+Calendar._TT["INFO"] = "\u041e \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u0435...";
 
 Calendar._TT["ABOUT"] =
 "DHTML Date/Time Selector\n" +
@@ -83,41 +83,41 @@ Calendar._TT["ABOUT"] =
 "For latest version visit: http://www.dynarch.com/projects/calendar/\n" +
 "Distributed under GNU LGPL.  See http://gnu.org/licenses/lgpl.html for details." +
 "\n\n" +
-"Как выбрать дату:\n" +
-"- При помощи кнопок \xab, \xbb можно выбрать год\n" +
-"- При помощи кнопок " + String.fromCharCode(0x2039) + ", " + String.fromCharCode(0x203a) + " можно выбрать месяц\n" +
-"- Подержите эти кнопки нажатыми, чтобы появилось меню быстрого выбора.";
+"\u041a\u0430\u043a \u0432\u044b\u0431\u0440\u0430\u0442\u044c \u0434\u0430\u0442\u0443:\n" +
+"- \u041f\u0440\u0438 \u043f\u043e\u043c\u043e\u0449\u0438 \u043a\u043d\u043e\u043f\u043e\u043a \xab, \xbb \u043c\u043e\u0436\u043d\u043e \u0432\u044b\u0431\u0440\u0430\u0442\u044c \u0433\u043e\u0434\n" +
+"- \u041f\u0440\u0438 \u043f\u043e\u043c\u043e\u0449\u0438 \u043a\u043d\u043e\u043f\u043e\u043a " + String.fromCharCode(0x2039) + ", " + String.fromCharCode(0x203a) + " \u043c\u043e\u0436\u043d\u043e \u0432\u044b\u0431\u0440\u0430\u0442\u044c \u043c\u0435\u0441\u044f\u0446\n" +
+"- \u041f\u043e\u0434\u0435\u0440\u0436\u0438\u0442\u0435 \u044d\u0442\u0438 \u043a\u043d\u043e\u043f\u043a\u0438 \u043d\u0430\u0436\u0430\u0442\u044b\u043c\u0438, \u0447\u0442\u043e\u0431\u044b \u043f\u043e\u044f\u0432\u0438\u043b\u043e\u0441\u044c \u043c\u0435\u043d\u044e \u0431\u044b\u0441\u0442\u0440\u043e\u0433\u043e \u0432\u044b\u0431\u043e\u0440\u0430.";
 Calendar._TT["ABOUT_TIME"] = "\n\n" +
-"Как выбрать время:\n" +
-"- При клике на часах или минутах они увеличиваются\n" +
-"- при клике с нажатой клавишей Shift они уменьшаются\n" +
-"- если нажать и двигать мышкой влево/вправо, они будут меняться быстрее.";
+"\u041a\u0430\u043a \u0432\u044b\u0431\u0440\u0430\u0442\u044c \u0432\u0440\u0435\u043c\u044f:\n" +
+"- \u041f\u0440\u0438 \u043a\u043b\u0438\u043a\u0435 \u043d\u0430 \u0447\u0430\u0441\u0430\u0445 \u0438\u043b\u0438 \u043c\u0438\u043d\u0443\u0442\u0430\u0445 \u043e\u043d\u0438 \u0443\u0432\u0435\u043b\u0438\u0447\u0438\u0432\u0430\u044e\u0442\u0441\u044f\n" +
+"- \u043f\u0440\u0438 \u043a\u043b\u0438\u043a\u0435 \u0441 \u043d\u0430\u0436\u0430\u0442\u043e\u0439 \u043a\u043b\u0430\u0432\u0438\u0448\u0435\u0439 Shift \u043e\u043d\u0438 \u0443\u043c\u0435\u043d\u044c\u0448\u0430\u044e\u0442\u0441\u044f\n" +
+"- \u0435\u0441\u043b\u0438 \u043d\u0430\u0436\u0430\u0442\u044c \u0438 \u0434\u0432\u0438\u0433\u0430\u0442\u044c \u043c\u044b\u0448\u043a\u043e\u0439 \u0432\u043b\u0435\u0432\u043e/\u0432\u043f\u0440\u0430\u0432\u043e, \u043e\u043d\u0438 \u0431\u0443\u0434\u0443\u0442 \u043c\u0435\u043d\u044f\u0442\u044c\u0441\u044f \u0431\u044b\u0441\u0442\u0440\u0435\u0435.";
 
-Calendar._TT["PREV_YEAR"] = "На год назад (удерживать для меню)";
-Calendar._TT["PREV_MONTH"] = "На месяц назад (удерживать для меню)";
-Calendar._TT["GO_TODAY"] = "Сегодня";
-Calendar._TT["NEXT_MONTH"] = "На месяц вперед (удерживать для меню)";
-Calendar._TT["NEXT_YEAR"] = "На год вперед (удерживать для меню)";
-Calendar._TT["SEL_DATE"] = "Выберите дату";
-Calendar._TT["DRAG_TO_MOVE"] = "Перетаскивайте мышкой";
-Calendar._TT["PART_TODAY"] = " (сегодня)";
+Calendar._TT["PREV_YEAR"] = "\u041d\u0430 \u0433\u043e\u0434 \u043d\u0430\u0437\u0430\u0434 (\u0443\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0442\u044c \u0434\u043b\u044f \u043c\u0435\u043d\u044e)";
+Calendar._TT["PREV_MONTH"] = "\u041d\u0430 \u043c\u0435\u0441\u044f\u0446 \u043d\u0430\u0437\u0430\u0434 (\u0443\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0442\u044c \u0434\u043b\u044f \u043c\u0435\u043d\u044e)";
+Calendar._TT["GO_TODAY"] = "\u0421\u0435\u0433\u043e\u0434\u043d\u044f";
+Calendar._TT["NEXT_MONTH"] = "\u041d\u0430 \u043c\u0435\u0441\u044f\u0446 \u0432\u043f\u0435\u0440\u0435\u0434 (\u0443\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0442\u044c \u0434\u043b\u044f \u043c\u0435\u043d\u044e)";
+Calendar._TT["NEXT_YEAR"] = "\u041d\u0430 \u0433\u043e\u0434 \u0432\u043f\u0435\u0440\u0435\u0434 (\u0443\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0442\u044c \u0434\u043b\u044f \u043c\u0435\u043d\u044e)";
+Calendar._TT["SEL_DATE"] = "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0434\u0430\u0442\u0443";
+Calendar._TT["DRAG_TO_MOVE"] = "\u041f\u0435\u0440\u0435\u0442\u0430\u0441\u043a\u0438\u0432\u0430\u0439\u0442\u0435 \u043c\u044b\u0448\u043a\u043e\u0439";
+Calendar._TT["PART_TODAY"] = " (\u0441\u0435\u0433\u043e\u0434\u043d\u044f)";
 
 // the following is to inform that "%s" is to be the first day of week
 // %s will be replaced with the day name.
-Calendar._TT["DAY_FIRST"] = "Первый день недели будет %s";
+Calendar._TT["DAY_FIRST"] = "\u041f\u0435\u0440\u0432\u044b\u0439 \u0434\u0435\u043d\u044c \u043d\u0435\u0434\u0435\u043b\u0438 \u0431\u0443\u0434\u0435\u0442 %s";
 
 // This may be locale-dependent.  It specifies the week-end days, as an array
 // of comma-separated numbers.  The numbers are from 0 to 6: 0 means Sunday, 1
 // means Monday, etc.
 Calendar._TT["WEEKEND"] = "0,6";
 
-Calendar._TT["CLOSE"] = "Закрыть";
-Calendar._TT["TODAY"] = "Сегодня";
-Calendar._TT["TIME_PART"] = "(Shift-)клик или нажать и двигать";
+Calendar._TT["CLOSE"] = "\u0417\u0430\u043a\u0440\u044b\u0442\u044c";
+Calendar._TT["TODAY"] = "\u0421\u0435\u0433\u043e\u0434\u043d\u044f";
+Calendar._TT["TIME_PART"] = "(Shift-)\u043a\u043b\u0438\u043a \u0438\u043b\u0438 \u043d\u0430\u0436\u0430\u0442\u044c \u0438 \u0434\u0432\u0438\u0433\u0430\u0442\u044c";
 
 // date formats
 Calendar._TT["DEF_DATE_FORMAT"] = "%Y-%m-%d";
 Calendar._TT["TT_DATE_FORMAT"] = "%e %b, %a";
 
-Calendar._TT["WK"] = "нед";
-Calendar._TT["TIME"] = "Время:";
+Calendar._TT["WK"] = "\u043d\u0435\u0434";
+Calendar._TT["TIME"] = "\u0412\u0440\u0435\u043c\u044f:";

@@ -37,3 +37,12 @@ Calendar._TT["MON_FIRST"] = "Vertoon Maandag eerste";
 Calendar._TT["SUN_FIRST"] = "Display Sunday first";
 Calendar._TT["CLOSE"] = "Close";
 Calendar._TT["TODAY"] = "Today";
+
+
+Calendar._TT["DAY_FIRST"] = "Display %s first";
+Calendar._TT["WEEKEND"] = "0,6";
+Calendar._TT["TIME_PART"] = "(Shift-)Click or drag to change value";
+Calendar._TT["DEF_DATE_FORMAT"] = "%Y-%m-%d";
+Calendar._TT["TT_DATE_FORMAT"] = "%a, %b %e";
+Calendar._TT["WK"] = "wk";
+Calendar._TT["TIME"] = "Time:";

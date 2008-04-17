@@ -9,7 +9,7 @@ Calendar._DN = new Array
  "Ponedeljek",
  "Torek",
  "Sreda",
- "Četrtek",
+ "\u010cetrtek",
  "Petek",
  "Sobota",
  "Nedelja");
@@ -19,7 +19,7 @@ Calendar._DN = new Array
  "Pon",
  "Tor",
  "Sre",
- "Čet",
+ "\u010cet",
  "Pet",
  "Sob",
  "Ned");
@@ -66,24 +66,24 @@ Calendar._TT["ABOUT"] =
 "Izbor datuma:\n" +
 "- Uporabite \xab, \xbb gumbe za izbor leta\n" +
 "- Uporabite " + String.fromCharCode(0x2039) + ", " + String.fromCharCode(0x203a) + " gumbe za izbor meseca\n" +
-"- Zadržite klik na kateremkoli od zgornjih gumbov za hiter izbor.";
+"- Zadr\u017eite klik na kateremkoli od zgornjih gumbov za hiter izbor.";
 Calendar._TT["ABOUT_TIME"] = "\n\n" +
-"Izbor ćasa:\n" +
-"- Kliknite na katerikoli del ćasa za poveć. le-tega\n" +
+"Izbor \u0107asa:\n" +
+"- Kliknite na katerikoli del \u0107asa za pove\u0107. le-tega\n" +
 "- ali Shift-click za zmanj. le-tega\n" +
 "- ali kliknite in povlecite za hiter izbor.";
 
-Calendar._TT["TOGGLE"] = "Spremeni dan s katerim se prićne teden";
+Calendar._TT["TOGGLE"] = "Spremeni dan s katerim se pri\u0107ne teden";
 Calendar._TT["PREV_YEAR"] = "Predhodnje leto (dolg klik za meni)";
 Calendar._TT["PREV_MONTH"] = "Predhodnji mesec (dolg klik za meni)";
-Calendar._TT["GO_TODAY"] = "Pojdi na tekoći dan";
+Calendar._TT["GO_TODAY"] = "Pojdi na teko\u0107i dan";
 Calendar._TT["NEXT_MONTH"] = "Naslednji mesec (dolg klik za meni)";
 Calendar._TT["NEXT_YEAR"] = "Naslednje leto (dolg klik za meni)";
 Calendar._TT["SEL_DATE"] = "Izberite datum";
 Calendar._TT["DRAG_TO_MOVE"] = "Pritisni in povleci za spremembo pozicije";
 Calendar._TT["PART_TODAY"] = " (danes)";
-Calendar._TT["MON_FIRST"] = "Prikaži ponedeljek kot prvi dan";
-Calendar._TT["SUN_FIRST"] = "Prikaži nedeljo kot prvi dan";
+Calendar._TT["MON_FIRST"] = "Prika\u017ei ponedeljek kot prvi dan";
+Calendar._TT["SUN_FIRST"] = "Prika\u017ei nedeljo kot prvi dan";
 Calendar._TT["CLOSE"] = "Zapri";
 Calendar._TT["TODAY"] = "Danes";
 
@@ -92,3 +92,8 @@ Calendar._TT["DEF_DATE_FORMAT"] = "%Y-%m-%d";
 Calendar._TT["TT_DATE_FORMAT"] = "%a, %b %e";
 
 Calendar._TT["WK"] = "Ted";
+
+Calendar._TT["DAY_FIRST"] = "Display %s first";
+Calendar._TT["WEEKEND"] = "0,6";
+Calendar._TT["TIME_PART"] = "(Shift-)Click or drag to change value";
+Calendar._TT["TIME"] = "Time:";
