@@ -254,7 +254,8 @@ function print_excerpt2($mod_vars, $func_vars) {
 	// make the link from $mod_page_link, add anchor
 	$link = "";
 	$link = page_link($mod_page_link);
-	$link .= make_url_searchstring($func_search_match, $func_search_url_array);
+	if(strpos($mod_page_link, 'http:')===FALSE)
+		$link .= make_url_searchstring($func_search_match, $func_search_url_array);
 	$link .= $anchor;
 
 	// now get the excerpt
