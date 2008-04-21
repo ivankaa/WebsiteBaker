@@ -54,7 +54,7 @@ function check_baseline_configuration() {
 	status_msg(', WB 2.7 core files uploaded: ');
 	@include_once(WB_PATH .'/framework/functions.php');
 	@include_once(ADMIN_PATH .'/interface/version.php');
-	if(defined('VERSION') && VERSION == '2.7 (RC3a)'
+	if(defined('VERSION') && VERSION == '2.7'
 		&& function_exists('get_variable_content') 
 		&& file_exists(WB_PATH .'/modules/menu_link/languages/DE.php') 
 		&& file_exists(WB_PATH .'/modules/output_filter/filter-routines.php') 
@@ -189,7 +189,7 @@ status_msg('<p>Congratulations: You have passed all the required pre-checks.', '
 ?>
 
 <h2>Step 2: Create a backup of your existing data</h2>
-<p>It is highly recommended to <strong>create a manual backup</strong> of the entire <strong>/pages folder</strong> and the <strong>MySQL database</strong> before proceeding. The upgrade script is not sufficiently tested at the moment and should therefore only be used for testing purposes!!! Please confirm the disclaimer before starting this script.</p>
+<p>It is highly recommended to <strong>create a manual backup</strong> of the entire <strong>/pages folder</strong> and the <strong>MySQL database</strong> before proceeding.<br /><strong class="error">Note: </strong>The upgrade script alters some settings of your existing database!!! You need to confirm the disclaimer before proceeding.</p>
 
 <form name="send" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
 <textarea cols="80" rows="5">DISCLAIMER: The Website Baker upgrade script is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. One needs to confirm that a manual backup of the /pages folder (including all files and subfolders contained in it) and backup of the entire Website Baker MySQL database was created before you can proceed.</textarea>
