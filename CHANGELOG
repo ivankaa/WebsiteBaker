@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.0 -------------------------------------
 21-Apr-2008 Christian Sommer
+#	fixed bug in the PL language file of the JS calendar
 +	added some basic functions for module developers
 20-Apr-2008 Thomas Hornik
 #	fix: allow external urls for search-results
