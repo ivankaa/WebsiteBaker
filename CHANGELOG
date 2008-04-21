@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.0 -------------------------------------
+21-Apr-2008 Christian Sommer
++	added some basic functions for module developers
 20-Apr-2008 Thomas Hornik
 #	fix: allow external urls for search-results
 17-Apr-2008 Thomas Hornik
