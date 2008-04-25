@@ -10,6 +10,9 @@ Legend:
 # = Bugfix
 ! = Update/Change
 
+------------------------------------- 2.7.1 -------------------------------------
+25-Apr-2008 Matthias Gallas
+#	fixed validiation bug in option fields of form modul
 ------------------------------------- 2.7.0 -------------------------------------
 21-Apr-2008 Christian Sommer
 !	set version to 2.7

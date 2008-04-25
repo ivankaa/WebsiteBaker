@@ -188,7 +188,7 @@ if($query_fields->numRows() > 0) {
 			$options = explode(',', $value);
 			array_walk($options, 'make_option', (isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:array()));
 			$field['extra'] = explode(',',$field['extra']);
-			$values[] = '<select name="field'.$field_id.'[]" id="field'.$field_id.'" size="'.$field['extra'][0].'" '.$field['extra'][1].'="'.$field['extra'][1].'" class="select">'.implode($options).'</select>';
+			$values[] = '<select name="field'.$field_id.'" id="field'.$field_id.'" size="'.$field['extra'][0].'" '.$field['extra'][1].' class="select">'.implode($options).'</select>';		
 		} elseif($field['type'] == 'heading') {
 			$vars[] = '{FIELD}';
 			$values[] = '<input type="hidden" name="field'.$field_id.'" id="field'.$field_id.'" value="===['.$field['title'].']===" />';
