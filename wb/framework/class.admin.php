@@ -86,7 +86,11 @@ class admin extends wb {
 			// check if page_id is set
 			$page_id_url = (isset($_GET['page_id'])) ? '&page_id=' .(int) $_GET['page_id'] : '';
 			$section_id_url = (isset($_GET['section_id'])) ? '&section_id=' .(int) $_GET['section_id'] : '';
-			header('Location: '.$_SERVER['PHP_SELF'] .'?lang='.$user_language .$page_id_url .$section_id_url);
+			if(isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != '') { // check if there is an query-string
+				header('Location: '.$_SERVER['PHP_SELF'] .'?lang='.$user_language .$page_id_url .$section_id_url.'&'.$_SERVER['QUERY_STRING']);
+			} else {
+				header('Location: '.$_SERVER['PHP_SELF'] .'?lang='.$user_language .$page_id_url .$section_id_url);
+			}
 			exit();
 		}
 

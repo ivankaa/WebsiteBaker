@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+26-Apr-2008 Thomas Hornik
+#	class.admin.php deletes actual query-string while redirection. fixed.
 25-Apr-2008 Matthias Gallas
 #	fixed validiation bug in option fields of form modul
 ------------------------------------- 2.7.0 -------------------------------------
