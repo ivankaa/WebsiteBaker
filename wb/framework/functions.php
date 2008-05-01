@@ -381,9 +381,6 @@ function page_filename($string) {
 	//init utf8-functions
 	init_utf8funcs();
 	$string = entities_to_7bit($string);
-	// Now replace spaces with page spcacer
-	$string = trim($string);
-	$string = preg_replace('/(\s)+/', PAGE_SPACER, $string);
 	// Now remove all bad characters
 	$bad = array(
 	'\'', /* /  */ '"', /* " */	'<', /* < */	'>', /* > */
@@ -394,6 +391,9 @@ function page_filename($string) {
 	';', /* ; */	':', /* : */	',', /* , */	'?' /* ? */
 	);
 	$string = str_replace($bad, '', $string);
+	// Now replace spaces with page spcacer
+	$string = trim($string);
+	$string = preg_replace('/(\s)+/', PAGE_SPACER, $string);
 	// Now convert to lower-case
 	$string = strtolower($string);
 	// If there are any weird language characters, this will protect us against possible problems they could cause

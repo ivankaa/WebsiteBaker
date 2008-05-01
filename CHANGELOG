@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+01-May-2008 Thomas Hornik
+#	fixed file-naming issue when old page-names (from before 2.7) contains "&"
 26-Apr-2008 Thomas Hornik
 #	class.admin.php deletes actual query-string while redirection. fixed.
 25-Apr-2008 Matthias Gallas
