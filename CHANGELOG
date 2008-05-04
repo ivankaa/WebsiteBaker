@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+04-May-2008 Thomas Hornik
+! changed register_backend_modfile() to work with wysiwyg-module, too
 01-May-2008 Thomas Hornik
 #	fixed file-naming issue when old page-names (from before 2.7) contains "&"
 26-Apr-2008 Thomas Hornik

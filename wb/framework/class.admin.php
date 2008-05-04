@@ -350,7 +350,7 @@ class admin extends wb {
 
     		// gather information for all models embedded on actual page
 			$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections 
-				WHERE page_id=$page_id AND module<>'wysiwyg'");
+				WHERE page_id=$page_id");
 
     		while($row = $query_modules->fetchRow()) {
 				// check if page module directory contains a backend.js or backend.css file
