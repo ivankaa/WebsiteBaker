@@ -32,7 +32,7 @@ if (!function_exists('get_output_filter_settings')) {
 		global $database, $admin;
 		// connect to database and read out filter settings
 		$result = $database->query("SELECT * FROM " .TABLE_PREFIX ."mod_output_filter");
-		if($result->numRows() > 0) {
+		if($result && $result->numRows() > 0) {
 			// get all data
 			$data = $result->fetchRow();
 			$filter_settings['email_filter'] = $admin->strip_slashes($data['email_filter']);

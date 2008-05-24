@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+24-May-2008 Christian Sommer
+! modified output filter routine to prevent errors if database entries do not exist
 04-May-2008 Thomas Hornik
 ! changed register_backend_modfile() to work with wysiwyg-module, too
 01-May-2008 Thomas Hornik
