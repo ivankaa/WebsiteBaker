@@ -22,7 +22,7 @@
     02110-1301, USA.
 
     ***********************************************
-    ** Version 4.5: see README for documentation **
+    ** Version 4.6: see README for documentation **
     ***********************************************
 */
 
@@ -149,7 +149,7 @@ class SM2_Formatter
             // not set if false, so existence = true
             $currClass .= ' menu-expand';
         }
-        if ($aPage['page_id'] == PAGE_ID) {
+        if (array_key_exists('sm2_is_curr', $aPage)) { 
             $currClass .= ' menu-current';
         }
         elseif (array_key_exists('sm2_is_parent', $aPage)) { 
@@ -424,6 +424,19 @@ function show_menu2(
         $aFlags |= SM2_TRIM; // default to TRIM
     }
     
+    // search page results don't have any of the page data loaded by WB, so we load it 
+    // ourselves using the referrer ID as the current page
+    $CURR_PAGE_ID = defined('REFERRER_ID') ? REFERRER_ID : PAGE_ID;
+    if (count($wb->page) == 0 && defined('REFERRER_ID') && REFERRER_ID > 0) {
+        global $database;
+        $sql = "SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = '".REFERRER_ID."'";
+        $result = $database->query($sql);
+        if ($result->numRows() == 1) {
+            $wb->page = $result->fetchRow();
+        }
+        unset($result);
+    }
+    
     // fix up the menu number to default to the menu number
     // of the current page if no menu has been supplied
     if ($aMenu == 0) {
@@ -431,7 +444,7 @@ function show_menu2(
     } 
 
     // Set some of the $wb->page[] settings to defaults if not set
-    $pageLevel = $wb->page['level'] == '' ? 0 : $wb->page['level'];
+    $pageLevel  = $wb->page['level']  == '' ? 0 : $wb->page['level'];
     $pageParent = $wb->page['parent'] == '' ? 0 : $wb->page['parent'];
     
     // adjust the start level and start page ID as necessary to
@@ -440,11 +453,11 @@ function show_menu2(
     if ($aStart < SM2_ROOT) {   // SM2_CURR+N
         if ($aStart == SM2_CURR) {
             $aStartLevel = $pageLevel;
-            $aStart =  $pageParent;
+            $aStart = $pageParent;
         }
         else {
             $aStartLevel = $pageLevel + $aStart - SM2_CURR;
-            $aStart = PAGE_ID; 
+            $aStart = $CURR_PAGE_ID; 
         }
     }
     elseif ($aStart < 0) {   // SM2_ROOT+N
@@ -481,7 +494,7 @@ function show_menu2(
         // is called (i.e. where the database is loaded) then the info won't
         // exist anyhow.
         $fields = 'parent,page_id,menu_title,page_title,link,target,level,visibility,viewing_groups';
-        if(version_compare(WB_VERSION, '2.7', '>=')) { // WB 2.7+
+        if (version_compare(WB_VERSION, '2.7', '>=')) { // WB 2.7+
             $fields .= ',viewing_users';
         }
         if ($aFlags & SM2_ALLINFO) {
@@ -506,17 +519,16 @@ function show_menu2(
             // create an in memory array of the database data based on the item's parent. 
             // The array stores all elements in the correct display order.
             while ($page = $oRowset->fetchRow()) {
-				// ignore all pages that the current user is not permitted to view
+                // ignore all pages that the current user is not permitted to view
                 if(version_compare(WB_VERSION, '2.7', '>=')) { // WB >= 2.7
                     // 1. all pages with no active sections (unless it is the top page) are ignored
-                    if(!$wb->page_is_active($page) && $page['link'] != $wb->default_link && !INTRO_PAGE) {
+                    if (!$wb->page_is_active($page) && $page['link'] != $wb->default_link && !INTRO_PAGE) {
                       continue; 
                     }
                     // 2. all pages not visible to this user (unless always visible to registered users) are ignored
-                    if(!$wb->page_is_visible($page) && $page['visibility'] != 'registered') {
+                    if (!$wb->page_is_visible($page) && $page['visibility'] != 'registered') {
                         continue;
                     }
-
                 }
                 else {  // WB < 2.7
                     // We can't do this in SQL as the viewing_groups column contains multiple 
@@ -537,7 +549,8 @@ function show_menu2(
                 }
 
                 // mark our current page as being on the current path
-                if ($page['page_id'] == PAGE_ID) {
+                if ($page['page_id'] == $CURR_PAGE_ID) {
+                    $page['sm2_is_curr'] = true;
                     $page['sm2_on_curr_path'] = true;
                 }
 
@@ -573,7 +586,7 @@ function show_menu2(
                 if (array_key_exists($mark['page_id'], $rgParent)) {
                     $mark['sm2_has_child'] = true;
                 }
-                if ($mark['parent'] == $parentId && $mark['page_id'] != PAGE_ID) {
+                if ($mark['parent'] == $parentId && $mark['page_id'] != $CURR_PAGE_ID) {
                     $mark['sm2_is_sibling'] = true;
                 }
                 unset($mark);
@@ -582,10 +595,11 @@ function show_menu2(
         }
         
         // mark all children of the current page. We don't do this when 
-        // PAGE_ID is 0, as 0 is the parent of everything. PAGE_ID == 0 
-        // occurs on special pages like search results.
-        if (PAGE_ID != 0) {
-            sm2_mark_children($rgParent, PAGE_ID, 1);
+        // $CURR_PAGE_ID is 0, as 0 is the parent of everything. 
+        // $CURR_PAGE_ID == 0 occurs on special pages like search results
+        // when no referrer is available.s
+        if ($CURR_PAGE_ID != 0) {
+            sm2_mark_children($rgParent, $CURR_PAGE_ID, 1);
         }
         
         // store the complete processed menu data as a global. We don't 

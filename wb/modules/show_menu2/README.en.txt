@@ -1,6 +1,4 @@
-// $Id$
-
-show_menu2, version 4.5
+﻿show_menu2, version 4.6
 =======================
 A code snippet for the Website Baker CMS software. It provides a complete 
 replacement for the builtin menu functions. All menu data is retrieved using 
