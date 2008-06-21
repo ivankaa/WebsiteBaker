@@ -96,9 +96,24 @@ $template->set_var(array(
 $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
+// get template used for the displayed page (for displaying block details)
+if (SECTION_BLOCKS) {
+	$sql = "SELECT `template` from `" . TABLE_PREFIX . "pages` WHERE `page_id` = '$page_id' ";
+	$result = $database->query($sql);
+	if ($result && $result->numRows() == 1) {
+		$row = $result->fetchRow();
+		$page_template = ($row['template'] == '') ? DEFAULT_TEMPLATE : $row['template'];
+		// include template info file if exists
+		if (file_exists(WB_PATH . '/templates/' . $page_template . '/info.php')) {
+			include_once(WB_PATH . '/templates/' . $page_template . '/info.php');
+		}
+	}
+}
+	
 // Get sections for this page
 $module_permissions = $_SESSION['MODULE_PERMISSIONS'];
-$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
+$query_sections = $database->query("SELECT section_id, module, block 
+	FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
 if($query_sections->numRows() > 0) {
 	while($section = $query_sections->fetchRow()) {
 		$section_id = $section['section_id'];
@@ -108,6 +123,19 @@ if($query_sections->numRows() > 0) {
 			// Include the modules editing script if it exists
 			if(file_exists(WB_PATH.'/modules/'.$module.'/modify.php')) {
 				echo '<a name="'.$section_id.'"></a>';
+				// output block name if blocks are enabled
+				if (SECTION_BLOCKS) {
+					if (isset($block[$section['block']]) && trim(strip_tags(($block[$section['block']]))) != '') {
+						$block_name = htmlentities(strip_tags($block[$section['block']]));
+					} else {
+						if ($section['block'] == 1) {
+							$block_name = $TEXT['MAIN'];
+						} else {
+							$block_name = '#' . (int) $section['block'];
+						}
+					}
+					echo '<b>' . $TEXT['BLOCK'] . ': </b>' . $block_name;
+				}
 				require(WB_PATH.'/modules/'.$module.'/modify.php');
 			}
 		}
