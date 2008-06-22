@@ -188,7 +188,11 @@ if($query_sections->numRows() > 0) {
 						<?php
 						foreach($block AS $number => $name) {
 							?>
-							<option value="<?php echo $number; ?>"<?php if($number == $section['block']) { echo ' selected'; } ?>><?php echo $name; ?></option>
+							<option value="<?php echo $number; ?>"<?php 
+							if($number == $section['block']) { echo ' selected'; } ?>><?php 
+							$block_name = htmlentities(strip_tags($name));
+							$block_name = ($block_name == '') ? $TEXT['BLOCK'] . '#' . (int) $number : $block_name;
+							echo $block_name; ?></option>
 							<?php
 						}
 						?>

@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+22-June-2008 Christian Sommer
+!	added output of block number to section admin if no block name is specified
 21-June-2008 Christian Sommer
 +	added output of block names to modify pages dialogue if blocks are enabled
 !	updated show_menu2 to version 4.60 (to avoid disappearing menus)
