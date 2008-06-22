@@ -43,12 +43,12 @@ foreach($t_bgs as $file) if(eregi('\.png$',$file)) $bgs[]=$file;
 if(!function_exists('randomString')) {
 	function randomString($len) {
 		list($usec, $sec) = explode(' ', microtime());
-		srand((float)$sec + ((float)$usec * 100000));
+		mt_srand((float)$sec + ((float)$usec * 100000));
 		//$possible="ABCDEFGHJKLMNPRSTUVWXYZabcdefghkmnpqrstuvwxyz23456789";
 		$possible="abdfhkrsvwxz23456789";
 		$str="";
 		while(strlen($str)<$len) {
-			$str.=substr($possible,(rand()%(strlen($possible))),1);
+			$str.=substr($possible,(mt_rand()%(strlen($possible))),1);
 		}
 		return($str);
 	}
@@ -64,25 +64,25 @@ list($width, $height, $type, $attr) = getimagesize($bg);
 
 // create image
 $image = ImageCreateFromPNG($bg); // background image
-$grey = rand(0,50);
+$grey = mt_rand(0,50);
 $color = ImageColorAllocate($image, $grey, $grey, $grey); // font-color
 $ttf = $font;
 $ttfsize = 25; // fontsize
 
-if(rand(0,2)==0) { // 1 out of 3
+if(mt_rand(0,2)==0) { // 1 out of 3
 
 	// draw each character individualy
 	$count = 0;
 	$image_failed = true;
-	$angle = rand(-15,15);
-	$x = rand(10,25);
-	$y = rand($height-10,$height-2);
+	$angle = mt_rand(-15,15);
+	$x = mt_rand(10,25);
+	$y = mt_rand($height-10,$height-2);
 	do {
 		for($i=0;$i<strlen($text);$i++) {
 			$res = imagettftext($image, $ttfsize, $angle, $x, $y, $color, $ttf, $text{$i});
-			$angle = rand(-15,15);
-			$x = rand($res[4],$res[4]+10);
-			$y = rand($height-15,$height-5);
+			$angle = mt_rand(-15,15);
+			$x = mt_rand($res[4],$res[4]+10);
+			$y = mt_rand($height-15,$height-5);
 		}
 		if($res[4] > $width) {
 			$image_failed = true;
@@ -100,13 +100,13 @@ if(rand(0,2)==0) { // 1 out of 3
 	$count=0;
 	do {
 		$image = ImageCreateFromPNG($bg); // background image
-		$grey = rand(0,50);
+		$grey = mt_rand(0,50);
 		$color = ImageColorAllocate($image, $grey, $grey, $grey); // font-color
 		$ttf = $font;
 		$ttfsize = 25; // fontsize
-		$angle = rand(0,5);
-		$x = rand(5,30);
-		$y = rand($height-10,$height-2);
+		$angle = mt_rand(0,5);
+		$x = mt_rand(5,30);
+		$y = mt_rand($height-10,$height-2);
 		$res = imagettftext($image, $ttfsize, $angle, $x, $y, $color, $ttf, $text);
 		// check if text fits into the image
 		if(($res[0]>0 && $res[0]<$width) && ($res[1]>0 && $res[1]<$height) && 

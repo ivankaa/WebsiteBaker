@@ -164,8 +164,8 @@ if(isset($_REQUEST['match'])) {
 }
 
 // Get search string
-$search_normal_string = 'unset';
-$search_entities_string = 'unset'; // for SQL's LIKE
+$search_normal_string = '';
+$search_entities_string = ''; // for SQL's LIKE
 $search_display_string = ''; // for displaying
 $search_url_string = ''; // for $_GET
 $string = '';

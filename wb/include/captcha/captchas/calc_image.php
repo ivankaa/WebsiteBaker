@@ -61,22 +61,20 @@ $white = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
 $gray = imagecolorallocate($image, 0xC0, 0xC0, 0xC0);
 $darkgray = imagecolorallocate($image, 0x30, 0x30, 0x30);
 
-srand((double)microtime()*1000000);
-
 for($i = 0; $i < 30; $i++) {
-	$x1 = rand(0,100);
-	$y1 = rand(0,30);
-	$x2 = rand(0,100);
-	$y2 = rand(0,30);
+	$x1 = mt_rand(0,100);
+	$y1 = mt_rand(0,30);
+	$x2 = mt_rand(0,100);
+	$y2 = mt_rand(0,30);
 	imageline($image, $x1, $y1, $x2, $y2 , $gray);  
 }
 
 $x = 0;
 $l = strlen($cap);
 for($i = 0; $i < $l; $i++) {
-	$fnt = rand(3,5);
-	$x = $x + rand(12 , 20);
-	$y = rand(7 , 12); 
+	$fnt = mt_rand(3,5);
+	$x = $x + mt_rand(12 , 20);
+	$y = mt_rand(7 , 12); 
 	imagestring($image, $fnt, $x, $y, substr($cap, $i, 1), $darkgray); 
 }
 
