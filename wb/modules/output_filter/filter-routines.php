@@ -74,12 +74,12 @@ if (!function_exists('filter_frontend_output')) {
 		
 		// check if mailto mail addresses needs to be filtered
 		if($filter_settings['mailto_filter'] == '1') {
-			$output_filter_mode = $output_filter_mode + 2;														// 0|2
+			$output_filter_mode = $output_filter_mode + 2;								// 0|2
 						
 			// check if Javascript mailto encryption is enabled (call register_frontend_functions in the template)
 			$search = '<script type="text/javascript" src="' .WB_URL .'/modules/output_filter/js/mdcr.js"></script>';
 			if(strpos($content, $search) !== false) { 
-				$output_filter_mode = $output_filter_mode + 4;													// 0|4
+				$output_filter_mode = $output_filter_mode + 4;							// 0|4
 			}
 		}
 		
@@ -95,10 +95,10 @@ if (!function_exists('filter_frontend_output')) {
 		/*
 		Sub 1:\b(<a.[^<]*href\s*?=\s*?"\s*?mailto\s*?:\s*?)			-->	"<a id="yyy" class="xxx" href = " mailto :" ignoring white spaces
 		Sub 2:([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})			-->	the email address in the mailto: part of the mail link
-		Sub 3:([^"]*?)"																					--> possible ?Subject&cc... stuff attached to the mail address
-		Sub 4:([^>]*>)																					--> all class or id statements after the mailto but before closing ..>
-		Sub 5:(.*?)</a>\b																				--> the mailto text; all characters between >xxxxx</a>
-		Sub 6:|\b([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})\b	--> email addresses which may appear in the text (require word boundaries)
+		Sub 3:([^"]*?)"												--> possible ?Subject&cc... stuff attached to the mail address
+		Sub 4:([^>]*>)												--> all class or id statements after the mailto but before closing ..>
+		Sub 5:(.*?)</a>\b											--> the mailto text; all characters between >xxxxx</a>
+		Sub 6:|\b([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})\b		--> email addresses which may appear in the text (require word boundaries)
 		*/
 			
 		// find all email addresses embedded in the content and filter them using a callback function
@@ -154,7 +154,13 @@ if (!function_exists('filter_mail_addresses')) {
 			// check if Javascript encryption routine is enabled
 			if(in_array(OUTPUT_FILTER_MODE, array(6,7))) {
 				/** USE JAVASCRIPT ENCRYPTION FOR MAILTO LINKS **/
-
+				
+				// extract possible class and id attribute from ahref link
+				preg_match('/class\s*?=\s*?("|\')(.*?)\1/ix', $match[0], $class_attr);
+				$class_attr = empty($class_attr) ? '' : 'class="' . $class_attr[2] . '" ';
+				preg_match('/id\s*?=\s*?("|\')(.*?)\1/ix', $match[0], $id_attr);
+				$id_attr = empty($id_attr) ? '' : 'id="' . $id_attr[2] . '" ';
+				
 				// preprocess mailto link parts for further usage
 				$search = array('@', '.', '_', '-'); $replace = array('F', 'Z', 'X', 'K');
 				$email_address = str_replace($search, $replace, strtolower($match[2]));
@@ -165,18 +171,18 @@ if (!function_exists('filter_mail_addresses')) {
 				$shift = mt_rand(1, 25);
 				
 				// encrypt the email using an adapted Caesar cipher
-		  	$encrypted_email = "";
+		  		$encrypted_email = "";
 				for($i = strlen($email_address) -1; $i > -1; $i--) {
 					if(preg_match('#[FZXK0-9]#', $email_address[$i], $characters)) {
 						$encrypted_email .= $email_address[$i];
-					} else {
+					} else {	
 						$encrypted_email .= chr((ord($email_address[$i]) -97 + $shift) % 26 + 97);
 					}
 				}
 				$encrypted_email .= chr($shift + 97);
 
 				// build the encrypted Javascript mailto link
-				$mailto_link  = "<a href=\"javascript:mdcr('$encrypted_email','$email_subject')\">" .$match[5] ."</a>";
+				$mailto_link  = "<a {$class_attr}{$id_attr}href=\"javascript:mdcr('$encrypted_email','$email_subject')\">" .$match[5] ."</a>";
 				
 				return $mailto_link;	
 
