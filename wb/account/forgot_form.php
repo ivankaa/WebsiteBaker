@@ -32,8 +32,8 @@ if(!defined('WB_URL')) {
 $database = new database();
 
 // Check if the user has already submitted the form, otherwise show it
-if(isset($_POST['email']) AND $_POST['email'] != "") {
-	
+if(isset($_POST['email']) && $_POST['email'] != "" &&
+	eregi("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$", $_POST['email'])) {
 	$email = strip_tags($_POST['email']);
 	
 	// Check if the email exists in the database

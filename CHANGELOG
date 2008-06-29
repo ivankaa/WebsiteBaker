@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+29-June-2008 Christian Sommer
+!	applied additional mail check to forgot login form
 28-June-2008 Christian Sommer
 !	class and id attributes in mailto links are no longer ignored by the output filter
 22-Jun-2008 Thomas Hornik
