@@ -391,6 +391,8 @@ function page_filename($string) {
 	';', /* ; */	':', /* : */	',', /* , */	'?' /* ? */
 	);
 	$string = str_replace($bad, '', $string);
+	// replace multiple dots in filename to single dot and (multiple) dots at the end of the filename to nothing
+	$string = preg_replace(array('/\.+/', '/\.+$/'), array('.', ''), $string);
 	// Now replace spaces with page spcacer
 	$string = trim($string);
 	$string = preg_replace('/(\s)+/', PAGE_SPACER, $string);
@@ -431,6 +433,8 @@ function media_filename($string) {
 	'?' // ?
 	);
 	$string = str_replace($bad, '', $string);
+	// replace multiple dots in filename to single dot and (multiple) dots at the end of the filename to nothing
+	$string = preg_replace(array('/\.+/', '/\.+$/'), array('.', ''), $string);
 	// Clean any page spacers at the end of string
 	$string = trim($string);
 	// Finally, return the cleaned string
