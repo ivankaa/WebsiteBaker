@@ -11,8 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+02-Jul-2008 Christian Sommer
+!	updated to latest FCKEditor version 2.6.2
 01-Jul-2008 Thomas Hornik
-# page-names with doubled (or more) points can not be handled if php runs as cgi. Thanks to forum member hgi2001.
+#	page-names with doubled (or more) points can not be handled if php runs as cgi. Thanks to forum member hgi2001.
 29-June-2008 Christian Sommer
 !	applied additional mail check to forgot login form
 28-June-2008 Christian Sommer
