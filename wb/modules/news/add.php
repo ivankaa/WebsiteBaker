@@ -29,7 +29,7 @@ if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 $header = '<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"98%\">';
 $post_loop = '<tr class=\"post_top\">
 <td class=\"post_title\"><a href=\"[LINK]\">[TITLE]</a></td>
-<td class=\"post_date\">[MODI_TIME], [MODI_DATE]</td>
+<td class=\"post_date\">[PUBLISHED_TIME], [PUBLISHED_DATE]</td>
 </tr>
 <tr>
 <td class=\"post_short\" colspan=\"2\">
@@ -51,7 +51,7 @@ $post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" wid
 <td rowspan="3" style="display: [DISPLAY_IMAGE]"><img src="[GROUP_IMAGE]" alt="[GROUP_TITLE]" /></td>
 </tr>
 <tr>
-<td valign="top"><b>Posted by [DISPLAY_NAME] ([USERNAME]) on [PUBL_DATE]</b></td>
+<td valign="top"><b>Posted by [DISPLAY_NAME] ([USERNAME]) on [PUBLISHED_DATE]</b></td>
 </tr>
 <tr style="display: [DISPLAY_GROUP]">
 <td valign="top"><a href="[BACK]">[PAGE_TITLE]</a> >> <a href="[BACK]?g=[GROUP_ID]">[GROUP_TITLE]</a></td>

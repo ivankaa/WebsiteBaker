@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+05-Jul-2008 Thomas Hornik
+# fixed MODI_DATE/PUBLISHED_DATE issue in news-module. Added PUBLISHED_TIME, removed PUBL_DATE,PUBL_TIME. Thanks to forum-member timorotha
 02-Jul-2008 Christian Sommer
 !	updated to latest FCKEditor version 2.6.2
 01-Jul-2008 Thomas Hornik

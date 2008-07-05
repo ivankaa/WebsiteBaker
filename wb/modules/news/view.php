@@ -178,6 +178,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				$post_date = gmdate(DATE_FORMAT, $post['posted_when']+TIMEZONE);
 				$post_time = gmdate(TIME_FORMAT, $post['posted_when']+TIMEZONE);
 				$publ_date = date(DATE_FORMAT,$post['published_when']);
+				$publ_time = date(TIME_FORMAT,$post['published_when']);
 				// Work-out the post link
 				$post_link = page_link($post['link']);
 				if(isset($_GET['p']) AND $position > 0) {
@@ -198,18 +199,18 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				$wb->preprocess($short);
 				// Replace vars with values
 				$post_long_len = strlen($post['content_long']);
-				$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[LINK]', '[MODI_DATE]', '[MODI_TIME]', '[PUBLISHED_DATE]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]');
+				$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[LINK]', '[MODI_DATE]', '[MODI_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]');
 				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
 					if($post_long_len < 9) {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], '');
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], '');
 					} else {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $TEXT['READ_MORE']);
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $TEXT['READ_MORE']);
 					}
 				} else {
 					if($post_long_len < 9) {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, '', '', '', '', '');
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, '', '', '', '', '');
 					} else {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, '', '', '', '', $TEXT['READ_MORE']);
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, '', '', '', '', $TEXT['READ_MORE']);
 					}
 				}
 				echo str_replace($vars, $values, $setting_post_loop);
@@ -273,19 +274,20 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			$post_date = gmdate(DATE_FORMAT, $post['posted_when']+TIMEZONE);
 			$post_time = gmdate(TIME_FORMAT, $post['posted_when']+TIMEZONE);
 			$publ_date = date(DATE_FORMAT,$post['published_when']);
+			$publ_time = date(TIME_FORMAT,$post['published_when']);
 			// Get group id, title, and image
 			$group_id = $post['group_id'];
 			$group_title = $groups[$group_id]['title'];
 			$group_image = $groups[$group_id]['image'];
 			if($group_image == '') { $display_image = 'none'; } else { $display_image = ''; }
 			if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
-			$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[BACK]', '[MODI_DATE]', '[MODI_TIME]', '[PUBL_DATE]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]');
+			$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[BACK]', '[MODI_DATE]', '[MODI_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]');
 			$post_short=$post['content_short'];
 			$wb->preprocess($post_short);
 			if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $post_date, $post_time, $publ_date, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
+				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $post_date, $post_time, $publ_date, $publ_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
 			} else {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $post_date, $post_time, $publ_date, '', '', '', '');
+				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $post_date, $post_time, $publ_date, $publ_time, '', '', '', '');
 			}
 			$post_long = ($post['content_long']);
 		}
