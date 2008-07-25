@@ -525,6 +525,8 @@ if($search_normal_string != '') {
 	if($cfg_enable_old_search) { // this is the old (wb <= 2.6.7) search-function
 		$search_path_SQL = str_replace(' link ', ' '.TABLE_PREFIX.'pages.link ', $search_path_SQL);
 		foreach($sorted_modules AS $module) {
+			if(isset($seen_pages[$module['value']]) && count($seen_pages[$module['value']])>0) // skip modules handled by new search-func
+				continue;
 			$query_start = '';
 			$query_body = '';
 			$query_end = '';

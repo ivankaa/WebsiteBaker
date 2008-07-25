@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+25-Jul-2008 Thomas Hornik
+# fixed an issues related to search, changed one SQL inner join (to use USING instead of WHERE)
+! added $database = new Database(); in front of output-filter
 05-Jul-2008 Thomas Hornik
 # fixed MODI_DATE/PUBLISHED_DATE issue in news-module. Added PUBLISHED_TIME, removed PUBL_DATE,PUBL_TIME. Thanks to forum-member timorotha
 02-Jul-2008 Christian Sommer

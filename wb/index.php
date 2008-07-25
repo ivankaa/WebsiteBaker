@@ -87,6 +87,8 @@ if($query_this_module->numRows() == 1) { // This is a menu_link. Get link of tar
 }
 
 if(file_exists(WB_PATH .'/modules/output_filter/filter-routines.php')) {
+	// reconnect to database
+	$database = new database();
 	// include the output filter module routines
 	@require_once(WB_PATH .'/modules/output_filter/filter-routines.php');
 	

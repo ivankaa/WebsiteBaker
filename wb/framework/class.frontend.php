@@ -88,13 +88,12 @@ class frontend extends wb {
 		$table_s = TABLE_PREFIX.'sections';
 		$now = time();
 		$query_default = "
-			SELECT p.page_id, p.link
-			FROM $table_p AS p, $table_s AS s
-			WHERE p.page_id=s.page_id
-			AND p.parent = '0' AND p.visibility = 'public'
-			AND (($now>=s.publ_start OR s.publ_start=0) AND ($now<=s.publ_end OR s.publ_end=0))
+			SELECT `p`.`page_id`, `link`
+			FROM `$table_p` AS `p` INNER JOIN `$table_s` USING(`page_id`)
+			WHERE `parent` = '0' AND `visibility` = 'public'
+			AND (($now>=`publ_start` OR `publ_start`=0) AND ($now<=`publ_end` OR `publ_end`=0))
 			$this->sql_where_language
-			ORDER BY p.position ASC LIMIT 1";
+			ORDER BY `p`.`position` ASC LIMIT 1";
 		$get_default = $database->query($query_default);
 		$default_num_rows = $get_default->numRows();
 		if(!isset($page_id) OR !is_numeric($page_id)){
