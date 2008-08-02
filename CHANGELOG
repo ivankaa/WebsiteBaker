@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+02-Aug-2008 Thomas Hornik
+# fixed sorting order of search-results
 25-Jul-2008 Thomas Hornik
 # fixed an issues related to search, changed one SQL inner join (to use USING instead of WHERE)
 ! added $database = new Database(); in front of output-filter

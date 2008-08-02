@@ -342,7 +342,7 @@ if($search_normal_string != '') {
 			       p.visibility, p.viewing_groups, p.viewing_users
 			FROM $table_s AS s INNER JOIN $table_p AS p ON s.page_id = p.page_id
 			WHERE s.module = '$module_name' AND p.visibility NOT IN ('none','deleted') AND p.searching = '1' $search_path_SQL
-			ORDER BY s.section_id, s.position ASC
+			ORDER BY s.page_id, s.position ASC
 		");
 		if($sections_query->numRows() > 0) {
 			while($res = $sections_query->fetchRow()) {
