@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+19-Aug-2008 Matthias Gallas
+!	updated to latest FCKEditor version 2.6.3
 02-Aug-2008 Thomas Hornik
 # fixed sorting order of search-results
 25-Jul-2008 Thomas Hornik

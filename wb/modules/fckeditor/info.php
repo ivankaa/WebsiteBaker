@@ -26,6 +26,9 @@
   Authors: P. Widlund, S. Braunewell, M. Gallas (ruebenwurzel), Wouldlouper, C. Sommer (doc)
 	Started to track applied changes in info.php from 27.03.2007 onwards (cs)
  -----------------------------------------------------------------------------------------------------------
+	v2.87 (ruebenwurzel.. Matthias Gallas; Aug 19, 2008)
+		+	update to FCKEditor release v2.63
+	
 	v2.86 (doc.. Christian Sommer; Jul 2, 2008)
 		+	update to FCKEditor release v2.62
 
@@ -111,10 +114,10 @@
 $module_directory		= 'fckeditor';
 $module_name				= 'FCKeditor';
 $module_function		= 'WYSIWYG';
-$module_version			= '2.86';
+$module_version			= '2.87';
 $module_platform		= '2.6.x';
 $module_author 			= 'Christian Sommer, P. Widlund, S. Braunewell, M. Gallas, Wouldlouper';
 $module_license 		= 'GNU General Public License';
-$module_description 	= 'This module allows you to edit the contents of a page using <a href="http://www.fckeditor.net/" target="_blank">FCKeditor v2.6.2</a>.';
+$module_description 	= 'This module allows you to edit the contents of a page using <a href="http://www.fckeditor.net/" target="_blank">FCKeditor v2.6.3</a>.';
 
 ?>
