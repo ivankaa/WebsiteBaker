@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+16-Sep-2008 Thomas Hornik
+# search: fixed windows-related regex issue
 19-Aug-2008 Matthias Gallas
 !	updated to latest FCKEditor version 2.6.3
 02-Aug-2008 Thomas Hornik

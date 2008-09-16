@@ -90,19 +90,25 @@ function get_excerpts($text, $search_words, $max_excerpt_num) {
 	$excerpt_array = array();
 	$word = '('.implode('|', $search_words).')';
 	// Build the regex-string
-	// start-sign: .!?; + INVERTED EXCLAMATION MARK - INVERTED QUESTION MARK - DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
-	$str1=".!?;"."\xC2\xA1"."\xC2\xBF"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
-	// stop-sign: .!?; + DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
-	$str2=".!?;"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
-	$regex='/(?:^|\b|['.$str1.'])([^'.$str1.']{0,200}?'.$word.'[^'.$str2.']{0,200}(?:['.$str2.']|\b|$))/Sisu';
-	if(version_compare(PHP_VERSION, '4.3.3', '>=')) {
+	if(strpos(strtoupper(PHP_OS), 'WIN')===0) { // windows -> see below
+		$str1=".!?;";
+		$str2=".!?;";
+	} else { // linux & Co.
+		// start-sign: .!?; + INVERTED EXCLAMATION MARK - INVERTED QUESTION MARK - DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
+		$str1=".!?;"."\xC2\xA1"."\xC2\xBF"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
+		// stop-sign: .!?; + DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
+		$str2=".!?;"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
+	}
+	$regex='/(?:^|\b|['.$str1.'])([^'.$str1.']{0,200}?'.$word.'[^'.$str2.']{0,200}(?:['.$str2.']|\b|$))/isu';
+	if(version_compare(PHP_VERSION, '4.3.3', '>=') &&
+	strpos(strtoupper(PHP_OS), 'WIN')!==0) { // this may crash windows server, so skip if on windows
 		// jump from match to match, get excerpt, stop if $max_excerpt_num is reached
 		$last_end = 0; $offset = 0;
 		while(preg_match('/'.$word.'/Sisu', $text, $match_array, PREG_OFFSET_CAPTURE, $last_end)) {
 			$offset = ($match_array[0][1]-206 < $last_end)?$last_end:$match_array[0][1]-206;
 			if(preg_match($regex, $text, $matches, PREG_OFFSET_CAPTURE, $offset)) {
 				$last_end = $matches[1][1]+strlen($matches[1][0])-1;
-				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./S', $matches[1][0])) // skip excerpts with email-addresses
+				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./', $matches[1][0])) // skip excerpts with email-addresses
 					$excerpt_array[] = trim($matches[1][0]);
 				if(count($excerpt_array)>=$max_excerpt_num) {
 					$excerpt_array = array_unique($excerpt_array);
@@ -116,7 +122,7 @@ function get_excerpts($text, $search_words, $max_excerpt_num) {
 	} else { // compatile, but may be very slow with many large pages
 		if(preg_match_all($regex, $text, $match_array)) {
 			foreach($match_array[1] AS $string) {
-				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./S', $string)) // skip excerpts with email-addresses
+				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./', $string)) // skip excerpts with email-addresses
 					$excerpt_array[] = trim($string);
 			}
 		}
@@ -233,9 +239,10 @@ function print_excerpt2($mod_vars, $func_vars) {
 	if($mod_no_highlight) // no highlighting
 		{ $mod_page_link_target = "&amp;nohighlight=1".$mod_page_link_target; }
 	// clean the text:
-	$mod_text = preg_replace('/\s+/', ' ', $mod_text);
 	$mod_text = preg_replace('#<(!--.*--|style.*</style|script.*</script)>#SiU', ' ', $mod_text);
 	$mod_text = preg_replace('#<(br( /)?|dt|/dd|/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>#Si', '.', $mod_text);
+	$mod_text = preg_replace('/\s+/', ' ', $mod_text);
+	$mod_text = preg_replace('/ \./', '.', $mod_text);
 	$mod_text = entities_to_umlauts($mod_text, 'UTF-8');
 	$anchor_text = $mod_text; // make an copy containing html-tags
 	$mod_text = strip_tags($mod_text);
