@@ -71,16 +71,17 @@ $bg = $bgs[array_rand($bgs)];
 // get image-dimensions
 list($width, $height, $type, $attr) = getimagesize($bg);
 
-// create image
-$image = ImageCreateFromPNG($bg); // background image
-$grey = mt_rand(0,50);
-$color = ImageColorAllocate($image, $grey, $grey, $grey); // font-color
-$ttf = $font;
-$ttfsize = 25; // fontsize
+// create reload-image
+$reload = ImageCreateFromPNG(WB_PATH.'/include/captcha/reload_140_40.png'); // reload-overlay
 
 if(mt_rand(0,2)==0) { // 1 out of 3
 
 	// draw each character individualy
+	$image = ImageCreateFromPNG($bg); // background image
+	$grey = mt_rand(0,50);
+	$color = ImageColorAllocate($image, $grey, $grey, $grey); // font-color
+	$ttf = $font;
+	$ttfsize = 25; // fontsize
 	$count = 0;
 	$image_failed = true;
 	$angle = mt_rand(-10,10);
@@ -111,6 +112,8 @@ if(mt_rand(0,2)==0) { // 1 out of 3
 		$image = ImageCreateFromPNG($bg); // background image
 		$grey = mt_rand(0,50);
 		$color = ImageColorAllocate($image, $grey, $grey, $grey); // font-color
+		$ttf = $font;
+		$ttfsize = 25; // fontsize
 		$angle = mt_rand(0,5);
 		$x = mt_rand(20,35);
 		$y = mt_rand($height-10,$height-2);
@@ -128,6 +131,14 @@ if(mt_rand(0,2)==0) { // 1 out of 3
 	} while($image_failed);
 	
 }
+
+imagealphablending($reload, TRUE);
+imagesavealpha($reload, TRUE);
+
+// overlay
+imagecopy($reload, $image, 0,0,0,0, 140,40);
+imagedestroy($image);
+$image = $reload;
 
 captcha_header();
 ob_start();

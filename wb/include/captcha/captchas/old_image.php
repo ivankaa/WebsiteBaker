@@ -34,6 +34,9 @@ unset($_SESSION['captcha_time']);
 srand((double)microtime()*100000);
 $_SESSION['captcha'] = rand(10000,99999);
 
+// create reload-image
+$reload = ImageCreateFromPNG(WB_PATH.'/include/captcha/reload_120_30.png'); // reload-overlay
+
 $w=120;
 $h=30;
 $image = imagecreate($w, $h);
@@ -57,6 +60,14 @@ for($i = 0; $i < 5; $i++) {
 	$y = rand(7 , 12); 
 	imagestring($image, $fnt, $x, $y, substr($_SESSION['captcha'], $i, 1), $darkgray); 
 }
+
+imagealphablending($reload, TRUE);
+imagesavealpha($reload, TRUE);
+
+// overlay
+imagecopy($reload, $image, 0,0,0,0, 120,30);
+imagedestroy($image);
+$image = $reload;
 
 captcha_header();
 ob_start();

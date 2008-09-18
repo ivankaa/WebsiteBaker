@@ -55,21 +55,24 @@ switch ($n) {
 		break;
 }
 
-$image = imagecreate(100, 30);
+// create reload-image
+$reload = ImageCreateFromPNG(WB_PATH.'/include/captcha/reload_120_30.png'); // reload-overlay
+
+$image = imagecreate(120, 30);
 
 $white = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
 $gray = imagecolorallocate($image, 0xC0, 0xC0, 0xC0);
 $darkgray = imagecolorallocate($image, 0x30, 0x30, 0x30);
 
 for($i = 0; $i < 30; $i++) {
-	$x1 = mt_rand(0,100);
+	$x1 = mt_rand(0,120);
 	$y1 = mt_rand(0,30);
-	$x2 = mt_rand(0,100);
+	$x2 = mt_rand(0,120);
 	$y2 = mt_rand(0,30);
 	imageline($image, $x1, $y1, $x2, $y2 , $gray);  
 }
 
-$x = 0;
+$x = 10;
 $l = strlen($cap);
 for($i = 0; $i < $l; $i++) {
 	$fnt = mt_rand(3,5);
@@ -77,6 +80,14 @@ for($i = 0; $i < $l; $i++) {
 	$y = mt_rand(7 , 12); 
 	imagestring($image, $fnt, $x, $y, substr($cap, $i, 1), $darkgray); 
 }
+
+imagealphablending($reload, TRUE);
+imagesavealpha($reload, TRUE);
+
+// overlay
+imagecopy($reload, $image, 0,0,0,0, 120,30);
+imagedestroy($image);
+$image = $reload;
 
 captcha_header();
 imagepng($image);
