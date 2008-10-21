@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.7.1 -------------------------------------
 19-Aug-2008 Matthias Gallas
+#	fixed display issue in news modul
 !	updated show_menu2 to version 4.7
 18-Sep-2008 Thomas Hornik
 +	Added captcha-reload
