@@ -11,19 +11,21 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+19-Aug-2008 Matthias Gallas
+!	updated show_menu2 to version 4.7
 18-Sep-2008 Thomas Hornik
-+ Added captcha-reload
++	Added captcha-reload
 16-Sep-2008 Thomas Hornik
-# search: fixed windows-related regex issue
+#	search: fixed windows-related regex issue
 19-Aug-2008 Matthias Gallas
 !	updated to latest FCKEditor version 2.6.3
 02-Aug-2008 Thomas Hornik
-# fixed sorting order of search-results
+#	fixed sorting order of search-results
 25-Jul-2008 Thomas Hornik
-# fixed an issues related to search, changed one SQL inner join (to use USING instead of WHERE)
-! added $database = new Database(); in front of output-filter
+#	fixed an issues related to search, changed one SQL inner join (to use USING instead of WHERE)
+!	added $database = new Database(); in front of output-filter
 05-Jul-2008 Thomas Hornik
-# fixed MODI_DATE/PUBLISHED_DATE issue in news-module. Added PUBLISHED_TIME, removed PUBL_DATE,PUBL_TIME. Thanks to forum-member timorotha
+#	fixed MODI_DATE/PUBLISHED_DATE issue in news-module. Added PUBLISHED_TIME, removed PUBL_DATE,PUBL_TIME. Thanks to forum-member timorotha
 02-Jul-2008 Christian Sommer
 !	updated to latest FCKEditor version 2.6.2
 01-Jul-2008 Thomas Hornik

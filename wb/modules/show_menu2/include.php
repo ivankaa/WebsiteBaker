@@ -1,7 +1,4 @@
 <?php
-
-// $Id$
-
 /*
     show_menu2: show_menu replacement for Website Baker 
     Copyright (C) 2006-2008, Brodie Thiesfield
@@ -22,7 +19,7 @@
     02110-1301, USA.
 
     ***********************************************
-    ** Version 4.6: see README for documentation **
+    ** Version 4.7: see README for documentation **
     ***********************************************
 */
 
@@ -406,7 +403,7 @@ function show_menu2(
     $aMenu          = 0,
     $aStart         = SM2_ROOT,
     $aMaxLevel      = -1999, // SM2_CURR+1
-    $aFlags         = SM2_TRIM,
+    $aOptions       = SM2_TRIM,
     $aItemOpen      = false,
     $aItemClose     = false,
     $aMenuOpen      = false,
@@ -417,11 +414,26 @@ function show_menu2(
 {
     global $wb;
 
+    // extract the flags and set $aOptions to an array
+    $flags = 0;
+    if (is_int($aOptions)) {
+        $flags = $aOptions;
+        $aOptions = array();
+    }
+    else if (isset($aOptions['flags'])) {
+        $flags = $aOptions['flags'];
+    }
+    else {
+        $flags = SM2_TRIM;
+        $aOptions = array();
+        error_log('show_menu2 error: $aOptions is invalid. No flags supplied!');
+    }
+    
     // ensure we have our group 1 flag, we don't check for the "exactly 1" part, but 
     // we do ensure that they provide at least one.
-    if (0 == ($aFlags & _SM2_GROUP_1)) {
-        error_log("show_menu2 error: no flags from group 1 supplied! Exactly one flag is required!");
-        $aFlags |= SM2_TRIM; // default to TRIM
+    if (0 == ($flags & _SM2_GROUP_1)) {
+        error_log('show_menu2 error: $aOptions is invalid. No flags from group 1 supplied!');
+        $flags |= SM2_TRIM; // default to TRIM
     }
     
     // search page results don't have any of the page data loaded by WB, so we load it 
@@ -469,7 +481,7 @@ function show_menu2(
     // multiple calls to show_menu2 in a single page with only a single call to 
     // the database. If this variable exists, then we have already retrieved all
     // of the information and processed it, so we don't need to do it again.
-    if (($aFlags & SM2_NOCACHE) != 0
+    if (($flags & SM2_NOCACHE) != 0
         || !array_key_exists('show_menu2_data', $GLOBALS) 
         || !array_key_exists($aMenu, $GLOBALS['show_menu2_data'])) 
     {
@@ -497,7 +509,7 @@ function show_menu2(
         if (version_compare(WB_VERSION, '2.7', '>=')) { // WB 2.7+
             $fields .= ',viewing_users';
         }
-        if ($aFlags & SM2_ALLINFO) {
+        if ($flags & SM2_ALLINFO) {
             $fields = '*';
         }
         
@@ -640,8 +652,15 @@ function show_menu2(
                 $sm2formatter = new SM2_Formatter;
             }
             $formatter = $sm2formatter;
-            $formatter->set($aFlags, $aItemOpen, $aItemClose, 
+            $formatter->set($flags, $aItemOpen, $aItemClose, 
                 $aMenuOpen, $aMenuClose, $aTopItemOpen, $aTopMenuOpen);
+        }
+        
+        // adjust the level until we show everything and ignore the SM2_TRIM flag.
+        // Usually this will be less than the start level to disable it.
+        $showAllLevel = $aStartLevel - 1;
+        if (isset($aOptions['notrim'])) {
+            $showAllLevel = $aStartLevel + $aOptions['notrim'];
         }
         
         // display the menu
@@ -649,18 +668,18 @@ function show_menu2(
         sm2_recurse(
             $GLOBALS['show_menu2_data'][$aMenu],
             $aStart,    // parent id to start displaying sub-menus
-            $aStartLevel, $aMaxLevel, $aFlags, 
+            $aStartLevel, $showAllLevel, $aMaxLevel, $flags, 
             $formatter);
         $formatter->finalize();
         
         // if we are returning something, get the data
-        if (($aFlags & SM2_BUFFER) != 0) {
+        if (($flags & SM2_BUFFER) != 0) {
             $retval = $formatter->getOutput();
         }
     }
 
     // clear the data if we aren't caching it
-    if (($aFlags & SM2_NOCACHE) != 0) {
+    if (($flags & SM2_NOCACHE) != 0) {
         unset($GLOBALS['show_menu2_data'][$aMenu]);
     }
     
@@ -681,7 +700,7 @@ function sm2_mark_children(&$rgParent, $aStart, $aChildLevel)
 
 function sm2_recurse(
     &$rgParent, $aStart, 
-    $aStartLevel, $aMaxLevel, $aFlags, 
+    $aStartLevel, $aShowAllLevel, $aMaxLevel, $aFlags, 
     &$aFormatter
     )
 {
@@ -725,7 +744,8 @@ function sm2_recurse(
         }
         else if ($aFlags & SM2_TRIM) {
             // parents and siblings of parents
-            if (!array_key_exists('sm2_on_curr_path', $page)    // not set if false, so existence = true
+            if ($pageLevel > $aShowAllLevel  // permit all levels to be shown
+                && !array_key_exists('sm2_on_curr_path', $page)    // not set if false, so existence = true
                 && !array_key_exists('sm2_path_sibling', $page)) {  // not set if false, so existence = true
                 continue;
             }
@@ -765,7 +785,7 @@ function sm2_recurse(
             && array_key_exists('sm2_has_child', $page)) {  // not set if false, so existence = true
             sm2_recurse(
                 $rgParent, $nextParent, // parent id to start displaying sub-menus
-                $aStartLevel, $aMaxLevel, $aFlags, 
+                $aStartLevel, $aShowAllLevel, $aMaxLevel, $aFlags, 
                 $aFormatter);
         }
         
