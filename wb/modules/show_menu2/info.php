@@ -1,4 +1,7 @@
 <?php
+
+// $Id$
+
 /*
     show_menu2: show_menu replacement for Website Baker 
     Copyright (C) 2006-2008, Brodie Thiesfield
