@@ -50,10 +50,64 @@ if(!is_dir(WB_PATH.'/modules/'.$file)) {
 	$admin->print_error($MESSAGE['MODULES']['NOT_INSTALLED']);
 }
 
-// Check if the module is in use
-$query_modules = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE module = '".$admin->add_slashes($_POST['file'])."' LIMIT 1");
-if($query_modules->numRows() > 0) {
-	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE']);
+/**
+*	Check if the module is in use
+*
+*	@version	0.1.0
+*	@build		1
+*	@date		2008-10-23
+*	@author		aldus
+*	@package	Websitebaker - Admin - modules
+*	@state		@dev
+*
+*/
+
+if (!function_exists("replace_all")) {
+	function replace_all ($aStr = "", &$aArray ) {
+		foreach($aArray as $k=>$v) $aStr = str_replace("{{".$k."}}", $v, $aStr);
+		return $aStr;
+	}
+}
+
+$info = $database->query("SELECT section_id, page_id FROM ".TABLE_PREFIX."sections WHERE module='".$_POST['file']."'" );
+
+if ( $info->numRows() > 0) {
+	
+	/**
+	*	Modul is in use, so we have to warn the user
+	*/
+	
+	$add = $info->numRows() == 1 ? "this page" : "these pages";
+	$msg_template_str  = "<br /><br />Modul <b>{{modul_name}}</b> could not be uninstalled because it is still in use on ";
+	$msg_template_str .= $add.":<br /><i>click for editing.</i><br /><br />";
+
+	/**
+	*	The template-string for displaying the Page-Titles ... in this case as a link
+	*/
+	$page_template_str = "- <b><a href='../pages/sections.php?page_id={{id}}'>{{title}}</a></b><br />";
+	
+	$values = array ('modul_name' => $file);
+	$msg = replace_all ( $msg_template_str,  $values );
+		
+	$page_names = "";
+	
+	while ($data = $info->fetchRow(DB_FETCHMODE_ASSOC) ) {
+	
+		$temp = $database->query("SELECT page_title from ".TABLE_PREFIX."pages where page_id=".$data['page_id']);
+		$temp_title = $temp->fetchRow( DB_FETCHMODE_ASSOC );
+		
+		$page_info = array(
+			'id'	=> $data['page_id'], 
+			'title' => $temp_title['page_title']
+		);
+			
+		$page_names .= replace_all ( $page_template_str, $page_info );
+	}
+	
+	/**
+	*	Printing out the error-message and die().
+	*/
+	$admin->print_error(str_replace ("Datei", "Modul", $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE']).$msg.$page_names);
 }
 
 // Check if we have permissions on the directory
