@@ -50,13 +50,96 @@ if(!is_dir(WB_PATH.'/templates/'.$file)) {
 	$admin->print_error($MESSAGE['GENERIC']['NOT_INSTALLED']);
 }
 
-// Check if the template is in use
-if($_POST['file'] == DEFAULT_TEMPLATE) {
-	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE']);
+if (!function_exists("replace_all")) {
+	function replace_all ($aStr = "", &$aArray ) {
+		foreach($aArray as $k=>$v) $aStr = str_replace("{{".$k."}}", $v, $aStr);
+		return $aStr;
+	}
+}
+
+/**
+*	Check if the template is the standard-template or still in use
+*/
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't unistall this template <b>".$file."</b> because it's the standardtemplate!";
+
+if ($file == DEFAULT_TEMPLATE) {
+	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE']); /** Text is missing! 2008-06-15 */
+
 } else {
-	$query_templates = $database->query("SELECT page_id FROM ".TABLE_PREFIX."pages WHERE template = '".$admin->add_slashes($_POST['file'])."' LIMIT 1");
-	if($query_templates->numRows() > 0) {
-		$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE']);
+	
+	/**
+	*	Check if the template is still in use by a page ...
+	*
+	*	@version	0.2.0
+	*	@build		5
+	*	@author		aldus
+	*	@since		0.1.0
+	*	@lastchange 2008-10-23
+	*
+	*/
+	$info = $database->query("SELECT page_id, page_title FROM ".TABLE_PREFIX."pages WHERE template='".$file."' order by page_title");
+	
+	if ($info->numRows() > 0) {
+	
+		/**
+		*	Template is still in use, so we're collecting the page-titles
+		*
+		*	@version	0.2.0
+		*	@build		5
+		*	@since		0.1.1
+		*	@lastchange 2008-10-23
+		*
+		*	0.2.0		Codechanges for Websitebaker to use it without the Black-Hawk-Engine
+		*
+		*	0.1.1		add this page <if we found only one> / these pages
+		*
+		*	@notice		All listed pages got linked to "settings.php" so the user can easy change
+		*				the template-settings. Modifications could be made in "page_template_str".
+		*				For additional informations you will have to modify the query, the page_template_str
+		*				and the page_info array.
+		*
+		*	@todo		1 - Additional informations about the pages (modified, modified_by, visibility, etc)
+		*
+		*				2 - What happends about pages, the user is not allowed to edit?
+		*					Marked "red"?
+		*
+		*				3 - Multiple language support here ...
+		*/
+		
+		/**
+		*	The base-message template-string for the top of the message
+		*
+		*	0.1.2	this page/ these pages
+		*
+		*/
+		$add = $info->numRows() == 1 ? "this page" : "these pages";
+		$msg_template_str  = "<br /><br />Template <b>{{template_name}}</b> could not be uninstalled because it is still in use by ";
+		$msg_template_str .= $add.":<br /><i>click for editing.</i><br /><br />";
+		
+		/**
+		*	The template-string for displaying the Page-Titles ... in this case as a link
+		*/
+		$page_template_str = "- <b><a href='../pages/settings.php?page_id={{id}}'>{{title}}</a></b><br />";
+		
+		$values = array ('template_name' => $file);
+		$msg = replace_all ( $msg_template_str,  $values );
+		
+		$page_names = "";
+		
+		while ($data = $info->fetchRow(DB_FETCHMODE_ASSOC) ) {
+			
+			$page_info = array(
+				'id'	=> $data['page_id'], 
+				'title' => $data['page_title']
+			);
+			
+			$page_names .= replace_all ( $page_template_str, $page_info );
+		}
+		
+		/**
+		*	Printing out the error-message and die().
+		*/
+		$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'].$msg.$page_names);
 	}
 }
 
