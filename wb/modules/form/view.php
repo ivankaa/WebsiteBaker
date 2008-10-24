@@ -94,21 +94,22 @@ function make_radio(&$n, $idx, $params) {
 	}
 }
 }
-// Generate temp submission id
-function new_submission_id() {
-	$submission_id = '';
-	$salt = "abchefghjkmnpqrstuvwxyz0123456789";
-	srand((double)microtime()*1000000);
-	$i = 0;
-	while ($i <= 7) {
-		$num = rand() % 33;
-		$tmp = substr($salt, $num, 1);
-		$submission_id = $submission_id . $tmp;
-		$i++;
-	}
-	return $submission_id;
-}
 
+if (!function_exists("new_submission_id") ) {
+	function new_submission_id() {
+		$submission_id = '';
+		$salt = "abchefghjkmnpqrstuvwxyz0123456789";
+		srand((double)microtime()*1000000);
+		$i = 0;
+		while ($i <= 7) {
+			$num = rand() % 33;
+			$tmp = substr($salt, $num, 1);
+			$submission_id = $submission_id . $tmp;
+			$i++;
+		}
+		return $submission_id;
+	}
+}
 // Work-out if the form has been submitted or not
 if($_POST == array()) {
 
