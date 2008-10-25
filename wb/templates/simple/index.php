@@ -1,54 +1,58 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
+/**
+ * $Id$
+ * Website Baker template: simple
+ * This template is one of four basis templates distributed with Website Baker.
+ * Feel free to modify or build up on this template.
+ *
+ * This file contains the overall template markup and the Website Baker
+ * template functions to add the contents from the database.
+ *
+ * LICENSE: GNU General Public License
+ * 
+ * @author     Ryan Djurovich, C. Sommer
+ * @copyright  GNU General Public License
+ * @license    http://www.gnu.org/licenses/gpl.html
+ * @version    2.70
+ * @platform   Website Baker 2.7
+ *
+ * Website Baker is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Website Baker is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
 */
 
-if(!defined('WB_URL')) {
-	header('Location: ../index.php');
-	exit(0);
-}
+// prevent this file from being accessed directly
+if (!defined('WB_PATH')) die(header('Location: ../../index.php'));
 
+// TEMPLATE CODE STARTS BELOW
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title><?php page_title(); ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php if(defined('DEFAULT_CHARSET')) { echo DEFAULT_CHARSET; } else { echo 'utf-8'; }?>" />
-<meta name="description" content="<?php page_description(); ?>" />
-<meta name="keywords" content="<?php page_keywords(); ?>" />
-<link href="<?php echo TEMPLATE_DIR; ?>/screen.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="<?php echo TEMPLATE_DIR; ?>/print.css" rel="stylesheet" type="text/css" media="print" />
-<?php
-// this allows to include the optional module files (frontend.css, frontend.js) into the head section
-if(function_exists('register_frontend_modfiles')) {
-  register_frontend_modfiles('css');
-  register_frontend_modfiles('js');
-} ?>
-<?php 
-// this allows to add custom information to the head section of your template (WB-->Settings-->Website Header)
-echo WEBSITE_HEADER; 
-?>
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php 
+	echo defined('DEFAULT_CHARSET') ? DEFAULT_CHARSET : 'utf-8'; ?>" />
+	<meta name="description" content="<?php page_description(); ?>" />
+	<meta name="keywords" content="<?php page_keywords(); ?>" />
+	<?php 
+	// automatically include optional WB module files (frontend.css, frontend.js)
+	if (function_exists('register_frontend_modfiles')) {
+		register_frontend_modfiles('css');
+		register_frontend_modfiles('js');
+	} ?>
+	<link rel="stylesheet" type="text/css" href="<?php 
+		echo TEMPLATE_DIR; ?>/template.css" media="screen,projection" />
+	<link rel="stylesheet" type="text/css" href="<?php 
+		echo TEMPLATE_DIR; ?>/print.css" media="print" />
+	<title><?php page_title('', '[WEBSITE_TITLE]'); ?></title>
 </head>
+
 <body>
 
 <table cellpadding="5" cellspacing="0" border="0" width="750" align="center">
@@ -64,15 +68,20 @@ echo WEBSITE_HEADER;
 </tr>
 <tr>
 	<td class="menu">
-		<?php if(SHOW_MENU) { /* Only shown menu if we need to */ ?>	
-			Menu: <br />
-			<?php show_menu(); ?>
-		<?php } ?>
+		<?php 
+		if (SHOW_MENU) { 
+			// navigation menu
+			echo $TEXT['MENU'] . ':';
+			show_menu();
+		} ?>
 		
-		<?php if(SHOW_SEARCH) { /* Only show search box if search is enabled */ ?>
+		<?php 
+		if (SHOW_SEARCH) { /* Only show search box if search is enabled */ ?>
 			<br />
-			Search: <br />
+			<?php echo $TEXT['SEARCH']; ?>: <br />
 			<form name="search" action="<?php echo WB_URL; ?>/search/index.php" method="get">
+				<input type="hidden" name="referrer" value="<?php
+					echo defined('REFERRER_ID') ? REFERRER_ID : PAGE_ID; ?>" />
 				<input type="text" name="string" style="width: 100%;" />
 				<input type="submit" name="submit" value="<?php echo $TEXT['SEARCH']; ?>" style="width: 100%;" />
 			</form>

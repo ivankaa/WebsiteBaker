@@ -1,11 +1,11 @@
 <?php
 /**
  * $Id$
- * Website Baker template: round
+ * Website Baker template: allcss
  * This template is one of four basis templates distributed with Website Baker.
  * Feel free to modify or build up on this template.
  *
- * This file defines the template variables required by Website Baker.
+ * This file prevents directory listing.
  *
  * LICENSE: GNU General Public License
  * 
@@ -26,20 +26,7 @@
  * GNU General Public License for more details.
 */
 
-// OBLIGATORY WEBSITE BAKER VARIABLES
-$template_directory				= 'round';
-$template_name						= 'Round';
-$template_version					= '2.70';
-$template_platform				= '2.7';
-$template_author					= 'Ryan Djurovich, C. Sommer';
-$template_license					= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';
-$template_license_terms		= '-';
-$template_description			= 'Default template for Website Baker. Simular to the box template, but with rounded edges.';
-
-// OPTIONAL VARIABLES FOR ADDITIONAL MENUES AND BLOCKS
-// $menu[1]								= '';
-// $menu[2]								= '';
-// $block[1]							= '';
-// $block[2]							= '';
+// prevent directory listing
+header('Location: ../../../index.php');
 
 ?>

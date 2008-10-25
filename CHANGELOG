@@ -11,7 +11,14 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
-19-Aug-2008 Matthias Gallas
+25-Oct-2008 Christian Sommer
+!	updated basic templates according the template guidelines
+24-Oct-2008 Dietrich Roland Pehlke
+#	applied bugfix for ticket #608 (redeclaration of news module)
+23-Oct-2008 Dietrich Roland Pehlke
+!	modified module delete function to provide additional information when module is in use when trying to delete
+!	modified template delete function to provide additional information when template is in when trying to delete
+21-Oct-2008 Matthias Gallas
 #	fixed display issue in news modul
 !	updated show_menu2 to version 4.7
 18-Sep-2008 Thomas Hornik
