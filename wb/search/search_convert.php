@@ -32,11 +32,17 @@ if(!defined('WB_URL')) {
 	header('Location: ../index.php');
 	exit(0);
 }
+if(!isset($search_lang)) $search_lang = LANGUAGE;
 
 //umlauts to '(upper|lower)' for preg_match()
 //this is UTF-8-encoded
 $string_ul_umlauts = array(
+	"i" => "(?:i|\xc4\xb0|I)",
+	"I" => "(?:I|\xc4\xb1|i)",
+	"k" => "(?:k|\xe2\x84\xaa|K)",
+	"S" => "(?:S|\xc5\xbf|s)",
 	"\xc2\xb5" => "(?:\xc2\xb5|\xce\x9c)",
+	"\xc3\x9f" => "(?:\xc3\x9f|SS|ss)", // german ß
 	"\xc3\xa0" => "(?:\xc3\xa0|\xc3\x80)",
 	"\xc3\xa1" => "(?:\xc3\xa1|\xc3\x81)",
 	"\xc3\xa2" => "(?:\xc3\xa2|\xc3\x82)",
@@ -1460,10 +1466,17 @@ $string_ul_umlauts = array(
 	"\xf0\x90\x90\xa3" => "(?:\xf0\x90\x90\xa3|\xf0\x90\x91\x8b)",
 	"\xf0\x90\x90\xa4" => "(?:\xf0\x90\x90\xa4|\xf0\x90\x91\x8c)",
 	"\xf0\x90\x90\xa5" => "(?:\xf0\x90\x90\xa5|\xf0\x90\x91\x8d)"
-	//"i" => "(?:i|\xc4\xb0|I)",
-	//"I" => "(?:I|\xc4\xb1|i)",
-	//"k" => "(?:k|\xe2\x84\xaa|K)",
-	//"S" => "(?:S|\xc5\xbf|s)"
 );
+
+
+if($search_lang=='DE') {
+	$string_ul_umlauts["\xc3\x9f"] = "(?:\xc3\x9f|SS|ss)"; // german ß
+	$string_ul_umlauts["\xc3\xa4"] = "(?:\xc3\xa4|\xc3\x84|ae|Ae)"; // german ä
+	$string_ul_umlauts["\xc3\xb6"] = "(?:\xc3\xb6|\xc3\x96|oe|Oe)"; // german ö
+	$string_ul_umlauts["\xc3\xbc"] = "(?:\xc3\xbc|\xc3\x9c|ue|Ue)"; // german ü
+	$string_ul_umlauts["\xc3\x84"] = "(?:\xc3\x84|\xc3\xa4|Ae|ae)"; // german Ä
+	$string_ul_umlauts["\xc3\x96"] = "(?:\xc3\x96|\xc3\xb6|Oe|oe)"; // german Ö
+	$string_ul_umlauts["\xc3\x9c"] = "(?:\xc3\x9c|\xc3\xbc|Ue|ue)"; // german Ü
+}
 
 ?>

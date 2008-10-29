@@ -117,26 +117,42 @@ if($query->numRows() > 0) {
 	}
 }
 
+// Get search language
+$search_lang = '';
+if(isset($_REQUEST['search_lang'])) {
+	$search_lang = $_REQUEST['search_lang'];
+	if(!preg_match('~^[A-Z]{2}$~', $search_lang))
+		$search_lang = LANGUAGE;
+} else {
+	$search_lang = LANGUAGE;
+}
+
 // Get the path to search into. Normally left blank
+// ATTN: since wb2.7.1 the path is evaluated as SQL: LIKE "/path%" - which will find "/path.php", "/path/info.php", ...; But not "/de/path.php"
+// Add a '%' in front of each path to get SQL: LIKE "%/path%"
 /* possible values:
  * - a single path: "/en/" - search only pages whose link contains 'path' ("/en/machinery/bender-x09")
- * - a bunch of alternative pathes: "/en/,/machinery/,docs/" - alternatives paths, seperated by comma
- * - a bunch of paths to exclude: "-/about,/info,/jp/,/light" - search all, exclude these.
+ * - a single path not to search into: "-/help" - search all, exclude /help...
+ * - a bunch of alternative pathes: "/en/,%/machinery/,/docs/" - alternatives paths, seperated by comma
+ * - a bunch of paths to exclude: "-/about,%/info,/jp/,/light" - search all, exclude these.
  * These different styles can't be mixed.
  */
-$search_path_SQL = "";
-$search_path = "";
+// ATTN: in wb2.7.0 "/en/" matched all links with "/en/" somewhere in the link: "/info/en/intro.php", "/en/info.php", ...
+// since wb2.7.1 "/en/" matches only links _starting_  with "/en/": "/en/intro/info.php"
+// use "%/en/" (or "%/en/, %/info", ...) to get the old behavior
+$search_path_SQL = '';
+$search_path = '';
 if(isset($_REQUEST['search_path'])) {
-	$search_path = $wb->add_slashes($_REQUEST['search_path']);
-	if(!preg_match('~^[-a-zA-Z0-9_,/ ]+$~', $search_path))
+	$search_path = addslashes(htmlspecialchars(strip_tags($wb->strip_slashes($_REQUEST['search_path']))));
+	if(!preg_match('~^%?[-a-zA-Z0-9_,/ ]+$~', $search_path))
 		$search_path = '';
 	if($search_path != '') {
-		$search_path_SQL = "AND ( ";
-		$not = "";
-		$op = "OR";
+		$search_path_SQL = 'AND ( ';
+		$not = '';
+		$op = 'OR';
 		if($search_path[0] == '-') {
-			$not = "NOT";
-			$op = "AND";
+			$not = 'NOT';
+			$op = 'AND';
 			$paths = explode(',', substr($search_path, 1) );
 		} else {
 			$paths = explode(',',$search_path);
@@ -144,11 +160,11 @@ if(isset($_REQUEST['search_path'])) {
 		$i=0;
 		foreach($paths as $p) {
 			if($i++ > 0) {
-				$search_path_SQL .= " $op";
+				$search_path_SQL .= ' $op';
 			}
-			$search_path_SQL .= " link $not LIKE '%$p%'";			
+			$search_path_SQL .= " link $not LIKE '".$p."%'";			
 		}
-		$search_path_SQL .= " )";
+		$search_path_SQL .= ' )';
 	}
 }
 
@@ -167,13 +183,13 @@ if(isset($_REQUEST['match'])) {
 $search_normal_string = '';
 $search_entities_string = ''; // for SQL's LIKE
 $search_display_string = ''; // for displaying
-$search_url_string = ''; // for $_GET
+$search_url_string = ''; // for $_GET -- ATTN: unquoted! Will become urldecoded later
 $string = '';
 if(isset($_REQUEST['string'])) {
-	if($match!='exact') {
+	if($match!='exact') { // $string will be cleaned below
 		$string=str_replace(',', '', $_REQUEST['string']);
 	} else {
-		$string=$_REQUEST['string']; // $string will be cleaned below
+		$string=$_REQUEST['string'];
 	}
 	// redo possible magic quotes
 	$string = $wb->strip_slashes($string);
@@ -187,12 +203,15 @@ if(isset($_REQUEST['string'])) {
 	$search_entities_string = str_replace('\\\\', '\\\\\\\\', $search_entities_string);
 	// convert string to utf-8
 	$string = entities_to_umlauts($string, 'UTF-8');
-	// quote ' " and /  -we need quoted / for regex
 	$search_url_string = $string;
 	$string = preg_quote($string);
+	// quote ' " and /  -we need quoted / for regex
 	$search_normal_string = str_replace(array('\'','"','/'), array('\\\'','\"','\/'), $string);
 }
 // make arrays from the search_..._strings above
+if($match == 'exact')
+	$search_url_array[] = $search_url_string;
+else
 $search_url_array = explode(' ', $search_url_string);
 $search_normal_array = array();
 $search_entities_array = array();
@@ -220,9 +239,6 @@ require_once(WB_PATH.'/search/search_convert.php');
 $search_words = array();
 foreach($search_normal_array AS $str) {
 	$str = strtr($str, $string_ul_umlauts);
-	// special-feature: '|' means word-boundary (\b). Searching for 'the|' will find the, but not thema.
-	// this doesn't(?) work correctly for unicode-chars: '|test' will work, but '|über' not.
-	$str = strtr($str, array('\\|'=>'\b'));
 	$search_words[] = $str;
 }
 

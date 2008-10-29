@@ -101,7 +101,8 @@ function get_excerpts($text, $search_words, $max_excerpt_num) {
 	}
 	$regex='/(?:^|\b|['.$str1.'])([^'.$str1.']{0,200}?'.$word.'[^'.$str2.']{0,200}(?:['.$str2.']|\b|$))/isu';
 	if(version_compare(PHP_VERSION, '4.3.3', '>=') &&
-	strpos(strtoupper(PHP_OS), 'WIN')!==0) { // this may crash windows server, so skip if on windows
+	   strpos(strtoupper(PHP_OS), 'WIN')!==0
+	) { // this may crash windows server, so skip if on windows
 		// jump from match to match, get excerpt, stop if $max_excerpt_num is reached
 		$last_end = 0; $offset = 0;
 		while(preg_match('/'.$word.'/Sisu', $text, $match_array, PREG_OFFSET_CAPTURE, $last_end)) {
@@ -115,11 +116,11 @@ function get_excerpts($text, $search_words, $max_excerpt_num) {
 					if(count($excerpt_array) >= $max_excerpt_num)
 						break;
 				}
-			} else { // problem - preg_match failed: can't find a start- or stop-sign
+			} else { // problem: preg_match failed - can't find a start- or stop-sign
 				$last_end += 201; // jump forward and try again
 			}
 		}
-	} else { // compatile, but may be very slow with many large pages
+	} else { // compatible, but may be very slow with large pages
 		if(preg_match_all($regex, $text, $match_array)) {
 			foreach($match_array[1] AS $string) {
 				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./', $string)) // skip excerpts with email-addresses
@@ -173,7 +174,7 @@ function make_url_target($page_link_target, $text, $search_words) {
 		if($match && is_array($match[0])) {
 			$x=$match[0][1]; // position of first match
 			// is there an anchor nearby?
-			if(preg_match_all('/<(?:[^>]+id|\s*a[^>]+name)\s*=\s*"(.*)"/SiU', substr($text,0,$x), $match, PREG_OFFSET_CAPTURE)) {
+			if(preg_match_all('/<(?:[^>]+id|\s*a[^>]+name)\s*=\s*"(.*)"/iU', substr($text,0,$x), $match, PREG_OFFSET_CAPTURE)) {
 				$anchor='';
 				foreach($match[1] AS $array) {
 					if($array[1] > $x) {
@@ -234,6 +235,7 @@ function print_excerpt2($mod_vars, $func_vars) {
 	if(!isset($mod_pic_link))           $mod_pic_link = "";
 	if(!isset($mod_no_highlight))       $mod_no_highlight = false;
 	if(!isset($func_enable_flush))      $func_enable_flush = false; // set this in db: wb_search.cfg_enable_flush [READ THE DOC BEFORE]
+	if(isset($mod_ext_charset) && $mod_ext_charset!='utf-8') $mod_ext_charset = 'utf-8'; // only utf-8 is allowed, yet. For other charset see DOCU
 	if($mod_text == "") // nothing to do
 		{ return false; }
 	if($mod_no_highlight) // no highlighting
@@ -243,10 +245,16 @@ function print_excerpt2($mod_vars, $func_vars) {
 	$mod_text = preg_replace('#<(br( /)?|dt|/dd|/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>#Si', '.', $mod_text);
 	$mod_text = preg_replace('/\s+/', ' ', $mod_text);
 	$mod_text = preg_replace('/ \./', '.', $mod_text);
+	if(isset($mod_ext_charset)) { // data from external database may have a different charset
+		require_once(WB_PATH.'/framework/functions-utf8.php');
+		$mod_text = charset_to_utf8($mod_text, $mod_ext_charset);
+	} else {
 	$mod_text = entities_to_umlauts($mod_text, 'UTF-8');
+	}
 	$anchor_text = $mod_text; // make an copy containing html-tags
 	$mod_text = strip_tags($mod_text);
 	$mod_text = str_replace(array('&gt;','&lt;','&amp;','&quot;','&#39;','&apos;','&nbsp;'), array('>','<','&','"','\'','\'',"\xC2\xA0"), $mod_text);
+	$mod_text = '.'.trim($mod_text).'.';
 	// Do a fast scan over $mod_text first. This will speedup things a lot.
 	if($func_search_match == 'all') {
 		if(!is_all_matched($mod_text, $func_search_words))

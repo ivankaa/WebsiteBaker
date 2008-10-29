@@ -77,8 +77,6 @@ function search_highlight($foo='', $arr_string=array()) {
 	array_walk($arr_string, create_function('&$v,$k','$v = preg_quote($v, \'/\');'));
 	$search_string = implode("|", $arr_string);
 	$string = strtr($search_string, $string_ul_umlauts);
-	// special-feature: '|' means word-boundary (\b). Searching for 'the|' will find 'the', but not 'thema'.
-	$string = strtr($string, array('\\|'=>'\b'));
 	// the highlighting
 	// match $string, but not inside <style>...</style>, <script>...</script>, <!--...--> or HTML-Tags
 	// split $string into pieces - "cut away" styles, scripts, comments, HTML-tags and eMail-addresses

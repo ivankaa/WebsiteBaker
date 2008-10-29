@@ -15,6 +15,10 @@ Legend:
 # News: total number of news wasn't calculated correctly
 ! Captcha: removed IFRAME for Calculation-as-text captcha
 - removed useless init_utf8funcs()-function
++ search: added search_lang for use in search-form. Using DE, the search will search ä=ae,... (alternate spelling of german umlauts)
+- search: removed undocumented word-boundary search
+! search: search_path is now anchored to the beginning of link ("link LIKE '$path%'" instead of "link LIKE '%$path%'")
++ search: added key 'ext_charset' to search-extension to query external databases
 25-Oct-2008 Christian Sommer
 !	updated basic templates according the template guidelines
 24-Oct-2008 Dietrich Roland Pehlke
