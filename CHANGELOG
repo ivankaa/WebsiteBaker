@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+29-Oct-2008 Thomas Hornik
+# News: total number of news wasn't calculated correctly
 25-Oct-2008 Christian Sommer
 !	updated basic templates according the template guidelines
 24-Oct-2008 Dietrich Roland Pehlke

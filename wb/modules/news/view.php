@@ -97,9 +97,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		$setting_posts_per_page = '';
 	}
 	
-	// Get total number of posts
 	$t = time();
-	$query_total_num = $database->query("SELECT post_id FROM ".TABLE_PREFIX."mod_news_posts WHERE section_id = '$section_id' AND active = '1' AND title != '' $query_extra AND (published_when = '0' OR published_when <= $t) AND (published_until = 0 OR published_until >= $t)");
+	// Get total number of posts
+	$query_total_num = $database->query("SELECT post_id FROM ".TABLE_PREFIX."mod_news_posts
+		WHERE section_id = '$section_id' AND active = '1' AND title != '' $query_extra 
+		AND (published_when = '0' OR published_when <= $t) AND (published_until = 0 OR published_until >= $t)");
 	$total_num = $query_total_num->numRows();
 
 	// Work-out if we need to add limit code to sql
@@ -110,7 +112,6 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	}
 	
 	// Query posts (for this page)
-	$t = time();
 	$query_posts = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_posts
 		WHERE section_id = '$section_id' AND active = '1' AND title != ''$query_extra
 		AND (published_when = '0' OR published_when <= $t) AND (published_until = 0 OR published_until >= $t)
