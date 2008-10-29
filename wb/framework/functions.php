@@ -349,37 +349,24 @@ function my_htmlspecialchars($string) {
 	return($string);
 }
 
-// init utf8-functions -- workaround to prevent functions-utf8.php and charsets_table.php (~140kB) to be loaded more than once
-// functions and arrays from functions-utf8.php and charsets_table.php will be in global name-space
-function init_utf8funcs() {
-	static $utf8_ok=0;
-	if($utf8_ok == 0) {
-		++$utf8_ok;
-		require_once(WB_PATH.'/framework/functions-utf8.php');
-	}
-}
-
 // Convert a string from mixed html-entities/umlauts to pure $charset_out-umlauts
 // Will replace all numeric and named entities except &gt; &lt; &apos; &quot; &#39; &nbsp;
 // In case of error the returned string is unchanged, and a message is emitted.
 function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET) {
-	//init utf8-functions
-	init_utf8funcs();
+	require_once(WB_PATH.'/framework/functions-utf8.php');
 	return entities_to_umlauts2($string, $charset_out);
 }
 
 // Will convert a string in $charset_in encoding to a pure ASCII string with HTML-entities.
 // In case of error the returned string is unchanged, and a message is emitted.
 function umlauts_to_entities($string, $charset_in=DEFAULT_CHARSET) {
-	//init utf8-functions
-	init_utf8funcs();
+	require_once(WB_PATH.'/framework/functions-utf8.php');
 	return umlauts_to_entities2($string, $charset_in);
 }
 
 // Function to convert a page title to a page filename
 function page_filename($string) {
-	//init utf8-functions
-	init_utf8funcs();
+	require_once(WB_PATH.'/framework/functions-utf8.php');
 	$string = entities_to_7bit($string);
 	// Now remove all bad characters
 	$bad = array(
@@ -406,8 +393,7 @@ function page_filename($string) {
 
 // Function to convert a desired media filename to a clean filename
 function media_filename($string) {
-	//init utf8-functions
-	init_utf8funcs();
+	require_once(WB_PATH.'/framework/functions-utf8.php');
 	$string = entities_to_7bit($string);
 	// Now remove all bad characters
 	$bad = array(
