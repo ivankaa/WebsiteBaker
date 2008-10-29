@@ -31,10 +31,6 @@ function display_captcha_real($kind='image') {
 		?><a title="reload" href="<?php echo WB_URL.'/include/captcha/captcha.php?display_captcha_X986E21=2'; ?>">
 		  <img style="border: none;" src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" />
 			</a><?php
-	} elseif($kind=='text') {
-		?><a style="text-decoration:none;" title="reload" href="<?php echo WB_URL.'/include/captcha/captcha.php?display_captcha_X986E21=2'; ?>"><?php
-		include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php');
-		?></a><?php
 	} else {
 		echo 'error';
 	}
@@ -44,10 +40,6 @@ function display_captcha_real($kind='image') {
 if(isset($_GET['display_captcha_X986E21'])) {
 	require('../../config.php');
 	switch(CAPTCHA_TYPE) {
-	case 'text':
-	case 'calc_text':
-		display_captcha_real('text');
-		break;
 	case 'calc_image':
 	case 'calc_ttf_image':
 	case 'ttf_image':
@@ -115,16 +107,8 @@ if(!function_exists('call_captcha')) {
 		$t = time();
 		$_SESSION['captcha_time'] = $t;
 
-		// get width and height of captcha image or text for use in <iframe>
+		// get width and height of captcha image for use in <iframe>
 		switch(CAPTCHA_TYPE) {
-		case 'text':
-			$captcha_width = 250;
-			$captcha_height = 100;
-			break;
-		case 'calc_text':
-			$captcha_width = 120;
-			$captcha_height = 20;
-			break;
 		case 'calc_image':
 			$captcha_width = 142;
 			$captcha_height = 30;
@@ -148,8 +132,7 @@ if(!function_exists('call_captcha')) {
 
 		if($action=='all') {
 			switch(CAPTCHA_TYPE) {
-				// one special case
-				case 'text': // text-captcha - we don't use an <iframe> in this case
+				case 'text': // text-captcha
 					?><table class="captcha_table"><tr>
 					<td class="text_captcha">
 						<?php include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php'); ?>
@@ -159,13 +142,10 @@ if(!function_exists('call_captcha')) {
 					<td class="captcha_expl"><?php echo $MOD_CAPTCHA['VERIFICATION_INFO_QUEST']; ?></td>
 					</tr></table><?php
 					break;
-				// two special cases
 				case 'calc_text': // calculation as text
 					?><table class="captcha_table"><tr>
 					<td class="text_captcha">
-						<iframe class="captcha_iframe" width="<?php echo $captcha_width; ?>" height="<?php echo $captcha_height; ?>" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" name="captcha_iframe" src="<?php echo WB_URL.'/include/captcha/captcha.php?display_captcha_X986E21=1'; ?>">
 						<?php include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php'); ?>
-						</iframe>
 					</td>
 					<td>&nbsp;=&nbsp;</td>
 					<td><input type="text" name="captcha" maxlength="10"  style="width:20px;" /></td>
@@ -223,9 +203,7 @@ if(!function_exists('call_captcha')) {
 					echo ($style?'</span>':'');
 					break;
 				case 'calc_text': // calculation as text
-					?><iframe class="captcha_iframe" width="<?php echo $captcha_width; ?>" height="<?php echo $captcha_height; ?>" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" name="captcha_iframe" src="<?php echo WB_URL.'/include/captcha/captcha.php?display_captcha_X986E21=1'; ?>"><?php
 					include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php');
-					?></iframe><?php
 					break;
 				case 'calc_image': // calculation with image (old captcha)
 				case 'calc_ttf_image': // calculation with varying background and ttf-font
