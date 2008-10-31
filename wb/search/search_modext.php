@@ -235,9 +235,12 @@ function print_excerpt2($mod_vars, $func_vars) {
 	if(!isset($mod_pic_link))           $mod_pic_link = "";
 	if(!isset($mod_no_highlight))       $mod_no_highlight = false;
 	if(!isset($func_enable_flush))      $func_enable_flush = false; // set this in db: wb_search.cfg_enable_flush [READ THE DOC BEFORE]
-	if(isset($mod_ext_charset) && $mod_ext_charset!='utf-8') $mod_ext_charset = 'utf-8'; // only utf-8 is allowed, yet. For other charset see DOCU
+	if(isset($mod_ext_charset)) $mod_ext_charset = strtolower($mod_ext_charset);
+	else $mod_ext_charset = '';
+
 	if($mod_text == "") // nothing to do
 		{ return false; }
+
 	if($mod_no_highlight) // no highlighting
 		{ $mod_page_link_target = "&amp;nohighlight=1".$mod_page_link_target; }
 	// clean the text:
@@ -245,9 +248,35 @@ function print_excerpt2($mod_vars, $func_vars) {
 	$mod_text = preg_replace('#<(br( /)?|dt|/dd|/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>#Si', '.', $mod_text);
 	$mod_text = preg_replace('/\s+/', ' ', $mod_text);
 	$mod_text = preg_replace('/ \./', '.', $mod_text);
-	if(isset($mod_ext_charset)) { // data from external database may have a different charset
+	if($mod_ext_charset!='') { // data from external database may have a different charset
 		require_once(WB_PATH.'/framework/functions-utf8.php');
-		$mod_text = charset_to_utf8($mod_text, $mod_ext_charset);
+		switch($mod_ext_charset) {
+		case 'latin1':
+		case 'cp1252':
+			$mod_text = charset_to_utf8($mod_text, 'CP1252');
+			break;
+		case 'cp1251':
+			$mod_text = charset_to_utf8($mod_text, 'CP1251');
+			break;
+		case 'latin2':
+			$mod_text = charset_to_utf8($mod_text, 'ISO-8859-2');
+			break;
+		case 'hebrew':
+			$mod_text = charset_to_utf8($mod_text, 'ISO-8859-8');
+			break;
+		case 'greek':
+			$mod_text = charset_to_utf8($mod_text, 'ISO-8859-7');
+			break;
+		case 'latin5':
+			$mod_text = charset_to_utf8($mod_text, 'ISO-8859-9');
+			break;
+		case 'latin7':
+			$mod_text = charset_to_utf8($mod_text, 'ISO-8859-13');
+			break;
+		case 'utf8':
+		default:
+			$mod_text = charset_to_utf8($mod_text, 'UTF-8');
+		}
 	} else {
 	$mod_text = entities_to_umlauts($mod_text, 'UTF-8');
 	}
