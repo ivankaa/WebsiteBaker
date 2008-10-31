@@ -13,6 +13,7 @@ Legend:
 ------------------------------------- 2.7.1 -------------------------------------
 01-Nov-2008 Thomas Hornik
 ! improved ext_charset to work with latin1,cp1252,cp1251,latin2,hebrew,greek,latin5,latin7,utf8
++ added config for section anchor. ATTN: add "INSERT INTO TABLE_PREFIX.'settings' (name,value,extra) VALUES ('sec_anchor', 'wb_', '')" to upgrade-script.
 29-Oct-2008 Thomas Hornik
 # News: total number of news wasn't calculated correctly
 ! Captcha: removed IFRAME for Calculation-as-text captcha

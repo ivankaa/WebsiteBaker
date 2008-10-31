@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Principal';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Renomear Arquivos ao Enviar';
 $TEXT['APP_NAME'] = 'Nome da Aplica&ccdil;&atilde;o';
 $TEXT['SESSION_IDENTIFIER'] = 'Identificador de Sess&atilde;o';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Backup';
 $TEXT['RESTORE'] = 'Restaurar';
 $TEXT['BACKUP_DATABASE'] = 'Backup do Banco de Dados';

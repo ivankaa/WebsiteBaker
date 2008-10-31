@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Hoved';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Gi filer nytt navn etter opplastningen';
 $TEXT['APP_NAME'] = 'Applikasjonsnavn';
 $TEXT['SESSION_IDENTIFIER'] = 'Sesjons id-navn';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Sikkerhetskopiere';
 $TEXT['RESTORE'] = 'Gjenopprett';
 $TEXT['BACKUP_DATABASE'] = 'Sikkerhetskopiere database';

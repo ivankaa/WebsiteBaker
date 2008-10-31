@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Hauptblock';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Datei nach Hochladen umbenennen';
 $TEXT['APP_NAME'] = 'Verwaltungswerkzeuge';
 $TEXT['SESSION_IDENTIFIER'] = 'Sitzungs ID';
+$TEXT['SEC_ANCHOR'] = 'Abschnitts-Anker Text';
 $TEXT['BACKUP'] = 'Sichern';
 $TEXT['RESTORE'] = 'Wiederherstellen';
 $TEXT['BACKUP_DATABASE'] = 'Datenbank sichern';

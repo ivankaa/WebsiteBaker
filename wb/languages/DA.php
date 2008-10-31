@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Hovedoversigt';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Omd&oslash;b filer under opload';
 $TEXT['APP_NAME'] = 'Applikationsnavn';
 $TEXT['SESSION_IDENTIFIER'] = 'Sessions-ID';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Backup';
 $TEXT['RESTORE'] = 'Gendannelse';
 $TEXT['BACKUP_DATABASE'] = 'Backup af database';

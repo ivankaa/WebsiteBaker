@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Ana';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Y&uuml;klenen dosyan&yacute;n ad&yacute;n&yacute; de&eth;i&thorn;tir';
 $TEXT['APP_NAME'] = 'Application Ad&yacute;';
 $TEXT['SESSION_IDENTIFIER'] = 'Session Identifier';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Yedek Al';
 $TEXT['RESTORE'] = 'Yede&eth;i y&uuml;kle';
 $TEXT['BACKUP_DATABASE'] = 'Database Yedekle';

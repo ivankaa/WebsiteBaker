@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Principal';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Renommer les fichiers au chargement';
 $TEXT['APP_NAME'] = 'Nom de lapplication';
 $TEXT['SESSION_IDENTIFIER'] = 'Identifiant de session';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Sauvegarde';
 $TEXT['RESTORE'] = 'Restaurer';
 $TEXT['BACKUP_DATABASE'] = 'Sauvegarde de la base de donn&eacute;es';

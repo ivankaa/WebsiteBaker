@@ -211,8 +211,10 @@ if (!function_exists('page_content')) {
 				}
 				$section_id = $section['section_id'];
 				$module = $section['module'];
-				// make a anchor for every section. This is for the search_extension
-				echo "<a id=\"wb_section_$section_id\" name=\"wb_section_$section_id\"></a>";
+				// make a anchor for every section.
+				if(defined('SEC_ANCHOR') && SEC_ANCHOR!='') {
+					echo '<a class="section_anchor" id="'.SEC_ANCHOR.$section_id.'" name="'.SEC_ANCHOR.$section_id.'"></a>';
+				}
 				// highlights searchresults
 				if (isset($_GET['searchresult']) AND is_numeric($_GET['searchresult']) AND !isset($_GET['nohighlight'])) {
 					if (isset($_GET['sstring']) AND !empty($_GET['sstring']) ){

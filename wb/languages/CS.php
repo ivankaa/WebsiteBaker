@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Hlavn&iacute;';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'P&#345;ejm. soubory po nahr&aacute;n&iacute;';
 $TEXT['APP_NAME'] = 'N&aacute;zev aplikace';
 $TEXT['SESSION_IDENTIFIER'] = 'Identifik&aacute;tor session';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Z&aacute;lohov&aacute;n&iacute;';
 $TEXT['RESTORE'] = 'Obnova ze z&aacute;lohy';
 $TEXT['BACKUP_DATABASE'] = 'Z&aacute;lohovat datab&aacute;zi';

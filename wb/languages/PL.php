@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'G&#322;&oacute;wny';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Zmie&#324; nazwy plik&oacute;w przy za&#322;adowywaniu';
 $TEXT['APP_NAME'] = 'Nazwa aplikacju';
 $TEXT['SESSION_IDENTIFIER'] = 'Identyfikator sesji';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Kopia zapasowa';
 $TEXT['RESTORE'] = 'Przywr&oacute;&#263;';
 $TEXT['BACKUP_DATABASE'] = 'Kopia zapasowa bazy danych';

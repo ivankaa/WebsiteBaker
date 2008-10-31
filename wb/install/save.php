@@ -454,6 +454,7 @@ if($install_tables == true) {
 	." ('er_level', ''),"
 	." ('default_language', '$default_language'),"
 	." ('app_name', 'wb_$session_rand'),"
+	." ('sec_anchor', 'wb_'),"
 	." ('default_timezone', '$default_timezone'),"
 	." ('default_date_format', 'M d Y'),"
 	." ('default_time_format', 'g:i A'),"

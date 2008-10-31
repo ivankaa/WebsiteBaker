@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Galvenais';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Datnes, kuram aug&scaron;upieladejot jamaina nosaukumi';
 $TEXT['APP_NAME'] = 'Programmas nosaukums';
 $TEXT['SESSION_IDENTIFIER'] = 'Sesijas identifikators';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Duble&scaron;ana';
 $TEXT['RESTORE'] = 'Atjaunot';
 $TEXT['BACKUP_DATABASE'] = 'Dublet datu bazi';

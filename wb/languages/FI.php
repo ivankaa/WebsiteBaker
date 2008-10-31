@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'P&auml;&auml;';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Nime&auml; ladatut';
 $TEXT['APP_NAME'] = 'Sovelluksen nimi';
 $TEXT['SESSION_IDENTIFIER'] = 'Tunniste';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Varmuuskopioi';
 $TEXT['RESTORE'] = 'Palauta';
 $TEXT['BACKUP_DATABASE'] = 'Varmista tietokanta';

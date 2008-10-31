@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Huvudmenyn';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = '&Auml;ndra filnamn vid uppladdning';
 $TEXT['APP_NAME'] = 'Namn p&aring; applikation';
 $TEXT['SESSION_IDENTIFIER'] = 'Sessionsidentifierare';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Backup';
 $TEXT['RESTORE'] = '&Aring;terst&auml;ll';
 $TEXT['BACKUP_DATABASE'] = 'Backup av databas';

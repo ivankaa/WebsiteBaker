@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Glevni';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Izmjeni fileove kod ponovnog upisa';
 $TEXT['APP_NAME'] = 'Ime aplikacije';
 $TEXT['SESSION_IDENTIFIER'] = 'Session Identifier';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Backup';
 $TEXT['RESTORE'] = 'Povrati';
 $TEXT['BACKUP_DATABASE'] = 'Backup baze podataka';

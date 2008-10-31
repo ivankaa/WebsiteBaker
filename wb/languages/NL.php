@@ -388,6 +388,7 @@ $TEXT['MAIN'] = 'Primair(e)';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Bestanden hernoemen bij uploaden';
 $TEXT['APP_NAME'] = 'Applicatienaam';
 $TEXT['SESSION_IDENTIFIER'] = 'Sessie-identificatie';
+$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
 $TEXT['BACKUP'] = 'Backup maken';
 $TEXT['RESTORE'] = 'Backup terugzetten';
 $TEXT['BACKUP_DATABASE'] = 'Database-backup maken';
