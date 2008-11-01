@@ -191,6 +191,17 @@ function make_url_target($page_link_target, $text, $search_words) {
 	elseif(substr($page_link_target,0,13)=='#!wb_section_') {
 		$page_link_target = '#'.substr($page_link_target, 2);
 	}
+	
+	// since wb 2.7.1 the section-anchor is configurable - SEC_ANCHOR holds the anchor name
+	if(substr($page_link_target,0,12)=='#wb_section_') {
+		if(defined('SEC_ANCHOR') && SEC_ANCHOR!='') {
+			$sec_id = substr($page_link_target, 12);
+			$page_link_target = '#'.SEC_ANCHOR.$sec_id;
+		} else { // section-anchors are disabled
+			$page_link_target = '';
+		}
+	}
+	
 	return $page_link_target;
 }
 

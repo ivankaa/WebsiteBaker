@@ -71,7 +71,11 @@ foreach($links as $pid=>$l) {
 	if($query_section = $database->query("SELECT section_id, module FROM $table_s WHERE page_id = '$pid' ORDER BY position")) {
 		while($section = $query_section->fetchRow()) {
 			// get section-anchor
-			$targets[$pid][] = "wb_section_{$section['section_id']}";
+			if(defined('SEC_ANCHOR') && SEC_ANCHOR!='') {
+				$targets[$pid][] = SEC_ANCHOR.$section['section_id'];
+			} else {
+				$targets[$pid] = array();
+			}
 			if($section['module'] == 'wysiwyg') {
 				if($query_page = $database->query("SELECT content FROM $table_mw WHERE section_id = '{$section['section_id']}' LIMIT 1")) {
 					$page = $query_page->fetchRow();

@@ -12,16 +12,17 @@ Legend:
 
 ------------------------------------- 2.7.1 -------------------------------------
 01-Nov-2008 Thomas Hornik
-! improved ext_charset to work with latin1,cp1252,cp1251,latin2,hebrew,greek,latin5,latin7,utf8
-+ added config for section anchor. ATTN: add "INSERT INTO TABLE_PREFIX.'settings' (name,value,extra) VALUES ('sec_anchor', 'wb_', '')" to upgrade-script.
+!	improved ext_charset to work with latin1,cp1252,cp1251,latin2,hebrew,greek,latin5,latin7,utf8
++	added config for section anchor. ATTN: add "INSERT INTO TABLE_PREFIX.'settings' (name,value,extra) VALUES ('sec_anchor', 'wb_', '')" to upgrade-script.
+!	updated menulink and search to use configureable section-anchor
 29-Oct-2008 Thomas Hornik
 # News: total number of news wasn't calculated correctly
-! Captcha: removed IFRAME for Calculation-as-text captcha
-- removed useless init_utf8funcs()-function
-+ search: added search_lang for use in search-form. Using DE, the search will search ä=ae,... (alternate spelling of german umlauts)
-- search: removed undocumented word-boundary search
-! search: search_path is now anchored to the beginning of link ("link LIKE '$path%'" instead of "link LIKE '%$path%'")
-+ search: added key 'ext_charset' to search-extension to query external databases
+!	Captcha: removed IFRAME for Calculation-as-text captcha
+-	removed useless init_utf8funcs()-function
++	search: added search_lang for use in search-form. Using DE, the search will search ä=ae,... (alternate spelling of german umlauts)
+-	search: removed undocumented word-boundary search
+!	search: search_path is now anchored to the beginning of link ("link LIKE '$path%'" instead of "link LIKE '%$path%'")
++	search: added key 'ext_charset' to search-extension to query external databases
 25-Oct-2008 Christian Sommer
 !	updated basic templates according the template guidelines
 24-Oct-2008 Dietrich Roland Pehlke
