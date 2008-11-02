@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+02-Nov-2008 Thomas Hornik
+!	news: added PAGE_SPACER to $page_title (creates e.g. title-32.php instead of title32.php)
 01-Nov-2008 Thomas Hornik
 !	improved ext_charset to work with latin1,cp1252,cp1251,latin2,hebrew,greek,latin5,latin7,utf8
 +	added config for section anchor. ATTN: add "INSERT INTO TABLE_PREFIX.'settings' (name,value,extra) VALUES ('sec_anchor', 'wb_', '')" to upgrade-script.
