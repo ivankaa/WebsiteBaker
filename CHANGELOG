@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+06-Nov-2008 Thomas Hornik
+#	fixed some typos in DE language-file, added missing tab in search.php
 02-Nov-2008 Thomas Hornik
 !	news: added PAGE_SPACER to $page_title (creates e.g. title-32.php instead of title32.php)
 01-Nov-2008 Thomas Hornik

@@ -212,7 +212,7 @@ if(isset($_REQUEST['string'])) {
 if($match == 'exact')
 	$search_url_array[] = $search_url_string;
 else
-$search_url_array = explode(' ', $search_url_string);
+	$search_url_array = explode(' ', $search_url_string);
 $search_normal_array = array();
 $search_entities_array = array();
 if($match == 'exact') {
