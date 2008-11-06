@@ -46,7 +46,8 @@ $template->set_var(array(
 						);
 
 // Parse template object
+$template->set_unknowns('keep');
 $template->parse('main', 'main_block', false);
-$template->pparse('output', 'page', false, false);
+$template->pparse('output', 'page', false);
 
 ?>
