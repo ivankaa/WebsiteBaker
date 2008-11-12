@@ -53,9 +53,9 @@ if(!is_dir(WB_PATH.'/modules/'.$file)) {
 /**
 *	Check if the module is in use
 *
-*	@version	0.1.0
-*	@build		1
-*	@date		2008-10-23
+*	@version	0.1.1
+*	@build		2
+*	@date		2008-11-12
 *	@author		aldus
 *	@package	Websitebaker - Admin - modules
 *	@state		@dev
@@ -91,10 +91,10 @@ if ( $info->numRows() > 0) {
 		
 	$page_names = "";
 	
-	while ($data = $info->fetchRow(DB_FETCHMODE_ASSOC) ) {
+	while ($data = $info->fetchRow() ) {
 	
 		$temp = $database->query("SELECT page_title from ".TABLE_PREFIX."pages where page_id=".$data['page_id']);
-		$temp_title = $temp->fetchRow( DB_FETCHMODE_ASSOC );
+		$temp_title = $temp->fetchRow();
 		
 		$page_info = array(
 			'id'	=> $data['page_id'], 
