@@ -84,11 +84,12 @@ if ($file == DEFAULT_TEMPLATE) {
 		/**
 		*	Template is still in use, so we're collecting the page-titles
 		*
-		*	@version	0.2.0
-		*	@build		5
+		*	@version	0.2.1
+		*	@build		6
 		*	@since		0.1.1
-		*	@lastchange 2008-10-23
+		*	@lastchange 2008-11-12
 		*
+		*	0.2.1		Remove unused constants
 		*	0.2.0		Codechanges for Websitebaker to use it without the Black-Hawk-Engine
 		*
 		*	0.1.1		add this page <if we found only one> / these pages
@@ -126,7 +127,7 @@ if ($file == DEFAULT_TEMPLATE) {
 		
 		$page_names = "";
 		
-		while ($data = $info->fetchRow(DB_FETCHMODE_ASSOC) ) {
+		while ($data = $info->fetchRow() ) {
 			
 			$page_info = array(
 				'id'	=> $data['page_id'], 
