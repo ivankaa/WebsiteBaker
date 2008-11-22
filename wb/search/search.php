@@ -238,7 +238,7 @@ if($match == 'exact') {
 require_once(WB_PATH.'/search/search_convert.php');
 $search_words = array();
 foreach($search_normal_array AS $str) {
-	$str = strtr($str, $string_ul_umlauts);
+	$str = str_replace($string_ul_umlaut, $string_ul_regex, $str);
 	$search_words[] = $str;
 }
 
@@ -650,7 +650,7 @@ if($search_normal_string != '') {
 							$sstring = implode(" ", $search_normal_array);
 							$link = $link."?searchresult=1&amp;sstring=".urlencode($sstring);
 						} else {
-							$sstring = strtr($search_normal_array[0], " ", "_");
+							$sstring = str_replace(" ", "_",$search_normal_array[0]);
 							$link = $link."?searchresult=2&amp;sstring=".urlencode($sstring);
 						}
 						// Set vars to be replaced by values

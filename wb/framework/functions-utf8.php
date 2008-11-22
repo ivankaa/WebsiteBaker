@@ -146,7 +146,7 @@ function utf8_stripspecials($string,$repl='',$additional=''){
 function utf8_fast_entities_to_umlauts($str) {
 	if(UTF8_MBSTRING) {
 		// we need this for use with mb_convert_encoding
-		$str = str_replace(array('&amp;','&gt;','&lt;','&quot;','&#39;','&nbsp;'), array('&amp;amp;','&amp;gt;','&amp;lt;','&amp;quot;','&amp;#39;','&amp;nbsp;'), $str);
+		$str = str_replace(array('&amp;','&gt;','&lt;','&quot;','&#039;','&nbsp;'), array('&amp;amp;','&amp;gt;','&amp;lt;','&amp;quot;','&amp;#39;','&amp;nbsp;'), $str);
 		// we need two mb_convert_encoding()-calls - is this a bug?
 		// mb_convert_encoding("ö&ouml;", 'UTF-8', 'HTML-ENTITIES'); // with string in utf-8-encoding doesn't work. Result: "Ã¶ö"
 		// Work-around: convert all umlauts to entities first ("ö&ouml;"->"&ouml;&ouml;"), then all entities to umlauts ("&ouml;&ouml;"->"öö")
@@ -404,11 +404,11 @@ function entities_to_7bit($str) {
 	// missed some? - Many UTF-8-chars can't be romanized
 	// convert to HTML-entities, and replace entites by hex-numbers
 	$str = utf8_fast_umlauts_to_entities($str, false);
-	$str = str_replace('&#39;', '&apos;', $str);
+	$str = str_replace('&#039;', '&apos;', $str);
 	$str = preg_replace('/&#([0-9]+);/e', "dechex('$1')",  $str);
 	// maybe there are some &gt; &lt; &apos; &quot; &amp; &nbsp; left, replace them too
-	$entities = array('&gt;'=>'','&lt;'=>'','&apos;'=>'','\''=>'','&quot;'=>'','&amp;'=>'','&nbsp;'=>' ');
-	$str = strtr($str, $entities);
+	$str = str_replace(array('&gt;', '&lt;', '&apos;', '\'', '&quot;', '&amp;'), '', $str);
+	$str = str_replace('&amp;', '', $str);
 	
 	return($str);
 }
@@ -417,7 +417,7 @@ function entities_to_7bit($str) {
  * Convert a string from mixed html-entities/umlauts to pure $charset_out-umlauts
  * 
  * Will replace all numeric and named entities except
- * &gt; &lt; &apos; &quot; &#39; &nbsp;
+ * &gt; &lt; &apos; &quot; &#039; &nbsp;
  * @author thorn
  */
 function entities_to_umlauts2($string, $charset_out=DEFAULT_CHARSET) {

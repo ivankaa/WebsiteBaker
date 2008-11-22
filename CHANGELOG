@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+22-Nov-2008 Thomas Hornik
+!	search: replaced most of $string_ul_umlauts (from search_convert.php) through use of preg's u-switch.
+!	search: replaced strtr() by str_replace() (it's just faster). Changed &#39; to &#039;
 06-Nov-2008 Thomas Hornik
 #	Module code: curly backets get deleted by pparse() from phplib --> old fix in #569 wasn't that smart. Fixed.
 #	fixed some typos in DE language-file, added missing tab in search.php

@@ -391,7 +391,7 @@ $utf8_to_iso_8859_11 = array(
 	"\xe0\xb9\x94"=>"\xf4","\xe0\xb9\x95"=>"\xf5","\xe0\xb9\x96"=>"\xf6","\xe0\xb9\x97"=>"\xf7","\xe0\xb9\x98"=>"\xf8","\xe0\xb9\x99"=>"\xf9","\xe0\xb9\x9a"=>"\xfa","\xe0\xb9\x9b"=>"\xfb"
 );
 
-// nicht enthalten &gt; &lt; &apos; &#39; &quot; &amp; &nbsp;
+// nicht enthalten &gt; &lt; &apos; &#039; &quot; &amp; &nbsp;
 global $named_entities;
 $named_entities=array(
 '&Aacute;','&aacute;','&Acirc;','&acirc;','&acute;','&AElig;','&aelig;','&Agrave;','&agrave;','&alefsym;',
@@ -421,7 +421,7 @@ $named_entities=array(
 '&yen;','&Yuml;','&yuml;','&Zeta;','&zeta;','&zwj;','&zwnj;'
 );
 
-// nicht enthalten &gt; &lt; &apos; &#39; &quot; &amp; &nbsp;
+// nicht enthalten &gt; &lt; &apos; &#039; &quot; &amp; &nbsp;
 global $numbered_entities;
 $numbered_entities=array(
 '&#193;','&#225;','&#194;','&#226;','&#180;','&#198;','&#230;','&#192;','&#224;','&#8501;',

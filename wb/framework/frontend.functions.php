@@ -70,13 +70,14 @@ if (!function_exists('page_link')) {
 if (!function_exists('search_highlight')) {
 function search_highlight($foo='', $arr_string=array()) {
 	require_once(WB_PATH.'/framework/functions.php');
-	static $string_ul_umlauts=array();
-	if($string_ul_umlauts == array())
+	static $string_ul_umlaut = FALSE;
+	static $string_ul_regex = FALSE;
+	if($string_ul_umlaut===FALSE || $string_ul_regex===FALSE)
 		require(WB_PATH.'/search/search_convert.php');
 	$foo = entities_to_umlauts($foo, 'UTF-8');
 	array_walk($arr_string, create_function('&$v,$k','$v = preg_quote($v, \'/\');'));
 	$search_string = implode("|", $arr_string);
-	$string = strtr($search_string, $string_ul_umlauts);
+	$string = str_replace($string_ul_umlaut, $string_ul_regex, $search_string);
 	// the highlighting
 	// match $string, but not inside <style>...</style>, <script>...</script>, <!--...--> or HTML-Tags
 	// split $string into pieces - "cut away" styles, scripts, comments, HTML-tags and eMail-addresses
@@ -86,9 +87,9 @@ function search_highlight($foo='', $arr_string=array()) {
 		$foo = "";
 		foreach($matches as $match) {
 			if($match{0}!="<" && !preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,8}$/i', $match)) {
-				$match = strtr($match, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#39;'=>'\'', '&nbsp;'=>"\xC2\xA0"));
-				$match = preg_replace('/('.$string.')/iS', '_span class=_highlight__$1_/span_',$match);
-				$match = strtr($match, array('<'=>'&lt;', '>'=>'&gt;', '&'=>'&amp;', '"'=>'&quot;', '\''=>'&#39;', "\xC2\xA0"=>'&nbsp;'));
+				$match = str_replace(array('&lt;', '&gt;', '&amp;', '&quot;', '&#039;', '&nbsp;'), array('<', '>', '&', '"', '\'', "\xC2\xA0"), $match);
+				$match = preg_replace('/('.$string.')/ui', '_span class=_highlight__$1_/span_',$match);
+				$match = str_replace(array('<', '>', '&', '"', '\'', "\xC2\xA0"), array('&lt;', '&gt;', '&amp;', '&quot;', '&#039;', '&nbsp;'), $match);
 				$match = str_replace(array('_span class=_highlight__', '_/span_'), array('<span class="highlight">', '</span>'), $match);
 			}
 			$foo .= $match;
@@ -215,22 +216,22 @@ if (!function_exists('page_content')) {
 				if(defined('SEC_ANCHOR') && SEC_ANCHOR!='') {
 					echo '<a class="section_anchor" id="'.SEC_ANCHOR.$section_id.'" name="'.SEC_ANCHOR.$section_id.'"></a>';
 				}
+
+				// fetch content -- this is where to place possible output-filters (before highlighting)
+				ob_start(); // fetch original content
+				require(WB_PATH.'/modules/'.$module.'/view.php');
+				$content = ob_get_contents();
+				ob_end_clean();
+
 				// highlights searchresults
-				if (isset($_GET['searchresult']) AND is_numeric($_GET['searchresult']) AND !isset($_GET['nohighlight'])) {
-					if (isset($_GET['sstring']) AND !empty($_GET['sstring']) ){
-						$arr_string = explode(" ", $_GET['sstring']);
-						if($_GET['searchresult'] == 2) {
-							// exact match
-							$arr_string[0] = strtr($arr_string[0], "_"," ");
-						}
-						ob_start(); //start output buffer
-						require(WB_PATH.'/modules/'.$module.'/view.php');
-						$foo = ob_get_contents();    // put outputbuffer in $foo
-						ob_end_clean();             // clear outputbuffer
-						echo search_highlight($foo, $arr_string);
+				if(isset($_GET['searchresult']) && is_numeric($_GET['searchresult']) && !isset($_GET['nohighlight']) && isset($_GET['sstring']) && !empty($_GET['sstring'])) {
+					$arr_string = explode(" ", $_GET['sstring']);
+					if($_GET['searchresult']==2) { // exact match
+						$arr_string[0] = str_replace("_", " ", $arr_string[0]);
 					}
+					echo search_highlight($content, $arr_string);
 				} else {
-					require(WB_PATH.'/modules/'.$module.'/view.php');
+					echo $content;
 				}
 			}
 		} else {

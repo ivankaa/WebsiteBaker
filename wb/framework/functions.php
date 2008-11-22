@@ -350,7 +350,7 @@ function my_htmlspecialchars($string) {
 }
 
 // Convert a string from mixed html-entities/umlauts to pure $charset_out-umlauts
-// Will replace all numeric and named entities except &gt; &lt; &apos; &quot; &#39; &nbsp;
+// Will replace all numeric and named entities except &gt; &lt; &apos; &quot; &#039; &nbsp;
 // In case of error the returned string is unchanged, and a message is emitted.
 function entities_to_umlauts($string, $charset_out=DEFAULT_CHARSET) {
 	require_once(WB_PATH.'/framework/functions-utf8.php');

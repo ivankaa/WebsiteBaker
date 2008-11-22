@@ -66,7 +66,7 @@ function get_page_modified_by($page_modified_by, $users) {
 function is_all_matched($text, $search_words) {
 	$all_matched = true;
 	foreach ($search_words AS $word) {
-		if(!preg_match('/'.$word.'/i', $text)) {
+		if(!preg_match('/'.$word.'/ui', $text)) {
 			$all_matched = false;
 			break;
 		}
@@ -78,7 +78,7 @@ function is_all_matched($text, $search_words) {
 function is_any_matched($text, $search_words) {
 	$any_matched = false;
 	$word = '('.implode('|', $search_words).')';
-	if(preg_match('/'.$word.'/i', $text)) {
+	if(preg_match('/'.$word.'/ui', $text)) {
 		$any_matched = true;
 	}
 	return $any_matched;
@@ -99,13 +99,13 @@ function get_excerpts($text, $search_words, $max_excerpt_num) {
 		// stop-sign: .!?; + DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
 		$str2=".!?;"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
 	}
-	$regex='/(?:^|\b|['.$str1.'])([^'.$str1.']{0,200}?'.$word.'[^'.$str2.']{0,200}(?:['.$str2.']|\b|$))/isu';
+	$regex='/(?:^|\b|['.$str1.'])([^'.$str1.']{0,200}?'.$word.'[^'.$str2.']{0,200}(?:['.$str2.']|\b|$))/uis';
 	if(version_compare(PHP_VERSION, '4.3.3', '>=') &&
 	   strpos(strtoupper(PHP_OS), 'WIN')!==0
 	) { // this may crash windows server, so skip if on windows
 		// jump from match to match, get excerpt, stop if $max_excerpt_num is reached
 		$last_end = 0; $offset = 0;
-		while(preg_match('/'.$word.'/Sisu', $text, $match_array, PREG_OFFSET_CAPTURE, $last_end)) {
+		while(preg_match('/'.$word.'/uis', $text, $match_array, PREG_OFFSET_CAPTURE, $last_end)) {
 			$offset = ($match_array[0][1]-206 < $last_end)?$last_end:$match_array[0][1]-206;
 			if(preg_match($regex, $text, $matches, PREG_OFFSET_CAPTURE, $offset)) {
 				$last_end = $matches[1][1]+strlen($matches[1][0])-1;
@@ -152,7 +152,7 @@ function prepare_excerpts($excerpt_array, $search_words, $max_excerpt_num) {
 	foreach($excerpt_array as $str) {
 		$excerpt .= '#,,#'.preg_replace("/($string)/iu","#,,,,#$1#,,,,,#",$str).'#,,,#';
 	}
-	$excerpt = str_replace(array('&','<','>','"','\'',"\xC2\xA0"), array('&amp;','&lt;','&gt;','&quot;','&#39;','&nbsp;'), $excerpt);
+	$excerpt = str_replace(array('&','<','>','"','\'',"\xC2\xA0"), array('&amp;','&lt;','&gt;','&quot;','&#039;','&nbsp;'), $excerpt);
 	$excerpt = str_replace(array('#,,,,#','#,,,,,#'), array($EXCERPT_MARKUP_START,$EXCERPT_MARKUP_END), $excerpt);
 	$excerpt = str_replace(array('#,,#','#,,,#'), array($EXCERPT_BEFORE,$EXCERPT_AFTER), $excerpt);
 	// prepare to write out
@@ -170,7 +170,7 @@ function make_url_target($page_link_target, $text, $search_words) {
 	// 4. $page_link_target=="" - do nothing
 	if(version_compare(PHP_VERSION, '4.3.3', ">=") && substr($page_link_target,0,12)=='#wb_section_') {
 		$word = '('.implode('|', $search_words).')';
-		preg_match('/'.$word.'/i', $text, $match, PREG_OFFSET_CAPTURE);
+		preg_match('/'.$word.'/ui', $text, $match, PREG_OFFSET_CAPTURE);
 		if($match && is_array($match[0])) {
 			$x=$match[0][1]; // position of first match
 			// is there an anchor nearby?
@@ -255,10 +255,10 @@ function print_excerpt2($mod_vars, $func_vars) {
 	if($mod_no_highlight) // no highlighting
 		{ $mod_page_link_target = "&amp;nohighlight=1".$mod_page_link_target; }
 	// clean the text:
-	$mod_text = preg_replace('#<(!--.*--|style.*</style|script.*</script)>#SiU', ' ', $mod_text);
-	$mod_text = preg_replace('#<(br( /)?|dt|/dd|/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>#Si', '.', $mod_text);
-	$mod_text = preg_replace('/\s+/', ' ', $mod_text);
-	$mod_text = preg_replace('/ \./', '.', $mod_text);
+	$mod_text = preg_replace('#<(!--.*--|style.*</style|script.*</script)>#iU', ' ', $mod_text);
+	$mod_text = preg_replace('#<(br( /)?|dt|/dd|/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>#i', '.', $mod_text);
+	$mod_text = preg_replace('/(\v\s?|\s\s)+/', ' ', $mod_text);
+	$mod_text = preg_replace('/\s\./', '.', $mod_text);
 	if($mod_ext_charset!='') { // data from external database may have a different charset
 		require_once(WB_PATH.'/framework/functions-utf8.php');
 		switch($mod_ext_charset) {
@@ -293,7 +293,7 @@ function print_excerpt2($mod_vars, $func_vars) {
 	}
 	$anchor_text = $mod_text; // make an copy containing html-tags
 	$mod_text = strip_tags($mod_text);
-	$mod_text = str_replace(array('&gt;','&lt;','&amp;','&quot;','&#39;','&apos;','&nbsp;'), array('>','<','&','"','\'','\'',"\xC2\xA0"), $mod_text);
+	$mod_text = str_replace(array('&gt;','&lt;','&amp;','&quot;','&#039;','&apos;','&nbsp;'), array('>','<','&','"','\'','\'',"\xC2\xA0"), $mod_text);
 	$mod_text = '.'.trim($mod_text).'.';
 	// Do a fast scan over $mod_text first. This will speedup things a lot.
 	if($func_search_match == 'all') {
