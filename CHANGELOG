@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+24-Nov-2008 Matthias Gallas
+!	updated upgrade-script.php to add sec_anchor field to settings table
 22-Nov-2008 Thomas Hornik
 !	search: replaced most of $string_ul_umlauts (from search_convert.php) through use of preg's u-switch.
 !	search: replaced strtr() by str_replace() (it's just faster). Changed &#39; to &#039;
