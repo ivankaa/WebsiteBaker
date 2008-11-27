@@ -40,6 +40,7 @@ $table = TABLE_PREFIX.'mod_menu_link';
 $sql_result = $database->query("SELECT * FROM $table WHERE section_id = '$section_id'");
 $sql_row = $sql_result->fetchRow();
 $target_page_id = $sql_row['target_page_id'];
+$r_type = $sql_row['redirect_type'];
 $extern = $sql_row['extern'];
 $anchor = $sql_row['anchor'];
 $sel = ' selected';
@@ -178,9 +179,20 @@ $target = $page['target'];
 	</td>
 	<td>
 		<select name="target" style="width:250px;" />
-			<option value="_blank"<?php if($target=='_blank') echo ' selected'; ?>><?php echo $TEXT['NEW_WINDOW'] ?></option>
-			<option value="_self"<?php if($target=='_self') echo ' selected'; ?>><?php echo $TEXT['SAME_WINDOW'] ?></option>
-			<option value="_top"<?php if($target=='_top') echo ' selected'; ?>><?php echo $TEXT['TOP_FRAME'] ?></option>
+			<option value="_blank"<?php if($target=='_blank') echo ' selected="selected"'; ?>><?php echo $TEXT['NEW_WINDOW'] ?></option>
+			<option value="_self"<?php if($target=='_self') echo ' selected="selected"'; ?>><?php echo $TEXT['SAME_WINDOW'] ?></option>
+			<option value="_top"<?php if($target=='_top') echo ' selected="selected"'; ?>><?php echo $TEXT['TOP_FRAME'] ?></option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<?php echo $MOD_MENU_LINK['R_TYPE'].':' ?>
+	</td>
+	<td>
+		<select name="r_type" style="width:250px;" />
+			<option value="301"<?php if($r_type=='301') echo ' selected="selected"'; ?>>301</option>
+			<option value="302"<?php if($r_type=='302') echo ' selected="selected"'; ?>>302</option>
 		</select>
 	</td>
 </tr>

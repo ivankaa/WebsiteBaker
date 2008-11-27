@@ -55,18 +55,25 @@ require(WB_PATH.'/framework/frontend.functions.php');
 
 // redirect menu-link
 $this_page_id = PAGE_ID;
+if(version_compare(phpversion(), '4.3', '>=')) $php43 = TRUE; else $php43 = FALSE;
 $query_this_module = $database->query("SELECT module, block FROM ".TABLE_PREFIX."sections WHERE page_id = '$this_page_id' AND module = 'menu_link'");
 if($query_this_module->numRows() == 1) { // This is a menu_link. Get link of target-page and redirect
 	// get target_page_id
 	$table = TABLE_PREFIX.'mod_menu_link';
-	$query_tpid = $database->query("SELECT target_page_id, anchor, extern FROM $table WHERE page_id = '$this_page_id'");
+	$query_tpid = $database->query("SELECT * FROM $table WHERE page_id = '$this_page_id'");
 	if($query_tpid->numRows() == 1) {
 		$res=$query_tpid->fetchRow();
 		$target_page_id = $res['target_page_id'];
+		$r_type = $res['redirect_type'];
 		$anchor = $res['anchor'];
 		$extern = $res['extern'];
 		if($anchor != '0') $anchor = ''.$anchor;
 		else $anchor = FALSE;
+		// set redirect-type
+		if($r_type=='301') {
+			if($php43) @header('HTTP/1.1 301 Moved Permanently', TRUE, 301);
+			else @header('HTTP/1.1 301 Moved Permanently');
+		}
 		if($target_page_id == -1) {
 			if($extern!='') {
 				header("Location: $extern".($anchor?'#'.$anchor:''));
@@ -78,7 +85,6 @@ if($query_this_module->numRows() == 1) { // This is a menu_link. Get link of tar
 			if($query_link->numRows() == 1) {
 				$res=$query_link->fetchRow();
 				$target_page_link = $res['link'];
-				// redirect
 				header('Location: '.WB_URL.PAGES_DIRECTORY.$target_page_link.PAGE_EXTENSION.($anchor?'#'.$anchor:''));
 				exit;
 			}

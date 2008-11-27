@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+27-Nov-2008 Thomas Hornik
+!	added redirect-type (301/302) to menu_link
 24-Nov-2008 Matthias Gallas
 !	updated upgrade-script.php to add sec_anchor field to settings table
 22-Nov-2008 Thomas Hornik

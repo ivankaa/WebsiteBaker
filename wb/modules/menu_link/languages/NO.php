@@ -29,5 +29,6 @@
 // Headings and text outputs
 $MOD_MENU_LINK['TEXT']			= 'Klikk HER for &aring; komme til hovedsiden';
 $MOD_MENU_LINK['EXTERNAL_LINK']	= 'Ekstern lenke';
+$MOD_MENU_LINK['R_TYPE'] = 'Redirect-Type';
 
 ?>

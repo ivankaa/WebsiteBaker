@@ -102,9 +102,7 @@ require_once(WB_PATH.'/framework/functions.php');
 $OK   = '<span class="ok">OK</span>';
 $FAIL = '<span class="error">FAILED</span>';
 
-/**********************************************************
- *  - Adding field sec_anchor to settings table
- */
+// function to add a var/value-pair into settings-table
 function db_add_key_value($key, $value) {
 	global $database; global $OK; global $FAIL;
 	$table = TABLE_PREFIX.'settings';
@@ -126,14 +124,46 @@ function db_add_key_value($key, $value) {
 	}
 }
 
-echo "<br />Adding field sec_anchor to settings table<br />";
+// function to add a new field into a table
+function db_add_field($field, $table, $desc) {
+	global $database; global $OK; global $FAIL;
+	echo "<u>Adding field '$field' to table '$table'</u><br />";
+	$table = TABLE_PREFIX.$table;
+	$query = $database->query("DESCRIBE $table '$field'");
+	if($query->numRows() == 0) { // add field
+		$query = $database->query("ALTER TABLE $table ADD $field $desc");
+		echo (mysql_error()?mysql_error().'<br />':'');
+		$query = $database->query("DESCRIBE $table '$field'");
+		echo (mysql_error()?mysql_error().'<br />':'');
+		if($query->numRows() > 0) {
+			echo "'$field' added. $OK.<br />";
+		} else {
+			echo "adding '$field' $FAIL!<br />";
+		}
+	} else {
+		echo "'$field' allready there. $OK.<br />";
+	}
+}
+
+
+/**********************************************************
+ *  - Adding field sec_anchor to settings table
+ */
+echo "<br />Adding key sec_anchor to settings table<br />";
 $cfg = array(
 	'sec_anchor' => 'wb_'
-	
 );
 foreach($cfg as $key=>$value) {
 	db_add_key_value($key, $value);
 }
+
+
+/**********************************************************
+ *  - Add field "redirect_type" to table "mod_menu_link"
+ */
+echo "<br />Adding field redirect_type to mod_menu_link table<br />";
+db_add_field('redirect_type', 'mod_menu_link', "INT NOT NULL DEFAULT '302' AFTER `target_page_id`");
+
 
 /**********************************************************
  *  - End of upgrade script
