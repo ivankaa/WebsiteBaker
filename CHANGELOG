@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+28-Oct-2008 Christian Sommer
+!	updated output filter regex to exclude mail addresses contained in input fields
 27-Nov-2008 Thomas Hornik
 !	added redirect-type (301/302) to menu_link
 24-Nov-2008 Matthias Gallas

@@ -91,7 +91,7 @@ if (!function_exists('filter_frontend_output')) {
 		// first search part to find all mailto email addresses
 		$pattern = '#(<a[^<]*href\s*?=\s*?"\s*?mailto\s*?:\s*?)([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})([^"]*?)"([^>]*>)(.*?)</a>';
 		// second part to find all non mailto email addresses
-		$pattern .= '|\b([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})\b#i';
+		$pattern .= '|(value\s*=\s*"|\')??\b([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})\b#i';
 		/*
 		Sub 1:\b(<a.[^<]*href\s*?=\s*?"\s*?mailto\s*?:\s*?)			-->	"<a id="yyy" class="xxx" href = " mailto :" ignoring white spaces
 		Sub 2:([A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4})			-->	the email address in the mailto: part of the mail link
@@ -120,14 +120,17 @@ if (!function_exists('filter_mail_addresses')) {
 		$search = array('@', '.');
 		$replace = array(OUTPUT_FILTER_AT_REPLACEMENT ,OUTPUT_FILTER_DOT_REPLACEMENT);
 		
-		// check if the match contains the expected number of subpatterns (6|7)
-		if(count($match) == 7) {
+		// check if the match contains the expected number of subpatterns (6|8)
+		if(count($match) == 8) {
 			/**
 				OUTPUT FILTER FOR EMAIL ADDRESSES EMBEDDED IN TEXT
 			**/
 			
 			// 1.. text mails only, 3.. text mails + mailto (no JS), 7 text mails + mailto (JS)
 			if(!in_array(OUTPUT_FILTER_MODE, array(1,3,7))) return $match[0];
+
+			// do not filter mail addresses included in input tags (<input ... value = "test@mail)
+			if (strpos($match[6], 'value') !== false) return $match[0];
 			
 			// filtering of non mailto email addresses enabled
 			return str_replace($search, $replace, $match[0]);
