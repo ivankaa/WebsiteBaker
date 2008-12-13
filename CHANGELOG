@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+13-Dec-2008 Christian Sommer
+!	changed mailer to not extract line break of alternative body text (thanks to freeSbee)
 28-Oct-2008 Christian Sommer
 !	updated output filter regex to exclude mail addresses contained in input fields
 27-Nov-2008 Thomas Hornik
