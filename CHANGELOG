@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+26-Dec-2008 Thomas Hornik
+#	fixed two issues with searchresult-highlighting: do not highlight in <pre>/<code>-tags, do not convert &lt; to &amp;lt; anymore. 
 13-Dec-2008 Christian Sommer
 !	changed mailer to not extract line break of alternative body text (thanks to freeSbee)
 28-Oct-2008 Christian Sommer
