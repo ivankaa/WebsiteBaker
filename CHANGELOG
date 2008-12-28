@@ -11,6 +11,11 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.7.1 -------------------------------------
+28-Dec-2008 Dietrich Roland Pehlke (aldus)
++	ticket 610: add ip-address to the email-body in the form-modul.
++	ticket 607: include the frontend.css in the comment_page.php file of the news-module.
+#	File: admin/admintools/index.php - add "order by name" to the query to display the admintools in alphabetic order.
+#	File: admin/modules/uninstall.php - remove a db-query to a db-field that doesn't exists in wb 2.7 anymore 
 26-Dec-2008 Thomas Hornik
 #	fixed two issues with searchresult-highlighting: do not highlight in <pre>/<code>-tags, do not convert &lt; to &amp;lt; anymore. 
 13-Dec-2008 Christian Sommer
