@@ -53,12 +53,12 @@ if(!is_dir(WB_PATH.'/modules/'.$file)) {
 /**
 *	Check if the module is in use
 *
-*	@version	0.1.1
-*	@build		2
-*	@date		2008-11-12
+*	@version	0.2.0
+*	@build		1
+*	@date		2008-12-29
 *	@author		aldus
-*	@package	Websitebaker - Admin - modules
-*	@state		@dev
+*	@package	Website Baker: Admin - modules
+*	@state		@beta
 *
 */
 
@@ -76,17 +76,21 @@ if ( $info->numRows() > 0) {
 	/**
 	*	Modul is in use, so we have to warn the user
 	*/
-	
-	$add = $info->numRows() == 1 ? "this page" : "these pages";
-	$msg_template_str  = "<br /><br />Modul <b>{{modul_name}}</b> could not be uninstalled because it is still in use on ";
-	$msg_template_str .= $add.":<br /><i>click for editing.</i><br /><br />";
-
+	if (!array_key_exists("CANNOT_UNINSTALL_IN_USE_TMPL", $MESSAGE['GENERIC'])) {
+		$add = $info->numRows() == 1 ? "this page" : "these pages";
+		$msg_template_str  = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled because it is still in use on {{pages}}";
+		$msg_template_str .= ":<br /><i>click for editing.</i><br /><br />";
+	} else {
+		$msg_template_str = $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'];
+		$temp = explode(";",$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES']);
+		$add = $info->numRows() == 1 ? $temp[0] : $temp[1];
+	}
 	/**
 	*	The template-string for displaying the Page-Titles ... in this case as a link
 	*/
 	$page_template_str = "- <b><a href='../pages/sections.php?page_id={{id}}'>{{title}}</a></b><br />";
 	
-	$values = array ('modul_name' => $file);
+	$values = array ('type' => 'Modul', 'type_name' => $file, 'pages' => $add );
 	$msg = replace_all ( $msg_template_str,  $values );
 		
 	$page_names = "";
@@ -94,7 +98,7 @@ if ( $info->numRows() > 0) {
 	while ($data = $info->fetchRow() ) {
 	
 		$temp = $database->query("SELECT page_title from ".TABLE_PREFIX."pages where page_id=".$data['page_id']);
-		$temp_title = $temp->fetchRow();
+		$temp_title = $temp->fetchRow( DB_FETCHMODE_ASSOC );
 		
 		$page_info = array(
 			'id'	=> $data['page_id'], 

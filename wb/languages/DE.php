@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Erfolgreich deinstalliert';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kann im Zielverzeichnis nicht schreiben';
 $MESSAGE['GENERIC']['INVALID'] = 'Die &uuml;bertragene Datei ist ung&uuml;ltig';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Deinstallation nicht m&ouml;glich: Datei wird benutzt';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />Das {{type}} <b>{{type_name}}</b> kann nicht deinstalliert werden, weil es auf {{pages}} benutzt wird:<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "folgender Seite;folgenden Seiten";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Das Template <b>{{name}}</b> kann nicht deinstalliert werden, weil es das Standardtemplate ist!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Momentan in Bearbeitung';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Bitte versuchen Sie es sp&auml;ter noch einmal ...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Die Datenbanksicherung kann je nach Gr&ouml;&szlig;e der Datenbank einige Zeit dauern.';

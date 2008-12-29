@@ -23,6 +23,13 @@
 
 */
 
+$debug = true;
+
+if (true === $debug) {
+	ini_set('display_errors', 1);
+	error_reporting(E_ALL);
+}
+
 // Check if user selected template
 if(!isset($_POST['file']) OR $_POST['file'] == "") {
 	header("Location: index.php");
@@ -60,10 +67,13 @@ if (!function_exists("replace_all")) {
 /**
 *	Check if the template is the standard-template or still in use
 */
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't unistall this template <b>".$file."</b> because it's the standardtemplate!";
+if (!array_key_exists('CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE', $MESSAGE['GENERIC'] ) )
+	$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall this template <b>{{name}}</b> because it's the standardtemplate!";
 
 if ($file == DEFAULT_TEMPLATE) {
-	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE']); /** Text is missing! 2008-06-15 */
+	$temp = array ('name' => $file );
+	$msg = replace_all( $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'], $temp );
+	$admin->print_error( $msg );
 
 } else {
 	
@@ -84,12 +94,11 @@ if ($file == DEFAULT_TEMPLATE) {
 		/**
 		*	Template is still in use, so we're collecting the page-titles
 		*
-		*	@version	0.2.1
-		*	@build		6
+		*	@version	0.2.0
+		*	@build		5
 		*	@since		0.1.1
-		*	@lastchange 2008-11-12
+		*	@lastchange 2008-10-23
 		*
-		*	0.2.1		Remove unused constants
 		*	0.2.0		Codechanges for Websitebaker to use it without the Black-Hawk-Engine
 		*
 		*	0.1.1		add this page <if we found only one> / these pages
@@ -113,16 +122,21 @@ if ($file == DEFAULT_TEMPLATE) {
 		*	0.1.2	this page/ these pages
 		*
 		*/
-		$add = $info->numRows() == 1 ? "this page" : "these pages";
-		$msg_template_str  = "<br /><br />Template <b>{{template_name}}</b> could not be uninstalled because it is still in use by ";
-		$msg_template_str .= $add.":<br /><i>click for editing.</i><br /><br />";
-		
+		if (!array_key_exists("CANNOT_UNINSTALL_IN_USE_TMPL", $MESSAGE['GENERIC'])) {
+			$add = $info->numRows() == 1 ? "this page" : "these pages";
+			$msg_template_str  = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled because it is still in use by {{pages}}";
+			$msg_template_str .= ":<br /><i>click for editing.</i><br /><br />";
+		} else {
+			$msg_template_str = $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'];
+			$temp = explode(";",$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES']);
+			$add = $info->numRows() == 1 ? $temp[0] : $temp[1];
+		}
 		/**
 		*	The template-string for displaying the Page-Titles ... in this case as a link
 		*/
 		$page_template_str = "- <b><a href='../pages/settings.php?page_id={{id}}'>{{title}}</a></b><br />";
 		
-		$values = array ('template_name' => $file);
+		$values = array ('type' => 'Template', 'type_name' => $file, 'pages' => $add);
 		$msg = replace_all ( $msg_template_str,  $values );
 		
 		$page_names = "";
