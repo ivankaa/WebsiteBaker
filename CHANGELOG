@@ -11,7 +11,13 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
-24-Nov-2008 Matthias Gallas
+29-Dec-2008 Dietrich Roland Pehlke
++	add language support for the errormessages inside the uninstall.php files for modules
+	and templates.
+!	add new keys inside the german de.php language-file.
+-	removed my own debugging-code (was in 893 by mistake)
+!	Correct the last date in the changelog
+29-Dec-2008 Matthias Gallas
 !	set version to 2.8 BETA
 #	replaced in news modul special chars with entities to get valid output
 !	changed SESSION ID Separator from '&' to '&amp;' to get valid output 
