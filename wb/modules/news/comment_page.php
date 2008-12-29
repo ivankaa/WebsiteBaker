@@ -29,6 +29,11 @@ if(!defined('WB_URL')) {
 	exit(0);
 }
 
+//overwrite php.ini on Apache servers for valid SESSION ID Separator
+if(function_exists('ini_set')) {
+	ini_set('arg_separator.output', '&amp;');
+}
+
 // check if frontend.css file needs to be included into the <body></body> of page
 if ( (!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) && file_exists(WB_PATH .'/modules/news/frontend.css')) {
 	echo '<style type="text/css">';
@@ -49,7 +54,7 @@ if($query_settings->numRows() == 0) {
 	// Print comments page
 	echo str_replace('[POST_TITLE]', POST_TITLE, ($settings['comments_page']));
 	?>
-	<form name="comment" action="<?php echo WB_URL.'/modules/news/submit_comment.php?page_id='.PAGE_ID.'&section_id='.SECTION_ID.'&post_id='.POST_ID; ?>" method="post">
+	<form name="comment" action="<?php echo WB_URL.'/modules/news/submit_comment.php?page_id='.PAGE_ID.'&amp;section_id='.SECTION_ID.'&amp;post_id='.POST_ID; ?>" method="post">
 	<?php if(ENABLED_ASP) { // add some honeypot-fields
 	?>
 	<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />

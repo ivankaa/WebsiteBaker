@@ -10,7 +10,12 @@ Legend:
 # = Bugfix
 ! = Update/Change
 
-------------------------------------- 2.7.1 -------------------------------------
+------------------------------------- 2.8.0 -------------------------------------
+24-Nov-2008 Matthias Gallas
+!	set version to 2.8 BETA
+#	replaced in news modul special chars with entities to get valid output
+!	changed SESSION ID Separator from '&' to '&amp;' to get valid output 
+-	Removed the <p> tag around the news as it is added from the editor  
 28-Dec-2008 Dietrich Roland Pehlke (aldus)
 +	ticket 610: add ip-address to the email-body in the form-modul.
 +	ticket 607: include the frontend.css in the comment_page.php file of the news-module.

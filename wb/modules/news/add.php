@@ -56,9 +56,8 @@ $post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" wid
 <tr style="display: [DISPLAY_GROUP]">
 <td valign="top"><a href="[BACK]">[PAGE_TITLE]</a> >> <a href="[BACK]?g=[GROUP_ID]">[GROUP_TITLE]</a></td>
 </tr>
-</table>
-<p style="text-align: justify;">');
-$post_footer = '</p><p>Last changed: [MODI_DATE] at [MODI_TIME]</p>
+</table>');
+$post_footer = '<p>Last changed: [MODI_DATE] at [MODI_TIME]</p>
 <a href=\"[BACK]\">Back</a>';
 $comments_header = addslashes('<br /><br />
 <h2>Comments</h2>

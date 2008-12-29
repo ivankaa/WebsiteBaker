@@ -33,6 +33,11 @@ if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS
    echo "\n</style>\n";
 } 
 
+//overwrite php.ini on Apache servers for valid SESSION ID Separator
+if(function_exists('ini_set')) {
+	ini_set('arg_separator.output', '&amp;');
+}
+
 // Check if there is a start point defined
 if(isset($_GET['p']) AND is_numeric($_GET['p']) AND $_GET['p'] >= 0) {
 	$position = $_GET['p'];
@@ -122,9 +127,9 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	if($setting_posts_per_page != 0) {
 		if($position > 0) {
 			if(isset($_GET['g']) AND is_numeric($_GET['g'])) {
-				$pl_prepend = '<a href="?p='.($position-$setting_posts_per_page).'&g='.$_GET['g'].'"><< ';
+				$pl_prepend = '<a href="?p='.($position-$setting_posts_per_page).'&amp;g='.$_GET['g'].'">&lt;&lt; ';
 			} else {
-				$pl_prepend = '<a href="?p='.($position-$setting_posts_per_page).'"><< ';
+				$pl_prepend = '<a href="?p='.($position-$setting_posts_per_page).'">&lt;&lt; ';
 			}
 			$pl_append = '</a>';
 			$previous_link = $pl_prepend.$TEXT['PREVIOUS'].$pl_append;
@@ -138,11 +143,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			$next_page_link = '';
 		} else {
 			if(isset($_GET['g']) AND is_numeric($_GET['g'])) {
-				$nl_prepend = '<a href="?p='.($position+$setting_posts_per_page).'&g='.$_GET['g'].'"> ';
+				$nl_prepend = '<a href="?p='.($position+$setting_posts_per_page).'&amp;g='.$_GET['g'].'"> ';
 			} else {
 				$nl_prepend = '<a href="?p='.($position+$setting_posts_per_page).'"> ';
 			}
-			$nl_append = ' >></a>';
+			$nl_append = ' &gt;&gt;</a>';
 			$next_link = $nl_prepend.$TEXT['NEXT'].$nl_append;
 			$next_page_link = $nl_prepend.$TEXT['NEXT_PAGE'].$nl_append;
 		}
@@ -169,7 +174,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		if($query_extra != '') {
 			?>
 			<div class="selected_group_title">
-				<?php echo '<a href="'.htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])).'">'.PAGE_TITLE.'</a> >> '.$groups[$_GET['g']]['title']; ?>
+				<?php echo '<a href="'.htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])).'">'.PAGE_TITLE.'</a> &gt;&gt; '.$groups[$_GET['g']]['title']; ?>
 			</div>
 			<?php
 		}
@@ -187,7 +192,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 					$post_link .= '?p='.$position;
 				}
 				if(isset($_GET['g']) AND is_numeric($_GET['g'])) {
-					if(isset($_GET['p']) AND $position > 0) { $post_link .= '&'; } else { $post_link .= '?'; }
+					if(isset($_GET['p']) AND $position > 0) { $post_link .= '&amp;'; } else { $post_link .= '?'; }
 					$post_link .= 'g='.$_GET['g'];
 				}
 				// Get group id, title, and image
@@ -255,7 +260,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			$page_link .= '?p='.$_GET['p'];
 		}
 		if(isset($_GET['g']) AND is_numeric($_GET['g'])) {
-			if(isset($_GET['p']) AND $position > 0) { $page_link .= '&'; } else { $page_link .= '?'; }
+			if(isset($_GET['p']) AND $position > 0) { $page_link .= '&amp;'; } else { $page_link .= '?'; }
 			$page_link .= 'g='.$_GET['g'];
 		}
 	} else {
@@ -313,7 +318,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	if(($post['commenting'] == 'private' AND isset($wb) AND $wb->is_authenticated() == true) OR $post['commenting'] == 'public') {
 		
 		// Print comments header
-		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&sid='.$section_id, $setting_comments_header);
+		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&amp;sid='.$section_id, $setting_comments_header);
 		
 		// Query for comments
 		$query_comments = $database->query("SELECT title,comment,commented_when,commented_by FROM ".TABLE_PREFIX."mod_news_comments WHERE post_id = '".POST_ID."' ORDER BY commented_when ASC");
@@ -344,7 +349,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		}
 		
 		// Print comments footer
-		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&sid='.$section_id, $setting_comments_footer);
+		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php&amp;id='.POST_ID.'&amp;sid='.$section_id, $setting_comments_footer);
 	}
 	if(ENABLED_ASP) {
 		$_SESSION['comes_from_view'] = POST_ID;

@@ -26,6 +26,11 @@
 // Include config file
 require('../../config.php');
 
+//overwrite php.ini on Apache servers for valid SESSION ID Separator
+if(function_exists('ini_set')) {
+	ini_set('arg_separator.output', '&amp;');
+}
+
 require_once(WB_PATH.'/framework/class.wb.php');
 $wb = new wb;
 
@@ -74,13 +79,13 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id']) AND isset($_GET['sec
 					$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 					$_SESSION['comment_title'] = $title;
 					$_SESSION['comment_body'] = $comment;
-					exit(header('Location: '.WB_URL."/modules/news/comment.php?id=$post_id&sid=$section_id"));
+					exit(header('Location: '.WB_URL."/modules/news/comment.php?id=$post_id&amp;sid=$section_id"));
 				}
 			} else {
 				$_SESSION['captcha_error'] = $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'];
 				$_SESSION['comment_title'] = $title;
 				$_SESSION['comment_body'] = $comment;
-				exit(header('Location: '.WB_URL."/modules/news/comment.php?id=$post_id&sid=$section_id"));
+				exit(header('Location: '.WB_URL."/modules/news/comment.php?id=$post_id&amp;sid=$section_id"));
 			}
 		}
 	}
@@ -105,7 +110,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id']) AND isset($_GET['sec
 	header('Location: '.$wb->page_link($page['link']).'?id='.$post_id);
 } else {
 	if(isset($_GET['post_id']) AND is_numeric($_GET['post_id']) AND isset($_GET['section_id']) AND is_numeric($_GET['section_id']))
-		header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&sid={$_GET['section_id']}");
+		header('Location: '.WB_URL."/modules/news/comment.php?id={$_GET['post_id']}&amp;sid={$_GET['section_id']}");
 	else
 		exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
 }
