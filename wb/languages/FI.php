@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Poistettu';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kohdekansioon ei voi kirjoittaa';
 $MESSAGE['GENERIC']['INVALID'] = 'Ladatussa tiedostossa virhe';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Tiedosto k&auml;yt&ouml;ss&auml;, tiedostoa ei voi poistaa';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Tervetuluoa my&ouml;hemmin...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Hetkinen...';

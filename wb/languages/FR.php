@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'D&eacute;sinstallation r&eacute;ussie avec
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Impossible d\'&eacute;crire dans le r&eacute;pertoire cible';
 $MESSAGE['GENERIC']['INVALID'] = 'Le fichier charg&eacute; est invalide';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'D&eacute;sinstallation impossible : fichier en cours d\'utilisation';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Site en construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Merci de revenir plus tard';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Merci de patienter';

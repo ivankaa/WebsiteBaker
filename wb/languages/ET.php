@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Edukalt eemaldatud';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'V&otilde;imetu kirjutama siht kataloogi';
 $MESSAGE['GENERIC']['INVALID'] = '&Uuml;les laetud fail on vigane';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Ei saa eemaldada: selekteeritud fail on kasutuses';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'K&uuml;lasta hiljem uuesti...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.';

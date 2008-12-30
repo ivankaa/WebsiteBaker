@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Avinstallerat';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kan inte skriva i m&aring;lmappen';
 $MESSAGE['GENERIC']['INVALID'] = 'Filen du laddade upp &auml;r ogilltig';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kan inte avinstallera: filen anv&auml;nds just nu';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'V&auml;nligen kom tillbaka snart...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'V&auml;nligen ha t&aring;lamod, det h&auml;r kan ta en stund.';

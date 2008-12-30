@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Desinstalado com Sucesso';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'N&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio de destino';
 $MESSAGE['GENERIC']['INVALID'] = 'O arquivo enviado &eacute; inv&aacute;lido';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'N&atilde;o foi poss&iacute;vel desinstalar: O arquivo selecionado est&aacute; em uso';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Em Constru&ccdil;&atilde;o';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Favor retornar em breve...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Aguarde, isso pode levar algum tempo.';

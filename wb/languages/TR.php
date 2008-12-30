@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Ba&thorn;ar&yacute;l&yacute; bir &thorn;ek
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Uygunsuz, hedef dizin yaz&yacute;lam&yacute;yor';
 $MESSAGE['GENERIC']['INVALID'] = 'Senin y&uuml;kledi&eth;in dosya, ge&ccedil;ersizdir';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kald&yacute;rama: Se&ccedil;ilen dosya, kullan&yacute;mdad&yacute;r';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'L&uuml;tfen daha sonra kontrol edin...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Ol hasta memnun et, bu, bir anda alabilirdi.';

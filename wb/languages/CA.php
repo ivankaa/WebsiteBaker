@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Desinstal&middot;lat amb &egrave;xit';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'No s\'ha pogut escriure al directori de dest&iacute;';
 $MESSAGE['GENERIC']['INVALID'] = 'El fitxer que heu penjat no &eacute;s v&agrave;lid';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'No s\'ha pogut desinstal&middot;lar: s\'est&agrave; usant el fitxer seleccionat';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Lloc Web en Construcci&oacute;';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Per favor torneu-ho a intentar prompte...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.';

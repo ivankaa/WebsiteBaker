@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Odinstalace prob&#283;hla &uacute;sp&#283;
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Nelze zapisovat do c&iacute;lov&eacute;ho adres&aacute;&#345;e';
 $MESSAGE['GENERIC']['INVALID'] = 'Nahr&aacute;van&yacute; soubor je neplatn&yacute;';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Nelze odinstalovat: soubor je pr&aacute;v&#283; pou&#382;&iacute;v&aacute;n';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Str&aacute;nky jsou ve v&yacute;stavb&#283;';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Zkuste to p&#345;&iacute;&scaron;t&#283;...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = '&#268;ekejte pros&iacute;m, operace m&#367;&#382;e chv&iacute;li trvat.';

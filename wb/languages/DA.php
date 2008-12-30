@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Afinstalleret';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kan ikke skrive i det valgte modtagebibliotek';
 $MESSAGE['GENERIC']['INVALID'] = 'Filen du uploadede er fejlbeh&aelig;ftet';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kan ikke afinstallere: Den valgte fil er i brug!';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Kom venligst igen senere...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'V&aelig;r venligst t&aring;lmodig, dette kan godt vare et stykke tid.';

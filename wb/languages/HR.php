@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Deinstaliran uspje&scaron;no';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Ne mo&#382;e zapisati u ciljani direktorij';
 $MESSAGE['GENERIC']['INVALID'] = 'Instaliran file je nevaljal';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Ne mo&#382;e deinstalirati: odabrani file je trenutno u upotrebi';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Webstranica u izradi';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Molimo poku&scaron;ajte ponovo za&egrave;as...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Budite strpljivo, ovo mo&#382;e potrajati.';

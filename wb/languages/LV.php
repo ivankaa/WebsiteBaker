@@ -548,6 +548,11 @@ $MESSAGE['GENERIC']['UNINSTALLED'] = 'Atinstalets veiksmigi';
 $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Nav iespejams ierakstit noraditaja mape';
 $MESSAGE['GENERIC']['INVALID'] = 'Datne, ko nupat aug&scaron;upieladeji, ir invalids';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Nav iespejams atinstalet: iezimetais fails tiek lietots';
+
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Lapa tiek veidota';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Nac driz atkal!';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Esi paceitigs, tas var kadu bridi ievilkties.';
