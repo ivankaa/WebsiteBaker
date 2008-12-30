@@ -98,7 +98,7 @@ if ( $info->numRows() > 0) {
 	while ($data = $info->fetchRow() ) {
 	
 		$temp = $database->query("SELECT page_title from ".TABLE_PREFIX."pages where page_id=".$data['page_id']);
-		$temp_title = $temp->fetchRow( DB_FETCHMODE_ASSOC );
+		$temp_title = $temp->fetchRow();
 		
 		$page_info = array(
 			'id'	=> $data['page_id'], 
@@ -111,7 +111,7 @@ if ( $info->numRows() > 0) {
 	/**
 	*	Printing out the error-message and die().
 	*/
-	$admin->print_error(str_replace ("Datei", "Modul", $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE']).$msg.$page_names);
+	$admin->print_error(str_replace ($TEXT['FILE'], "Modul", $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE']).$msg.$page_names);
 }
 
 // Check if we have permissions on the directory

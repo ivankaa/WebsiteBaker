@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+30-Dec-2008 Matthias Gallas
+-	modul_uninstall: Removed undefined and unused constants (DB_FETCHMODE_ASSOC)
+!	modul_uninstall: added language variable $TEXT['FILE'] instead of "Datei"
 29-Dec-2008 Dietrich Roland Pehlke
 +	add language support for the errormessages inside the uninstall.php files for modules
 	and templates.
