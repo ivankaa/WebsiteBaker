@@ -549,9 +549,9 @@ $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'No se pudo escribir en el directorio';
 $MESSAGE['GENERIC']['INVALID'] = 'Archivo inv&aacute;lido';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Desinstalaci&oacute;n erronea: el archivo seleccionado est&aacute; en uso';
 
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br />No se puede desinstalar el {{type}} <b>{{type_name}}</b>, dado que se est&aacute; utilizando {{pages}}:<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "en la p&aacute;gina siguiente;en las p&aacute;ginas siguientes";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "No se puede desinstalar el template {{name}} dado que se trata del template est&aacute;ndar.";
 
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Vuelva pronto...';
