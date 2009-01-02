@@ -549,9 +549,9 @@ $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Nie mo&#380;a zapisa&#263; do katalogu
 $MESSAGE['GENERIC']['INVALID'] = 'Za&#322;adowany plik jest nieprawid&#322;owy';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Nie mo&#380;na odinstalowa&#263;: wybrany plik jest obecnie u&#380;ywany';
 
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> nie mo&#380;e by&#263; odinstalowany, poniewa&#380; jest u&#380;ywany przez {{pages}}:<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "nast&#281;puj&#261;c&#261; stron&#281;;nast&#281;puj&#261;ce strony";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Szablon <b>{{name}}</b> nie mo&#380;e by&#263; odinstalowany, poniewa&#380; jest ustawiony jako szablon domy&#347;lny!";
 
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Witryna w trakcie tworzenia';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Zapraszamy wkr&oacute;tce...';

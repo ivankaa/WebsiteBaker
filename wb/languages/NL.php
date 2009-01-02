@@ -549,9 +549,9 @@ $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kan niet schrijven naar doelmap';
 $MESSAGE['GENERIC']['INVALID'] = 'Ongeldig bestand';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kan niet de&iuml;nstalleren: het geselecteerde bestand is in gebruik';
 
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />De {{type}} <b>{{type_name}}</b> kan niet verwijderd wordem omdat het in gebruik is op {{pages}}:<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />De {{type}} <b>{{type_name}}</b> kan niet verwijderd worden omdat het in gebruik is op {{pages}}:<br /><br />";
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "volgende pagina;volgende pagina's";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "De Template <b>{{name}}</b> kan niet verwijderd worden omdat het de Standaardtemplate is!";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "De template <b>{{name}}</b> kan niet verwijderd worden omdat het de standaardtemplate is!";
 
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Probeert u aub het binnenkort nog eens.';
