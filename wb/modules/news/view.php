@@ -59,6 +59,9 @@ if($query_users->numRows() > 0) {
 }
 
 // Get groups (title, if they are active, and their image [if one has been uploaded])
+if (isset($groups)) {
+   unset($groups);
+}
 $groups[0]['title'] = '';
 $groups[0]['active'] = true;
 $groups[0]['image'] = '';
@@ -349,7 +352,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		}
 		
 		// Print comments footer
-		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php&amp;id='.POST_ID.'&amp;sid='.$section_id, $setting_comments_footer);
+		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&amp;sid='.$section_id, $setting_comments_footer);
 	}
 	if(ENABLED_ASP) {
 		$_SESSION['comes_from_view'] = POST_ID;
