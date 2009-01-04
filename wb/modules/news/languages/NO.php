@@ -26,7 +26,19 @@
 //Modul Description
 $module_description = 'Denne sidetypen er ment for &aring; kunne lage Nyhets sider.';
   
-//Variables for the  backend
+//Variables for the backend
 $MOD_NEWS['SETTINGS'] = 'Innstillinger for Nyheter';
+
+//Variables for the frontend
+$MOD_NEWS['TEXT_READ_MORE'] = 'Les Mer';
+$MOD_NEWS['TEXT_POSTED_BY'] = 'Posted Av';
+$MOD_NEWS['TEXT_ON'] = 'P&aring;';
+$MOD_NEWS['TEXT_LAST_CHANGED'] = 'Sist Endret';
+$MOD_NEWS['TEXT_AT'] = 'at';
+$MOD_NEWS['TEXT_BACK'] = 'Tilbake';
+$MOD_NEWS['TEXT_COMMENTS'] = 'Kommentarer';
+$MOD_NEWS['TEXT_COMMENT'] = 'Kommentar';
+$MOD_NEWS['TEXT_ADD_COMMENT'] = 'Legg Til Kommentar';
+$MOD_NEWS['TEXT_BY'] = 'Av';
   
 ?>

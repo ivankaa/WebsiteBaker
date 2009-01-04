@@ -51,27 +51,27 @@ $post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" wid
 <td rowspan="3" style="display: [DISPLAY_IMAGE]"><img src="[GROUP_IMAGE]" alt="[GROUP_TITLE]" /></td>
 </tr>
 <tr>
-<td valign="top"><b>Posted by [DISPLAY_NAME] ([USERNAME]) on [PUBLISHED_DATE]</b></td>
+<td valign="top"><b>[TEXT_POSTED_BY] [DISPLAY_NAME] ([USERNAME]) [TEXT_ON] [PUBLISHED_DATE]</b></td>
 </tr>
 <tr style="display: [DISPLAY_GROUP]">
 <td valign="top"><a href="[BACK]">[PAGE_TITLE]</a> >> <a href="[BACK]?g=[GROUP_ID]">[GROUP_TITLE]</a></td>
 </tr>
 </table>');
-$post_footer = '<p>Last changed: [MODI_DATE] at [MODI_TIME]</p>
-<a href=\"[BACK]\">Back</a>';
+$post_footer = '<p>[TEXT_LAST_CHANGED]: [MODI_DATE] [TEXT_AT] [MODI_TIME]</p>
+<a href=\"[BACK]\">[TEXT_BACK]</a>';
 $comments_header = addslashes('<br /><br />
-<h2>Comments</h2>
+<h2>[TEXT_COMMENTS]</h2>
 <table cellpadding="2" cellspacing="0" border="0" width="98%">');
 $comments_loop = addslashes('<tr>
 <td class="comment_title">[TITLE]</td>
-<td class="comment_info">By [DISPLAY_NAME] on [DATE] at [TIME]</td>
+<td class="comment_info">[TEXT_BY] [DISPLAY_NAME] [TEXT_ON] [DATE] [TEXT_AT] [TIME]</td>
 </tr>
 <tr>
 <td colspan="2" class="comment_text">[COMMENT]</td>
 </tr>');
 $comments_footer = '</table>
-<br /><a href=\"[ADD_COMMENT_URL]\">Add Comment</a>';
-$comments_page = '<h1>Comment</h1>
+<br /><a href=\"[ADD_COMMENT_URL]\">[TEXT_ADD_COMMENT]</a>';
+$comments_page = '<h1>[TEXT_COMMENT]</h1>
 <h2>[POST_TITLE]</h2>
 <br />';
 $commenting = 'none';

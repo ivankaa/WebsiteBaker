@@ -11,8 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+04-Jan-2009 Matthias Gallas
+#	made news Modul multilingual, see ticket #676 (some additional translations are needed)
 03-Jan-2009 Matthias Gallas
-#	fixed bug in view.php of news module (ticket 676 Thanks to susigross)
+#	fixed bug in view.php of news module (ticket #676 Thanks to susigross)
 #	fixed another bug in view.php of news modul introduced in changeset [892]
 30-Dec-2008 Matthias Gallas
 +	added default new language variables to all language files

@@ -41,6 +41,15 @@ if ( (!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_C
 	echo "\n</style>\n";
 }
 
+// check if module language file exists for the language set by the user (e.g. DE, EN)
+if(!file_exists(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php')) {
+	// no module language file exists for the language set by the user, include default module language file EN.php
+	require_once(WB_PATH .'/modules/news/languages/EN.php');
+} else {
+	// a module language file exists for the language defined by the user, load it
+	require_once(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php');
+}
+
 require_once(WB_PATH.'/include/captcha/captcha.php');
 
 // Get comments page template details from db
@@ -52,7 +61,9 @@ if($query_settings->numRows() == 0) {
 	$settings = $query_settings->fetchRow();
 
 	// Print comments page
-	echo str_replace('[POST_TITLE]', POST_TITLE, ($settings['comments_page']));
+	$vars = array('[POST_TITLE]','[TEXT_COMMENT]');
+	$values = array(POST_TITLE, $MOD_NEWS['TEXT_COMMENT']);
+	echo str_replace($vars, $values, ($settings['comments_page']));
 	?>
 	<form name="comment" action="<?php echo WB_URL.'/modules/news/submit_comment.php?page_id='.PAGE_ID.'&amp;section_id='.SECTION_ID.'&amp;post_id='.POST_ID; ?>" method="post">
 	<?php if(ENABLED_ASP) { // add some honeypot-fields
@@ -109,7 +120,7 @@ if($query_settings->numRows() == 0) {
 	<?php
 	}
 	?>
-	<input type="submit" name="submit" value="<?php echo $TEXT['ADD']; ?> <?php echo $TEXT['COMMENT']; ?>" />
+	<input type="submit" name="submit" value="<?php echo $MOD_NEWS['TEXT_ADD_COMMENT']; ?>" />
 	</form>	
 	<?php
 }

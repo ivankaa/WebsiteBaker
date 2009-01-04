@@ -33,6 +33,15 @@ if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS
    echo "\n</style>\n";
 } 
 
+// check if module language file exists for the language set by the user (e.g. DE, EN)
+if(!file_exists(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php')) {
+	// no module language file exists for the language set by the user, include default module language file EN.php
+	require_once(WB_PATH .'/modules/news/languages/EN.php');
+} else {
+	// a module language file exists for the language defined by the user, load it
+	require_once(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php');
+}
+
 //overwrite php.ini on Apache servers for valid SESSION ID Separator
 if(function_exists('ini_set')) {
 	ini_set('arg_separator.output', '&amp;');
@@ -214,13 +223,13 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 					if($post_long_len < 9) {
 						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], '');
 					} else {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $TEXT['READ_MORE']);
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $MOD_NEWS['TEXT_READ_MORE']);
 					}
 				} else {
 					if($post_long_len < 9) {
 						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, '', '', '', '', '');
 					} else {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, '', '', '', '', $TEXT['READ_MORE']);
+						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, '', '', '', '', $MOD_NEWS['TEXT_READ_MORE']);
 					}
 				}
 				echo str_replace($vars, $values, $setting_post_loop);
@@ -291,13 +300,13 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			$group_image = $groups[$group_id]['image'];
 			if($group_image == '') { $display_image = 'none'; } else { $display_image = ''; }
 			if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
-			$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[BACK]', '[MODI_DATE]', '[MODI_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]');
+			$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[BACK]', '[TEXT_BACK]', '[TEXT_LAST_CHANGED]', '[MODI_DATE]', '[TEXT_AT]', '[MODI_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[TEXT_POSTED_BY]', '[TEXT_ON]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]');
 			$post_short=$post['content_short'];
 			$wb->preprocess($post_short);
 			if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $post_date, $post_time, $publ_date, $publ_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
+				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $MOD_NEWS['TEXT_BACK'], $MOD_NEWS['TEXT_LAST_CHANGED'], $post_date, $MOD_NEWS['TEXT_AT'], $post_time, $publ_date, $publ_time, $MOD_NEWS['TEXT_POSTED_BY'], $MOD_NEWS['TEXT_ON'], $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
 			} else {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $post_date, $post_time, $publ_date, $publ_time, '', '', '', '');
+				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $MOD_NEWS['TEXT_BACK'], $MOD_NEWS['TEXT_LAST_CHANGED'], $post_date, $MOD_NEWS['TEXT_AT'], $post_time, $publ_date, $publ_time, $MOD_NEWS['TEXT_POSTED_BY'], $MOD_NEWS['TEXT_ON'], '', '', '', '');
 			}
 			$post_long = ($post['content_long']);
 		}
@@ -321,7 +330,9 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	if(($post['commenting'] == 'private' AND isset($wb) AND $wb->is_authenticated() == true) OR $post['commenting'] == 'public') {
 		
 		// Print comments header
-		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&amp;sid='.$section_id, $setting_comments_header);
+		$vars = array('[ADD_COMMENT_URL]','[TEXT_COMMENTS]');
+		$values = array(WB_URL.'/modules/news/comment.php?id='.POST_ID.'&amp;sid='.$section_id, $MOD_NEWS['TEXT_COMMENTS']);
+		echo str_replace($vars, $values, $setting_comments_header);
 		
 		// Query for comments
 		$query_comments = $database->query("SELECT title,comment,commented_when,commented_by FROM ".TABLE_PREFIX."mod_news_comments WHERE post_id = '".POST_ID."' ORDER BY commented_when ASC");
@@ -334,11 +345,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				$commented_date = gmdate(DATE_FORMAT, $comment['commented_when']+TIMEZONE);
 				$commented_time = gmdate(TIME_FORMAT, $comment['commented_when']+TIMEZONE);
 				$uid = $comment['commented_by'];
-				$vars = array('[TITLE]','[COMMENT]','[DATE]','[TIME]','[USER_ID]','[USERNAME]','[DISPLAY_NAME]', '[EMAIL]');
+				$vars = array('[TITLE]','[COMMENT]','[TEXT_ON]','[DATE]','[TEXT_AT]','[TIME]','[TEXT_BY]','[USER_ID]','[USERNAME]','[DISPLAY_NAME]', '[EMAIL]');
 				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-					$values = array(($comment['title']), ($comment['comment']), $commented_date, $commented_time, $uid, ($users[$uid]['username']), ($users[$uid]['display_name']), ($users[$uid]['email']));
+					$values = array(($comment['title']), ($comment['comment']), $MOD_NEWS['TEXT_ON'], $commented_date, $MOD_NEWS['TEXT_AT'], $commented_time, $MOD_NEWS['TEXT_BY'], $uid, ($users[$uid]['username']), ($users[$uid]['display_name']), ($users[$uid]['email']));
 				} else {
-					$values = array(($comment['title']), ($comment['comment']), $commented_date, $commented_time, '0', strtolower($TEXT['UNKNOWN']), $TEXT['UNKNOWN'], '');
+					$values = array(($comment['title']), ($comment['comment']), $MOD_NEWS['TEXT_ON'], $commented_date, $MOD_NEWS['TEXT_AT'], $commented_time, $MOD_NEWS['TEXT_BY'], '0', strtolower($TEXT['UNKNOWN']), $TEXT['UNKNOWN'], '');
 				}
 				echo str_replace($vars, $values, $setting_comments_loop);
 			}
@@ -352,7 +363,9 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		}
 		
 		// Print comments footer
-		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&amp;sid='.$section_id, $setting_comments_footer);
+		$vars = array('[ADD_COMMENT_URL]','[TEXT_ADD_COMMENT]');
+		$values = array(WB_URL.'/modules/news/comment.php?id='.POST_ID.'&amp;sid='.$section_id, $MOD_NEWS['TEXT_ADD_COMMENT']);
+		echo str_replace($vars, $values, $setting_comments_footer);
 	}
 	if(ENABLED_ASP) {
 		$_SESSION['comes_from_view'] = POST_ID;

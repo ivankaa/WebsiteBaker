@@ -23,10 +23,22 @@
 
 */
 
-//Modulbeschreibung
+//Modul Description
 $module_description = 'Mit diesem Modul k&ouml;nnen sie eine News Seite ihrer Seite hinzuf&uuml;gen.';
 
-//Variablen fuer backend Texte
+//Variables for the backend
 $MOD_NEWS['SETTINGS'] = 'News Einstellungen';
+
+//Variables for the frontend
+$MOD_NEWS['TEXT_READ_MORE'] = 'Weiterlesen';
+$MOD_NEWS['TEXT_POSTED_BY'] = 'Ver&ouml;ffentlicht von';
+$MOD_NEWS['TEXT_ON'] = 'am';
+$MOD_NEWS['TEXT_LAST_CHANGED'] = 'Zuletzt ge&auml;ndert am';
+$MOD_NEWS['TEXT_AT'] = 'um';
+$MOD_NEWS['TEXT_BACK'] = 'Zur&uuml;ck';
+$MOD_NEWS['TEXT_COMMENTS'] = 'Kommentare';
+$MOD_NEWS['TEXT_COMMENT'] = 'Kommentar';
+$MOD_NEWS['TEXT_ADD_COMMENT'] = 'Kommentar hinzuf&uuml;gen';
+$MOD_NEWS['TEXT_BY'] = 'von';
 
 ?>
