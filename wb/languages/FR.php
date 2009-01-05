@@ -425,6 +425,7 @@ $TEXT['PLEASE_LOGIN'] = 'Please login';
 $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
+$TEXT['CODE_SNIPPET'] = "Code-snippet";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'D&eacute;sol&eacute;, vous n\'avez pas les droits pour visualiser cette page';
@@ -549,9 +550,9 @@ $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Impossible d\'&eacute;crire dans le r&
 $MESSAGE['GENERIC']['INVALID'] = 'Le fichier charg&eacute; est invalide';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'D&eacute;sinstallation impossible : fichier en cours d\'utilisation';
 
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />Le {{type}} <b>{{type_name}}</b> ne sait pas &ecirc;tre supprim&eacute; comme il est en usage sur {{pages}}:<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "page suivante;pages suivantes";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Le template <b>{{name}}</b> ne sait pas &ecirc;tre supprimé comme il s'agit d'un template standard!";
 
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Site en construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Merci de revenir plus tard';
