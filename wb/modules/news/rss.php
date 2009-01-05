@@ -76,12 +76,13 @@ echo '<?xml version="1.0" encoding="'.$charset.'"?>';
 
 <?php
 // Get news items from database
-
+$t = TIME();
+$time_check_str= "(published_when = '0' OR published_when <= ".$t.") AND (published_until = 0 OR published_until >= ".$t.")";
 //Query
 if(isset($group_id)) {
-	$query = "SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE group_id=".$group_id." AND page_id = ".$page_id." AND active=1 ORDER BY posted_when DESC";
+	$query = "SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE group_id=".$group_id." AND page_id = ".$page_id." AND active=1 AND ".$time_check_str." ORDER BY posted_when DESC";
 } else {
-	$query = "SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE page_id=".$page_id." AND active=1 ORDER BY posted_when DESC";	
+	$query = "SELECT * FROM ".TABLE_PREFIX."mod_news_posts WHERE page_id=".$page_id." AND active=1 AND ".$time_check_str." ORDER BY posted_when DESC";	
 }
 $result = $database->query($query);
 
