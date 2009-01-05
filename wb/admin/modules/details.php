@@ -87,24 +87,27 @@ $template->set_var(array(
 switch ($module['function']) {
 	case NULL:
 		$type_name = $TEXT['UNKNOWN'];
-	break;
+		break;
 	case 'page':
 		$type_name = $TEXT['PAGE'];
-	break;
+		break;
 	case 'wysiwyg':
 		$type_name = $TEXT['WYSIWYG_EDITOR'];
-	break;
+		break;
 	case 'tool':
 		$type_name = $TEXT['ADMINISTRATION_TOOL'];
-	break;
+		break;
 	case 'admin':
 		$type_name = $TEXT['ADMIN'];
-	break;
+		break;
 	case 'administration':
 		$type_name = $TEXT['ADMINISTRATION'];
-	break;
+		break;
+	case 'snippet':
+		$type_name = $TEXT['CODE_SNIPPET'];
+		break;
 	default:
-	$type_name = $TEXT['UNKNOWN'];
+		$type_name = $TEXT['UNKNOWN'];
 }
 $template->set_var('TYPE', $type_name);
 

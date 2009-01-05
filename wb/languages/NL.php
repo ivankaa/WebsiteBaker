@@ -425,6 +425,7 @@ $TEXT['PLEASE_LOGIN'] = 'Inloggen aub';
 $TEXT['CAP_EDIT_CSS'] = 'Wijzig CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actuele module bestand: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Wijzig de CSS definities in het textveld hieronder.';
+$TEXT['CODE_SNIPPET'] = "Code-snippet";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, u heeft geen bevoegdheden om deze pagina te bekijken';
@@ -551,7 +552,7 @@ $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kan niet de&iuml;nstalleren: h
 
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />De {{type}} <b>{{type_name}}</b> kan niet verwijderd worden omdat het in gebruik is op {{pages}}:<br /><br />";
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "volgende pagina;volgende pagina's";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "De template <b>{{name}}</b> kan niet verwijderd worden omdat het de standaardtemplate is!";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "De template <b>{{name}}</b> kan niet verwijderd worden omdat het de standaard-template is.";
 
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Probeert u aub het binnenkort nog eens.';

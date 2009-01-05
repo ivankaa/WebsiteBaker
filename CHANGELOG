@@ -11,6 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+05-Jan-2009 Dietrich Roland Pehlke
+#	Code-Snippets are no longer shown as type: unknown. 
++	Additional key in the languagefiles "$TEXT['CODE_SNIPPET']";
+#	fixed bug for the rss of news, see ticket #609
 04-Jan-2009 Matthias Gallas
 #	made news Modul multilingual, see ticket #676 (some additional translations are needed)
 03-Jan-2009 Matthias Gallas

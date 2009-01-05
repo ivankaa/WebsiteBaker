@@ -425,6 +425,7 @@ $TEXT['PLEASE_LOGIN'] = 'Bitte anmelden';
 $TEXT['CAP_EDIT_CSS'] = 'Bearbeite CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Aktuelle Moduldatei: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Bearbeite die CSS Definitionen im nachfolgenden Textfeld.';
+$TEXT['CODE_SNIPPET'] = "Funktionserweiterung";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sie sind nicht berechtigt, diese Seite zu sehen';

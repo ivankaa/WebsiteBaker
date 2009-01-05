@@ -425,6 +425,7 @@ $TEXT['PLEASE_LOGIN'] = 'Venligst log p&aring;';
 $TEXT['CAP_EDIT_CSS'] = 'Rediger CSS koden';
 $TEXT['HEADING_CSS_FILE'] = 'Faktisk modul fil: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Rediger  CSS koden i tekst viduet nedenfor.';
+$TEXT['CODE_SNIPPET'] = "Code-snippet";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Beklager, du har ikke adgang til &aring; se denne siden';

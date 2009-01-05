@@ -425,6 +425,7 @@ $TEXT['PLEASE_LOGIN'] = 'Please login';
 $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
+$TEXT['CODE_SNIPPET'] = "Code-snippet";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Ho sentim, no teniu permisos per a veure aquesta p&agrave;gina';
