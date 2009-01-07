@@ -10,7 +10,7 @@ Legend:
 # = Bugfix
 ! = Update/Change
 
-------------------------------------- 2.8.0 -------------------------------------
+------------------------------------- 2.8.0 --------------------------------------
 05-Jan-2009 Dietrich Roland Pehlke
 #	Code-Snippets are no longer shown as type: unknown. 
 +	Additional key in the languagefiles "$TEXT['CODE_SNIPPET']";
