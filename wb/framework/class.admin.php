@@ -213,7 +213,7 @@ class admin extends wb {
 			// Set template permissions var
 			$template_permissions = $this->get_session('TEMPLATE_PERMISSIONS');
 			// Return true if system perm = 1
-			if(is_numeric(array_search($name, $$type))) {
+			if (isset($$type) && is_array($$type) && is_numeric(array_search($name, $$type))) {
 				if($type == 'system_permissions') {
 					return true;
 				} else {
