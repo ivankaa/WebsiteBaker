@@ -12,7 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 --------------------------------------
 13-Jan-2009 Christian Sommer
-!	updated external PHPMailer class to latest version (v2.3)
+!	updated external PHPMailer class to latest version (v2.0.3)
 08-Jan-2009 Christian Sommer
 #	fixed error message in admin class if type array not defined
 05-Jan-2009 Dietrich Roland Pehlke
