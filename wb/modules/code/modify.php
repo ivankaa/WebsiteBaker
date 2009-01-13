@@ -35,15 +35,17 @@ $content = $get_content->fetchRow();
 $content = (htmlspecialchars($content['content']));
 
 // Insert vars
-$template->set_var(array(
-								'PAGE_ID' => $page_id,
-								'SECTION_ID' => $section_id,
-								'WB_URL' => WB_URL,
-								'CONTENT' => $content,
-								'TEXT_SAVE' => $TEXT['SAVE'],
-								'TEXT_CANCEL' => $TEXT['CANCEL']
-								)
-						);
+$template->set_var(
+	array(
+		'PAGE_ID'				=> $page_id,
+		'SECTION_ID'			=> $section_id,
+		'REGISTER_EDIT_AREA'	=> function_exists('registerEditArea') ? registerEditArea('content', 'php', false) : '',
+		'WB_URL'				=> WB_URL,
+		'CONTENT'				=> $content,
+		'TEXT_SAVE'				=> $TEXT['SAVE'],
+		'TEXT_CANCEL'			=> $TEXT['CANCEL']
+	)
+);
 
 // Parse template object
 $template->set_unknowns('keep');

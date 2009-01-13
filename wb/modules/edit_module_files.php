@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+ Copyright (C) 2004-2009, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -44,6 +44,9 @@ if(!file_exists(WB_PATH .'/framework/module.functions.php')) {
 	die;
 }
 
+// register the textarea to use edit_area
+echo (function_exists('registerEditArea')) ? registerEditArea('code_area', 'css', false) : '';
+
 // set default text output if varibles are not defined in the global WB language files
 $HEADING_CSS_FILE = (isset($GLOBALS['TEXT']['HEADING_CSS_FILE'])) ?$GLOBALS['TEXT']['HEADING_CSS_FILE'] :'Actual module file: ';
 $TXT_EDIT_CSS_FILE = (isset($GLOBALS['TEXT']['TXT_EDIT_CSS_FILE'])) ?$GLOBALS['TEXT']['TXT_EDIT_CSS_FILE'] :'Edit the CSS definitions in the textarea below.';
@@ -63,20 +66,15 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	/** 
 		SAVE THE UPDATED CONTENTS TO THE CSS FILE
 	*/
-
 	$css_content = '';
-	if(isset($_POST['css_codepress']) && strlen($_POST['css_codepress']) > 0) {
-		// Javascript is enabled so take contents from hidden field: css_codepress
-		$css_content = stripslashes($_POST['css_codepress']);
-	} elseif(isset($_POST['css_data']) && strlen($_POST['css_data']) > 0) {
-		// Javascript disabled, take contens from textarea: css_data
+	if (isset($_POST['css_data']) && strlen($_POST['css_data']) > 0) {
 		$css_content = stripslashes($_POST['css_data']);
 	}
 
 	$bytes = 0;
 	if ($css_content != '') {
 		// open the module CSS file for writting
-		$mod_file = @fopen(WB_PATH .'/modules/' .$mod_dir .'/' .$_POST['edit_file'], "wb");
+		$mod_file = @fopen(WB_PATH .'/modules/' .$mod_dir .'/' .$_POST['edit_file'], 'wb');
 		// write new content to the module CSS file
 		$bytes = @fwrite($mod_file, $css_content);
 		// close the file
@@ -118,38 +116,28 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	} else {
 		// store content of the module file in variable
 		$css_content = @file_get_contents(WB_PATH .'/modules/' .$mod_dir .'/' .$css_file);
-
-		// make sure that codepress stuff is only used if the framework is available
-		$CODEPRESS['CLASS'] = '';
-		$CODEPRESS['JS'] = '';
-		if(file_exists(WB_PATH .'/include/codepress/codepress.js')) {
-			$CODEPRESS['CLASS'] = 'class="codepress css" ';
-			$CODEPRESS['JS'] = 'onclick="javascript: css_codepress.value = area_codepress.getCode();"';
-		}
-
 		// write out heading
 		echo '<h2>' .$HEADING_CSS_FILE .'"' .$css_file .'"</h2>';
 		// include button to switch between frontend.css and backend.css (only shown if both files exists)
 		toggle_css_file($mod_dir, $css_file); 
-	  echo '<p>' .$TXT_EDIT_CSS_FILE .'</p>';
+		echo '<p>' .$TXT_EDIT_CSS_FILE .'</p>';
 
 		// output content of module file to textareas
 	?>
 		<form name="edit_module_file" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" style="margin: 0;">
-			<input type="hidden" name="css_codepress" value="" />
 	  	<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
 	  	<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
 	  	<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>">
-			<input type="hidden" name="edit_file" value="<?php echo $css_file; ?>" />
+		<input type="hidden" name="edit_file" value="<?php echo $css_file; ?>" />
 	  	<input type="hidden" name="action" value="save">
 
-			<textarea id="area_codepress" name="css_data" <?php echo $CODEPRESS['CLASS'];?>cols="115" rows="25" wrap="VIRTUAL" style="margin:2px;"><?php echo $css_content; ?></textarea>
+		<textarea id="code_area" name="css_data" cols="115" rows="25" wrap="VIRTUAL" style="margin:2px;"><?php echo $css_content; ?>
+		</textarea>
 
   			<table cellpadding="0" cellspacing="0" border="0" width="100%">
   			<tr>
     			<td align="left">
- 				<input name="save" type="submit" value="<?php echo $TEXT['SAVE'];?>"
-				  <?php echo $CODEPRESS['JS'];?> style="width: 100px; margin-top: 5px;" />
+ 				<input name="save" type="submit" value="<?php echo $TEXT['SAVE'];?>" style="width: 100px; margin-top: 5px;" />
     			</td>
   				<td align="right">
       			<input type="button" value="<?php echo $TEXT['CANCEL']; ?>"
