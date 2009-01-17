@@ -194,8 +194,13 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false) { // Make sure parent group is active
 				$uid = $post['posted_by']; // User who last modified the post
 				// Workout date and time of last modified post
-				$post_date = gmdate(DATE_FORMAT, $post['posted_when']+TIMEZONE);
-				$post_time = gmdate(TIME_FORMAT, $post['posted_when']+TIMEZONE);
+				if ($post['published_when'] > $post['posted_when']) {
+					$post_date = gmdate(DATE_FORMAT, $post['published_when']+TIMEZONE);
+					$post_time = gmdate(TIME_FORMAT, $post['published_when']+TIMEZONE);
+				} else {
+					$post_date = gmdate(DATE_FORMAT, $post['posted_when']+TIMEZONE);
+					$post_time = gmdate(TIME_FORMAT, $post['posted_when']+TIMEZONE);
+				}
 				$publ_date = date(DATE_FORMAT,$post['published_when']);
 				$publ_time = date(TIME_FORMAT,$post['published_when']);
 				// Work-out the post link
@@ -290,8 +295,13 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false) { // Make sure parent group is active
 			$uid = $post['posted_by']; // User who last modified the post
 			// Workout date and time of last modified post
-			$post_date = gmdate(DATE_FORMAT, $post['posted_when']+TIMEZONE);
-			$post_time = gmdate(TIME_FORMAT, $post['posted_when']+TIMEZONE);
+			if ($post['published_when'] > $post['posted_when']) {
+				$post_date = gmdate(DATE_FORMAT, $post['published_when']+TIMEZONE);
+				$post_time = gmdate(TIME_FORMAT, $post['published_when']+TIMEZONE);
+			} else {
+				$post_date = gmdate(DATE_FORMAT, $post['posted_when']+TIMEZONE);
+				$post_time = gmdate(TIME_FORMAT, $post['posted_when']+TIMEZONE);
+			}
 			$publ_date = date(DATE_FORMAT,$post['published_when']);
 			$publ_time = date(TIME_FORMAT,$post['published_when']);
 			// Get group id, title, and image
