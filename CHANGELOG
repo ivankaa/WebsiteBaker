@@ -13,6 +13,7 @@ Legend:
 ------------------------------------- 2.8.0 -------------------------------------
 17-Jan-2009 Matthias Gallas
 !	changed handling of post_date in news modul (thanks to susigross)
++	added hour and minute support to default published_when field in news modul
 13-Jan-2009 Christian Sommer
 -	removed the obsolete Codepress framework from the include folder
 +	added Javascript syntax highlighting framework EditArea as replacement for Codepress

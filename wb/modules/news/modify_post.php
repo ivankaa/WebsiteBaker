@@ -115,7 +115,7 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 <tr>
 	<td><?php echo $TEXT['PUBL_START_DATE']; ?>:</td>
 	<td>
-	<input type="text" id="publishdate" name="publishdate" value="<?php if($fetch_content['published_when']==0) print date($jscal_format, strtotime((date('Y-m-d')))); else print date($jscal_format, $fetch_content['published_when']);?>" style="width: 120px;" />
+	<input type="text" id="publishdate" name="publishdate" value="<?php if($fetch_content['published_when']==0) print date($jscal_format, strtotime((date('Y-m-d H:i')))); else print date($jscal_format, $fetch_content['published_when']);?>" style="width: 120px;" />
 	<img src="<?php echo ADMIN_URL ?>/images/clock_16.png" id="publishdate_trigger" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
 	<img src="<?php echo ADMIN_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="<?php echo $TEXT['DELETE_DATE']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.modify.publishdate.value=''" />
 	</td>
