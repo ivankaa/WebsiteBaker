@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+20-Jan-2009 Matthias Gallas
+#	fixed form-module select (multiple) doesn't work (ticket #681 Thanks to thorn)
 17-Jan-2009 Matthias Gallas
 +	added French languages to modules
 !	changed handling of post_date in news modul (thanks to susigross)
