@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project http://www.websitebaker.org/
- Copyright (C) 2004-2008, Ryan Djurovich
+ Copyright (C) 2004-2009, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

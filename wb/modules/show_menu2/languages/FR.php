@@ -4,7 +4,7 @@
 
 /*
     show_menu2: show_menu replacement for Website Baker 
-    Copyright (C) 2006-2008, Brodie Thiesfield
+    Copyright (C) 2006-2009, Brodie Thiesfield
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
