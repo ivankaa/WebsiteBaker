@@ -164,7 +164,7 @@ class admin extends wb {
 		$header_template->set_block('header_block', 'linkBlock', 'link');
 		foreach($menu AS $menu_item) {
 			$link = $menu_item[0];
-			$target = $menu_item[1];
+			$target = ($menu_item[1] == '') ? '_self' : $menu_item[1];
 			$title = $menu_item[2];
 			$permission_title = $menu_item[3];
 			$required = $menu_item[4];

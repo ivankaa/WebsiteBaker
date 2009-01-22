@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+22-Jan-2009 Christian Sommer
+!	Added default target attribut to backend menu links
 21-Jan-2009 Matthias Gallas
 !	Copyright notices now includes 2009
 20-Jan-2009 Matthias Gallas
