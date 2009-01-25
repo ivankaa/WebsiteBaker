@@ -101,7 +101,7 @@ $template->set_var('SUBMIT_TITLE', $TEXT['ADD']);
 $template->set_var('ADVANCED_ACTION', 'index.php');
 
 // Tell the browser whether or not to show advanced options
-if(isset($_POST['advanced']) AND $_POST['advanced'] == $TEXT['SHOW_ADVANCED'].' >>') {
+if ( true == (isset( $_POST['advanced']) AND ( strpos( $_POST['advanced'], ">>") > 0 ) ) ) {
 	$template->set_var('DISPLAY_ADVANCED', '');
 	$template->set_var('DISPLAY_BASIC', 'none');
 	$template->set_var('ADVANCED', 'yes');
