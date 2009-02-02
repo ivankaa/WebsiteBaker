@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+02-Feb-2009 Christian Sommer
+#	removed PHPMailer fix introduced with 2.0.3 to get SMTP working again (line 1041 in class.smtp.php)
 02-Feb-2009 Matthias Gallas
 #	Fixed bug wich causes that install of captcha-control may fail (ticket #682 thanks to thorn)
 01-Feb-2009 Matthias Gallas

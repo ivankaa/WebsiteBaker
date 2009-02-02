@@ -1,4 +1,5 @@
 ChangeLog
+* removed PHPMailer fix introduced with 2.0.3 to get SMTP working again (line 1041 in class.smtp.php) doc
 
 Version 2.0.3 (November 08 2008)
 * fixed line 1041 in class.smtp.php (endless loop from missing = sign)
