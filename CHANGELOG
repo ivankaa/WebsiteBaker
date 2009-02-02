@@ -11,6 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+02-Feb-2009 Matthias Gallas
+#	Fixed bug wich causes that install of captcha-control may fail (ticket #682 thanks to thorn)
+01-Feb-2009 Matthias Gallas
+!	Update FCKEditor to version 2.6.4
 22-Jan-2009 Christian Sommer
 !	Added default target attribut to backend menu links
 21-Jan-2009 Matthias Gallas

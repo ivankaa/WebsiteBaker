@@ -36,7 +36,7 @@ $database->query("CREATE TABLE `$table` (
 	`asp_session_min_age` INT(11) NOT NULL DEFAULT '20',
 	`asp_view_min_age` INT(11) NOT NULL DEFAULT '10',
 	`asp_input_min_age` INT(11) NOT NULL DEFAULT '5',
-	`ct_text` LONGTEXT NOT NULL DEFAULT ''
+	`ct_text` LONGTEXT NOT NULL
 	)"
 );
 
