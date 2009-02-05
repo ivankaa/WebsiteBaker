@@ -82,19 +82,14 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 				$message = $database->get_error();
 			} else {
 				// Setup email to send
-				$mail_subject = 'Your login details...';
 				$mail_to = $email;
-				$mail_message = ''.
-	'Hello '.$results_array["display_name"].', 
-	
-	Your '.$website_title.' administration login details are:
-	Username: '.$results_array["username"].'
-	Password: '.$new_pass.'
-	
-	Your password has been reset to the one above.
-	This means that your old password will no longer work.
-	
-	If you have received this message in error, please delete it immediately.';
+				$mail_subject = $MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'];
+
+				// Replace placeholders from language variable with values
+				$search = array('{LOGIN_DISPLAY_NAME}', '{LOGIN_WEBSITE_TITLE}', '{LOGIN_NAME}', '{LOGIN_PASSWORD}');
+				$replace = array($results_array['display_name'], WEBSITE_TITLE, $results_array['username'], $new_pass); 
+				$mail_message = str_replace($search, $replace, $MESSAGE['SIGNUP2']['BODY_LOGIN_INFO']);
+
 				// Try sending the email
 				if($admin->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
 					$message = $MESSAGE['FORGOT_PASS']['PASSWORD_RESET'];

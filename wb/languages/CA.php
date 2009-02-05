@@ -443,6 +443,19 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'La contrasenya &eacute;s massa llarga'
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Nom d\'usuari o contrasenya incorrectes';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'Heu d\'Introduir una adre&ccedil;a de correu';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
+Hello {LOGIN_DISPLAY_NAME},
+
+Your '{LOGIN_WEBSITE_TITLE}' login details are:
+Username: {LOGIN_NAME}
+Password: {LOGIN_PASSWORD}
+
+Your password has been set to the one above.
+This means that your old password will no longer work.
+
+If you have received this message in error, please delete it immediately.
+EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Per favor introdu&iuml;u la vostra adre&ccedil;a de correu a baix';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'El correu que heu introdu&iuml;t no s\'ha trobat a la base de dades';

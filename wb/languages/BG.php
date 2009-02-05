@@ -443,6 +443,19 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = '&#1042;&#1098;&#1074;&#1077;&#1076;&#1
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = '&#1053;&#1077;&#1082;&#1086;&#1088;&#1077;&#1082;&#1090;&#1072;&#1085; &#1082;&#1086;&#1084;&#1073;&#1080;&#1085;&#1072;&#1094;&#1080;&#1103; &#1087;&#1086;&#1090;&#1088;&#1077;&#1073;&#1080;&#1090;&#1077;&#1083;&#1089;&#1082;&#1086; &#1080;&#1084;&#1077; / &#1087;&#1072;&#1088;&#1086;&#1083;&#1072;';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = '&#1058;&#1088;&#1103;&#1073;&#1074;&#1072; &#1076;&#1072; &#1074;&#1098;&#1074;&#1077;&#1076;&#1077;&#1090;&#1077; e-mail &#1072;&#1076;&#1088;&#1077;&#1089;';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
+Hello {LOGIN_DISPLAY_NAME},
+
+Your '{LOGIN_WEBSITE_TITLE}' login details are:
+Username: {LOGIN_NAME}
+Password: {LOGIN_PASSWORD}
+
+Your password has been set to the one above.
+This means that your old password will no longer work.
+
+If you have received this message in error, please delete it immediately.
+EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = '&#1042;&#1098;&#1074;&#1077;&#1076;&#1077;&#1090;&#1077; email &#1072;&#1076;&#1088;&#1077;&#1089;';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = '&#1042;&#1098;&#1074;&#1077;&#1076;&#1077;&#1085;&#1080;&#1103; email &#1085;&#1077; &#1077; &#1074; &#1073;&#1072;&#1079;&#1072;&#1090;&#1072; &#1076;&#1072;&#1085;&#1085;&#1080;';

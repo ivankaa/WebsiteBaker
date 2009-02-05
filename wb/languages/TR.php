@@ -443,6 +443,19 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = '&THORN;ifreniz &ccedil;ok uzun';
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Kullan&yacute;c&yacute; ad&yacute; ve &thorn;ifreniz yanl&yacute;&thorn;';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'Bir email adresi girmelisiniz.';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
+Hello {LOGIN_DISPLAY_NAME},
+
+Your '{LOGIN_WEBSITE_TITLE}' login details are:
+Username: {LOGIN_NAME}
+Password: {LOGIN_PASSWORD}
+
+Your password has been set to the one above.
+This means that your old password will no longer work.
+
+If you have received this message in error, please delete it immediately.
+EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'L&uuml;tfen email adresini girin';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'Bu email adresi veritaban&yacute;nda bulunamad&yacute;';

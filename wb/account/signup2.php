@@ -115,18 +115,13 @@ if($database->is_error()) {
 	$message = $database->get_error();
 } else {
 	// Setup email to send
-	$mail_subject = 'Your login details...';
 	$mail_to = $email;
-	$mail_message = ''.
-'Hello '.$display_name.', 
+	$mail_subject = $MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'];
 
-Your '.WEBSITE_TITLE.' login details are:
-Username: '.$username.'
-Password: '.$new_pass.'
-
-Your password has been set to the one above.
-
-If you have received this message in error, please delete it immediately.';
+	// Replace placeholders from language variable with values
+	$search = array('{LOGIN_DISPLAY_NAME}', '{LOGIN_WEBSITE_TITLE}', '{LOGIN_NAME}', '{LOGIN_PASSWORD}');
+	$replace = array($display_name, WEBSITE_TITLE, $username, $new_pass); 
+	$mail_message = str_replace($search, $replace, $MESSAGE['SIGNUP2']['BODY_LOGIN_INFO']);
 
 	// Try sending the email
 	if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 

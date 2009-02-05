@@ -443,6 +443,19 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Votre mot de passe est trop long';
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Votre nom d\'utilisateur ou votre mot de passe est incorrect';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'L\'adresse email est obligatoire';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
+Hello {LOGIN_DISPLAY_NAME},
+
+Your '{LOGIN_WEBSITE_TITLE}' login details are:
+Username: {LOGIN_NAME}
+Password: {LOGIN_PASSWORD}
+
+Your password has been set to the one above.
+This means that your old password will no longer work.
+
+If you have received this message in error, please delete it immediately.
+EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Merci de saisir votre adresse email';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'L\'adresse email que vous avez saisi est introuvable dans la base de donn&eacute;es';

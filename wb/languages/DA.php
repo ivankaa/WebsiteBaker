@@ -443,6 +443,19 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Den indtastede adgangskode er for LANG
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Brugernavn og/eller adgangskode er ikke korrekt';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'Du SKAL indtaste en gyldig email-adresse';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
+Hello {LOGIN_DISPLAY_NAME},
+
+Your '{LOGIN_WEBSITE_TITLE}' login details are:
+Username: {LOGIN_NAME}
+Password: {LOGIN_PASSWORD}
+
+Your password has been set to the one above.
+This means that your old password will no longer work.
+
+If you have received this message in error, please delete it immediately.
+EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Indtast venligst din email-adresse nedenfor';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'Den email-adresse du indtastede findes ikke i vores database';

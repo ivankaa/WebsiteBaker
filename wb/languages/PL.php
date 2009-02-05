@@ -443,6 +443,19 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Wprowadzone has&#322;o zbyt kr&oacute;
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Nieprawid&#322;owa nazwa u&#380;ytkownika lub has&#322;o';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'Nale&#380;y wprowadzi&#263; adres e-mail';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
+Hello {LOGIN_DISPLAY_NAME},
+
+Your '{LOGIN_WEBSITE_TITLE}' login details are:
+Username: {LOGIN_NAME}
+Password: {LOGIN_PASSWORD}
+
+Your password has been set to the one above.
+This means that your old password will no longer work.
+
+If you have received this message in error, please delete it immediately.
+EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Prosz&#281; wprowadzi&#263; poni&#380;ej sw&oacute;j adres e-mail';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'Wprowadzonego adresu e-mail nie ma w bazie danych';

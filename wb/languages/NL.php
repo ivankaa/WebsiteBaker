@@ -443,6 +443,19 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Dit wachtwoord is te lang';
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Gebruikersnaam en/of wachtwoord incorrect';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'U moet een e-mailadres invullen';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
+Hello {LOGIN_DISPLAY_NAME},
+
+Your '{LOGIN_WEBSITE_TITLE}' login details are:
+Username: {LOGIN_NAME}
+Password: {LOGIN_PASSWORD}
+
+Your password has been set to the one above.
+This means that your old password will no longer work.
+
+If you have received this message in error, please delete it immediately.
+EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Vult u alstublieft uw e-mailadres hieronder in';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'Het door u opgegeven e-mailadres is niet gevonden in onze database';

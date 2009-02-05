@@ -65,7 +65,7 @@ $OVERVIEW['MEDIA'] = 'Verwaltung der im Medienordner gespeicherten Dateien...';
 $OVERVIEW['MODULES'] = 'Verwaltung der Website Baker Module...';
 $OVERVIEW['TEMPLATES'] = '&Auml;ndern des Designs Ihrer Webseite mit Vorlagen...';
 $OVERVIEW['LANGUAGES'] = 'Sprachen verwalten...';
-$OVERVIEW['PREFERENCES'] = '&Auml;ndern pers&ouml;nlicher Einstellungen wie E-Mail-Adresse, Passwort, usw.... ';
+$OVERVIEW['PREFERENCES'] = '&Auml;ndern pers&ouml;nlicher Einstellungen wie E-Mail Adresse, Passwort, usw.... ';
 $OVERVIEW['SETTINGS'] = '&Auml;ndern der Optionen f&uuml;r Website Baker...';
 $OVERVIEW['USERS'] = 'Verwaltung von Benutzern, die sich in Website Baker einloggen d&uuml;rfen...';
 $OVERVIEW['GROUPS'] = 'Verwaltung von Gruppen und Ihrer Zugangsberechtigungen...';
@@ -101,7 +101,7 @@ $HEADING['UNINSTALL_LANGUAGE'] = 'Sprache l&ouml;schen';
 $HEADING['LANGUAGE_DETAILS'] = 'Details zur Sprache';
 
 $HEADING['MY_SETTINGS'] = 'Einstellungen';
-$HEADING['MY_EMAIL'] = 'E-Mail-Adresse';
+$HEADING['MY_EMAIL'] = 'E-Mail Adresse';
 $HEADING['MY_PASSWORD'] = 'Passwort';
 
 $HEADING['GENERAL_SETTINGS'] = 'Allgemeine Optionen';
@@ -182,7 +182,7 @@ $TEXT['AUTHOR'] = 'Autor';
 $TEXT['VERSION'] = 'Version';
 $TEXT['DESIGNED_FOR'] = 'Entworfen f&uuml;r';
 $TEXT['DESCRIPTION'] = 'Beschreibung';
-$TEXT['EMAIL'] = 'E-Mail-Adresse';
+$TEXT['EMAIL'] = 'E-Mail Adresse';
 $TEXT['LANGUAGE'] = 'Sprache';
 $TEXT['TIMEZONE'] = 'Zeitzone';
 $TEXT['CURRENT_PASSWORD'] = 'Bisheriges Passwort';
@@ -409,10 +409,10 @@ $TEXT['PUBL_START_DATE'] = 'Start Datum';
 $TEXT['PUBL_END_DATE'] = 'End Datum';
 $TEXT['CALENDAR'] = 'Kalender';
 $TEXT['DELETE_DATE'] = 'Datum l&ouml;schen';
-$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Bitte geben Sie eine Standard "VON" Adresse und einen Sendernamen an. Als Absender Adresse empfiehlt sich ein Format wie: <strong>admin@IhreWebseite.de</strong>. Manche E-Mail-Provider (z.B. <em>mail.de</em>) stellen keine E-Mails zu, die nicht &uuml;ber den Provider selbst verschickt wurden, in der Absenderadresse aber den Namen des E-Mail-Providers <em>name@mail.de</em> enthalten. Die Standard Werte werden nur verwendet, wenn keine anderen Werte von Website Baker gesetzt wurden. Wenn Ihr Service Provider <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> anbietet, sollten Sie diese Option f&uuml;r ausgehende E-Mails verwenden.';
+$TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Bitte geben Sie eine Standard "VON" Adresse und einen Sendernamen an. Als Absender Adresse empfiehlt sich ein Format wie: <strong>admin@IhreWebseite.de</strong>. Manche E-Mail Provider (z.B. <em>mail.de</em>) stellen keine E-Mails zu, die nicht &uuml;ber den Provider selbst verschickt wurden, in der Absenderadresse aber den Namen des E-Mail Providers <em>name@mail.de</em> enthalten. Die Standard Werte werden nur verwendet, wenn keine anderen Werte von Website Baker gesetzt wurden. Wenn Ihr Service Provider <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> anbietet, sollten Sie diese Option f&uuml;r ausgehende E-Mails verwenden.';
 $TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Standard "VON" Adresse';
 $TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Standard Absender Name';
-$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Maileinstellungen:</strong><br />Die nachfolgenden Einstellungen m&uuml;ssen nur angepasst werden, wenn Sie E-Mail &uuml;ber <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> verschicken wollen. Wenn Sie Ihren SMTP Server nicht kennen, oder Sie sich unsicher bei den Einstellungen sind, verwenden Sie einfach die Standard E-Mailroutine: PHP MAIL.';
+$TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Maileinstellungen:</strong><br />Die nachfolgenden Einstellungen m&uuml;ssen nur angepasst werden, wenn Sie E-Mail &uuml;ber <acronym title="Simple Mail Transfer Protocol">SMTP</acronym> verschicken wollen. Wenn Sie Ihren SMTP Server nicht kennen, oder Sie sich unsicher bei den Einstellungen sind, verwenden Sie einfach die Standard E-Mail Routine: PHP MAIL.';
 $TEXT['WBMAILER_FUNCTION'] = 'E-Mail Routine';
 $TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
 $TEXT['WBMAILER_PHP'] = 'PHP MAIL';
@@ -442,12 +442,25 @@ $MESSAGE['LOGIN']['USERNAME_TOO_LONG'] = 'Der angegebene Benutzername ist zu lan
 $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Das angegebene Passwort ist zu lang';
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Der Benutzername oder das Passwort ist nicht korrekt';
 
-$MESSAGE['SIGNUP']['NO_EMAIL'] = 'Bitte geben Sie Ihre E-Mail-Adresse an';
+$MESSAGE['SIGNUP']['NO_EMAIL'] = 'Bitte geben Sie Ihre E-Mail Adresse an';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Deine WB Logindaten ...';
+$MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
+Hallo {LOGIN_DISPLAY_NAME},
 
-$MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Bitte geben Sie nachfolgend Ihre E-Mail-Adresse an';
-$MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'Die angegebene E-Mail-Adresse wurde nicht in der Datenbank gefunden';
+Deine neuen Logindaten f&uuml;r '{LOGIN_WEBSITE_TITLE}' lauten:
+Benutzername: {LOGIN_NAME}
+Passwort: {LOGIN_PASSWORD}
+
+Dein bisheriges Passwort wurde durch das neue Passwort oben ersetzt.
+Das bisherige Passwort ist nicht mehr g&uuml;ltig.
+
+Wenn Du dieses E-Mail versehentlich erhalten hast, bitte einfach l&ouml;schen.
+EOT;
+
+$MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Bitte geben Sie nachfolgend Ihre E-Mail Adresse an';
+$MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'Die angegebene E-Mail Adresse wurde nicht in der Datenbank gefunden';
 $MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'] = 'Das Passwort konnte nicht versendet werden, bitte kontaktieren Sie den Systemadministrator';
-$MESSAGE['FORGOT_PASS']['PASSWORD_RESET'] = 'Ihr Benutzername und Ihr Passwort wurden an Ihre E-Mail-Adresse gesendet';
+$MESSAGE['FORGOT_PASS']['PASSWORD_RESET'] = 'Ihr Benutzername und Ihr Passwort wurden an Ihre E-Mail Adresse gesendet';
 $MESSAGE['FORGOT_PASS']['ALREADY_RESET'] = 'Das Passwort kann nur einmal pro Stunde zur&uuml;ckgesetzt werden';
 
 $MESSAGE['START']['WELCOME_MESSAGE'] = 'Willkommen in der Website Baker Verwaltung';
@@ -467,8 +480,8 @@ $MESSAGE['USERS']['NO_GROUP'] = 'Es wurde keine Gruppe ausgew&auml;hlt';
 $MESSAGE['USERS']['USERNAME_TOO_SHORT'] = 'Der eingegebene Benutzername war zu kurz';
 $MESSAGE['USERS']['PASSWORD_TOO_SHORT'] = 'Das eingegebene Passwort war zu kurz';
 $MESSAGE['USERS']['PASSWORD_MISMATCH'] = 'Das angegebene Passwort ist ung&uuml;ltig';
-$MESSAGE['USERS']['INVALID_EMAIL'] = 'Die angegebene E-Mail-Adresse ist ung&uuml;ltig';
-$MESSAGE['USERS']['EMAIL_TAKEN'] = 'Die angegebene E-Mail-Adresse wird bereits verwendet';
+$MESSAGE['USERS']['INVALID_EMAIL'] = 'Die angegebene E-Mail Adresse ist ung&uuml;ltig';
+$MESSAGE['USERS']['EMAIL_TAKEN'] = 'Die angegebene E-Mail Adresse wird bereits verwendet';
 $MESSAGE['USERS']['USERNAME_TAKEN'] = 'Der angegebene Benutzername wird bereits verwendet';
 $MESSAGE['USERS']['CHANGING_PASSWORD'] = 'Bitte beachten Sie: Sie sollten in die obigen Felder nur Werte eingeben, wenn Sie das Passwort dieses Benutzers &auml;ndern m&ouml;chten';
 $MESSAGE['USERS']['CONFIRM_DELETE'] = 'Sind Sie sicher, dass Sie den ausgew&auml;hlten Benutzer l&ouml;schen m&ouml;chten?';
@@ -482,7 +495,7 @@ $MESSAGE['GROUPS']['NO_GROUPS_FOUND'] = 'Keine Gruppen gefunden';
 $MESSAGE['GROUPS']['GROUP_NAME_EXISTS'] = 'Der Gruppenname existiert bereits';
 
 $MESSAGE['PREFERENCES']['DETAILS_SAVED'] = 'Pers&ouml;nliche Daten wurden erfolgreich gespeichert';
-$MESSAGE['PREFERENCES']['EMAIL_UPDATED'] = 'E-Mail-Einstellung ge&auml;ndert';
+$MESSAGE['PREFERENCES']['EMAIL_UPDATED'] = 'E-Mail Einstellung ge&auml;ndert';
 $MESSAGE['PREFERENCES']['CURRENT_PASSWORD_INCORRECT'] = 'Das alte Passwort, das Sie angegeben haben, ist ung&uuml;ltig';
 $MESSAGE['PREFERENCES']['PASSWORD_CHANGED'] = 'Das Passwort wurde erfolgreich ge&auml;ndert';
 

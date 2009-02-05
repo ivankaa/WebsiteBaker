@@ -443,6 +443,19 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Zadan&eacute; heslo je p&#345;&iacute;
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Jm&eacute;no nebo heslo nen&iacute; platn&eacute;';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'Mus&iacute;te zadat e-mailovou adresu';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
+Hello {LOGIN_DISPLAY_NAME},
+
+Your '{LOGIN_WEBSITE_TITLE}' login details are:
+Username: {LOGIN_NAME}
+Password: {LOGIN_PASSWORD}
+
+Your password has been set to the one above.
+This means that your old password will no longer work.
+
+If you have received this message in error, please delete it immediately.
+EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Zadejte svoji e-mailovou adresu:';
 $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'Zadan&aacute; e-mailov&aacute; adresa nebyla nalezena';
