@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+06-Feb-2009 Christian Sommer
+!	fixed some typos in German language file (thanks to freeSbee)
 05-Feb-2009 Christian Sommer
 !	mail text for register, signup and forgot mail now taken from WB language file (ticket #684)
 02-Feb-2009 Christian Sommer
