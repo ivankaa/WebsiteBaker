@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+08-Feb-2009 Christian Sommer
+#	fixed warning if database connection failed during installation process
 06-Feb-2009 Christian Sommer
 !	fixed some typos in German language file (thanks to freeSbee)
 !	added new captcha fonts and replaced old background images with the ones created by thorn

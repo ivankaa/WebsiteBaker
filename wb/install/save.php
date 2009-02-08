@@ -345,7 +345,7 @@ if(!file_exists(WB_PATH.'/framework/class.admin.php')) {
 }
 
 // Try connecting to database	
-if(!mysql_connect(DB_HOST, DB_USERNAME, DB_PASSWORD)) {
+if(!@mysql_connect(DB_HOST, DB_USERNAME, DB_PASSWORD)) {
 	set_error('Database host name, username and/or password incorrect. MySQL Error:<br />'.mysql_error());
 }
 
