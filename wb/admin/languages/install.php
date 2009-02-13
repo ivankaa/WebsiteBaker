@@ -29,6 +29,9 @@ if(!isset($_FILES['userfile'])) {
 	exit(0);
 }
 
+// do not display notices and warnings during installation
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+
 // Setup admin object
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
@@ -65,8 +68,15 @@ if(!move_uploaded_file($_FILES['userfile']['tmp_name'], $temp_file)) {
 	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UPLOAD']);
 }
 
+// Check if uploaded file is a valid language file (no binary file etc.)
+$content = file_get_contents($temp_file);
+if (strpos($content, '<?php') === false) $admin->print_error($MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE']);
+
 // Remove any vars with name "language_code"
 unset($language_code);
+
+// Include precheck files for versionCompare routine
+require(WB_PATH . '/framework/addon.precheck.inc.php');
 
 // Read the temp file and look for a language code
 require($temp_file);
@@ -77,18 +87,22 @@ if(!isset($language_code)) {
 	if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
 	// Restore to correct language
 	require(WB_PATH.'/languages/'.LANGUAGE.'.php');
-	$admin->print_error($MESSAGE['GENERIC']['INVALID']);
+	$admin->print_error($MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE']);
 }
 
 // Set destination for language file
 $language_file = WB_PATH.'/languages/'.$language_code.'.php';
+$action="install";
 
 // Move to new location
 if (file_exists($language_file)) {
 	require($language_file);
-	if ($language_version>$new_language_version) {
+	if (versionCompare($language_version, $new_language_version, '>=')) {
+		// Restore to correct language
+		require(WB_PATH . '/languages/' . LANGUAGE . '.php');
 		$admin->print_error($MESSAGE['GENERIC']['ALREADY_INSTALLED']);
 	}
+	$action="upgrade";
 	unlink($language_file);
 }
 
@@ -104,7 +118,11 @@ load_language($language_file);
 require(WB_PATH.'/languages/'.LANGUAGE.'.php');
 
 // Print success message
-$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
+if ($action=="install") {
+	$admin->print_success($MESSAGE['GENERIC']['INSTALLED']);
+} else {
+	$admin->print_success($MESSAGE['GENERIC']['UPGRADED']);
+}
 
 // Print admin footer
 $admin->print_footer();

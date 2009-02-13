@@ -33,8 +33,8 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'PT';
 $language_name = 'Portuguese (Brazil)';
-$language_version = '2.7';
-$language_platform = '2.7.x';
+$language_version = '2.8';
+$language_platform = '2.8.x';
 $language_author = 'Daniel Neto';
 $language_license = 'GNU General Public License';
 
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = 'Modificar Usu&aacute;rio';
 $HEADING['MODIFY_DELETE_GROUP'] = 'Modificar/Apagar Grupo';
 $HEADING['ADD_GROUP'] = 'Adicionar Grupo';
 $HEADING['MODIFY_GROUP'] = 'Modificar Grupo';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
+$TEXT['REQUIREMENT'] = "Requirement";
+$TEXT['INSTALLED'] = "installed";
+$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['ADDON'] = "Add-On";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Desculpe, voc&ecirc; n&atilde;o tem permiss&atilde;o para ver essa p&aacute;gina';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Em Constru&ccdil;&a
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Favor retornar em breve...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Aguarde, isso pode levar algum tempo.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Erro ao abrir o arquivo.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Voc&ecirc; precisa preencher os seguintes campos';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Desculpe, este formul&aacute;rio foi submetido v&aacute;rias vezes nessa hora. Favor tentar novamente dentro de uma hora.';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Favor selecionar quais add-ons deseja
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'M&oacute;dulos recarregados com sucesso';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Temas (Templates) recarregados com sucesso';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Idiomas recarregados com sucesso';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

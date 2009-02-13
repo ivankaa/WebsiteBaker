@@ -33,8 +33,8 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'ET';
 $language_name = 'Eesti';
-$language_version = '2.7';
-$language_platform = '2.7.x';
+$language_version = '2.8';
+$language_platform = '2.8.x';
 $language_author = 'Heiko H&auml;ng';
 $language_license = 'GNU General Public License';
 
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = 'Muuda Kasutajat';
 $HEADING['MODIFY_DELETE_GROUP'] = 'Muuda/Kustuta Grupp';
 $HEADING['ADD_GROUP'] = 'Lisa Grupp';
 $HEADING['MODIFY_GROUP'] = 'Muuda Gruppi';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
+$TEXT['REQUIREMENT'] = "Requirement";
+$TEXT['INSTALLED'] = "installed";
+$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['ADDON'] = "Add-On";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Vabandame, sul ei ole &otilde;igusi selle lehe vaatamiseks';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction'
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'K&uuml;lasta hiljem uuesti...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Error opening file.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Sa pead detailid sisestama j&auml;rgnevatesse lahtritesse';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Vabandame, see vorm on juba liiga palju kordi selle tunni jooksul saadetud. Palun proovi j&auml;rgmine tund uuesti.';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you wou
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

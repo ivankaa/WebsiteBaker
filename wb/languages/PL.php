@@ -33,8 +33,8 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'PL';
 $language_name = 'Polski';
-$language_version = '2.7';
-$language_platform = '2.7.x';
+$language_version = '2.8';
+$language_platform = '2.8.x';
 $language_author = 'Marek St&#281;pie&#324;';
 $language_license = 'GNU General Public License';
 
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = 'Zmie&#324; u&#380;ytkownika';
 $HEADING['MODIFY_DELETE_GROUP'] = 'Zmie&#324;/usu&#324; grup&#281;';
 $HEADING['ADD_GROUP'] = 'Dodaj grup&#281;';
 $HEADING['MODIFY_GROUP'] = 'Zmie&#324; grup&#281;';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
+$TEXT['REQUIREMENT'] = "Requirement";
+$TEXT['INSTALLED'] = "installed";
+$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['ADDON'] = "Add-On";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Niestety, nie masz uprawnie&#324; do ogl&#261;dania tej strony.';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Witryna w trakcie tworzenia
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Zapraszamy wkr&oacute;tce...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Prosimy o cierpliwo&#347;&#263;, to mo&#380;e troch&#281; potrwa&#263;.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'B&#322;&#261;d podczas otwierania pliku.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Nale&#380;y wprowadzi&#263; szczeg&oacute;&#322;y dla nast&#281;puj&#261;cych p&oacute;l';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Niestety, ten formularz zosta&#322; wys&#322;any zbyt wiele razy w ci&#261;gu tej godziny. Prosimy spr&oacute;bowa&#263; ponownie za godzin&#281;.';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Prosz&#281; wskaza&#263;, kt&oacute;r
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modu&#322;y zosta&#322;y za&#322;adowane ponownie';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Szablony zosta&#322;y za&#322;adowane ponownie';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'J&#281;zyki zosta&#322;y za&#322;adowane ponownie';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

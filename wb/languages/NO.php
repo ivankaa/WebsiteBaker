@@ -33,8 +33,8 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'NO';
 $language_name = 'Norsk';
-$language_version = '2.7';
-$language_platform = '2.7.x';
+$language_version = '2.8';
+$language_platform = '2.8.x';
 $language_author = 'Odd Egil Hansen';
 $language_license = 'GNU General Public License';
 
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = 'Endre Bruker';
 $HEADING['MODIFY_DELETE_GROUP'] = 'Endre/Slette Gruppe';
 $HEADING['ADD_GROUP'] = 'Legg til Gruppe';
 $HEADING['MODIFY_GROUP'] = 'Endre Gruppe';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
 
 // Other text
 $TEXT['OPEN'] = '&Aring;pne';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Rediger CSS koden';
 $TEXT['HEADING_CSS_FILE'] = 'Faktisk modul fil: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Rediger  CSS koden i tekst viduet nedenfor.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
+$TEXT['REQUIREMENT'] = "Requirement";
+$TEXT['INSTALLED'] = "installed";
+$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['ADDON'] = "Add-On";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Beklager, du har ikke adgang til &aring; se denne siden';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction'
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Vennligst kom tilbake p&aring; et annet tidspunkt...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Vennligst v&aelig;r t&aring;lmodig, dette kan ta en stund.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Feil ved &aring;pningen av filen.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du m&aring; skrive inn detaljer for f&oslash;lgende felt';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Beklager, denne form har blitt sendt for mange ganger denne timen. Vennligst pr&oslash;v igjen neste time.';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Vennligst velg hvilket tillegg du vil
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Lykkes i &aring; oppdatere moduler';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Lykkes i &aring; oppdatere maler';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Lykkes i &aring; oppdatere spr&aring;k';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

@@ -33,8 +33,8 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'SE';
 $language_name = 'Svenska';
-$language_version = '2.7';
-$language_platform = '2.7.x';
+$language_version = '2.8';
+$language_platform = '2.8.x';
 $language_author = 'Markus Eriksson, Peppe Bergqvist';
 $language_license = 'GNU General Public License';
 
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = '&Auml;ndra anv&auml;ndare';
 $HEADING['MODIFY_DELETE_GROUP'] = '&Auml;ndra/radera grupp';
 $HEADING['ADD_GROUP'] = 'Skapa ny grupp';
 $HEADING['MODIFY_GROUP'] = '&Auml;ndra grupp';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
+$TEXT['REQUIREMENT'] = "Requirement";
+$TEXT['INSTALLED'] = "installed";
+$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['ADDON'] = "Add-On";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Tyv&auml;rr, du har inte till&aring;telse att titta p&aring; denna sida';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction'
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'V&auml;nligen kom tillbaka snart...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'V&auml;nligen ha t&aring;lamod, det h&auml;r kan ta en stund.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Fel vid &ouml;ppnande av fil.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du m&aring;ste fylla i f&ouml;ljande f&auml;lt';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Tyv&auml;rr, detta formul&auml;r har skickats f&ouml;r m&aring;nga g&aring;nger inom denna timme. F&ouml;rs&ouml;k igen om ett tag.';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'V&auml;nligen v&auml;lj vilka till&au
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduler laddades om';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Mallar laddades om';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Spr&aring;k laddades om';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

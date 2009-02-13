@@ -33,8 +33,8 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'HU';
 $language_name = 'Magyar';
-$language_version = '2.7';
-$language_platform = '2.7.x';
+$language_version = '2.8';
+$language_platform = '2.8.x';
 $language_author = 'Zsolt';
 $language_license = 'GNU General Public License';
 
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = 'Felhaszn&aacute;l&oacute; m&oacute;dos&iacute;t&aacut
 $HEADING['MODIFY_DELETE_GROUP'] = 'Csoport m&oacute;dos&iacute;t&aacute;sa/t&ouml;rl&eacute;se';
 $HEADING['ADD_GROUP'] = 'Csoport m&oacute;dos&iacute;t&aacute;sa';
 $HEADING['MODIFY_GROUP'] = 'csoport m&oacute;dos&iacute;t&aacute;sa';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
+$TEXT['REQUIREMENT'] = "Requirement";
+$TEXT['INSTALLED'] = "installed";
+$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['ADDON'] = "Add-On";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sajn&aacute;ljuk, de a megjelen&iacute;t&eacute;shez nincs jogosults&aacute;ga!';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction'
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'K&eacute;rem t&eacute;rjen vissza k&eacute;s&otilde;bb!';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Please be patient, this might take a while.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Error opening file.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'A k&ouml;vetkez&otilde; mez&otilde;ket k&ouml;telez&otilde; kit&ouml;ltenie';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sajn&aacute;ljuk, de ez az &ucirc;rlap t&uacute;l sokszor lett kit&ouml;ltve egy &oacute;ran bel&uuml;l! K&eacute;rem pr&oacute;b&aacute;lja meg egy &oacute;ra m&uacute;lva.';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you wou
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

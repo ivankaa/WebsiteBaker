@@ -33,8 +33,8 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'BG';
 $language_name = 'Bulgarian';
-$language_version = '2.7';
-$language_platform = '2.7.x';
+$language_version = '2.8';
+$language_platform = '2.8.x';
 $language_author = 'Hristo Benev(&#1061;&#1088;&#1080;&#1089;&#1090;&#1086; &#1041;&#1077;&#1085;&#1077;&#1074;)';
 $language_license = 'GNU General Public License';
 
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = '&#1055;&#1088;&#1086;&#1084;&#1077;&#1085;&#1080; &#1
 $HEADING['MODIFY_DELETE_GROUP'] = '&#1055;&#1088;&#1086;&#1084;&#1077;&#1085;&#1080;/&#1048;&#1079;&#1090;&#1088;&#1080;&#1081; &#1075;&#1088;&#1091;&#1087;&#1072;';
 $HEADING['ADD_GROUP'] = '&#1044;&#1086;&#1073;&#1072;&#1074;&#1080; &#1075;&#1088;&#1091;&#1087;&#1072;';
 $HEADING['MODIFY_GROUP'] = '&#1055;&#1088;&#1086;&#1084;&#1077;&#1085;&#1080; &#1075;&#1088;&#1091;&#1087;&#1072;';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
+$TEXT['REQUIREMENT'] = "Requirement";
+$TEXT['INSTALLED'] = "installed";
+$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['ADDON'] = "Add-On";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = '&#1057;&#1098;&#1078;&#1072;&#1083;&#1103;&#1074;&#1072;&#1084;&#1077; ,&#1085;&#1086; &#1085;&#1103;&#1084;&#1072;&#1090;&#1077; &#1088;&#1072;&#1079;&#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1076;&#1072; &#1074;&#1080;&#1076;&#1080;&#1090;&#1077; &#1090;&#1072;&#1079;&#1080; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1072;';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = '&#1057;&#1072;&#1081;&#1090
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = '&#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1077;&#1090;&#1077; &#1087;&#1072;&#1082;...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = '&#1041;&#1098;&#1076;&#1077;&#1090;&#1077; &#1090;&#1098;&#1088;&#1087;&#1077;&#1083;&#1080;&#1074;&#1080;, &#1084;&#1086;&#1078;&#1077; &#1076;&#1072; &#1086;&#1090;&#1085;&#1077;&#1084;&#1077; &#1074;&#1088;&#1077;&#1084;&#1077;.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = '&#1043;&#1088;&#1077;&#1096;&#1082;&#1072; &#1087;&#1088;&#1080; &#1086;&#1090;&#1074;&#1072;&#1088;&#1103;&#1085;&#1077; &#1085;&#1072; &#1092;&#1072;&#1081;&#1083;.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = '&#1058;&#1088;&#1103;&#1073;&#1074;&#1072; &#1076;&#1072; &#1087;&#1086;&#1087;&#1098;&#1083;&#1085;&#1080;&#1090;&#1077; &#1089;&#1083;&#1077;&#1076;&#1085;&#1080;&#1090;&#1077; &#1087;&#1086;&#1083;&#1077;&#1090;&#1072;';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = '&#1057;&#1098;&#1078;&#1072;&#1083;&#1103;&#1074;&#1072;&#1084;&#1077;, &#1090;&#1086;&#1079;&#1080; &#1092;&#1086;&#1088;&#1091;&#1083;&#1103;&#1088; &#1077; &#1087;&#1086;&#1076;&#1072;&#1076;&#1077;&#1085; &#1087;&#1086;&#1074;&#1077;&#1095;&#1077; &#1087;&#1098;&#1090;&#1080; &#1086;&#1090; &#1087;&#1086;&#1079;&#1074;&#1086;&#1083;&#1077;&#1085;&#1086;&#1090;&#1086; &#1087;&#1088;&#1077;&#1079; &#1090;&#1086;&#1079;&#1080; &#1095;&#1072;&#1089;. &#1054;&#1087;&#1080;&#1090;&#1072;&#1081;&#1090;&#1077; &#1086;&#1090;&#1085;&#1086;&#1074;&#1077; &#1087;&#1086; &#1074;&#1088;&#1077;&#1084;&#1077; &#1085;&#1072; &#1089;&#1083;&#1077;&#1076;&#1074;&#1072;&#1097;&#1080; &#1095;&#1072;&#1089;.';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you wou
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules reloaded successfully';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates reloaded successfully';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Languages reloaded successfully';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

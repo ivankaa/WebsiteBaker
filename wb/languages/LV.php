@@ -33,8 +33,8 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'LV';
 $language_name = 'Latvie&scaron;u';
-$language_version = '2.7';
-$language_platform = '2.7.x';
+$language_version = '2.8';
+$language_platform = '2.8.x';
 $language_author = 'Kri&scaron;janis Rijnieks';
 $language_license = 'GNU General Public License';
 
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = 'Mainit lietotaju';
 $HEADING['MODIFY_DELETE_GROUP'] = 'Mainit/dzest grupu';
 $HEADING['ADD_GROUP'] = 'Pievienot grupu';
 $HEADING['MODIFY_GROUP'] = 'Mainit grupu';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
+$TEXT['REQUIREMENT'] = "Requirement";
+$TEXT['INSTALLED'] = "installed";
+$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['ADDON'] = "Add-On";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Piedod, bet Tev nav tiesibu aplukot &scaron;o lapu';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Lapa tiek veidota';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Nac driz atkal!';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Esi paceitigs, tas var kadu bridi ievilkties.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Keza atverot datni';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Ievadi detalas sekojo&scaron;ajos laukos';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Atvaino, &scaron;i forma ir tikusi aizpildita parak daudz rei&#382;u &scaron;is stundas laika. Ludzu pamegini velreiz pec stundas.';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Ludzu atzime, kurus papildinajumus ve
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduli veiksmigi parladeti';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = '&scaron;abloni veiksmigi parladeti';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Valodas veiksmigi parladetas';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

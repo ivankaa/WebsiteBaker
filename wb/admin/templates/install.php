@@ -29,6 +29,9 @@ if(!isset($_FILES['userfile'])) {
 	exit(0);
 }
 
+// do not display notices and warnings during installation
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+
 // Setup admin object
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
@@ -57,8 +60,17 @@ unset($template_directory);
 $archive = new PclZip($temp_file);
 // Unzip the files to the temp unzip folder
 $list = $archive->extract(PCLZIP_OPT_PATH, $temp_unzip);
+
+// Check if uploaded file is a valid Add-On zip file
+if (!($list && file_exists($temp_unzip . 'index.php'))) $admin->print_error($MESSAGE['GENERIC']['INVALID_ADDON_FILE']);
+
 // Include the templates info file
 require($temp_unzip.'info.php');
+
+// Perform Add-on requirement checks before proceeding
+require(WB_PATH . '/framework/addon.precheck.inc.php');
+preCheckAddon($temp_file);
+
 // Delete the temp unzip directory
 rm_full_dir($temp_unzip);
 
@@ -75,7 +87,7 @@ if(is_dir(WB_PATH.'/templates/'.$template_directory)) {
 	if(file_exists(WB_PATH.'/templates/'.$template_directory.'/info.php')) {
 		require(WB_PATH.'/templates/'.$template_directory.'/info.php');
 		// Version to be installed is older than currently installed version
-		if ($template_version>$new_template_version) {
+		if (versionCompare($template_version, $new_template_version, '>=')) {
 			if(file_exists($temp_file)) { unlink($temp_file); } // Remove temp file
 			$admin->print_error($MESSAGE['GENERIC']['ALREADY_INSTALLED']);
 		}

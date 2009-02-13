@@ -33,8 +33,8 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'HR';
 $language_name = 'Hrvatski';
-$language_version = '2.7';
-$language_platform = '2.7.x';
+$language_version = '2.8';
+$language_platform = '2.8.x';
 $language_author = 'Vedran Presecki';
 $language_license = 'GNU General Public License';
 
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = 'Izmjeni korisnika';
 $HEADING['MODIFY_DELETE_GROUP'] = 'Izmjeni/Obri&scaron;i Grupu';
 $HEADING['ADD_GROUP'] = 'Dodaj grupu';
 $HEADING['MODIFY_GROUP'] = 'Izmjeni grupu';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
+$TEXT['REQUIREMENT'] = "Requirement";
+$TEXT['INSTALLED'] = "installed";
+$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['ADDON'] = "Add-On";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Nemate dopu&scaron;tenje za gledanje ove stranice';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Webstranica u izradi';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Molimo poku&scaron;ajte ponovo za&egrave;as...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Budite strpljivo, ovo mo&#382;e potrajati.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Gre&scaron;ka pri otvaranju filea.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Morate unjeti detaljen podatke u nadoilaze&aelig;a polja';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Ova forma je pregledavana previ&scaron;e puta u jednom satu. Molimo poku&scaron;ajte slijede&aelig;i sat.';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Molimo odaberite koje dodatke &#382;e
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Uspje&scaron;no nasnimljeni moduli';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Uspje&scaron;no nasnimljeni predlo&scaron;ci';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Uspje&scaron;no nasnimljeni jezici';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

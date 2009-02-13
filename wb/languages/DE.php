@@ -33,9 +33,9 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'DE';
 $language_name = 'Deutsch';
-$language_version = '2.7';
-$language_platform = '2.7.x';
-$language_author = 'Stefan Braunewell, Matthias Gallas, Dave Camenisch, Klaus Weitzel, Michael Tenschert';
+$language_version = '2.8';
+$language_platform = '2.8.x';
+$language_author = 'Stefan Braunewell, Matthias Gallas';
 $language_license = 'GNU General Public License';
 
 // Menu titles
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = 'Benutzer &auml;ndern';
 $HEADING['MODIFY_DELETE_GROUP'] = '&Auml;ndern/L&ouml;schen von Gruppen';
 $HEADING['ADD_GROUP'] = 'Gruppen hinzuf&uuml;gen';
 $HEADING['MODIFY_GROUP'] = 'Gruppen &auml;ndern';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On Voraussetzungen nicht erf&uuml;llt';
 
 // Other text
 $TEXT['OPEN'] = '&Ouml;ffnen';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Bearbeite CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Aktuelle Moduldatei: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Bearbeite die CSS Definitionen im nachfolgenden Textfeld.';
 $TEXT['CODE_SNIPPET'] = "Funktionserweiterung";
+$TEXT['REQUIREMENT'] = "Voraussetzung";
+$TEXT['INSTALLED'] = "installiert";
+$TEXT['NOT_INSTALLED'] = "nicht installiert";
+$TEXT['ADDON'] = "Addon";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sie sind nicht berechtigt, diese Seite zu sehen';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Momentan in Bearbeitung';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Bitte versuchen Sie es sp&auml;ter noch einmal ...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Die Datenbanksicherung kann je nach Gr&ouml;&szlig;e der Datenbank einige Zeit dauern.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Fehler beim &Ouml;ffnen der Datei.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Ung&uuml;ltige Website Baker Installationsdatei. Bitte *.zip Format pr&uuml;fen.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Ung&uuml;ltige Website Baker Sprachdatei. Bitte Textdatei pr&uuml;fen.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Bitte folgende Angaben erg&auml;nzen';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Dieses Formular wurde zu oft aufgerufen. Bitte versuchen Sie es in einer Stunde noch einmal.';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Bitte w&auml;hlen Sie aus, welche Erw
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Module erfolgreich geladen';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Designvorlagen erfolgreich geladen';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Sprachen erfolgreich geladen';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Installation fehlgeschlagen. Dein System erf&uuml;llt nicht alle Voraussetzungen die f&uuml;r diese Erweiterung ben&ouml;tigt werden. Um diese Erweiterung nutzen zu k&ouml;nnen, m&uuml;ssen nachfolgende Updates durchgef&uuml;hrt werden.';
 
 ?>

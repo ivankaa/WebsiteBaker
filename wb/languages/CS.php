@@ -33,8 +33,8 @@ define('LANGUAGE_LOADED', true);
 // Set the language information
 $language_code = 'CS';
 $language_name = '&#268;e&scaron;tina';
-$language_version = '2.7';
-$language_platform = '2.7.x';
+$language_version = '2.8';
+$language_platform = '2.8.x';
 $language_author = 'WebStep, s.r.o.';
 $language_license = 'GNU General Public License';
 
@@ -119,6 +119,8 @@ $HEADING['MODIFY_USER'] = 'Zm&#283;nit u&#382;ivatele';
 $HEADING['MODIFY_DELETE_GROUP'] = 'Zm&#283;nit/Smazat skupinu';
 $HEADING['ADD_GROUP'] = 'P&#345;idat skupinu';
 $HEADING['MODIFY_GROUP'] = 'Zm&#283;nit skupinu';
+
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -426,6 +428,11 @@ $TEXT['CAP_EDIT_CSS'] = 'Edit CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actual module file: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Edit the CSS definitions in the textarea below.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
+$TEXT['REQUIREMENT'] = "Requirement";
+$TEXT['INSTALLED'] = "installed";
+$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['ADDON'] = "Add-On";
+$TEXT['EXTENSION'] = "Extension";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Nem&aacute;te opr&aacute;vn&#283;n&iacute; prohl&iacute;&#382;et tuto str&aacute;nku';
@@ -571,6 +578,8 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Str&aacute;nky jsou ve v&ya
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Zkuste to p&#345;&iacute;&scaron;t&#283;...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = '&#268;ekejte pros&iacute;m, operace m&#367;&#382;e chv&iacute;li trvat.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Do&scaron;lo k chyb&#283; p&#345;i otev&iacute;r&aacute;n&iacute; souboru.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Mus&iacute;te vyplnit n&aacute;sleduj&iacute;c&iacute; pole';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Omlouv&aacute;me se, ale tento formul&aacute;&#345; dos&aacute;hl limitu povolen&yacute;ch odesl&aacute;n&iacute; pro tuto hodinu. Pros&iacute;m zkuste to znovu v dal&scaron;&iacute; hodin&#283;..';
@@ -580,5 +589,7 @@ $MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Vyberte kter&aacute; roz&scaron;&iacu
 $MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduly byly &uacute;sp&#283;&scaron;n&#283; p&#345;ehr&aacute;ny';
 $MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = '&Scaron;ablony byly &uacute;sp&#283;&scaron;n&#283; p&#345;ehr&aacute;ny';
 $MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Jazyky byly &uacute;sp&#283;&scaron;n&#283; p&#345;ehr&aacute;ny';
+
+$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>
