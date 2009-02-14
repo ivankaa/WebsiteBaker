@@ -136,6 +136,8 @@ class admin extends wb {
 													'BODY_TAGS' => $body_tags,
 													'WEBSITE_TITLE' => ($title['value']),
 													'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
+													'CURRENT_USER' => $MESSAGE['START']['CURRENT_USER'],
+													'DISPLAY_NAME' => $this->get_display_name(),
 													'CHARSET' => $charset,
 													'VERSION' => VERSION,
 													'WB_URL' => WB_URL,
@@ -174,9 +176,9 @@ class admin extends wb {
 				$header_template->set_var('TARGET', $target);
 				// If link is the current section apply a class name
 				if($permission_title == strtolower($this->section_name)) {
-					$header_template->set_var('CLASS', 'current');
+					$header_template->set_var('CLASS', $menu_item[3] . ' current');
 				} else {
-					$header_template->set_var('CLASS', '');
+					$header_template->set_var('CLASS', $menu_item[3]);
 				}
 				$header_template->set_var('TITLE', $title);
 				// Print link
