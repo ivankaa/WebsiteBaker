@@ -12,7 +12,7 @@
  * @author		Christian Sommer
  * @copyright	(c) 2009
  * @license		http://www.gnu.org/copyleft/lesser.html
- * @version		0.2.1
+ * @version		0.2.2
  * @platform	Website Baker 2.7
  *
  * Website Baker Project <http://www.websitebaker.org/>
@@ -34,7 +34,7 @@
 */
 
 // prevent this file from being accessed directly
-if (!defined('WB_PATH')) die(header('Location: ../../index.php'));
+if (!defined('WB_PATH')) die(header('Location: ../index.php'));
 
 function getVersion($version, $strip_suffix = true)
 {

@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+14-Feb-2009 Christian Sommer
+#	fixed wrong redirect path and added SVN Id
 13-Feb-2009 Christian Sommer
 +	added option to perform pre-installation checks to test requirements of Add-Ons
 #	added error messages to installation process for Add-Ons with wrong file type
