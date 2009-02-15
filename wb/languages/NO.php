@@ -585,11 +585,11 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du m&aring; skrive inn detaljer for f
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Beklager, denne form har blitt sendt for mange ganger denne timen. Vennligst pr&oslash;v igjen neste time.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Bekreftelsesnummeret (ogs&aring; kjent som Captcha) som du skrev inn er feil. Hvis du har problemer med &aring; lese Captcha, vennligst kontakt: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Vennligst velg hvilket tillegg du vil oppdatere';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Lykkes i &aring; oppdatere moduler';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Lykkes i &aring; oppdatere maler';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Lykkes i &aring; oppdatere spr&aring;k';
-
-$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Lykkes i &aring; oppdatere moduler';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Lykkes i &aring; oppdatere maler';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Lykkes i &aring; oppdatere spr&aring;k';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

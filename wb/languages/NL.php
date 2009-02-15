@@ -585,11 +585,11 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'De volgende velden zijn verplicht';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sorry, dit formulier is te vaak verstuurd binnen dit uur. Probeert u het over een uur nog eens.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Het verificatienummer (ook wel Captcha genoemd) dat u hebt ingevoerd is incorrect. Als u de Captcha niet goed kunt lezen, stuur dan een e-mail naar: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Selecteer de extra&rsquo;s die u opnieuw wilt laden';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules succesvol herladen';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates succesvol herladen';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Taalbestanden succesvol herladen';
-
-$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Modules succesvol herladen';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Templates succesvol herladen';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Taalbestanden succesvol herladen';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

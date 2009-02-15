@@ -585,11 +585,11 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Nale&#380;y wprowadzi&#263; szczeg&oa
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Niestety, ten formularz zosta&#322; wys&#322;any zbyt wiele razy w ci&#261;gu tej godziny. Prosimy spr&oacute;bowa&#263; ponownie za godzin&#281;.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Wprowadzony numer weryfikacyjny (tzw. Captcha) jest nieprawid&#322;owy. Je&#347;li masz problemy z odczytaniem Captcha, napisz do: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Prosz&#281; wskaza&#263;, kt&oacute;re dodatki maj&#261; zosta&#263; za&#322;adowane ponownie';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modu&#322;y zosta&#322;y za&#322;adowane ponownie';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Szablony zosta&#322;y za&#322;adowane ponownie';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'J&#281;zyki zosta&#322;y za&#322;adowane ponownie';
-
-$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Modu&#322;y zosta&#322;y za&#322;adowane ponownie';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Szablony zosta&#322;y za&#322;adowane ponownie';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'J&#281;zyki zosta&#322;y za&#322;adowane ponownie';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

@@ -54,6 +54,9 @@ if($admin->get_permission('languages_uninstall') != true) {
 if($admin->get_permission('languages_view') != true) {
 	$template->set_var('DISPLAY_LIST', 'hide');
 }
+if($admin->get_permission('admintools') != true) {
+	$template->set_var('DISPLAY_RELOAD', 'hide');
+}
 
 // Insert language headings
 $template->set_var(array(
@@ -64,12 +67,19 @@ $template->set_var(array(
 						);
 // Insert language text and messages
 $template->set_var(array(
-								'TEXT_INSTALL' => $TEXT['INSTALL'],
-								'TEXT_UNINSTALL' => $TEXT['UNINSTALL'],
-								'TEXT_VIEW_DETAILS' => $TEXT['VIEW_DETAILS'],
-								'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT']
-								)
-						);
+	'URL_MODULES' => $admin->get_permission('modules') ? 
+		'<a href="' . ADMIN_URL . '/modules/index.php">' . $MENU['MODULES'] . '</a>' : '',
+	'URL_TEMPLATES' => $admin->get_permission('templates') ? 
+		'<a href="' . ADMIN_URL . '/templates/index.php">' . $MENU['TEMPLATES'] . '</a>' : '',
+	'TEXT_INSTALL' => $TEXT['INSTALL'],
+	'TEXT_UNINSTALL' => $TEXT['UNINSTALL'],
+	'TEXT_VIEW_DETAILS' => $TEXT['VIEW_DETAILS'],
+	'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
+	'TXT_ADMIN_SETTINGS' => $TEXT['ADMIN'] . '-' . $TEXT['SETTINGS'],
+	'TEXT_RELOAD_ADDON' => $MESSAGE['ADDON']['RELOAD'],
+	'TEXT_RELOAD' => $TEXT['RELOAD']
+	)
+);
 
 // Parse template object
 $template->parse('main', 'main_block', false);

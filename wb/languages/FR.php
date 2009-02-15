@@ -585,11 +585,11 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Vous devez renseigner les champs suiv
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'D&eacute;sol&eacute; mais vous avez utilis&eacute; ce formulaire trop de fois durant cette heure. Merci de r&eacute;essayer &agrave; l\'heure suivante';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Le num&eacute;ro de v&eacute;rification (Captcha) que vous avez entr&eacute; est incorrect. Si vous rencontrez des probl&egrave;mes quant &agrave; la lecture de ce num&eacute;ro, merci d\'envoyer un email &agrave; : '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'S&eacute;lectionnez les ADD-ON que vous souhaitez r&eacute;installer';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Modules r&eacute;install&eacute;s avec succ&egrave;s';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Mod&egrave;les r&eacute;install&eacute;s avec succ&egrave;s';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Langages r&eacute;install&eacute;s avec succ&egrave;s';
-
-$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Modules r&eacute;install&eacute;s avec succ&egrave;s';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Mod&egrave;les r&eacute;install&eacute;s avec succ&egrave;s';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Langages r&eacute;install&eacute;s avec succ&egrave;s';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

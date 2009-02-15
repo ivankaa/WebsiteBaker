@@ -585,11 +585,11 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Ievadi detalas sekojo&scaron;ajos lau
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Atvaino, &scaron;i forma ir tikusi aizpildita parak daudz rei&#382;u &scaron;is stundas laika. Ludzu pamegini velreiz pec stundas.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Ievaditais parbaudes numurs ir nepareizs. Ja radu&scaron;as problemas ar parbaudes koda nolasi&scaron;anu, suti zinu uz: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Ludzu atzime, kurus papildinajumus velies parladet';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduli veiksmigi parladeti';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = '&scaron;abloni veiksmigi parladeti';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Valodas veiksmigi parladetas';
-
-$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Moduli veiksmigi parladeti';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = '&scaron;abloni veiksmigi parladeti';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Valodas veiksmigi parladetas';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

@@ -585,11 +585,11 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Debe completar los siguiente campos';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Disculpe este formulario ha sido enviado demasiadas veces seguidas. Vuelva a intentarlo en una hora.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'El n&uacute;mero de verificaci&oacute;n que ha introducido es incorrecto. Si est&aacute;s teniendo problemas ley&eacute;ndolo, por favor, env&iacute;e un e-mail a: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Por favor, seleccione qu&eacute; add-on quiere que se recargue';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'M&oacute;dulos recargados correctamente';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Plantillas recargadas correctamente';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Lenguajes recargados correctamente';
-
-$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'M&oacute;dulos recargados correctamente';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Plantillas recargadas correctamente';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Lenguajes recargados correctamente';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

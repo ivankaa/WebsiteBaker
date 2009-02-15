@@ -585,11 +585,11 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du SKAL udfylde f&oslash;lgende felte
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Beklager! Denne formular er blevet afsendt for mange gange indenfor den sidste time, og du vil derfor blive afvist - Pr&oslash;v igen om en times tid!';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Verifikations tallene (ogs&aring; kendt som Captcha) som du tastede er ikke korrekte. Hvis du har problemer med at l&aelig;se Captha tallene, s&aring; kontakt venligst sidens Administrator p&aring; denne mailadresse: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'V&aelig;lg venligst hvilke add-ons du vil have opdateret';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduler opdateret med succes';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Templates opdateret med succes';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Sprog opdateret med succes';
-
-$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Moduler opdateret med succes';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Templates opdateret med succes';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Sprog opdateret med succes';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

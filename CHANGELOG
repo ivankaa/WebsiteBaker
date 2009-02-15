@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+15-Feb-2009 Christian Sommer
+-	removed reload admin tool
++	added possibility to reload Add-ons via the Add-on section
 14-Feb-2009 Christian Sommer
 !	added option to display current user name in backend template
 #	fixed wrong redirect path and added SVN Id

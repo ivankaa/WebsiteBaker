@@ -585,11 +585,11 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'T&auml;yt&auml; kent&auml;t';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Rajoitus voimassa, yrit&auml; tunnin kuluttua uudelleen';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Tarkistusluku (Captcha) virheellinen ';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Valitse uudelleen ladattavat...';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Moduulin lataus onnistui';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Sivupohjan lataus onnistui';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Kielen lataus onnistui';
-
-$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Moduulin lataus onnistui';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Sivupohjan lataus onnistui';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Kielen lataus onnistui';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

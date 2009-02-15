@@ -585,11 +585,11 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'You must enter details for the follow
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sorry, this form has been submitted too many times so far this hour. Please retry in the next hour.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'The verification number (also known as Captcha) that you entered is incorrect. If you are having problems reading the Captcha, please email: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Please selected which add-ons you would like to have reloaded';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Mod&uuml;l, ba&thorn;ar&yacute;l&yacute; bir &thorn;ekildeninkini tekrar y&uuml;klendi';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Kal&yacute;plar, ba&thorn;ar&yacute;l&yacute; bir &thorn;ekildeninkini tekrar y&uuml;klendi';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Diller, ba&thorn;ar&yacute;l&yacute; bir &thorn;ekildeninkini tekrar y&uuml;klendi';
-
-$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Mod&uuml;l, ba&thorn;ar&yacute;l&yacute; bir &thorn;ekildeninkini tekrar y&uuml;klendi';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Kal&yacute;plar, ba&thorn;ar&yacute;l&yacute; bir &thorn;ekildeninkini tekrar y&uuml;klendi';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Diller, ba&thorn;ar&yacute;l&yacute; bir &thorn;ekildeninkini tekrar y&uuml;klendi';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>

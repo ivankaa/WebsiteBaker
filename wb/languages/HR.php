@@ -585,11 +585,11 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Morate unjeti detaljen podatke u nado
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Ova forma je pregledavana previ&scaron;e puta u jednom satu. Molimo poku&scaron;ajte slijede&aelig;i sat.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Broj provjere (poznat kao Captcha) neto&egrave;no je une&scaron;en. Ako imate problema s &egrave;itanjem Captcha, molimo po&scaron;aljite email: '.SERVER_EMAIL.'';
 
-$MESSAGE['MOD_RELOAD']['PLEASE_SELECT'] = 'Molimo odaberite koje dodatke &#382;elite ponovo nasnimiti';
-$MESSAGE['MOD_RELOAD']['MODULES_RELOADED'] = 'Uspje&scaron;no nasnimljeni moduli';
-$MESSAGE['MOD_RELOAD']['TEMPLATES_RELOADED'] = 'Uspje&scaron;no nasnimljeni predlo&scaron;ci';
-$MESSAGE['MOD_RELOAD']['LANGUAGES_RELOADED'] = 'Uspje&scaron;no nasnimljeni jezici';
-
-$MESSAGE['ADDON_PRECHECK']['FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Uspje&scaron;no nasnimljeni moduli';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Uspje&scaron;no nasnimljeni predlo&scaron;ci';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Uspje&scaron;no nasnimljeni jezici';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
 
 ?>
