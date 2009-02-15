@@ -323,7 +323,10 @@ class login extends admin {
 		if(isset($_COOKIE['REMEMBER_KEY']) AND $_COOKIE['REMEMBER_KEY'] != '') {
 			// Check if the remember key is correct
 			$database = new database();
-			$check_query = $database->query("SELECT user_id FROM ".$this->USERS_TABLE." WHERE remember_key = '".$this->get_safe_remember_key()."' LIMIT 1");
+			$sql = "SELECT `user_id` FROM `" . $this->USERS_TABLE . "` WHERE `remember_key` = '";
+			$sql .= $this->get_safe_remember_key() . "' LIMIT 1";
+			$check_query = $database->query($sql);
+
 			if($check_query->numRows() > 0) {
 				$check_fetch = $check_query->fetchRow();
 				$user_id = $check_fetch['user_id'];
@@ -407,10 +410,12 @@ class login extends admin {
 		}
 	}
 
-	// convert "REMEMBER_KEY" to a number and then repad
-	// any non numeric character will cause intval to return null thus returning 11 0's
+	// sanities the REMEMBER_KEY cookie to avoid SQL injection
 	function get_safe_remember_key() {
-		return str_pad(intval(substr($_COOKIE['REMEMBER_KEY'],0,11)),11,"0",STR_PAD_LEFT); // SQL Injection prevention
+		if (!((strlen($_COOKIE['REMEMBER_KEY']) == 23) && (substr($_COOKIE['REMEMBER_KEY'], 11, 1) == '_'))) return '';
+		// create a clean cookie (XXXXXXXXXXX_YYYYYYYYYYY) where X:= numeric, Y:= hash
+		$clean_cookie = sprintf('%011d', (int) substr($_COOKIE['REMEMBER_KEY'], 0, 11)) . substr($_COOKIE['REMEMBER_KEY'], 11);
+		return ($clean_cookie == $_COOKIE['REMEMBER_KEY']) ? $this->add_slashes($clean_cookie) : '';
 	}
 	
 	// Warn user that they have had to many login attemps

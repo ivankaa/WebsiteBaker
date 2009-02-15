@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 15-Feb-2009 Christian Sommer
+#	fixed bug with smart login option (remember me) (ticket #689)
 #	special chars like &nbsp; are shown when editing Add-on CSS files (ticket #678)
 !	redirect time for function print_success can now be defined in Settings (ticket #603)
 -	removed reload admin tool
