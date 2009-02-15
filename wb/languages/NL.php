@@ -378,6 +378,7 @@ $TEXT['ON'] = 'Op';
 $TEXT['LAST_UPDATED_BY'] = 'Laatst vernieuwd door';
 $TEXT['RESULTS_FOR'] = 'Resultaten voor';
 $TEXT['TIME'] = 'Tijd';
+$TEXT['REDIRECT_AFTER'] = 'Redirect after';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG-stijl';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG-editor';
 $TEXT['SERVER_EMAIL'] = 'Server e-mail';

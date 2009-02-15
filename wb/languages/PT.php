@@ -378,6 +378,7 @@ $TEXT['ON'] = 'On';
 $TEXT['LAST_UPDATED_BY'] = '&Uacute;ltima atualiza&ccdil;&atilde;o por';
 $TEXT['RESULTS_FOR'] = 'Resultados para';
 $TEXT['TIME'] = 'Hora';
+$TEXT['REDIRECT_AFTER'] = 'Redirect after';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Style';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor';
 $TEXT['SERVER_EMAIL'] = 'Servidor de Email';

@@ -378,6 +378,7 @@ $TEXT['ON'] = 'Na';
 $TEXT['LAST_UPDATED_BY'] = 'Posledn&iacute; zm&#283;na:';
 $TEXT['RESULTS_FOR'] = 'V&yacute;sledky pro';
 $TEXT['TIME'] = '&#268;as';
+$TEXT['REDIRECT_AFTER'] = 'Redirect after';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG styl';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG editor';
 $TEXT['SERVER_EMAIL'] = 'Syt&eacute;mov&yacute; e-mail';

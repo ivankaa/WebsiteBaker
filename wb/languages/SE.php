@@ -378,6 +378,7 @@ $TEXT['ON'] = 'Den';
 $TEXT['LAST_UPDATED_BY'] = 'Senast uppdaterad av';
 $TEXT['RESULTS_FOR'] = 'Resultat f&ouml;r';
 $TEXT['TIME'] = 'Tid';
+$TEXT['REDIRECT_AFTER'] = 'Redirect after';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG stil';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG redigerare';
 $TEXT['SERVER_EMAIL'] = 'Server e-post';

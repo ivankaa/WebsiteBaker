@@ -378,6 +378,7 @@ $TEXT['ON'] = 'On';
 $TEXT['LAST_UPDATED_BY'] = 'P&auml;ivitetty';
 $TEXT['RESULTS_FOR'] = 'Tulokset';
 $TEXT['TIME'] = 'Aika';
+$TEXT['REDIRECT_AFTER'] = 'Redirect after';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG tyyli';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG muokkain';
 $TEXT['SERVER_EMAIL'] = 'Palvelimen s&auml;hk&ouml;posti';

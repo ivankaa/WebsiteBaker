@@ -157,6 +157,16 @@ foreach($cfg as $key=>$value) {
 	db_add_key_value($key, $value);
 }
 
+/**********************************************************
+ *  - Adding redirect timer to settings table
+ */
+echo "<br />Adding redirect timer to settings table<br />";
+$cfg = array(
+	'redirect_timer' => '1500'
+);
+foreach($cfg as $key=>$value) {
+	db_add_key_value($key, $value);
+}
 
 /**********************************************************
  *  - Add field "redirect_type" to table "mod_menu_link"

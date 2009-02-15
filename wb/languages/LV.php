@@ -378,6 +378,7 @@ $TEXT['ON'] = 'ieslegts';
 $TEXT['LAST_UPDATED_BY'] = 'Pedejo reizi mainits';
 $TEXT['RESULTS_FOR'] = 'Rezultati';
 $TEXT['TIME'] = 'Laiks';
+$TEXT['REDIRECT_AFTER'] = 'Redirect after';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG stils';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG redaktors';
 $TEXT['SERVER_EMAIL'] = 'Servera e-pasta adrese';

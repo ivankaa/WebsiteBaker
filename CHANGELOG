@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 15-Feb-2009 Christian Sommer
++	redirect time for function print_success can now be defined in Settings (ticket #603)
 -	removed reload admin tool
 +	added possibility to reload Add-ons via the Add-on section
 14-Feb-2009 Christian Sommer

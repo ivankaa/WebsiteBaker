@@ -551,6 +551,7 @@ $template->set_var(array(
 								'TEXT_INTRO_PAGE' => $TEXT['INTRO_PAGE'],
 								'TEXT_FRONTEND' => $TEXT['FRONTEND'],
 								'TEXT_LOGIN' => $TEXT['LOGIN'],
+								'TEXT_REDIRECT_AFTER' => $TEXT['REDIRECT_AFTER'],
 								'TEXT_SIGNUP' => $TEXT['SIGNUP'],
 								'TEXT_PHP_ERROR_LEVEL' => $TEXT['PHP_ERROR_LEVEL'],
 								'TEXT_PAGES_DIRECTORY' => $TEXT['PAGES_DIRECTORY'],

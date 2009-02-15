@@ -378,6 +378,7 @@ $TEXT['ON'] = 'Edasi';
 $TEXT['LAST_UPDATED_BY'] = 'Viimati Uuendatud';
 $TEXT['RESULTS_FOR'] = 'Tulemused';
 $TEXT['TIME'] = 'Aeg';
+$TEXT['REDIRECT_AFTER'] = 'Redirect after';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Stiil';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor';
 $TEXT['SERVER_EMAIL'] = 'Serveri Email';

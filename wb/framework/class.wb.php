@@ -269,12 +269,20 @@ class wb
 
 	// Print a success message which then automatically redirects the user to another page
 	function print_success($message, $redirect = 'index.php') {
-		global $TEXT;
+		global $TEXT, $database;
+		
+		// fetch redirect timer for sucess messages from settings table
+		$table = TABLE_PREFIX . 'settings';
+		$results = @$database->get_one("SELECT `value` FROM `$table` WHERE `name` = 'redirect_timer'");
+		$redirect_timer = ($results) ? $results : '1500';
+
+		// add template variables
 		$success_template = new Template(ADMIN_PATH.'/interface');
 		$success_template->set_file('page', 'success.html');
 		$success_template->set_block('page', 'main_block', 'main');
 		$success_template->set_var('MESSAGE', $message);
 		$success_template->set_var('REDIRECT', $redirect);
+		$success_template->set_var('REDIRECT_TIMER', $redirect_timer);
 		$success_template->set_var('NEXT', $TEXT['NEXT']);
 		$success_template->parse('main', 'main_block', false);
 		$success_template->pparse('output', 'page');

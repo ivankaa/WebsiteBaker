@@ -378,6 +378,7 @@ $TEXT['ON'] = 'On';
 $TEXT['LAST_UPDATED_BY'] = 'Zadnje izmjenjen od';
 $TEXT['RESULTS_FOR'] = 'Rezultati za';
 $TEXT['TIME'] = 'Vrijeme';
+$TEXT['REDIRECT_AFTER'] = 'Redirect after';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Style';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor';
 $TEXT['SERVER_EMAIL'] = 'Server Email';

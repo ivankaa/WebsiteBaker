@@ -378,6 +378,7 @@ $TEXT['ON'] = 'Be';
 $TEXT['LAST_UPDATED_BY'] = 'M&oacute;dos&iacute;totta';
 $TEXT['RESULTS_FOR'] = 'Keresett';
 $TEXT['TIME'] = 'Id&otilde;';
+$TEXT['REDIRECT_AFTER'] = 'Redirect after';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Style';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor';
 $TEXT['SERVER_EMAIL'] = 'Port&aacute;l E-mail c&iacute;me';

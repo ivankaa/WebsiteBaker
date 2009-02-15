@@ -458,6 +458,7 @@ if($install_tables == true) {
 	." ('default_timezone', '$default_timezone'),"
 	." ('default_date_format', 'M d Y'),"
 	." ('default_time_format', 'g:i A'),"
+	." ('redirect_timer', '1500'),"
 	." ('home_folders', 'true'),"
 	." ('default_template', 'round'),"
 	." ('default_charset', 'utf-8'),"
