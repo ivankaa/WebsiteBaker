@@ -586,7 +586,7 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Ievadi detalas sekojo&scaron;ajos lau
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Atvaino, &scaron;i forma ir tikusi aizpildita parak daudz rei&#382;u &scaron;is stundas laika. Ludzu pamegini velreiz pec stundas.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Ievaditais parbaudes numurs ir nepareizs. Ja radu&scaron;as problemas ar parbaudes koda nolasi&scaron;anu, suti zinu uz: '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
 $MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Moduli veiksmigi parladeti';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = '&scaron;abloni veiksmigi parladeti';

@@ -586,7 +586,7 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'You must enter details for the follow
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sorry, this form has been submitted too many times so far this hour. Please retry in the next hour.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'The verification number (also known as Captcha) that you entered is incorrect. If you are having problems reading the Captcha, please email: '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
 $MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Mod&uuml;l, ba&thorn;ar&yacute;l&yacute; bir &thorn;ekildeninkini tekrar y&uuml;klendi';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Kal&yacute;plar, ba&thorn;ar&yacute;l&yacute; bir &thorn;ekildeninkini tekrar y&uuml;klendi';

@@ -586,7 +586,7 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Bitte folgende Angaben erg&auml;nzen'
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Dieses Formular wurde zu oft aufgerufen. Bitte versuchen Sie es in einer Stunde noch einmal.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Die eingegebene Pr&uuml;fziffer stimmt nicht &uuml;berein. Wenn Sie Probleme mit dem Lesen der Pr&uuml;fziffer haben, bitte schreiben Sie eine E-Mail an uns: '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'Nachfolgende Schaltfl&auml;che gleicht die Informationen der Datenbank mit den Daten der Addon Dateien "info.php" ab. Dies kann notwendig sein, wenn Addons &uuml;ber FTP hochgeladen wurden.';
+$MESSAGE['ADDON']['RELOAD'] = 'Abgleich der Datenbank mit den Informationen aus den Addon-Dateien (z.B. nach FTP Upload).';
 $MESSAGE['ADDON']['ERROR_RELOAD'] = 'Fehler beim Abgleich der Addon Informationen.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Module erfolgreich geladen';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Designvorlagen erfolgreich geladen';

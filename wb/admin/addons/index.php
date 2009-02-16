@@ -49,6 +49,9 @@ if($admin->get_permission('templates') != true) {
 if($admin->get_permission('languages') != true) {
 	$template->set_var('DISPLAY_LANGUAGES', 'none');
 }
+if($admin->get_permission('admintools') != true) {
+	$template->set_var('DISPLAY_RELOAD', 'none');
+}
 
 // Insert section names and descriptions
 $template->set_var(array(
@@ -57,7 +60,11 @@ $template->set_var(array(
 								'LANGUAGES' => $MENU['LANGUAGES'],
 								'MODULES_OVERVIEW' => $OVERVIEW['MODULES'],
 								'TEMPLATES_OVERVIEW' => $OVERVIEW['TEMPLATES'],
-								'LANGUAGES_OVERVIEW' => $OVERVIEW['LANGUAGES']
+								'LANGUAGES_OVERVIEW' => $OVERVIEW['LANGUAGES'],
+								'TXT_ADMIN_SETTINGS' => $TEXT['ADMIN'] . ' ' . $TEXT['SETTINGS'],
+								'MESSAGE_RELOAD_ADDONS' => $MESSAGE['ADDON']['RELOAD'],
+								'TEXT_RELOAD' => $TEXT['RELOAD'],
+								'RELOAD_URL' => ADMIN_URL . '/addons/reload.php',
 								)
 						);
 

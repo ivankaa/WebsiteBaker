@@ -586,7 +586,7 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Mus&iacute;te vyplnit n&aacute;sleduj
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Omlouv&aacute;me se, ale tento formul&aacute;&#345; dos&aacute;hl limitu povolen&yacute;ch odesl&aacute;n&iacute; pro tuto hodinu. Pros&iacute;m zkuste to znovu v dal&scaron;&iacute; hodin&#283;..';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Kontroln&iacute; k&oacute;d (zn&aacute;m&yacute; jako Captcha) neodpov&iacute;d&aacute;. Pokud m&aacute;te probl&eacute;my s p&#345;e&#269;ten&iacute;m tohoto k&oacute;du, kontaktujte '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
 $MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Moduly byly &uacute;sp&#283;&scaron;n&#283; p&#345;ehr&aacute;ny';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = '&Scaron;ablony byly &uacute;sp&#283;&scaron;n&#283; p&#345;ehr&aacute;ny';

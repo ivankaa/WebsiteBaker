@@ -586,7 +586,7 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Morate unjeti detaljen podatke u nado
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Ova forma je pregledavana previ&scaron;e puta u jednom satu. Molimo poku&scaron;ajte slijede&aelig;i sat.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Broj provjere (poznat kao Captcha) neto&egrave;no je une&scaron;en. Ako imate problema s &egrave;itanjem Captcha, molimo po&scaron;aljite email: '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
 $MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Uspje&scaron;no nasnimljeni moduli';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Uspje&scaron;no nasnimljeni predlo&scaron;ci';

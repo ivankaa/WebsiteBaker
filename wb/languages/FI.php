@@ -586,7 +586,7 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'T&auml;yt&auml; kent&auml;t';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Rajoitus voimassa, yrit&auml; tunnin kuluttua uudelleen';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Tarkistusluku (Captcha) virheellinen ';
 
-$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
 $MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Moduulin lataus onnistui';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Sivupohjan lataus onnistui';

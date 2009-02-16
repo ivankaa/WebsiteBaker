@@ -586,7 +586,7 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'De volgende velden zijn verplicht';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sorry, dit formulier is te vaak verstuurd binnen dit uur. Probeert u het over een uur nog eens.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Het verificatienummer (ook wel Captcha genoemd) dat u hebt ingevoerd is incorrect. Als u de Captcha niet goed kunt lezen, stuur dan een e-mail naar: '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
 $MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Modules succesvol herladen';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Templates succesvol herladen';

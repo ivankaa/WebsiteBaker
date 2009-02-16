@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 16-Feb-2009 Christian Sommer
+!	moved reload option of Add-ons to main Add-on section
 !	reworked logout to reset possible remember key in database when logging out
 15-Feb-2009 Christian Sommer
 #	fixed bug with smart login option (remember me) (ticket #689)

@@ -586,7 +586,7 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du m&aring;ste fylla i f&ouml;ljande 
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Tyv&auml;rr, detta formul&auml;r har skickats f&ouml;r m&aring;nga g&aring;nger inom denna timme. F&ouml;rs&ouml;k igen om ett tag.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Verifieringsnumret (ocks&aring; k&auml;nt som Captcha) som du angav &auml;r felaktigt. Om du har problem med att l&auml;sa ut Captcha, v&auml;nligen s&auml;nd email till: '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
 $MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Moduler laddades om';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Mallar laddades om';

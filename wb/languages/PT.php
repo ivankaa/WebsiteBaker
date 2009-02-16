@@ -586,7 +586,7 @@ $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Voc&ecirc; precisa preencher os segui
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Desculpe, este formul&aacute;rio foi submetido v&aacute;rias vezes nessa hora. Favor tentar novamente dentro de uma hora.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'O N&uacute;mero de Verifica&ccdil;&atilde;o (conhecido como Captcha) que voc&ecirc; entrou, &eacute; inv&aacute;lido. Se estiver tendo problemas usando o Captcha, envie uma mensagem para: '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'The button below updates the information in the database with the data stored in the Add-On "info.php" files. This may be required if you have uploaded Addons via FTP.';
+$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
 $MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'M&oacute;dulos recarregados com sucesso';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Temas (Templates) recarregados com sucesso';
