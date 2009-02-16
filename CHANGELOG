@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+16-Feb-2009 Christian Sommer
+!	reworked logout to reset possible remember key in database when logging out
 15-Feb-2009 Christian Sommer
 #	fixed bug with smart login option (remember me) (ticket #689)
 #	special chars like &nbsp; are shown when editing Add-on CSS files (ticket #678)
