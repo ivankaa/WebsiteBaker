@@ -1,7 +1,7 @@
 <!-- BEGIN main_block -->
 
 <div class="box">
-	{URL_TEMPLATES}&nbsp;&nbsp;{URL_LANGUAGES}
+	{URL_TEMPLATES}&nbsp;&nbsp;{URL_LANGUAGES}&nbsp;&nbsp;{URL_ADVANCED}
 </div>
 
 <form name="install" enctype="multipart/form-data" action="install.php" method="post" class="{DISPLAY_INSTALL}">
@@ -69,6 +69,32 @@
 	</td>
 </tr>
 </table>
+
+<br />
+</form>
+
+<form name="details" action="manual_install.php" method="post" class="{DISPLAY_MANUAL_INSTALL}">
+
+<h2>{HEADING_MANUAL_MODULE_INSTALLATION}</h2>
+{TEXT_MANUAL_INSTALLATION}
+<p>{TEXT_MANUAL_INSTALLATION_2}</p>
+
+<table cellpadding="2" cellspacing="0" border="0" width="100%">
+<tr>
+	<td>
+		<select name="file" style="width: 97%;">
+		<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+		<!-- BEGIN install_list_block -->
+			<option value="{VALUE}">{NAME}</option>
+		<!-- END install_list_block -->
+		</select>
+	</td>
+	<td width="110">
+		<input type="submit" name="submit" value="{TEXT_RELOAD}" style="width: 100px;" />
+	</td>
+</tr>
+</table>
+<p style="color: red;">{TEXT_MANUAL_INSTALLATION_WARNING}</p>
 
 <br />
 </form>

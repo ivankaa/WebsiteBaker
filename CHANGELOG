@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+17-Feb-2009 Christian Sommer
++	added option to invoke module install.php from backend (for modules uploaded via FTP)
+!	admin Add-on settings no hidden by default (can be set visible via advanced link)
 16-Feb-2009 Christian Sommer
 !	moved reload option of Add-ons to main Add-on section
 !	reworked logout to reset possible remember key in database when logging out

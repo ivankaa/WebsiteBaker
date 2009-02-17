@@ -121,6 +121,7 @@ $HEADING['ADD_GROUP'] = 'Tilf&oslash;j gruppe';
 $HEADING['MODIFY_GROUP'] = 'Ret gruppe';
 
 $HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
+$HEADING['MANUAL_MODULE_INSTALLATION'] = 'Execute module "install.php" manually';
 
 // Other text
 $TEXT['OPEN'] = '&Aring;ben';
@@ -592,5 +593,7 @@ $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Moduler opdateret med succes';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Templates opdateret med succes';
 $MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Sprog opdateret med succes';
 $MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'The module installation file "install.php" is not executed when modules are uploaded via FTP (not recommended). For those modules, you have to execute the "install.php" manually.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warning: Existing module database entries will get lost. Only use this option if you experience problems with modules uploaded via FTP.';
 
 ?>

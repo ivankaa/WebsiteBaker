@@ -121,6 +121,7 @@ $HEADING['ADD_GROUP'] = 'Gruppen hinzuf&uuml;gen';
 $HEADING['MODIFY_GROUP'] = 'Gruppen &auml;ndern';
 
 $HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On Voraussetzungen nicht erf&uuml;llt';
+$HEADING['MANUAL_MODULE_INSTALLATION'] = 'Modul "install.php" manuell aufrufen';
 
 // Other text
 $TEXT['OPEN'] = '&Ouml;ffnen';
@@ -592,5 +593,7 @@ $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Module erfolgreich geladen';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Designvorlagen erfolgreich geladen';
 $MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Sprachen erfolgreich geladen';
 $MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Installation fehlgeschlagen. Dein System erf&uuml;llt nicht alle Voraussetzungen die f&uuml;r diese Erweiterung ben&ouml;tigt werden. Um diese Erweiterung nutzen zu k&ouml;nnen, m&uuml;ssen nachfolgende Updates durchgef&uuml;hrt werden.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'Beim Hochladen eines Moduls per FTP (nicht empfohlen), wird die Modulinstallationsdatei "install.php" nicht aufgerufen. Diese Module funktionieren dann meist nicht richtig. In diesem Fall kann die Installationsdatei "install.php" eines bereits installierten Moduls nachtr&auml;glich manuell gestartet werden.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warnung: Eventuell vorhandene Datenbankeintr&auml;ge eines Moduls gehen verloren. Bitte nur bei bei Problemen mit per FTP hochgeladenen Modulen verwenden. ';
 
 ?>

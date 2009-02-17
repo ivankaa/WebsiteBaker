@@ -49,24 +49,26 @@ if($admin->get_permission('templates') != true) {
 if($admin->get_permission('languages') != true) {
 	$template->set_var('DISPLAY_LANGUAGES', 'none');
 }
-if($admin->get_permission('admintools') != true) {
+if(!isset($_GET['advanced']) || $admin->get_permission('admintools') != true) {
 	$template->set_var('DISPLAY_RELOAD', 'none');
 }
 
 // Insert section names and descriptions
 $template->set_var(array(
-								'MODULES' => $MENU['MODULES'],
-								'TEMPLATES' => $MENU['TEMPLATES'],
-								'LANGUAGES' => $MENU['LANGUAGES'],
-								'MODULES_OVERVIEW' => $OVERVIEW['MODULES'],
-								'TEMPLATES_OVERVIEW' => $OVERVIEW['TEMPLATES'],
-								'LANGUAGES_OVERVIEW' => $OVERVIEW['LANGUAGES'],
-								'TXT_ADMIN_SETTINGS' => $TEXT['ADMIN'] . ' ' . $TEXT['SETTINGS'],
-								'MESSAGE_RELOAD_ADDONS' => $MESSAGE['ADDON']['RELOAD'],
-								'TEXT_RELOAD' => $TEXT['RELOAD'],
-								'RELOAD_URL' => ADMIN_URL . '/addons/reload.php',
-								)
-						);
+	'MODULES' => $MENU['MODULES'],
+	'TEMPLATES' => $MENU['TEMPLATES'],
+	'LANGUAGES' => $MENU['LANGUAGES'],
+	'MODULES_OVERVIEW' => $OVERVIEW['MODULES'],
+	'TEMPLATES_OVERVIEW' => $OVERVIEW['TEMPLATES'],
+	'LANGUAGES_OVERVIEW' => $OVERVIEW['LANGUAGES'],
+	'TXT_ADMIN_SETTINGS' => $TEXT['ADMIN'] . ' ' . $TEXT['SETTINGS'],
+	'MESSAGE_RELOAD_ADDONS' => $MESSAGE['ADDON']['RELOAD'],
+	'TEXT_RELOAD' => $TEXT['RELOAD'],
+	'RELOAD_URL' => ADMIN_URL . '/addons/reload.php',
+	'URL_ADVANCED' => $admin->get_permission('admintools') ? 
+		'<a href="' . ADMIN_URL . '/addons/index.php?advanced">' . $TEXT['ADVANCED'] . '</a>' : ''
+	)
+);
 
 // Parse template object
 $template->parse('main', 'main_block', false);
