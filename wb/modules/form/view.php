@@ -110,6 +110,7 @@ if (!function_exists("new_submission_id") ) {
 		return $submission_id;
 	}
 }
+
 // Work-out if the form has been submitted or not
 if($_POST == array()) {
 
@@ -117,26 +118,30 @@ if($_POST == array()) {
 $_SESSION['form_submission_id'] = new_submission_id();
 
 // Get settings
-$query_settings = $database->query("SELECT header,field_loop,footer,use_captcha FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
+$query_settings = $database->query("SELECT header,field_loop,footer,use_captcha,name,use_xhtml_strict FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 if($query_settings->numRows() > 0) {
 	$fetch_settings = $query_settings->fetchRow();
 	$header = str_replace('{WB_URL}',WB_URL,$fetch_settings['header']);
 	$field_loop = $fetch_settings['field_loop'];
 	$footer = str_replace('{WB_URL}',WB_URL,$fetch_settings['footer']);
 	$use_captcha = $fetch_settings['use_captcha'];
+	$form_name = $fetch_settings['name'];
+	$use_xhtml_strict = ($fetch_settings['use_xhtml_strict'] == 1);
 } else {
 	$header = '';
 	$field_loop = '';
 	$footer = '';
+	$form_name = 'form';
+	$use_xhtml_strict = false;
 }
 
 ?>
-<form name="form" action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])); ?>" method="post">
-<input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" />
+<form <?php echo ( ( (strlen($form_name) > 0) AND (false == $use_xhtml_strict) ) ? "name=\"".$form_name."\"" : ""); ?> action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])); ?>" method="post">
+<div><input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" /></div>
 <?php
 if(ENABLED_ASP) { // first add some honeypot-fields
 ?>
-<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
+<div><input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" /></div>
 <p class="nixhier">
 email address:
 <label for="email">Leave this field email-address blank:</label>
@@ -192,7 +197,8 @@ if($query_fields->numRows() > 0) {
 			$values[] = '<select name="field'.$field_id.'[]" id="field'.$field_id.'" size="'.$field['extra'][0].'" '.$field['extra'][1].' class="select">'.implode($options).'</select>';		
 		} elseif($field['type'] == 'heading') {
 			$vars[] = '{FIELD}';
-			$values[] = '<input type="hidden" name="field'.$field_id.'" id="field'.$field_id.'" value="===['.$field['title'].']===" />';
+			$str = '<input type="hidden" name="field'.$field_id.'" id="field'.$field_id.'" value="===['.$field['title'].']===" />';
+			$values[] = ( true == $use_xhtml_strict) ? "<div>".$str."</div>" : $str;
 			$tmp_field_loop = $field_loop;		// temporarily modify the field loop template
 			$field_loop = $field['extra'];
 		} elseif($field['type'] == 'checkbox') {
@@ -461,7 +467,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 			}    
 		}
 		// clearing session on success
-		$query_fields = $database->query("SELECT field_id FROM ".TABLE_PREFIX."mod_form_fields WHERE section_id = '$section_id' AND required = 1");
+		$query_fields = $database->query("SELECT field_id FROM ".TABLE_PREFIX."mod_form_fields WHERE section_id = '$section_id'");
 		while($field = $query_fields->fetchRow()) {
 			$field_id = $field[0];
 			if(isset($_SESSION['field'.$field_id])) unset($_SESSION['field'.$field_id]);
@@ -470,7 +476,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 		if(isset($success) AND $success == false) {
 			echo $TEXT['ERROR'];
 		}
-	}	
+	}
 }
 
 ?>
