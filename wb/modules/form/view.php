@@ -118,15 +118,15 @@ if($_POST == array()) {
 $_SESSION['form_submission_id'] = new_submission_id();
 
 // Get settings
-$query_settings = $database->query("SELECT header,field_loop,footer,use_captcha,name,use_xhtml_strict FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
+$query_settings = $database->query("SELECT header,field_loop,footer,use_captcha FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
 if($query_settings->numRows() > 0) {
 	$fetch_settings = $query_settings->fetchRow();
 	$header = str_replace('{WB_URL}',WB_URL,$fetch_settings['header']);
 	$field_loop = $fetch_settings['field_loop'];
 	$footer = str_replace('{WB_URL}',WB_URL,$fetch_settings['footer']);
 	$use_captcha = $fetch_settings['use_captcha'];
-	$form_name = $fetch_settings['name'];
-	$use_xhtml_strict = ($fetch_settings['use_xhtml_strict'] == 1);
+	$form_name = 'form';
+	$use_xhtml_strict = false;
 } else {
 	$header = '';
 	$field_loop = '';
@@ -136,7 +136,7 @@ if($query_settings->numRows() > 0) {
 }
 
 ?>
-<form <?php echo ( ( (strlen($form_name) > 0) AND (false == $use_xhtml_strict) ) ? "name=\"".$form_name."\"" : ""); ?> action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])); ?>" method="post">
+<form <?php echo ( ( (strlen($form_name) > 0) AND (false == $use_xhtml_strict) ) ? "name=\"".$form_name."\"" : ""); ?> action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])); ?>#wb_section_<?PHP echo $section_id;?>" method="post">
 <div><input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" /></div>
 <?php
 if(ENABLED_ASP) { // first add some honeypot-fields
