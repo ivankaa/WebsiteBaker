@@ -136,7 +136,7 @@ if($query_settings->numRows() > 0) {
 }
 
 ?>
-<form <?php echo ( ( (strlen($form_name) > 0) AND (false == $use_xhtml_strict) ) ? "name=\"".$form_name."\"" : ""); ?> action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])); ?>#wb_section_<?PHP echo $section_id;?>" method="post">
+<form <?php echo ( ( (strlen($form_name) > 0) AND (false == $use_xhtml_strict) ) ? "name=\"".$form_name."\"" : ""); ?> action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])); ?>#wb_<?PHP echo $section_id;?>" method="post">
 <div><input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" /></div>
 <?php
 if(ENABLED_ASP) { // first add some honeypot-fields
