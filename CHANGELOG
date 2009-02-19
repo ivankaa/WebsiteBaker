@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 19-Feb-2009 Christian Sommer
+!	addon overview to show advanced options after redirect from reload.php
 #	fixed bug if language folder contains none language files (XX.php) or sub folders
 +	added option to invoke module upgrade.php/uninstall.php files from backend (for modules uploaded via FTP)
 18-Feb-2009 Dietrich Roland Pehlke (aldus)

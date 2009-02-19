@@ -11,7 +11,7 @@
  * @author		Christian Sommer
  * @copyright	(c) 2009
  * @license		http://www.gnu.org/copyleft/lesser.html
- * @version		0.1.0
+ * @version		0.1.1
  * @platform	Website Baker 2.7
  *
  * Website Baker Project <http://www.websitebaker.org/>
@@ -39,7 +39,7 @@ $post_check = array('reload_modules', 'reload_templates', 'reload_languages');
 foreach ($post_check as $index => $key) {
 	if (!isset($_POST[$key])) unset($post_check[$index]);
 }
-if (count($post_check) == 0) die(header('Location: index.php'));
+if (count($post_check) == 0) die(header('Location: index.php?advanced'));
 
 /**
  * check if user has permissions to access this file
@@ -69,7 +69,7 @@ require_once(WB_PATH . '/languages/' . LANGUAGE .'.php');
 
 // create Admin object with admin header
 $admin = new admin('Addons', '', true, false);
-$js_back = ADMIN_URL . '/addons/index.php';
+$js_back = ADMIN_URL . '/addons/index.php?advanced';
 
 /**
  * Reload all specified Addons
