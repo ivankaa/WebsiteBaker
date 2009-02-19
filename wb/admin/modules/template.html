@@ -73,30 +73,47 @@
 <br />
 </form>
 
-<form name="details" action="manual_install.php" method="post" class="{DISPLAY_MANUAL_INSTALL}">
+<div class="{DISPLAY_MANUAL_INSTALL}">
+<h2>{HEADING_INVOKE_MODULE_FILES}</h2>
+<p>{TEXT_MANUAL_INSTALLATION}</p>
 
-<h2>{HEADING_MANUAL_MODULE_INSTALLATION}</h2>
-{TEXT_MANUAL_INSTALLATION}
-<p>{TEXT_MANUAL_INSTALLATION_2}</p>
-
-<table cellpadding="2" cellspacing="0" border="0" width="100%">
-<tr>
-	<td>
-		<select name="file" style="width: 97%;">
-		<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+<form name="details" action="manual_install.php" method="post" class="{INSTALL_VISIBLE}">
+	{TEXT_FILE}:</strong> "install.php"&nbsp;&nbsp;&nbsp;
+	<input type="hidden" name="action" value="install" />
+	<select name="file" style="width: 250px;">
+	<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
 		<!-- BEGIN install_list_block -->
-			<option value="{VALUE}">{NAME}</option>
+		<option value="{VALUE}">{NAME}</option>
 		<!-- END install_list_block -->
-		</select>
-	</td>
-	<td width="110">
-		<input type="submit" name="submit" value="{TEXT_RELOAD}" style="width: 100px;" />
-	</td>
-</tr>
-</table>
-<p style="color: red;">{TEXT_MANUAL_INSTALLATION_WARNING}</p>
-
-<br />
+	</select>
+	<input type="submit" name="submit" value="{TEXT_EXECUTE}" style="width: 100px; margin-left: 1em;" />
 </form>
+
+<form name="details" action="manual_install.php" method="post" class="{UPGRADE_VISIBLE}">
+	<br />{TEXT_FILE}: "upgrade.php"
+	<input type="hidden" name="action" value="upgrade" />
+	<select name="file" style="width: 250px;">
+	<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+		<!-- BEGIN upgrade_list_block -->
+		<option value="{VALUE}">{NAME}</option>
+		<!-- END upgrade_list_block -->
+	</select>
+	<input type="submit" name="submit" value="{TEXT_EXECUTE}" style="width: 100px; margin-left: 1em;" />
+</form>
+
+<form name="details" action="manual_install.php" method="post" class="{UNINSTALL_VISIBLE}">
+	<br />{TEXT_FILE}: "uninstall.php"
+	<input type="hidden" name="action" value="uninstall" />
+	<select name="file" style="width: 250px;">
+	<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+		<!-- BEGIN uninstall_list_block -->
+		<option value="{VALUE}">{NAME}</option>
+		<!-- END uninstall_list_block -->
+	</select>
+	<input type="submit" name="submit" value="{TEXT_EXECUTE}" style="width: 100px; margin-left: 1em;" />
+</form>
+
+<p style="color: red;">{TEXT_MANUAL_INSTALLATION_WARNING}</p>
+</div>
 
 <!-- END main_block -->

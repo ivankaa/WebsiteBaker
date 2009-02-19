@@ -11,6 +11,12 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+19-Feb-2009 Christian Sommer
++	added option to invoke module upgrade.php/uninstall.php files from backend (for modules uploaded via FTP)
+18-Feb-2009 Dietrich Roland Pehlke (aldus)
+#	fixed: typos in the section_id inside the action-link 
+!	Remove test_trash and unused variables in query, added suggetions from #588
+#	Bugfix for form bug (ticket #688)
 17-Feb-2009 Christian Sommer
 +	added option to invoke module install.php from backend (for modules uploaded via FTP)
 !	admin Add-on settings no hidden by default (can be set visible via advanced link)

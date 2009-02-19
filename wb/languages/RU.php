@@ -121,7 +121,7 @@ $HEADING['ADD_GROUP'] = '&#1044;&#1086;&#1073;&#1072;&#1074;&#1080;&#1090;&#1100
 $HEADING['MODIFY_GROUP'] = '&#1048;&#1079;&#1084;&#1077;&#1085;&#1080;&#1090;&#1100; &#1075;&#1088;&#1091;&#1087;&#1087;&#1091;';
 
 $HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
-$HEADING['MANUAL_MODULE_INSTALLATION'] = 'Execute module "install.php" manually';
+$HEADING['INVOKE_MODULE_FILES'] = 'Execute module files manually';
 
 // Other text
 $TEXT['OPEN'] = '&#1054;&#1090;&#1082;&#1088;&#1099;&#1090;&#1100;';
@@ -593,7 +593,7 @@ $MESSAGE['ADDON']['MODULES_RELOADED'] = '&#1052;&#1086;&#1076;&#1091;&#1083;&#10
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = '&#1064;&#1072;&#1073;&#1083;&#1086;&#1085;&#1099; &#1087;&#1077;&#1088;&#1077;&#1079;&#1072;&#1075;&#1088;&#1091;&#1078;&#1077;&#1085;&#1099; &#1091;&#1089;&#1087;&#1077;&#1096;&#1085;&#1086;';
 $MESSAGE['ADDON']['LANGUAGES_RELOADED'] = '&#1071;&#1079;&#1099;&#1082;&#1080; &#1087;&#1077;&#1088;&#1077;&#1079;&#1072;&#1075;&#1088;&#1091;&#1078;&#1077;&#1085;&#1099; &#1091;&#1089;&#1087;&#1077;&#1096;&#1085;&#1086;';
 $MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'The module installation file "install.php" is not executed when modules are uploaded via FTP (not recommended). For those modules, you have to execute the "install.php" manually.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'When modules are uploaded via FTP (not recommended), the module installation files <tt>install.php</tt>, <tt>upgrade.php</tt> or <tt>uninstall.php</tt> will not be executed automatically. Those modules may not work correct or do not uninstall properly.<br /><br />You can execute the module files manually for modules uploaded via FTP below.';
 $MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warning: Existing module database entries will get lost. Only use this option if you experience problems with modules uploaded via FTP.';
 
 ?>

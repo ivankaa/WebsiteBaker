@@ -121,7 +121,7 @@ $HEADING['ADD_GROUP'] = 'Adicionar Grupo';
 $HEADING['MODIFY_GROUP'] = 'Modificar Grupo';
 
 $HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
-$HEADING['MANUAL_MODULE_INSTALLATION'] = 'Execute module "install.php" manually';
+$HEADING['INVOKE_MODULE_FILES'] = 'Execute module files manually';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -593,7 +593,7 @@ $MESSAGE['ADDON']['MODULES_RELOADED'] = 'M&oacute;dulos recarregados com sucesso
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Temas (Templates) recarregados com sucesso';
 $MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Idiomas recarregados com sucesso';
 $MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'The module installation file "install.php" is not executed when modules are uploaded via FTP (not recommended). For those modules, you have to execute the "install.php" manually.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'When modules are uploaded via FTP (not recommended), the module installation files <tt>install.php</tt>, <tt>upgrade.php</tt> or <tt>uninstall.php</tt> will not be executed automatically. Those modules may not work correct or do not uninstall properly.<br /><br />You can execute the module files manually for modules uploaded via FTP below.';
 $MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warning: Existing module database entries will get lost. Only use this option if you experience problems with modules uploaded via FTP.';
 
 ?>

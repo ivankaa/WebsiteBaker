@@ -121,7 +121,7 @@ $HEADING['ADD_GROUP'] = 'Gruppen hinzuf&uuml;gen';
 $HEADING['MODIFY_GROUP'] = 'Gruppen &auml;ndern';
 
 $HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On Voraussetzungen nicht erf&uuml;llt';
-$HEADING['MANUAL_MODULE_INSTALLATION'] = 'Modul "install.php" manuell aufrufen';
+$HEADING['INVOKE_MODULE_FILES'] = 'Moduldateien manuell aufrufen';
 
 // Other text
 $TEXT['OPEN'] = '&Ouml;ffnen';
@@ -593,7 +593,7 @@ $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Module erfolgreich geladen';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Designvorlagen erfolgreich geladen';
 $MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Sprachen erfolgreich geladen';
 $MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Installation fehlgeschlagen. Dein System erf&uuml;llt nicht alle Voraussetzungen die f&uuml;r diese Erweiterung ben&ouml;tigt werden. Um diese Erweiterung nutzen zu k&ouml;nnen, m&uuml;ssen nachfolgende Updates durchgef&uuml;hrt werden.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'Beim Hochladen eines Moduls per FTP (nicht empfohlen), wird die Modulinstallationsdatei "install.php" nicht aufgerufen. Diese Module funktionieren dann meist nicht richtig. In diesem Fall kann die Installationsdatei "install.php" eines bereits installierten Moduls nachtr&auml;glich manuell gestartet werden.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'Beim Hochladen oder L&ouml;schen von Modulen per FTP (nicht empfohlen), werden eventuell vorhandene Moduldateien <tt>install.php</tt>, <tt>upgrade.php</tt> oder <tt>uninstall.php</tt> nicht automatisch ausgef&uuml;hrt. Solche Module funktionieren daher meist nicht richtig, oder hinterlassen Datenbankeintr&auml;ge beim L&ouml;schen per FTP.<br /><br /> Nachfolgend k&ouml;nnen die Moduldateien von per FTP hochgeladenen Modulen manuell ausgef&uuml;hrt werden.';
 $MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warnung: Eventuell vorhandene Datenbankeintr&auml;ge eines Moduls gehen verloren. Bitte nur bei bei Problemen mit per FTP hochgeladenen Modulen verwenden. ';
 
 ?>

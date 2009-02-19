@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id:$
+ * $Id$
  * Website Baker Manual module installation
  *
  * This file contains the function to invoke the module install or upgrade
@@ -12,7 +12,7 @@
  * @author		Christian Sommer
  * @copyright	(c) 2009
  * @license		http://www.gnu.org/copyleft/lesser.html
- * @version		0.1.0
+ * @version		0.2.0
  * @platform	Website Baker 2.7
  *
  * Website Baker Project <http://www.websitebaker.org/>
@@ -36,7 +36,8 @@
 /**
  * check if there is anything to do
  */
-if (!(isset($_POST['file']) && (strpos($_POST['file'], '..') === false))) die(header('Location: index.php'));
+if (!(isset($_POST['action']) && in_array($_POST['action'], array('install', 'upgrade', 'uninstall')))) die(header('Location: index.php?advanced'));
+if (!(isset($_POST['file']) && $_POST['file'] != '' && (strpos($_POST['file'], '..') === false))) die(header('Location: index.php?advanced'));
 
 /**
  * check if user has permissions to access this file
@@ -66,20 +67,34 @@ require_once(WB_PATH . '/languages/' . LANGUAGE .'.php');
 
 // create Admin object with admin header
 $admin = new admin('Addons', '', true, false);
-$js_back = ADMIN_URL . '/modules/index.php';
+$js_back = ADMIN_URL . '/modules/index.php?advanced';
 
 /**
- * Reload all specified Addons
+ * Manually execute the specified module file (install.php, upgrade.php or uninstall.php)
  */
 // check if specified module folder exists
 $mod_path = WB_PATH . '/modules/' . basename(WB_PATH . '/' . $_POST['file']);
-if (!file_exists($mod_path . '/install.php')) $admin->print_error($MESSAGE['GENERIC']['NOT_INSTALLED'], $js_back);
+if (!file_exists($mod_path . '/' . $_POST['action'] . '.php')) $admin->print_error($TEXT['NOT_FOUND'] . ': <tt>"' . htmlentities(basename($mod_path)) . '/' . $_POST['action'] . '.php"</tt> ', $js_back);
 
 // include modules install.php script
-require($mod_path . '/install.php');
+require($mod_path . '/' . $_POST['action'] . '.php');
 
 // load module info into database and output status message
 load_module($mod_path, false);
-$admin->print_success($MESSAGE['GENERIC']['INSTALLED'], $js_back);
+$msg = $TEXT['EXECUTE'] . ': <tt>"' . htmlentities(basename($mod_path)) . '/' . $_POST['action'] . '.php"</tt>';
+
+switch ($_POST['action']) {
+	case 'install':
+		$admin->print_success($msg, $js_back);
+		break;
+
+	case 'upgrade':
+		$admin->print_success($msg, $js_back);
+		break;
+	
+	case 'uninstall':
+		$admin->print_success($msg, $js_back);
+		break;
+}
 
 ?>

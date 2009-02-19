@@ -45,13 +45,39 @@ if($result->numRows() > 0) {
 }
 
 // Insert modules which includes a install.php file to install list
-$template->set_block('main_block', 'install_list_block', 'install_list');
 $module_files = glob(WB_PATH . '/modules/*');
+$template->set_block('main_block', 'install_list_block', 'install_list');
+$template->set_block('main_block', 'upgrade_list_block', 'upgrade_list');
+$template->set_block('main_block', 'uninstall_list_block', 'uninstall_list');
+$template->set_var(array('INSTALL_VISIBLE' => 'hide', 'UPGRADE_VISIBLE' => 'hide', 'UNINSTALL_VISIBLE' => 'hide'));
+
+$show_block = false;
 foreach ($module_files as $index => $path) {
-	if (is_dir($path) && file_exists($path . '/install.php')) {
-		$template->set_var('VALUE', basename($path));
-		$template->set_var('NAME', basename($path));
-		$template->parse('install_list', 'install_list_block', true);
+	if (is_dir($path)) {
+		if (file_exists($path . '/install.php')) {
+			$show_block = true;
+			$template->set_var('INSTALL_VISIBLE', '');
+			$template->set_var('VALUE', basename($path));
+			$template->set_var('NAME', basename($path));
+			$template->parse('install_list', 'install_list_block', true);
+		}
+
+		if (file_exists($path . '/upgrade.php')) {
+			$show_block = true;
+			$template->set_var('UPGRADE_VISIBLE', '');
+			$template->set_var('VALUE', basename($path));
+			$template->set_var('NAME', basename($path));
+			$template->parse('upgrade_list', 'upgrade_list_block', true);
+		} 
+		
+		if (file_exists($path . '/uninstall.php')) {
+			$show_block = true;
+			$template->set_var('UNINSTALL_VISIBLE', '');
+			$template->set_var('VALUE', basename($path));
+			$template->set_var('NAME', basename($path));
+			$template->parse('uninstall_list', 'uninstall_list_block', true);
+		}
+
 	} else {
 		unset($module_files[$index]);
 	}
@@ -67,8 +93,8 @@ if($admin->get_permission('modules_uninstall') != true) {
 if($admin->get_permission('modules_view') != true) {
 	$template->set_var('DISPLAY_LIST', 'hide');
 }
-// only show if at least one module folder contains a install.php file and permissions to admin section exists
-if(count($module_files) == 0 || !isset($_GET['advanced']) || $admin->get_permission('admintools') != true) {
+// only show block if there is something to show
+if(!$show_block || count($module_files) == 0 || !isset($_GET['advanced']) || $admin->get_permission('admintools') != true) {
 	$template->set_var('DISPLAY_MANUAL_INSTALL', 'hide');
 }
 
@@ -77,7 +103,7 @@ $template->set_var(array(
 								'HEADING_INSTALL_MODULE' => $HEADING['INSTALL_MODULE'],
 								'HEADING_UNINSTALL_MODULE' => $HEADING['UNINSTALL_MODULE'],
 								'HEADING_MODULE_DETAILS' => $HEADING['MODULE_DETAILS'],
-								'HEADING_MANUAL_MODULE_INSTALLATION' => $HEADING['MANUAL_MODULE_INSTALLATION']
+								'HEADING_INVOKE_MODULE_FILES' => $HEADING['INVOKE_MODULE_FILES']
 								)
 						);
 // Insert language text and messages
@@ -94,7 +120,8 @@ $template->set_var(array(
 	'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
 	'TEXT_MANUAL_INSTALLATION' => $MESSAGE['ADDON']['MANUAL_INSTALLATION'],
 	'TEXT_MANUAL_INSTALLATION_WARNING' => $MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'],
-	'TEXT_RELOAD' => $TEXT['RELOAD']
+	'TEXT_EXECUTE' => $TEXT['EXECUTE'],
+	'TEXT_FILE' => $TEXT['FILE']
 	)
 );
 
