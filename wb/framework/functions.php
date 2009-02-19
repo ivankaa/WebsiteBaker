@@ -758,7 +758,7 @@ function load_template($directory) {
 // Load language into DB
 function load_language($file) {
 	global $database;
-	if(file_exists($file)) {
+	if (file_exists($file) && preg_match('#^([A-Z]{2}.php)#', basename($file))) {
 		require($file);
 		if(isset($language_name)) {
 			if(!isset($language_license)) { $language_license = 'GNU General Public License'; }
