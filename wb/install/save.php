@@ -617,7 +617,7 @@ if($install_tables == true) {
 	$insert_search_results_footer = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'results_footer', '$search_results_footer', '')";
 	$database->query($insert_search_results_footer);
 	// Search no results
-	$search_no_results = addslashes('<br />[TEXT_NO_RESULTS]');
+	$search_no_results = addslashes('<tr><td><p>[TEXT_NO_RESULTS]</p></td></tr>');
 	$insert_search_no_results = "INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'no_results', '$search_no_results', '')";
 	$database->query($insert_search_no_results);
 	// Search module-order
