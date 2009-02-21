@@ -47,20 +47,8 @@ require_once(WB_PATH.'/framework/functions.php');
 
 // Check if the module exists
 if(!is_dir(WB_PATH.'/modules/'.$file)) {
-	$admin->print_error($MESSAGE['MODULES']['NOT_INSTALLED']);
+	$admin->print_error($MESSAGE['GENERIC']['NOT_INSTALLED']);
 }
-
-/**
-*	Check if the module is in use
-*
-*	@version	0.2.0
-*	@build		1
-*	@date		2008-12-29
-*	@author		aldus
-*	@package	Website Baker: Admin - modules
-*	@state		@beta
-*
-*/
 
 if (!function_exists("replace_all")) {
 	function replace_all ($aStr = "", &$aArray ) {
@@ -126,7 +114,7 @@ if(file_exists(WB_PATH.'/modules/'.$file.'/uninstall.php')) {
 
 // Try to delete the module dir
 if(!rm_full_dir(WB_PATH.'/modules/'.$file)) {
-	$admin->print_error($MESSAGE['MODULES']['CANNOT_UNINSTALL']);
+	$admin->print_error($MESSAGE['GENERIC']['CANNOT_UNINSTALL']);
 } else {
 	// Remove entry from DB
 	$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE directory = '".$file."' AND type = 'module'");

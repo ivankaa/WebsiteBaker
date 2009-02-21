@@ -11,6 +11,11 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+21-Feb-2009 Christian Sommer
+#	fixed wrong index in language array
+!	removed some comment lines (changes are tracked by SVN)
+20-Feb-2009 Dietrich Roland Pehlke (aldus)
+!	add additional tr and td tags to the text_no_results message to get valid XHMTL output
 19-Feb-2009 Christian Sommer
 !	addon overview to show advanced options after redirect from reload.php
 #	fixed bug if language folder contains none language files (XX.php) or sub folders

@@ -72,48 +72,16 @@ if ($file == DEFAULT_TEMPLATE) {
 	
 	/**
 	*	Check if the template is still in use by a page ...
-	*
-	*	@version	0.2.0
-	*	@build		5
-	*	@author		aldus
-	*	@since		0.1.0
-	*	@lastchange 2008-10-23
-	*
 	*/
 	$info = $database->query("SELECT page_id, page_title FROM ".TABLE_PREFIX."pages WHERE template='".$file."' order by page_title");
 	
 	if ($info->numRows() > 0) {
-	
 		/**
 		*	Template is still in use, so we're collecting the page-titles
-		*
-		*	@version	0.2.0
-		*	@build		5
-		*	@since		0.1.1
-		*	@lastchange 2008-10-23
-		*
-		*	0.2.0		Codechanges for Websitebaker to use it without the Black-Hawk-Engine
-		*
-		*	0.1.1		add this page <if we found only one> / these pages
-		*
-		*	@notice		All listed pages got linked to "settings.php" so the user can easy change
-		*				the template-settings. Modifications could be made in "page_template_str".
-		*				For additional informations you will have to modify the query, the page_template_str
-		*				and the page_info array.
-		*
-		*	@todo		1 - Additional informations about the pages (modified, modified_by, visibility, etc)
-		*
-		*				2 - What happends about pages, the user is not allowed to edit?
-		*					Marked "red"?
-		*
-		*				3 - Multiple language support here ...
 		*/
 		
 		/**
 		*	The base-message template-string for the top of the message
-		*
-		*	0.1.2	this page/ these pages
-		*
 		*/
 		if (!array_key_exists("CANNOT_UNINSTALL_IN_USE_TMPL", $MESSAGE['GENERIC'])) {
 			$add = $info->numRows() == 1 ? "this page" : "these pages";
