@@ -176,6 +176,16 @@ db_add_field('redirect_type', 'mod_menu_link', "INT NOT NULL DEFAULT '302' AFTER
 
 
 /**********************************************************
+ *  - Update search no results database filed to create
+ *  valid XHTML if search is empty
+ */
+echo "<br />Updating database field `no_results` of search table: ";
+$search_no_results = addslashes('<tr><td><p>[TEXT_NO_RESULTS]</p></td></tr>');
+$sql = "UPDATE `" . TABLE_PREFIX . "search` SET `value` = '$search_no_results' WHERE `name`= 'no_results'";
+$database->query($sql);
+echo ($database->query($sql)) ? " $OK<br />" : " $FAIL<br />";
+
+/**********************************************************
  *  - End of upgrade script
  */
 echo '<p style="font-size:120%;"><strong>Congratulations: The upgrade script is finished ...</strong></p>';

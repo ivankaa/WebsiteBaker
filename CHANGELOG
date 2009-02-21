@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 21-Feb-2009 Christian Sommer
++	added update of search table missing in Changeset 941
 #	fixed wrong index in language array
 !	removed some comment lines (changes are tracked by SVN)
 20-Feb-2009 Dietrich Roland Pehlke (aldus)
