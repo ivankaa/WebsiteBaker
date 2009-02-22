@@ -46,8 +46,8 @@ if(!file_exists(WB_PATH.'/modules/'.$file)) {
 }
 
 // Setup module object
-$template = new Template(ADMIN_PATH.'/modules');
-$template->set_file('page', 'details.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'modules_details.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Insert values

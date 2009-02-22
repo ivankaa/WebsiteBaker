@@ -30,8 +30,8 @@ $admin = new admin('Preferences');
 require_once(WB_PATH.'/framework/functions-utf8.php');
 
 // Create new template object for the preferences form
-$template = new Template(ADMIN_PATH.'/preferences');
-$template->set_file('page', 'template.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'preferences.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Get existing value from database

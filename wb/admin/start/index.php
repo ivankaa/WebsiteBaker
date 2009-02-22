@@ -28,8 +28,8 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Start','start');
 
 // Setup template object
-$template = new Template(ADMIN_PATH.'/start');
-$template->set_file('page', 'template.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'start.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Insert values into the template object
@@ -39,6 +39,7 @@ $template->set_var(array(
 								'DISPLAY_NAME' => $admin->get_display_name(),
 								'ADMIN_URL' => ADMIN_URL,
 								'WB_URL' => WB_URL,
+								'THEME_URL' => THEME_URL,
 								'WB_VERSION' => WB_VERSION
 								)
 						);

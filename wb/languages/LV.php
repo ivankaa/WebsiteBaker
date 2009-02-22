@@ -209,6 +209,7 @@ $TEXT['TEXT'] = 'Teksts';
 $TEXT['HEADER'] = 'Galvene';
 $TEXT['FOOTER'] = 'Kajene';
 $TEXT['TEMPLATE'] = '&scaron;ablons';
+$TEXT['THEME'] = 'Backend-Theme';
 $TEXT['INSTALLATION'] = 'Instalacija';
 $TEXT['DATABASE'] = 'Datu baze';
 $TEXT['HOST'] = 'Hosts';

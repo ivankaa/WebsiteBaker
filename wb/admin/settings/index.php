@@ -36,8 +36,8 @@ require_once(WB_PATH.'/framework/functions.php');
 require_once(WB_PATH.'/framework/functions-utf8.php');
 
 // Create new template object
-$template = new Template(ADMIN_PATH.'/settings');
-$template->set_file('page', 'template.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'settings.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Query current settings in the db, then loop through them and print them
@@ -126,6 +126,7 @@ $template->set_var(array(
 									'PAGE_SPACER' => PAGE_SPACER,
 									'WB_PATH' => WB_PATH,
 									'WB_URL' => WB_URL,
+									'THEME_URL' => THEME_URL,
 									'ADMIN_PATH' => ADMIN_PATH,
 									'ADMIN_URL' => ADMIN_URL,
 									'DATABASE_TYPE' => DB_TYPE,
@@ -232,7 +233,7 @@ foreach($TIME_FORMATS AS $format => $title) {
 
 // Insert templates
 $template->set_block('main_block', 'template_list_block', 'template_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' order by name");
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' AND function != 'theme' order by name");
 if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('FILE', $addon['directory']);
@@ -240,6 +241,19 @@ if($result->numRows() > 0) {
 		if(($addon['directory'] == DEFAULT_TEMPLATE) ? $selected = ' selected' : $selected = '');
 		$template->set_var('SELECTED', $selected);
 		$template->parse('template_list', 'template_list_block', true);
+	}
+}
+
+// Insert backend theme
+$template->set_block('main_block', 'theme_list_block', 'theme_list');
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' AND function = 'theme' order by name");
+if($result->numRows() > 0) {
+	while($addon = $result->fetchRow()) {
+		$template->set_var('FILE', $addon['directory']);
+		$template->set_var('NAME', $addon['name']);
+		if(($addon['directory'] == DEFAULT_THEME) ? $selected = ' selected' : $selected = '');
+		$template->set_var('SELECTED', $selected);
+		$template->parse('theme_list', 'theme_list_block', true);
 	}
 }
 
@@ -546,6 +560,7 @@ $template->set_var(array(
 								'TEXT_DATE_FORMAT' => $TEXT['DATE_FORMAT'],
 								'TEXT_TIME_FORMAT' => $TEXT['TIME_FORMAT'],
 								'TEXT_TEMPLATE' => $TEXT['TEMPLATE'],
+								'TEXT_THEME' => $TEXT['THEME'],
 								'TEXT_WYSIWYG_EDITOR' => $TEXT['WYSIWYG_EDITOR'],
 								'TEXT_PAGE_LEVEL_LIMIT' => $TEXT['PAGE_LEVEL_LIMIT'],
 								'TEXT_INTRO_PAGE' => $TEXT['INTRO_PAGE'],

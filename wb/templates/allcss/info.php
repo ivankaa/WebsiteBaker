@@ -29,6 +29,7 @@
 // OBLIGATORY WEBSITE BAKER VARIABLES
 $template_directory				= 'allcss';
 $template_name						= 'All CSS';
+$template_function			= 'template';
 $template_version					= '2.70';
 $template_platform				= '2.7';
 $template_author					= 'Ryan Djurovich, C. Sommer';

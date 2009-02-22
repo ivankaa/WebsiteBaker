@@ -99,7 +99,7 @@ function change_os(type) {
 <table cellpadding="0" cellspacing="0" border="0" width="750" align="center">
 <tr>
 	<td width="60" valign="top">
-		<img src="../admin/interface/logo.png" alt="Logo" />
+		<img src="../templates/wb_theme/images/logo.png" alt="Logo" />
 	</td>
 	<td width="5">&nbsp;</td>
 	<td style="font-size: 20px;">

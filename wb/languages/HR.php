@@ -209,6 +209,7 @@ $TEXT['TEXT'] = 'Tekst';
 $TEXT['HEADER'] = 'Zaglavlje';
 $TEXT['FOOTER'] = 'Podno&#382;je';
 $TEXT['TEMPLATE'] = 'Predlo&#382;ak';
+$TEXT['THEME'] = 'Backend-Theme';
 $TEXT['INSTALLATION'] = 'Instalacija';
 $TEXT['DATABASE'] = 'Baza podataka';
 $TEXT['HOST'] = 'Host';

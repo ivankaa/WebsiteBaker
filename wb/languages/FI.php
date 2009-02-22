@@ -209,6 +209,7 @@ $TEXT['TEXT'] = 'Teksti';
 $TEXT['HEADER'] = 'Yl&auml;tunniste';
 $TEXT['FOOTER'] = 'Alatunniste';
 $TEXT['TEMPLATE'] = 'Sivupohja';
+$TEXT['THEME'] = 'Backend-Theme';
 $TEXT['INSTALLATION'] = 'Asentaminen';
 $TEXT['DATABASE'] = 'Tietokanta';
 $TEXT['HOST'] = 'Palvelin';

@@ -112,8 +112,8 @@ class admin extends wb {
 		global $database;
 		$get_title = $database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name = 'website_title'");
 		$title = $get_title->fetchRow();
-		$header_template = new Template(ADMIN_PATH."/interface");
-		$header_template->set_file('page', 'header.html');
+		$header_template = new Template(THEME_PATH.'/templates');
+		$header_template->set_file('page', 'header.htt');
 		$header_template->set_block('page', 'header_block', 'header');
 		if(defined('DEFAULT_CHARSET')) {
 			$charset=DEFAULT_CHARSET;
@@ -142,6 +142,7 @@ class admin extends wb {
 													'VERSION' => VERSION,
 													'WB_URL' => WB_URL,
 													'ADMIN_URL' => ADMIN_URL,
+													'THEME_URL' => THEME_URL,
 													'TITLE_START' => $MENU['START'],
 													'TITLE_VIEW' => $MENU['VIEW'],
 													'TITLE_HELP' => $MENU['HELP'],
@@ -195,8 +196,8 @@ class admin extends wb {
     	if(file_exists(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php')){
       	@include(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php');
     	}
-		$footer_template = new Template(ADMIN_PATH."/interface");
-		$footer_template->set_file('page', 'footer.html');
+		$footer_template = new Template(THEME_PATH.'/templates');
+		$footer_template->set_file('page', 'footer.htt');
 		$footer_template->set_block('page', 'footer_block', 'header');
 		$footer_template->parse('header', 'footer_block', false);
 		$footer_template->pparse('output', 'page');

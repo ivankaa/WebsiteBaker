@@ -49,9 +49,9 @@ function toggle_visibility(id){
 	}
 }
 var plus = new Image;
-plus.src = "<?php echo ADMIN_URL; ?>/images/plus_16.png";
+plus.src = "<?php echo THEME_URL; ?>/images/plus_16.png";
 var minus = new Image;
-minus.src = "<?php echo ADMIN_URL; ?>/images/minus_16.png";
+minus.src = "<?php echo THEME_URL; ?>/images/minus_16.png";
 function toggle_plus_minus(id) {
 	var img_src = document.images['plus_minus_' + id].src;
 	if(img_src == plus.src) {
@@ -62,27 +62,6 @@ function toggle_plus_minus(id) {
 }
 </script>
 
-<style type="text/css">
-.pages_list img {
-	display: block;
-}
-ul, li {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-.page_list {
-	display: none;
-}
-</style>
-
-<noscript>
-	<style type="text/css">
-	.page_list {
-		display: block;
-	}
-	</style>
-</noscript>
 <?php
 
 function make_list($parent, $editable_pages) {
@@ -131,15 +110,15 @@ function make_list($parent, $editable_pages) {
 			$num_pages = $get_pages->numRows();
 			?>
 			
-			<li id="p<?php echo $page['parent']; ?>" style="padding: 2px 0px 2px 0px;">
-			<table width="720" cellpadding="1" cellspacing="0" border="0" style="background-color: #F0F0F0;">
+			<li id="p<?php echo $page['parent']; ?>">
+			<table cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td width="20" style="padding-left: <?php echo $page['level']*20; ?>px;">
 					<?php
 					if($display_plus == true) {
 					?>
 					<a href="javascript: toggle_visibility('p<?php echo $page['page_id']; ?>');" title="<?php echo $TEXT['EXPAND'].'/'.$TEXT['COLLAPSE']; ?>">
-						<img src="<?php echo ADMIN_URL; ?>/images/plus_16.png" onclick="toggle_plus_minus('<?php echo $page['page_id']; ?>');" name="plus_minus_<?php echo $page['page_id']; ?>" border="0" alt="+" />
+						<img src="<?php echo THEME_URL; ?>/images/plus_16.png" onclick="toggle_plus_minus('<?php echo $page['page_id']; ?>');" name="plus_minus_<?php echo $page['page_id']; ?>" border="0" alt="+" />
 					</a>
 					<?php
 					}
@@ -163,29 +142,29 @@ function make_list($parent, $editable_pages) {
 				<td align="left" width="232">
 					<font color="#999999"><?php echo $page['menu_title']; ?></font>
 				</td>
-				<td align="right" valign="middle" width="30" style="padding-right: 20px;">
+				<td align="right" valign="middle" width="30" class="icon_col">
 				<?php if($page['visibility'] == 'public') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/visible_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PUBLIC']; ?>" border="0" />
+					<img src="<?php echo THEME_URL; ?>/images/visible_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PUBLIC']; ?>" border="0" />
 				<?php } elseif($page['visibility'] == 'private') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/private_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PRIVATE']; ?>" border="0" />
+					<img src="<?php echo THEME_URL; ?>/images/private_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PRIVATE']; ?>" border="0" />
 				<?php } elseif($page['visibility'] == 'registered') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/keys_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['REGISTERED']; ?>" border="0" />
+					<img src="<?php echo THEME_URL; ?>/images/keys_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['REGISTERED']; ?>" border="0" />
 				<?php } elseif($page['visibility'] == 'none') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/hidden_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['NONE']; ?>" border="0" />
+					<img src="<?php echo THEME_URL; ?>/images/hidden_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['NONE']; ?>" border="0" />
 				<?php } elseif($page['visibility'] == 'deleted') { ?>
-					<img src="<?php echo ADMIN_URL; ?>/images/deleted_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['DELETED']; ?>" border="0" />
+					<img src="<?php echo THEME_URL; ?>/images/deleted_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['DELETED']; ?>" border="0" />
 				<?php } ?>
 				</td>
 				<td width="20">
 					<?php if($page['visibility'] != 'deleted') { ?>
 						<?php if($admin->get_permission('pages_settings') == true AND $can_modify == true) { ?>
 						<a href="<?php echo ADMIN_URL; ?>/pages/settings.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['SETTINGS']; ?>">
-							<img src="<?php echo ADMIN_URL; ?>/images/modify_16.png" border="0" alt="<?php echo $TEXT['SETTINGS']; ?>" />
+							<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="<?php echo $TEXT['SETTINGS']; ?>" />
 						</a>
 						<?php } ?>
 					<?php } else { ?>
 						<a href="<?php echo ADMIN_URL; ?>/pages/restore.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['RESTORE']; ?>">
-							<img src="<?php echo ADMIN_URL; ?>/images/restore_16.png" border="0" alt="<?php echo $TEXT['RESTORE']; ?>" />
+							<img src="<?php echo THEME_URL; ?>/images/restore_16.png" border="0" alt="<?php echo $TEXT['RESTORE']; ?>" />
 						</a>
 					<?php } ?>
 				</td>
@@ -194,7 +173,7 @@ function make_list($parent, $editable_pages) {
 					<?php if($page['visibility'] != 'deleted') { ?>
 						<?php if($admin->get_permission('pages_settings') == true AND $can_modify == true) { ?>
 						<a href="<?php echo ADMIN_URL; ?>/pages/move_up.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MOVE_UP']; ?>">
-							<img src="<?php echo ADMIN_URL; ?>/images/up_16.png" border="0" alt="^" />
+							<img src="<?php echo THEME_URL; ?>/images/up_16.png" border="0" alt="^" />
 						</a>
 						<?php } ?>
 					<?php } ?>
@@ -205,7 +184,7 @@ function make_list($parent, $editable_pages) {
 					<?php if($page['visibility'] != 'deleted') { ?>
 						<?php if($admin->get_permission('pages_settings') == true AND $can_modify == true) { ?>
 						<a href="<?php echo ADMIN_URL; ?>/pages/move_down.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MOVE_DOWN']; ?>">
-							<img src="<?php echo ADMIN_URL; ?>/images/down_16.png" border="0" alt="v" />
+							<img src="<?php echo THEME_URL; ?>/images/down_16.png" border="0" alt="v" />
 						</a>
 						<?php } ?>
 					<?php } ?>
@@ -214,7 +193,7 @@ function make_list($parent, $editable_pages) {
 				<td width="20">
 					<?php if($admin->get_permission('pages_delete') == true AND $can_modify == true) { ?>
 					<a href="javascript: confirm_link('<?php echo $MESSAGE['PAGES']['DELETE_CONFIRM']; ?>?', '<?php echo ADMIN_URL; ?>/pages/delete.php?page_id=<?php echo $page['page_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-						<img src="<?php echo ADMIN_URL; ?>/images/delete_16.png" border="0" alt="X" />
+						<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
 					</a>
 					<?php } ?>
 				</td>
@@ -244,7 +223,7 @@ if($admin->get_permission('pages_view') == true) {
 		</td>
 		<td align="right">
 				<a href="<?php echo ADMIN_URL; ?>/pages/empty_trash.php">
-				<img src="<?php echo ADMIN_URL; ?>/images/delete_16.png" alt="<?php echo $TEXT['PAGE_TRASH']; ?>" border="0" />
+				<img src="<?php echo THEME_URL; ?>/images/delete_16.png" alt="<?php echo $TEXT['PAGE_TRASH']; ?>" border="0" />
 				<?php echo $TEXT['EMPTY_TRASH']; ?></a>
 		</td>
 	</tr>

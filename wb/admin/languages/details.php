@@ -45,8 +45,8 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'languages_view');
 
 // Setup language object
-$template = new Template(ADMIN_PATH.'/languages');
-$template->set_file('page', 'details.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'languages_details.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Insert values

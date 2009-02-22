@@ -31,9 +31,6 @@ $admin = new admin('Media', 'media_rename', false);
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
-// Include the basic header file
-require(ADMIN_PATH.'/media/basic_header.html');
-
 // Get list of file types to which we're supposed to append 'txt'
 $get_result=$database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name='rename_files_on_upload' LIMIT 1");
 $file_extension_string='';

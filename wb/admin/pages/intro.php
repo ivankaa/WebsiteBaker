@@ -59,14 +59,14 @@ if(!isset($_GET['wysiwyg']) OR $_GET['wysiwyg'] != 'no') {
 show_wysiwyg_editor('content','content',$content,'100%','500px');
 ?>
 
-<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<table cellpadding="0" cellspacing="0" border="0" class="form_submit">
 <tr>
-	<td align="left">
-		<input type="submit" value="<?php echo $TEXT['SAVE'];?>" style="width: 100px; margin-top: 5px;" />
+	<td class="left">
+		<input type="submit" value="<?php echo $TEXT['SAVE'];?>" class="submit" />
 	</td>
-	<td align="right">
+	<td class="right">
 		</form>
-		<input type="button" value="<?php echo $TEXT['CANCEL'];?>" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
+		<input type="button" value="<?php echo $TEXT['CANCEL'];?>" onclick="javascript: window.location = 'index.php';" class="submit" />
 	</td>
 </tr>
 </table>

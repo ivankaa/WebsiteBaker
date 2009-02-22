@@ -741,14 +741,15 @@ function load_template($directory) {
 		if(isset($template_name)) {
 			if(!isset($template_license)) { $template_license = 'GNU General Public License'; }
 			if(!isset($template_platform) AND isset($template_designed_for)) { $template_platform = $template_designed_for; }
+			if(!isset($template_function)) { $template_function = 'template'; }
 			// Check that it doesn't already exist
 			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$template_directory."' LIMIT 0,1");
 			if($result->numRows() == 0) {
 				// Load into DB
 				$query = "INSERT INTO ".TABLE_PREFIX."addons ".
-				"(directory,name,description,type,version,platform,author,license) ".
+				"(directory,name,description,type,function,version,platform,author,license) ".
 				"VALUES ('$template_directory','$template_name','".addslashes($template_description)."','template',".
-				"'$template_version','$template_platform','$template_author','$template_license')";
+				"'$template_function','$template_version','$template_platform','$template_author','$template_license')";
 				$database->query($query);
 			}
 		}

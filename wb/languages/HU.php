@@ -209,6 +209,7 @@ $TEXT['TEXT'] = 'Sz&ouml;veg';
 $TEXT['HEADER'] = 'Fejl&eacute;c';
 $TEXT['FOOTER'] = 'L&aacute;bl&eacute;c';
 $TEXT['TEMPLATE'] = 'Sablon';
+$TEXT['THEME'] = 'Backend-Theme';
 $TEXT['INSTALLATION'] = 'Telep&iacute;t&eacute;s';
 $TEXT['DATABASE'] = 'Adatb&aacute;zis';
 $TEXT['HOST'] = 'Host';

@@ -209,6 +209,7 @@ $TEXT['TEXT'] = 'Text';
 $TEXT['HEADER'] = 'Header';
 $TEXT['FOOTER'] = 'Footer';
 $TEXT['TEMPLATE'] = 'Template';
+$TEXT['THEME'] = 'Backend-Theme';
 $TEXT['INSTALLATION'] = 'Installation';
 $TEXT['DATABASE'] = 'Database';
 $TEXT['HOST'] = 'Host';

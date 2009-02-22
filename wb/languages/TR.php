@@ -209,6 +209,7 @@ $TEXT['TEXT'] = 'Yaz&yacute;';
 $TEXT['HEADER'] = '&Uuml;st K&yacute;s&yacute;m';
 $TEXT['FOOTER'] = 'Alt K&yacute;s&yacute;m';
 $TEXT['TEMPLATE'] = 'Kal&yacute;p';
+$TEXT['THEME'] = 'Backend-Theme';
 $TEXT['INSTALLATION'] = 'Y&uuml;kle';
 $TEXT['DATABASE'] = 'Database';
 $TEXT['HOST'] = 'Host';

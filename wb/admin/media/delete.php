@@ -31,9 +31,6 @@ $admin = new admin('Media', 'media_delete', false);
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
-// Include the stripped-down header file
-require('basic_header.html');
-
 // Get the current dir
 $directory = $admin->get_get('dir');
 if($directory == '/') {

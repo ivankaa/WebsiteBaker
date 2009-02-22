@@ -119,7 +119,11 @@ if (file_exists(WB_PATH.'/framework/class.database.php')) {
 	} else {
 		define('TIME_FORMAT', DEFAULT_TIME_FORMAT);
 	}
-		
+	
+	// Set Theme dir
+	define('THEME_URL', WB_URL.'/templates/'.DEFAULT_THEME);
+	define('THEME_PATH', WB_PATH.'/templates/'.DEFAULT_THEME);
+	
 }
 
 ?>

@@ -209,6 +209,7 @@ $TEXT['TEXT'] = 'Tekst';
 $TEXT['HEADER'] = 'P&auml;is';
 $TEXT['FOOTER'] = 'Jalus';
 $TEXT['TEMPLATE'] = 'Kujundus';
+$TEXT['THEME'] = 'Backend-Theme';
 $TEXT['INSTALLATION'] = 'Installatsioon';
 $TEXT['DATABASE'] = 'Andmebaas';
 $TEXT['HOST'] = 'Hostia';

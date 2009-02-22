@@ -209,6 +209,7 @@ $TEXT['TEXT'] = 'Tekst';
 $TEXT['HEADER'] = 'Hoved (overligger)';
 $TEXT['FOOTER'] = 'Fod (bund)';
 $TEXT['TEMPLATE'] = 'Skabelon';
+$TEXT['THEME'] = 'Backend-Theme';
 $TEXT['INSTALLATION'] = 'Installation';
 $TEXT['DATABASE'] = 'Database';
 $TEXT['HOST'] = 'V&aelig;rt';

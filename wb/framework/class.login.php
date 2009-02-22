@@ -385,6 +385,7 @@ class login extends admin {
 											'MAX_USERNAME_LEN' => $this->max_username_len,
 											'MAX_PASSWORD_LEN' => $this->max_password_len,
 											'WB_URL' => WB_URL,
+											'THEME_URL' => THEME_URL,
 											'FORGOTTEN_DETAILS_APP' => $this->forgotten_details_app,
 											'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS'],
 											'TEXT_USERNAME' => $TEXT['USERNAME'],

@@ -31,12 +31,13 @@ $admin = new admin('admintools', 'admintools');
 require_once(WB_PATH.'/framework/functions.php');
 
 // Create new template object
-$template = new Template(ADMIN_PATH.'/admintools');
-$template->set_file('page', 'template.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'admintools.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Insert required template variables
 $template->set_var('ADMIN_URL', ADMIN_URL);
+$template->set_var('THEME_URL', THEME_URL);
 $template->set_var('HEADING_ADMINISTRATION_TOOLS', $HEADING['ADMINISTRATION_TOOLS']);
 
 // Insert tools into tool list

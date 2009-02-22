@@ -30,6 +30,7 @@
 // OBLIGATORY WEBSITE BAKER VARIABLES
 $template_directory				= 'blank';
 $template_name						= 'Blank Template';
+$template_function			= 'template';
 $template_version					= '2.70';
 $template_platform				= '2.7';
 $template_author					= 'Ryan Djurovich, C. Sommer';

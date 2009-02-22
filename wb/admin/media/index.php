@@ -29,8 +29,8 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Media', 'media');
 
 // Setup template object
-$template = new Template(ADMIN_PATH.'/media');
-$template->set_file('page', 'template.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'media.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Include the WB functions file

@@ -32,8 +32,8 @@ $admin = new admin('Media', 'media', false);
 require_once(WB_PATH.'/framework/functions.php');
 
 // Setup template object
-$template = new Template(ADMIN_PATH.'/media');
-$template->set_file('page', 'browse.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'media_browse.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Get the current dir
@@ -71,6 +71,7 @@ if($directory == '') {
 
 // Insert values
 $template->set_var(array(
+								'THEME_URL' => THEME_URL,
 								'CURRENT_DIR' => $directory,
 								'PARENT_DIR_LINK' => $parent_dir_link,
 								'DISPLAY_UP_ARROW' => $display_up_arrow
@@ -110,7 +111,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 											'LINK' => "browse.php?dir=$directory/$link_name",
 											'LINK_TARGET' => '',
 											'ROW_BG_COLOR' => $row_bg_color,
-											'FILETYPE_ICON' => ADMIN_URL.'/images/folder_16.png'
+											'FILETYPE_ICON' => THEME_URL.'/images/folder_16.png'
 											)
 									);
 			$template->parse('list', 'list_block', true);
@@ -133,7 +134,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 											'LINK' => WB_URL.MEDIA_DIRECTORY.$directory.'/'.$name,
 											'LINK_TARGET' => '_blank',
 											'ROW_BG_COLOR' => $row_bg_color,
-											'FILETYPE_ICON' => ADMIN_URL.'/images/blank.gif'
+											'FILETYPE_ICON' => THEME_URL.'/images/blank.gif'
 											)
 									);
 			$template->parse('list', 'list_block', true);

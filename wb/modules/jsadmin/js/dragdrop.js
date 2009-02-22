@@ -133,7 +133,7 @@ JsAdmin.DD.addMoveButton = function(tr, cell, op) {
 	}
 	
 	var html = '<a href="' + item.url + 'move_' + op + '.php' + item.params
-				+ '"><img src="' + JsAdmin.WB_URL + '/admin/images/' + op
+				+ '"><img src="' + JsAdminTheme.THEME_URL + '/images/' + op
 				+ '_16.png" border="0" alt="' + op + '" /></a>';
 	tr.cells[cell].innerHTML = html;
 };

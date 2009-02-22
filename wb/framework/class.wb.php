@@ -277,8 +277,8 @@ class wb
 		$redirect_timer = ($results) ? $results : '1500';
 
 		// add template variables
-		$success_template = new Template(ADMIN_PATH.'/interface');
-		$success_template->set_file('page', 'success.html');
+		$success_template = new Template(THEME_PATH.'/templates');
+		$success_template->set_file('page', 'success.htt');
 		$success_template->set_block('page', 'main_block', 'main');
 		$success_template->set_var('MESSAGE', $message);
 		$success_template->set_var('REDIRECT', $redirect);
@@ -291,8 +291,8 @@ class wb
 	// Print an error message
 	function print_error($message, $link = 'index.php', $auto_footer = true) {
 		global $TEXT;
-		$success_template = new Template(ADMIN_PATH.'/interface');
-		$success_template->set_file('page', 'error.html');
+		$success_template = new Template(THEME_PATH.'/templates');
+		$success_template->set_file('page', 'error.htt');
 		$success_template->set_block('page', 'main_block', 'main');
 		$success_template->set_var('MESSAGE', $message);
 		$success_template->set_var('LINK', $link);

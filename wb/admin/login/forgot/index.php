@@ -119,8 +119,8 @@ if(!isset($message)) {
 }
 	
 // Setup the template
-$template = new Template(ADMIN_PATH.'/login/forgot');
-$template->set_file('page', 'template.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'login_forgot.htt');
 $template->set_block('page', 'main_block', 'main');
 if(defined('FRONTEND')) {
 	$template->set_var('ACTION_URL', 'forgot.php');
@@ -139,6 +139,7 @@ $template->set_var(array(
 								'MESSAGE' => $message,
 								'WB_URL' => WB_URL,
 								'ADMIN_URL' => ADMIN_URL,
+								'THEME_URL' => THEME_URL,
 								'TEXT_EMAIL' => $TEXT['EMAIL'],
 								'TEXT_SEND_DETAILS' => $TEXT['SEND_DETAILS'],
 								'TEXT_HOME' => $TEXT['HOME'],

@@ -63,6 +63,13 @@ if (!function_exists("replace_all")) {
 if (!array_key_exists('CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE', $MESSAGE['GENERIC'] ) )
 	$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall this template <b>{{name}}</b> because it's the standardtemplate!";
 
+// check whether the template is used as default wb theme
+if($file == DEFAULT_THEME) {
+	$temp = array ('name' => $file );
+	$msg = replace_all( $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'], $temp );
+	$admin->print_error( $msg );
+}
+
 if ($file == DEFAULT_TEMPLATE) {
 	$temp = array ('name' => $file );
 	$msg = replace_all( $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'], $temp );

@@ -141,8 +141,8 @@ if(!isset($block[1]) OR $block[1] == '') {
 	$jscal_use_time = true; // whether to use a clock, too
 	require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 ?>
-<table cellpadding="5" cellspacing="0" border="0" align="center" width="100%" height="50" style="margin-bottom: 10px;">
-<tr style="background-color: #F0F0F0;">
+<table cellpadding="0" cellspacing="0" class="sections_header">
+<tr>
 	<td valign="middle" align="left">
 		<h2><?php echo $HEADING['MANAGE_SECTIONS']; ?></h2>
 	</td>
@@ -181,10 +181,10 @@ if($query_sections->numRows() > 0) {
 		if(!is_numeric(array_search($section['module'], $module_permissions))) {
 			?>
 			<tr onmouseover="this.style.backgroundColor = '#F1F8DD'" onmouseout="this.style.backgroundColor = '#FFF'">
-				<td style="width: <?php if(SECTION_BLOCKS) print "120"; else print "200"; ?>px;"><a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>#<?php echo $section['section_id']; ?>"><?php echo $module_name; ?></a></td>
+				<td class="<?php if(SECTION_BLOCKS) print 'input_normal'; else print 'input_wide'; ?>"><a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>#<?php echo $section['section_id']; ?>"><?php echo $module_name; ?></a></td>
 				<?php if(SECTION_BLOCKS) { ?>
 				<td>
-					<select name="block<?php echo $section['section_id']; ?>" style="width: 120px;">
+					<select name="block<?php echo $section['section_id']; ?>" class="input_normal">
 						<?php
 						foreach($block AS $number => $name) {
 							?>
@@ -199,31 +199,31 @@ if($query_sections->numRows() > 0) {
 					</select>
 				</td>
 				<?php } // jscalendar-stuff following ?>
-				<td><input type="text" id="start_date<?php echo $section['section_id']; ?>" name="start_date<?php echo $section['section_id']; ?>" value="<?php if($section['publ_start']==0) print ""; else print date($jscal_format, $section['publ_start'])?>" style="width: 120px;" />
-					<img src="<?php echo ADMIN_URL ?>/images/clock_16.png" id="trigger_start<?php echo $section['section_id']; ?>" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
-					<img src="<?php echo ADMIN_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="<?php echo $TEXT['DELETE_DATE']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.section_properties.start_date<?php echo $section['section_id']; ?>.value=''" />
+				<td><input type="text" id="start_date<?php echo $section['section_id']; ?>" name="start_date<?php echo $section['section_id']; ?>" value="<?php if($section['publ_start']==0) print ""; else print date($jscal_format, $section['publ_start'])?>" class="input_normal" />
+					<img src="<?php echo THEME_URL ?>/images/clock_16.png" id="trigger_start<?php echo $section['section_id']; ?>" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" />
+					<img src="<?php echo THEME_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="<?php echo $TEXT['DELETE_DATE']; ?>" onclick="document.section_properties.start_date<?php echo $section['section_id']; ?>.value=''" />
 				</td>
-				<td><input type="text" id="end_date<?php echo $section['section_id']; ?>" name="end_date<?php echo $section['section_id']; ?>" value="<?php if($section['publ_end']==0) print ""; else print date($jscal_format, $section['publ_end'])?>" style="width: 120px;" />
-					<img src="<?php echo ADMIN_URL ?>/images/clock_16.png" id="trigger_stop<?php echo $section['section_id']; ?>" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
-					<img src="<?php echo ADMIN_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="<?php echo $TEXT['DELETE_DATE']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.section_properties.end_date<?php echo $section['section_id']; ?>.value=''"/>
+				<td><input type="text" id="end_date<?php echo $section['section_id']; ?>" name="end_date<?php echo $section['section_id']; ?>" value="<?php if($section['publ_end']==0) print ""; else print date($jscal_format, $section['publ_end'])?>" class="input_normal" />
+					<img src="<?php echo THEME_URL ?>/images/clock_16.png" id="trigger_stop<?php echo $section['section_id']; ?>" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
+					<img src="<?php echo THEME_URL ?>/images/clock_del_16.png" title="<?php echo $TEXT['DELETE_DATE']; ?>" onclick="document.section_properties.end_date<?php echo $section['section_id']; ?>.value=''"/>
 				</td>
 				<td width="20">
 					<?php if($section['position'] != 1) { ?>
 					<a href="<?php echo ADMIN_URL; ?>/pages/move_up.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section['section_id']; ?>">
-						<img src="<?php echo ADMIN_URL; ?>/images/up_16.png" alt="^" border="0" />
+						<img src="<?php echo THEME_URL; ?>/images/up_16.png" alt="^" border="0" />
 					</a>
 					<?php } ?>
 				</td>
 				<td width="20">
 					<?php if($section['position'] != $num_sections) { ?>
 					<a href="<?php echo ADMIN_URL; ?>/pages/move_down.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section['section_id']; ?>">
-						<img src="<?php echo ADMIN_URL; ?>/images/down_16.png" alt="v" border="0" />
+						<img src="<?php echo THEME_URL; ?>/images/down_16.png" alt="v" border="0" />
 					</a>
 					<?php } ?>
 				</td>
 				<td width="20">
 					<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo ADMIN_URL; ?>/pages/sections.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section['section_id']; ?>');">
-						<img src="<?php echo ADMIN_URL; ?>/images/delete_16.png" alt="Del" border="0" />
+						<img src="<?php echo THEME_URL; ?>/images/delete_16.png" alt="Del" border="0" />
 					</a>
 				</td>
 			</tr>
@@ -232,7 +232,7 @@ if($query_sections->numRows() > 0) {
 	}
 	?>
 	<tr>
-		<td align="center" colspan="<?php if(SECTION_BLOCKS) print "7"; else print "6"; ?>"><input type="submit" name="save" value="<?php echo $TEXT['SAVE']; ?>" style="width: 150px;" /></td>
+		<td align="center" colspan="<?php if(SECTION_BLOCKS) print '7'; else print '6'; ?>"><input type="submit" name="save" value="<?php echo $TEXT['SAVE']; ?>" class="input_medium" /></td>
 	</tr>
 	</table>
 
@@ -301,7 +301,7 @@ if($query_sections->numRows() == 0) {
 	<table cellpadding="5" cellspacing="0" border="0" align="center" width="100%">
 	<tr>
 		<td>
-			<select name="module" style="width: 100%;">
+			<select name="module" class="input_full">
 			<?php
 			// Insert module list
 			$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page' AND directory != 'menu_link' order by name");
@@ -318,8 +318,10 @@ if($query_sections->numRows() == 0) {
 			?>
 			</select>
 		</td>
-		<td width="100">
-			<input type="submit" name="submit" value="<?php echo $TEXT['ADD']; ?>" style="width: 100px" />
+	</tr>
+	<tr>
+		<td>
+			<input type="submit" name="submit" value="<?php echo $TEXT['ADD']; ?>" class="input_narrow" />
 		</td>
 	</tr>
 	</table>

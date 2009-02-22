@@ -209,6 +209,7 @@ $TEXT['TEXT'] = 'Text';
 $TEXT['HEADER'] = 'Huvud';
 $TEXT['FOOTER'] = 'Fot';
 $TEXT['TEMPLATE'] = 'Mall';
+$TEXT['THEME'] = 'Backend-Theme';
 $TEXT['INSTALLATION'] = 'Installation';
 $TEXT['DATABASE'] = 'Databas';
 $TEXT['HOST'] = 'Host';

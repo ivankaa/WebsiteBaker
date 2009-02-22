@@ -52,7 +52,7 @@ body {
 
 #container {
 	width:85%;
-	background: #A8BCCB url(<?php echo ADMIN_URL;?>/interface/background.png) repeat-x;
+	background: #A8BCCB url(<?php echo THEME_URL;?>/images/background.png) repeat-x;
 	border:1px solid #000;
 	color:#000;
 	margin:2em auto;
@@ -90,7 +90,7 @@ h3 { font-size: 120%; }
 </head>
 <body>
 <div id="container">
-<img src="<?php echo ADMIN_URL;?>/interface/logo.png" alt="Website Baker Logo" />
+<img src="<?php echo THEME_URL;?>/images/logo.png" alt="Website Baker Logo" />
 
 <h1>Website Baker Upgrade</h1>
 
@@ -127,7 +127,6 @@ function db_add_key_value($key, $value) {
 // function to add a new field into a table
 function db_add_field($field, $table, $desc) {
 	global $database; global $OK; global $FAIL;
-	echo "<u>Adding field '$field' to table '$table'</u><br />";
 	$table = TABLE_PREFIX.$table;
 	$query = $database->query("DESCRIBE $table '$field'");
 	if($query->numRows() == 0) { // add field
@@ -149,13 +148,26 @@ function db_add_field($field, $table, $desc) {
 /**********************************************************
  *  - Adding field sec_anchor to settings table
  */
-echo "<br />Adding key sec_anchor to settings table<br />";
+echo "<br />Adding sec_anchor to settings table<br />";
 $cfg = array(
 	'sec_anchor' => 'wb_'
 );
 foreach($cfg as $key=>$value) {
 	db_add_key_value($key, $value);
 }
+
+
+/**********************************************************
+ *  - Adding field default_theme to settings table
+ */
+echo "<br />Adding default_theme to settings table<br />";
+$cfg = array(
+	'default_theme' => 'wb_theme'
+);
+foreach($cfg as $key=>$value) {
+	db_add_key_value($key, $value);
+}
+
 
 /**********************************************************
  *  - Adding redirect timer to settings table
@@ -167,6 +179,7 @@ $cfg = array(
 foreach($cfg as $key=>$value) {
 	db_add_key_value($key, $value);
 }
+
 
 /**********************************************************
  *  - Add field "redirect_type" to table "mod_menu_link"
@@ -184,6 +197,59 @@ $search_no_results = addslashes('<tr><td><p>[TEXT_NO_RESULTS]</p></td></tr>');
 $sql = "UPDATE `" . TABLE_PREFIX . "search` SET `value` = '$search_no_results' WHERE `name`= 'no_results'";
 $database->query($sql);
 echo ($database->query($sql)) ? " $OK<br />" : " $FAIL<br />";
+
+
+/**********************************************************
+ *  - Set Version to WB 2.8 BETA
+ */
+echo "<br />Update database version number to 2.8 BETA : ";
+$version = '2.8 BETA';
+echo ($database->query("UPDATE `".TABLE_PREFIX."settings` SET `value` = '$version' WHERE `name` = 'wb_version'")) ? " $OK<br />" : " $FAIL<br />";
+
+
+/**********************************************************
+ *  - Reload all addons
+ */
+
+//delete modules
+$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE type = 'module'");
+// Load all modules
+if($handle = opendir(WB_PATH.'/modules/')) {
+	while(false !== ($file = readdir($handle))) {
+		if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'admin.php' AND $file != 'index.php') {
+			load_module(WB_PATH.'/modules/'.$file);
+		}
+	}
+	closedir($handle);
+}
+echo '<br />Modules reloaded<br />';
+
+//delete templates		
+$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+// Load all templates
+if($handle = opendir(WB_PATH.'/templates/')) {
+	while(false !== ($file = readdir($handle))) {
+		if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'index.php') {
+			load_template(WB_PATH.'/templates/'.$file);
+		}
+	}
+	closedir($handle);
+}
+echo '<br />Templates reloaded<br />';
+
+//delete languages
+$database->query("DELETE FROM ".TABLE_PREFIX."addons WHERE type = 'language'");
+// Load all languages
+if($handle = opendir(WB_PATH.'/languages/')) {
+	while(false !== ($file = readdir($handle))) {
+		if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'index.php') {
+			load_language(WB_PATH.'/languages/'.$file);
+		}
+	}
+	closedir($handle);
+}
+echo '<br />Languages reloaded<br />';
+
 
 /**********************************************************
  *  - End of upgrade script

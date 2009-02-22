@@ -209,6 +209,7 @@ $TEXT['TEXT'] = 'Tekst';
 $TEXT['HEADER'] = 'Koptekst';
 $TEXT['FOOTER'] = 'Voettekst';
 $TEXT['TEMPLATE'] = 'Template';
+$TEXT['THEME'] = 'Backend-Theme';
 $TEXT['INSTALLATION'] = 'Installatie';
 $TEXT['DATABASE'] = 'Database';
 $TEXT['HOST'] = 'Host';

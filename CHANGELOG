@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+22-Feb-2009 Matthias Gallas
++	added skinable Admin Interface
 21-Feb-2009 Christian Sommer
 +	added update of search table missing in Changeset 941
 #	fixed wrong index in language array

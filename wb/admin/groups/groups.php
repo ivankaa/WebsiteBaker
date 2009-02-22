@@ -50,8 +50,8 @@ if($_POST['action'] == 'modify') {
 	$results = $database->query("SELECT * FROM ".TABLE_PREFIX."groups WHERE group_id = '".$_POST['group_id']."'");
 	$group = $results->fetchRow();
 	// Setup template object
-	$template = new Template(ADMIN_PATH.'/groups');
-	$template->set_file('page', 'group_form.html');
+	$template = new Template(THEME_PATH.'/templates');
+	$template->set_file('page', 'groups_form.htt');
 	$template->set_block('page', 'main_block', 'main');
 	$template->set_var(	array(
 										'ACTION_URL' => ADMIN_URL.'/groups/save.php',

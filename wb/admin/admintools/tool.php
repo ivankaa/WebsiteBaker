@@ -43,7 +43,7 @@ if($result->numRows() == 0) {
 $tool = $result->fetchRow();
 
 ?>
-<h4 style="margin: 0; border-bottom: 1px solid #DDD; padding-bottom: 5px;">
+<h4>
 	<a href="<?php echo ADMIN_URL; ?>/admintools/index.php"><?php echo $HEADING['ADMINISTRATION_TOOLS']; ?></a>
 	->
 	<?php echo $tool['name']; ?>

@@ -48,7 +48,7 @@ if(defined('SMART_LOGIN') AND SMART_LOGIN == 'enabled') {
 $thisApp = new Login(
 							array(
 									'MAX_ATTEMPS' => "3",
-									'WARNING_URL' => ADMIN_URL."/login/warning.html",
+									'WARNING_URL' => THEME_URL."/templates/warning.htt",
 									'USERNAME_FIELDNAME' => $username_fieldname,
 									'PASSWORD_FIELDNAME' => $password_fieldname,
 									'REMEMBER_ME_OPTION' => SMART_LOGIN,
@@ -58,8 +58,8 @@ $thisApp = new Login(
 									'MAX_PASSWORD_LEN' => "30",
 									'LOGIN_URL' => ADMIN_URL."/login/index.php",
 									'DEFAULT_URL' => ADMIN_URL."/start/index.php",
-									'TEMPLATE_DIR' => ADMIN_PATH."/login",
-									'TEMPLATE_FILE' => "template.html",
+									'TEMPLATE_DIR' => THEME_PATH."/templates",
+									'TEMPLATE_FILE' => "login.htt",
 									'FRONTEND' => false,
 									'FORGOTTEN_DETAILS_APP' => ADMIN_URL."/login/forgot/index.php",
 									'USERS_TABLE' => TABLE_PREFIX."users",

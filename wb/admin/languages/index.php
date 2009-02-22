@@ -29,8 +29,8 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'languages');
 
 // Setup template object
-$template = new Template(ADMIN_PATH.'/languages');
-$template->set_file('page', 'template.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'languages.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Insert values into language list

@@ -113,6 +113,7 @@ ul.jsadmin_drag_area {
 <script language="JavaScript">
 <!--
 var JsAdmin = { WB_URL : '<?php echo WB_URL ?>' };
+var JsAdminTheme = { THEME_URL : '<?php echo THEME_URL ?>' };
 //-->
 </script>
 <?php

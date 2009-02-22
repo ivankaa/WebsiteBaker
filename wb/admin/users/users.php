@@ -49,8 +49,8 @@ if($_POST['action'] == 'modify') {
 	$user = $results->fetchRow();
 	
 	// Setup template object
-	$template = new Template(ADMIN_PATH.'/users');
-	$template->set_file('page', 'user_form.html');
+	$template = new Template(THEME_PATH.'/templates');
+	$template->set_file('page', 'users_form.htt');
 	$template->set_block('page', 'main_block', 'main');
 	$template->set_var(	array(
 										'ACTION_URL' => ADMIN_URL.'/users/save.php',

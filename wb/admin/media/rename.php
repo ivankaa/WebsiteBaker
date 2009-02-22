@@ -31,9 +31,6 @@ $admin = new admin('Media', 'media_rename', false);
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
-// Include the basic header file
-require(ADMIN_PATH.'/media/basic_header.html');
-
 // Get the current dir
 $directory = $admin->get_get('dir');
 if($directory == '/') {
@@ -97,8 +94,8 @@ if(!isset($rename_file)) {
 }
 
 // Setup template object
-$template = new Template(ADMIN_PATH.'/media');
-$template->set_file('page', 'rename.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'media_rename.htt');
 $template->set_block('page', 'main_block', 'main');
 //echo WB_PATH.'/media/'.$directory.'/'.$rename_file;
 if($type == 'folder') {
@@ -116,6 +113,7 @@ if($type == 'folder') {
 }
 
 $template->set_var(array(
+								'THEME_URL' => THEME_URL,
 								'FILENAME' => $rename_file,
 								'DIR' => $directory,
 								'FILE_ID' => $file_id,

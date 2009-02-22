@@ -29,8 +29,8 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'groups');
 
 // Create new template object for the modify/remove menu
-$template = new Template(ADMIN_PATH.'/groups');
-$template->set_file('page', 'template.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'groups.htt');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var('ADMIN_URL', ADMIN_URL);
 
@@ -92,8 +92,8 @@ $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
 // Setup template for add group form
-$template = new Template(ADMIN_PATH.'/groups');
-$template->set_file('page', 'group_form.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'groups_form.htt');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var('DISPLAY_EXTRA', 'none');
 $template->set_var('ACTION_URL', ADMIN_URL.'/groups/add.php');

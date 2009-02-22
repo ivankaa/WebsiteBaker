@@ -28,13 +28,14 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'addons');
 
 // Setup template object
-$template = new Template(ADMIN_PATH.'/addons');
-$template->set_file('page', 'template.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'addons.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Insert values into the template object
 $template->set_var(array(
 								'ADMIN_URL' => ADMIN_URL,
+								'THEME_URL' => THEME_URL,
 								'WB_URL' => WB_URL
 								)
 						);

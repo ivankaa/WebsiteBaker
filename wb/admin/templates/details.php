@@ -45,8 +45,8 @@ require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Addons', 'templates_view');
 
 // Setup template object
-$template = new Template(ADMIN_PATH.'/templates');
-$template->set_file('page', 'details.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'templates_details.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Insert values

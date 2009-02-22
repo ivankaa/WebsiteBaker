@@ -461,6 +461,7 @@ if($install_tables == true) {
 	." ('redirect_timer', '1500'),"
 	." ('home_folders', 'true'),"
 	." ('default_template', 'round'),"
+	." ('default_theme', 'wb_theme'),"
 	." ('default_charset', 'utf-8'),"
 	." ('multiple_menus', 'false'),"
 	." ('page_level_limit', '4'),"

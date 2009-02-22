@@ -81,8 +81,8 @@ if($results_array['modified_when'] != 0) {
 }
 
 // Setup template object, parse vars to it, then parse it
-$template = new Template(ADMIN_PATH.'/pages');
-$template->set_file('page', 'settings.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'pages_settings.htt');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var(array(
 								'PAGE_ID' => $results_array['page_id'],
@@ -290,10 +290,10 @@ function parent_list($parent) {
 			if($results_array['parent'] == $page['page_id']) {
 				$template->set_var('SELECTED', ' selected');
 			} elseif($results_array['page_id'] == $page['page_id']) {
-				$template->set_var('SELECTED', ' disabled="disabled" style="color: #aaa;"');
+				$template->set_var('SELECTED', ' disabled="disabled" class="disabled"');
 				$list_next_level=false;
 			} elseif($can_modify != true) {
-				$template->set_var('SELECTED', ' disabled="disabled" style="color: #aaa;"');
+				$template->set_var('SELECTED', ' disabled="disabled" class="disabled"');
 			} else {
 				$template->set_var('SELECTED', '');
 			}
