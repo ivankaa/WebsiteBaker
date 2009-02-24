@@ -15,6 +15,9 @@ Legend:
 !	Changes in warning.htt templates to get valid XHTL1.1 output - replace the center-tag with div
 #	add "AND section_id='$section_id'" to the delete-query to avoid conflicts if there are more
 	than one Form on one single page.
+#	Fixed: news-module doesn't display [PUBLISHED_DATE] inside the detail-view.
+#	Modify error.htt template in wb_theme for valid XHTML1.1 output - replace the center-tag with a div
+	and replace the br-tag with valid p-tags.
 22-Feb-2009 Matthias Gallas
 +	added skinable Admin Interface
 21-Feb-2009 Christian Sommer

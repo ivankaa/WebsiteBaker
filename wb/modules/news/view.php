@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
+ Copyright (C) 2004-2008, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 */
 
 // Must include code to stop this file being access directly
-if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
+if (defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
 // check if frontend.css file needs to be included into the <body></body> of view.php
 if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) &&  file_exists(WB_PATH .'/modules/news/frontend.css')) {
@@ -33,19 +33,11 @@ if((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS
    echo "\n</style>\n";
 } 
 
-// check if module language file exists for the language set by the user (e.g. DE, EN)
-if(!file_exists(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php')) {
-	// no module language file exists for the language set by the user, include default module language file EN.php
-	require_once(WB_PATH .'/modules/news/languages/EN.php');
-} else {
-	// a module language file exists for the language defined by the user, load it
-	require_once(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php');
-}
-
-//overwrite php.ini on Apache servers for valid SESSION ID Separator
-if(function_exists('ini_set')) {
-	ini_set('arg_separator.output', '&amp;');
-}
+/**
+ *	Load Language file
+ */
+$lang = (dirname(__FILE__))."/languages/". LANGUAGE .".php";
+require_once ( !file_exists($lang) ? (dirname(__FILE__))."/languages/EN.php" : $lang );
 
 // Check if there is a start point defined
 if(isset($_GET['p']) AND is_numeric($_GET['p']) AND $_GET['p'] >= 0) {
@@ -68,9 +60,6 @@ if($query_users->numRows() > 0) {
 }
 
 // Get groups (title, if they are active, and their image [if one has been uploaded])
-if (isset($groups)) {
-   unset($groups);
-}
 $groups[0]['title'] = '';
 $groups[0]['active'] = true;
 $groups[0]['image'] = '';
@@ -139,9 +128,9 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	if($setting_posts_per_page != 0) {
 		if($position > 0) {
 			if(isset($_GET['g']) AND is_numeric($_GET['g'])) {
-				$pl_prepend = '<a href="?p='.($position-$setting_posts_per_page).'&amp;g='.$_GET['g'].'">&lt;&lt; ';
+				$pl_prepend = '<a href="?p='.($position-$setting_posts_per_page).'&g='.$_GET['g'].'"><< ';
 			} else {
-				$pl_prepend = '<a href="?p='.($position-$setting_posts_per_page).'">&lt;&lt; ';
+				$pl_prepend = '<a href="?p='.($position-$setting_posts_per_page).'"><< ';
 			}
 			$pl_append = '</a>';
 			$previous_link = $pl_prepend.$TEXT['PREVIOUS'].$pl_append;
@@ -155,11 +144,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			$next_page_link = '';
 		} else {
 			if(isset($_GET['g']) AND is_numeric($_GET['g'])) {
-				$nl_prepend = '<a href="?p='.($position+$setting_posts_per_page).'&amp;g='.$_GET['g'].'"> ';
+				$nl_prepend = '<a href="?p='.($position+$setting_posts_per_page).'&g='.$_GET['g'].'"> ';
 			} else {
 				$nl_prepend = '<a href="?p='.($position+$setting_posts_per_page).'"> ';
 			}
-			$nl_append = ' &gt;&gt;</a>';
+			$nl_append = ' >></a>';
 			$next_link = $nl_prepend.$TEXT['NEXT'].$nl_append;
 			$next_page_link = $nl_prepend.$TEXT['NEXT_PAGE'].$nl_append;
 		}
@@ -186,7 +175,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		if($query_extra != '') {
 			?>
 			<div class="selected_group_title">
-				<?php echo '<a href="'.htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])).'">'.PAGE_TITLE.'</a> &gt;&gt; '.$groups[$_GET['g']]['title']; ?>
+				<?php echo '<a href="'.htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])).'">'.PAGE_TITLE.'</a> >> '.$groups[$_GET['g']]['title']; ?>
 			</div>
 			<?php
 		}
@@ -194,13 +183,8 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false) { // Make sure parent group is active
 				$uid = $post['posted_by']; // User who last modified the post
 				// Workout date and time of last modified post
-				if ($post['published_when'] > $post['posted_when']) {
-					$post_date = gmdate(DATE_FORMAT, $post['published_when']+TIMEZONE);
-					$post_time = gmdate(TIME_FORMAT, $post['published_when']+TIMEZONE);
-				} else {
-					$post_date = gmdate(DATE_FORMAT, $post['posted_when']+TIMEZONE);
-					$post_time = gmdate(TIME_FORMAT, $post['posted_when']+TIMEZONE);
-				}
+				$post_date = gmdate(DATE_FORMAT, $post['posted_when']+TIMEZONE);
+				$post_time = gmdate(TIME_FORMAT, $post['posted_when']+TIMEZONE);
 				$publ_date = date(DATE_FORMAT,$post['published_when']);
 				$publ_time = date(TIME_FORMAT,$post['published_when']);
 				// Work-out the post link
@@ -209,7 +193,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 					$post_link .= '?p='.$position;
 				}
 				if(isset($_GET['g']) AND is_numeric($_GET['g'])) {
-					if(isset($_GET['p']) AND $position > 0) { $post_link .= '&amp;'; } else { $post_link .= '?'; }
+					if(isset($_GET['p']) AND $position > 0) { $post_link .= '&'; } else { $post_link .= '?'; }
 					$post_link .= 'g='.$_GET['g'];
 				}
 				// Get group id, title, and image
@@ -223,21 +207,35 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				$wb->preprocess($short);
 				// Replace vars with values
 				$post_long_len = strlen($post['content_long']);
-				$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[LINK]', '[MODI_DATE]', '[MODI_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]', '[TEXT_READ_MORE]');
-				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-					if($post_long_len < 9) {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], '');
-					} else {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email'], $MOD_NEWS['TEXT_READ_MORE']);
-					}
-				} else {
-					if($post_long_len < 9) {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, '', '', '', '', '');
-					} else {
-						$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $short, $post_link, $post_date, $post_time, $publ_date, $publ_time, '', '', '', '', $MOD_NEWS['TEXT_READ_MORE']);
-					}
-				}
-				echo str_replace($vars, $values, $setting_post_loop);
+				
+				$display_user_info = (isset($users[$uid]['username']) AND $users[$uid]['username'] != '');
+				
+				$vars = array(
+					'[PAGE_TITLE]'	=> PAGE_TITLE, 
+					'[GROUP_ID]'	=> $group_id, 
+					'[GROUP_TITLE]'	=> $group_title, 
+					'[GROUP_IMAGE]'	=> $group_image, 
+					'[DISPLAY_GROUP]'	=> $display_group, 
+					'[DISPLAY_IMAGE]'	=> $display_image, 
+					'[TITLE]'		=> $post['title'], 
+					'[SHORT]'		=> $short, 
+					'[LINK]'		=> $post_link, 
+					'[MODI_DATE]'	=> $post_date, 
+					'[MODI_TIME]'	=> $post_time, 
+					'[PUBLISHED_DATE]'	=> $publ_date, 
+					'[PUBLISHED_TIME]'	=> $publ_time, 
+					'[USER_ID]'			=> $uid, 
+					'[USERNAME]'		=> ( true === $display_user_info ) ? $users[$uid]['username'] : "", 
+					'[DISPLAY_NAME]'	=> ( true === $display_user_info ) ? $users[$uid]['display_name'] : "", 
+					'[EMAIL]'			=> ( true === $display_user_info ) ? $users[$uid]['email'] : "", 
+					'[TEXT_READ_MORE]'	=> ( $post_long_len < 9 ) ? "" : $TEXT['READ_MORE'],
+					'[LAST_CHANGED]'	=> $MOD_NEWS['LAST_CHANGED'],
+					'[LAST_CHANGED_AT]'	=> $MOD_NEWS['LAST_CHANGED_AT'],
+					'[POSTET_BY]'		=> $MOD_NEWS['POSTET_BY'],
+					'[POSTET_ON]'		=> $MOD_NEWS['POSTET_ON']
+				);
+				
+				echo str_replace( array_keys($vars), array_values($vars), $setting_post_loop);
 			}
 		}
 	}
@@ -277,7 +275,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			$page_link .= '?p='.$_GET['p'];
 		}
 		if(isset($_GET['g']) AND is_numeric($_GET['g'])) {
-			if(isset($_GET['p']) AND $position > 0) { $page_link .= '&amp;'; } else { $page_link .= '?'; }
+			if(isset($_GET['p']) AND $position > 0) { $page_link .= '&'; } else { $page_link .= '?'; }
 			$page_link .= 'g='.$_GET['g'];
 		}
 	} else {
@@ -295,13 +293,8 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false) { // Make sure parent group is active
 			$uid = $post['posted_by']; // User who last modified the post
 			// Workout date and time of last modified post
-			if ($post['published_when'] > $post['posted_when']) {
-				$post_date = gmdate(DATE_FORMAT, $post['published_when']+TIMEZONE);
-				$post_time = gmdate(TIME_FORMAT, $post['published_when']+TIMEZONE);
-			} else {
-				$post_date = gmdate(DATE_FORMAT, $post['posted_when']+TIMEZONE);
-				$post_time = gmdate(TIME_FORMAT, $post['posted_when']+TIMEZONE);
-			}
+			$post_date = gmdate(DATE_FORMAT, $post['posted_when']+TIMEZONE);
+			$post_time = gmdate(TIME_FORMAT, $post['posted_when']+TIMEZONE);
 			$publ_date = date(DATE_FORMAT,$post['published_when']);
 			$publ_time = date(TIME_FORMAT,$post['published_when']);
 			// Get group id, title, and image
@@ -310,15 +303,37 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			$group_image = $groups[$group_id]['image'];
 			if($group_image == '') { $display_image = 'none'; } else { $display_image = ''; }
 			if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
-			$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[BACK]', '[TEXT_BACK]', '[TEXT_LAST_CHANGED]', '[MODI_DATE]', '[TEXT_AT]', '[MODI_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[TEXT_POSTED_BY]', '[TEXT_ON]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]');
+			
+			$display_user_info = (isset($users[$uid]['username']) AND $users[$uid]['username'] != '');
+			
+			$vars = array(
+				'[PAGE_TITLE]'		=> PAGE_TITLE, 
+				'[GROUP_ID]'		=> $group_id, 
+				'[GROUP_TITLE]'		=> $group_title, 
+				'[GROUP_IMAGE]'		=> $group_image, 
+				'[DISPLAY_GROUP]'	=> $display_group, 
+				'[DISPLAY_IMAGE]'	=> $display_image, 
+				'[TITLE]'			=> $post['title'], 
+				'[SHORT]'			=> $post_short, 
+				'[BACK]'			=> $page_link, 
+				'[MODI_DATE]'		=> $post_date, 
+				'[MODI_TIME]'		=> $post_time, 
+				'[PUBLISHED_DATE]'	=> $publ_date, 
+				'[PUBLISHED_TIME]'	=> $publ_time, 
+				'[USER_ID]'			=> ( true === $display_user_info ) ? $uid : "", 
+				'[USERNAME]'		=> ( true === $display_user_info ) ? $users[$uid]['username'] : "", 
+				'[DISPLAY_NAME]'	=> ( true === $display_user_info ) ? $users[$uid]['display_name'] : "", 
+				'[EMAIL]'			=> ( true === $display_user_info ) ? $users[$uid]['email'] : "",
+				'[LAST_CHANGED]'	=> $MOD_NEWS['LAST_CHANGED'],
+				'[LAST_CHANGED_AT]'	=> $MOD_NEWS['LAST_CHANGED_AT'],
+				'[POSTET_BY]'		=> $MOD_NEWS['POSTET_BY'],
+				'[POSTET_ON]'		=> $MOD_NEWS['POSTET_ON']
+			);
+			
 			$post_short=$post['content_short'];
 			$wb->preprocess($post_short);
-			if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $MOD_NEWS['TEXT_BACK'], $MOD_NEWS['TEXT_LAST_CHANGED'], $post_date, $MOD_NEWS['TEXT_AT'], $post_time, $publ_date, $publ_time, $MOD_NEWS['TEXT_POSTED_BY'], $MOD_NEWS['TEXT_ON'], $uid, $users[$uid]['username'], $users[$uid]['display_name'], $users[$uid]['email']);
-			} else {
-				$values = array(PAGE_TITLE, $group_id, $group_title, $group_image, $display_group, $display_image, $post['title'], $post_short, $page_link, $MOD_NEWS['TEXT_BACK'], $MOD_NEWS['TEXT_LAST_CHANGED'], $post_date, $MOD_NEWS['TEXT_AT'], $post_time, $publ_date, $publ_time, $MOD_NEWS['TEXT_POSTED_BY'], $MOD_NEWS['TEXT_ON'], '', '', '', '');
-			}
-			$post_long = ($post['content_long']);
+			
+			$post_long = $post['content_long'];
 		}
 	} else {
 		$wb->print_error($MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'], "javascript: history.go(-1);", false);
@@ -326,7 +341,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	}
 	
 	// Print post header
-	echo str_replace($vars, $values, $setting_post_header);
+	echo str_replace( array_keys($vars), array_values($vars), $setting_post_header);
 	
 	// Replace [wblink--PAGE_ID--] with real link
   	$wb->preprocess($post_long);
@@ -334,15 +349,13 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	echo $post_long;
 	
 	// Print post footer
-	echo str_replace($vars, $values, $setting_post_footer);
+	echo str_replace( array_keys($vars), array_values($vars), $setting_post_footer);
 	
 	// Show comments section if we have to
 	if(($post['commenting'] == 'private' AND isset($wb) AND $wb->is_authenticated() == true) OR $post['commenting'] == 'public') {
 		
 		// Print comments header
-		$vars = array('[ADD_COMMENT_URL]','[TEXT_COMMENTS]');
-		$values = array(WB_URL.'/modules/news/comment.php?id='.POST_ID.'&amp;sid='.$section_id, $MOD_NEWS['TEXT_COMMENTS']);
-		echo str_replace($vars, $values, $setting_comments_header);
+		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&sid='.$section_id, $setting_comments_header);
 		
 		// Query for comments
 		$query_comments = $database->query("SELECT title,comment,commented_when,commented_by FROM ".TABLE_PREFIX."mod_news_comments WHERE post_id = '".POST_ID."' ORDER BY commented_when ASC");
@@ -355,11 +368,11 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				$commented_date = gmdate(DATE_FORMAT, $comment['commented_when']+TIMEZONE);
 				$commented_time = gmdate(TIME_FORMAT, $comment['commented_when']+TIMEZONE);
 				$uid = $comment['commented_by'];
-				$vars = array('[TITLE]','[COMMENT]','[TEXT_ON]','[DATE]','[TEXT_AT]','[TIME]','[TEXT_BY]','[USER_ID]','[USERNAME]','[DISPLAY_NAME]', '[EMAIL]');
+				$vars = array('[TITLE]','[COMMENT]','[DATE]','[TIME]','[USER_ID]','[USERNAME]','[DISPLAY_NAME]', '[EMAIL]');
 				if(isset($users[$uid]['username']) AND $users[$uid]['username'] != '') {
-					$values = array(($comment['title']), ($comment['comment']), $MOD_NEWS['TEXT_ON'], $commented_date, $MOD_NEWS['TEXT_AT'], $commented_time, $MOD_NEWS['TEXT_BY'], $uid, ($users[$uid]['username']), ($users[$uid]['display_name']), ($users[$uid]['email']));
+					$values = array(($comment['title']), ($comment['comment']), $commented_date, $commented_time, $uid, ($users[$uid]['username']), ($users[$uid]['display_name']), ($users[$uid]['email']));
 				} else {
-					$values = array(($comment['title']), ($comment['comment']), $MOD_NEWS['TEXT_ON'], $commented_date, $MOD_NEWS['TEXT_AT'], $commented_time, $MOD_NEWS['TEXT_BY'], '0', strtolower($TEXT['UNKNOWN']), $TEXT['UNKNOWN'], '');
+					$values = array(($comment['title']), ($comment['comment']), $commented_date, $commented_time, '0', strtolower($TEXT['UNKNOWN']), $TEXT['UNKNOWN'], '');
 				}
 				echo str_replace($vars, $values, $setting_comments_loop);
 			}
@@ -373,9 +386,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		}
 		
 		// Print comments footer
-		$vars = array('[ADD_COMMENT_URL]','[TEXT_ADD_COMMENT]');
-		$values = array(WB_URL.'/modules/news/comment.php?id='.POST_ID.'&amp;sid='.$section_id, $MOD_NEWS['TEXT_ADD_COMMENT']);
-		echo str_replace($vars, $values, $setting_comments_footer);
+		echo str_replace('[ADD_COMMENT_URL]', WB_URL.'/modules/news/comment.php?id='.POST_ID.'&sid='.$section_id, $setting_comments_footer);
 	}
 	if(ENABLED_ASP) {
 		$_SESSION['comes_from_view'] = POST_ID;
