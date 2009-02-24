@@ -33,14 +33,16 @@ hr {
 	background-color: #336699;
 	border: 0;
 }
+div#message {
+	text-align: center;
+}
 --></style></head>
 <body>
 
-<center>
-	<br />
+<div id='message'>
 	<h1>Excessive Invalid Logins</h1>
 	You have attempted to login too many times
-</center>
+</div>
 
 </body>
 </html>
