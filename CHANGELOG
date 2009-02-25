@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 25-Feb-2009 Matthias Gallas
+#	renamed warning.htt to warning.html to fix display of sourcecode after invalid logins
++	added fixed error.htt also to classic theme
 +	corrected info.php of news-modul
 24-Feb-2009 Dietrich Roland Pehlke
 !	Changes in warning.htt templates to get valid XHTL1.1 output - replace the center-tag with div

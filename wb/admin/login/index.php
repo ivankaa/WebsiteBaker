@@ -48,7 +48,7 @@ if(defined('SMART_LOGIN') AND SMART_LOGIN == 'enabled') {
 $thisApp = new Login(
 							array(
 									'MAX_ATTEMPS' => "3",
-									'WARNING_URL' => THEME_URL."/templates/warning.htt",
+									'WARNING_URL' => THEME_URL."/templates/warning.html",
 									'USERNAME_FIELDNAME' => $username_fieldname,
 									'PASSWORD_FIELDNAME' => $password_fieldname,
 									'REMEMBER_ME_OPTION' => SMART_LOGIN,

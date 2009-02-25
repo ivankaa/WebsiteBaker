@@ -57,7 +57,7 @@ $redirect = strip_tags((isset($_REQUEST['redirect'])) ? $_REQUEST['redirect'] : 
 $thisApp = new Login(
 							array(
 									"MAX_ATTEMPS" => "3",
-									"WARNING_URL" => THEME_URL."/templates/warning.htt",
+									"WARNING_URL" => THEME_URL."/templates/warning.html",
 									"USERNAME_FIELDNAME" => 'username',
 									"PASSWORD_FIELDNAME" => 'password',
 									"REMEMBER_ME_OPTION" => SMART_LOGIN,
