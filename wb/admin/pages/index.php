@@ -213,20 +213,6 @@ function make_list($parent, $editable_pages) {
 					<?php } ?>
 				</td>
 				<!-- MANAGE SECTIONS AND DATES BUTTONS -->
-
-				<!-- 'MANAGE SECTIONS' BUTTON -->
-				<td width="20">
-					<?php
-					// Work-out if we should show the "manage sections" link
-					$query_sections = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '" . $page['page_id'] . "' AND module = 'menu_link'");
-					if(($query_sections->numRows() == 0) && (MANAGE_SECTIONS == 'enabled')) {
-					?>
-						<a href="<?php echo ADMIN_URL; ?>/pages/sections.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $HEADING['MANAGE_SECTIONS']; ?>">
-						<img src="<?php echo THEME_URL; ?>/images/sections_16.png" border="0" alt="<?php echo $HEADING['MANAGE_SECTIONS']; ?>" />	
-						</a>
-					<?php } ?>
-				</td>
-
 				<td width="20">
 				<?php
 				// Work-out if we should show the "manage dates" link
