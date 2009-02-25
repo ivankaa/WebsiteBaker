@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 25-Feb-2009 Matthias Gallas
+-	removed unneeded icons from wb_theme
+-	removed unneeded stylesheet.css from account dir
 #	renamed warning.htt to warning.html to fix display of sourcecode after invalid logins
 +	added fixed error.htt also to classic theme
 +	corrected info.php of news-modul
