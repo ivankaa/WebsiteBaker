@@ -9,7 +9,7 @@
  *
  * LICENSE: GNU General Public License
  * 
- * @author     Matthias Gallas
+ * @author     Johannes Tassilo Gruber
  * @copyright  GNU General Public License
  * @license    http://www.gnu.org/licenses/gpl.html
  * @version    2.80
@@ -32,7 +32,7 @@ $template_name				= 'wb_theme';
 $template_function			= 'theme';
 $template_version			= '2.80';
 $template_platform			= '2.8';
-$template_author			= 'Matthias Gallas';
+$template_author			= 'Johannes Tassilo Gruber';
 $template_license			= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';
 $template_license_terms		= '-';
 $template_description		= 'Default backend theme for Website Baker 2.8.';

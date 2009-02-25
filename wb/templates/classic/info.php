@@ -1,7 +1,7 @@
 <?php
 /**
  * $Id$
- * Website Baker theme: wb_theme
+ * Website Baker theme: classic
  * This theme is the default WB backend Theme
  * Feel free to modify or build up on this template.
  *
@@ -35,6 +35,6 @@ $template_platform			= '2.8';
 $template_author			= 'Matthias Gallas';
 $template_license			= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';
 $template_license_terms		= '-';
-$template_description		= 'Default backend theme for Website Baker 2.8.';
+$template_description		= 'Backend theme for Website Baker 2.7.';
 
 ?>
