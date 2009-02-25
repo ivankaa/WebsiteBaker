@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+ Copyright (C) 2004-2009, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -23,27 +23,13 @@
 
 */
 
-/**
- *	@version	2.7.1
- *	@date		2009-02-24
- *	@author		Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke (last)
- *	@platform	WB 2.7
- *	@license	GNU
- *
- *	2.7.1	2009-02-24	Bugfix inside view.php; '[PUBLISHED_DATE]' and other keys
- *						wasn't replaced. Minor cosmetic code-changes (removing unnessasary brackes).
- *						Add mudule guid.
- *
- */
- 
-$module_directory	= 'news';
-$module_name		= 'News';
-$module_function	= 'page';
-$module_version		= '2.71';
-$module_platform	= '2.7';
-$module_author		= 'Ryan Djurovich, Rob Smith, Dietrich Roland Pehlke (last)';
-$module_license		= 'GNU General Public License';
-$module_description	= 'This page type is designed for making a news page.';
-$module_guid		= 'EF51C6A5-5E83-430E-BEC8-25ABC4CC4D89';
+$module_directory = 'news';
+$module_name = 'News';
+$module_function = 'page';
+$module_version = '2.8';
+$module_platform = '2.8';
+$module_author = 'Ryan Djurovich, Rob Smith';
+$module_license = 'GNU General Public License';
+$module_description = 'This page type is designed for making a news page.';
 
 ?>

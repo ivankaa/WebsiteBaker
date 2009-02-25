@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+25-Feb-2009 Matthias Gallas
++	corrected info.php of news-modul
 24-Feb-2009 Dietrich Roland Pehlke
 !	Changes in warning.htt templates to get valid XHTL1.1 output - replace the center-tag with div
 #	add "AND section_id='$section_id'" to the delete-query to avoid conflicts if there are more
