@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 25-Feb-2009 Matthias Gallas
+#	fixed wrong path to images in news and form modul
 #	fixed manage section is showed twice (ticket #694)
 -	removed unneeded icons from wb_theme
 -	removed unneeded stylesheet.css from account dir

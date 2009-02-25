@@ -64,7 +64,7 @@ if($query_fields->numRows() > 0) {
 		<tr class="row_<?php echo $row; ?>" height="20">
 			<td width="20" style="padding-left: 5px;">
 				<a href="<?php echo WB_URL; ?>/modules/form/modify_field.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&field_id=<?php echo $field['field_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/modify_16.png" border="0" alt="^" />
+					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="^" />
 				</a>
 			</td>		
 			<td>
@@ -110,20 +110,20 @@ if($query_fields->numRows() > 0) {
 			<td width="20">
 			<?php if($field['position'] != 1) { ?>
 				<a href="<?php echo WB_URL; ?>/modules/form/move_up.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&field_id=<?php echo $field['field_id']; ?>" title="<?php echo $TEXT['MOVE_UP']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/up_16.png" border="0" alt="^" />
+					<img src="<?php echo THEME_URL; ?>/images/up_16.png" border="0" alt="^" />
 				</a>
 			<?php } ?>
 			</td>
 			<td width="20">
 			<?php if($field['position'] != $num_fields) { ?>
 				<a href="<?php echo WB_URL; ?>/modules/form/move_down.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&field_id=<?php echo $field['field_id']; ?>" title="<?php echo $TEXT['MOVE_DOWN']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/down_16.png" border="0" alt="v" />
+					<img src="<?php echo THEME_URL; ?>/images/down_16.png" border="0" alt="v" />
 				</a>
 			<?php } ?>
 			</td>
 			<td width="20">
 				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/form/delete_field.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&field_id=<?php echo $field['field_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/delete_16.png" border="0" alt="X" />
+					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
 				</a>
 			</td>
 		</tr>
@@ -163,14 +163,14 @@ if($query_submissions->numRows() > 0) {
 		<tr class="row_<?php echo $row; ?>" height="20">
 			<td width="20" style="padding-left: 5px;">
 				<a href="<?php echo WB_URL; ?>/modules/form/view_submission.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&submission_id=<?php echo $submission['submission_id']; ?>" title="<?php echo $TEXT['OPEN']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/folder_16.png" alt="<?php echo $TEXT['OPEN']; ?>" border="0" />
+					<img src="<?php echo THEME_URL; ?>/images/folder_16.png" alt="<?php echo $TEXT['OPEN']; ?>" border="0" />
 				</a>
 			</td>
 			<td width="237"><?php echo $TEXT['SUBMISSION_ID'].': '.$submission['submission_id']; ?></td>
 			<td><?php echo $TEXT['SUBMITTED'].': '.gmdate(TIME_FORMAT.', '.DATE_FORMAT, $submission['submitted_when']+TIMEZONE); ?></td>
 			<td width="20">
 				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/form/delete_submission.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&submission_id=<?php echo $submission['submission_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/delete_16.png" border="0" alt="X" />
+					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
 				</a>
 			</td>
 		</tr>

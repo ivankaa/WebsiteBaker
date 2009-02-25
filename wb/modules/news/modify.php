@@ -62,7 +62,7 @@ if($query_posts->numRows() > 0) {
 		<tr class="row_<?php echo $row; ?>" height="20">
 			<td width="20" style="padding-left: 5px;">
 				<a href="<?php echo WB_URL; ?>/modules/news/modify_post.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&post_id=<?php echo $post['post_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/modify_16.png" border="0" alt="Modify - " />
+					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="Modify - " />
 				</a>
 			</td>
 			<td>
@@ -99,11 +99,11 @@ if($query_posts->numRows() > 0) {
 			$t = time();
 			$icon = '';
 			if($start<=$t && $end==0)
-				$icon=ADMIN_URL.'/images/noclock_16.png';
+				$icon=THEME_URL.'/images/noclock_16.png';
 			elseif(($start<=$t || $start==0) && $end>=$t)
-				$icon=ADMIN_URL.'/images/clock_16.png';
+				$icon=THEME_URL.'/images/clock_16.png';
 			else
-				$icon=ADMIN_URL.'/images/clock_red_16.png';
+				$icon=THEME_URL.'/images/clock_red_16.png';
 			?>
 			<a href="<?php echo WB_URL; ?>/modules/news/modify_post.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&post_id=<?php echo $post['post_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
 				<img src="<?php echo $icon; ?>" border="0" alt="" />
@@ -111,20 +111,20 @@ if($query_posts->numRows() > 0) {
 			<td width="20">
 			<?php if($post['position'] != $num_posts) { ?>
 				<a href="<?php echo WB_URL; ?>/modules/news/move_down.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&post_id=<?php echo $post['post_id']; ?>" title="<?php echo $TEXT['MOVE_UP']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/up_16.png" border="0" alt="^" />
+					<img src="<?php echo THEME_URL; ?>/images/up_16.png" border="0" alt="^" />
 				</a>
 			<?php } ?>
 			</td>
 			<td width="20">
 			<?php if($post['position'] != 1) { ?>
 				<a href="<?php echo WB_URL; ?>/modules/news/move_up.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&post_id=<?php echo $post['post_id']; ?>" title="<?php echo $TEXT['MOVE_DOWN']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/down_16.png" border="0" alt="v" />
+					<img src="<?php echo THEME_URL; ?>/images/down_16.png" border="0" alt="v" />
 				</a>
 			<?php } ?>
 			</td>
 			<td width="20">
 				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/news/delete_post.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&post_id=<?php echo $post['post_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/delete_16.png" border="0" alt="X" />
+					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
 				</a>
 			</td>
 		</tr>
@@ -162,7 +162,7 @@ if($query_groups->numRows() > 0) {
 		<tr class="row_<?php echo $row; ?>" height="20">
 			<td width="20" style="padding-left: 5px;">
 				<a href="<?php echo WB_URL; ?>/modules/news/modify_group.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&group_id=<?php echo $group['group_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/modify_16.png" border="0" alt="Modify - " />
+					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="Modify - " />
 				</a>
 			</td>		
 			<td>
@@ -176,20 +176,20 @@ if($query_groups->numRows() > 0) {
 			<td width="20">
 			<?php if($group['position'] != 1) { ?>
 				<a href="<?php echo WB_URL; ?>/modules/news/move_up.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&group_id=<?php echo $group['group_id']; ?>" title="<?php echo $TEXT['MOVE_UP']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/up_16.png" border="0" alt="^" />
+					<img src="<?php echo THEME_URL; ?>/images/up_16.png" border="0" alt="^" />
 				</a>
 			<?php } ?>
 			</td>
 			<td width="20">
 			<?php if($group['position'] != $num_groups) { ?>
 				<a href="<?php echo WB_URL; ?>/modules/news/move_down.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&group_id=<?php echo $group['group_id']; ?>" title="<?php echo $TEXT['MOVE_DOWN']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/down_16.png" border="0" alt="v" />
+					<img src="<?php echo THEME_URL; ?>/images/down_16.png" border="0" alt="v" />
 				</a>
 			<?php } ?>
 			</td>
 			<td width="20">
 				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/news/delete_group.php?page_id=<?php echo $page_id; ?>&group_id=<?php echo $group['group_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-					<img src="<?php echo ADMIN_URL; ?>/images/delete_16.png" border="0" alt="X" />
+					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
 				</a>
 			</td>
 		</tr>
