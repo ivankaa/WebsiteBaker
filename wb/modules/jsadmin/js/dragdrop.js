@@ -23,7 +23,8 @@ JsAdmin.init_drag_drop = function() {
 
 	var page_type = '';
 	var is_tree = false;
-	if(document.URL.indexOf("/admin/pages/index.php") > 0) {
+
+	if(document.URL.indexOf(JsAdmin.ADMIN_URL + "/pages/index.php") > -1) {
 		page_type = 'pages';
 		is_tree = true;
 

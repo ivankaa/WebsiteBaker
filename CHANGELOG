@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+28-Feb-2009 Christian Sommer
++	Removed hardcoded admin path from JSAdmin module (jsadmin/js/dragdrop.js)
 25-Feb-2009 Matthias Gallas
 +	Added language support for template_description (affects templates and themes)
 #	fixed wrong path to images in news and form modul
