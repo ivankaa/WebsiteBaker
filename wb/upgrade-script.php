@@ -93,8 +93,30 @@ h3 { font-size: 120%; }
 <img src="<?php echo THEME_URL;?>/images/logo.png" alt="Website Baker Logo" />
 
 <h1>Website Baker Upgrade</h1>
+<p>This script upgrades an existing Website Baker <strong>Version 2.7</strong> installation to the <strong>Version 2.8</strong>. The upgrade script alters the existing WB database to reflect the changes introduced with WB 2.8.</p>
 
 <?php
+/**
+ * Check if disclaimer was accepted
+ */
+if (!(isset($_POST['backup_confirmed']) && $_POST['backup_confirmed'] == 'confirmed')) { ?>
+<h2>Step 1: Backup your files</h2>
+<p>It is highly recommended to <strong>create a manual backup</strong> of the entire <strong>/pages folder</strong> and the <strong>MySQL database</strong> before proceeding.<br /><strong class="error">Note: </strong>The upgrade script alters some settings of your existing database!!! You need to confirm the disclaimer before proceeding.</p>
+
+<form name="send" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+<textarea cols="80" rows="5">DISCLAIMER: The Website Baker upgrade script is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. One needs to confirm that a manual backup of the /pages folder (including all files and subfolders contained in it) and backup of the entire Website Baker MySQL database was created before you can proceed.</textarea>
+<br /><br /><input name="backup_confirmed" type="checkbox" value="confirmed" />&nbsp;I confirm that a manual backup of the /pages folder and the MySQL database was created.
+<br /><br /><input name="send" type="submit" value="Start upgrade script" />
+</form>
+<br />
+
+<?php
+	status_msg('<strong>Notice:</strong><br />You need to confirm that you have created a manual backup of the /pages directory and the MySQL database before you can proceed.', 'warning', 'div');
+	echo '<br /><br />';
+	exit;
+}
+
+echo '<h2>Step 2: Updating database entries</h2>';
 
 require_once('config.php');
 require_once(WB_PATH.'/framework/functions.php');
@@ -108,7 +130,7 @@ function db_add_key_value($key, $value) {
 	$table = TABLE_PREFIX.'settings';
 	$query = $database->query("SELECT value FROM $table WHERE name = '$key' LIMIT 1");
 	if($query->numRows() > 0) {
-		echo "$key: allready there. $OK.<br />";
+		echo "$key: already exists. $OK.<br />";
 		return true;
 	} else {
 		$database->query("INSERT INTO $table (name,value) VALUES ('$key', '$value')");
@@ -140,7 +162,7 @@ function db_add_field($field, $table, $desc) {
 			echo "adding '$field' $FAIL!<br />";
 		}
 	} else {
-		echo "'$field' allready there. $OK.<br />";
+		echo "'$field' already exists. $OK.<br />";
 	}
 }
 
