@@ -42,7 +42,7 @@ $results = $database->query($query);
 
 // Validate values
 if($results->numRows() == 0) {
-	$wb->print_error($MESSAGE['PREFERENCES']['OLD_PASSWORD_INCORRECT'], $js_back, false);
+	$wb->print_error($MESSAGE['PREFERENCES']['CURRENT_PASSWORD_INCORRECT'], $js_back, false);
 }
 // Validate values
 if(!$wb->validate_email($email)) {
