@@ -268,7 +268,7 @@
 		<input type="reset" name="reset" value="{TEXT_RESET}" />
 		</form>
 	</td>
-	<form name="advanced" action="{ADVANED_ACTION}" method="post">
+	<form name="advanced" action="{ADVANCED_ACTION}" method="post">
 	<input type="hidden" name="group_id" value="{GROUP_ID}" />
 	<input type="hidden" name="action" value="modify" />
 	<td width="200" align="right">

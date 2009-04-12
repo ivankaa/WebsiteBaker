@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+12-Apr-2009 Matthias Gallas
+#	Fixed Typo in group_form.htt (ticket #705)
 01-Mar-2009 Christian Sommer
 !	Added disclaimer to upgrade-script.php	
 28-Feb-2009 Christian Sommer
