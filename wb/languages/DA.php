@@ -549,7 +549,7 @@ $MESSAGE['PAGES']['RESTORED'] = 'Siden er gendannet';
 $MESSAGE['PAGES']['BLANK_PAGE_TITLE'] = 'Indtast venligst en overskrift til siden';
 $MESSAGE['PAGES']['BLANK_MENU_TITLE'] = 'Indtast venligst en overskrift til menuen';
 $MESSAGE['PAGES']['REORDERED'] = 'Siden er omorganiseret';
-$MESSAGE['PAGES']['CANNOT_REORDER'] = 'Fejl ved fors&oslash;g p&aring; at    omorganisere siden';
+$MESSAGE['PAGES']['CANNOT_REORDER'] = 'Fejl ved fors&oslash;g p&aring; at omorganisere siden';
 $MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS'] = 'Du har ikke rettigheder til at &aelig;ndre denne side';
 $MESSAGE['PAGES']['INTRO_NOT_WRITABLE'] = 'Kan ikke skrive til filen /pages/intro.php (utilstr&aelig;kkelige rettigheder)';
 $MESSAGE['PAGES']['INTRO_SAVED'] = 'Introside gemt';
@@ -586,7 +586,7 @@ $MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language f
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du skal udfylde f&oslash;lgende felter:';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Beklager! Denne formular er blevet afsendt for mange gange indenfor den sidste time, og du vil derfor blive afvist - Pr&oslash;v igen om en times tid!';
-$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'V
+$MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Verifikations tallene (ogs&aring; kendt som Captcha) som du tastede er ikke korrekte. Hvis du har problemer med at l&aelig;se Captha tallene, s&aring; kontakt venligst sidens Administrator p&aring; denne mailadresse: '.SERVER_EMAIL.'';
 
 $MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
 $MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
