@@ -52,7 +52,7 @@ body {
 
 #container {
 	width:85%;
-	background: #A8BCCB url(<?php echo THEME_URL;?>/images/background.png) repeat-x;
+	background: #A8BCCB url(templates/wb_theme/images/background.png) repeat-x;
 	border:1px solid #000;
 	color:#000;
 	margin:2em auto;
@@ -90,7 +90,7 @@ h3 { font-size: 120%; }
 </head>
 <body>
 <div id="container">
-<img src="<?php echo THEME_URL;?>/images/logo.png" alt="Website Baker Logo" />
+<img src="templates/wb_theme/images/logo.png" alt="Website Baker Logo" />
 
 <h1>Website Baker Upgrade</h1>
 <p>This script upgrades an existing Website Baker <strong>Version 2.7</strong> installation to the <strong>Version 2.8</strong>. The upgrade script alters the existing WB database to reflect the changes introduced with WB 2.8.</p>
