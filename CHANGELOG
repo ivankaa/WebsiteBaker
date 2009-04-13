@@ -11,8 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+13-Apr-2009 Matthias Gallas
+!	Updated Danish language file (Thanks to Achrist)
 12-Apr-2009 Matthias Gallas
-#	Fixed not defined language variable in account/email.php (Thanks to Forum-User BlackTiger)
+#	Fixed not defined language variable in account/email.php (Thanks to BlackTiger)
 #	Fixed Typo in group_form.htt (ticket #705)
 01-Mar-2009 Christian Sommer
 !	Added disclaimer to upgrade-script.php	
