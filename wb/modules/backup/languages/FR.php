@@ -22,13 +22,15 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  ENGLISH LANGUAGE FILE FOR THE ADDON: BACKUP
+  FRENCH LANGUAGE FILE FOR THE ADDON: BACKUP
  -----------------------------------------------------------------------------------------
 */
+//Module Description
+$module_description = 'Ce module permets de sauvegarder votre base de donn&eacute;es';
 
 // text outputs
 $MOD_BACKUP['BACKUP_ALL_TABLES'] 	= 	'Sauvegarder toutes les tables de la base de donn&eacute;es';
-$MOD_BACKUP['BACKUP_WB_SPECIFIC'] 	= 	'Sauvegarder seulement les tables reli&eacute; &agrave; WB de la base de donn&eacute;es.';
-$TEXT['BACKUP_DATABASE']				=	'Sauvegarde de la Base de donn&eacute;es';
+$MOD_BACKUP['BACKUP_WB_SPECIFIC'] 	= 	'Sauvegarder seulement les tables sp&eacute;cifiques &agrave; WB';
+$TEXT['BACKUP_DATABASE']				=	'Sauvegarder la base de donn&eacute;es';
 
 ?>

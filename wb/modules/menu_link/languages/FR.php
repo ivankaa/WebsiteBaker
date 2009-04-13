@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  ENGLISH LANGUAGE FILE FOR THE ADDON: MENU_LINK
+  FRENCH LANGUAGE FILE FOR THE ADDON: MENU_LINK
  -----------------------------------------------------------------------------------------
 */
 

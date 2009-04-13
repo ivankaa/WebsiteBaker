@@ -22,22 +22,24 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  FICHIER DE LANGUE FRANCAIS POUR L'AJOUT: OUTPUT_FILTER
+  FRENCH LANGUAGE FILE FOR THE ADDON: OUTPUT_FILTER
  -----------------------------------------------------------------------------------------
 */
+//Module Description
+$module_description = 'Ce module g&egrave;re le filtrage des donn&eacute;es avant affichage &agrave; l&apos;utilisateur. Permets de filtrer les liens mailto et les adresses emails.';
 
 // Headings and text outputs
-$MOD_MAIL_FILTER['HEADING']				= 'Options: Filtre de sortie';
-$MOD_MAIL_FILTER['HOWTO']= 'Vous pouvez configurer les filtres de sorties avec les options suivantes.<p style="line-height:1.5em;"><strong>Astuce: </strong>Les liens <i>Mailto</i> peuvent &ecirc;tres encrypt&eacute; par une fonction JavaScript. Pour utilis&eacute; cette option, vous devez ajouter le code suivant dans la section &lt;head&gt; mod&egrave;le (index.php) :  <code style="background:#FFA;color:#900;">&lt;?php '."register_frontend_modfiles('js');".'?&gt;</code>. Sans cette modification, seulement le charact&egrave;re @ dans la balise <i>Mailto</i> sera remplac&eacute;.</p>';
+$MOD_MAIL_FILTER['HEADING']				= 'Options: Output Filter';
+$MOD_MAIL_FILTER['HOWTO']						= 'Vous pouvez configurer le filtrage des donn&eacute;es avant affichage gr&acirc;ce aux options ci-dessous.<p style="line-height:1.5em;"><strong>Conseil: </strong>Les liens Mailto peuvent &ecirc;tre crypt&eacute;s &agrave; l&apos;aide d&apos;une fonction Javascript. Pour utiliser cette fonctionnalit&eacute;, vous devez ajouter le code PHP <code style="background:#FFA;color:#900;">&lt;?php register_frontend_modfiles(&apos;js&apos;);?&gt;</code> dans la partie &lt;head&gt; de index.php de votre fichier mod&egrave;le. Sans cette modification, seulement le caract&egrave;re @ sera remplac&eacute; dans le champ mailto.</p>';
 
 // Text and captions of form elements
-$MOD_MAIL_FILTER['BASIC_CONF']			= 'Configuration courriel de base';
-$MOD_MAIL_FILTER['EMAIL_FILTER']		= 'Filtr&eacute; les adresses courriels dans les texte';
-$MOD_MAIL_FILTER['MAILTO_FILTER']		= 'Filtr&eacute; les adresses courriels dans les liens <i>mailto</i>';
-$MOD_MAIL_FILTER['ENABLED']				= 'Activ&eacute;';
-$MOD_MAIL_FILTER['DISABLED']			= 'D&eacute;activ&eacute;';
+$MOD_MAIL_FILTER['BASIC_CONF']			= 'Configuration de base des Emails';
+$MOD_MAIL_FILTER['EMAIL_FILTER']		= 'Filtrer le texte des Emails';
+$MOD_MAIL_FILTER['MAILTO_FILTER']		= 'Filtrer les liens mailto des Emails';
+$MOD_MAIL_FILTER['ENABLED']					= 'Activ&eacute;';
+$MOD_MAIL_FILTER['DISABLED']				= 'D&eacute;sactiv&eacute;';
 
-$MOD_MAIL_FILTER['REPLACEMENT_CONF']= 'Remplacement de courriels';
+$MOD_MAIL_FILTER['REPLACEMENT_CONF']= 'Remplacements';
 $MOD_MAIL_FILTER['AT_REPLACEMENT']	= 'Remplacer "@" par';
 $MOD_MAIL_FILTER['DOT_REPLACEMENT']	= 'Remplacer "." par';
 

@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 13-Apr-2009 Matthias Gallas
+!	Updated French language files (Thanks to Quinto and VotreEspace)
 !	Updated Danish language file (Thanks to Achrist)
 12-Apr-2009 Matthias Gallas
 #	Fixed not defined language variable in account/email.php (Thanks to BlackTiger)

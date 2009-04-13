@@ -21,12 +21,12 @@
  along with Website Baker; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+ 
  -----------------------------------------------------------------------------------------
-  DEUTSCHE SPRACHDATEI FUER DAS MODUL: FCKEDITOR
+  FRENCH LANGUAGE FILE FOR THE ADDON: FCKEDITOR
  -----------------------------------------------------------------------------------------
 */
-
-// Deutsche Modulbeschreibung
+//Module Description
 $module_description = 'Ce module permet de modifier le contenu de la page avec <a href="http://www.fckeditor.net/" target="_blank">FCKeditor v2.6.4</a>.';
 
 ?>

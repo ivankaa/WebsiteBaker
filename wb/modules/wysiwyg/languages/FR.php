@@ -22,11 +22,10 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  DEUTSCHE SPRACHDATEI FUER DAS MODUL: WYSIWYG
+  FRENCH LANGUAGE FILE FOR THE ADDON: WYSIWYG
  -----------------------------------------------------------------------------------------
 */
-
-// Deutsche Modulbeschreibung
-$module_description = "Ce module permet de modifier le contenu de la page &agrave; l'aide d'un &eacute;diteur graphique";
+//Module Description
+$module_description = 'Ce module permet de modifier le contenu de la page &agrave; l&apos;aide d&apos;un &eacute;diteur graphique';
 
 ?>

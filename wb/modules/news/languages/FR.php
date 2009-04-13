@@ -21,9 +21,12 @@
  along with Website Baker; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-*/
 
-//Modul Description
+ -----------------------------------------------------------------------------------------
+  FRENCH LANGUAGE FILE FOR THE ADDON: NEWS
+ -----------------------------------------------------------------------------------------
+*/
+//Module Description
 $module_description = 'This page type is designed for making a news page.';
 
 //Variables for the  backend

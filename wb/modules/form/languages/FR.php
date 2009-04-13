@@ -21,9 +21,12 @@
  along with Website Baker; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-*/
 
-//Modul Description
+ -----------------------------------------------------------------------------------------
+  FRENCH LANGUAGE FILE FOR THE MODULE: FORM
+ -----------------------------------------------------------------------------------------
+*/
+//Module Description
 $module_description = 'This module allows you to create customised online forms, such as a feedback form. Thank-you to Rudolph Lartey who help enhance this module, providing code for extra field types, etc.';
 
 //Variables for the  backend

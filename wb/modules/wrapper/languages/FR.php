@@ -22,12 +22,11 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  DEUTSCHE SPRACHDATEI FUER DAS MODUL: WRAPPER
+  FRENCH LANGUAGE FILE FOR THE ADDON: WRAPPER
  -----------------------------------------------------------------------------------------
 */
-
-// Deutsche Modulbeschreibung
-$module_description = "Ce module permet l'int&eacute;gration de contenus externes sur votre page &agrave; l'aide de cadres enlign&eacute; (iframe)";
+//Module Description
+$module_description = 'Ce module permet l&apos;int&eacute;gration de contenus externes sur votre page &agrave; l&apos;aide de cadres enlign&eacute; (iframe)';
 
 // Ueberschriften und Textausgaben
 $MOD_WRAPPER['NOTICE'] = 'Votre navigateur ne supporte pas les cadres enlign&eacute;<br />Cliquez sur le lien ci-dessous pour vous rendre au site qui &eacute;tais sens&eacute; être affich&eacute; ici...<br />';

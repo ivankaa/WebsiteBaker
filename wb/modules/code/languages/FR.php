@@ -22,11 +22,10 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  -----------------------------------------------------------------------------------------
-  DEUTSCHE SPRACHDATEI FUER DAS MODUL: CODE
+  FRENCH LANGUAGE FILE FOR THE ADDON: CODE
  -----------------------------------------------------------------------------------------
 */
-
-// Deutsche Modulbeschreibung
-$module_description = "Ce module permet d'ex&eacute;cuter des commandes PHP (merci de limiter l'acc&egrave;s &agrave; des personnes dignes de confiance!)";
+//Module Description
+$module_description = 'Ce module permet d&apos;ex&eacute;cuter des commandes PHP (merci de limiter l&apos;acc&egrave;s &agrave; des personnes dignes de confiance!)';
 
 ?>
