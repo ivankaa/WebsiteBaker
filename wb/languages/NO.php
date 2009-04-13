@@ -35,7 +35,7 @@ $language_code = 'NO';
 $language_name = 'Norsk';
 $language_version = '2.8';
 $language_platform = '2.8.x';
-$language_author = 'Odd Egil Hansen';
+$language_author = 'Odd Egil Hansen (oeh)';
 $language_license = 'GNU General Public License';
 
 // Menu titles
@@ -65,7 +65,7 @@ $OVERVIEW['MEDIA'] = 'Administrer filer lagret i media katalogen...';
 $OVERVIEW['MODULES'] = 'Administrer Website Baker moduler...';
 $OVERVIEW['TEMPLATES'] = 'Forandre utseende p&aring; internett siden med maler...';
 $OVERVIEW['LANGUAGES'] = 'Administrer Website Baker spr&aring;k...';
-$OVERVIEW['PREFERENCES'] = 'Forandre innstillinger som epost adresse, passord, o.l....';
+$OVERVIEW['PREFERENCES'] = 'Forandre innstillinger som e-post adresse, passord, o.l....';
 $OVERVIEW['SETTINGS'] = 'Forandre instillinger for Website Baker...';
 $OVERVIEW['USERS'] = 'Velg hvilke brukere som kan logge inn i Website Baker...';
 $OVERVIEW['GROUPS'] = 'Administrer grupper og deres system adgang...';
@@ -101,7 +101,7 @@ $HEADING['UNINSTALL_LANGUAGE'] = 'Avinstaller Spr&aring;k';
 $HEADING['LANGUAGE_DETAILS'] = 'Spr&aring;k Detaljer';
 
 $HEADING['MY_SETTINGS'] = 'Mine Innstillinger';
-$HEADING['MY_EMAIL'] = 'Min Epost';
+$HEADING['MY_EMAIL'] = 'Min E-post';
 $HEADING['MY_PASSWORD'] = 'Mitt Passord';
 
 $HEADING['GENERAL_SETTINGS'] = 'Generelle Instillinger';
@@ -120,8 +120,8 @@ $HEADING['MODIFY_DELETE_GROUP'] = 'Endre/Slette Gruppe';
 $HEADING['ADD_GROUP'] = 'Legg til Gruppe';
 $HEADING['MODIFY_GROUP'] = 'Endre Gruppe';
 
-$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
-$HEADING['INVOKE_MODULE_FILES'] = 'Execute module files manually';
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Kravene for installering av denne modulen er ikke oppfylt';
+$HEADING['INVOKE_MODULE_FILES'] = 'Start modul filene mauelt';
 
 // Other text
 $TEXT['OPEN'] = '&Aring;pne';
@@ -185,7 +185,7 @@ $TEXT['AUTHOR'] = 'Skribent';
 $TEXT['VERSION'] = 'Versjon';
 $TEXT['DESIGNED_FOR'] = 'Laget For';
 $TEXT['DESCRIPTION'] = 'Beskrivelse';
-$TEXT['EMAIL'] = 'Epost';
+$TEXT['EMAIL'] = 'E-post';
 $TEXT['LANGUAGE'] = 'Spr&aring;k';
 $TEXT['TIMEZONE'] = 'Tidssone';
 $TEXT['CURRENT_PASSWORD'] = 'Gjeldende Passord';
@@ -306,7 +306,7 @@ $TEXT['LEVEL'] = 'Niv&aring;';
 $TEXT['NOT_FOUND'] = 'Ikke Funnet';
 $TEXT['PAGE_SPACER'] = 'Side Mellomrom';
 $TEXT['MATCHING'] = 'Finner Motstykke';
-$TEXT['TEMPLATE_PERMISSIONS'] = 'Mal Adgang';
+$TEXT['TEMPLATE_PERMISSIONS'] = 'Mal Tillgang';
 $TEXT['PAGES_DIRECTORY'] = 'Side Katalog';
 $TEXT['MEDIA_DIRECTORY'] = 'Media Katalog';
 $TEXT['FILE_MODE'] = 'Fil Modus';
@@ -317,12 +317,12 @@ $TEXT['WRITE'] = 'Skriv';
 $TEXT['EXECUTE'] = 'Utf&oslash;re';
 $TEXT['SMART_LOGIN'] = 'Smart Innlogging';
 $TEXT['REMEMBER_ME'] = 'Husk Meg';
-$TEXT['FILESYSTEM_PERMISSIONS'] = 'Filsystem Adgang';
+$TEXT['FILESYSTEM_PERMISSIONS'] = 'Filsystem Tillgang';
 $TEXT['DIRECTORIES'] = 'Kataloger';
 $TEXT['DIRECTORY_MODE'] = 'Katalog Modus';
 $TEXT['LIST_OPTIONS'] = 'Vis Valg';
 $TEXT['OPTION'] = 'Valg';
-$TEXT['ALLOW_MULTIPLE_SELECTIONS'] = 'Tillatt Flere Valg';
+$TEXT['ALLOW_MULTIPLE_SELECTIONS'] = 'Tillat Flere Valg';
 $TEXT['TEXTFIELD'] = 'Tekstfelt';
 $TEXT['TEXTAREA'] = 'Tekstomr&aring;de';
 $TEXT['SELECT_BOX'] = 'Velg Boks';
@@ -348,18 +348,18 @@ $TEXT['SUBMISSIONS'] = 'Avgivelser';
 $TEXT['SUBMITTED'] = 'Avgitt';
 $TEXT['MAX_SUBMISSIONS_PER_HOUR'] = 'Max. Avgivelser Per Time';
 $TEXT['SUBMISSIONS_STORED_IN_DATABASE'] = 'Avgivelser Lagret i Database';
-$TEXT['EMAIL_ADDRESS'] = 'Epost Adresse';
+$TEXT['EMAIL_ADDRESS'] = 'E-post Adresse';
 $TEXT['CUSTOM'] = 'Egendefinert';
 $TEXT['ANONYMOUS'] = 'Anonym';
-$TEXT['SERVER_OPERATING_SYSTEM'] = 'Server Operativ System';
-$TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'] = 'World-writeable fil tilgang';
+$TEXT['SERVER_OPERATING_SYSTEM'] = 'Serveren Operativ System';
+$TEXT['WORLD_WRITEABLE_FILE_PERMISSIONS'] = 'Global skrivetilgang til filer';
 $TEXT['LINUX_UNIX_BASED'] = 'Linux/Unix bassert';
 $TEXT['WINDOWS'] = 'WINDOWS';
 $TEXT['HOME_FOLDER'] = 'Hjemmekatalog';
 $TEXT['HOME_FOLDERS'] = 'Hjemmekataloger';
 $TEXT['PAGE_TRASH'] = 'Sides&oslash;ppel';
 $TEXT['INLINE'] = 'In-line';
-$TEXT['SEPARATE'] = 'Seperat';
+$TEXT['SEPARATE'] = 'Separat';
 $TEXT['DELETED'] = 'Slettet';
 $TEXT['VIEW_DELETED_PAGES'] = 'Vis Slettete Sider';
 $TEXT['EMPTY_TRASH'] = 'T&oslash;m S&oslash;ppel';
@@ -368,10 +368,10 @@ $TEXT['ADD_SECTION'] = 'Legg Til Seksjon';
 $TEXT['POST_HEADER'] = 'Legg Til Header';
 $TEXT['POST_FOOTER'] = 'Legg Til Footer';
 $TEXT['POSTS_PER_PAGE'] = 'Innlegg Per Side';
-$TEXT['RESIZE_IMAGE_TO'] = 'Resize Bilde Til';
+$TEXT['RESIZE_IMAGE_TO'] = 'Endre Bilde St&oslash;rrelse Til';
 $TEXT['UNLIMITED'] = 'Ubegrenset';
 $TEXT['OF'] = 'Av';
-$TEXT['OUT_OF'] = 'Ut av';
+$TEXT['OUT_OF'] = 'Av antall';
 $TEXT['NEXT'] = 'Neste';
 $TEXT['PREVIOUS'] = 'Forrige';
 $TEXT['NEXT_PAGE'] = 'Neste Side';
@@ -380,10 +380,10 @@ $TEXT['ON'] = 'P&aring;';
 $TEXT['LAST_UPDATED_BY'] = 'Sist Endret Av';
 $TEXT['RESULTS_FOR'] = 'Resultat For';
 $TEXT['TIME'] = 'Tid';
-$TEXT['REDIRECT_AFTER'] = 'Redirect after';
+$TEXT['REDIRECT_AFTER'] = 'Videresend etter';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG Stil';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG Editor';
-$TEXT['SERVER_EMAIL'] = 'Server Epost';
+$TEXT['SERVER_EMAIL'] = 'Server E-post';
 $TEXT['MENU'] = 'Meny';
 $TEXT['MANAGE_GROUPS'] = 'Administrer Grupper';
 $TEXT['MANAGE_USERS'] = 'Administrer Brukere';
@@ -398,9 +398,9 @@ $TEXT['BACKUP'] = 'Sikkerhetskopiere';
 $TEXT['RESTORE'] = 'Gjenopprett';
 $TEXT['BACKUP_DATABASE'] = 'Sikkerhetskopiere database';
 $TEXT['RESTORE_DATABASE'] = 'Gjenopprett Database';
-$TEXT['BACKUP_ALL_TABLES'] = 'Sikkerhetskoppiere alle tabeller i databasen';
-$TEXT['BACKUP_WB_SPECIFIC'] = 'Sikkerhetskoppiere bare WB-specifike tabeller';
-$TEXT['BACKUP_MEDIA'] = 'Sikkerhetskoppi Medie';
+$TEXT['BACKUP_ALL_TABLES'] = 'Sikkerhetskopiere alle tabeller i databasen';
+$TEXT['BACKUP_WB_SPECIFIC'] = 'Sikkerhetskopiere bare WB- spesifikke tabeller';
+$TEXT['BACKUP_MEDIA'] = 'Sikkerhetskopi Medie';
 $TEXT['RESTORE_MEDIA'] = 'Gjenopprett Media';
 $TEXT['ADMINISTRATION_TOOL'] = 'Administrasjonsverkt&oslash;y';
 $TEXT['CAPTCHA_VERIFICATION'] = 'Captcha bekreftelse';
@@ -408,8 +408,8 @@ $TEXT['VERIFICATION'] = 'Bekreftelse';
 $TEXT['DEFAULT_CHARSET'] = 'Standard Charset';
 $TEXT['CHARSET'] = 'Tegnsett';
 $TEXT['MODULE_ORDER'] = 'Modul-rekkef&oslash;lge for s&oslash;king';
-$TEXT['MAX_EXCERPT'] = 'Maksimum antall linjer for utdrag';
-$TEXT['TIME_LIMIT'] = 'Maksimum tid for &aring; samle utrag per modul';
+$TEXT['MAX_EXCERPT'] = 'Maksimalt antall linjer for utdrag';
+$TEXT['TIME_LIMIT'] = 'Maksimal tid for &aring; samle utrag per modul';
 $TEXT['PUBL_START_DATE'] = 'Start dato';
 $TEXT['PUBL_END_DATE'] = 'Slutt dato';
 $TEXT['CALENDAR'] = 'Kalender';
@@ -431,47 +431,47 @@ $TEXT['CAP_EDIT_CSS'] = 'Rediger CSS koden';
 $TEXT['HEADING_CSS_FILE'] = 'Faktisk modul fil: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Rediger  CSS koden i tekst viduet nedenfor.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
-$TEXT['REQUIREMENT'] = "Requirement";
-$TEXT['INSTALLED'] = "installed";
-$TEXT['NOT_INSTALLED'] = "not installed";
-$TEXT['ADDON'] = "Add-On";
-$TEXT['EXTENSION'] = "Extension";
+$TEXT['REQUIREMENT'] = "Krav";
+$TEXT['INSTALLED'] = "installert";
+$TEXT['NOT_INSTALLED'] = "ikke installert";
+$TEXT['ADDON'] = "Tillegg";
+$TEXT['EXTENSION'] = "Utvidelse";
 
 // Success/error messages
-$MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Beklager, du har ikke adgang til &aring; se denne siden';
+$MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Beklager, du har ikke tillgang til &aring; se denne siden';
 $MESSAGE['FRONTEND']['SORRY_NO_ACTIVE_SECTIONS'] = 'Beklager, ikke noe aktivt innhold &aring; vise.';
 
-$MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Mangelfull adgangs rettigheter';
+$MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES'] = 'Mangelfull tillgangs rettigheter';
 
 $MESSAGE['LOGIN']['BOTH_BLANK'] = 'Vennligst skriv brukernavn og passord nedenfor';
 $MESSAGE['LOGIN']['USERNAME_BLANK'] = 'Vennligst skriv et brukernavn';
 $MESSAGE['LOGIN']['PASSWORD_BLANK'] = 'Vennligst skriv et passord';
-$MESSAGE['LOGIN']['USERNAME_TOO_SHORT'] = 'Angitt brukernavn for kort';
-$MESSAGE['LOGIN']['PASSWORD_TOO_SHORT'] = 'Angitt passord for kort';
-$MESSAGE['LOGIN']['USERNAME_TOO_LONG'] = 'Angitt brukernavn for langt';
-$MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Angitt passord for langt';
-$MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Brukernavn eller passord feil';
+$MESSAGE['LOGIN']['USERNAME_TOO_SHORT'] = 'Det angitte brukernavnet er for kort';
+$MESSAGE['LOGIN']['PASSWORD_TOO_SHORT'] = 'Det angitte passordet er for kort';
+$MESSAGE['LOGIN']['USERNAME_TOO_LONG'] = 'Det angitte brukernavnet er for langt';
+$MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Det angitte passordet er for langt';
+$MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Brukernavnet eller passordet er feil';
 
-$MESSAGE['SIGNUP']['NO_EMAIL'] = 'Du m&aring; skrive inn en epost adresse';
-$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP']['NO_EMAIL'] = 'Du m&aring; skrive inn en e-post adresse';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Dine p&aring;-loggings detaljer...';
 $MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
-Hello {LOGIN_DISPLAY_NAME},
+Hei {LOGIN_DISPLAY_NAME},
 
-Your '{LOGIN_WEBSITE_TITLE}' login details are:
-Username: {LOGIN_NAME}
-Password: {LOGIN_PASSWORD}
+Dine p&aring;-loggings detaljer for '{LOGIN_WEBSITE_TITLE}' er:
+Brukernavn: {LOGIN_NAME}
+Passord: {LOGIN_PASSWORD}
 
-Your password has been set to the one above.
-This means that your old password will no longer work.
+Dit passord er sendt til e-postadressen over.
+Dette betyr at ditt tidligere passord ikke er gyldig lenger.
 
-If you have received this message in error, please delete it immediately.
+Hvis du har mottatt denne e-posten ved en feil, v&aelig;r vennlig &aring; slette den med en gang.
 EOT;
 
-$MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Vennligst skriv epost adressen nedenfor';
-$MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'Epost adressen ble ikke funnet i databasen';
+$MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Vennligst skriv e-post adressen nedenfor';
+$MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'] = 'E-post adressen ble ikke funnet i databasen';
 $MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'] = 'Kunne ikke sende passord. Kontakt system administrator';
-$MESSAGE['FORGOT_PASS']['PASSWORD_RESET'] = 'Brukernavn og passord er sendt i epost';
-$MESSAGE['FORGOT_PASS']['ALREADY_RESET'] = 'Passord kan ikke bli tilbakestilt mer enn en gang i timen, beklager';
+$MESSAGE['FORGOT_PASS']['PASSWORD_RESET'] = 'Brukernavn og passord er sendt i e-post';
+$MESSAGE['FORGOT_PASS']['ALREADY_RESET'] = 'Beklager, men passord kan ikke tilbakestilles mer enn en gang i timen.';
 
 $MESSAGE['START']['WELCOME_MESSAGE'] = 'Velkommen til Website Baker Administrasjon';
 $MESSAGE['START']['INSTALL_DIR_EXISTS'] = 'Advarsel, installasjonskatalogen eksisterer forsatt!';
@@ -483,17 +483,17 @@ $MESSAGE['SETTINGS']['SAVED'] = 'Lykkes &aring; lagre endringer';
 $MESSAGE['SETTINGS']['MODE_SWITCH_WARNING'] = 'Merk: Ved &aring; klikke denne knappen lagres ikke endringer';
 $MESSAGE['SETTINGS']['WORLD_WRITEABLE_WARNING'] = 'Merk: Dette er kun ment for teste milj&oslash;er';
 
-$MESSAGE['USERS']['ADDED'] = 'Lykkes &aring; lagre ny bruker';
+$MESSAGE['USERS']['ADDED'] = 'Lykkes &aring; opprette ny bruker';
 $MESSAGE['USERS']['SAVED'] = 'Lykkes &aring; lagre bruker';
 $MESSAGE['USERS']['DELETED'] = 'Lykkes &aring; slette bruker';
 $MESSAGE['USERS']['NO_GROUP'] = 'Ingen gruppe ble valgt';
 $MESSAGE['USERS']['USERNAME_TOO_SHORT'] = 'Angitt brukernavn for kort';
 $MESSAGE['USERS']['PASSWORD_TOO_SHORT'] = 'Angitt passord for kort';
 $MESSAGE['USERS']['PASSWORD_MISMATCH'] = 'Passordene er ikke like';
-$MESSAGE['USERS']['INVALID_EMAIL'] = 'Epost adresse ikke gyldig';
-$MESSAGE['USERS']['EMAIL_TAKEN'] = 'Epost adresse allerede i bruk';
-$MESSAGE['USERS']['USERNAME_TAKEN'] = 'Brukernavn er allerede brukt, finn et annet';
-$MESSAGE['USERS']['CHANGING_PASSWORD'] = 'Merk: Kun skriv verdier i feltene ovenfor hvis du vil endre passord til denne brukeren';
+$MESSAGE['USERS']['INVALID_EMAIL'] = 'E-post adresse ikke gyldig';
+$MESSAGE['USERS']['EMAIL_TAKEN'] = 'E-post adresse allerede i bruk';
+$MESSAGE['USERS']['USERNAME_TAKEN'] = 'Brukernavn er allerede brukt, du m&aring; anngi et annet brukernavn';
+$MESSAGE['USERS']['CHANGING_PASSWORD'] = 'Merk: Skriv kun inn verdier i feltene ovenfor hvis du vil endre passordet til denne brukeren';
 $MESSAGE['USERS']['CONFIRM_DELETE'] = 'Vil du virkelig slette den valgte brukeren?';
 
 $MESSAGE['GROUPS']['ADDED'] = 'Lykkes &aring; legge til gruppe';
@@ -505,38 +505,38 @@ $MESSAGE['GROUPS']['NO_GROUPS_FOUND'] = 'Ingen gruppe funnet';
 $MESSAGE['GROUPS']['GROUP_NAME_EXISTS'] = 'Gruppenavn finnes allerede';
 
 $MESSAGE['PREFERENCES']['DETAILS_SAVED'] = 'Lykkes &aring; lagre detaljer';
-$MESSAGE['PREFERENCES']['EMAIL_UPDATED'] = 'Lykkes &aring; oppdatere epost';
-$MESSAGE['PREFERENCES']['CURRENT_PASSWORD_INCORRECT'] = 'Inntasting av gjeldende passord ikke riktig';
+$MESSAGE['PREFERENCES']['EMAIL_UPDATED'] = 'Lykkes &aring; oppdatere e-post';
+$MESSAGE['PREFERENCES']['CURRENT_PASSWORD_INCORRECT'] = 'Passordet du skrev inn er ikke korrekt';
 $MESSAGE['PREFERENCES']['PASSWORD_CHANGED'] = 'Lykkes &aring; endre passord';
 
 $MESSAGE['TEMPLATES']['CHANGE_TEMPLATE_NOTICE'] = 'Merk: For &aring; endre malen m&aring; man gj&oslash;re dette i Instillinger seksjonen';
 
-$MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH'] = 'Kan ikke inkludere ../ i katalog navnet';
+$MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH'] = 'Kan ikke benytte ../ i katalog navnet';
 $MESSAGE['MEDIA']['DIR_DOES_NOT_EXIST'] = 'Katalogen finnes ikke';
 $MESSAGE['MEDIA']['TARGET_DOT_DOT_SLASH'] = 'Kan ikke ha ../ i katalog m&aring;let';
-$MESSAGE['MEDIA']['NAME_DOT_DOT_SLASH'] = 'Kan ikke inkludere ../ i navnet';
-$MESSAGE['MEDIA']['NAME_INDEX_PHP'] = 'Kan ikke bruke index.php som navnet';
-$MESSAGE['MEDIA']['NONE_FOUND'] = 'Ingen media funnet i gjeldende katalog';
-$MESSAGE['MEDIA']['FILE_NOT_FOUND'] = 'Fant ikke fil';
+$MESSAGE['MEDIA']['NAME_DOT_DOT_SLASH'] = 'Kan ikke benytte ../ i navnet';
+$MESSAGE['MEDIA']['NAME_INDEX_PHP'] = 'Kan ikke benytte index.php som navnet';
+$MESSAGE['MEDIA']['NONE_FOUND'] = 'Det ble ikke funnet noen media i den angitte katalogen';
+$MESSAGE['MEDIA']['FILE_NOT_FOUND'] = 'Fant ingen fil';
 $MESSAGE['MEDIA']['DELETED_FILE'] = 'Lykkes &aring; slette fil';
 $MESSAGE['MEDIA']['DELETED_DIR'] = 'Lykkes &aring; slette katalog';
-$MESSAGE['MEDIA']['CONFIRM_DELETE'] = 'Vil du virkelig slette fil eller katalog?';
+$MESSAGE['MEDIA']['CONFIRM_DELETE'] = 'Vil du virkelig slette filen eller katalogen?';
 $MESSAGE['MEDIA']['CANNOT_DELETE_FILE'] = 'Kan ikke slette valgte fil';
 $MESSAGE['MEDIA']['CANNOT_DELETE_DIR'] = 'Kan ikke slette valgte katalog';
-$MESSAGE['MEDIA']['BLANK_NAME'] = 'Du tastet ikke inn et nytt navn';
+$MESSAGE['MEDIA']['BLANK_NAME'] = 'Du anga ikke inn et nytt navn';
 $MESSAGE['MEDIA']['BLANK_EXTENSION'] = 'Du tastet ikke inn en fil utvidelse';
 $MESSAGE['MEDIA']['RENAMED'] = 'Lykkes &aring; endre navn';
 $MESSAGE['MEDIA']['CANNOT_RENAME'] = 'Mislykkes &aring; endre navn';
-$MESSAGE['MEDIA']['FILE_EXISTS'] = 'En fil med samme navn eksisterer';
-$MESSAGE['MEDIA']['DIR_EXISTS'] = 'En katalog med samme navn eksisterer';
-$MESSAGE['MEDIA']['DIR_MADE'] = 'Lykkes &aring; opprette katalog';
-$MESSAGE['MEDIA']['DIR_NOT_MADE'] = 'Mislykkes &aring; opprette katalog';
-$MESSAGE['MEDIA']['SINGLE_UPLOADED'] = ' lykkes &aring; laste opp fil';
-$MESSAGE['MEDIA']['UPLOADED'] = ' lykkes &aring; laste opp filer';
+$MESSAGE['MEDIA']['FILE_EXISTS'] = 'En fil med samme navn eksisterer allerede';
+$MESSAGE['MEDIA']['DIR_EXISTS'] = 'En katalog med samme navn eksisterer allerede';
+$MESSAGE['MEDIA']['DIR_MADE'] = 'Lykkes &aring; opprette katalogen';
+$MESSAGE['MEDIA']['DIR_NOT_MADE'] = 'Mislykkes &aring; opprette katalogen';
+$MESSAGE['MEDIA']['SINGLE_UPLOADED'] = ' Lykkes &aring; laste opp filen';
+$MESSAGE['MEDIA']['UPLOADED'] = ' Lykkes &aring; laste opp filene';
 
-$MESSAGE['PAGES']['ADDED'] = 'Lykkes &aring; legge til side';
+$MESSAGE['PAGES']['ADDED'] = 'Lykkes &aring; legge til siden';
 $MESSAGE['PAGES']['ADDED_HEADING'] = 'Lykkes &aring; legge til side overskrift';
-$MESSAGE['PAGES']['PAGE_EXISTS'] = 'En side med lik eller samme tittel eksisterer';
+$MESSAGE['PAGES']['PAGE_EXISTS'] = 'En side med lik eller tilsvarende tittel eksisterer';
 $MESSAGE['PAGES']['CANNOT_CREATE_ACCESS_FILE'] = 'Feilet &aring; opprette adgang fil i /pages katalog (manglende rettigheter)';
 $MESSAGE['PAGES']['CANNOT_DELETE_ACCESS_FILE'] = 'Feilet &aring; slette adgang fil i /pages katalog (manglende rettigheter)';
 $MESSAGE['PAGES']['NOT_FOUND'] = 'Fant ikke side';
@@ -573,28 +573,28 @@ $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kunne ikke skrive til m&aring;l katalo
 $MESSAGE['GENERIC']['INVALID'] = 'Filen du lastet opp er ikke gyldig';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kan ikke avinstallere: Valgte fil er i bruk';
 
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> kunne ikke avinstalleres, da den fortsatt benyttes p&aring; siden {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "denne siden;disse sidene";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Kan ikke avinstallere designmalen <b>{{name}}</b>, da den benyttes som standard designmal!";
 
-$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction';
+$MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Nettstedet er under konstruksjon';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Vennligst kom tilbake p&aring; et annet tidspunkt...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Vennligst v&aelig;r t&aring;lmodig, dette kan ta en stund.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Feil ved &aring;pningen av filen.';
-$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
-$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Feil i Website Baker installasjons filen. Vennligst sjekk formatet på *.zip filen.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Feil i Website Baker spr&aring;k filen. Vennligst sjekk tekst filen.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du m&aring; skrive inn detaljer for f&oslash;lgende felt';
-$MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Beklager, denne form har blitt sendt for mange ganger denne timen. Vennligst pr&oslash;v igjen neste time.';
+$MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Beklager, dette skjemaet har blitt sendt for mange ganger denne timen. Vennligst pr&oslash;v igjen om en time.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Bekreftelsesnummeret (ogs&aring; kjent som Captcha) som du skrev inn er feil. Hvis du har problemer med &aring; lese Captcha, vennligst kontakt: '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
-$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['RELOAD'] = 'Oppdater databasen med innformasjon fra Tilleggs filen (for eksempel etter å ha lastet opp via FTP).';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'En feil oppstod under oppdateringen av Tilleggs innformasjonen.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Lykkes i &aring; oppdatere moduler';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Lykkes i &aring; oppdatere maler';
 $MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Lykkes i &aring; oppdatere spr&aring;k';
-$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'When modules are uploaded via FTP (not recommended), the module installation files <tt>install.php</tt>, <tt>upgrade.php</tt> or <tt>uninstall.php</tt> will not be executed automatically. Those modules may not work correct or do not uninstall properly.<br /><br />You can execute the module files manually for modules uploaded via FTP below.';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'En fei oppstod under installasjonen av Tillegget. Dit system oppfyller ikke kravene for denne Tilleggs modulen. For &aring; f&aring; denne Tilleggs modulen til &aring; fungere p&aring; systemet ditt, m&aring; du fikse de feilene som er inngitt under.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'N&aring;r Tillegg lastes opp via FTP (ikke &arin
 $MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warning: Existing module database entries will get lost. Only use this option if you experience problems with modules uploaded via FTP.';
 
 ?>
