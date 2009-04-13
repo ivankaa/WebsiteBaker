@@ -26,7 +26,7 @@
  -----------------------------------------------------------------------------------------
 */
 //Module Description
-$module_description = 'Ce module am&eacute;liore l&apos;interactivit&eacute; de l&apos;interface d&apos;administration gr&acirc;ce à l&apos;ajout de fonctionnalit&eacute;s javascript am&eacute;lior&eacute;es. Utilise la librairie YahooUI.';
+$module_description = 'Ce module am&eacute;liore l&apos;interactivit&eacute; de l&apos;interface d&apos;administration gr&acirc;ce &agrave; l&apos;ajout de fonctionnalit&eacute;s javascript am&eacute;lior&eacute;es. Utilise la librairie YahooUI.';
 
 // Headings and text outputs
 $MOD_JSADMIN['TXT_HEADING_B'] 				= 'Veuillez s&eacute;lectionner la fonctionnalit&eacute; Javascript &agrave; activer';
