@@ -594,7 +594,7 @@ $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Lykkes i &aring; oppdatere moduler';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Lykkes i &aring; oppdatere maler';
 $MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Lykkes i &aring; oppdatere spr&aring;k';
 $MESSAGE['ADDON']['PRECHECK_FAILED'] = 'En fei oppstod under installasjonen av Tillegget. Dit system oppfyller ikke kravene for denne Tilleggs modulen. For &aring; f&aring; denne Tilleggs modulen til &aring; fungere p&aring; systemet ditt, m&aring; du fikse de feilene som er inngitt under.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'N&aring;r Tillegg lastes opp via FTP (ikke &aring; annbefale), vill ikke modulens installasjons filer <tt>install.php</tt>, <tt>upgrade.php</tt> eller <tt>uninstall.php</tt> bli kj&oslash;rt automatisk. Moduler, lastet opp p&aring; denne m&aring;ten, vil muligens ikke fungere p&aring; korrekt m&aring;te eller ikke la seg av-installere.<br /><br />Du kan, for moduler lastet om via FTP, kj&oslash;re disse modul filene manuelt nedenfor.';
 $MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'OBS: Den eksisterende databasen for modulen vil g&aring; tapt. Benytt denne muligheten hvis du har problemer med Moduler som er lastet opp via FTP.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warning: Existing module database entries will get lost. Only use this option if you experience problems with modules uploaded via FTP.';
 
 ?>
