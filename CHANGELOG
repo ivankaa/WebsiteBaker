@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 17-Apr-2009 Matthias Gallas
+#	Fixed MenuLink timeout with many large wysiwyg-pages (ticket #710)
 !	Updated again Norsk language File (Thanks to oeh)
 !	Updated Dutch language file (Zhanks to Luckyluke)
 13-Apr-2009 Matthias Gallas

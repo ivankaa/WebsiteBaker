@@ -80,7 +80,7 @@ foreach($links as $pid=>$l) {
 			if($section['module'] == 'wysiwyg') {
 				if($query_page = $database->query("SELECT content FROM $table_mw WHERE section_id = '{$section['section_id']}' LIMIT 1")) {
 					$page = $query_page->fetchRow();
-					if(preg_match_all('/<(?:[^>]+id|\s*a[^>]+name)\s*=\s*"(.*)"/iuU',$page['content'], $match)) {
+					if(preg_match_all('/<(?:[^>]+id|\s*a[^>]+name)\s*=\s*"([^"]+)"/i',$page['content'], $match)) {
 						foreach($match[1] AS $t) {
 							$targets[$pid][] = $t;
 						}
