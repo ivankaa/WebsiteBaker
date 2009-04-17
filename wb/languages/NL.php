@@ -35,7 +35,7 @@ $language_code = 'NL';
 $language_name = 'Nederlands';
 $language_version = '2.8';
 $language_platform = '2.8.x';
-$language_author = 'Bramus, CodeALot';
+$language_author = 'Bramus, CodeALot, Luckyluke';
 $language_license = 'GNU General Public License';
 
 // Menu titles
@@ -69,7 +69,7 @@ $OVERVIEW['PREFERENCES'] = 'Beheren van uw persoonlijk profiel.';
 $OVERVIEW['SETTINGS'] = 'Beheren van de technische website-instellingen.';
 $OVERVIEW['USERS'] = 'Beheren van de gebruikers van uw website.';
 $OVERVIEW['GROUPS'] = 'Beheren van de gebruikersgroepen en hun rechten.';
-$OVERVIEW['HELP'] = 'Uitgebreide (Engelstalige) hulp voor het gebruik van dit systeem.';
+$OVERVIEW['HELP'] = 'Uitgebreide hulp voor het gebruik van dit systeem.';
 $OVERVIEW['VIEW'] = 'Bekijk uw website zoals deze voor bezoekers te zien is (nieuw scherm).';
 $OVERVIEW['ADMINTOOLS'] = 'Wijzig diverse beheerinstellingen...';
 
@@ -120,8 +120,8 @@ $HEADING['MODIFY_DELETE_GROUP'] = 'Beheren groep';
 $HEADING['ADD_GROUP'] = 'Toevoegen groep';
 $HEADING['MODIFY_GROUP'] = 'Groepsgegevens';
 
-$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
-$HEADING['INVOKE_MODULE_FILES'] = 'Execute module files manually';
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On eisen voldoen niet';
+$HEADING['INVOKE_MODULE_FILES'] = 'Voer deze module bestanden handmatig uit';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -209,7 +209,7 @@ $TEXT['TEXT'] = 'Tekst';
 $TEXT['HEADER'] = 'Koptekst';
 $TEXT['FOOTER'] = 'Voettekst';
 $TEXT['TEMPLATE'] = 'Template';
-$TEXT['THEME'] = 'Backend-Theme';
+$TEXT['THEME'] = 'Website-beheer Thema';
 $TEXT['INSTALLATION'] = 'Installatie';
 $TEXT['DATABASE'] = 'Database';
 $TEXT['HOST'] = 'Host';
@@ -380,7 +380,7 @@ $TEXT['ON'] = 'Op';
 $TEXT['LAST_UPDATED_BY'] = 'Laatst vernieuwd door';
 $TEXT['RESULTS_FOR'] = 'Resultaten voor';
 $TEXT['TIME'] = 'Tijd';
-$TEXT['REDIRECT_AFTER'] = 'Redirect after';
+$TEXT['REDIRECT_AFTER'] = 'Redirect na';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG-stijl';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG-editor';
 $TEXT['SERVER_EMAIL'] = 'Server e-mail';
@@ -393,7 +393,7 @@ $TEXT['MAIN'] = 'Primair(e)';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Bestanden hernoemen bij uploaden';
 $TEXT['APP_NAME'] = 'Applicatienaam';
 $TEXT['SESSION_IDENTIFIER'] = 'Sessie-identificatie';
-$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
+$TEXT['SEC_ANCHOR'] = 'Sessie-anker tekst';
 $TEXT['BACKUP'] = 'Backup maken';
 $TEXT['RESTORE'] = 'Backup terugzetten';
 $TEXT['BACKUP_DATABASE'] = 'Database-backup maken';
@@ -429,13 +429,13 @@ $TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Paswoord';
 $TEXT['PLEASE_LOGIN'] = 'Inloggen aub';
 $TEXT['CAP_EDIT_CSS'] = 'Wijzig CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Actuele module bestand: ';
-$TEXT['TXT_EDIT_CSS_FILE'] = 'Wijzig de CSS definities in het textveld hieronder.';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Wijzig de CSS definities in het tekstveld hieronder.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
-$TEXT['REQUIREMENT'] = "Requirement";
-$TEXT['INSTALLED'] = "installed";
-$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['REQUIREMENT'] = "Benodigd";
+$TEXT['INSTALLED'] = "ge&iuml;nstalleerd";
+$TEXT['NOT_INSTALLED'] = "niet ge&iuml;nstalleerd";
 $TEXT['ADDON'] = "Add-On";
-$TEXT['EXTENSION'] = "Extension";
+$TEXT['EXTENSION'] = "Extensie";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, u heeft geen bevoegdheden om deze pagina te bekijken';
@@ -453,18 +453,18 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Dit wachtwoord is te lang';
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Gebruikersnaam en/of wachtwoord incorrect';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'U moet een e-mailadres invullen';
-$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Uw login gegevens...';
 $MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
-Hello {LOGIN_DISPLAY_NAME},
+Hallo {LOGIN_DISPLAY_NAME},
 
-Your '{LOGIN_WEBSITE_TITLE}' login details are:
-Username: {LOGIN_NAME}
-Password: {LOGIN_PASSWORD}
+Uw '{LOGIN_WEBSITE_TITLE}' login details zijn:
+Gebruikersnaam: {LOGIN_NAME}
+Paswoord: {LOGIN_PASSWORD}
 
-Your password has been set to the one above.
-This means that your old password will no longer work.
+Uw wachtwoord is ingesteld en zichtbaar hierboven. 
+Dit betekent dat uw oude wachtwoord niet meer werkt. 
 
-If you have received this message in error, please delete it immediately.
+Indien deze melding niet voor u bestemd is, wis deze dan onmiddellijk.
 EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Vult u alstublieft uw e-mailadres hieronder in';
@@ -581,19 +581,19 @@ $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website Under Construction'
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Probeert u aub het binnenkort nog eens.';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Even geduld aub, dit kan even duren.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Kan bestand niet openen.';
-$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
-$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] =    'Ongeldig Website Baker installatie bestand. Controleer het *.zip bestand.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Ongeldig Website Baker taalbestand. Controleer het tekstbestand.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'De volgende velden zijn verplicht';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Sorry, dit formulier is te vaak verstuurd binnen dit uur. Probeert u het over een uur nog eens.';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Het verificatienummer (ook wel Captcha genoemd) dat u hebt ingevoerd is incorrect. Als u de Captcha niet goed kunt lezen, stuur dan een e-mail naar: '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
-$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
+$MESSAGE['ADDON']['RELOAD'] = 'Aanpassen van de database met informatie van de modules (voorbeeld na een FTP upload).';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Fout tijdens de update van de module informatie.';
 $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Modules succesvol herladen';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Templates succesvol herladen';
 $MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Taalbestanden succesvol herladen';
-$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'De installatie van deze module is mislukt. Uw systeem voldoet niet aan de eisen voor een goede werking van deze module. Om deze module op uw systeem te laten werken, moeten onderstaande problemen opgelost worden.';
 $MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'When modules are uploaded via FTP (not recommended), the module installation files <tt>install.php</tt>, <tt>upgrade.php</tt> or <tt>uninstall.php</tt> will not be executed automatically. Those modules may not work correct or do not uninstall properly.<br /><br />You can execute the module files manually for modules uploaded via FTP below.';
 $MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warning: Existing module database entries will get lost. Only use this option if you experience problems with modules uploaded via FTP.';
 
