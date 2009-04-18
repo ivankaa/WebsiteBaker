@@ -594,7 +594,7 @@ $MESSAGE['ADDON']['MODULES_RELOADED'] = 'Modules succesvol herladen';
 $MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Templates succesvol herladen';
 $MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Taalbestanden succesvol herladen';
 $MESSAGE['ADDON']['PRECHECK_FAILED'] = 'De installatie van deze module is mislukt. Uw systeem voldoet niet aan de eisen voor een goede werking van deze module. Om deze module op uw systeem te laten werken, moeten onderstaande problemen opgelost worden.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'When modules are uploaded via FTP (not recommended), the module installation files <tt>install.php</tt>, <tt>upgrade.php</tt> or <tt>uninstall.php</tt> will not be executed automatically. Those modules may not work correct or do not uninstall properly.<br /><br />You can execute the module files manually for modules uploaded via FTP below.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warning: Existing module database entries will get lost. Only use this option if you experience problems with modules uploaded via FTP.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'Wanneer modules via FTP ge&uuml;pload  worden (niet aanbevolen), worden de module installatie bestanden <tt>install.php </tt>, <tt> upgrade.php </tt> of <tt> uninstall.php </tt> niet automatisch uitgevoerd. Deze modules werken mogelijk niet correct of worden niet correct verwijderd.<br /><br />Je kan deze module bestanden handmatig uitvoeren voor onderstaande modules die je via FTP ge&uuml;pload hebt.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Waarschuwing: bestaande instellingen in de database van de modules zullen verloren gaan. Gebruik deze optie alleen als u problemen ondervindt met modules ge&uuml;pload via FTP.';
 
 ?>

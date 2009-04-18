@@ -11,10 +11,12 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+18-Apr-2009 Matthias Gallas
+!	Updated Dutch language file (Thanks to Luckyluke)
 17-Apr-2009 Matthias Gallas
 #	Fixed MenuLink timeout with many large wysiwyg-pages (ticket #710)
 !	Updated again Norsk language File (Thanks to oeh)
-!	Updated Dutch language file (Zhanks to Luckyluke)
+!	Updated Dutch language file (Thanks to Luckyluke)
 13-Apr-2009 Matthias Gallas
 #	Fixed minor dispay issue in upgrade script
 !	Updated Norsk language File (Thanks to oeh)
