@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+20-Apr-2009 Matthias Gallas
+#	Fixed small error in Spain language file (ticket #711)
 18-Apr-2009 Matthias Gallas
 !	Updated Dutch language file (Thanks to Luckyluke)
 17-Apr-2009 Matthias Gallas
