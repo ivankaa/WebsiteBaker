@@ -723,12 +723,21 @@ function sm2_recurse(
     // need to check if any of the children need to be displayed too.
     $isListOpen = false;
     $currentLevel = $wb->page['level'] == '' ? 0 : $wb->page['level'];
+
+    // get the number of siblings skipping the hidden pages so we can pass 
+    // this in and check if the item is first or last
+    $sibCount = 0;
+    foreach ($rgParent[$aStart] as $page) {
+        if (!array_key_exists('sm2_hide', $page)) $sibCount++;
+    }
     
-    // get the number of siblings so we can check pass this and check if the 
-    // item is first or last
-    $sibCount = count($rgParent[$aStart]);
     $currSib = 0;
     foreach ($rgParent[$aStart] as $page) {
+        // skip all hidden pages 
+        if (array_key_exists('sm2_hide', $page)) { // not set if false, so existence = true
+            continue;
+        }
+        
         $currSib++;
 
         // skip any elements that are lower than the maximum level
