@@ -1,4 +1,4 @@
-show_menu2, version 4.7
+show_menu2, version 4.8
 =======================
 A code snippet for the Website Baker CMS software. It provides a complete 
 replacement for the builtin menu functions. All menu data is retrieved using 
@@ -101,6 +101,39 @@ A:  You are passing the wrong values to the function. Have a closer look at the
     correct flag values to pass for the $aOptions parameter.
 
 
+Q:  How do I use a different class/picture/color/widget for each entry in a menu?
+A:  Use the [page_id] format string in the $aItemOpen string. Create a unique 
+    class or id for each menu item, then reference that item in your CSS or Javascript
+    to do whatever you want.
+    
+    To add a unique class for each menu item (or similar):
+    
+        "<li><a href="[url]" target="[target]" class="[class] p[page_id]">[menu_title]</a>"
+
+        ... creating menu items like ...
+    
+        <li><a href="/pages/foo/bar.php" target="_top" class="menu-top p45">Top Menu</a>
+
+        Reference this in your CSS like:
+        
+        a.p45 { color: red; }
+    
+    To add a unique ID for each menu item (or similar):
+    
+        "<li><a id="p[page_id]" href="[url]" target="[target]" class="[class]">[menu_title]</a>"
+    
+        ... creating menu items like ...
+    
+        <li><a id="p45" href="/pages/foo/bar.php" target="_top" class="menu-top">Top Menu</a>
+
+        Reference this in your CSS like:
+        
+        a#p45 { color: red; }
+        
+        Note that the ID can only be used if that menu is generated and displayed one time
+        only on the page (because HTML ID's must be unique within a page). 
+    
+
 
 FUNCTION
 ========
@@ -140,8 +173,8 @@ the default value.
 
 
 
-OUTPUT
-======
+HTML OUTPUT
+===========
 The menu is output differently depending on what parameters have been 
 supplied to the function, however in general the following classes are used 
 for each menu. Note that items will have multiple classes when relevant.

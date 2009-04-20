@@ -1,4 +1,4 @@
-﻿show_menu2, version 4.7
+﻿show_menu2, version 4.8
 =======================
 Ist ein Code-Snippet für das CMS Website Baker. Es stellt einen kompletten 
 Ersatz für die eingebaute Menüfuntionalität zur Verfügung. Alle, für die 
@@ -117,6 +117,38 @@ A:  Der Funktion wurden die falschen Werte oder eine falsche Anzahl an
     $aOptions Parameter zu übergeben sind.    
 
 
+Q:  How do I use a different class/picture/color/widget for each entry in a menu?
+A:  Use the [page_id] format string in the $aItemOpen string. Create a unique 
+    class or id for each menu item, then reference that item in your CSS or Javascript
+    to do whatever you want.
+    
+    To add a unique class for each menu item (or similar):
+    
+        "<li><a href="[url]" target="[target]" class="[class] p[page_id]">[menu_title]</a>"
+
+        ... creating menu items like ...
+    
+        <li><a href="/pages/foo/bar.php" target="_top" class="menu-top p45">Top Menu</a>
+
+        Reference this in your CSS like:
+        
+        a.p45 { color: red; }
+    
+    To add a unique ID for each menu item (or similar):
+    
+        "<li><a id="p[page_id]" href="[url]" target="[target]" class="[class]">[menu_title]</a>"
+    
+        ... creating menu items like ...
+    
+        <li><a id="p45" href="/pages/foo/bar.php" target="_top" class="menu-top">Top Menu</a>
+
+        Reference this in your CSS like:
+        
+        a#p45 { color: red; }
+        
+        Note that the ID can only be used if that menu is generated and displayed one time
+        only on the page (because HTML ID's must be unique within a page). 
+    
     
 FUNKTION
 ========

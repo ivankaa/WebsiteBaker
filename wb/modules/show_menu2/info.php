@@ -39,7 +39,7 @@
 $module_directory = 'show_menu2';
 $module_name = 'show_menu2';
 $module_function = 'snippet';
-$module_version = '4.7';
+$module_version = '4.8';
 $module_platform = '2.6.x | 2.7.x';
 $module_author = 'Brodie Thiesfield';
 $module_license = 'GNU General Public License';

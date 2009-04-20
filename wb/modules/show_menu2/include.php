@@ -22,7 +22,7 @@
     02110-1301, USA.
 
     ***********************************************
-    ** Version 4.7: see README for documentation **
+    ** Version 4.8: see README for documentation **
     ***********************************************
 */
 
@@ -529,6 +529,7 @@ function show_menu2(
         $sql = "SELECT $fields FROM ".TABLE_PREFIX.
                "pages WHERE $wb->extra_where_sql $menuLimitSql ".
                'ORDER BY level ASC, position ASC';
+        $sql = str_replace('hidden', 'IGNOREME', $sql); // we want the hidden pages
         $oRowset = $database->query($sql);
         if (is_object($oRowset) && $oRowset->numRows() > 0) {
             // create an in memory array of the database data based on the item's parent. 
@@ -536,12 +537,18 @@ function show_menu2(
             while ($page = $oRowset->fetchRow()) {
                 // ignore all pages that the current user is not permitted to view
                 if(version_compare(WB_VERSION, '2.7', '>=')) { // WB >= 2.7
-                    // 1. all pages with no active sections (unless it is the top page) are ignored
-                    if (!$wb->page_is_active($page) && $page['link'] != $wb->default_link && !INTRO_PAGE) {
-                      continue; 
+                    // 1. hidden pages aren't shown unless they are on the current page
+                    if ($page['visibility'] == 'hidden') {
+                        $page['sm2_hide'] = true;
                     }
-                    // 2. all pages not visible to this user (unless always visible to registered users) are ignored
-                    if (!$wb->page_is_visible($page) && $page['visibility'] != 'registered') {
+                    
+                    // 2. all pages with no active sections (unless it is the top page) are ignored
+                    else if (!$wb->page_is_active($page) && $page['link'] != $wb->default_link && !INTRO_PAGE) {
+                        continue;
+                    }
+
+                    // 3. all pages not visible to this user (unless always visible to registered users) are ignored
+                    else if (!$wb->page_is_visible($page) && $page['visibility'] != 'registered') {
                         continue;
                     }
                 }
@@ -567,12 +574,14 @@ function show_menu2(
                 if ($page['page_id'] == $CURR_PAGE_ID) {
                     $page['sm2_is_curr'] = true;
                     $page['sm2_on_curr_path'] = true;
+                    unset($page['sm2_hide']); // don't hide the current page
                 }
 
                 // mark parents of the current page as such
                 if (in_array($page['page_id'], $rgCurrParents)) {
                     $page['sm2_is_parent'] = true;
                     $page['sm2_on_curr_path'] = true;
+                    unset($page['sm2_hide']); // don't hide a parent page                
                 }
                 
                 // add the entry to the array                
