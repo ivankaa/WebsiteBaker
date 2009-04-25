@@ -22,11 +22,11 @@
     02110-1301, USA.
 
  -----------------------------------------------------------------------------------------
-  NORWEGIAN LANGUAGE FILE FOR THE ADDON: SHOW_MENU2
+  DUTCH LANGUAGE FILE FOR THE ADDON: SHOW_MENU2
  -----------------------------------------------------------------------------------------
 */
 
-// Norwegian Moduledscripton
-$module_description = 'Dette er en kode snutt (snippet) beregnet p&aring; Website Baker CMS og er en fullgod erstatning for den innebygde meny modulen. For n&aelig;rmere beskrivelse se (Kun p&aring; Engelsk) <a href="http://code.jellycan.com/show_menu2/" target="_blank">http://code.jellycan.com/show_menu2/</a> , for mer WB spesifikke detaljer se <a href="' .WB_URL .'/modules/show_menu2/README.en.txt" target="_blank">readme</a> filen.';
+//Module Description
+$module_description = 'Deze module integreert een de geavanceerde menu functie <code> show_menu2 () </ code> in Website Baker. Gedetailleerde informatie is beschikbaar op <a href="http://code.jellycan.com/show_menu2/" target="_blank"> http://code.jellycan.com/show_menu2/ </a> of in de <a href = "{WB_URL}/modules/show_menu2/README_EN" target = "_blank"> README </a>.
 
 ?>

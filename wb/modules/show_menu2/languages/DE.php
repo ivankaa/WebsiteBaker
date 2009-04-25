@@ -1,5 +1,7 @@
 <?php
 
+// $Id$
+
 /*
     show_menu2: show_menu replacement for Website Baker 
     Copyright (C) 2006-2009, Brodie Thiesfield
@@ -18,6 +20,10 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  
     02110-1301, USA.
+
+ -----------------------------------------------------------------------------------------
+  GERMAN LANGUAGE FILE FOR THE ADDON: SHOW_MENU2
+ -----------------------------------------------------------------------------------------
 */
 
 // Deutsche Modulbeschreibung

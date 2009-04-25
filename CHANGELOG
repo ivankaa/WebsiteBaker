@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+25-Apr-2009 Matthias Gallas
+!	Updated Dutch language files for modules (Thanks to LuckyLuke)
 23-Apr-2009 Matthias Gallas
 #	Fixed bug with dropdownlist in pages settings (ticket #713)
 20-Apr-2009 Matthias Gallas

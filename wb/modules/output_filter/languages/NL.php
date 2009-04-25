@@ -27,18 +27,18 @@
 */
 
 // Headings and text outputs
-$MOD_MAIL_FILTER['HEADING']				= 'Options: Output Filter';
-$MOD_MAIL_FILTER['HOWTO']						= 'You can configure the output filtering with the options below.<p style="line-height:1.5em;"><strong>Tip: </strong>Mailto links can be encrypted by a Javascript function. To make use of this option, one needs to add the PHP code <code style="background:#FFA;color:#900;">&lt;?php register_frontend_modfiles(\'js\');?&gt;</code> into the &lt;head&gt; section of the index.php of your template. Without this modification, only the @ character in the mailto part will be replaced.</p>';
+$MOD_MAIL_FILTER['HEADING']				= 'Beheersinstellingen: Output Filter';
+$MOD_MAIL_FILTER['HOWTO']				= 'Hier kan je de uitvoer filteren met onderstaande opties.<p style="line-height:1.5em;"><strong>Tip: </strong>Mailto links kunnen gecodeerd worden door een Javascript functie. Om van deze optie gebruik te kunnen maken moet je de PHP code <code style="background:#FFA;color:#900;">&lt;?php register_frontend_modfiles(\'js\');?&gt;</code> in de &lt;head&gt; sectie van het index.php bestand van je template plaatsen. Zonder deze aanpassing zal enkel het @ teken in het mailto deel vervangen worden.</p>';
 
 // Text and captions of form elements
-$MOD_MAIL_FILTER['BASIC_CONF']			= 'Basic Email Configuration';
-$MOD_MAIL_FILTER['EMAIL_FILTER']		= 'Filter Email addresses in text';
-$MOD_MAIL_FILTER['MAILTO_FILTER']		= 'Filter Email addresses in mailto links';
-$MOD_MAIL_FILTER['ENABLED']					= 'Enabled';
-$MOD_MAIL_FILTER['DISABLED']				= 'Disabled';
+$MOD_MAIL_FILTER['BASIC_CONF']			= 'E-mail Configuratie';
+$MOD_MAIL_FILTER['EMAIL_FILTER']		= 'Filter E-mail adressen in tekst';
+$MOD_MAIL_FILTER['MAILTO_FILTER']		= 'Filter E-mail adressen in mailto links';
+$MOD_MAIL_FILTER['ENABLED']				= 'Aan';
+$MOD_MAIL_FILTER['DISABLED']			= 'Uit';
 
-$MOD_MAIL_FILTER['REPLACEMENT_CONF']= 'Email Replacements';
-$MOD_MAIL_FILTER['AT_REPLACEMENT']	= 'Replace "@" by';
-$MOD_MAIL_FILTER['DOT_REPLACEMENT']	= 'Replace "." by';
+$MOD_MAIL_FILTER['REPLACEMENT_CONF']	= 'Vervang E-mail tekens';
+$MOD_MAIL_FILTER['AT_REPLACEMENT']		= 'Vervang "@" door';
+$MOD_MAIL_FILTER['DOT_REPLACEMENT']		= 'Vervang "." door';
 
 ?>

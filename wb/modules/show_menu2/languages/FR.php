@@ -25,6 +25,7 @@
   FRENCH LANGUAGE FILE FOR THE ADDON: SHOW_MENU2
  -----------------------------------------------------------------------------------------
 */
+
 //Module Description
 $module_description = 'Ce module int&egrave;gre la fonction de menu avanc&eacute;e <code> show_menu2 () </ code> dans Website Baker. Une information d&eacute;taill&eacute;e est disponible sur <a href="http://code.jellycan.com/show_menu2/" target="_blank"> http://code.jellycan.com/show_menu2/ </a> ou dans le fichier <a href = "{WB_URL}/modules/show_menu2/README_DE" target = "_blank"> README </a>.';
 
