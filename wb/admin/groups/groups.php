@@ -156,7 +156,7 @@ if($_POST['action'] == 'modify') {
 									'TEXT_BASIC' => $TEXT['BASIC'],
 									'TEXT_ADVANCED' => $TEXT['ADVANCED'],
 									'CHANGING_PASSWORD' => $MESSAGE['USERS']['CHANGING_PASSWORD'],
-									'HEADING_MODIFY_GROUPS' => $HEADING['MODIFY_GROUPS']
+									'HEADING_MODIFY_GROUP' => $HEADING['MODIFY_GROUP']
 									)
 							);
 	
