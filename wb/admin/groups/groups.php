@@ -155,7 +155,8 @@ if($_POST['action'] == 'modify') {
 									'TEXT_UPLOAD_FILES' => $TEXT['UPLOAD_FILES'],
 									'TEXT_BASIC' => $TEXT['BASIC'],
 									'TEXT_ADVANCED' => $TEXT['ADVANCED'],
-									'CHANGING_PASSWORD' => $MESSAGE['USERS']['CHANGING_PASSWORD']
+									'CHANGING_PASSWORD' => $MESSAGE['USERS']['CHANGING_PASSWORD'],
+									'HEADING_MODIFY_GROUPS' => $HEADING['MODIFY_GROUPS']
 									)
 							);
 	
