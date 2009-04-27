@@ -77,6 +77,7 @@ if($admin->get_post('advanced') != 'yes') {
 	$system_permissions['groups_modify'] = $system_permissions['groups'];
 	$system_permissions['groups_delete'] = $system_permissions['groups'];
 	$system_permissions['admintools'] = $admin->get_post('admintools');
+	$system_permissions['admintools_settings'] = $system_permissions['admintools'];
 } else {
 	// Pages
 	$system_permissions['pages_view'] = $admin->get_post('pages_view');
@@ -132,6 +133,13 @@ if($admin->get_post('advanced') != 'yes') {
 			$system_permissions['languages'] = 1;
 		} else {
 			$system_permissions['languages'] = '';
+		}
+		// Admintools
+		$system_permissions['admintools_settings'] = $admin->get_post('admintools_settings');
+		if($system_permissions['admintools_settings'] == 1) {
+			$system_permissions['admintools'] = 1;
+		} else {
+			$system_permissions['admintools'] = '';
 		}
 	if($system_permissions['modules'] == 1 OR $system_permissions['templates'] == 1 OR $system_permissions['languages'] == 1) {
 		$system_permissions['addons'] = 1;

@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 27-Apr-2009 Matthias Gallas
+#	Fixed bug with missing option for admin-tools in advanced view of access
+	settings (ticket #714)
 #	Fixed bug with backup fails if a user has only permissions to admin-tools (ticket #715)
 #	Fixed bug with missing template object in groups and user settings(ticket #716)
 25-Apr-2009 Matthias Gallas

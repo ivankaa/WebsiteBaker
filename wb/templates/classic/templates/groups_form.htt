@@ -222,6 +222,17 @@
 	<td><input name="groups_delete" id="groups_delete" type="checkbox" value="1" {groups_delete_checked}></td>
 	<td><label for="groups_delete">{TEXT_DELETE}</label></td>
 </tr>
+<tr>
+	<td colspan="4">
+		<h3>{SECTION_ADMINTOOLS}</h3>
+	</td>
+</tr>
+<tr>
+	<td><input name="admintools_settings" id="admintools_settings" type="checkbox" value="1" {admintools_settings_checked}></td>
+	<td><label for="admintools_settings">{TEXT_MODIFY_SETTINGS}</label></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
 </table>
 
 
