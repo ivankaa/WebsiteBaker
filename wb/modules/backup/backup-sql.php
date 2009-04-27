@@ -35,10 +35,6 @@ if(!isset($_POST['backup'])){
 // Include config
 require_once('../../config.php');
 
-// Create new admin object
-require(WB_PATH.'/framework/class.admin.php');
-$admin = new admin('Settings', 'settings_advanced', false);
-
 // Begin output var
 $output = "".
 "#\n".
