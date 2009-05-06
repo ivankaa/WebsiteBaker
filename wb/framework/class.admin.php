@@ -349,9 +349,13 @@ class admin extends wb {
 					return str_replace("{MODULE_DIRECTORY}", $tool['directory'], $base_link);
 				}
 			}
-		} elseif(isset($_GET['page_id'])) {
+		} elseif(isset($_GET['page_id']) or isset($_POST['page_id'])) {
 			// check if displayed page in the backend contains a page module
-			$page_id = (int) addslashes($_GET['page_id']);
+			if (isset($_GET['page_id'])) {
+				$page_id = (int) addslashes($_GET['page_id']);
+			} else {
+				$page_id = (int) addslashes($_POST['page_id']);
+			}
 
     		// gather information for all models embedded on actual page
 			$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections 
