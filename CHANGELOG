@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 06-May-2009 Matthias Gallas
+!	Updated Norsk language File (Thanks to oeh)
 #	Fixed bug with not always included stylesheets in backend (ticket #717)
 27-Apr-2009 Matthias Gallas
 #	Fixed bug with missing option for admin-tools in advanced view of access
