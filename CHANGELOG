@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+09-May-2009 Matthias Gallas
++	Added index.php to all WB-Theme folders to prevent directory spoofing
 06-May-2009 Matthias Gallas
 !	Updated Norsk language File (Thanks to oeh)
 #	Fixed bug with not always included stylesheets in backend (ticket #717)
