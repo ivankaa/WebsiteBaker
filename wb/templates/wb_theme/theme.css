@@ -226,7 +226,11 @@ img.page_list_rights {
 }
 
 .setting_name {
- width: 180px;
+ width: 20%;
+}
+
+.setting_value {
+ width: 80%;
 }
 
 .setting_value input, .setting_value select, .setting_value textarea {

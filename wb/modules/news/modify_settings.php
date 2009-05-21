@@ -75,38 +75,38 @@ if(function_exists('edit_module_css')) {
 		<tr>
 			<td colspan="2"><strong><?php echo $HEADING['GENERAL_SETTINGS']; ?></strong></td>
 		<tr>
-			<td class="setting_name" width="20%"><?php echo $TEXT['HEADER']; ?>:</td>
-			<td class="setting_name">
+			<td class="setting_name"><?php echo $TEXT['HEADER']; ?>:</td>
+			<td class="setting_value">
 				<textarea name="header" style="width: 98%; height: 80px;"><?php echo ($fetch_content['header']); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['POST'].' '.$TEXT['LOOP']; ?>:</td>
-			<td class="setting_name">
+			<td class="setting_value">
 				<textarea name="post_loop" style="width: 98%; height: 60px;"><?php echo ($fetch_content['post_loop']); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['FOOTER']; ?>:</td>
-			<td class="setting_name">
+			<td class="setting_value">
 				<textarea name="footer" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($fetch_content['footer'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['POST_HEADER']; ?>:</td>
-			<td class="setting_name">
+			<td class="setting_value">
 				<textarea name="post_header" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['post_header'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['POST_FOOTER']; ?>:</td>
-			<td class="setting_name">
+			<td class="setting_value">
 				<textarea name="post_footer" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['post_footer'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['POSTS_PER_PAGE']; ?>:</td>
-			<td class="setting_name">
+			<td class="setting_value">
 				<select name="posts_per_page" style="width: 98%;">
 					<option value=""><?php echo $TEXT['UNLIMITED']; ?></option>
 					<?php
@@ -124,8 +124,8 @@ if(function_exists('edit_module_css')) {
 			<td colspan="2"><strong><?php echo $TEXT['COMMENTS']; ?></strong></td>
 		</tr>
 		<tr>
-			<td  width="20%"><?php echo $TEXT['COMMENTING']; ?>:</td>
-			<td>
+			<td class="setting_name"><?php echo $TEXT['COMMENTING']; ?>:</td>
+			<td class="setting_value">
 				<select name="commenting" style="width: 98%;">
 					<option value="none"><?php echo $TEXT['DISABLED']; ?></option>
 					<option value="public" <?php if($fetch_content['commenting'] == 'public') { echo 'selected'; } ?>><?php echo $TEXT['PUBLIC']; ?></option>
@@ -135,7 +135,7 @@ if(function_exists('edit_module_css')) {
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['CAPTCHA_VERIFICATION']; ?>:</td>
-			<td>
+			<td >
 				<input type="radio" name="use_captcha" id="use_captcha_true" value="1"<?php if($fetch_content['use_captcha'] == true) { echo ' checked'; } ?> />
 				<label for="use_captcha_true"><?php echo $TEXT['ENABLED']; ?></label>
 				<input type="radio" name="use_captcha" id="use_captcha_false" value="0"<?php if($fetch_content['use_captcha'] == false) { echo ' checked'; } ?> />
@@ -144,10 +144,8 @@ if(function_exists('edit_module_css')) {
 		</tr>
 		<?php if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */ ?>
 		<tr>
-			<td>
-				<?php echo $TEXT['RESIZE_IMAGE_TO']; ?>:
-			</td>
-			<td>
+			<td class="setting_name"><?php echo $TEXT['RESIZE_IMAGE_TO']; ?>:</td>
+			<td class="setting_value">
 				<select name="resize" style="width: 98%;">
 					<option value=""><?php echo $TEXT['NONE']; ?></option>
 					<?php
@@ -167,25 +165,25 @@ if(function_exists('edit_module_css')) {
 		<?php } ?>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['HEADER']; ?>:</td>
-			<td class="setting_name">
+			<td class="setting_value">
 				<textarea name="comments_header" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_header'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['LOOP']; ?>:</td>
-			<td class="setting_name">
+			<td class="setting_value">
 				<textarea name="comments_loop" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_loop'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['FOOTER']; ?>:</td>
-			<td class="setting_name">
+			<td class="setting_value">
 				<textarea name="comments_footer" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_footer'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['PAGE']; ?>:</td>
-			<td class="setting_name">
+			<td class="setting_value">
 				<textarea name="comments_page" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_page'])); ?></textarea>
 			</td>
 		</tr>

@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+21-May-2009 Matthias Gallas
+#	Fixed some strange backend layout issues (ticket #722)
 09-May-2009 Matthias Gallas
 +	Added index.php to all WB-Theme folders to prevent directory spoofing
 06-May-2009 Matthias Gallas

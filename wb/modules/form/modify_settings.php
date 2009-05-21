@@ -81,7 +81,7 @@ if(function_exists('edit_module_css')) {
 		<td colspan="2"><strong><?php echo $HEADING['GENERAL_SETTINGS']; ?></strong></td>
 	</tr>
 	<tr>
-		<td class="setting_name" width="30%"><?php echo $TEXT['CAPTCHA_VERIFICATION']; ?>:</td>
+		<td class="setting_name"><?php echo $TEXT['CAPTCHA_VERIFICATION']; ?>:</td>
 		<td>
 			<input type="radio" name="use_captcha" id="use_captcha_true" value="1"<?php if($setting['use_captcha'] == true) { echo ' checked'; } ?> />
 			<label for="use_captcha_true"><?php echo $TEXT['ENABLED']; ?></label>
@@ -90,32 +90,32 @@ if(function_exists('edit_module_css')) {
 		</td>
 	</tr>
 	<tr>
-		<td class="setting_name" width="30%"><?php echo $TEXT['MAX_SUBMISSIONS_PER_HOUR']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_name"><?php echo $TEXT['MAX_SUBMISSIONS_PER_HOUR']; ?>:</td>
+		<td class="setting_value">
 			<input type="text" name="max_submissions" style="width: 30px;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['max_submissions'])); ?>" />
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['SUBMISSIONS_STORED_IN_DATABASE']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<input type="text" name="stored_submissions" style="width: 30px;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['stored_submissions'])); ?>" />
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['HEADER']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<textarea name="header" style="width: 98%; height: 80px;"><?php echo ($setting['header']); ?></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['FIELD'].' '.$TEXT['LOOP']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<textarea name="field_loop" style="width: 98%; height: 80px;"><?php echo ($setting['field_loop']); ?></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['FOOTER']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<textarea name="footer" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($setting['footer'])); ?></textarea>
 		</td>
 	</tr>
@@ -126,14 +126,14 @@ if(function_exists('edit_module_css')) {
 		<td colspan="2"><strong><?php echo $TEXT['EMAIL'].' '.$TEXT['SETTINGS']; ?></strong></td>
 	</tr>
 	<tr>
-		<td class="setting_name" width="30%"><?php echo $TEXT['EMAIL'].' '.$TEXT['TO']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['TO']; ?>:</td>
+		<td class="setting_value">
 			<input type="text" name="email_to" style="width: 98%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['email_to'])); ?>" />
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['FROM']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<select name="email_from_field" style="width: 98%;">
 			<option value="" onclick="javascript: document.getElementById('email_from').style.display = 'block';"><?php echo $TEXT['CUSTOM']; ?>:</option>
 			<?php
@@ -155,13 +155,13 @@ if(function_exists('edit_module_css')) {
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['NAME']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<input type="text" name="email_fromname" style="width: 98%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['email_fromname'])); ?>" />
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['SUBJECT']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<input type="text" name="email_subject" style="width: 98%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['email_subject'])); ?>" />
 		</td>
 	</tr>
@@ -172,8 +172,8 @@ if(function_exists('edit_module_css')) {
 		<td colspan="2"><strong><?php echo $TEXT['SUCCESS'].' '.$TEXT['SETTINGS']; ?></strong></td>
 	</tr>
 	<tr>
-		<td class="setting_name" width="30%"><?php echo $TEXT['EMAIL'].' '.$TEXT['TO']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['TO']; ?>:</td>
+		<td class="setting_value">
 			<select name="success_email_to" style="width: 98%;">
 			<option value="" onclick="javascript: document.getElementById('success_email_to').style.display = 'block';"><?php echo $TEXT['NONE']; ?></option>
 			<?php
@@ -194,25 +194,25 @@ if(function_exists('edit_module_css')) {
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['FROM']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<input type="text" name="success_email_from" style="width: 98%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['success_email_from'])); ?>" />
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['NAME']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<input type="text" name="success_email_fromname" style="width: 98%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['success_email_fromname'])); ?>" />
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['SUBJECT']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<input type="text" name="success_email_subject" style="width: 98%;" maxlength="255" value="<?php echo str_replace($raw, $friendly, ($setting['success_email_subject'])); ?>" />
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['TEXT']; ?>:</td>
-		<td class="setting_name">
+		<td class="setting_value">
 			<textarea name="success_email_text" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($setting['success_email_text'])); ?></textarea>
 		</td>
 	</tr>

@@ -1,5 +1,10 @@
 .setting_name {
 	vertical-align: top;
+	width: 20%;
+}
+.setting_value {
+	vertical-align: top;
+	width: 80%;
 }
 
 /* 
