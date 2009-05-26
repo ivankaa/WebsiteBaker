@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+26-May-2009 Matthias Gallas
++	Added jQuery(1.3.2) and jQueryUI(1.7.1) to WB core (ticket #708)
 21-May-2009 Matthias Gallas
 #	Fixed some strange backend layout issues (ticket #722)
 09-May-2009 Matthias Gallas
