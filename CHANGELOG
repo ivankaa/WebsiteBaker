@@ -11,6 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+13-jun-2009 Matthias Gallas
++	Added jQuery-insert.js and jQuery plugins (Thanks to Luisehahne)
+!	Moved images in lQuery plugins folder (Thanks to Luisehahne)
+#	fixed small german language issue in jscalendar (Thanks to Luisehahne)
 26-May-2009 Matthias Gallas
 +	Added jQuery(1.3.2) and jQueryUI(1.7.1) to WB core (ticket #708)
 21-May-2009 Matthias Gallas

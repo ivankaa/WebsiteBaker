@@ -1,6 +1,6 @@
 <?php
 
-// $Id$
+// $Id: index.php 985 2009-05-27 04:46:39Z Ruebenwurzel $
 
 /*
 
@@ -23,6 +23,6 @@
 
 */
 
-header("Location: ../../../index.php");
+header("Location: ../../../../index.php");
 
 ?>
