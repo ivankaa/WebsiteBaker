@@ -51,21 +51,22 @@ if (file_exists(WB_PATH.'/framework/class.database.php')) {
 	$string_dir_mode = STRING_DIR_MODE;
 	define('OCTAL_DIR_MODE',(int) octdec($string_dir_mode));
 	
-	// get CAPTCHA and ASP settings
-	$table = TABLE_PREFIX.'mod_captcha_control';
-	if($get_settings = $database->query("SELECT * FROM $table LIMIT 1")) {
-		if($get_settings->numRows() == 0) { die("CAPTCHA-Settings not found"); }
-		$setting = $get_settings->fetchRow();
-		if($setting['enabled_captcha'] == '1') define('ENABLED_CAPTCHA', true);
-		else define('ENABLED_CAPTCHA', false);
-		if($setting['enabled_asp'] == '1') define('ENABLED_ASP', true);
-		else define('ENABLED_ASP', false);
-		define('CAPTCHA_TYPE', $setting['captcha_type']);
-		define('ASP_SESSION_MIN_AGE', (int)$setting['asp_session_min_age']);
-		define('ASP_VIEW_MIN_AGE', (int)$setting['asp_view_min_age']);
-		define('ASP_INPUT_MIN_AGE', (int)$setting['asp_input_min_age']);
+	if (!defined("WB_INSTALL_PROCESS")) {
+		// get CAPTCHA and ASP settings
+		$table = TABLE_PREFIX.'mod_captcha_control';
+		if($get_settings = $database->query("SELECT * FROM $table LIMIT 1")) {
+			if($get_settings->numRows() == 0) { die("CAPTCHA-Settings not found"); }
+			$setting = $get_settings->fetchRow();
+			if($setting['enabled_captcha'] == '1') define('ENABLED_CAPTCHA', true);
+			else define('ENABLED_CAPTCHA', false);
+			if($setting['enabled_asp'] == '1') define('ENABLED_ASP', true);
+			else define('ENABLED_ASP', false);
+			define('CAPTCHA_TYPE', $setting['captcha_type']);
+			define('ASP_SESSION_MIN_AGE', (int)$setting['asp_session_min_age']);
+			define('ASP_VIEW_MIN_AGE', (int)$setting['asp_view_min_age']);
+			define('ASP_INPUT_MIN_AGE', (int)$setting['asp_input_min_age']);
+		}
 	}
-
 	// set error-reporting
 	if(is_numeric(ER_LEVEL)) {
 		error_reporting(ER_LEVEL);

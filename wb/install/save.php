@@ -22,7 +22,12 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
+$debug = true;
 
+if (true === $debug) {
+	ini_set('display_errors', 1);
+	error_reporting(E_ALL);
+}
 // Start a session
 if(!defined('SESSION_STARTED')) {
 	session_name('wb_session_id');
@@ -126,12 +131,12 @@ function default_dir_mode($temp_dir) {
 }
 
 function add_slashes($input) {
-		if ( get_magic_quotes_gpc() || ( !is_string($input) ) ) {
-			return $input;
-		}
-		$output = addslashes($input);
-		return $output;
+	if ( get_magic_quotes_gpc() || ( !is_string($input) ) ) {
+		return $input;
 	}
+	$output = addslashes($input);
+	return $output;
+}
 
 // Begin check to see if form was even submitted
 // Set error if no post vars found
@@ -364,7 +369,7 @@ $database=new database();
 
 // Check if we should install tables
 if($install_tables == true) {
-	
+	if (!defined('WB_INSTALL_PROCESS')) define ('WB_INSTALL_PROCESS', true);
 	// Remove tables if they exist
 
 	// Pages table
@@ -693,29 +698,99 @@ if($install_tables == true) {
 	if($database->is_error()) {
 		set_error($database->get_error());
 	}
-	
-}
 
+// end of if install_tables	
+} else {
+	/**
+	 *	DB - Exists
+	 *	Tables also?
+	 *
+	 */
+	$requested_tables = array("pages","sections","settings","users","groups","search","addons");
+	for($i=0;$i<count($requested_tables);$i++) $requested_tables[$i] = $table_prefix.$requested_tables[$i];
+	
+	$result = mysql_list_tables( DB_NAME );
+	$all_tables = array();
+	for($i=0; $i < mysql_num_rows($result); $i++) $all_tables[] = mysql_table_name($result, $i);
+
+	$missing_tables = array();
+	foreach($requested_tables as $temp_table) {
+		if (!in_array($temp_table, $all_tables)) {
+			$missing_tables[] = $temp_table;
+		}
+	}
+	
+	/**
+	 *	If one or more needed tables are missing, so 
+	 *	we can't go on and have to display an error
+	 */
+	if ( count($missing_tables) > 0 ) {
+		$error_message  = "One or more tables are missing in the selected database <b><font color='#990000'>".DB_NAME."</font></b>.<br />";
+		$error_message .= "Please install the missing tables or choose 'install tables' as recommend.<br />";
+		$error_message .= "Missing tables are: <b>".implode(", ", $missing_tables)."</b>";
+		
+		set_error( $error_message );
+	}
+	
+	/**
+	 *	Try to get some default settings ...
+	 */
+	$vars = array(
+		'DEFAULT_THEME'	=> "wb_theme",
+		'THEME_URL'		=> WB_URL."/templates/wb_theme",
+		'THEME_PATH'	=> WB_PATH."/templates/wb_theme",
+		'LANGUAGE'		=> $_POST['default_language'],
+		'SERVER_EMAIL'	=> "admin@yourdomain.com",
+		'SMART_LOGIN'	=> false
+	);
+	foreach($vars as $k => $v) if (!defined($k)) define($k, $v);
+	
+	if (!isset($MESSAGE)) include (WB_PATH."/languages/".LANGUAGE.".php");
+	
+	/**
+	 *	The important part ...
+	 *	Is there an valid user?
+	 */
+	$result = $database->query("SELECT * from ".$table_prefix."users where username='".$_POST['admin_username']."'");
+	if ( $database->is_error() ) {
+		set_error ($database->get_error() );
+	}
+	if ($result->numRows() == 0) {
+		/**
+		 *	No matches found ... user properly unknown
+	 	 */
+	 	set_error ("Unkown user. Please use a valid username.");
+	} else {
+	 	
+		$data = $result->fetchRow();
+	 	/**
+	 	 *	Does the password match
+	 	 */
+	 	if ( md5($_POST['admin_password']) != $data['password']) {
+	 		set_error ("Password didn't match");
+	 	}
+	}
+}
 // Log the user in and go to Website Baker Administration
 $thisApp = new Login(
-							array(
-									"MAX_ATTEMPS" => "50",
-									"WARNING_URL" => ADMIN_URL."/login/warning.html",
-									"USERNAME_FIELDNAME" => 'admin_username',
-									"PASSWORD_FIELDNAME" => 'admin_password',
-									"REMEMBER_ME_OPTION" => SMART_LOGIN,
-									"MIN_USERNAME_LEN" => "2",
-									"MIN_PASSWORD_LEN" => "2",
-									"MAX_USERNAME_LEN" => "30",
-									"MAX_PASSWORD_LEN" => "30",
-									'LOGIN_URL' => ADMIN_URL."/login/index.php",
-									'DEFAULT_URL' => ADMIN_URL."/start/index.php",
-									'TEMPLATE_DIR' => ADMIN_PATH."/login",
-									'TEMPLATE_FILE' => "template.html",
-									'FRONTEND' => false,
-									'FORGOTTEN_DETAILS_APP' => ADMIN_URL."/login/forgot/index.php",
-									'USERS_TABLE' => TABLE_PREFIX."users",
-									'GROUPS_TABLE' => TABLE_PREFIX."groups",
-							)
-					);
+		array(
+				"MAX_ATTEMPS" => "50",
+				"WARNING_URL" => ADMIN_URL."/login/warning.html",
+				"USERNAME_FIELDNAME" => 'admin_username',
+				"PASSWORD_FIELDNAME" => 'admin_password',
+				"REMEMBER_ME_OPTION" => SMART_LOGIN,
+				"MIN_USERNAME_LEN" => "2",
+				"MIN_PASSWORD_LEN" => "2",
+				"MAX_USERNAME_LEN" => "30",
+				"MAX_PASSWORD_LEN" => "30",
+				'LOGIN_URL' => ADMIN_URL."/login/index.php",
+				'DEFAULT_URL' => ADMIN_URL."/start/index.php",
+				'TEMPLATE_DIR' => ADMIN_PATH."/login",
+				'TEMPLATE_FILE' => "template.html",
+				'FRONTEND' => false,
+				'FORGOTTEN_DETAILS_APP' => ADMIN_URL."/login/forgot/index.php",
+				'USERS_TABLE' => TABLE_PREFIX."users",
+				'GROUPS_TABLE' => TABLE_PREFIX."groups",
+		)
+);
 ?>

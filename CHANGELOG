@@ -11,6 +11,14 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+14-June-2009 Dietrich Roland Pehlke (aldus)
+# Bugfixes for (ticket #728)
++ Add additional constant to "install/save.php" to avoid conflikts during
+	installation inside "/framework/initialize.php".
++ Add condition inside "/framework/initialize.php" to avoid conflikts
+	during installation; table "mod_captcha_control" doesn't exsits at runtime.
++ Add test for tables inside "install/save.php" if the user uncheck "install table" option.
++ Additional Errormessage if nessesary tables are not found (english).
 13-jun-2009 Matthias Gallas
 +	Added jQuery-insert.js and jQuery plugins (Thanks to Luisehahne)
 !	Moved images in lQuery plugins folder (Thanks to Luisehahne)
