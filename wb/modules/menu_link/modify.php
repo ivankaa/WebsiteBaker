@@ -45,25 +45,41 @@ $extern = $sql_row['extern'];
 $anchor = $sql_row['anchor'];
 $sel = ' selected';
 
-// Get list of all visible pages, except actual one
-$links = array();
-$table_p = TABLE_PREFIX."pages";
-if($query_page = $database->query("SELECT * FROM $table_p WHERE parent = '0' ORDER BY position")) {
-	while($page = $query_page->fetchRow()) {
-		$all_links[$page['page_id']]='/'.$page['menu_title'];
-		if($admin->page_is_visible($page) && $page['page_id']!=$page_id) {
-			$links[$page['page_id']]='/'.$page['menu_title'];
-		}
-		if($query_subpage = $database->query("SELECT * FROM $table_p WHERE page_id != '$page_id' AND root_parent = '{$page['page_id']}' ORDER BY level")) {
-			while($sub = $query_subpage->fetchRow()) {
-				if($admin->page_is_visible($sub)) {
-					$parent_link = (array_key_exists($sub['parent'],$all_links))?$all_links[$sub['parent']]:"";
-					$links[$sub['page_id']]=$parent_link.'/'.$sub['menu_title'];
-				}
+// Get list of all visible pages, except actual one, and build a page-tree
+
+// this function will fetch the page_tree, recursive
+if(!function_exists('menulink_make_tree')) {
+function menulink_make_tree($parent, $link_pid, $tree) {
+	global $database, $admin, $menulink_titles;
+	$table_p = TABLE_PREFIX."pages";
+	// get list of page-trails, recursive
+	if($query_page = $database->query("SELECT * FROM `$table_p` WHERE `parent`=$parent ORDER BY `position`")) {
+		while($page = $query_page->fetchRow()) {
+			if($admin->page_is_visible($page) && $page['page_id']!=$link_pid) {
+				$pids = explode(',', $page['page_trail']);
+				$entry = '';
+				foreach($pids as $pid)
+					$entry .= $menulink_titles[$pid].' / ';
+				$tree[$page['page_id']] = rtrim($entry, '/ ');
+				$tree = menulink_make_tree($page['page_id'], $link_pid, $tree);
 			}
 		}
 	}
+	return($tree);
 }
+}
+// get list of all page_ids and page_titles
+global $menulink_titles;
+$menulink_titles = array();
+$table_p = TABLE_PREFIX."pages";
+if($query_page = $database->query("SELECT `page_id`,`page_title` FROM `$table_p`")) {
+	while($page = $query_page->fetchRow())
+		$menulink_titles[$page['page_id']] = $page['page_title'];
+}
+// now get the tree
+$links = array();
+$links = menulink_make_tree(0, $page_id, $links);
+
 // Get list of targets (id=... or <a name ...>) from pages in $links
 $targets = array();
 $table_mw = TABLE_PREFIX."mod_wysiwyg";
@@ -80,9 +96,9 @@ foreach($links as $pid=>$l) {
 			if($section['module'] == 'wysiwyg') {
 				if($query_page = $database->query("SELECT content FROM $table_mw WHERE section_id = '{$section['section_id']}' LIMIT 1")) {
 					$page = $query_page->fetchRow();
-					if(preg_match_all('/<(?:[^>]+id|\s*a[^>]+name)\s*=\s*"([^"]+)"/i',$page['content'], $match)) {
+					if(preg_match_all('/<(?:a[^>]+name|[^>]+id)\s*=\s*"([^"]+)"/i',$page['content'], $match)) {
 						foreach($match[1] AS $t) {
-							$targets[$pid][] = $t;
+							$targets[$pid][$t] = $t;
 						}
 					}
 				}
