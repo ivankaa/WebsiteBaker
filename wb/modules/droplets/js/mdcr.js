@@ -1,5 +1,5 @@
 
-// $Id: mdcr.js 793 2008-04-03 15:48:49Z doc $
+// $Id$
 
 
 function mdcr(a,b) {

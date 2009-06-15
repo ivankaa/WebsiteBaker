@@ -1,4 +1,7 @@
 <?php
+
+// $Id$
+
 /*
 *	@version	1.0
 *	@author		Ruud Eisinga (Ruud) John (PCWacht)
