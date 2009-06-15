@@ -372,9 +372,9 @@ if(!function_exists('register_frontend_modfiles')) {
 
 		// include the Javascript email protection function
 		if( $file_id != 'css' && file_exists(WB_PATH .'/modules/droplets/js/mdcr.js')) {
-			$head_links .= '<script type="text/javascript" src="'.WB_URL.'/modules/droplets/js/mdcr.js"></script>\n';
+			$head_links .= '<script type="text/javascript" src="'.WB_URL.'/modules/droplets/js/mdcr.js"></script>'."\n";
 		} elseif( $file_id != 'css' && file_exists(WB_PATH .'/modules/output_filter/js/mdcr.js')) {
-			$head_links .= '<script type="text/javascript" src="'.WB_URL.'/modules/output_filter/js/mdcr.js"></script>\n';
+			$head_links .= '<script type="text/javascript" src="'.WB_URL.'/modules/output_filter/js/mdcr.js"></script>'."\n";
 		}
 		echo $head_links;
 	}
