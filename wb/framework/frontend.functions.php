@@ -338,7 +338,7 @@ if(!function_exists('register_frontend_modfiles')) {
 		// define default baselink and filename for optional module javascript and stylesheet files
 		$head_links = "";
 		if($file_id == "css") {
-      $base_link = '<link href="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend.css"'; 
+			$base_link = '<link href="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend.css"'; 
 			$base_link.= ' rel="stylesheet" type="text/css" media="screen" />';
 			$base_file = "frontend.css";
 		} else {
@@ -346,36 +346,36 @@ if(!function_exists('register_frontend_modfiles')) {
 			$base_file = "frontend.js";
 		}
 
-  	// gather information for all models embedded on actual page
+		// gather information for all models embedded on actual page
 		$page_id = $wb->page_id;
-    $query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections 
-			WHERE page_id=$page_id AND module<>'wysiwyg'");
+		$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections 
+				WHERE page_id=$page_id AND module<>'wysiwyg'");
 
-    while($row = $query_modules->fetchRow()) {
-		// check if page module directory contains a frontend.js or frontend.css file
-    	if(file_exists(WB_PATH ."/modules/" .$row['module'] ."/$base_file")) {
-				// create link with frontend.js or frontend.css source for the current module
+		while($row = $query_modules->fetchRow()) {
+			// check if page module directory contains a frontend.js or frontend.css file
+			if(file_exists(WB_PATH ."/modules/" .$row['module'] ."/$base_file")) {
+					// create link with frontend.js or frontend.css source for the current module
 				$tmp_link = str_replace("{MODULE_DIRECTORY}", $row['module'], $base_link);
 
-        // define constant indicating that the register_frontent_files was invoked
+				// define constant indicating that the register_frontent_files was invoked
 				if($file_id == 'css') {
 					if(!defined('MOD_FRONTEND_CSS_REGISTERED')) define('MOD_FRONTEND_CSS_REGISTERED', true);
 				} else {
 					if(!defined('MOD_FRONTEND_JAVASCRIPT_REGISTERED')) define('MOD_FRONTEND_JAVASCRIPT_REGISTERED', true);
 				}
-
-        // ensure that frontend.js or frontend.css is only added once per module type
-        if(strpos($head_links, $tmp_link) === false) {
+				// ensure that frontend.js or frontend.css is only added once per module type
+				if(strpos($head_links, $tmp_link) === false) {
 					$head_links .= $tmp_link ."\n";
 				}
-			}
-    }
-  	// include the Javascript email protection function
-  	if($file_id != 'css' && file_exists(WB_PATH .'/modules/output_filter/js/mdcr.js')) {
-			$head_links .= '<script type="text/javascript" src="'.WB_URL.'/modules/output_filter/js/mdcr.js"></script>' ."\n";
+			};
 		}
-  		
-		// write out links with all external module javascript/CSS files, remove last line feed
+
+		// include the Javascript email protection function
+		if( $file_id != 'css' && file_exists(WB_PATH .'/modules/droplets/js/mdcr.js')) {
+			$head_links .= '<script type="text/javascript" src="'.WB_URL.'/modules/droplets/js/mdcr.js"></script>\n';
+		} elseif( $file_id != 'css' && file_exists(WB_PATH .'/modules/output_filter/js/mdcr.js')) {
+			$head_links .= '<script type="text/javascript" src="'.WB_URL.'/modules/output_filter/js/mdcr.js"></script>\n';
+		}
 		echo $head_links;
 	}
 }

@@ -92,25 +92,20 @@ if($query_this_module->numRows() == 1) { // This is a menu_link. Get link of tar
 	}
 }
 
-if(file_exists(WB_PATH .'/modules/output_filter/filter-routines.php')) {
-	// reconnect to database
-	$database = new database();
-	// include the output filter module routines
-	@require_once(WB_PATH .'/modules/output_filter/filter-routines.php');
-	
-	if(function_exists('filter_frontend_output')) {
-		// store output in variable for filtering
-		@ob_start();
-		require(WB_PATH.'/templates/'.TEMPLATE.'/index.php');
-		$frontend_output = ob_get_contents();
-		@ob_end_clean();
-		// Display the filtered output on the frontend
-		echo filter_frontend_output($frontend_output);
-		die;
-	}
-}	
+// Backwards compatible Frontend filter support
+// include the output filter module routines
+if(file_exists(WB_PATH .'/modules/output_filter/filter-routines.php')) {@require_once(WB_PATH .'/modules/output_filter/filter-routines.php');}
+// Load Droplet engine
+if(file_exists(WB_PATH .'/modules/droplets/droplets.php')) { @require_once(WB_PATH .'/modules/droplets/droplets.php'); }
 
-// Display the template (no output filtering)
+//Get pagecontent in buffer for Droplets and/or Filter operations
+ob_start();
 require(WB_PATH.'/templates/'.TEMPLATE.'/index.php');
+$output = ob_get_contents();
+ob_end_clean();
+
+if(function_exists('evalDroplets')) { $output = evalDroplets($output); }
+if(function_exists('filter_frontend_output')) { $output = filter_frontend_output($output); }
+echo $output;
 
 ?>

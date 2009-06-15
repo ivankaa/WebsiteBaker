@@ -89,6 +89,13 @@ function get_excerpts($text, $search_words, $max_excerpt_num) {
 	$match_array = array();
 	$excerpt_array = array();
 	$word = '('.implode('|', $search_words).')';
+
+	//Filter droplets from the page data
+	preg_match_all('~\[\[(.*?)\]\]~', $text, $matches);
+	foreach ($matches[1] as $match) {
+		$text = str_replace('[['.$match.']]', '', $text);					
+	}
+
 	// Build the regex-string
 	if(strpos(strtoupper(PHP_OS), 'WIN')===0) { // windows -> see below
 		$str1=".!?;";
@@ -123,8 +130,9 @@ function get_excerpts($text, $search_words, $max_excerpt_num) {
 	} else { // compatible, but may be very slow with large pages
 		if(preg_match_all($regex, $text, $match_array)) {
 			foreach($match_array[1] AS $string) {
-				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./', $string)) // skip excerpts with email-addresses
+				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./', $string))  // skip excerpts with email-addresses
 					$excerpt_array[] = trim($string);
+				
 			}
 		}
 	}

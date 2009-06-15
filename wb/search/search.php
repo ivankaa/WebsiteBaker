@@ -196,6 +196,7 @@ if(isset($_REQUEST['string'])) {
 	$string = preg_replace('/\s+/', ' ', $string);
 	$string = trim($string);
 	// remove some bad chars
+	$string = str_replace ( array('[[',']]'),'', $string);
 	$string = preg_replace('/(^|\s+)[|.]+(?=\s+|$)/', '', $string);
 	$search_display_string = htmlspecialchars($string);
 	$search_entities_string = addslashes(umlauts_to_entities(htmlspecialchars($string)));
