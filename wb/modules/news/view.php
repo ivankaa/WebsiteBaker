@@ -349,8 +349,8 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		if($query_comments->numRows() > 0) {
 			while($comment = $query_comments->fetchRow()) {
 				// Display Comments without slashes, but with new-line characters
-				$comment['comment'] = nl2br(($comment['comment']));
-				$comment['title'] = ($comment['title']);
+				$comment['comment'] = nl2br($wb->strip_slashes($comment['comment']));
+				$comment['title'] = $wb->strip_slashes($comment['title']);
 				// Print comments loop
 				$commented_date = gmdate(DATE_FORMAT, $comment['commented_when']+TIMEZONE);
 				$commented_time = gmdate(TIME_FORMAT, $comment['commented_when']+TIMEZONE);

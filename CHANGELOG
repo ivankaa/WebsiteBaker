@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+15-June-2009 Dietrich Roland Pehlke (aldus)
+# Bugfix for ticket #725
++ Add "$wb->strip_slashes" again for backslashes are displayed in the output (view.php).
 14-June-2009 Dietrich Roland Pehlke (aldus)
 # Bugfixes for (ticket #728)
 + Add additional constant to "install/save.php" to avoid conflikts during
