@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 15-June-2009 Matthias Gallas
++	Added install routine for droplets to the upgrade script
 #	Fixed bug in menu_link modul with wrong displayed pages tree (Thanks to thorn)
 #	Fixed small bug introduced in changeset [989]
 +	Added missing id tags and copyright notices to droplets modul
