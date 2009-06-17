@@ -27,6 +27,7 @@
 if(!defined('WB_PATH')) die(header('Location: ../index.php'));
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
+$MOD_MAIL_FILTER['WARNING']	= '<p style="color: red; line-height:1.5em;"><strong>Warning: </strong>This function is now available as a Droplet. The next major release of website baker will not include this filter anymore. Please concider using the <a href="?tool=droplets">Droplet</a> [[EmailFilter]]</p>';
 if(!file_exists(WB_PATH .'/modules/output_filter/languages/'.LANGUAGE .'.php')) {
 	// no module language file exists for the language set by the user, include default module language file EN.php
 	require_once(WB_PATH .'/modules/output_filter/languages/EN.php');
@@ -69,6 +70,7 @@ if(isset($_POST['save_settings'])) {
 	
 	// output the form with values from the database
 	echo '<p>' .$MOD_MAIL_FILTER['HOWTO'] .'</p>';
+	echo $MOD_MAIL_FILTER['WARNING'];
 ?>
 <form name="store_settings" action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post">
 	<table width="98%" cellspacing="0" cellpadding="5px" class="row_a">

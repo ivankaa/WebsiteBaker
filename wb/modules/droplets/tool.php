@@ -148,9 +148,5 @@ function check_unique($name) {
 	global $database;
 	$query_droplets = $database->query("SELECT name FROM ".TABLE_PREFIX."mod_droplets WHERE name = '$name'");
 	return ($query_droplets->numRows() == 1);
-
-
-
 }
-
 ?>

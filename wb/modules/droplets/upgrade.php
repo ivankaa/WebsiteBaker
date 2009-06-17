@@ -24,9 +24,9 @@ if (!array_key_exists("admin_edit", $fields)) {
 	 */
 	
 	if (function_exists('db_add_field')) {
-		db_add_field($table, "admin_edit", "INT NOT NULL default '0'");
-		db_add_field($table, "admin_view", "INT NOT NULL default '0'");
-		db_add_field($table, "show_wysiwyg", "INT NOT NULL default '0'");
+		db_add_field("admin_edit", 'mod_droplets', "INT NOT NULL default '0'");
+		db_add_field("admin_view", 'mod_droplets', "INT NOT NULL default '0'");
+		db_add_field("show_wysiwyg", 'mod_droplets', "INT NOT NULL default '0'");
 	} else {
 		/**
 		 * Not call by the upgrade-script
@@ -35,7 +35,7 @@ if (!array_key_exists("admin_edit", $fields)) {
 			`admin_edit` INT NOT NULL default '0',
 			`admin_view` INT NOT NULL default '0',
 			`show_wysiwyg` INT NOT NULL default '0'
-			)";
+			)");
 	}
 }
 ?>

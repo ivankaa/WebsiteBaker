@@ -11,6 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+17-June-2009 Ruud Eisinga
+# Bugfix in "droplets/upgrade.php" - wrong parameter order for adding fields.
+	also the query for "normal" upgrades had a typo.
+! Added warning in output_filter that the function will be removed in 2.9
 17-June-2009 Dietrich Roland Pehlke
 # Bugfix in "droplets/upgrade.php" - wrong tablename change to the correct one
 + Add upgrade-script to droplets
