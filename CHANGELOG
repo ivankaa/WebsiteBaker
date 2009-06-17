@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 17-June-2009 Dietrich Roland Pehlke
+# Bugfix in "droplets/upgrade.php" - wrong tablename change to the correct one
 + Add upgrade-script to droplets
 ! Changes on upgrade-script to avoid droping droplet-modul-tables if the exists.
 ! calling "upgrate.php" or "install.php" instead of hard-coded lines to avoid

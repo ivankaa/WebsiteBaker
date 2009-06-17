@@ -18,7 +18,7 @@ $table = TABLE_PREFIX .'mod_droplets';
 
 $info = $database->query("SELECT * from `$table` limit 0,1" );
 $fields = $info->fetchRow();
-if (!array_key_exists("look_for_it", $fields)) {
+if (!array_key_exists("admin_edit", $fields)) {
 	/**
 	 *	Call from the upgrade-script
 	 */
