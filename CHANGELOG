@@ -11,6 +11,11 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+17-June-2009 Dietrich Roland Pehlke
++ Add upgrade-script to droplets
+! Changes on upgrade-script to avoid droping droplet-modul-tables if the exists.
+! calling "upgrate.php" or "install.php" instead of hard-coded lines to avoid
+	future conflicts by upgrading the modul
 15-June-2009 Matthias Gallas
 +	Added install routine for droplets to the upgrade script
 #	Fixed bug in menu_link modul with wrong displayed pages tree (Thanks to thorn)
