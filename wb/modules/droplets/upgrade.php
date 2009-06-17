@@ -12,6 +12,30 @@
 * 	To call a droplet just use [[dropletname]]. optional parameters for a droplet can be used like [[dropletname?parameter=value&parameter2=value]]
 */
 
-if(!defined('WB_PATH')) { exit("Cannot access this file directly"); }
+if(!defined('WB_PATH')) die(header('Location: ../../index.php'));
 
+$table = TABLE_PREFIX .'mod_droplets';
+
+$info = $database->query("SELECT * from `$table` limit 0,1" );
+$fields = $info->fetchRow();
+if (!array_key_exists("look_for_it", $fields)) {
+	/**
+	 *	Call from the upgrade-script
+	 */
+	
+	if (function_exists('db_add_field')) {
+		db_add_field($table, "admin_edit", "INT NOT NULL default '0'");
+		db_add_field($table, "admin_view", "INT NOT NULL default '0'");
+		db_add_field($table, "show_wysiwyg", "INT NOT NULL default '0'");
+	} else {
+		/**
+		 * Not call by the upgrade-script
+		 */
+		$database->query("ALTER TABLE `$table` (
+			`admin_edit` INT NOT NULL default '0',
+			`admin_view` INT NOT NULL default '0',
+			`show_wysiwyg` INT NOT NULL default '0'
+			)";
+	}
+}
 ?>

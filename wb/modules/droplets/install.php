@@ -12,7 +12,7 @@
 */
 
 // prevent this file from being accessed directly
-if(!defined('WB_PATH')) die(header('Location: ../index.php'));
+if(!defined('WB_PATH')) die(header('Location: ../../index.php'));
 
 $table = TABLE_PREFIX .'mod_droplets';
 $database->query("DROP TABLE IF EXISTS `$table`");
@@ -73,7 +73,6 @@ foreach ($names as $dropfile) {
 		if (method_exists($admin, 'get_user_id')) echo "Droplet import: $name<br/>";
 	}  
 }
-
 
 function getDropletCodeFromFile ( $dropletfile ) {
 	$data = "";

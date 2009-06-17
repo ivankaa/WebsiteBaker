@@ -233,75 +233,13 @@ echo ($database->query("UPDATE `".TABLE_PREFIX."settings` SET `value` = '$versio
  *  - install droplets
  */
 echo "<br />Install droplets<br />";
-$table = TABLE_PREFIX .'mod_droplets';
-$database->query("DROP TABLE IF EXISTS `$table`");
 
-$database->query("CREATE TABLE `$table` (
-	`id` INT NOT NULL auto_increment,
-	`name` VARCHAR(32) NOT NULL,
-	`code` LONGTEXT NOT NULL ,
-	`description` TEXT NOT NULL,
-	`modified_when` INT NOT NULL default '0',
-	`modified_by` INT NOT NULL default '0',
-	`active` INT NOT NULL default '0',
-	`admin_edit` INT NOT NULL default '0',
-	`admin_view` INT NOT NULL default '0',
-	`show_wysiwyg` INT NOT NULL default '0',
-	`comments` TEXT NOT NULL,
-	PRIMARY KEY ( `id` )
-	)"
-);
+$result = mysql_list_tables( DB_NAME );
+$all_tables = array();
+for($i=0; $i < mysql_num_rows($result); $i++) $all_tables[] = mysql_table_name($result, $i);
 
-//add all droplets from the droplet subdirectory
-$folder=opendir(WB_PATH.'/modules/droplets/example/.'); 
-$names = array();
-while ($file = readdir($folder)) {
-	$ext=strtolower(substr($file,-4));
-	if ($ext==".php"){
-		if ($file<>"index.php" ) {
-			$names[count($names)] = $file; 
-		}
-	}
-}
-closedir($folder);
-
-foreach ($names as $dropfile) {
-	$droplet = addslashes(getDropletCodeFromFile($dropfile));
-	if ($droplet != "") {
-		$description = "Example Droplet";
-		$comments = "Example Droplet";
-		$cArray = explode("\n",$droplet);
-		if (substr($cArray[0],0,3) == "//:") {
-			$description = trim(substr($cArray[0],3));
-			array_shift ( $cArray );
-		}
-		if (substr($cArray[0],0,3) == "//:") {
-			$comments = trim(substr($cArray[0],3));
-			array_shift ( $cArray );
-		}
-		$droplet = implode ( "\n", $cArray );
-		$name = substr($dropfile,0,-4);
-		$modified_when = mktime();
-		$modified_by = method_exists($admin, 'get_user_id') ? $admin->get_user_id() : 1;
-		echo ($database->query("INSERT INTO `$table`  
-			(name, code, description, comments, active, modified_when, modified_by) 
-			VALUES 
-			('$name', '$droplet', '$description', '$comments', '1', '$modified_when', '$modified_by')"))? "$name: $OK<br />" : "$name: $FAIL<br />";
-	}  
-}
-
-
-function getDropletCodeFromFile ( $dropletfile ) {
-	$data = "";
-	$filename = WB_PATH."/modules/droplets/example/".$dropletfile;
-	if (file_exists($filename)) {
-		$filehandle = fopen ($filename, "r");
-		$data = fread ($filehandle, filesize ($filename));
-		fclose($filehandle);
-		// unlink($filename); doesnt work in unix
-	}	
-	return $data;
-}
+ $file_name = (!in_array ( TABLE_PREFIX."mod_droplets", $all_tables)) ? "install.php" : "upgrade.php";
+ require_once (WB_PATH."/modules/droplets/".$file_name);
 
 /**********************************************************
  *  - Reload all addons

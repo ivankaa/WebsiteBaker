@@ -34,5 +34,6 @@ $DR_TEXT['ADMIN_EDIT']	= 'Edit-Only';
 $DR_TEXT['ADMIN_VIEW']	= 'View-Only';
 $DR_TEXT['WYSIWYG']		= 'Wysiwyg';
 $DR_TEXT['HELP']		= 'Help / Readme';
+$DR_TEXT['USED']		= 'This droplet is used on the following page(-s):<br />';
 
 ?>
