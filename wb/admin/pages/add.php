@@ -122,10 +122,10 @@ $query_parent = $database->query("SELECT template, language FROM ".TABLE_PREFIX.
 if($query_parent->numRows() > 0) {
 	$fetch_parent = $query_parent->fetchRow();
 	$template = $fetch_parent['template'];
-    $language = $fetch_parent['language'];
+	$language = $fetch_parent['language'];
 } else {
 	$template = '';
-    $language = DEFAULT_LANGUAGE;
+	$language = DEFAULT_LANGUAGE;
 }
 
 // Insert page into pages table
