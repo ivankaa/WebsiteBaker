@@ -117,13 +117,15 @@ $order->clean($parent);
 // Get new order
 $position = $order->get_new($parent);
 
-// Work-out if the page parent (if selected) has a seperate template to the default
-$query_parent = $database->query("SELECT template FROM ".TABLE_PREFIX."pages WHERE page_id = '$parent'");
+// Work-out if the page parent (if selected) has a seperate template or language to the default
+$query_parent = $database->query("SELECT template, language FROM ".TABLE_PREFIX."pages WHERE page_id = '$parent'");
 if($query_parent->numRows() > 0) {
 	$fetch_parent = $query_parent->fetchRow();
 	$template = $fetch_parent['template'];
+    $language = $fetch_parent['language'];
 } else {
 	$template = '';
+    $language = DEFAULT_LANGUAGE;
 }
 
 // Insert page into pages table
