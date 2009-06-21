@@ -11,12 +11,14 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+21-June-2009 Matthias Gallas
+#	Fixed small bug introduced in changeset [999]
 19-June-2009 Matthias Gallas
 #	Fixed bug that parent pages didn't inherit language settings to kind pages
 17-June-2009 Ruud Eisinga
 #	Bugfix in "droplets/upgrade.php" - wrong parameter order for adding fields.
 	also the query for "normal" upgrades had a typo.
-! 	Added warning in output_filter that the function will be removed in 2.9
+!	Added warning in output_filter that the function will be removed in 2.9
 17-June-2009 Dietrich Roland Pehlke
 #	Bugfix in "droplets/upgrade.php" - wrong tablename change to the correct one
 +	Add upgrade-script to droplets

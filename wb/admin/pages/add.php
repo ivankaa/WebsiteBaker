@@ -129,7 +129,7 @@ if($query_parent->numRows() > 0) {
 }
 
 // Insert page into pages table
-$query = "INSERT INTO ".TABLE_PREFIX."pages (page_title,menu_title,parent,template,target,position,visibility,searching,menu,language,admin_groups,viewing_groups,modified_when,modified_by) VALUES ('$title','$title','$parent','$template','_top','$position','$visibility','1','1','".DEFAULT_LANGUAGE."','$admin_groups','$viewing_groups','".mktime()."','".$admin->get_user_id()."')";
+$query = "INSERT INTO ".TABLE_PREFIX."pages (page_title,menu_title,parent,template,target,position,visibility,searching,menu,language,admin_groups,viewing_groups,modified_when,modified_by) VALUES ('$title','$title','$parent','$template','_top','$position','$visibility','1','1','".$language."','$admin_groups','$viewing_groups','".mktime()."','".$admin->get_user_id()."')";
 $database->query($query);
 if($database->is_error()) {
 	$admin->print_error($database->get_error());
