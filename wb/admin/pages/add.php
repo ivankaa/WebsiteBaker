@@ -151,9 +151,8 @@ $database->query("UPDATE ".TABLE_PREFIX."pages SET link = '$link', level = '$lev
 // Create a new file in the /pages dir
 create_access_file($filename, $page_id, $level);
 
-// Get new order for section
-$order = new order(TABLE_PREFIX.'sections', 'position', 'section_id', 'page_id');
-$position = $order->get_new($parent);
+// add position 1 to new page
+$position = 1;
 
 // Add new record into the sections table
 $database->query("INSERT INTO ".TABLE_PREFIX."sections (page_id,position,module,block) VALUES ('$page_id','$position', '$module','1')");
