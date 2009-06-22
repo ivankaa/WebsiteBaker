@@ -58,11 +58,10 @@ function menulink_make_tree($parent, $link_pid, $tree) {
 			if($admin->page_is_visible($page) ) {
 				$pids = explode(',', $page['page_trail']);
 				$entry = '';
-				foreach($pids as $pid) {
+				foreach($pids as $pid)
 					$entry .= $menulink_titles[$pid].' / ';
-					$tree[$page['page_id']] = rtrim($entry, '/ ');
-					$tree = menulink_make_tree($page['page_id'], $link_pid, $tree);
-				}
+				$tree[$page['page_id']] = rtrim($entry, '/ ');
+				$tree = menulink_make_tree($page['page_id'], $link_pid, $tree);
 			}
 		}
 	}
