@@ -25,7 +25,7 @@
 
 // Setup template object
 $template = new Template(WB_PATH.'/modules/code');
-$template->set_file('page', 'modify.html');
+$template->set_file('page', 'htt/modify.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Get page content
@@ -39,11 +39,12 @@ $template->set_var(
 	array(
 		'PAGE_ID'				=> $page_id,
 		'SECTION_ID'			=> $section_id,
-		'REGISTER_EDIT_AREA'	=> function_exists('registerEditArea') ? registerEditArea('content', 'php', false) : '',
+		'REGISTER_EDIT_AREA'	=> function_exists('registerEditArea') ? registerEditArea('content'.$section_id, 'php', false) : '',
 		'WB_URL'				=> WB_URL,
 		'CONTENT'				=> $content,
 		'TEXT_SAVE'				=> $TEXT['SAVE'],
-		'TEXT_CANCEL'			=> $TEXT['CANCEL']
+		'TEXT_CANCEL'			=> $TEXT['CANCEL'],
+		'SECTION'				=> $section_id
 	)
 );
 

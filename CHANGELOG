@@ -11,6 +11,11 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+22-June-2009 Dietrich Roland Pehlke
+#	Changes on module "code": add the section_id to the name of the textarea,
+	to keep the functionality if you are using more than one code-section on a page.
+!	Moving the html-template inside a "htt" folder and rename the suffix to ".htt" to
+	keep it consitant to other modules. Minor cosmetic changes inside the code.
 22-June-2009 Ruud Eisinga
 #	Fixed a bug in Menu_link module that made childpages of the menu_link page 
 	not selectable. (thnx to Luisehahne)
