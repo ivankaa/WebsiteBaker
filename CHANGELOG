@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+22-June-2009 Ruud Eisinga
+#	Fixed a bug in Menu_link module that made childpages of the menu_link page 
+	not selectable. (thnx to Luisehahne)
 21-June-2009 Matthias Gallas
 #	Fixed small bug introduced in changeset [999]
 19-June-2009 Matthias Gallas

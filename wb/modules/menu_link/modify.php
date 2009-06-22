@@ -45,7 +45,7 @@ $extern = $sql_row['extern'];
 $anchor = $sql_row['anchor'];
 $sel = ' selected';
 
-// Get list of all visible pages, except actual one, and build a page-tree
+// Get list of all visible pages and build a page-tree
 
 // this function will fetch the page_tree, recursive
 if(!function_exists('menulink_make_tree')) {
@@ -55,19 +55,21 @@ function menulink_make_tree($parent, $link_pid, $tree) {
 	// get list of page-trails, recursive
 	if($query_page = $database->query("SELECT * FROM `$table_p` WHERE `parent`=$parent ORDER BY `position`")) {
 		while($page = $query_page->fetchRow()) {
-			if($admin->page_is_visible($page) && $page['page_id']!=$link_pid) {
+			if($admin->page_is_visible($page) ) {
 				$pids = explode(',', $page['page_trail']);
 				$entry = '';
-				foreach($pids as $pid)
+				foreach($pids as $pid) {
 					$entry .= $menulink_titles[$pid].' / ';
-				$tree[$page['page_id']] = rtrim($entry, '/ ');
-				$tree = menulink_make_tree($page['page_id'], $link_pid, $tree);
+					$tree[$page['page_id']] = rtrim($entry, '/ ');
+					$tree = menulink_make_tree($page['page_id'], $link_pid, $tree);
+				}
 			}
 		}
 	}
 	return($tree);
 }
 }
+
 // get list of all page_ids and page_titles
 global $menulink_titles;
 $menulink_titles = array();
@@ -172,7 +174,10 @@ $target = $page['target'];
 			<option value="0"<?php echo $target_page_id=='0'?$sel:''?>><?php echo $TEXT['PLEASE_SELECT']; ?></option>
 			<option value="-1"<?php echo $target_page_id=='-1'?$sel:''?>><?php echo $MOD_MENU_LINK['EXTERNAL_LINK']; ?></option>
 			<?php foreach($links AS $pid=>$link) {
-				echo "<option value=\"$pid\" ".($target_page_id==$pid?$sel:'').">$link</option>";
+				if ($pid == $page_id)  // Display current page with selection disabled
+					echo "<option value=\"$pid\" disabled=\"disabled\">$link *</option>";
+				else
+					echo "<option value=\"$pid\" ".($target_page_id==$pid?$sel:'').">$link</option>";
 			} ?>
 		</select>
 		&nbsp;
