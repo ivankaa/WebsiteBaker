@@ -70,47 +70,15 @@ if($page_type) {
 		if(get_setting('mod_jsadmin_ajax_order_sections', '1')) {
 			$js_scripts[] = 'dragdrop.js';
 			if(SECTION_BLOCKS) {
-			$js_buttonCell= 4;}
-      else{ $js_buttonCell= 3;} // This ist the Cell where the Button "Up" is , by Swen Uth
+			$js_buttonCell= 5;}
+      else{ $js_buttonCell= 5;} // This ist the Cell where the Button "Up" is , by Swen Uth
 		}
 	} elseif($page_type == 'config') {
 		$js_scripts[] = 'tool.js';
 	}
 ?>
-<style type="text/css">
-/* Fix for funky spacing on page listing */
-.pages_list li {
-	margin-bottom: -2px;
-}
 
-body.jsadmin_busy td.content {
-	background: white url(<?php echo WB_URL ?>/modules/jsadmin/images/busy.gif) 4px 4px no-repeat;
-}
-
-body.jsadmin_success td.content {
-	background: white url(<?php echo WB_URL ?>/modules/jsadmin/images/success.gif) 4px 4px no-repeat;
-}
-
-body.jsadmin_failure td.content {
-	background: white url(<?php echo WB_URL ?>/modules/jsadmin/images/failure.gif) 4px 4px no-repeat;
-}
-
-.jsadmin_drag {
-	cursor: move;
-}
-
-.jsadmin_drag a, .jsadmin_drag input, .jsadmin_drag select {
-	cursor: pointer;
-	cursor: hand;
-}
-
-ul.jsadmin_drag_area {
-	border: solid 1px #99f;
-}
-
-</style>
-
-<script language="JavaScript">
+<script  type="text/javascript" language="JavaScript">
 <!--
 var JsAdmin = { WB_URL : '<?php echo WB_URL ?>', ADMIN_URL : '<?php echo ADMIN_URL ?>' };
 var JsAdminTheme = { THEME_URL : '<?php echo THEME_URL ?>' };

@@ -8,7 +8,13 @@ body {
  background-color: #A8BCCB;
  background-image: url(images/background.png);
  background-repeat: repeat-x;
- margin: 0px;
+ overflow-y: scroll;
+ margin: auto;
+ height: 1%;
+}
+
+img {
+	border: 0;
 }
 
 form {
@@ -319,6 +325,10 @@ table.pages_view tr:hover {
 
 .form_submit .right {
  text-align: right;
+}
+
+.input_small {
+ width: 20px;
 }
 
 .input_narrow {

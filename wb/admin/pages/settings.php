@@ -48,9 +48,9 @@ $old_admin_users = explode(',', $results_array['admin_users']);
 
 $in_old_group = FALSE;
 foreach($admin->get_groups_id() as $cur_gid){
-    if (in_array($cur_gid, $old_admin_groups)) {
-        $in_old_group = TRUE;
-    }
+	if (in_array($cur_gid, $old_admin_groups)) {
+		$in_old_group = TRUE;
+	}
 }
 if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
 	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
@@ -84,18 +84,21 @@ if($results_array['modified_when'] != 0) {
 $template = new Template(THEME_PATH.'/templates');
 $template->set_file('page', 'pages_settings.htt');
 $template->set_block('page', 'main_block', 'main');
+
 $template->set_var(array(
-								'PAGE_ID' => $results_array['page_id'],
-								'PAGE_TITLE' => ($results_array['page_title']),
-								'MENU_TITLE' => ($results_array['menu_title']),
-								'DESCRIPTION' => ($results_array['description']),
-								'KEYWORDS' => ($results_array['keywords']),
-								'MODIFIED_BY' => $user['display_name'],
-								'MODIFIED_BY_USERNAME' => $user['username'],
-								'MODIFIED_WHEN' => $modified_ts,
-								'ADMIN_URL' => ADMIN_URL
-								)
-						);
+				'PAGE_ID' => $results_array['page_id'],
+				'PAGE_TITLE' => ($results_array['page_title']),
+				'MENU_TITLE' => ($results_array['menu_title']),
+				'DESCRIPTION' => ($results_array['description']),
+				'KEYWORDS' => ($results_array['keywords']),
+				'MODIFIED_BY' => $user['display_name'],
+				'MODIFIED_BY_USERNAME' => $user['username'],
+				'MODIFIED_WHEN' => $modified_ts,
+				'ADMIN_URL' => ADMIN_URL,
+				'WB_URL' => WB_URL,
+				'WB_PATH' => WB_PATH,
+				'THEME_URL' => THEME_URL,
+			) );
 
 // Work-out if we should show the "manage sections" link
 $query_sections = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'menu_link'");
@@ -109,15 +112,15 @@ if($query_sections->numRows() > 0) {
 
 // Visibility
 if($results_array['visibility'] == 'public') {
-	$template->set_var('PUBLIC_SELECTED', ' selected');
+	$template->set_var('PUBLIC_SELECTED', ' selected="selected"');
 } elseif($results_array['visibility'] == 'private') {
-	$template->set_var('PRIVATE_SELECTED', ' selected');
+	$template->set_var('PRIVATE_SELECTED', ' selected="selected"');
 } elseif($results_array['visibility'] == 'registered') {
-	$template->set_var('REGISTERED_SELECTED', ' selected');
+	$template->set_var('REGISTERED_SELECTED', ' selected="selected"');
 } elseif($results_array['visibility'] == 'hidden') {
-	$template->set_var('HIDDEN_SELECTED', ' selected');
+	$template->set_var('HIDDEN_SELECTED', ' selected="selected"');
 } elseif($results_array['visibility'] == 'none') {
-	$template->set_var('NO_VIS_SELECTED', ' selected');
+	$template->set_var('NO_VIS_SELECTED', ' selected="selected"');
 }
 // Group list 1 (admin_groups)
 	$admin_groups = explode(',', str_replace('_', '', $results_array['admin_groups']));
@@ -131,11 +134,11 @@ if($results_array['visibility'] == 'public') {
 	$template->set_var(array(
 									'ID' => 1,
 									'TOGGLE' => '',
-									'DISABLED' => ' disabled',
+									'DISABLED' => ' disabled="disabled"',
 									'LINK_COLOR' => '000000',
 									'CURSOR' => 'default',
 									'NAME' => $admin_group_name['name'],
-									'CHECKED' => ' checked'
+									'CHECKED' => ' checked="checked"'
 									)
 							);
 	$template->parse('group_list', 'group_list_block', true);
@@ -184,7 +187,7 @@ if($results_array['visibility'] == 'public') {
 											)
 									);
 			if(is_numeric(array_search($group['group_id'], $admin_groups))) {
-				$template->set_var('CHECKED', 'checked');
+				$template->set_var('CHECKED', ' checked="checked"');
 			} else {
 				if (!$flag_checked) $template->set_var('CHECKED', '');
 			}
@@ -203,11 +206,11 @@ if($results_array['visibility'] == 'public') {
 	$template->set_var(array(
 									'ID' => 1,
 									'TOGGLE' => '',
-									'DISABLED' => ' disabled',
+									'DISABLED' => ' disabled="disabled"',
 									'LINK_COLOR' => '000000',
 									'CURSOR' => 'default',
 									'NAME' => $admin_group_name['name'],
-									'CHECKED' => ' checked'
+									'CHECKED' => ' checked="checked"'
 									)
 							);
 	$template->parse('group_list2', 'group_list_block2', true);
@@ -237,7 +240,7 @@ if($results_array['visibility'] == 'public') {
 										)
 								);
 		if(is_numeric(array_search($group['group_id'], $viewing_groups))) {
-			$template->set_var('CHECKED', 'checked');
+			$template->set_var('CHECKED', 'checked="checked"');
 		} else {
 			if (!$flag_checked) $template->set_var('CHECKED', '');
 		}
@@ -259,6 +262,11 @@ function parent_list($parent) {
 	while($page = $get_pages->fetchRow()) {
 		if($admin->page_is_visible($page)==false)
 			continue;
+		// if psrent = 0 set flag_icon
+		$template->set_var('FLAG_ROOT_ICON',' none ');
+		if( $page['parent'] == 0 ) {
+			$template->set_var('FLAG_ROOT_ICON','url('.THEME_URL.'/images/flags/'.strtolower($page['language']).'.png)');
+		}
 		// If the current page cannot be parent, then its children neither
 		$list_next_level = true;
 		// Stop users from adding pages with a level of more than the set page level limit
@@ -266,14 +274,12 @@ function parent_list($parent) {
 			// Get user perms
 			$admin_groups = explode(',', str_replace('_', '', $page['admin_groups']));
 			$admin_users = explode(',', str_replace('_', '', $page['admin_users']));
-
 			$in_group = FALSE;
 			foreach($admin->get_groups_id() as $cur_gid){
-			    if (in_array($cur_gid, $admin_groups)) {
-			        $in_group = TRUE;
-			    }
+				if (in_array($cur_gid, $admin_groups)) {
+					$in_group = TRUE;
+				}
 			}
-			
 			if(($in_group) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
 				$can_modify = true;
 			} else {
@@ -284,11 +290,12 @@ function parent_list($parent) {
 			for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - '; }
 			$template->set_var(array(
 											'ID' => $page['page_id'],
-											'TITLE' => ($title_prefix.$page['page_title'])
-											)
-									);
+											'TITLE' => ($title_prefix.$page['page_title']),
+											'FLAG_ICON' => 'none',
+											));
+
 			if($results_array['parent'] == $page['page_id']) {
-				$template->set_var('SELECTED', ' selected');
+				$template->set_var('SELECTED', ' selected="selected"');
 			} elseif($results_array['page_id'] == $page['page_id']) {
 				$template->set_var('SELECTED', ' disabled="disabled" class="disabled"');
 				$list_next_level=false;
@@ -303,9 +310,14 @@ function parent_list($parent) {
 			parent_list($page['page_id']);
 	}
 }
+
 $template->set_block('main_block', 'page_list_block2', 'page_list2');
 if($admin->get_permission('pages_add_l0') == true OR $results_array['level'] == 0) {
-	if($results_array['parent'] == 0) { $selected = ' selected'; } else { $selected = ''; }
+	if($results_array['parent'] == 0) {
+		$selected = ' selected';
+	} else { 
+		$selected = '';
+	}
 	$template->set_var(array(
 									'ID' => '0',
 									'TITLE' => $TEXT['NONE'],
@@ -331,7 +343,7 @@ if($result->numRows() > 0) {
 			$template->set_var('VALUE', $addon['directory']);
 			$template->set_var('NAME', $addon['name']);
 			if($addon['directory'] == $results_array['template']) {
-				$template->set_var('SELECTED', ' selected');
+				$template->set_var('SELECTED', ' selected="selected"');
 			} else {
 				$template->set_var('SELECTED', '');
 			}
@@ -364,7 +376,7 @@ foreach($menu AS $number => $name) {
 	$template->set_var('NAME', $name);
 	$template->set_var('VALUE', $number);
 	if($results_array['menu'] == $number) {
-		$template->set_var('SELECTED', 'selected');
+		$template->set_var('SELECTED', ' selected="selected"');
 	} else {
 		$template->set_var('SELECTED', '');
 	}
@@ -384,11 +396,12 @@ if($result->numRows() > 0) {
 		// Insert code and name
 		$template->set_var(array(
 								'VALUE' => $l_codes[$l_name],
-								'NAME' => $l_name
+								'NAME' => $l_name,
+								'FLAG_LANG_ICONS' => 'url('.THEME_URL.'/images/flags/'.strtolower($l_codes[$l_name]).'.png)',
 								));
 		// Check if it is selected
 		if($results_array['language'] == $l_codes[$l_name]) {
-			$template->set_var('SELECTED', ' selected');
+			$template->set_var('SELECTED', ' selected="selected"');
 		} else {
 			$template->set_var('SELECTED', '');
 		}
@@ -398,61 +411,60 @@ if($result->numRows() > 0) {
 
 // Select disabled if searching is disabled
 if($results_array['searching'] == 0) {
-	$template->set_var('SEARCHING_DISABLED', ' selected');
+	$template->set_var('SEARCHING_DISABLED', ' selected="selected"');
 }
 // Select what the page target is
 switch ($results_array['target']) {
 	case '_top':
-		$template->set_var('TOP_SELECTED', ' selected');
+		$template->set_var('TOP_SELECTED', ' selected="selected"');
 		break;
 	case '_self':
-		$template->set_var('SELF_SELECTED', ' selected');
+		$template->set_var('SELF_SELECTED', ' selected="selected"');
 		break;
 	case '_blank':
-		$template->set_var('BLANK_SELECTED', ' selected');
+		$template->set_var('BLANK_SELECTED', ' selected="selected"');
 		break;
 }
 	
 
 // Insert language text
 $template->set_var(array(
-								'HEADING_MODIFY_PAGE_SETTINGS' => $HEADING['MODIFY_PAGE_SETTINGS'],
-								'TEXT_CURRENT_PAGE' => $TEXT['CURRENT_PAGE'],
-								'TEXT_MODIFY' => $TEXT['MODIFY'],
-								'TEXT_MODIFY_PAGE' => $HEADING['MODIFY_PAGE'],
-								'LAST_MODIFIED' => $MESSAGE['PAGES']['LAST_MODIFIED'],
-								'TEXT_PAGE_TITLE' => $TEXT['PAGE_TITLE'],
-								'TEXT_MENU_TITLE' => $TEXT['MENU_TITLE'],
-								'TEXT_TYPE' => $TEXT['TYPE'],
-								'TEXT_MENU' => $TEXT['MENU'],
-								'TEXT_PARENT' => $TEXT['PARENT'],
-								'TEXT_VISIBILITY' => $TEXT['VISIBILITY'],
-								'TEXT_PUBLIC' => $TEXT['PUBLIC'],
-								'TEXT_PRIVATE' => $TEXT['PRIVATE'],
-								'TEXT_REGISTERED' => $TEXT['REGISTERED'],
-								'TEXT_NONE' => $TEXT['NONE'],
-								'TEXT_HIDDEN' => $TEXT['HIDDEN'],
-								'TEXT_TEMPLATE' => $TEXT['TEMPLATE'],
-								'TEXT_TARGET' => $TEXT['TARGET'],
-								'TEXT_SYSTEM_DEFAULT' => $TEXT['SYSTEM_DEFAULT'],
-								'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
-								'TEXT_NEW_WINDOW' => $TEXT['NEW_WINDOW'],
-								'TEXT_SAME_WINDOW' => $TEXT['SAME_WINDOW'],
-								'TEXT_TOP_FRAME' => $TEXT['TOP_FRAME'],
-								'TEXT_ADMINISTRATORS' => $TEXT['ADMINISTRATORS'],
-								'TEXT_ALLOWED_VIEWERS' => $TEXT['ALLOWED_VIEWERS'],
-								'TEXT_DESCRIPTION' => $TEXT['DESCRIPTION'],
-								'TEXT_KEYWORDS' => $TEXT['KEYWORDS'],
-								'TEXT_SEARCHING' => $TEXT['SEARCHING'],
-								'TEXT_LANGUAGE' => $TEXT['LANGUAGE'],
-								'TEXT_ENABLED' => $TEXT['ENABLED'],
-								'TEXT_DISABLED' => $TEXT['DISABLED'],
-								'TEXT_SAVE' => $TEXT['SAVE'],
-								'TEXT_RESET' => $TEXT['RESET'],
-								'LAST_MODIFIED' => $MESSAGE['PAGES']['LAST_MODIFIED'],
-								'HEADING_MODIFY_PAGE' => $HEADING['MODIFY_PAGE']
-								)
-						);
+				'HEADING_MODIFY_PAGE_SETTINGS' => $HEADING['MODIFY_PAGE_SETTINGS'],
+				'TEXT_CURRENT_PAGE' => $TEXT['CURRENT_PAGE'],
+				'TEXT_MODIFY' => $TEXT['MODIFY'],
+				'TEXT_MODIFY_PAGE' => $HEADING['MODIFY_PAGE'],
+				'LAST_MODIFIED' => $MESSAGE['PAGES']['LAST_MODIFIED'],
+				'TEXT_PAGE_TITLE' => $TEXT['PAGE_TITLE'],
+				'TEXT_MENU_TITLE' => $TEXT['MENU_TITLE'],
+				'TEXT_TYPE' => $TEXT['TYPE'],
+				'TEXT_MENU' => $TEXT['MENU'],
+				'TEXT_PARENT' => $TEXT['PARENT'],
+				'TEXT_VISIBILITY' => $TEXT['VISIBILITY'],
+				'TEXT_PUBLIC' => $TEXT['PUBLIC'],
+				'TEXT_PRIVATE' => $TEXT['PRIVATE'],
+				'TEXT_REGISTERED' => $TEXT['REGISTERED'],
+				'TEXT_NONE' => $TEXT['NONE'],
+				'TEXT_HIDDEN' => $TEXT['HIDDEN'],
+				'TEXT_TEMPLATE' => $TEXT['TEMPLATE'],
+				'TEXT_TARGET' => $TEXT['TARGET'],
+				'TEXT_SYSTEM_DEFAULT' => $TEXT['SYSTEM_DEFAULT'],
+				'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
+				'TEXT_NEW_WINDOW' => $TEXT['NEW_WINDOW'],
+				'TEXT_SAME_WINDOW' => $TEXT['SAME_WINDOW'],
+				'TEXT_TOP_FRAME' => $TEXT['TOP_FRAME'],
+				'TEXT_ADMINISTRATORS' => $TEXT['ADMINISTRATORS'],
+				'TEXT_ALLOWED_VIEWERS' => $TEXT['ALLOWED_VIEWERS'],
+				'TEXT_DESCRIPTION' => $TEXT['DESCRIPTION'],
+				'TEXT_KEYWORDS' => $TEXT['KEYWORDS'],
+				'TEXT_SEARCHING' => $TEXT['SEARCHING'],
+				'TEXT_LANGUAGE' => $TEXT['LANGUAGE'],
+				'TEXT_ENABLED' => $TEXT['ENABLED'],
+				'TEXT_DISABLED' => $TEXT['DISABLED'],
+				'TEXT_SAVE' => $TEXT['SAVE'],
+				'TEXT_RESET' => $TEXT['RESET'],
+				'LAST_MODIFIED' => $MESSAGE['PAGES']['LAST_MODIFIED'],
+				'HEADING_MODIFY_PAGE' => $HEADING['MODIFY_PAGE']
+			) );
 
 $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');

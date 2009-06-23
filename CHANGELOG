@@ -11,6 +11,13 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+23-June-2009 Matthias Gallas
+#	Moved styles from admin/pages/sections.php to sections.htt in backend themes
+	(Thanks to Luisehahne)
+!	Moved javascript files from admin/pages/index.php to external js files
+	(Thanks to Luisehahne)
+#	Major improovements and changes to all backend files to get more valide Code
+	output (Thanks to Luisehahne)
 22-June-2009 Matthias Gallas
 #	fixed wrong position id when adding a new page
 -	removed obsolete code/modify.html

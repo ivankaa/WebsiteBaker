@@ -33,11 +33,11 @@ if(!defined('WB_URL')) {
 }
 
 ?>
-<style type="text/css">
+<!--<style type="text/css">-->
 <?php
-require_once(WB_PATH.'/include/jscalendar/calendar-system.css');
+// require_once(WB_PATH.'/include/jscalendar/calendar-system.css');
 ?>
-</style>
+<!--</style>  -->
 <script type="text/javascript" src="<?php echo WB_URL ?>/include/jscalendar/calendar.js"></script>
 <?php // some stuff for jscalendar
 	// language

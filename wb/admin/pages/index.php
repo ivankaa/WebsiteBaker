@@ -29,56 +29,12 @@ $admin = new admin('Pages', 'pages');
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
-?>
-<!-- Addition for remembering expanded state of pages -->
-<script language="JavaScript">
-function writeSessionCookie (cookieName, cookieValue) {
-    document.cookie = escape(cookieName) + "=" + escape(cookieValue) + ";";
-}
-</script>
-<!-- End addition -->
-
-<script type="text/javascript" language="javascript">
-function toggle_viewers() {
-	if(document.add.visibility.value == 'private') {
-		document.getElementById('viewers').style.display = 'block';
-	} else if(document.add.visibility.value == 'registered') {
-		document.getElementById('viewers').style.display = 'block';
-	} else {
-		document.getElementById('viewers').style.display = 'none';
-	}
-}
-function toggle_visibility(id){
-	if(document.getElementById(id).style.display == "block") {
-		document.getElementById(id).style.display = "none";
-		writeSessionCookie (id, "0");//Addition for remembering expanded state of pages
-	} else {
-		document.getElementById(id).style.display = "block";
-		writeSessionCookie (id, "1");//Addition for remembering expanded state of pages
-	}
-}
-var plus = new Image;
-plus.src = "<?php echo THEME_URL; ?>/images/plus_16.png";
-var minus = new Image;
-minus.src = "<?php echo THEME_URL; ?>/images/minus_16.png";
-function toggle_plus_minus(id) {
-	var img_src = document.images['plus_minus_' + id].src;
-	if(img_src == plus.src) {
-		document.images['plus_minus_' + id].src = minus.src;
-	} else {
-		document.images['plus_minus_' + id].src = plus.src;
-	}
-}
-</script>
-
-<?php
-
 function make_list($parent, $editable_pages) {
 	// Get objects and vars from outside this function
-	global $admin, $template, $database, $TEXT, $MESSAGE, $HEADING;
+	global $admin, $template, $database, $TEXT, $MESSAGE, $HEADING, $page_tmp_id;
 	?>
 	<ul id="p<?php echo $parent; ?>" <?php if($parent != 0) { echo 'class="page_list" '; if(isset($_COOKIE['p'.$parent]) && $_COOKIE['p'.$parent] == '1'){ echo 'style="display:block"'; }} ?>>
-	<?php	
+	<?php
 	// Get page list from database
 	$database = new database();
 	if(PAGE_TRASH != 'inline') {
@@ -87,19 +43,17 @@ function make_list($parent, $editable_pages) {
 		$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' ORDER BY position ASC";
 	}
 	$get_pages = $database->query($query);
-	
 	// Insert values into main page list
-	if($get_pages->numRows() > 0)	{
+	if($get_pages->numRows() > 0) {
 		while($page = $get_pages->fetchRow()) {
 			// Get user perms
 			$admin_groups = explode(',', str_replace('_', '', $page['admin_groups']));
 			$admin_users = explode(',', str_replace('_', '', $page['admin_users']));
-
 			$in_group = FALSE;
-			foreach($admin->get_groups_id() as $cur_gid){
-			    if (in_array($cur_gid, $admin_groups)) {
-			        $in_group = TRUE;
-			    }
+			foreach($admin->get_groups_id() as $cur_gid) {
+				if (in_array($cur_gid, $admin_groups)) {
+					$in_group = TRUE;
+				}
 			}
 			if(($in_group) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
 				if($page['visibility'] == 'deleted') {
@@ -121,7 +75,6 @@ function make_list($parent, $editable_pages) {
 					$can_modify = false;
 				}
 			}
-						
 			// Work out if we should show a plus or not
 			if(PAGE_TRASH != 'inline') {
 				$get_page_subs = $database->query("SELECT page_id,admin_groups,admin_users FROM ".TABLE_PREFIX."pages WHERE parent = '".$page['page_id']."' AND visibility!='deleted'");
@@ -133,12 +86,10 @@ function make_list($parent, $editable_pages) {
 			} else {
 				$display_plus = false;
 			}
-			
 			// Work out how many pages there are for this parent
 			$num_pages = $get_pages->numRows();
 			?>
-			
-			<li id="p<?php echo $page['parent']; ?>">
+			<li class="p<?php echo $page['parent']; ?>">
 			<table class="pages_view">
 			<tr>
 				<td width="20" style="padding-left: <?php if($page['level'] > 0){ echo $page['level']*20; } else { echo '7'; } ?>px;">
@@ -168,8 +119,8 @@ function make_list($parent, $editable_pages) {
 						<?php } elseif($page['visibility'] == 'deleted') { ?>
 							<img src="<?php echo THEME_URL; ?>/images/deleted_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['DELETED']; ?>" class="page_list_rights" />
 						<?php } 
-						echo '<div class="modify_link">'.($page['page_title']).'</div>'; ?>
-					</a>				
+						echo '<span class="modify_link">'.($page['page_title']).'</span>'; ?>
+					</a>
 				</td>
 				<?php } else { ?>
 				<td>
@@ -271,12 +222,13 @@ function make_list($parent, $editable_pages) {
 			</tr>
 			</table>
 			</li>
-							
 			<?php
+			if ( $page['parent'] = 0) {
+				$page_tmp_id = $page['page_id'];
+			}
 			// Get subs
 			$editable_pages=make_list($page['page_id'], $editable_pages);
 		}
-
 	}
 	?>
 	</ul>
@@ -287,6 +239,7 @@ function make_list($parent, $editable_pages) {
 // Generate pages list
 if($admin->get_permission('pages_view') == true) {
 	?>
+	<div class="jsadmin hide"></div>
 	<table cellpadding="0" cellspacing="0" width="100%" border="0">
 	<tr>
 		<td>
@@ -327,6 +280,7 @@ if($admin->get_permission('pages_view') == true) {
 	</tr>
 	</table>
 	<?php
+	$page_tmp_id = 0;
 	$editable_pages = make_list(0, 0);
 	?>
 	</div>
@@ -367,7 +321,6 @@ if($editable_pages == 0) {
 // Group list 1
 
 	$query = "SELECT * FROM ".TABLE_PREFIX."groups";
-
 	$get_groups = $database->query($query);
 	$template->set_block('main_block', 'group_list_block', 'group_list');
 	// Insert admin group and current group first
@@ -375,7 +328,7 @@ if($editable_pages == 0) {
 	$template->set_var(array(
 									'ID' => 1,
 									'TOGGLE' => '',
-									'DISABLED' => ' disabled',
+									'DISABLED' => ' disabled="disabled"',
 									'LINK_COLOR' => '000000',
 									'CURSOR' => 'default',
 									'NAME' => $admin_group_name['name'],
@@ -392,7 +345,7 @@ if($editable_pages == 0) {
 		$flag_color =    '';
 		if (in_array($group["group_id"], $admin->get_groups_id())) {
 			$flag_disabled = ''; //' disabled';
-			$flag_checked =  ' checked';
+			$flag_checked =  ' checked="checked"';
 			$flag_cursor =   'default';
 			$flag_color =    '000000';
 		}
@@ -424,7 +377,7 @@ if($editable_pages == 0) {
 	$template->set_var(array(
 									'ID' => 1,
 									'TOGGLE' => '',
-									'DISABLED' => ' disabled',
+									'DISABLED' => ' disabled="disabled"',
 									'LINK_COLOR' => '000000',
 									'CURSOR' => 'default',
 									'NAME' => $admin_group_name['name'],
@@ -441,7 +394,7 @@ if($editable_pages == 0) {
 		$flag_color =    '';
 		if (in_array($group["group_id"], $admin->get_groups_id())) {
 			$flag_disabled = ''; //' disabled';
-			$flag_checked =  ' checked';
+			$flag_checked =  ' checked="checked"';
 			$flag_cursor =   'default';
 			$flag_color =    '000000';
 		}
@@ -468,6 +421,11 @@ function parent_list($parent) {
 	while($page = $get_pages->fetchRow()) {
 		if($admin->page_is_visible($page)==false)
 			continue;
+		// if parent = 0 set flag_icon
+		$template->set_var('FLAG_ROOT_ICON',' none ');
+		if( $page['parent'] == 0 ) {
+			$template->set_var('FLAG_ROOT_ICON','url('.THEME_URL.'/images/flags/'.strtolower($page['language']).'.png)');
+		}
 		// Stop users from adding pages with a level of more than the set page level limit
 		if($page['level']+1 < PAGE_LEVEL_LIMIT) {
 			// Get user perms
@@ -475,10 +433,10 @@ function parent_list($parent) {
 			$admin_users = explode(',', str_replace('_', '', $page['admin_users']));
 			
 			$in_group = FALSE;
-			foreach($admin->get_groups_id() as $cur_gid){
-			    if (in_array($cur_gid, $admin_groups)) {
-			        $in_group = TRUE;
-			    }
+			foreach($admin->get_groups_id() as $cur_gid) {
+				if (in_array($cur_gid, $admin_groups)) {
+					$in_group = TRUE;
+				}
 			}
 			if(($in_group) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
 				$can_modify = true;
@@ -508,7 +466,7 @@ if($admin->get_permission('pages_add_l0') == true) {
 	$template->set_var(array(
 									'ID' => '0',
 									'TITLE' => $TEXT['NONE'],
-									'SELECTED' => ' selected',
+									'SELECTED' => ' selected="selected"',
 									'DISABLED' => ''
 									)
 							);
@@ -528,7 +486,7 @@ if($result->numRows() > 0) {
 			$template->set_var('VALUE', $module['directory']);
 			$template->set_var('NAME', $module['name']);
 			if($module['directory'] == 'wysiwyg') {
-				$template->set_var('SELECTED', ' selected');
+				$template->set_var('SELECTED', ' selected="selected"');
 			} else {
 				$template->set_var('SELECTED', '');
 			}
@@ -536,6 +494,15 @@ if($result->numRows() > 0) {
 		}
 	}
 }
+
+// Insert urls
+$template->set_var(array(
+								'THEME_URL' => THEME_URL,
+								'WB_URL' => WB_URL,
+								'WB_PATH' => WB_PATH,
+								'ADMIN_URL' => ADMIN_URL,
+								)
+						);
 
 // Insert language headings
 $template->set_var(array(
@@ -557,7 +524,7 @@ $template->set_var(array(
 								'TEXT_NONE_FOUND' => $TEXT['NONE_FOUND'],
 								'TEXT_ADD' => $TEXT['ADD'],
 								'TEXT_RESET' => $TEXT['RESET'],
-								'TEXT_ADMINISTRATORS' => $TEXT['ADMINISTRATORS'],								
+								'TEXT_ADMINISTRATORS' => $TEXT['ADMINISTRATORS'],
 								'TEXT_PRIVATE_VIEWERS' => $TEXT['PRIVATE_VIEWERS'],
 								'TEXT_REGISTERED_VIEWERS' => $TEXT['REGISTERED_VIEWERS'],
 								'INTRO_LINK' => $MESSAGE['PAGES']['INTRO_LINK'],

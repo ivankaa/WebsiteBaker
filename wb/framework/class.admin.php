@@ -193,12 +193,19 @@ class admin extends wb {
 	// Print the admin footer
 	function print_footer() {
 		// include the required file for Javascript admin
-    	if(file_exists(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php')){
-      	@include(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php');
-    	}
+		if(file_exists(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php')){
+		@include(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php');
+		}
 		$footer_template = new Template(THEME_PATH.'/templates');
 		$footer_template->set_file('page', 'footer.htt');
 		$footer_template->set_block('page', 'footer_block', 'header');
+		$footer_template->set_var(array(
+						'BACKEND_MODULE_JS' => $this->register_backend_modfiles('js'),
+						'WB_URL' => WB_URL,
+						'WB_PATH' => WB_PATH,
+						'ADMIN_URL' => ADMIN_URL,
+						'THEME_URL' => THEME_URL,
+			 ) );
 		$footer_template->parse('header', 'footer_block', false);
 		$footer_template->pparse('output', 'page');
 	}

@@ -40,6 +40,8 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
 	$page_id = $_GET['page_id'];
 }
 
+$debug = false; // to show position and section_id
+
 // Create new admin object
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify');
@@ -94,9 +96,9 @@ $old_admin_groups = explode(',', $results_array['admin_groups']);
 $old_admin_users = explode(',', $results_array['admin_users']);
 $in_old_group = FALSE;
 foreach($admin->get_groups_id() as $cur_gid){
-    if (in_array($cur_gid, $old_admin_groups)) {
-	$in_old_group = TRUE;
-    }
+	if (in_array($cur_gid, $old_admin_groups)) {
+		$in_old_group = TRUE;
+	}
 }
 if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
 	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
@@ -135,200 +137,228 @@ if(!isset($block[1]) OR $block[1] == '') {
 	// Make our own menu list
 	$block[1] = $TEXT['MAIN'];
 }
-?>
 
-<?php // include jscalendar-setup
-	$jscal_use_time = true; // whether to use a clock, too
-	require_once(WB_PATH."/include/jscalendar/wb-setup.php");
-?>
-<table cellpadding="0" cellspacing="0" class="sections_header">
-<tr>
-	<td valign="middle" align="left">
-		<h2><?php echo $HEADING['MANAGE_SECTIONS']; ?></h2>
-	</td>
-	<td align="right">
-		<?php echo $TEXT['CURRENT_PAGE']; ?>: 
-		<b><?php echo ($results_array['page_title']); ?></b>
-		-
-		<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>"><?php echo $HEADING['MODIFY_PAGE']; ?></a>
-		-
-		<a href="<?php echo ADMIN_URL; ?>/pages/settings.php?page_id=<?php echo $page_id; ?>"><?php echo $TEXT['CHANGE_SETTINGS']; ?></a>
-	</td>
-</tr>
-</table>
+/*-- load css files with jquery --*/
+// include jscalendar-setup
+$jscal_use_time = true; // whether to use a clock, too
+require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 
-<?php
+// Setup template object
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'pages_sections.htt');
+$template->set_block('page', 'main_block', 'main');
+$template->set_block('main_block', 'module_block', 'module_list');
+$template->set_block('main_block', 'section_block', 'section_list');
+$template->set_block('section_block', 'block_block', 'block_list');
+$template->set_block('main_block', 'calendar_block', 'calendar_list');
+
+// set first defaults and messages
+$template->set_var(array(
+				'PAGE_ID' => $results_array['page_id'],
+				'PAGE_TITLE' => ($results_array['page_title']),
+				'MENU_TITLE' => ($results_array['menu_title']),
+				'TEXT_CURRENT_PAGE' => $TEXT['CURRENT_PAGE'],
+				'HEADING_MANAGE_SECTIONS' => $HEADING['MANAGE_SECTIONS'],
+				'HEADING_MODIFY_PAGE' => $HEADING['MODIFY_PAGE'],
+				'TEXT_CHANGE_SETTINGS' => $TEXT['CHANGE_SETTINGS'],
+				'TEXT_ADD_SECTION' => $TEXT['ADD_SECTION'],
+				'TEXT_ID' => 'ID',
+				'TEXT_TYPE' => $TEXT['TYPE'],
+				'TEXT_BLOCK' => $TEXT['BLOCK'],
+				'TEXT_PUBL_START_DATE' => $TEXT{'PUBL_START_DATE'},
+				'TEXT_PUBL_END_DATE' => $TEXT['PUBL_END_DATE'],
+				'TEXT_ACTIONS' => $TEXT['ACTIONS'],
+				'ADMIN_URL' => ADMIN_URL,
+				'WB_URL' => WB_URL,
+				'WB_PATH' => WB_PATH,
+				'THEME_URL' => THEME_URL,
+			) );
+
+// Insert variables
+$template->set_var(array(
+				'VAR_PAGE_ID' => $results_array['page_id'],
+				'VAR_PAGE_TITLE' => $results_array['page_title'],
+				'SETTINGS_LINK' => ADMIN_URL.'/pages/settings.php?page_id='.$results_array['page_id'],
+				'MODIFY_LINK' => ADMIN_URL.'/pages/modify.php?page_id='.$results_array['page_id'],
+			) );
+
 $query_sections = $database->query("SELECT section_id,module,position,block,publ_start,publ_end FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
 if($query_sections->numRows() > 0) {
-?>
-<form name="section_properties" action="<?php echo ADMIN_URL; ?>/pages/sections_save.php?page_id=<?php echo $page_id; ?>" method="post">
+	$num_sections = $query_sections->numRows();
+	while($section = $query_sections->fetchRow()) {
+		if(!is_numeric(array_search($section['module'], $module_permissions))) {
+			// Get the modules real name
+			$module_name=$database->get_one("SELECT name FROM ".TABLE_PREFIX."addons WHERE directory='".$section['module']."'");
+			$template->set_var(array(
+			) );
+			if(SECTION_BLOCKS) {
+				$edit_page ='<a name="'.$section['section_id'].'" href="'.ADMIN_URL.'/pages/modify.php?page_id='.$page_id.'#'.$section['section_id'].'">'.$module_name.'</a>';
+				$input_attribute = 'input_normal';
+				$template->set_var(array(
+						'STYLE_DISPLAY_SECTION_BLOCK' => ' style="visibility: visible;"',
+						'NAME_SIZE' => 180,
+						'INPUT_ATTRIBUTE' => $input_attribute,
+						'VAR_SECTION_ID' => $section['section_id'],
+						'VAR_POSITION' => $section['position'],
+						'LINK_MODIFY_URL_VAR_MODUL_NAME' => $edit_page,
+				) );
+				// Add block options to the section_list
+				$template->clear_var('block_list');
+				foreach($block AS $number => $name) {
+					$template->set_var('NAME', htmlentities(strip_tags($name)));
+					$template->set_var('VALUE', $number);
+					$template->set_var('SIZE', 1);
+					if($section['block'] == $number) {
+						$template->set_var('SELECTED', ' selected="selected"');
+					} else {
+						$template->set_var('SELECTED', '');
+					}
+					$template->parse('block_list', 'block_block', true);
+				}
+			} else {
+				$edit_page = $module_name;
+				$input_attribute = 'input_small';
+				$template->set_var(array(
+						'STYLE_DISPLAY_SECTION_BLOCK' => ' style="display:none;"',
+						'NAME_SIZE' => 270,
+						'INPUT_ATTRIBUTE' => $input_attribute,
+						'VAR_SECTION_ID' => $section['section_id'],
+						'VAR_POSITION' => $section['position'],
+						'LINK_MODIFY_URL_VAR_MODUL_NAME' => $edit_page,
+					) );
+			}
+			// Insert icon and images
+			$template->set_var(array(
+						'CLOCK_16_PNG' => 'clock_16.png',
+						'CLOCK_DEL_16_PNG' => 'clock_del_16.png',
+						'DELETE_16_PNG' => 'delete_16.png',
+					) );
+			// set calendar start values
+			if($section['publ_start']==0) {
+				$template->set_var('VALUE_PUBL_START', '');
+			} else {
+				$template->set_var('VALUE_PUBL_START', date($jscal_format, $section['publ_start']));
+			}
+			// set calendar start values
+			if($section['publ_end']==0) {
+				$template->set_var('VALUE_PUBL_END', '');
+			} else {
+				$template->set_var('VALUE_PUBL_END', date($jscal_format, $section['publ_end']));
+			}
+			// Insert icons up and down
+			if($section['position'] != 1 ) {
+				$template->set_var(
+							'VAR_MOVE_UP_URL',
+							'<a href="'.ADMIN_URL.'/pages/move_up.php?page_id='.$page_id.'&amp;section_id='.$section['section_id'].'">
+							<img src="'.THEME_URL.'/images/up_16.png" alt="^" />
+							</a>' );
+			} else {
+				$template->set_var(array(
+							'VAR_MOVE_UP_URL' => '',
+						) );
+			}
+			if($section['position'] != $num_sections ) {
+				$template->set_var(
+							'VAR_MOVE_DOWN_URL',
+							'<a href="'.ADMIN_URL.'/pages/move_down.php?page_id='.$page_id.'&amp;section_id='.$section['section_id'].'">
+							<img src="'.THEME_URL.'/images/down_16.png" alt="v" />
+							</a>' );
+			} else {
+				$template->set_var(array(
+							'VAR_MOVE_DOWN_URL' => '',
+						) );
+			}
+		}
+		if($debug) {
+			$template->set_var(array(
+							'DISPLAY_DEBUG' => ' style="visibility="visible;"',
+							'TEXT_PID' => 'PID',
+							'TEXT_SID' => 'SID',
+							'POSITION' => $section['position'],
+							'DEBUG_COLSPAN_SIZE' => 9,
+						) );
+		} else {
+			$template->set_var(array(
+							'DISPLAY_DEBUG' => ' style="display: none;"',
+							'TEXT_PID' => '',
+							'TEXT_SID' => '',
+							'POSITION' => '',
+							'DEBUG_COLSPAN_SIZE' => 7,
+						) );
+		}
+		$template->parse('section_list', 'section_block', true);
+	}
+}
 
-<table cellpadding="5" cellspacing="0" border="0" align="center" width="100%">
-<tr>
-	<td><?php echo $TEXT['TYPE']; ?>:</td>
-	<?php if(SECTION_BLOCKS) { ?>
-	<td style="display: {DISPLAY_BLOCK}"><?php echo $TEXT['BLOCK']; ?>:</td>
-	<?php } ?>
-	<td><?php echo $TEXT['PUBL_START_DATE']; ?>:</td>
-	<td><?php echo $TEXT['PUBL_END_DATE']; ?>:</td>
-	<td colspan="3" width="60"><?php echo $TEXT['ACTIONS']; ?>:</td>
-</tr>
-<?php
+// now add the calendars -- remember to to set the range to [1970, 2037] if the date is used as timestamp!
+// the loop is simply a copy from above.
+$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
+if($query_sections->numRows() > 0) {
 	$num_sections = $query_sections->numRows();
 	while($section = $query_sections->fetchRow()) {
 		// Get the modules real name
 		$module_name=$database->get_one("SELECT name FROM ".TABLE_PREFIX."addons WHERE directory='".$section['module']."'");
 		if(!is_numeric(array_search($section['module'], $module_permissions))) {
-			?>
-			<tr onmouseover="this.style.backgroundColor = '#F1F8DD'" onmouseout="this.style.backgroundColor = '#FFF'">
-				<td class="<?php if(SECTION_BLOCKS) print 'input_normal'; else print 'input_wide'; ?>"><a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>#<?php echo $section['section_id']; ?>"><?php echo $module_name; ?></a></td>
-				<?php if(SECTION_BLOCKS) { ?>
-				<td>
-					<select name="block<?php echo $section['section_id']; ?>" class="input_normal">
-						<?php
-						foreach($block AS $number => $name) {
-							?>
-							<option value="<?php echo $number; ?>"<?php 
-							if($number == $section['block']) { echo ' selected'; } ?>><?php 
-							$block_name = htmlentities(strip_tags($name));
-							$block_name = ($block_name == '') ? $TEXT['BLOCK'] . '#' . (int) $number : $block_name;
-							echo $block_name; ?></option>
-							<?php
-						}
-						?>
-					</select>
-				</td>
-				<?php } // jscalendar-stuff following ?>
-				<td><input type="text" id="start_date<?php echo $section['section_id']; ?>" name="start_date<?php echo $section['section_id']; ?>" value="<?php if($section['publ_start']==0) print ""; else print date($jscal_format, $section['publ_start'])?>" class="input_normal" />
-					<img src="<?php echo THEME_URL ?>/images/clock_16.png" id="trigger_start<?php echo $section['section_id']; ?>" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" />
-					<img src="<?php echo THEME_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="<?php echo $TEXT['DELETE_DATE']; ?>" onclick="document.section_properties.start_date<?php echo $section['section_id']; ?>.value=''" />
-				</td>
-				<td><input type="text" id="end_date<?php echo $section['section_id']; ?>" name="end_date<?php echo $section['section_id']; ?>" value="<?php if($section['publ_end']==0) print ""; else print date($jscal_format, $section['publ_end'])?>" class="input_normal" />
-					<img src="<?php echo THEME_URL ?>/images/clock_16.png" id="trigger_stop<?php echo $section['section_id']; ?>" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
-					<img src="<?php echo THEME_URL ?>/images/clock_del_16.png" title="<?php echo $TEXT['DELETE_DATE']; ?>" onclick="document.section_properties.end_date<?php echo $section['section_id']; ?>.value=''"/>
-				</td>
-				<td width="20">
-					<?php if($section['position'] != 1) { ?>
-					<a href="<?php echo ADMIN_URL; ?>/pages/move_up.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section['section_id']; ?>">
-						<img src="<?php echo THEME_URL; ?>/images/up_16.png" alt="^" border="0" />
-					</a>
-					<?php } ?>
-				</td>
-				<td width="20">
-					<?php if($section['position'] != $num_sections) { ?>
-					<a href="<?php echo ADMIN_URL; ?>/pages/move_down.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section['section_id']; ?>">
-						<img src="<?php echo THEME_URL; ?>/images/down_16.png" alt="v" border="0" />
-					</a>
-					<?php } ?>
-				</td>
-				<td width="20">
-					<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo ADMIN_URL; ?>/pages/sections.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section['section_id']; ?>');">
-						<img src="<?php echo THEME_URL; ?>/images/delete_16.png" alt="Del" border="0" />
-					</a>
-				</td>
-			</tr>
-			<?php
-			}
-	}
-	?>
-	<tr>
-		<td align="center" colspan="<?php if(SECTION_BLOCKS) print '7'; else print '6'; ?>"><input type="submit" name="save" value="<?php echo $TEXT['SAVE']; ?>" class="input_medium" /></td>
-	</tr>
-	</table>
-
-</form>
-<?php
-	// now add the calendars -- remember to to set the range to [1970, 2037] if the date is used as timestamp!
-	// the loop is simply a copy from above.
-	$query_sections = $database->query("SELECT section_id,module FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
-	if($query_sections->numRows() > 0) {
-		$num_sections = $query_sections->numRows();
-		while($section = $query_sections->fetchRow()) {
-			// Get the modules real name
-			$module_name=$database->get_one("SELECT name FROM ".TABLE_PREFIX."addons WHERE directory='".$section['module']."'");
-			if(!is_numeric(array_search($section['module'], $module_permissions))) {
-	?>			
-				<script type="text/javascript">
-					Calendar.setup(
-						{
-							inputField  : "start_date<?php echo $section['section_id']; ?>",
-							ifFormat    : "<?php echo $jscal_ifformat ?>",
-							button      : "trigger_start<?php echo $section['section_id']; ?>",
-							firstDay    : <?php echo $jscal_firstday ?>,
-							<?php if(isset($jscal_use_time) && $jscal_use_time==TRUE) { ?>
-								showsTime   : "true",
-								timeFormat  : "24",
-							<?php } ?>
-							date        : "<?php echo $jscal_today ?>",
-							range       : [1970, 2037],
-							step        : 1
-						}
-					);
-				</script>
-				<script type="text/javascript">
-					Calendar.setup(
-						{
-							inputField  : "end_date<?php echo $section['section_id']; ?>",
-							ifFormat    : "<?php echo $jscal_ifformat ?>",
-							button      : "trigger_stop<?php echo $section['section_id']; ?>",
-							firstDay    : <?php echo $jscal_firstday ?>,
-							<?php if(isset($jscal_use_time) && $jscal_use_time==TRUE) { ?>
-								showsTime   : "true",
-								timeFormat  : "24",
-							<?php } ?>
-							date        : "<?php echo $jscal_today ?>",
-							range       : [1970, 2037],
-							step        : 1
-						}
-					);
-				</script>
-<?php
+			$template->set_var(array(
+						'jscal_ifformat' => $jscal_ifformat,
+						'jscal_firstday' => $jscal_firstday,
+						'jscal_today' => $jscal_today,
+						'start_date' => 'start_date'.$section['section_id'],
+						'end_date' => 'end_date'.$section['section_id'],
+						'trigger_start' => 'trigger_start'.$section['section_id'],
+						'trigger_end' => 'trigger_stop'.$section['section_id'],
+					) );
+			if(isset($jscal_use_time) && $jscal_use_time==TRUE) {
+				$template->set_var(array(
+						'showsTime' => "true",
+						'timeFormat' => "24",
+					) );
+			}  else {
+				$template->set_var(array(
+						'showsTime' => "false",
+						'timeFormat' => "24",
+					) );
 			}
 		}
+		$template->parse('calendar_list', 'calendar_block', true);
 	}
-?>
-<?php
 }
 
 // Work-out if we should show the "Add Section" form
 $query_sections = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'menu_link'");
 if($query_sections->numRows() == 0) {
-	?>
-	<h2><?php echo $TEXT['ADD_SECTION']; ?></h2>
-	
-	<form name="add" action="<?php echo ADMIN_URL; ?>/pages/sections.php?page_id=<?php echo $page_id; ?>" method="post">
-	
-	<table cellpadding="5" cellspacing="0" border="0" align="center" width="100%">
-	<tr>
-		<td>
-			<select name="module" class="input_full">
-			<?php
-			// Insert module list
-			$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page' AND directory != 'menu_link' order by name");
-			if($result->numRows() > 0) {
-				while($module = $result->fetchRow()) {
-					// Check if user is allowed to use this module
-					if(!is_numeric(array_search($module['directory'], $module_permissions))) {
-						?>
-						<option value="<?php echo $module['directory']; ?>"<?php if($module['directory'] == 'wysiwyg') { echo 'selected'; } ?>><?php echo $module['name']; ?></option>
-						<?php
-					}
+	// Modules list
+	$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page' AND directory != 'menu_link' order by name");
+	if($result->numRows() > 0) {
+		while ($module = $result->fetchRow()) {
+			// Check if user is allowed to use this module   echo  $module['directory'],'<br />';
+			if(!is_numeric(array_search($module['directory'], $module_permissions))) {
+				$template->set_var('VALUE', $module['directory']);
+				$template->set_var('NAME', $module['name']);
+				if($module['directory'] == 'wysiwyg') {
+					$template->set_var('SELECTED', ' selected="selected"');
+				} else {
+					$template->set_var('SELECTED', '');
 				}
+				$template->parse('module_list', 'module_block', true);
 			}
-			?>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input type="submit" name="submit" value="<?php echo $TEXT['ADD']; ?>" class="input_narrow" />
-		</td>
-	</tr>
-	</table>
-	
-	</form>
-	<?php
+		}
+	}
 }
+// Insert language text and messages
+$template->set_var(array(
+					'TEXT_MANAGE_SECTIONS' => $HEADING['MANAGE_SECTIONS'],
+					'TEXT_ARE_YOU_SURE' => $TEXT['ARE_YOU_SURE'],
+					'TEXT_TYPE' => $TEXT['TYPE'],
+					'TEXT_ADD' => $TEXT['ADD'],
+					'TEXT_SAVE' =>  $TEXT['SAVE'],
+					'TEXTLINK_MODIFY_PAGE' => $HEADING['MODIFY_PAGE'],
+					'TEXT_CALENDAR' => $TEXT['CALENDAR'],
+					'TEXT_DELETE_DATE' => $TEXT['DELETE_DATE'],
+					'TEXT_ADD_SECTION' => $TEXT['ADD_SECTION'],
+				) );
+$template->parse('main', 'main_block', false);
+$template->pparse('output', 'page');
 
 // Print admin footer
 $admin->print_footer();

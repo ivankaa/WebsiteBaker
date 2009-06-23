@@ -13,7 +13,7 @@
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
 				<a href="{ADMIN_URL}/modules/index.php">
-					<img src="{THEME_URL}/icons/modules.png" border="0" />
+					<img src="{THEME_URL}/icons/modules.png" alt="0" />
 				</a>
 			</td>
 			<td class="title">
@@ -21,9 +21,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="description">
-				{MODULES_OVERVIEW}
-			</td>
+			<td class="description">{MODULES_OVERVIEW}</td>
 		</tr>
 		</table>
 				
@@ -32,7 +30,7 @@
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
 				<a href="{ADMIN_URL}/templates/index.php">
-					<img src="{THEME_URL}/icons/templates.png" border="0" />
+					<img src="{THEME_URL}/icons/templates.png" alt="{TEMPLATES}" />
 				</a>
 			</td>
 			<td class="title">
@@ -40,9 +38,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="description">
-				{TEMPLATES_OVERVIEW}
-			</td>
+			<td class="description">{TEMPLATES_OVERVIEW}</td>
 		</tr>
 		</table>
 				
@@ -51,7 +47,7 @@
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
 				<a href="{ADMIN_URL}/languages/index.php">
-					<img src="{THEME_URL}/icons/languages.png" border="0" />
+					<img src="{THEME_URL}/icons/languages.png" alt="{LANGUAGES}" />
 				</a>
 			</td>
 			<td class="title">
@@ -59,20 +55,16 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="description">
-				{LANGUAGES_OVERVIEW}
-			</td>
+			<td class="description">{LANGUAGES_OVERVIEW}</td>
 		</tr>
 		</table>
 
 		<table cellpadding="0" cellspacing="0" border="0" class="section" style="display:{DISPLAY_RELOAD};">
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
-				<img src="{THEME_URL}/icons/admintools.png" border="0" />
+				<img src="{THEME_URL}/icons/admintools.png" alt="{TXT_ADMIN_SETTINGS}" />
 			</td>
-			<td class="title">
-				{TXT_ADMIN_SETTINGS}
-			</td>
+			<td class="title">{TXT_ADMIN_SETTINGS}</td>
 		</tr>
 		<tr>
 			<td class="description">
