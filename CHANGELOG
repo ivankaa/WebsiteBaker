@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 25-June-2009 Matthias Gallas
++	Added option to use also MYSQL_ASSOC and MYSQL_NUM with mysql_fetch_array
+	(Thanks to Luisehahne)
 #	Bugfix for Error-Level settings (Thanks to Luisehahne)
 23-June-2009 Matthias Gallas
 #	Moved styles from admin/pages/sections.php to sections.htt in backend themes

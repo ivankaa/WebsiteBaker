@@ -143,12 +143,12 @@ class mysql {
 	function numRows() {
 		return mysql_num_rows($this->result);
 	}
-	
-	// Fetch row
-	function fetchRow() {
-		return mysql_fetch_array($this->result);
+
+	// Fetch row  $typ = MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH
+	function fetchRow($typ = MYSQL_BOTH) {
+		return mysql_fetch_array($this->result, $typ);
 	}
-	
+
 	// Get error
 	function error() {
 		if(isset($this->error)) {
