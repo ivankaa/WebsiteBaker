@@ -61,9 +61,9 @@ if(isset($_POST['submit']) AND $_POST['submit'] != '') {
 }
 
 // Display form
-$persist_order = get_setting('mod_jsadmin_persist_order', true) ? 'checked="1"' : '';
-$ajax_order_pages = get_setting('mod_jsadmin_ajax_order_pages', true) ? 'checked="1"' : '';
-$ajax_order_sections = get_setting('mod_jsadmin_ajax_order_sections', true) ? 'checked="1"' : '';
+$persist_order = get_setting('mod_jsadmin_persist_order', true) ? 'checked="checked"' : '';
+$ajax_order_pages = get_setting('mod_jsadmin_ajax_order_pages', true) ? 'checked="checked"' : '';
+$ajax_order_sections = get_setting('mod_jsadmin_ajax_order_sections', true) ? 'checked="checked"' : '';
 ?>
 <?php
 
