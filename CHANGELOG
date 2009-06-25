@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 25-June-2009 Matthias Gallas
++	Added missing admin/settings/setting.js
 !	Changed name of classic theme from "classic" to "classic_theme"
 +	Added output-filter warning to all language files
 #	Fixed admintool jsadmin to get XHTML valid output (Thanks to Luisehahne)
