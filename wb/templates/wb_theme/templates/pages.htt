@@ -1,10 +1,4 @@
 <!-- BEGIN main_block -->
-
-
-
-
-
-
 <div class="{DISPLAY_ADD}">
     <h2>{HEADING_ADD_PAGE}</h2>
     <form name="add" action="add.php" method="post">

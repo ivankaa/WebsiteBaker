@@ -60,11 +60,12 @@ if($result->numRows() > 0) {
 		// Insert code and name
 		$template->set_var(array(
 								'CODE' => $l_codes[$l_name],
-								'NAME' => $l_name
+								'NAME' => $l_name,
+								'FLAG' => THEME_URL.'/images/flags/'.strtolower($l_codes[$l_name]),
 								));
 		// Check if it is selected
 		if(LANGUAGE == $l_codes[$l_name]) {
-			$template->set_var('SELECTED', ' selected');
+			$template->set_var('SELECTED', ' selected="selected"');
 		} else {
 			$template->set_var('SELECTED', '');
 		}
@@ -79,7 +80,7 @@ foreach($TIMEZONES AS $hour_offset => $title) {
 	$template->set_var('VALUE', $hour_offset);
 	$template->set_var('NAME', $title);
 	if($admin->get_timezone() == $hour_offset*60*60) {
-		$template->set_var('SELECTED', 'selected');
+		$template->set_var('SELECTED', ' selected="selected"');
 	} else {
 		$template->set_var('SELECTED', '');
 	}
@@ -99,9 +100,9 @@ foreach($DATE_FORMATS AS $format => $title) {
 	}
 	$template->set_var('NAME', $title);
 	if(DATE_FORMAT == $format AND !isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) {
-		$template->set_var('SELECTED', 'selected');
+		$template->set_var('SELECTED', ' selected="selected"');
 	} elseif($format == 'system_default' AND isset($_SESSION['USE_DEFAULT_DATE_FORMAT'])) {
-		$template->set_var('SELECTED', 'selected');
+		$template->set_var('SELECTED', ' selected="selected"');
 	} else {
 		$template->set_var('SELECTED', '');
 	}
@@ -120,7 +121,7 @@ foreach($TIME_FORMATS AS $format => $title) {
 	}
 	$template->set_var('NAME', $title);
 	if(TIME_FORMAT == $format AND !isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
-		$template->set_var('SELECTED', 'selected');
+		$template->set_var('SELECTED', ' selected="selected"');
 	} elseif($format == 'system_default' AND isset($_SESSION['USE_DEFAULT_TIME_FORMAT'])) {
 		$template->set_var('SELECTED', 'selected');
 	} else {

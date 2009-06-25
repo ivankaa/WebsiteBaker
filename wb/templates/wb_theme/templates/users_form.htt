@@ -64,7 +64,7 @@ function toggle_radio(radio_on, radio_off) {
 <tr>
 	<td>{TEXT_GROUP}:</td>
 	<td class="value_input">
-		<select name="groups[]" multiple size=5>
+		<select name="groups[]" multiple="multiple" size="5">
 		<!-- BEGIN group_list_block -->
 			<option value="{ID}" {SELECTED}>{NAME}</option>
 		<!-- END group_list_block -->

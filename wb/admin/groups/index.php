@@ -179,7 +179,7 @@ $template->set_var(array(
 								'TEXT_BASIC' => $TEXT['BASIC'],
 								'TEXT_ADVANCED' => $TEXT['ADVANCED'],
 								'CHANGING_PASSWORD' => $MESSAGE['USERS']['CHANGING_PASSWORD'],
-								'CHECKED' => 'checked'
+								'CHECKED' => ' checked="checked"',
 								)
 						);
 

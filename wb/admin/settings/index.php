@@ -106,14 +106,14 @@ $database_type = '';
 if(isset($_GET['advanced']) AND $_GET['advanced'] == 'yes') {
 	$template->set_var('DISPLAY_ADVANCED', '');
 	$template->set_var('ADVANCED', 'yes');
-	$template->set_var('ADVANCED_BUTTON', '<< '.$TEXT['HIDE_ADVANCED']);
+	$template->set_var('ADVANCED_BUTTON', '&lt;&lt; '.$TEXT['HIDE_ADVANCED']);
 	$template->set_var('ADVANCED_LINK', 'index.php?advanced=no');
 	$template->set_var('BASIC_FILE_PERMS_ID', 'hide');
 	$template->set_var('ADVANCED_FILE_PERMS_ID', 'file_perms_box');
 } else {
-	$template->set_var('DISPLAY_ADVANCED', 'none');
+	$template->set_var('DISPLAY_ADVANCED', ' style="display: none;"');
 	$template->set_var('ADVANCED', 'no');
-	$template->set_var('ADVANCED_BUTTON', $TEXT['SHOW_ADVANCED'].' >>');
+	$template->set_var('ADVANCED_BUTTON', $TEXT['SHOW_ADVANCED'].' &gt;&gt;');
 	$template->set_var('ADVANCED_LINK', 'index.php?advanced=yes');
 	$template->set_var('BASIC_FILE_PERMS_ID', 'file_perms_box');
 	$template->set_var('ADVANCED_FILE_PERMS_ID', 'hide');
@@ -150,11 +150,12 @@ if($result->numRows() > 0) {
 		// Insert code and name
 		$template->set_var(array(
 								'CODE' => $l_codes[$l_name],
-								'NAME' => $l_name
+								'NAME' => $l_name,
+								'FLAG' => THEME_URL.'/images/flags/'.strtolower($l_codes[$l_name]),
 								));
 		// Check if it is selected
 		if(DEFAULT_LANGUAGE == $l_codes[$l_name]) {
-			$template->set_var('SELECTED', ' selected');
+			$template->set_var('SELECTED', ' selected="selected"');
 		} else {
 			$template->set_var('SELECTED', '');
 		}
@@ -171,7 +172,7 @@ foreach($TIMEZONES AS $hour_offset => $title) {
 		$template->set_var('VALUE', $hour_offset);
 		$template->set_var('NAME', $title);
 		if(DEFAULT_TIMEZONE == $hour_offset*60*60) {
-			$template->set_var('SELECTED', 'selected');
+			$template->set_var('SELECTED', ' selected="selected"');
 		} else {
 			$template->set_var('SELECTED', '');
 		}
@@ -186,7 +187,7 @@ foreach($CHARSETS AS $code => $title) {
 	$template->set_var('VALUE', $code);
 	$template->set_var('NAME', $title);
 	if(DEFAULT_CHARSET == $code) {
-		$template->set_var('SELECTED', 'selected');
+		$template->set_var('SELECTED', ' selected="selected"');
 	} else {
 		$template->set_var('SELECTED', '');
 	}
@@ -205,7 +206,7 @@ foreach($DATE_FORMATS AS $format => $title) {
 	}
 	$template->set_var('NAME', $title);
 	if(DEFAULT_DATE_FORMAT == $format) {
-		$template->set_var('SELECTED', 'selected');
+		$template->set_var('SELECTED', ' selected="selected"');
 	} else {
 		$template->set_var('SELECTED', '');
 	}
@@ -224,7 +225,7 @@ foreach($TIME_FORMATS AS $format => $title) {
 	}
 	$template->set_var('NAME', $title);
 	if(DEFAULT_TIME_FORMAT == $format) {
-		$template->set_var('SELECTED', 'selected');
+		$template->set_var('SELECTED', ' selected="selected"');
 	} else {
 		$template->set_var('SELECTED', '');
 	}
@@ -238,7 +239,7 @@ if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('FILE', $addon['directory']);
 		$template->set_var('NAME', $addon['name']);
-		if(($addon['directory'] == DEFAULT_TEMPLATE) ? $selected = ' selected' : $selected = '');
+		if(($addon['directory'] == DEFAULT_TEMPLATE) ? $selected = ' selected="selected"' : $selected = '');
 		$template->set_var('SELECTED', $selected);
 		$template->parse('template_list', 'template_list_block', true);
 	}
@@ -251,7 +252,7 @@ if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('FILE', $addon['directory']);
 		$template->set_var('NAME', $addon['name']);
-		if(($addon['directory'] == DEFAULT_THEME) ? $selected = ' selected' : $selected = '');
+		if(($addon['directory'] == DEFAULT_THEME) ? $selected = ' selected="selected"' : $selected = '');
 		$template->set_var('SELECTED', $selected);
 		$template->parse('theme_list', 'theme_list_block', true);
 	}
@@ -263,15 +264,15 @@ $file='none';
 $module_name=$TEXT['NONE'];  
 $template->set_var('FILE', $file);  
 $template->set_var('NAME', $module_name);  
-if((!defined('WYSIWYG_EDITOR') OR $file == WYSIWYG_EDITOR) ? $selected = ' selected' : $selected = '');  
-$template->set_var('SELECTED', $selected);  
+if((!defined('WYSIWYG_EDITOR') OR $file == WYSIWYG_EDITOR) ? $selected = ' selected="selected"' : $selected = '');
+$template->set_var('SELECTED', $selected);
 $template->parse('editor_list', 'editor_list_block', true);  
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'wysiwyg'");
 if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('FILE', $addon['directory']);
 		$template->set_var('NAME', $addon['name']);
-		if((defined('WYSIWYG_EDITOR') AND $addon['directory'] == WYSIWYG_EDITOR) ? $selected = ' selected' : $selected = '');
+		if((defined('WYSIWYG_EDITOR') AND $addon['directory'] == WYSIWYG_EDITOR) ? $selected = ' selected="selected"' : $selected = '');
 		$template->set_var('SELECTED', $selected);
 		$template->parse('editor_list', 'editor_list_block', true);
 	}
@@ -279,7 +280,7 @@ if($result->numRows() > 0) {
 
 // Insert templates for search settings
 $template->set_block('main_block', 'search_template_list_block', 'search_template_list');
-if($search_template == '') { $selected = ' selected'; } else { $selected = ''; }
+if($search_template == '') { $selected = ' selected="selected"'; } else { $selected = ''; }
 $template->set_var(array('FILE' => '', 'NAME' => $TEXT['SYSTEM_DEFAULT'], 'SELECTED' => $selected));
 $template->parse('search_template_list', 'search_template_list_block', true);
 $result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' order by name");
@@ -287,7 +288,7 @@ if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('FILE', $addon['directory']);
 		$template->set_var('NAME', $addon['name']);
-		if($addon['directory'] == $search_template ? $selected = ' selected' : $selected = '');
+		if($addon['directory'] == $search_template ? $selected = ' selected="selected"' : $selected = '');
 		$template->set_var('SELECTED', $selected);
 		$template->parse('search_template_list', 'search_template_list_block', true);
 	}
@@ -300,7 +301,7 @@ foreach($ER_LEVELS AS $value => $title) {
 	$template->set_var('VALUE', $value);
 	$template->set_var('NAME', $title);
 	if(ER_LEVEL == $value) {
-		$template->set_var('SELECTED', 'selected');
+		$template->set_var('SELECTED', ' selected="selected"');
 	} else {
 		$template->set_var('SELECTED', '');
 	}
@@ -317,7 +318,7 @@ $template->set_block('main_block', 'page_level_limit_list_block', 'page_level_li
 for($i = 1; $i <= 10; $i++) {
 	$template->set_var('NUMBER', $i);
 	if(PAGE_LEVEL_LIMIT == $i) {
-		$template->set_var('SELECTED', 'selected');
+		$template->set_var('SELECTED', ' selected="selected"');
 	} else {
 		$template->set_var('SELECTED', '');
 	}
@@ -326,23 +327,23 @@ for($i = 1; $i <= 10; $i++) {
 
 // Work-out if multiple menus feature is enabled
 if(defined('MULTIPLE_MENUS') AND MULTIPLE_MENUS == true) {
-	$template->set_var('MULTIPLE_MENUS_ENABLED', ' checked');
+	$template->set_var('MULTIPLE_MENUS_ENABLED', ' checked="checked"');
 } else {
-	$template->set_var('MULTIPLE_MENUS_DISABLED', ' checked');
+	$template->set_var('MULTIPLE_MENUS_DISABLED', ' checked="checked"');
 }
 
 // Work-out if page languages feature is enabled
 if(defined('PAGE_LANGUAGES') AND PAGE_LANGUAGES == true) {
-        $template->set_var('PAGE_LANGUAGES_ENABLED', ' checked');
+        $template->set_var('PAGE_LANGUAGES_ENABLED', ' checked="checked"');
 } else {
-        $template->set_var('PAGE_LANGUAGES_DISABLED', ' checked');
+        $template->set_var('PAGE_LANGUAGES_DISABLED', ' checked="checked"');
 }
 
 // Work-out if smart login feature is enabled
 if(defined('SMART_LOGIN') AND SMART_LOGIN == true) {
-	$template->set_var('SMART_LOGIN_ENABLED', ' checked');
+	$template->set_var('SMART_LOGIN_ENABLED', ' checked="checked"');
 } else {
-	$template->set_var('SMART_LOGIN_DISABLED', ' checked');
+	$template->set_var('SMART_LOGIN_DISABLED', ' checked="checked"');
 }
 
 if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make's sure GD library is installed */
@@ -353,45 +354,45 @@ if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) { /* Make'
 
 // Work-out if section blocks feature is enabled
 if(defined('SECTION_BLOCKS') AND SECTION_BLOCKS == true) {
-	$template->set_var('SECTION_BLOCKS_ENABLED', ' checked');
+	$template->set_var('SECTION_BLOCKS_ENABLED', ' checked="checked"');
 } else {
-	$template->set_var('SECTION_BLOCKS_DISABLED', ' checked');
+	$template->set_var('SECTION_BLOCKS_DISABLED', ' checked="checked"');
 }
 
 // Work-out if homepage redirection feature is enabled
 if(defined('HOMEPAGE_REDIRECTION') AND HOMEPAGE_REDIRECTION == true) {
-	$template->set_var('HOMEPAGE_REDIRECTION_ENABLED', ' checked');
+	$template->set_var('HOMEPAGE_REDIRECTION_ENABLED', ' checked="checked"');
 } else {
-	$template->set_var('HOMEPAGE_REDIRECTION_DISABLED', ' checked');
+	$template->set_var('HOMEPAGE_REDIRECTION_DISABLED', ' checked="checked"');
 }
 
 // Work-out which server os should be checked
 if(OPERATING_SYSTEM == 'linux') {
-	$template->set_var('LINUX_SELECTED', ' checked');
+	$template->set_var('LINUX_SELECTED', ' checked="checked"');
 } elseif(OPERATING_SYSTEM == 'windows') {
-	$template->set_var('WINDOWS_SELECTED', ' checked');
+	$template->set_var('WINDOWS_SELECTED', ' checked="checked"');
 }
 
 // Work-out if manage sections feature is enabled
 if(MANAGE_SECTIONS) {
-	$template->set_var('MANAGE_SECTIONS_ENABLED', ' checked');
+	$template->set_var('MANAGE_SECTIONS_ENABLED', ' checked="checked"');
 } else {
-	$template->set_var('MANAGE_SECTIONS_DISABLED', ' checked');
+	$template->set_var('MANAGE_SECTIONS_DISABLED', ' checked="checked"');
 }
 
 // Work-out which wbmailer routine should be checked
 if(WBMAILER_ROUTINE == 'phpmail') {
-	$template->set_var('PHPMAIL_SELECTED', ' checked');
+	$template->set_var('PHPMAIL_SELECTED', ' checked="checked"');
 	$template->set_var('SMTP_VISIBILITY', 'none');
 	$template->set_var('SMTP_VISIBILITY_AUTH', 'none');
 } elseif(WBMAILER_ROUTINE == 'smtp') {
-	$template->set_var('SMTPMAIL_SELECTED', ' checked');
+	$template->set_var('SMTPMAIL_SELECTED', ' checked="checked"');
 	$template->set_var('SMTP_VISIBILITY', '');
 }
 
 // Work-out if SMTP authentification should be checked
 if(WBMAILER_SMTP_AUTH) {
-	$template->set_var('SMTP_AUTH_SELECTED', ' checked');
+	$template->set_var('SMTP_AUTH_SELECTED', ' checked="checked"');
 	if(WBMAILER_ROUTINE == 'smtp') {
 		$template->set_var('SMTP_VISIBILITY_AUTH', '');
 	} else {
@@ -403,106 +404,106 @@ if(WBMAILER_SMTP_AUTH) {
 
 // Work-out if intro feature is enabled
 if(INTRO_PAGE) {
-	$template->set_var('INTRO_PAGE_ENABLED', ' checked');
+	$template->set_var('INTRO_PAGE_ENABLED', ' checked="checked"');
 } else {
-	$template->set_var('INTRO_PAGE_DISABLED', ' checked');
+	$template->set_var('INTRO_PAGE_DISABLED', ' checked="checked"');
 }
 
 // Work-out if frontend login feature is enabled
 if(FRONTEND_LOGIN) {
-	$template->set_var('PRIVATE_ENABLED', ' checked');
+	$template->set_var('PRIVATE_ENABLED', ' checked="checked"');
 } else {
-	$template->set_var('PRIVATE_DISABLED', ' checked');
+	$template->set_var('PRIVATE_DISABLED', ' checked="checked"');
 }
 
 // Work-out if page trash feature is disabled, in-line, or separate
 if(PAGE_TRASH == 'disabled') {
-	$template->set_var('PAGE_TRASH_DISABLED', ' checked');
+	$template->set_var('PAGE_TRASH_DISABLED', ' checked="checked"');
 	$template->set_var('DISPLAY_PAGE_TRASH_SEPARATE', ' display: none;');
 } elseif(PAGE_TRASH == 'inline') {
-	$template->set_var('PAGE_TRASH_INLINE', ' checked');
+	$template->set_var('PAGE_TRASH_INLINE', ' checked="checked"');
 	$template->set_var('DISPLAY_PAGE_TRASH_SEPARATE', ' display: none;');
 } elseif(PAGE_TRASH == 'separate') {
-	$template->set_var('PAGE_TRASH_SEPARATE', ' checked');
+	$template->set_var('PAGE_TRASH_SEPARATE', ' checked="checked"');
 	$template->set_var('DISPLAY_PAGE_TRASH_SEPARATE', ' display: inline;');
 }
 
 // Work-out if media home folde feature is enabled
 if(HOME_FOLDERS) {
-	$template->set_var('HOME_FOLDERS_ENABLED', ' checked');
+	$template->set_var('HOME_FOLDERS_ENABLED', ' checked="checked"');
 } else {
-	$template->set_var('HOME_FOLDERS_DISABLED', ' checked');
+	$template->set_var('HOME_FOLDERS_DISABLED', ' checked="checked"');
 }
 
 // Insert search select
 if(SEARCH == 'private') {
-	$template->set_var('PRIVATE_SEARCH', 'selected');
+	$template->set_var('PRIVATE_SEARCH', ' selected="selected"');
 } elseif(SEARCH == 'registered') {
-	$template->set_var('REGISTERED_SEARCH', 'selected');
+	$template->set_var('REGISTERED_SEARCH', ' selected="selected"');
 } elseif(SEARCH == 'none') {
-	$template->set_var('NONE_SEARCH', 'selected');
+	$template->set_var('NONE_SEARCH', ' selected="selected"');
 }
 
 // Work-out if 777 permissions are set
 if(STRING_FILE_MODE == '0777' AND STRING_DIR_MODE == '0777') {
-	$template->set_var('WORLD_WRITEABLE_SELECTED', ' checked');
+	$template->set_var('WORLD_WRITEABLE_SELECTED', ' checked="checked"');
 }
 
 // Work-out which file mode boxes are checked
 if(extract_permission(STRING_FILE_MODE, 'u', 'r')) {
-	$template->set_var('FILE_U_R_CHECKED', 'checked');
+	$template->set_var('FILE_U_R_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_FILE_MODE, 'u', 'w')) {
-	$template->set_var('FILE_U_W_CHECKED', 'checked');
+	$template->set_var('FILE_U_W_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_FILE_MODE, 'u', 'e')) {
-	$template->set_var('FILE_U_E_CHECKED', 'checked');
+	$template->set_var('FILE_U_E_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_FILE_MODE, 'g', 'r')) {
-	$template->set_var('FILE_G_R_CHECKED', 'checked');
+	$template->set_var('FILE_G_R_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_FILE_MODE, 'g', 'w')) {
-	$template->set_var('FILE_G_W_CHECKED', 'checked');
+	$template->set_var('FILE_G_W_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_FILE_MODE, 'g', 'e')) {
-	$template->set_var('FILE_G_E_CHECKED', 'checked');
+	$template->set_var('FILE_G_E_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_FILE_MODE, 'o', 'r')) {
-	$template->set_var('FILE_O_R_CHECKED', 'checked');
+	$template->set_var('FILE_O_R_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_FILE_MODE, 'o', 'w')) {
-	$template->set_var('FILE_O_W_CHECKED', 'checked');
+	$template->set_var('FILE_O_W_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_FILE_MODE, 'o', 'e')) {
-	$template->set_var('FILE_O_E_CHECKED', 'checked');
+	$template->set_var('FILE_O_E_CHECKED', ' checked="checked"');
 }
 // Work-out which dir mode boxes are checked
 if(extract_permission(STRING_DIR_MODE, 'u', 'r')) {
-	$template->set_var('DIR_U_R_CHECKED', 'checked');
+	$template->set_var('DIR_U_R_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_DIR_MODE, 'u', 'w')) {
-	$template->set_var('DIR_U_W_CHECKED', 'checked');
+	$template->set_var('DIR_U_W_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_DIR_MODE, 'u', 'e')) {
-	$template->set_var('DIR_U_E_CHECKED', 'checked');
+	$template->set_var('DIR_U_E_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_DIR_MODE, 'g', 'r')) {
-	$template->set_var('DIR_G_R_CHECKED', 'checked');
+	$template->set_var('DIR_G_R_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_DIR_MODE, 'g', 'w')) {
-	$template->set_var('DIR_G_W_CHECKED', 'checked');
+	$template->set_var('DIR_G_W_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_DIR_MODE, 'g', 'e')) {
-	$template->set_var('DIR_G_E_CHECKED', 'checked');
+	$template->set_var('DIR_G_E_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_DIR_MODE, 'o', 'r')) {
-	$template->set_var('DIR_O_R_CHECKED', 'checked');
+	$template->set_var('DIR_O_R_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_DIR_MODE, 'o', 'w')) {
-	$template->set_var('DIR_O_W_CHECKED', 'checked');
+	$template->set_var('DIR_O_W_CHECKED', ' checked="checked"');
 }
 if(extract_permission(STRING_DIR_MODE, 'o', 'e')) {
-	$template->set_var('DIR_O_E_CHECKED', 'checked');
+	$template->set_var('DIR_O_E_CHECKED', ' checked="checked"');
 }
 
 // Insert Server Email value into template
@@ -516,7 +517,7 @@ if($results->numRows() > 0) {
 		$template->set_var('ID', $group['group_id']);
 		$template->set_var('NAME', $group['name']);
 		if(FRONTEND_SIGNUP == $group['group_id']) {
-			$template->set_var('SELECTED', 'selected');
+			$template->set_var('SELECTED', ' selected="selected"');
 		} else {
 			$template->set_var('SELECTED', '');
 		}

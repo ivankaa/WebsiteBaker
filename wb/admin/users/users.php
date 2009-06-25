@@ -62,9 +62,9 @@ if($_POST['action'] == 'modify') {
 										)
 							);
 	if($user['active'] == 1) {
-		$template->set_var('ACTIVE_CHECKED', ' checked');
+		$template->set_var('ACTIVE_CHECKED', ' checked="checked"');
 	} else {
-		$template->set_var('DISABLED_CHECKED', ' checked');
+		$template->set_var('DISABLED_CHECKED', ' checked="checked"');
 	}
 	// Add groups to list
 	$template->set_block('main_block', 'group_list_block', 'group_list');
@@ -78,7 +78,7 @@ if($_POST['action'] == 'modify') {
 			$template->set_var('ID', $group['group_id']);
 			$template->set_var('NAME', $group['name']);
 			if(in_array($group['group_id'], split(",",$user['groups_id']))) {
-				$template->set_var('SELECTED', 'selected');
+				$template->set_var('SELECTED', ' selected="selected"');
 			} else {
 				$template->set_var('SELECTED', '');
 			}
@@ -99,7 +99,7 @@ if($_POST['action'] == 'modify') {
 		}
 
 		if($in_group) {
-			$template->set_var('SELECTED', 'selected');
+			$template->set_var('SELECTED', ' selected="selected"');
 		} else {
 			$template->set_var('SELECTED', '');
 		}
@@ -108,10 +108,10 @@ if($_POST['action'] == 'modify') {
 		if($results->numRows() == 0) {
 			$template->set_var('ID', '');
 			$template->set_var('NAME', $TEXT['NONE_FOUND']);
-			$template->set_var('SELECTED', 'selected');
+			$template->set_var('SELECTED', ' selected="selected"');
 			$template->parse('group_list', 'group_list_block', true);
 		}
-	}	
+	}
 	
 	// Generate username field name
 	$username_fieldname = 'username_';
@@ -139,7 +139,7 @@ if($_POST['action'] == 'modify') {
 		$template->set_var('NAME', str_replace(WB_PATH, '', $name));
 		$template->set_var('FOLDER', str_replace(WB_PATH.MEDIA_DIRECTORY, '', $name));
 		if($user['home_folder'] == str_replace(WB_PATH.MEDIA_DIRECTORY, '', $name)) {
-			$template->set_var('SELECTED', ' selected');
+			$template->set_var('SELECTED', ' selected="selected"');
 		} else {
 			$template->set_var('SELECTED', ' ');
 		}

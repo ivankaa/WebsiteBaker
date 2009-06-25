@@ -95,7 +95,7 @@ $template = new Template(THEME_PATH.'/templates');
 $template->set_file('page', 'users_form.htt');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var('DISPLAY_EXTRA', 'none');
-$template->set_var('ACTIVE_CHECKED', 'checked');
+$template->set_var('ACTIVE_CHECKED', ' checked="checked"');
 $template->set_var('ACTION_URL', ADMIN_URL.'/users/add.php');
 $template->set_var('SUBMIT_TITLE', $TEXT['ADD']);
 
@@ -105,7 +105,7 @@ $results = $database->query("SELECT group_id, name FROM ".TABLE_PREFIX."groups W
 if($results->numRows() > 0) {
 	$template->set_var('ID', '');
 	$template->set_var('NAME', $TEXT['PLEASE_SELECT'].'...');
-	$template->set_var('SELECTED', 'selected');
+	$template->set_var('SELECTED', ' selected="selected"');
 	$template->parse('group_list', 'group_list_block', true);
 	while($group = $results->fetchRow()) {
 		$template->set_var('ID', $group['group_id']);

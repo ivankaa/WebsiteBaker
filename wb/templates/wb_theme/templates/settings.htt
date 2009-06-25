@@ -1,56 +1,4 @@
-</div><!-- BEGIN main_block -->
-
-<script language="javascript" type="text/javascript">
-function change_os(type) {
-	if(type == 'linux') {
-		document.getElementById('file_perms_box1').style.display = 'block';
-		document.getElementById('file_perms_box2').style.display = 'block';
-		document.getElementById('file_perms_box3').style.display = 'block';
-	} else if(type == 'windows') {
-		document.getElementById('file_perms_box1').style.display = 'none';
-		document.getElementById('file_perms_box2').style.display = 'none';
-		document.getElementById('file_perms_box3').style.display = 'none';
-	}
-}
-
-function change_wbmailer(type) {
-	if(type == 'smtp') {
-		document.getElementById('row_wbmailer_smtp_settings').style.display = '';
-		document.getElementById('row_wbmailer_smtp_host').style.display = '';
-		document.getElementById('row_wbmailer_smtp_auth_mode').style.display = '';
-		document.getElementById('row_wbmailer_smtp_username').style.display = '';
-		document.getElementById('row_wbmailer_smtp_password').style.display = '';
-		if( document.settings.wbmailer_smtp_auth.checked == true ) {
-			document.getElementById('row_wbmailer_smtp_username').style.display = '';
-			document.getElementById('row_wbmailer_smtp_password').style.display = '';
-		} else {
-			document.getElementById('row_wbmailer_smtp_username').style.display = 'none';
-			document.getElementById('row_wbmailer_smtp_password').style.display = 'none';
-		}
-	} else if(type == 'phpmail') {
-		document.getElementById('row_wbmailer_smtp_settings').style.display = 'none';
-		document.getElementById('row_wbmailer_smtp_host').style.display = 'none';
-		document.getElementById('row_wbmailer_smtp_auth_mode').style.display = 'none';
-		document.getElementById('row_wbmailer_smtp_username').style.display = 'none';
-		document.getElementById('row_wbmailer_smtp_password').style.display = 'none';
-	}
-}
-
-function toggle_wbmailer_auth() {
-	if( document.settings.wbmailer_smtp_auth.checked == true ) {
-		document.getElementById('row_wbmailer_smtp_username').style.display = '';
-		document.getElementById('row_wbmailer_smtp_password').style.display = '';
-	} else {
-		document.getElementById('row_wbmailer_smtp_username').style.display = 'none';
-		document.getElementById('row_wbmailer_smtp_password').style.display = 'none';
-	}
-}
-</script>
-
-<style>
-.advanced {
-	display: {DISPLAY_ADVANCED};
-</style>
+<!-- BEGIN main_block -->
 
 <form name="settings" action="save.php" method="post">
 <input type="hidden" name="advanced" value="{ADVANCED}" />
@@ -66,35 +14,32 @@ function toggle_wbmailer_auth() {
 	<td class="setting_value" colspan="2">
 		<input type="text" name="website_title" value="{WEBSITE_TITLE}" />
 	</td>
-	<script language="javascript" type="text/javascript">
-	document.settings.website_title.focus();
-	</script>
 </tr>
 <tr>
 	<td class="setting_name">{TEXT_WEBSITE_DESCRIPTION}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="website_description">{WEBSITE_DESCRIPTION}</textarea>
+		<textarea name="website_description" cols="50" rows="3">{WEBSITE_DESCRIPTION}</textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name">{TEXT_WEBSITE_KEYWORDS}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="website_keywords">{WEBSITE_KEYWORDS}</textarea>
+		<textarea name="website_keywords" cols="50" rows="3" >{WEBSITE_KEYWORDS}</textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name">{TEXT_WEBSITE_HEADER}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="website_header">{WEBSITE_HEADER}</textarea>
+		<textarea name="website_header" cols="50" rows="3">{WEBSITE_HEADER}</textarea>
 	</td>
 </tr>
 <tr>
 	<td class="setting_name">{TEXT_WEBSITE_FOOTER}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="website_footer">{WEBSITE_FOOTER}</textarea>
+		<textarea name="website_footer" cols="50" rows="3">{WEBSITE_FOOTER}</textarea>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_PAGE_LEVEL_LIMIT}:</td>
 	<td class="setting_value" colspan="2">
 		<select name="page_level_limit">
@@ -117,7 +62,7 @@ function toggle_wbmailer_auth() {
 		</div>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
         <td class="setting_name">{TEXT_PAGE_LANGUAGES}:</td>
         <td class="setting_value" colspan="2">
                 <input type="radio" name="page_languages" id="page_languages_true" style="width: 14px; height: 14px;" value="true"{PAGE_LANGUAGES_ENABLED} />
@@ -126,7 +71,7 @@ function toggle_wbmailer_auth() {
                 <label for="page_languages_false">{TEXT_DISABLED}</label>
 		</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_MULTIPLE_MENUS}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="multiple_menus" id="multiple_menus_true" style="width: 14px; height: 14px;" value="true"{MULTIPLE_MENUS_ENABLED} />
@@ -144,7 +89,7 @@ function toggle_wbmailer_auth() {
 		<label for="home_folders_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_MANAGE_SECTIONS}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="manage_sections" id="manage_sections_true" style="width: 14px; height: 14px;" value="true"{MANAGE_SECTIONS_ENABLED} />
@@ -153,7 +98,7 @@ function toggle_wbmailer_auth() {
 		<label for="manage_sections_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_SECTION_BLOCKS}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="section_blocks" id="section_blocks_true" style="width: 14px; height: 14px;" value="true"{SECTION_BLOCKS_ENABLED} />
@@ -171,7 +116,7 @@ function toggle_wbmailer_auth() {
 		<label for="intro_page_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_HOMEPAGE_REDIRECTION}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="homepage_redirection" id="homepage_redirection_true" style="width: 14px; height: 14px;" value="true"{HOMEPAGE_REDIRECTION_ENABLED} />
@@ -180,7 +125,7 @@ function toggle_wbmailer_auth() {
 		<label for="homepage_redirection_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_SMART_LOGIN}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="smart_login" id="smart_login_true" style="width: 14px; height: 14px;" value="true"{SMART_LOGIN_ENABLED} />
@@ -198,7 +143,7 @@ function toggle_wbmailer_auth() {
 		<label for="frontend_login_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_REDIRECT_AFTER}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="redirect_timer" value="{REDIRECT_TIMER}" />
@@ -215,7 +160,7 @@ function toggle_wbmailer_auth() {
 		</select>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_PHP_ERROR_LEVEL}:</td>
 	<td class="setting_value" colspan="2">
 		<select name="er_level">
@@ -226,13 +171,13 @@ function toggle_wbmailer_auth() {
 		</select>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_WYSIWYG_STYLE}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="wysiwyg_style" value="{WYSIWYG_STYLE}" />
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_WYSIWYG_EDITOR}:</td>
 	<td class="setting_value" colspan="2">
 		<select name="wysiwyg_editor">
@@ -249,7 +194,7 @@ function toggle_wbmailer_auth() {
 		<input type="reset" name="reset" value="{TEXT_RESET}" class="reset" />
 	</td>
 	<td style="text-align: right;">
-		<button onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
+		<button title="{MODE_SWITCH_WARNING}" onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
 	</td>
 </tr>
 <tr>
@@ -262,12 +207,12 @@ function toggle_wbmailer_auth() {
 	<td class="setting_value" colspan="2">
 		<select name="default_language">
 			<!-- BEGIN language_list_block -->
-			<option value="{CODE}"{SELECTED}>{NAME} ({CODE})</option>
+			<option value="{CODE}"{SELECTED} style="background: url({FLAG}.png) no-repeat center left; padding-left: 20px;">{NAME} ({CODE})</option>
 			<!-- END language_list_block -->
 		</select>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_CHARSET}:</td>
 	<td class="setting_value" colspan="2">
 		<select name="default_charset">
@@ -338,7 +283,7 @@ function toggle_wbmailer_auth() {
 		<input type="reset" name="reset" value="{TEXT_RESET}" class="reset" />
 	</td>
 	<td style="text-align: right;">
-		<button onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
+		<button title="{MODE_SWITCH_WARNING}" onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
 	</td>
 </tr>
 <tr>
@@ -367,55 +312,55 @@ function toggle_wbmailer_auth() {
 		</select>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_HEADER}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="search_header" style="height: 100px;">{SEARCH_HEADER}</textarea>
+		<textarea name="search_header" style="height: 100px;" cols="50" rows="3">{SEARCH_HEADER}</textarea>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_RESULTS_HEADER}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="search_results_header">{SEARCH_RESULTS_HEADER}</textarea>
+		<textarea name="search_results_header" cols="50" rows="3">{SEARCH_RESULTS_HEADER}</textarea>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_RESULTS_LOOP}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="search_results_loop">{SEARCH_RESULTS_LOOP}</textarea>
+		<textarea name="search_results_loop" cols="50" rows="3">{SEARCH_RESULTS_LOOP}</textarea>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_RESULTS_FOOTER}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="search_results_footer">{SEARCH_RESULTS_FOOTER}</textarea>
+		<textarea name="search_results_footer" cols="50" rows="3">{SEARCH_RESULTS_FOOTER}</textarea>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_NO_RESULTS}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="search_no_results" value="{SEARCH_NO_RESULTS}" />
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_FOOTER}:</td>
 	<td class="setting_value" colspan="2">
-		<textarea name="search_footer">{SEARCH_FOOTER}</textarea>
+		<textarea name="search_footer" cols="50" rows="3">{SEARCH_FOOTER}</textarea>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_MODULE_ORDER}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="search_module_order" value="{SEARCH_MODULE_ORDER}" />
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_MAX_EXCERPT}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="search_max_excerpt" value="{SEARCH_MAX_EXCERPT}" />
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_TIME_LIMIT}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="search_time_limit" value="{SEARCH_TIME_LIMIT}" />
@@ -428,7 +373,7 @@ function toggle_wbmailer_auth() {
 		<input type="reset" name="reset" value="{TEXT_RESET}" class="reset" />
 	</td>
 	<td style="text-align: right;">
-		<button onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
+		<button title="{MODE_SWITCH_WARNING}" onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
 	</td>
 </tr>
 <tr>
@@ -441,7 +386,7 @@ function toggle_wbmailer_auth() {
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="operating_system" id="operating_system_linux" onclick="javascript: change_os('linux');" style="width: 14px; height: 14px;" value="linux"{LINUX_SELECTED} />
 		<label for="operating_system_linux" onclick="javascript: change_os('linux');">{TEXT_LINUX_UNIX_BASED}</label>
-		<input type="radio" name="operating_system" id="operating_system_windows" onclick="javascript: change_os('windows');"" style="width: 14px; height: 14px;" value="windows"{WINDOWS_SELECTED} />
+		<input type="radio" name="operating_system" id="operating_system_windows" onclick="javascript: change_os('windows');" style="width: 14px; height: 14px;" value="windows"{WINDOWS_SELECTED} />
 		<label for="operating_system_windows" onclick="javascript: change_os('windows');">{TEXT_WINDOWS}</label>
 	</td>
 </tr>
@@ -459,7 +404,7 @@ function toggle_wbmailer_auth() {
 		<div id="{BASIC_FILE_PERMS_ID}3" style="margin: 0; padding: 0;"></div>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name"><div id="{ADVANCED_FILE_PERMS_ID}1" style="margin: 0; padding: 0;">{TEXT_FILESYSTEM_PERMISSIONS}:</div></td>
 	<td class="setting_value" id="file_mode" align="left">
 		<table cellpadding="2" cellspacing="0" border="0" width="100%" style="border-right: 1px solid #DDDDDD;" id="{ADVANCED_FILE_PERMS_ID}2">
@@ -554,43 +499,43 @@ function toggle_wbmailer_auth() {
 		</table>
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_PAGES_DIRECTORY}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="pages_directory" value="{PAGES_DIRECTORY}" />
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_MEDIA_DIRECTORY}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="media_directory" value="{MEDIA_DIRECTORY}" />
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_PAGE_EXTENSION}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="page_extension" value="{PAGE_EXTENSION}" />
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_PAGE_SPACER}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="page_spacer" value="{PAGE_SPACER}" />
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_RENAME_FILES_ON_UPLOAD}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="rename_files_on_upload" value="{RENAME_FILES_ON_UPLOAD}" />
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_SESSION_IDENTIFIER}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="app_name" value="{APP_NAME}" />
 	</td>
 </tr>
-<tr class="advanced">
+<tr {DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_SEC_ANCHOR}:</td>
 	<td class="setting_value" colspan="2">
 		<input type="text" name="sec_anchor" value="{SEC_ANCHOR}" />
@@ -620,7 +565,7 @@ function toggle_wbmailer_auth() {
 	<td class="setting_value" colspan="2">
 		<input type="radio" name="wbmailer_routine" id="wbmailer_routine_phpmail" onclick="javascript: change_wbmailer('phpmail');" style="width: 14px; height: 14px;" value="phpmail"{PHPMAIL_SELECTED} />
 		<label for="wbmailer_routine_phpmail" onclick="javascript: change_wbmailer('phpmail');">{TEXT_WBMAILER_PHP}</label>
-		<input type="radio" name="wbmailer_routine" id="wbmailer_routine_smtp" onclick="javascript: change_wbmailer('smtp');"" style="width: 14px; height: 14px;" value="smtp"{SMTPMAIL_SELECTED} />
+		<input type="radio" name="wbmailer_routine" id="wbmailer_routine_smtp" onclick="javascript: change_wbmailer('smtp');" style="width: 14px; height: 14px;" value="smtp"{SMTPMAIL_SELECTED} />
 		<label for="wbmailer_routine_smtp" onclick="javascript: change_wbmailer('smtp');">{TEXT_WBMAILER_SMTP}</label>
 	</td>
 </tr>
@@ -662,19 +607,19 @@ function toggle_wbmailer_auth() {
 		<input type="reset" name="reset" value="{TEXT_RESET}" class="reset" />
 	</td>
 	<td style="text-align: right;">
-		<button onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
+		<button title="{MODE_SWITCH_WARNING}" onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
 	</td>
 </tr>
 </table>
 
 </form>
 
-<hr />
+<hr size="1" />
 
-<button onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
-
+<button title="{MODE_SWITCH_WARNING}" onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
+<br />
 <font class="{DISPLAY_ADVANCED_BUTTON}">
-&nbsp; {MODE_SWITCH_WARNING}
+{MODE_SWITCH_WARNING}
 </font>
-
+<script src="{ADMIN_URL}/settings/setting.js" language="javascript" type="text/javascript"></script>
 <!-- END main_block -->

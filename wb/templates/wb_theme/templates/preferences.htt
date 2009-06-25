@@ -19,7 +19,7 @@
 	<td>
 		<select name="language" style="width: 98%;">
 			<!-- BEGIN language_list_block -->
-			<option value="{CODE}"{SELECTED}>{NAME} ({CODE})</option>
+			<option value="{CODE}"{SELECTED} style="background: url({FLAG}.png) no-repeat center left; padding-left: 20px;">{NAME} ({CODE})</option>
 			<!-- END language_list_block -->
 		</select>
 	</td>
@@ -119,7 +119,7 @@
 		<input type="password" name="new_password2" style="width: 98%;" />
 	</td>
 </tr>
-</tr>
+
 <tr>
 	<td>&nbsp;</td>
 	<td>

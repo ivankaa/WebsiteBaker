@@ -314,7 +314,7 @@ function parent_list($parent) {
 $template->set_block('main_block', 'page_list_block2', 'page_list2');
 if($admin->get_permission('pages_add_l0') == true OR $results_array['level'] == 0) {
 	if($results_array['parent'] == 0) {
-		$selected = ' selected';
+		$selected = ' selected="selected"';
 	} else { 
 		$selected = '';
 	}

@@ -66,19 +66,19 @@ if($_POST['action'] == 'modify') {
 		$template->set_var('DISPLAY_ADVANCED', '');
 		$template->set_var('DISPLAY_BASIC', 'none');
 		$template->set_var('ADVANCED', 'yes');
-		$template->set_var('ADVANCED_BUTTON', '<< '.$TEXT['HIDE_ADVANCED']);
+		$template->set_var('ADVANCED_BUTTON', '&lt;&lt; '.$TEXT['HIDE_ADVANCED']);
 	} else {
 		$template->set_var('DISPLAY_ADVANCED', 'none');
 		$template->set_var('DISPLAY_BASIC', '');
 		$template->set_var('ADVANCED', 'no');
-		$template->set_var('ADVANCED_BUTTON', $TEXT['SHOW_ADVANCED'].' >>');
+		$template->set_var('ADVANCED_BUTTON', $TEXT['SHOW_ADVANCED'].'  &gt;&gt;');
 	}
-	
+
 	// Explode system permissions
 	$system_permissions = explode(',', $group['system_permissions']);
 	// Check system permissions boxes
 	foreach($system_permissions AS $name) {
-			$template->set_var($name.'_checked', 'checked');
+			$template->set_var($name.'_checked', ' checked="checked"');
 	}
 	// Explode module permissions
 	$module_permissions = explode(',', $group['module_permissions']);
@@ -93,7 +93,7 @@ if($_POST['action'] == 'modify') {
 			$template->set_var('VALUE', $addon['directory']);
 			$template->set_var('NAME', $addon['name']);
 			if(!is_numeric(array_search($addon['directory'], $module_permissions))) {
-				$template->set_var('CHECKED', 'checked');
+				$template->set_var('CHECKED', ' checked="checked"');
 			} else {
 				$template->set_var('CHECKED', '');
 			}
@@ -109,7 +109,7 @@ if($_POST['action'] == 'modify') {
 			$template->set_var('VALUE', $addon['directory']);
 			$template->set_var('NAME', $addon['name']);
 			if(!is_numeric(array_search($addon['directory'], $template_permissions))) {
-				$template->set_var('CHECKED', 'checked');
+				$template->set_var('CHECKED', ' checked="checked"');
 			} else {
 				$template->set_var('CHECKED', '');
 			}
