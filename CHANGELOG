@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+25-June-2009 Matthias Gallas
+#	Bugfix for Error-Level settings (Thanks to Luisehahne)
 23-June-2009 Matthias Gallas
 #	Moved styles from admin/pages/sections.php to sections.htt in backend themes
 	(Thanks to Luisehahne)

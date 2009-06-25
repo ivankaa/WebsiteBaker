@@ -54,6 +54,6 @@ if(isset($TEXT['SYSTEM_DEFAULT'])) {
 $ER_LEVELS['6135'] = 'E_ALL^E_NOTICE'; // standard: E_ALL without E_NOTICE
 $ER_LEVELS['0'] = 'E_NONE';
 $ER_LEVELS['6143'] = 'E_ALL';
-$ER_LEVELS['8191'] = 'E_ALL&E_STRICT'; // for programmers
+$ER_LEVELS['8191'] = htmlentities('E_ALL&E_STRICT'); // for programmers
 
 ?>
