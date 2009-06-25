@@ -1,7 +1,7 @@
 <?php
 /**
  * $Id$
- * Website Baker theme: classic
+ * Website Baker theme: classic_theme
  * This theme is the default WB backend Theme
  * Feel free to modify or build up on this template.
  *
@@ -27,8 +27,8 @@
 */
 
 // OBLIGATORY WEBSITE BAKER VARIABLES
-$template_directory			= 'classic';
-$template_name				= 'classic';
+$template_directory			= 'classic_theme';
+$template_name				= 'classic_theme';
 $template_function			= 'theme';
 $template_version			= '2.80';
 $template_platform			= '2.8';
