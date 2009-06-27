@@ -78,7 +78,8 @@ if (!function_exists('filter_frontend_output')) {
 						
 			// check if Javascript mailto encryption is enabled (call register_frontend_functions in the template)
 			$search = '<script type="text/javascript" src="' .WB_URL .'/modules/output_filter/js/mdcr.js"></script>';
-			if(strpos($content, $search) !== false) { 
+			$search_droplet = '<script type="text/javascript" src="' .WB_URL .'/modules/droplets/js/mdcr.js"></script>';
+			if(strpos($content, $search) !== false || strpos($content, $search_droplet) !== false) { 
 				$output_filter_mode = $output_filter_mode + 4;							// 0|4
 			}
 		}
