@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+29-June-2009 Matthias Gallas
+!	Update JQuery UI to version 1.7.2 (ticket #731)
 27-June-2009 Ruud Eisinga
 #	Fixed email encryption bug in output filter. Introduced by adding droplets.
 	(Thanks to Luisehahne)
