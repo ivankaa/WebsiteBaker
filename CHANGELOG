@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 29-June-2009 Matthias Gallas
+#	Replaced in FCKEdiotor folder all index.html with index.php (ticket #691)
 !	Update PHPMailer to version 2.0.4 (ticket #733)
 !	Update Editarea to version 0.8.1.1 (ticket #732)
 !	Update JQuery UI to version 1.7.2 (ticket #731)
