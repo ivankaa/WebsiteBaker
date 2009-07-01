@@ -9,8 +9,6 @@ body {
  /*background-image: url(images/background.png);*/
  background-repeat: repeat-x;
  margin: auto;
- overflow-y: scroll;
- height: 1%;
 }
 
 img {
