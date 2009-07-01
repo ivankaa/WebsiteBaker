@@ -34,6 +34,7 @@ if(!isset($_POST['target']) OR $_POST['target'] == '') {
 // Print admin header
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
+require_once(WB_PATH.'/include/pclzip/pclzip.lib.php');	// Required to unzip file.
 $admin = new admin('Media', 'media_upload');
 
 // Include the WB functions file
@@ -94,14 +95,31 @@ for($count = 1; $count <= 10; $count++) {
 					change_mode($relative.$filename);
 				}
 			}
+			// store file name of first file for possible unzip action
+			if ($count == 1) {
+				$filename1 = $relative . $filename;
+			}
 		}
 	}
 }
 
+// If the user chose to unzip the first file, unzip into the current folder
+if (isset($_POST['unzip']) && isset($filename1) && file_exists($filename1) ) {
+	$archive = new PclZip($filename1);
+	$list = $archive->extract(PCLZIP_OPT_PATH, $relative);
+	if($list == 0) {
+		// error while trying to extract the archive (most likely wrong format)
+		$admin->print_error('UNABLE TO UNZIP FILE' . $archive -> errorInfo(true));
+	}
+}
+
 if($good_uploads == 1) {
-	$admin->print_success($good_uploads.$MESSAGE['MEDIA']['SINGLE_UPLOADED']);
+	$admin->print_success($good_uploads.' '.$MESSAGE['MEDIA']['SINGLE_UPLOADED']);
+	if (isset($_POST['delzip'])) {
+		unlink($filename1);
+	}
 } else {
-	$admin->print_success($good_uploads.$MESSAGE['MEDIA']['UPLOADED']);
+	$admin->print_success($good_uploads.' '.$MESSAGE['MEDIA']['UPLOADED']);
 }
 
 // Print admin 

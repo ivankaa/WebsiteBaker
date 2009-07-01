@@ -436,6 +436,8 @@ $TEXT['INSTALLED'] = "ge&iuml;nstalleerd";
 $TEXT['NOT_INSTALLED'] = "niet ge&iuml;nstalleerd";
 $TEXT['ADDON'] = "Add-On";
 $TEXT['EXTENSION'] = "Extensie";
+$TEXT['UNZIP_FILE'] = "Upload and unpack a zip archiv";
+$TEXT['DELETE_ZIP'] = "Delete zip archiv after unpacking";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, u heeft geen bevoegdheden om deze pagina te bekijken';

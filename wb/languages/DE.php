@@ -436,6 +436,8 @@ $TEXT['INSTALLED'] = "installiert";
 $TEXT['NOT_INSTALLED'] = "nicht installiert";
 $TEXT['ADDON'] = "Addon";
 $TEXT['EXTENSION'] = "Extension";
+$TEXT['UNZIP_FILE'] = "Zip-Archiv hochladen und entpacken";
+$TEXT['DELETE_ZIP'] = "Zip-Archiv nach dem entpacken l&ouml;schen";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sie sind nicht berechtigt, diese Seite zu sehen';

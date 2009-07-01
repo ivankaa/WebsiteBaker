@@ -31,6 +31,36 @@ $admin = new admin('Media', 'media', false);
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
+// Byte convert for filesize
+function byte_convert($bytes) {
+	$symbol = array('B', 'KB', 'MB', 'GB', 'TB');
+   $exp = 0;
+   $converted_value = 0;
+   if( $bytes > 0 ) {
+   	$exp = floor( log($bytes)/log(1024) );
+      $converted_value = ( $bytes/pow(1024,floor($exp)) );
+   }
+   return sprintf( '%.2f '.$symbol[$exp], $converted_value );
+}
+
+// Get file extension
+function get_filetype($fname) {
+	$pathinfo = pathinfo($fname);
+	$extension = strtolower($pathinfo['extension']);
+	return $extension;
+}
+
+// Get file extension for icons
+function get_filetype_icon($fname) {
+	$pathinfo = pathinfo($fname);
+	$extension = strtolower($pathinfo['extension']);
+	if (file_exists(THEME_PATH.'/images/files/'.$extension.'.png')) {
+		return $extension;
+	} else {
+		return 'unknown';
+	}
+}
+
 // Setup template object
 $template = new Template(THEME_PATH.'/templates');
 $template->set_file('page', 'media_browse.htt');
@@ -74,7 +104,8 @@ $template->set_var(array(
 								'THEME_URL' => THEME_URL,
 								'CURRENT_DIR' => $directory,
 								'PARENT_DIR_LINK' => $parent_dir_link,
-								'DISPLAY_UP_ARROW' => $display_up_arrow
+								'DISPLAY_UP_ARROW' => $display_up_arrow,
+								'INCLUDE_PATH' => WB_URL.'/include'
 								)
 						);
 
@@ -111,7 +142,10 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 											'LINK' => "browse.php?dir=$directory/$link_name",
 											'LINK_TARGET' => '',
 											'ROW_BG_COLOR' => $row_bg_color,
-											'FILETYPE_ICON' => THEME_URL.'/images/folder_16.png'
+											'FILETYPE_ICON' => THEME_URL.'/images/folder_16.png',
+											'SIZE' => '',
+											'DATE' => '',
+											'PREVIEW' => ''
 											)
 									);
 			$template->parse('list', 'list_block', true);
@@ -125,7 +159,20 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 	}
 	if(isset($FILE)) {
 		sort($FILE);
+		$filepreview = array('jpg','gif','tif','tiff','png','txt','css','js','cfg','conf');
 		foreach($FILE AS $name) {
+			$size = filesize('../../'.MEDIA_DIRECTORY.$directory.'/'.$name);
+			$bytes = byte_convert($size);
+			$fdate = filemtime('../../'.MEDIA_DIRECTORY.$directory.'/'.$name);
+			$date = gmdate(DATE_FORMAT.' '.TIME_FORMAT, $fdate);
+			$filetypeicon = get_filetype_icon(WB_URL.MEDIA_DIRECTORY.$directory.'/'.$name);
+			$filetype = get_filetype(WB_URL.MEDIA_DIRECTORY.$directory.'/'.$name);
+				
+			if (in_array($filetype, $filepreview)) {
+				$preview = 'preview';
+			} else {
+				$preview = '';
+			}
 			$temp_id++;
 			$template->set_var(array(
 											'NAME' => $name,
@@ -134,7 +181,10 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 											'LINK' => WB_URL.MEDIA_DIRECTORY.$directory.'/'.$name,
 											'LINK_TARGET' => '_blank',
 											'ROW_BG_COLOR' => $row_bg_color,
-											'FILETYPE_ICON' => THEME_URL.'/images/blank.gif'
+											'FILETYPE_ICON' => THEME_URL.'/images/files/'.$filetypeicon.'.png',
+											'SIZE' => $bytes,
+											'DATE' => $date,
+											'PREVIEW' => $preview
 											)
 									);
 			$template->parse('list', 'list_block', true);
@@ -170,6 +220,10 @@ $template->set_var(array(
 								'TEXT_RELOAD' => $TEXT['RELOAD'],
 								'TEXT_RENAME' => $TEXT['RENAME'],
 								'TEXT_DELETE' => $TEXT['DELETE'],
+								'TEXT_SIZE' => $TEXT['SIZE'],
+								'TEXT_DATE' => $TEXT['DATE'],
+								'TEXT_NAME' => $TEXT['NAME'],
+								'TEXT_TYPE' => $TEXT['TYPE'],
 								'TEXT_UP' => $TEXT['UP'],
 								'NONE_FOUND' => $MESSAGE['MEDIA']['NONE_FOUND'],
 								'CONFIRM_DELETE' => $MESSAGE['MEDIA']['CONFIRM_DELETE']

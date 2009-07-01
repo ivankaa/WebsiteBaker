@@ -71,7 +71,9 @@ $template->set_var(array(
 								'TEXT_OVERWRITE_EXISTING' => $TEXT['OVERWRITE_EXISTING'],
 								'TEXT_FILES' => $TEXT['FILES'],
 								'TEXT_CREATE_FOLDER' => $TEXT['CREATE_FOLDER'],
-								'TEXT_UPLOAD_FILES' => $TEXT['UPLOAD_FILES']
+								'TEXT_UPLOAD_FILES' => $TEXT['UPLOAD_FILES'],
+								'TEXT_UNZIP_FILE' => $TEXT['UNZIP_FILE'],
+								'TEXT_DELETE_ZIP' => $TEXT['DELETE_ZIP']
 								)
 						);
 

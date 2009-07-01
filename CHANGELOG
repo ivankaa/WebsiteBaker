@@ -11,6 +11,11 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+01-July-2009 Matthias Gallas
++	Added posibility to upload and unzip .zip packages to media section
+	(Thanks to BerndJM)
+!	Updated Browse Media Window in wb_theme now supports file icons, more file
+	informations and a new preview function (Thanks to BerndJM)
 29-June-2009 Matthias Gallas
 #	Replaced in FCKEdiotor folder all index.html with index.php (ticket #691)
 !	Update PHPMailer to version 2.0.4 (ticket #733)

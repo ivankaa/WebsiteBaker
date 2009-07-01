@@ -35,3 +35,17 @@ input:focus, select:focus, textarea:focus {
 .hide {
 	display: none;
 }
+
+table.browse_header {
+	background-color: #EEE; 
+	border-bottom: 1px solid #35373a;
+}
+
+th.headline {
+	font-weight: normal;
+	font-size: 10px;
+	border-bottom: 1px solid #35373a;
+}
+
+
+
