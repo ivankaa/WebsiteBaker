@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+02-July-2009 Matthias Gallas
++	Added missing fancy_progress.png
 01-July-2009 Matthias Gallas
 #	Fixed backend display issues in IE6 and IE7
 !	Set Version to WB2.8RC1
