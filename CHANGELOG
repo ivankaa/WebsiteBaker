@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+03-July-2009 Ruud Eisinga
+#	Fixed the wrong handling of htmlentities in Droplet parameter parsing
 02-July-2009 Matthias Gallas
 +	Added missing fancy_progress.png
 01-July-2009 Matthias Gallas

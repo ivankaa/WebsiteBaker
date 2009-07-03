@@ -19,14 +19,14 @@ function evalDroplets ($wb_page_data) {
 		if (strpos($match,"?")) {
 			list ($droplet,$params) = explode("?",$match);
 			if(!empty($params)) {
-				$params = str_replace("&amp;", "&", $params); // replace &amp; to single &
+				$params = html_entity_decode($params,ENT_COMPAT,DEFAULT_CHARSET); // make sure we can parse the parameters correctly
 				$paramarray = explode("&",$params); //create array of parms as parm=value
 				foreach ($paramarray as $paramelement) {
 					$parameterTemp = explode("=", $paramelement,2);
 					if (count($parameterTemp) == 2)
-						$parameter[$parameterTemp[0]] = $parameterTemp[1];
+						$parameter[$parameterTemp[0]] = htmlentities($parameterTemp[1],ENT_COMPAT,DEFAULT_CHARSET); //re-encode the parameter values
 					else
-						$parameter['parm'] = $parameterTemp[0];
+						$parameter['parm'] = htmlentities($parameterTemp[0],ENT_COMPAT,DEFAULT_CHARSET);
 				}
 			}
 		} else {
