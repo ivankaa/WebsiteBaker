@@ -38,7 +38,7 @@ $fetch_settings = $get_settings->fetchRow();
 $url = ($fetch_settings['url']);
 
 ?>
-<iframe src="<?php echo $url; ?>" width="100%" height="<?php echo $fetch_settings['height']; ?>px" frameborder="0" scrolling="auto">
+<iframe src="<?php echo $url; ?>" width="100%" height="<?php echo $fetch_settings['height']; ?>" frameborder="0" scrolling="auto">
 <?php echo $MOD_WRAPPER['NOTICE']; ?>
 <a href="<?php echo $url; ?>" target="_blank"><?php echo $url; ?></a>
 </iframe>
