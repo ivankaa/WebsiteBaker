@@ -41,6 +41,7 @@ $database = new database();
 $get_droplet = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_droplets where active=1 ORDER BY name");
 if($get_droplet->numRows() > 0) {
 	// Loop through pages
+	$list = "";
 	while($droplet = $get_droplet->fetchRow()) {
 		// method page_is_visible was introduced with WB 2.7
 		$title = stripslashes($droplet['name']);
@@ -56,6 +57,7 @@ if($get_droplet->numRows() > 0) {
 	$template->parse('page_list', 'page_list_block', false);
 }
 $template->set_var('LIST', $list);
+$template->set_var("CHARSET", defined('DEFAULT_CHARSET') ? DEFAULT_CHARSET : 'utf-8' );
 
 // Parse the template object
 $template->parse('main', 'main_block', false);
