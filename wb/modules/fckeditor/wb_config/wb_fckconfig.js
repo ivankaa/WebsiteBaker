@@ -16,6 +16,7 @@
 
 // required settings to make FCKEditor work with Website Baker (do not change them)
    FCKConfig.Plugins.Add( 'WBModules', 'en,nl,de' ) ;
+   FCKConfig.Plugins.Add( 'WBDroplets', 'en,nl,de' ) ;
 
 // #########################################################################################
 // # FCKEditor: General settings
@@ -67,7 +68,7 @@
 	['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
 	['OrderedList','UnorderedList','-','Outdent','Indent'],
 	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
-	['WBModules','Link','Unlink','Anchor'],
+	['WBDroplets','WBModules','Link','Unlink','Anchor'],
 	['Image','Flash','Table','Rule'],
 	'/',
 	['Style','FontFormat','FontName','FontSize'],

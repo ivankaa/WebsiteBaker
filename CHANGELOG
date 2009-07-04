@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+04-July-2009 Matthias Gallas
++	Added Droplets plugin to FCKEditor (ticket #737) (Big Thanks to vizmotion)
 03-July-2009 Matthias Gallas
 +	Fixed IE Bug in Wrapper modul (ticket #736)
 03-July-2009 Ruud Eisinga
