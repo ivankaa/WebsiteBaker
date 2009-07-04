@@ -36,7 +36,7 @@ $template->set_file('page', 'wbdroplets.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Get pages and put them into the pages list
-$template->set_block('main_block', 'page_list_block', 'page_list');
+$template->set_block('main_block', 'droplets_list_block', 'page_list');
 $database = new database();
 $get_droplet = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_droplets where active=1 ORDER BY name");
 if($get_droplet->numRows() > 0) {
@@ -49,12 +49,12 @@ if($get_droplet->numRows() > 0) {
 		$comm = stripslashes($droplet['comments']);
 		$template->set_var('TITLE', $title);
 		$template->set_var('DESC', $desc);
-		$list .= "<div id=$title class=hidden><b>$title: </b> $desc<br>$comm</div>";
-		$template->parse('page_list', 'page_list_block', true);
+		$list .= "<div id='".$title."' class='hidden'><b>".$title.": </b> ".$desc."<br>".$comm."</div>";
+		$template->parse('page_list', 'droplets_list_block', true);
 	}
 } else {
 	$template->set_var('TITLE', 'None found');
-	$template->parse('page_list', 'page_list_block', false);
+	$template->parse('page_list', 'droplets_list_block', false);
 }
 $template->set_var('LIST', $list);
 $template->set_var("CHARSET", defined('DEFAULT_CHARSET') ? DEFAULT_CHARSET : 'utf-8' );

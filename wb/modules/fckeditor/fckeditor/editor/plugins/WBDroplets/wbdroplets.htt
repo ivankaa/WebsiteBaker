@@ -3,8 +3,8 @@
 <html>
 	<head>
 		<title>WB Link - Insert Website Baker Droplet</title>
-		<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}">
-		<meta content="noindex, nofollow" name="robots">
+		<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
+		<meta name="robots" content="noindex, nofollow" />
 		<script type="text/javascript" src="fckwbdroplets.js"></script>
 		<script type="text/javascript">
 		<!--
@@ -36,35 +36,35 @@
 				} else {
 					sSelected = FCK.EditorDocument.selection.createRange().text;
 				}
-
-
 			}
 
 			//Code that runs after the OK button is clicked 
 			function Ok() {
 				//Validate is option is selected
-				var oPageList = document.getElementById( 'cmbPages' ) ;
-				if(oPageList.selectedIndex == -1) {
+				var oDropletList = document.getElementById( 'cmbDroplets' ) ;
+				if(oDropletList.selectedIndex == -1) {
 					alert( FCKLang.WBDropletsErrPageSelect );
 					return false;
 				}
 				
 				var oTagLink = document.getElementById( 'chkTaglink' );
 				
-				var sPageId = oPageList[oPageList.selectedIndex].value;
-				FCK.InsertHtml("[[" + sPageId + "]]");
+				var sDropletStr = oDropletList[oDropletList.selectedIndex].value;
+				FCK.InsertHtml("[[" + sDropletStr + "]]");
 				// the following line was commented out as it creates an error message in some browser (e.g. IE)
 				// even Firefox seems not to make use of the title so we remove this option for know (doc)
 				// SetAttribute( oLink, 'title', document.getElementById( 'txtTitle' ).value ) ;
 			return true;
 
-			} 
+			}
+			
 			var oldid = 'LoginBox';
+			
 			function showdetail(obj) {
 				var olditem = document.getElementById(oldid);
-  				var newitem = document.getElementById(obj.value);
-  				olditem.className='hidden';
-  				newitem.className='unhidden';
+				var newitem = document.getElementById(obj.value);
+				olditem.className='hidden';
+				newitem.className='unhidden';
 				oldid = obj.value;
 			}
 		//-->
@@ -74,10 +74,9 @@
 			.unhidden { display: block; }
 		</style>
 	</head>
-			
 	<body scroll="yes" >
-		 <table height="100%" cellSpacing="0" cellPadding="0" width="100%" border="0"> 
-		 	<tr> 
+		<table height="100%" cellSpacing="0" cellPadding="0" width="100%" border="0"> 
+			<tr> 
 				<td>
 					<table width="100%">
 						<tr> 
@@ -85,10 +84,10 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<select id="cmbPages" style="WIDTH: 100%" size="10" name="cmbPages"  onchange="javascript:showdetail(this);" >
-									<!-- BEGIN page_list_block -->
+								<select id="cmbDroplets" style="WIDTH: 100%" size="10" name="cmbDroplets"  onchange="javascript:showdetail(this);" >
+									<!-- BEGIN droplets_list_block -->
 									<option value="{TITLE}"{SELECTED}>{TITLE}</option>
-									<!-- END page_list_block -->
+									<!-- END droplets_list_block -->
 								</select>
 							</td>
 						</tr>
@@ -96,8 +95,7 @@
 					{LIST}
 				</td>
 			</tr>
-		</table>
-		
+		</table>		
 	</body>
 </html> 
 <!-- END main_block -->

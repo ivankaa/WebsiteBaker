@@ -11,6 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+04-July-2009 Dietrich Roland Pehlke
+! FCK-Editor Modul: Droplet Select: change "page_list_block" to "droplets_list_block", also "cmbPages" to "cmbDroplets"
+	as we are listen droplets not pages.
+!	Remove unneeded empty lines and spaces/blanks; minor cosmetic changes in the source to keep the string more readable.
 04-July-2009 Matthias Gallas
 !	Replaced droplet icon for FCKEditor Toolbar (thanks to Stefek)
 #	Fixed two bugs in droplets-plugin for FCKEditor (thanks to Aldus)
