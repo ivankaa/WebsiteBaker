@@ -5,7 +5,7 @@
 /*
 
  Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2008, Ryan Djurovich
+ Copyright (C) 2004-2009, Ryan Djurovich
 
  Website Baker is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ $admin = new admin('Pages', 'pages_modify', false);
 
 // Setup the template
 $template = new Template(WB_PATH.'/modules/fckeditor/fckeditor/editor/plugins/WBModules');
-$template->set_file('page', 'wbmodules.html');
+$template->set_file('page', 'wbmodules.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Function to generate page list
