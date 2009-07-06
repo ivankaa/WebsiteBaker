@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 06-July-2009 Matthias Gallas
+!	Updated FCKEditor to Version 2.6.4.1 (ticket #738) (Thanks to doc)
 #	Fixed Backend-Themes to get more valide output (Thanks to Luisehahne)
 +	Added argos_theme
 +	Added new functions to admin dir (Thanks Argos and Ruud)
