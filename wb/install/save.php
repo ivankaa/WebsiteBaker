@@ -494,7 +494,8 @@ if($install_tables == true) {
 	." ('wbmailer_smtp_host', ''),"
 	." ('wbmailer_smtp_auth', ''),"
 	." ('wbmailer_smtp_username', ''),"
-	." ('wbmailer_smtp_password', '')";
+	." ('wbmailer_smtp_password', ''),"
+	." ('mediasettings', '')";
 	$database->query($settings_rows);
 	
 	// Users table

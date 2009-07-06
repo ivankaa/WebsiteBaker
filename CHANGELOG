@@ -11,10 +11,15 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+06-July-2009 Matthias Gallas
++	Added new functions to admin dir (Thanks Argos and Ruud)
+!	Updated install and upgrade-script
+!	Adapted wb_theme and classic_theme to changed admin dir files
 04-July-2009 Dietrich Roland Pehlke
-! FCK-Editor Modul: Droplet Select: change "page_list_block" to "droplets_list_block", also "cmbPages" to "cmbDroplets"
-	as we are listen droplets not pages.
-!	Remove unneeded empty lines and spaces/blanks; minor cosmetic changes in the source to keep the string more readable.
+!	FCK-Editor Modul: Droplet Select: change "page_list_block" to "droplets_list_block",
+	also "cmbPages" to "cmbDroplets" as we are listen droplets not pages.
+!	Remove unneeded empty lines and spaces/blanks;
+	minor cosmetic changes in the source to keep the string more readable.
 04-July-2009 Matthias Gallas
 !	Replaced droplet icon for FCKEditor Toolbar (thanks to Stefek)
 #	Fixed two bugs in droplets-plugin for FCKEditor (thanks to Aldus)

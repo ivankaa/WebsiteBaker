@@ -12,7 +12,7 @@ body {
 }
 
 img {
-	border: 0;
+	border: 0px;
 }
 
 form {
@@ -292,14 +292,14 @@ img.page_list_rights {
 /* CSS STYLES FOR THE PAGES SECTION */
 
 table.pages_view {
-	width: 720px;
+ width: 730px;
  border: 0;
  border-spacing: 0px;
  background-color: #ECF3F7;
 }
 
 table.pages_view td {
-	padding: 1px;
+ padding: 3px;
 }
 
 table.pages_view tr:hover {
@@ -374,7 +374,13 @@ select option.disabled {
  text-indent: 7px;
 }
 
+.header_list_page_title {width:284px;text-align:left;}
+.header_list_menu_title {width:252px;text-align:left;}
+.header_list_actions {text-align:left;}
 
+.list_page_title {}
+.list_menu_title {width:252px;text-align:left;}
+.list_actions {width:20px;}
 
 
 

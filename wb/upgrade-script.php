@@ -204,6 +204,18 @@ foreach($cfg as $key=>$value) {
 
 
 /**********************************************************
+ *  - Adding mediasettings to settings table
+ */
+echo "<br />Adding mediasettings to settings table<br />";
+$cfg = array(
+	'mediasettings' => ''
+);
+foreach($cfg as $key=>$value) {
+	db_add_key_value($key, $value);
+}
+
+
+/**********************************************************
  *  - Add field "redirect_type" to table "mod_menu_link"
  */
 echo "<br />Adding field redirect_type to mod_menu_link table<br />";

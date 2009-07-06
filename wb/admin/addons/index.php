@@ -56,6 +56,7 @@ if(!isset($_GET['advanced']) || $admin->get_permission('admintools') != true) {
 
 // Insert section names and descriptions
 $template->set_var(array(
+	'ADDONS_OVERVIEW' => $MENU['ADDONS'],
 	'MODULES' => $MENU['MODULES'],
 	'TEMPLATES' => $MENU['TEMPLATES'],
 	'LANGUAGES' => $MENU['LANGUAGES'],

@@ -23,34 +23,17 @@
 
 */
 
-require('../../config.php');
-require_once(WB_PATH.'/framework/class.admin.php');
-require_once(WB_PATH.'/framework/functions.php');
-
-$admin = new admin('admintools', 'admintools');
-
-if(!isset($_GET['tool'])) {
-	header("Location: index.php");
-	exit(0);
+function __unserialize($sObject) {  // found in php manual :-)
+	$__ret =preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $sObject );
+	return unserialize($__ret);
 }
-
-// Check if tool is installed
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'tool' AND directory = '".$admin->add_slashes($_GET['tool'])."'");
-if($result->numRows() == 0) {
-	header("Location: index.php");
-	exit(0);
+$pathsettings = array();
+$query = $database->query ( "SELECT * FROM ".TABLE_PREFIX."settings where `name`='mediasettings'" );
+if ($query && $query->numRows() > 0) {
+	$settings = $query->fetchRow();
+	$pathsettings = __unserialize($settings['value']);
+} else {
+	$database->query ( "INSERT INTO ".TABLE_PREFIX."settings (`name`,`value`) VALUES ('mediasettings','')" );
 }
-$tool = $result->fetchRow();
-
-?>
-<h4>
-	<a href="<?php echo ADMIN_URL; ?>/admintools/index.php"><?php echo $HEADING['ADMINISTRATION_TOOLS']; ?></a>
-	&raquo;
-	<?php echo $tool['name']; ?>
-</h4>
-<?php
-require(WB_PATH.'/modules/'.$tool['directory'].'/tool.php');
-
-$admin->print_footer();
 
 ?>

@@ -68,6 +68,8 @@ $template->set_var(array(
 		'<a href="' . ADMIN_URL . '/modules/index.php">' . $MENU['MODULES'] . '</a>' : '',
 	'URL_LANGUAGES' => $admin->get_permission('languages') ? 
 		'<a href="' . ADMIN_URL . '/languages/index.php">' . $MENU['LANGUAGES'] . '</a>' : '',
+	'URL_ADVANCED' => $admin->get_permission('admintools') ? 
+	'<a href="' . ADMIN_URL . '/modules/index.php?advanced">' . $TEXT['ADVANCED'] . '</a>' : '',
 	'TEXT_INSTALL' => $TEXT['INSTALL'],
 	'TEXT_UNINSTALL' => $TEXT['UNINSTALL'],
 	'TEXT_VIEW_DETAILS' => $TEXT['VIEW_DETAILS'],

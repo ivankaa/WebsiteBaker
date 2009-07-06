@@ -66,6 +66,8 @@ $template->set_var(array(
 $template->set_var(array(
 	'URL_MODULES' => $admin->get_permission('modules') ? 
 		'<a href="' . ADMIN_URL . '/modules/index.php">' . $MENU['MODULES'] . '</a>' : '',
+	'URL_ADVANCED' => $admin->get_permission('admintools') ? 
+		'<a href="' . ADMIN_URL . '/modules/index.php?advanced">' . $TEXT['ADVANCED'] . '</a>' : '',		
 	'URL_TEMPLATES' => $admin->get_permission('templates') ? 
 		'<a href="' . ADMIN_URL . '/templates/index.php">' . $MENU['TEMPLATES'] . '</a>' : '',
 	'TEXT_INSTALL' => $TEXT['INSTALL'],

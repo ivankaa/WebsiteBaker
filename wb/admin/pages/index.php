@@ -104,7 +104,7 @@ function make_list($parent, $editable_pages) {
 					?>
 				</td>
 				<?php if($admin->get_permission('pages_modify') == true AND $can_modify == true) { ?>
-				<td>
+				<td class="list_page_title">
 					<a href="<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
 						<?php if($page['visibility'] == 'public') { ?>
 							<img src="<?php echo THEME_URL; ?>/images/visible_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PUBLIC']; ?>" class="page_list_rights" />
@@ -123,7 +123,7 @@ function make_list($parent, $editable_pages) {
 					</a>
 				</td>
 				<?php } else { ?>
-				<td>
+				<td class="list_page_title">
 					<?php if($page['visibility'] == 'public') { ?>
 						<img src="<?php echo THEME_URL; ?>/images/visible_16.png" alt="<?php echo $TEXT['VISIBILITY']; ?>: <?php echo $TEXT['PUBLIC']; ?>" class="page_list_rights" />
 					<?php } elseif($page['visibility'] == 'private') { ?>
@@ -140,17 +140,17 @@ function make_list($parent, $editable_pages) {
 					echo ($page['page_title']); ?>
 				</td>
 				<?php } ?>
-				<td align="left" width="252">
+				<td class="list_menu_title">
 					<font color="#999999"><?php echo ($page['menu_title']); ?></font>
 				</td>
-				<td width="20">
+				<td class="list_actions">
 					<?php if($page['visibility'] != 'deleted' AND $page['visibility'] != 'none') { ?>
 					<a href="<?php echo $admin->page_link($page['link']); ?>" target="_blank" title="<?php echo $TEXT['VIEW']; ?>">
 						<img src="<?php echo THEME_URL; ?>/images/view_16.png" border="0" alt="<?php echo $TEXT['VIEW']; ?>" />
 					</a>
 					<?php } ?>
 				</td>
-				<td width="20">
+				<td class="list_actions">
 					<?php if($page['visibility'] != 'deleted') { ?>
 						<?php if($admin->get_permission('pages_settings') == true AND $can_modify == true) { ?>
 						<a href="<?php echo ADMIN_URL; ?>/pages/settings.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['SETTINGS']; ?>">
@@ -164,7 +164,7 @@ function make_list($parent, $editable_pages) {
 					<?php } ?>
 				</td>
 				<!-- MANAGE SECTIONS AND DATES BUTTONS -->
-				<td width="20">
+				<td class="list_actions">
 				<?php
 				// Work-out if we should show the "manage dates" link
 				if(MANAGE_SECTIONS == 'enabled' && $admin->get_permission('pages_modify')==true && $can_modify==true) {
@@ -190,7 +190,7 @@ function make_list($parent, $editable_pages) {
 					<?php } ?>
 				<?php } ?>
 				</td>
-				<td width="20">
+				<td class="list_actions">
 				<?php if($page['position'] != 1) { ?>
 					<?php if($page['visibility'] != 'deleted') { ?>
 						<?php if($admin->get_permission('pages_settings') == true AND $can_modify == true) { ?>
@@ -201,7 +201,7 @@ function make_list($parent, $editable_pages) {
 					<?php } ?>
 				<?php } ?>
 				</td>
-				<td width="20">
+				<td class="list_actions">
 				<?php if($page['position'] != $num_pages) { ?>
 					<?php if($page['visibility'] != 'deleted') { ?>
 						<?php if($admin->get_permission('pages_settings') == true AND $can_modify == true) { ?>
@@ -212,7 +212,7 @@ function make_list($parent, $editable_pages) {
 					<?php } ?>
 				<?php } ?>
 				</td>
-				<td width="20">
+				<td class="list_actions">
 					<?php if($admin->get_permission('pages_delete') == true AND $can_modify == true) { ?>
 					<a href="javascript: confirm_link('<?php echo $MESSAGE['PAGES']['DELETE_CONFIRM']; ?>?', '<?php echo ADMIN_URL; ?>/pages/delete.php?page_id=<?php echo $page['page_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
 						<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
@@ -268,15 +268,15 @@ if($admin->get_permission('pages_view') == true) {
 		<td width="20px">
 			&nbsp;
 		</td>
-		<td width="314px">
-			<?php echo $TEXT['VISIBILITY'] .' / ' .$TEXT['PAGE_TITLE']; ?>:
+		<td class="header_list_page_title">
+			<?php echo $TEXT['PAGE_TITLE']; ?>:
 		</td>
-		<td width="256px" align="left">
+		<td class="header_list_menu_title">
 			<?php echo $TEXT['MENU_TITLE']; ?>:
 		</td>
-		<td width="130px" align="center">
+		<td class="header_list_actions">
 			<?php echo $TEXT['ACTIONS']; ?>:
-		</td>		
+		</td>
 	</tr>
 	</table>
 	<?php

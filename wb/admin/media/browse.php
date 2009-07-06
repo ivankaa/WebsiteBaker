@@ -34,13 +34,13 @@ require_once(WB_PATH.'/framework/functions.php');
 // Byte convert for filesize
 function byte_convert($bytes) {
 	$symbol = array('B', 'KB', 'MB', 'GB', 'TB');
-   $exp = 0;
-   $converted_value = 0;
-   if( $bytes > 0 ) {
-   	$exp = floor( log($bytes)/log(1024) );
-      $converted_value = ( $bytes/pow(1024,floor($exp)) );
-   }
-   return sprintf( '%.2f '.$symbol[$exp], $converted_value );
+	$exp = 0;
+	$converted_value = 0;
+	if( $bytes > 0 ) {
+		$exp = floor( log($bytes)/log(1024) );
+		$converted_value = ( $bytes/pow(1024,floor($exp)) );
+	}
+	return sprintf( '%.2f '.$symbol[$exp], $converted_value );
 }
 
 // Get file extension
@@ -116,7 +116,7 @@ $home_folders = get_home_folders();
 $template->set_block('main_block', 'list_block', 'list');
 if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 	// Loop through the files and dirs an add to list
-   while(false !== ($file = readdir($handle))) {
+	while(false !== ($file = readdir($handle))) {
 		if(substr($file, 0, 1) != '.' AND $file != '.svn' AND $file != 'index.php') {
 			if(is_dir(WB_PATH.MEDIA_DIRECTORY.$directory.'/'.$file)) {
 				if(!isset($home_folders[$directory.'/'.$file])) {
@@ -143,6 +143,8 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 											'LINK_TARGET' => '',
 											'ROW_BG_COLOR' => $row_bg_color,
 											'FILETYPE_ICON' => THEME_URL.'/images/folder_16.png',
+											'MOUSEOVER' => '',
+											'IMAGEDETAIL' => '',
 											'SIZE' => '',
 											'DATE' => '',
 											'PREVIEW' => ''
@@ -174,6 +176,18 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 				$preview = '';
 			}
 			$temp_id++;
+			$imgdetail = '';
+			$icon = THEME_URL.'/images/blank.gif';
+			$tooltip = '';
+			$pathsettings['global']['show_thumbs'] = '';
+			if (!$pathsettings['global']['show_thumbs']) {
+				$info = getimagesize(WB_PATH.MEDIA_DIRECTORY.$directory.'/'.$name);
+				if ($info[0]) {
+					$imgdetail = fsize(filesize(WB_PATH.MEDIA_DIRECTORY.$directory.'/'.$name)).', '.$info[0].'x'.$info[1].'px';
+					$icon = 'thumb.php?t=1&img='.$directory.'/'.$name;
+					$tooltip = ShowTip('thumb.php?t=2&img='.$directory.'/'.$name,$imgdetail);
+				}
+			}
 			$template->set_var(array(
 											'NAME' => $name,
 											'NAME_SLASHED' => addslashes($name),
@@ -181,7 +195,10 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 											'LINK' => WB_URL.MEDIA_DIRECTORY.$directory.'/'.$name,
 											'LINK_TARGET' => '_blank',
 											'ROW_BG_COLOR' => $row_bg_color,
+											'ICON' => $icon,
 											'FILETYPE_ICON' => THEME_URL.'/images/files/'.$filetypeicon.'.png',
+											'MOUSEOVER' => $tooltip, 
+											'IMAGEDETAIL' => $imgdetail,
 											'SIZE' => $bytes,
 											'DATE' => $date,
 											'PREVIEW' => $preview
@@ -226,6 +243,7 @@ $template->set_var(array(
 								'TEXT_TYPE' => $TEXT['TYPE'],
 								'TEXT_UP' => $TEXT['UP'],
 								'NONE_FOUND' => $MESSAGE['MEDIA']['NONE_FOUND'],
+								'CHANGE_SETTINGS' => $TEXT['MODIFY_SETTINGS'],
 								'CONFIRM_DELETE' => $MESSAGE['MEDIA']['CONFIRM_DELETE']
 								)
 						);
@@ -234,4 +252,17 @@ $template->set_var(array(
 $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
+function ShowTip($name,$detail='') {
+$ext = strtolower(end(explode(".", $name)));
+if (strpos('.gif.jpg.jpeg.png.bmp.',$ext) )
+	return 'onmouseover="overlib(\'<img src=\\\''.$name.'\\\' width=\\\'200\\\'><br/><center>'.$detail.'</center>\',VAUTO, WIDTH, 200)" onmouseout="nd()" ' ;
+else
+	return '';
+}
+
+function fsize($size) {
+   if($size == 0) return("0 Bytes");
+   $filesizename = array(" Bytes", "kB", "MB", "GB", "TB");
+   return round($size/pow(1024, ($i = floor(log($size, 1024)))), 1) . $filesizename[$i];
+}
 ?>

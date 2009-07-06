@@ -374,7 +374,13 @@ select option.disabled {
  text-indent: 7px;
 }
 
+.header_list_page_title {width:284px;text-align:left;}
+.header_list_menu_title {width:252px;text-align:left;}
+.header_list_actions {text-align:left;}
 
+.list_page_title {}
+.list_menu_title {width:252px;text-align:left;}
+.list_actions {width:20px;}
 
 
 

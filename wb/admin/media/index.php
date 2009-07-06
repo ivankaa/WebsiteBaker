@@ -27,6 +27,7 @@
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Media', 'media');
+include ('parameters.php');
 
 // Setup template object
 $template = new Template(THEME_PATH.'/templates');
@@ -41,7 +42,10 @@ $home_folders = get_home_folders();
 
 // Insert values
 $template->set_block('main_block', 'dir_list_block', 'dir_list');
-foreach(directory_list(WB_PATH.MEDIA_DIRECTORY) AS $name) {
+$dirs = directory_list(WB_PATH.MEDIA_DIRECTORY);
+$array_lowercase = array_map('strtolower', $dirs);
+array_multisort($array_lowercase, SORT_ASC, SORT_STRING, $dirs);
+foreach($dirs AS $name) {
 	if(!isset($home_folders[str_replace(WB_PATH.MEDIA_DIRECTORY, '', $name)])) {
 		$template->set_var('NAME', str_replace(WB_PATH, '', $name));
 		$template->parse('dir_list', 'dir_list_block', true);
@@ -55,6 +59,9 @@ if($admin->get_permission('media_create') != true) {
 if($admin->get_permission('media_upload') != true) {
 	$template->set_var('DISPLAY_UPLOAD', 'hide');
 }
+if ($_SESSION['GROUP_ID'] != 1 && $pathsettings['global']['admin_only']) { // Only show admin the settings link
+	$template->set_var('DISPLAY_SETTINGS', 'hide');
+}
 
 // Insert language headings
 $template->set_var(array(
@@ -67,11 +74,14 @@ $template->set_var(array(
 $template->set_var(array(
 								'MEDIA_DIRECTORY' => MEDIA_DIRECTORY,
 								'TEXT_NAME' => $TEXT['TITLE'],
+								'TEXT_RELOAD' => $TEXT['RELOAD'],
 								'TEXT_TARGET_FOLDER' => $TEXT['TARGET_FOLDER'],
 								'TEXT_OVERWRITE_EXISTING' => $TEXT['OVERWRITE_EXISTING'],
 								'TEXT_FILES' => $TEXT['FILES'],
 								'TEXT_CREATE_FOLDER' => $TEXT['CREATE_FOLDER'],
 								'TEXT_UPLOAD_FILES' => $TEXT['UPLOAD_FILES'],
+								'CHANGE_SETTINGS' => $TEXT['MODIFY_SETTINGS'],
+								'OPTIONS' => $TEXT['OPTION'],
 								'TEXT_UNZIP_FILE' => $TEXT['UNZIP_FILE'],
 								'TEXT_DELETE_ZIP' => $TEXT['DELETE_ZIP']
 								)

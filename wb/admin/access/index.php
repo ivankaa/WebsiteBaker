@@ -52,6 +52,7 @@ if($admin->get_permission('groups') != true) {
 $template->set_var(array(
 								'USERS' => $MENU['USERS'],
 								'GROUPS' => $MENU['GROUPS'],
+								'ACCESS' => $MENU['ACCESS'],
 								'USERS_OVERVIEW' => $OVERVIEW['USERS'],
 								'GROUPS_OVERVIEW' => $OVERVIEW['GROUPS'],
 								)
