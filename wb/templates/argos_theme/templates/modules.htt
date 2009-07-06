@@ -34,13 +34,9 @@
     <tr>
       <td>
         <select name="file" style="width: 97%;">
-          <option value="" selected>
-          {TEXT_PLEASE_SELECT}
-          ...</option>
-          <!-- BEGIN module_list_block -->
-          <option value="{VALUE}">
-          {NAME}
-          </option>
+		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
+		<!-- BEGIN module_list_block -->
+			<option value="{VALUE}">{NAME}</option>
           <!-- END module_list_block -->
         </select>
       </td>
@@ -57,13 +53,9 @@
     <tr>
       <td>
         <select name="file" style="width: 97%;">
-          <option value="" selected>
-          {TEXT_PLEASE_SELECT}
-          ...</option>
-          <!-- BEGIN module_list_block -->
-          <option value="{VALUE}">
-          {NAME}
-          </option>
+		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
+		<!-- BEGIN module_list_block -->
+			<option value="{VALUE}">{NAME}</option>
           <!-- END module_list_block -->
         </select>
       </td>
@@ -84,7 +76,7 @@
 		<td valign="middle" align="left">
 			<input type="hidden" name="action" value="install" />
 			<select name="file" style="width: 250px;">
-			<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+	<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
 			<!-- BEGIN install_list_block -->
 			<option value="{VALUE}">{NAME}</option>
 			<!-- END install_list_block -->
@@ -100,7 +92,7 @@
 		<td valign="middle" align="left">
 			<input type="hidden" name="action" value="upgrade" />
 			<select name="file" style="width: 250px;">
-			<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+	<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
 			<!-- BEGIN install_list_block -->
 			<option value="{VALUE}">{NAME}</option>
 			<!-- END install_list_block -->
@@ -116,7 +108,7 @@
 		<td valign="middle" align="left">
 			<input type="hidden" name="action" value="uninstall" />
 			<select name="file" style="width: 250px;">
-			<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+	<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
 			<!-- BEGIN install_list_block -->
 			<option value="{VALUE}">{NAME}</option>
 			<!-- END install_list_block -->

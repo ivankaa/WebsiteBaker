@@ -5,7 +5,7 @@
 <title>{WEBSITE_TITLE} >> {TEXT_ADMINISTRATION} - {SECTION_NAME}</title>
 <meta http-equiv="content-type" content="text/html; charset={CHARSET}" />
 <link href="{THEME_URL}/theme.css" rel="stylesheet" type="text/css" />
-<link href="{WB_URL}/include/jquery/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="{WB_URL}/include/jquery/plugins/jquery-ui.css" rel="stylesheet" type="text/css" />
 {BACKEND_MODULE_CSS}
 <script type="text/javascript" src="{WB_URL}/include/editarea/edit_area_full.js"></script>
 <script language="javascript" type="text/javascript">

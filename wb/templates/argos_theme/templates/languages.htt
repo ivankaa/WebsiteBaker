@@ -36,13 +36,9 @@
     <tr>
       <td>
         <select name="code" style="width: 97%;">
-          <option value="" selected>
-          {TEXT_PLEASE_SELECT}
-          ...</option>
-          <!-- BEGIN language_list_block -->
-          <option value="{VALUE}">
-          {NAME}
-          </option>
+		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
+		<!-- BEGIN language_list_block -->
+			<option value="{VALUE}">{NAME}</option>
           <!-- END language_list_block -->
         </select>
       </td>
@@ -59,13 +55,9 @@
     <tr>
       <td>
         <select name="code" style="width: 97%;">
-          <option value="" selected>
-          {TEXT_PLEASE_SELECT}
-          ...</option>
-          <!-- BEGIN language_list_block -->
-          <option value="{VALUE}">
-          {NAME}
-          </option>
+		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
+		<!-- BEGIN language_list_block -->
+			<option value="{VALUE}">{NAME}</option>
           <!-- END language_list_block -->
         </select>
       </td>

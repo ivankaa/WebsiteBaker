@@ -34,7 +34,7 @@
 <tr>
 	<td>
 		<select name="file" style="width: 97%;">
-		<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
 		<!-- BEGIN module_list_block -->
 			<option value="{VALUE}">{NAME}</option>
 		<!-- END module_list_block -->
@@ -58,7 +58,7 @@
 <tr>
 	<td>
 		<select name="file" style="width: 97%;">
-		<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
 		<!-- BEGIN module_list_block -->
 			<option value="{VALUE}">{NAME}</option>
 		<!-- END module_list_block -->
@@ -78,10 +78,10 @@
 <p>{TEXT_MANUAL_INSTALLATION}</p>
 
 <form name="details" action="manual_install.php" method="post" class="{INSTALL_VISIBLE}">
-	{TEXT_FILE}:</strong> "install.php"&nbsp;&nbsp;&nbsp;
+	<strong>{TEXT_FILE}:</strong> "install.php"&nbsp;&nbsp;&nbsp;
 	<input type="hidden" name="action" value="install" />
 	<select name="file" style="width: 250px;">
-	<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+	<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
 		<!-- BEGIN install_list_block -->
 		<option value="{VALUE}">{NAME}</option>
 		<!-- END install_list_block -->
@@ -93,7 +93,7 @@
 	<br />{TEXT_FILE}: "upgrade.php"
 	<input type="hidden" name="action" value="upgrade" />
 	<select name="file" style="width: 250px;">
-	<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+	<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
 		<!-- BEGIN upgrade_list_block -->
 		<option value="{VALUE}">{NAME}</option>
 		<!-- END upgrade_list_block -->
@@ -105,7 +105,7 @@
 	<br />{TEXT_FILE}: "uninstall.php"
 	<input type="hidden" name="action" value="uninstall" />
 	<select name="file" style="width: 250px;">
-	<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+	<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
 		<!-- BEGIN uninstall_list_block -->
 		<option value="{VALUE}">{NAME}</option>
 		<!-- END uninstall_list_block -->

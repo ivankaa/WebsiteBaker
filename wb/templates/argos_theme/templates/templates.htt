@@ -43,7 +43,7 @@
 <tr>
 	<td>
 		<select name="file" style="width: 97%;">
-		<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
 		<!-- BEGIN template_list_block -->
 			<option value="{VALUE}">{NAME}</option>
 		<!-- END template_list_block -->
@@ -67,7 +67,7 @@
 <tr>
 	<td>
 		<select name="file" style="width: 97%;">
-		<option value="" selected>{TEXT_PLEASE_SELECT}...</option>
+		<option value="" selected="selected">{TEXT_PLEASE_SELECT}...</option>
 		<!-- BEGIN template_list_block -->
 			<option value="{VALUE}">{NAME}</option>
 		<!-- END template_list_block -->

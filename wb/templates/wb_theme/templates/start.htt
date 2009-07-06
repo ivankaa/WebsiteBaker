@@ -18,7 +18,7 @@
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
 				<a href="{ADMIN_URL}/pages/index.php">
-					<img src="{THEME_URL}/icons/pages.png" border="0" />
+					<img src="{THEME_URL}/icons/pages.png" alt="{PAGES}" />
 				</a>
 			</td>
 			<td class="title">
@@ -36,7 +36,7 @@
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
 				<a href="{ADMIN_URL}/addons/index.php">
-					<img src="{THEME_URL}/icons/addons.png" border="0" />
+					<img src="{THEME_URL}/icons/addons.png" alt="{ADDONS}" />
 				</a>
 			</td>
 			<td class="title">
@@ -54,7 +54,7 @@
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
 				<a href="{ADMIN_URL}/settings/index.php">
-					<img src="{THEME_URL}/icons/settings.png" border="0" />
+					<img src="{THEME_URL}/icons/settings.png" alt="{SETTINGS}" />
 				</a>
 			</td>
 			<td class="title">
@@ -72,7 +72,7 @@
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
 				<a href="{ADMIN_URL}/access/index.php">
-					<img src="{THEME_URL}/icons/access.png" border="0" />
+					<img src="{THEME_URL}/icons/access.png" alt="{ACCESS}" />
 				</a>
 			</td>
 			<td class="title">
@@ -96,7 +96,7 @@
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
 				<a href="{ADMIN_URL}/media/index.php">
-					<img src="{THEME_URL}/icons/media.png" border="0" />
+					<img src="{THEME_URL}/icons/media.png" alt="{MEDIA}" />
 				</a>
 			</td>
 			<td class="title">
@@ -114,7 +114,7 @@
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
 				<a href="{ADMIN_URL}/preferences/index.php">
-					<img src="{THEME_URL}/icons/preferences.png" border="0" />
+					<img src="{THEME_URL}/icons/preferences.png" alt="{PREFERENCES}" />
 				</a>
 			</td>
 			<td class="title">
@@ -132,7 +132,7 @@
 		<tr>
 			<td class="graphic" align="center" valign="middle" rowspan="2">
 				<a href="{ADMIN_URL}/admintools/index.php">
-					<img src="{THEME_URL}/icons/admintools.png" border="0" />
+					<img src="{THEME_URL}/icons/admintools.png" alt="{ADMINTOOLS}" />
 				</a>
 			</td>
 			<td class="title">
