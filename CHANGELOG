@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 06-July-2009 Matthias Gallas
++	Added argos_theme
 +	Added new functions to admin dir (Thanks Argos and Ruud)
 !	Updated install and upgrade-script
 !	Adapted wb_theme and classic_theme to changed admin dir files
