@@ -234,10 +234,10 @@ echo ($database->query($sql)) ? " $OK<br />" : " $FAIL<br />";
 
 
 /**********************************************************
- *  - Set Version to WB 2.8 BETA
+ *  - Set Version to WB 2.8RC1
  */
-echo "<br />Update database version number to 2.8 BETA : ";
-$version = '2.8 BETA';
+echo "<br />Update database version number to 2.8RC1 : ";
+$version = '2.8RC1';
 echo ($database->query("UPDATE `".TABLE_PREFIX."settings` SET `value` = '$version' WHERE `name` = 'wb_version'")) ? " $OK<br />" : " $FAIL<br />";
 
 
