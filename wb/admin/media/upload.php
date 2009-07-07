@@ -33,6 +33,9 @@ if(!isset($_POST['target']) OR $_POST['target'] == '') {
 
 // Print admin header
 require('../../config.php');
+include_once('resize_img.php');
+include_once('parameters.php');
+
 require_once(WB_PATH.'/framework/class.admin.php');
 require_once(WB_PATH.'/include/pclzip/pclzip.lib.php');	// Required to unzip file.
 $admin = new admin('Media', 'media_upload');
@@ -47,6 +50,7 @@ if(strstr($target, '../')) {
 
 // Create relative path of the target location for the file
 $relative = WB_PATH.$target.'/';
+$resizepath = str_replace('/','_',$target);
 
 // Find out whether we should replace files or give an error
 if($admin->get_post('overwrite') != '') {
@@ -95,6 +99,15 @@ for($count = 1; $count <= 10; $count++) {
 					change_mode($relative.$filename);
 				}
 			}
+			
+			if(file_exists($relative.$filename)) {
+				if ($pathsettings[$resizepath]['width'] || $pathsettings[$resizepath]['height'] ) {
+					$rimg=new RESIZEIMAGE($relative.$filename);
+					$rimg->resize_limitwh($pathsettings[$resizepath]['width'],$pathsettings[$resizepath]['height'],$relative.$filename);
+					$rimg->close();
+				}
+			}
+				
 			// store file name of first file for possible unzip action
 			if ($count == 1) {
 				$filename1 = $relative . $filename;

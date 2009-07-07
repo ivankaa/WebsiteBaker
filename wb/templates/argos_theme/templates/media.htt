@@ -1,10 +1,23 @@
-<!-- Adapted by Jurgen Nijhuis / Argos Media - 2009/05/25 -->
-
 <!-- BEGIN main_block -->
-
-<table>
+<script language="javascript" type="text/javascript">
+function toggle() {
+	var check = document.getElementById("file2");
+	if (check.style.visibility == "visible") {
+		for (i=2; i<=10; i++) {
+			document.getElementById("file" + i).style.visibility = "hidden";
+		}
+		document.getElementById("delzip").style.display = "inline";
+	} else {
+		for (i=2; i<=10; i++) {
+			document.getElementById("file" + i).style.visibility = "visible";
+		}
+		document.getElementById("delzip").style.display = "none";
+	}
+}
+</script>
+<table cellpadding="0" cellspacing="0" border="0">
   <tr>
-    <td width="400" valign="top">
+    <td width="300" valign="top" align="left">
 	<h2>{HEADING_UPLOAD_FILES}</h2>
       <form name="upload" action="upload.php" method="post" enctype="multipart/form-data" class="{DISPLAY_UPLOAD}">
         <table cellpadding="3" cellspacing="0" border="0" width="100%">
@@ -24,28 +37,43 @@
         </table>
         <table cellpadding="3" cellspacing="0" border="0" width="100%">
           <tr>
-            <td width="50%" align="left"><input type="file" size="49" name="file1" /> </td>
+		  	<td valign="top">
+				<input type="checkbox" name="unzip" id="unzip"  onClick="toggle();" />
+				<label for="unzip">{TEXT_UNZIP_FILE}</label>
+				<span id="delzip" style="display: none;"><br />
+				<input type="checkbox" name="delzip" id="deletezip" />
+				<label for="deletezip">{TEXT_DELETE_ZIP}</label></span>
+			</td>
           </tr>
           <tr>
-            <td width="50%" align="left"><input type="file" size="49" name="file2" /> </td>
+            <td width="50%" align="left"><input type="file" size="33" name="file1" /> </td>
           </tr>
           <tr>
-            <td width="50%" align="left"><input type="file" size="49" name="file3" /> </td>
+            <td width="50%" align="left"><input type="file" size="33" name="file2" id="file2" style="visibility: visible;" /> </td>
           </tr>
           <tr>
-            <td width="50%" align="left"><input type="file" size="49" name="file4" /> </td>
+            <td width="50%" align="left"><input type="file" size="33" name="file3" id="file3" style="visibility: visible;" /> </td>
           </tr>
           <tr>
-            <td width="50%" align="left"><input type="file" size="49" name="file5" /> </td>
+            <td width="50%" align="left"><input type="file" size="33" name="file4" id="file4" style="visibility: visible;" /> </td>
+          </tr>
+          <tr>
+            <td width="50%" align="left"><input type="file" size="33" name="file5" id="file5" style="visibility: visible;" /> </td>
           </tr>
 		  <tr>
-            <td width="50%" align="left"><input type="file" size="49" name="file6" /> </td>
+            <td width="50%" align="left"><input type="file" size="33" name="file6" id="file6" style="visibility: visible;" /> </td>
           </tr>
           <tr>
-            <td width="50%" align="left"><input type="file" size="49" name="file7" /> </td>
+            <td width="50%" align="left"><input type="file" size="33" name="file7" id="file7" style="visibility: visible;" /> </td>
           </tr>
           <tr>
-            <td width="50%" align="left"><input type="file" size="49" name="file8" /> </td>
+            <td width="50%" align="left"><input type="file" size="33" name="file8" id="file8" style="visibility: visible;" /> </td>
+          </tr>
+		  <tr>
+            <td width="50%" align="left"><input type="file" size="33" name="file9" id="file9" style="visibility: visible;" /> </td>
+          </tr>
+          <tr>
+            <td width="50%" align="left"><input type="file" size="33" name="file10" id="file10" style="visibility: visible;" /> </td>
           </tr>
         </table>
 
@@ -63,7 +91,7 @@ If you want to HIDE the option of creating folders in the Media-folder (for your
 please set the class below to "hide", else to "show".
 <--->
       <div class="show">
-	  	<hr>
+	  <br /><br />
         <form name="create" action="create.php" method="post" class="{DISPLAY_CREATE}">
           <h2>{HEADING_CREATE_FOLDER}</h2>
           <table cellpadding="3" cellspacing="0" border="0" width="100%">
@@ -94,13 +122,14 @@ please set the class below to "hide", else to "show".
       </div>
       <!-- END main_block -->
     </td>
-    <td width="480" valign="top" align="right">
-	<h2>{HEADING_BROWSE_MEDIA}</h2>
+	<td width="10">&nbsp;</td>
+    <td width="580" valign="top" align="right">
+	<h2 style="padding-left:3px;">{HEADING_BROWSE_MEDIA}</h2>
 	<span class="{DISPLAY_SETTINGS}" style="margin-bottom:2px;">{OPTIONS}:&nbsp;
 	<a href="setparameter.php" target="browse">{CHANGE_SETTINGS}</a>&nbsp;&nbsp;|&nbsp;
 	<a href="browse.php?dir={CURRENT_DIR}" target="browse">{TEXT_RELOAD}</a>
 	</span>
-	<iframe name="browse" width="100%" height="500" src="browse.php" scrolling="yes" frameborder="0" style="border:1px solid #333;"></iframe>
+	<iframe name="browse" width="99%" height="550" src="browse.php" scrolling="yes" frameborder="0" style="border:1px solid #333;"></iframe>
     </td>
   </tr>
 </table>

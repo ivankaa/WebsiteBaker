@@ -81,7 +81,7 @@ select option.disabled {color:#aaa;}
 .pages_list .icon_col td img {display:block;border-style:none;float:left;padding-right:7px;}
 .pages_list table {width:900px;}
 .pages_list table td {}
-.pages_list ul {margin:0;font-weight:normal;}
+.pages_list ul {margin:0;font-weight:normal;padding: 0;}
 .pages_list ul li {list-style-type:none;margin:2px 0;}
 
 table.pages_view {width:900px;background-color:#f0f0f0;}
@@ -92,8 +92,8 @@ table.pages_view tr:hover {background:#eaeff6;}
 .page_list_show li {display:block;}
 img.page_list_rights {border:none;float:left;margin:0;}
 
-.header_list_page_title {width:414px;padding-left: 24px;text-align:left;}
-.header_list_menu_title {width:326px;text-align:left;}
+.header_list_page_title {width:396px;text-align:left;}
+.header_list_menu_title {width:328px;text-align:left;}
 .header_list_actions {text-align:left;}
 
 .list_page_title {width:350px;text-align:left;}

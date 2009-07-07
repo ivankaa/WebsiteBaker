@@ -36,10 +36,10 @@ registerCommands('donothing,inarray,caparray,sticky,background,noclose,caption,l
 // Settings you want everywhere are set here. All of this can also be
 // changed on your html page or through an overLIB call.
 ////////
-if (typeof ol_fgcolor=='undefined') var ol_fgcolor="#CCCCFF";
-if (typeof ol_bgcolor=='undefined') var ol_bgcolor="#333399";
+if (typeof ol_fgcolor=='undefined') var ol_fgcolor="#ffffff";
+if (typeof ol_bgcolor=='undefined') var ol_bgcolor="#cccccc";
 if (typeof ol_textcolor=='undefined') var ol_textcolor="#000000";
-if (typeof ol_capcolor=='undefined') var ol_capcolor="#FFFFFF";
+if (typeof ol_capcolor=='undefined') var ol_capcolor="#000000";
 if (typeof ol_closecolor=='undefined') var ol_closecolor="#9999FF";
 if (typeof ol_textfont=='undefined') var ol_textfont="Verdana,Arial,Helvetica";
 if (typeof ol_captionfont=='undefined') var ol_captionfont="Verdana,Arial,Helvetica";
@@ -49,10 +49,10 @@ if (typeof ol_captionsize=='undefined') var ol_captionsize="1";
 if (typeof ol_closesize=='undefined') var ol_closesize="1";
 if (typeof ol_width=='undefined') var ol_width="200";
 if (typeof ol_border=='undefined') var ol_border="1";
-if (typeof ol_cellpad=='undefined') var ol_cellpad=2;
+if (typeof ol_cellpad=='undefined') var ol_cellpad=7;
 if (typeof ol_offsetx=='undefined') var ol_offsetx=10;
 if (typeof ol_offsety=='undefined') var ol_offsety=10;
-if (typeof ol_text=='undefined') var ol_text="Default Text";
+if (typeof ol_text=='undefined') var ol_text="";
 if (typeof ol_cap=='undefined') var ol_cap="";
 if (typeof ol_sticky=='undefined') var ol_sticky=0;
 if (typeof ol_background=='undefined') var ol_background="";

@@ -30,10 +30,11 @@ $admin = new admin('Media', 'media', false);
 
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
+include ('parameters.php');
 
 // Byte convert for filesize
 function byte_convert($bytes) {
-	$symbol = array('B', 'KB', 'MB', 'GB', 'TB');
+	$symbol = array(' bytes', ' KB', ' MB', ' GB', ' TB');
 	$exp = 0;
 	$converted_value = 0;
 	if( $bytes > 0 ) {
@@ -90,6 +91,10 @@ if($admin->get_get('up') == 1) {
 	exit(0);
 }
 
+if ($_SESSION['GROUP_ID'] != 1 && $pathsettings['global']['admin_only']) { // Only show admin the settings link
+	$template->set_var('DISPLAY_SETTINGS', 'hide');
+}
+
 // Workout the parent dir link
 $parent_dir_link = ADMIN_URL.'/media/browse.php?dir='.$directory.'&up=1';
 // Workout if the up arrow should be shown
@@ -142,6 +147,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 											'LINK' => "browse.php?dir=$directory/$link_name",
 											'LINK_TARGET' => '',
 											'ROW_BG_COLOR' => $row_bg_color,
+											'FT_ICON' => THEME_URL.'/images/folder_16.png',
 											'FILETYPE_ICON' => THEME_URL.'/images/folder_16.png',
 											'MOUSEOVER' => '',
 											'IMAGEDETAIL' => '',
@@ -179,13 +185,14 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 			$imgdetail = '';
 			$icon = THEME_URL.'/images/blank.gif';
 			$tooltip = '';
-			$pathsettings['global']['show_thumbs'] = '';
+			
+			
 			if (!$pathsettings['global']['show_thumbs']) {
 				$info = getimagesize(WB_PATH.MEDIA_DIRECTORY.$directory.'/'.$name);
 				if ($info[0]) {
-					$imgdetail = fsize(filesize(WB_PATH.MEDIA_DIRECTORY.$directory.'/'.$name)).', '.$info[0].'x'.$info[1].'px';
+					$imgdetail = fsize(filesize(WB_PATH.MEDIA_DIRECTORY.$directory.'/'.$name)).'<br /> '.$info[0].' x '.$info[1].' px';
 					$icon = 'thumb.php?t=1&img='.$directory.'/'.$name;
-					$tooltip = ShowTip('thumb.php?t=2&img='.$directory.'/'.$name,$imgdetail);
+					$tooltip = ShowTip('thumb.php?t=2&img='.$directory.'/'.$name);
 				}
 			}
 			$template->set_var(array(
@@ -195,7 +202,7 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 											'LINK' => WB_URL.MEDIA_DIRECTORY.$directory.'/'.$name,
 											'LINK_TARGET' => '_blank',
 											'ROW_BG_COLOR' => $row_bg_color,
-											'ICON' => $icon,
+											'FT_ICON' => $icon,
 											'FILETYPE_ICON' => THEME_URL.'/images/files/'.$filetypeicon.'.png',
 											'MOUSEOVER' => $tooltip, 
 											'IMAGEDETAIL' => $imgdetail,
@@ -255,14 +262,14 @@ $template->pparse('output', 'page');
 function ShowTip($name,$detail='') {
 $ext = strtolower(end(explode(".", $name)));
 if (strpos('.gif.jpg.jpeg.png.bmp.',$ext) )
-	return 'onmouseover="overlib(\'<img src=\\\''.$name.'\\\' width=\\\'200\\\'><br/><center>'.$detail.'</center>\',VAUTO, WIDTH, 200)" onmouseout="nd()" ' ;
+	return 'onmouseover="overlib(\'<img src=\\\''.$name.'\\\' maxwidth=\\\'200\\\' maxheight=\\\'200\\\'>\',VAUTO, WIDTH)" onmouseout="nd()" ' ;
 else
 	return '';
 }
 
 function fsize($size) {
    if($size == 0) return("0 Bytes");
-   $filesizename = array(" Bytes", "kB", "MB", "GB", "TB");
+   $filesizename = array(" bytes", " kB", " MB", " GB", " TB");
    return round($size/pow(1024, ($i = floor(log($size, 1024)))), 1) . $filesizename[$i];
 }
 ?>

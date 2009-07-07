@@ -12,7 +12,7 @@
  * @author     Jurgen Nijhuis (Argos Media) & Ruud Eisinga
  * @copyright  GNU General Public License
  * @license    http://www.gnu.org/licenses/gpl.html
- * @version    2.80
+ * @version    1.1
  * @platform   Website Baker 2.8
  *
  * Website Baker is free software; you can redistribute it and/or modify
@@ -30,7 +30,7 @@
 $template_directory			= 'argos_theme';
 $template_name				= 'argos_theme';
 $template_function			= 'theme';
-$template_version			= '2.80';
+$template_version			= '1.1';
 $template_platform			= '2.8';
 $template_author			= 'Jurgen Nijhuis (Argos Media) & Ruud Eisinga';
 $template_license			= '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>';

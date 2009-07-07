@@ -12,7 +12,7 @@
  * @author     Jurgen Nijhuis (Argos Media) & Ruud Eisinga
  * @copyright  GNU General Public License
  * @license    http://www.gnu.org/licenses/gpl.html
- * @version    2.80
+ * @version    1.1
  * @platform   Website Baker 2.8
  *
  * Website Baker is free software; you can redistribute it and/or modify

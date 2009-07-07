@@ -26,7 +26,7 @@ function confirm_link(message, url) {
 <tr style="background-color: #{ROW_BG_COLOR};">
 	<td width="18" style="padding-left: 10px;">
 		<a href="{LINK}" target="{LINK_TARGET}">
-			<img {MOUSEOVER} src="{ICON}" class="{DISPLAY_ICON}" border="0" alt="" />
+			<img {MOUSEOVER} src="{FT_ICON}" class="{DISPLAY_ICON}" border="0" alt="" />
 		</a>
 	</td>
 	<td><a {MOUSEOVER} href="{LINK}" target="{LINK_TARGET}">{NAME}</a><br /><small>{IMAGEDETAIL}</small></td>
