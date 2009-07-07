@@ -475,7 +475,6 @@ function LoadSelection()
 	GetE('txtAttTabIndex').value	= oLink.tabIndex <= 0 ? '' : oLink.tabIndex ;
 	GetE('txtAttTitle').value		= oLink.title ;
 	GetE('txtAttContentType').value	= oLink.type ;
-	GetE('cmbAttContentRel').value	= oLink.rel ;
 	GetE('txtAttCharSet').value		= oLink.charset ;
 
 	var sClass ;
@@ -768,7 +767,6 @@ function Ok()
 		SetAttribute( oLink, 'tabindex'	, ( GetE('txtAttTabIndex').value > 0 ? GetE('txtAttTabIndex').value : null ) ) ;
 		SetAttribute( oLink, 'title'	, GetE('txtAttTitle').value ) ;
 		SetAttribute( oLink, 'type'		, GetE('txtAttContentType').value ) ;
-		SetAttribute( oLink, 'rel'		, GetE('cmbAttContentRel').value ) ;
 		SetAttribute( oLink, 'charset'	, GetE('txtAttCharSet').value ) ;
 
 		if ( oEditor.FCKBrowserInfo.IsIE )
