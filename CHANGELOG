@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+08-July-2009 Matthias Gallas
+!	Replaced wbmodules.gif in FCKEditor Plugins (Thanks to Stefek)
 08-July-2009 Dietrich Roland Pehlke
 !	admin -> users -> index.php
 !	admin -> groups -> index.php
