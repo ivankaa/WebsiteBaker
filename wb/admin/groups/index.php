@@ -32,6 +32,7 @@ $admin = new admin('Access', 'groups');
 $template = new Template(THEME_PATH.'/templates');
 $template->set_file('page', 'groups.htt');
 $template->set_block('page', 'main_block', 'main');
+$template->set_block('main_block', 'manage_users_block', 'users');
 $template->set_var('ADMIN_URL', ADMIN_URL);
 
 // Get existing value from database
@@ -74,19 +75,19 @@ if($admin->get_permission('groups_delete') != true) {
 
 // Insert language headings
 $template->set_var(array(
-								'HEADING_MODIFY_DELETE_GROUP' => $HEADING['MODIFY_DELETE_GROUP'],
-								'HEADING_ADD_GROUP' => $HEADING['ADD_GROUP']
-								)
-						);
+	'HEADING_MODIFY_DELETE_GROUP' => $HEADING['MODIFY_DELETE_GROUP'],
+	'HEADING_ADD_GROUP' => $HEADING['ADD_GROUP']
+	)
+);
 // Insert language text and messages
 $template->set_var(array(
-								'TEXT_MODIFY' => $TEXT['MODIFY'],
-								'TEXT_DELETE' => $TEXT['DELETE'],
-								'TEXT_MANAGE_USERS' => $TEXT['MANAGE_USERS'],
-								'CONFIRM_DELETE' => $MESSAGE['GROUPS']['CONFIRM_DELETE']
-								)
-						);
-
+	'TEXT_MODIFY' => $TEXT['MODIFY'],
+	'TEXT_DELETE' => $TEXT['DELETE'],
+	'TEXT_MANAGE_USERS' => ( $admin->get_permission('users') == true ) ? $TEXT['MANAGE_USERS']: "",
+	'CONFIRM_DELETE' => $MESSAGE['GROUPS']['CONFIRM_DELETE']
+	)
+);
+if ( $admin->get_permission('users') == true ) $template->parse("users", "manage_users_block", true);
 // Parse template object
 $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');

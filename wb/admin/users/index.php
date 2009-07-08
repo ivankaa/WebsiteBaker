@@ -31,6 +31,7 @@ $admin = new admin('Access', 'users');
 $template = new Template(THEME_PATH.'/templates');
 $template->set_file('page', 'users.htt');
 $template->set_block('page', 'main_block', 'main');
+$template->set_block("main_block", "manage_groups_block", "groups");
 $template->set_var('ADMIN_URL', ADMIN_URL);
 
 // Get existing value from database
@@ -73,19 +74,19 @@ if($admin->get_permission('users_delete') != true) {
 
 // Insert language headings
 $template->set_var(array(
-								'HEADING_MODIFY_DELETE_USER' => $HEADING['MODIFY_DELETE_USER'],
-								'HEADING_ADD_USER' => $HEADING['ADD_USER']
-								)
-						);
+		'HEADING_MODIFY_DELETE_USER' => $HEADING['MODIFY_DELETE_USER'],
+		'HEADING_ADD_USER' => $HEADING['ADD_USER']
+		)
+);
 // Insert language text and messages
 $template->set_var(array(
-								'TEXT_MODIFY' => $TEXT['MODIFY'],
-								'TEXT_DELETE' => $TEXT['DELETE'],
-								'TEXT_MANAGE_GROUPS' => $TEXT['MANAGE_GROUPS'],
-								'CONFIRM_DELETE' => $MESSAGE['USERS']['CONFIRM_DELETE']
-								)
-						);
-
+		'TEXT_MODIFY' => $TEXT['MODIFY'],
+		'TEXT_DELETE' => $TEXT['DELETE'],
+		'TEXT_MANAGE_GROUPS' => ( $admin->get_permission('groups') == true ) ? $TEXT['MANAGE_GROUPS'] : "**",
+		'CONFIRM_DELETE' => $MESSAGE['USERS']['CONFIRM_DELETE']
+		)
+);
+if ( $admin->get_permission('groups') == true ) $template->parse("groups", "manage_groups_block", true);
 // Parse template object
 $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
@@ -165,22 +166,22 @@ foreach(directory_list(WB_PATH.MEDIA_DIRECTORY) AS $name) {
 
 // Insert language text and messages
 $template->set_var(array(
-								'TEXT_RESET' => $TEXT['RESET'],
-								'TEXT_ACTIVE' => $TEXT['ACTIVE'],
-								'TEXT_DISABLED' => $TEXT['DISABLED'],
-								'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
-								'TEXT_USERNAME' => $TEXT['USERNAME'],
-								'TEXT_PASSWORD' => $TEXT['PASSWORD'],
-								'TEXT_RETYPE_PASSWORD' => $TEXT['RETYPE_PASSWORD'],
-								'TEXT_DISPLAY_NAME' => $TEXT['DISPLAY_NAME'],
-								'TEXT_EMAIL' => $TEXT['EMAIL'],
-								'TEXT_GROUP' => $TEXT['GROUP'],
-								'TEXT_NONE' => $TEXT['NONE'],
-								'TEXT_HOME_FOLDER' => $TEXT['HOME_FOLDER'],
-								'USERNAME_FIELDNAME' => $username_fieldname,
-								'CHANGING_PASSWORD' => $MESSAGE['USERS']['CHANGING_PASSWORD']
-								)
-						);
+			'TEXT_RESET' => $TEXT['RESET'],
+			'TEXT_ACTIVE' => $TEXT['ACTIVE'],
+			'TEXT_DISABLED' => $TEXT['DISABLED'],
+			'TEXT_PLEASE_SELECT' => $TEXT['PLEASE_SELECT'],
+			'TEXT_USERNAME' => $TEXT['USERNAME'],
+			'TEXT_PASSWORD' => $TEXT['PASSWORD'],
+			'TEXT_RETYPE_PASSWORD' => $TEXT['RETYPE_PASSWORD'],
+			'TEXT_DISPLAY_NAME' => $TEXT['DISPLAY_NAME'],
+			'TEXT_EMAIL' => $TEXT['EMAIL'],
+			'TEXT_GROUP' => $TEXT['GROUP'],
+			'TEXT_NONE' => $TEXT['NONE'],
+			'TEXT_HOME_FOLDER' => $TEXT['HOME_FOLDER'],
+			'USERNAME_FIELDNAME' => $username_fieldname,
+			'CHANGING_PASSWORD' => $MESSAGE['USERS']['CHANGING_PASSWORD']
+			)
+	);
 
 // Parse template for add user form
 $template->parse('main', 'main_block', false);

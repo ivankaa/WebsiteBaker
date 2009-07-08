@@ -12,6 +12,13 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 08-July-2009 Dietrich Roland Pehlke
+!	admin -> users -> index.php
+!	admin -> groups -> index.php
+	Codechanges using blocks to avoid to generate the "switch"-link right-top,
+	if the user has no permission to edit the other one.
+!	wb_theme|classic_theme|argos_theme -> templates -> users.htt
+!	wb_theme|classic_theme|argos_theme -> templates -> groups.htt
+ 	Add block-comments
 !	admin -> addons -> index.php	codechanges
 !	admin -> access -> index.php	codechanges
 	Codechanges to get rid of the empty display(style) declaration "style='display: ;'",

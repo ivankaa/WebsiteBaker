@@ -10,7 +10,9 @@
 		<h2>{HEADING_MODIFY_DELETE_GROUP}</h2>
 	</td>
 	<td align="right">
+		<!-- BEGIN manage_users_block -->
 		<a href="{ADMIN_URL}/users/index.php">{TEXT_MANAGE_USERS}</a>
+		<!-- END manage_users_block -->
 	</td>
 </tr>
 </table>
