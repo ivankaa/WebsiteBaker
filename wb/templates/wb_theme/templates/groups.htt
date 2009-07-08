@@ -13,7 +13,6 @@
 		<!-- BEGIN manage_users_block -->
 		<a href="{ADMIN_URL}/users/index.php">{TEXT_MANAGE_USERS}</a>
 		<!-- END manage_users_block -->
-		{USER}
 	</td>
 </tr>
 </table>
