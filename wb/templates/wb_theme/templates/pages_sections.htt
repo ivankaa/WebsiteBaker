@@ -5,6 +5,7 @@
                 <td valign="middle" align="left">
                     <h2>{HEADING_MANAGE_SECTIONS}</h2>
                 </td>
+                <td>ID: {PAGE_ID}</td>
                 <td align="right">{TEXT_CURRENT_PAGE}: <b>{PAGE_TITLE}</b>
                     -
                     <a href="{ADMIN_URL}/pages/modify.php?page_id={PAGE_ID}">{HEADING_MODIFY_PAGE}</a>
@@ -22,20 +23,20 @@
                 	<td valign="middle" align="left">{TEXT_PUBL_START_DATE}:</td>
                 	<td valign="middle" align="left">{TEXT_PUBL_END_DATE}:</td>
                 	<td valign="middle" align="left" colspan="3">{TEXT_ACTIONS}:</td>
+                    <td valign="middle" align="left">{TEXT_SID}</td>
                     <td valign="middle" align="left"{DISPLAY_DEBUG}>{TEXT_PID}</td>
-                    <td valign="middle" align="left"{DISPLAY_DEBUG}>{TEXT_SID}</td>
                 </tr>
 <!-- BEGIN section_block -->
             	<tr onmouseover="this.style.backgroundColor = '#F1F8DD'" onmouseout="this.style.backgroundColor = '#FFF'">
-    				<td align="right" style="display: none;">
+    				<td style="display: none;">
                       <input type="hidden" name="page_id" value="{VAR_PAGE_ID}"  />
                       <input type="hidden" name="section_id" value="{VAR_SECTION_ID}"  />
                       {VAR_SECTION_ID}
                     </td>
 
-                    <td width="{NAME_SIZE}">{LINK_MODIFY_URL_VAR_MODUL_NAME}</td>
+                    <td valign="middle" width="{NAME_SIZE}">{LINK_MODIFY_URL_VAR_MODUL_NAME}</td>
 
-                    <td class="{INPUT_ATTRIBUTE"{STYLE_DISPLAY_SECTION_BLOCK}>
+                    <td valign="middle" class="{INPUT_ATTRIBUTE}"{STYLE_DISPLAY_SECTION_BLOCK}>
                     	<select name="block{VAR_SECTION_ID}" class="input_narrow">
                     	<!-- BEGIN block_block -->
                     		<option value="{VALUE}"{SELECTED}>{NAME}</option>
@@ -43,39 +44,39 @@
                     	</select>
                     </td>
 
-                    <td nowrap="nowrap" width="120"><input type="text" id="start_date{VAR_SECTION_ID}" name="start_date{VAR_SECTION_ID}" value="{VALUE_PUBL_START}" class="input_normal" />
+                    <td valign="middle" nowrap="nowrap" width="120"><input type="text" id="start_date{VAR_SECTION_ID}" name="start_date{VAR_SECTION_ID}" value="{VALUE_PUBL_START}" class="input_normal" />
                         <img src="{THEME_URL}/images/{CLOCK_16_PNG}" id="trigger_start{VAR_SECTION_ID}" style="cursor: pointer;" title="{TEXT_CALENDAR}" alt="start"  />
                         <img src="{THEME_URL}/images/{CLOCK_DEL_16_PNG}" style="cursor: pointer;" alt="del" title="{TEXT_DELETE_DATE}" onclick="document.section_properties.start_date{VAR_SECTION_ID}.value=''" />
                     </td>
 
-                    <td nowrap="nowrap" width="120"><input type="text" id="end_date{VAR_SECTION_ID}" name="end_date{VAR_SECTION_ID}" value="{VALUE_PUBL_END}" class="input_narrow" />
+                    <td valign="middle" nowrap="nowrap" width="120"><input type="text" id="end_date{VAR_SECTION_ID}" name="end_date{VAR_SECTION_ID}" value="{VALUE_PUBL_END}" class="input_narrow" />
                         <img src="{THEME_URL}/images/{CLOCK_16_PNG}" id="trigger_stop{VAR_SECTION_ID}" alt="end" style="cursor: pointer;" title="{TEXT_CALENDAR}"  />
                         <img src="{THEME_URL}/images/{CLOCK_DEL_16_PNG}" style="cursor: pointer;" alt="del" title="{TEXT_DELETE_DATE}" onclick="document.section_properties.end_date{VAR_SECTION_ID}.value=''" />
                     </td>
 
-                    <td width="20">
+                    <td valign="middle" width="20">
                         {VAR_MOVE_UP_URL}
                     </td>
 
-                    <td width="20">
+                    <td valign="middle"  width="20">
                         {VAR_MOVE_DOWN_URL}
                     </td>
 
-                    <td width="20">
+                    <td valign="middle" width="20">
                         <a href="javascript: confirm_link('{TEXT_ARE_YOU_SURE}', '{ADMIN_URL}/pages/sections.php?page_id={VAR_PAGE_ID}&amp;section_id={VAR_SECTION_ID}');">
                         <img src="{THEME_URL}/images/{DELETE_16_PNG}" alt="X" />
                         </a>
                     </td>
-                    <td align="right"{DISPLAY_DEBUG}>
-                       {POSITION}
-                    </td>
-                    <td align="right"{DISPLAY_DEBUG}>
+                    <td valign="middle" align="right">
                        {VAR_SECTION_ID}
+                    </td>
+                    <td valign="middle" align="right"{DISPLAY_DEBUG}>
+                       {POSITION}
                     </td>
                 </tr>
 <!-- END section_block -->
                 <tr>
-                    <td align="right" colspan="{DEBUG_COLSPAN_SIZE}"><input type="submit" name="save" value="{TEXT_SAVE}" class="input_medium" /></td>
+                    <td valign="middle" align="right" colspan="{DEBUG_COLSPAN_SIZE}"><input type="submit" name="save" value="{TEXT_SAVE}" class="input_medium" /></td>
     	        </tr>
 	    </table>
     </form>

@@ -219,7 +219,7 @@ if($query_sections->numRows() > 0) {
 				$edit_page = $module_name;
 				$input_attribute = 'input_small';
 				$template->set_var(array(
-						'STYLE_DISPLAY_SECTION_BLOCK' => ' style="display:none;"',
+						'STYLE_DISPLAY_SECTION_BLOCK' => ' style="visibility: hidden;"',
 						'NAME_SIZE' => 270,
 						'INPUT_ATTRIBUTE' => $input_attribute,
 						'VAR_SECTION_ID' => $section['section_id'],
@@ -269,21 +269,23 @@ if($query_sections->numRows() > 0) {
 						) );
 			}
 		}
+			$template->set_var(array(
+							'DISPLAY_DEBUG' => ' style="visibility="visible;"',
+							'TEXT_SID' => 'SID',
+							'DEBUG_COLSPAN_SIZE' => 9,
+						) );
 		if($debug) {
 			$template->set_var(array(
 							'DISPLAY_DEBUG' => ' style="visibility="visible;"',
 							'TEXT_PID' => 'PID',
 							'TEXT_SID' => 'SID',
 							'POSITION' => $section['position'],
-							'DEBUG_COLSPAN_SIZE' => 9,
 						) );
 		} else {
 			$template->set_var(array(
-							'DISPLAY_DEBUG' => ' style="display: none;"',
+							'DISPLAY_DEBUG' => ' style="visibility="hidden;"',
 							'TEXT_PID' => '',
-							'TEXT_SID' => '',
 							'POSITION' => '',
-							'DEBUG_COLSPAN_SIZE' => 7,
 						) );
 		}
 		$template->parse('section_list', 'section_block', true);

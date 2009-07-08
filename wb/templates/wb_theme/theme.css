@@ -1,3 +1,4 @@
+html {overflow: -moz-scrollbars-vertical;} /* Force firefox to always show room for a vertical scrollbar */
 body,td,th,input,textarea {
  font-family: Verdana, Arial, Helvetica, sans-serif;
  font-size: 12px;
@@ -171,9 +172,8 @@ div.box {
  padding: 3px;
 }
 
-.pages_list ul li {
- padding: 2px 0px;
-}
+.pages_list ul {margin:0;font-weight:normal; padding: 0px;}
+.pages_list ul li {list-style-type:none;margin:2px 0; padding:0px;}
 
 .page_list {
  display: none;
@@ -191,6 +191,9 @@ img.page_list_rights {
  margin-bottom: 2px;
 }
 
+.content input {
+	font-size: 12px;
+}
 .row_a {
  background-color: #ECF3F7;
 }
@@ -325,6 +328,7 @@ table.pages_view tr:hover {
 .form_submit .right {
  text-align: right;
 }
+
 .input_small {
  width: 20px;
 }
@@ -374,7 +378,8 @@ select option.disabled {
  text-indent: 7px;
 }
 
-.header_list_page_title {width:284px;text-align:left;}
+.header_list_page_ID {width:15px;text-align:left;}
+.header_list_page_title {width:272px;text-align:left;}
 .header_list_menu_title {width:252px;text-align:left;}
 .header_list_actions {text-align:left;}
 

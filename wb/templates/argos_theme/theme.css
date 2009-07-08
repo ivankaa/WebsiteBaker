@@ -2,6 +2,7 @@ html {overflow: -moz-scrollbars-vertical;} /* Force firefox to always show room 
 
 body,td,th,input,textarea {font-family:verdana,arial,helvetica,sans-serif;font-size:11px;color:#333;}
 body {background:#f9f9f9 url(images/background.jpg) 0 0 repeat-x;margin:0;text-align:center;}
+img {	border: 0px;}
 
 #admin_header{text-align:center;width:900px;height:105px;margin:0 auto;padding:0;*padding-top:10px;}
 #topmenu {float:right;text-align:right;color:#fff;}
@@ -92,8 +93,9 @@ table.pages_view tr:hover {background:#eaeff6;}
 .page_list_show li {display:block;}
 img.page_list_rights {border:none;float:left;margin:0;}
 
-.header_list_page_title {width:396px;text-align:left;}
-.header_list_menu_title {width:328px;text-align:left;}
+.header_list_page_ID {padding-left:10px; width:25px;text-align:left;}
+.header_list_page_title {width:391px;text-align:left;}
+.header_list_menu_title {width:314px;text-align:left;}
 .header_list_actions {text-align:left;}
 
 .list_page_title {width:350px;text-align:left;}

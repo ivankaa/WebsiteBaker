@@ -189,7 +189,7 @@
 </tr>
 <tr>
 	<td>&nbsp;</td>
-	<td>
+	<td align="left" nowrap="nowrap">
 		<input type="submit" name="submit" value="{TEXT_SAVE}" class="save" />
 		<input type="reset" name="reset" value="{TEXT_RESET}" class="reset" />
 	</td>
@@ -419,7 +419,7 @@
 			<td>{TEXT_OTHERS}:</td>
 		</tr>
 		<tr>
-			<td>
+			<td width="100" nowrap="nowrap">
 				<input type="checkbox" name="file_u_r" id="file_u_r" value="true"{FILE_U_R_CHECKED} />
 				<label for="file_u_r">{TEXT_READ}</label>
 				<br />
@@ -429,7 +429,7 @@
 				<input type="checkbox" name="file_u_e" id="file_u_e" value="true"{FILE_U_E_CHECKED} />
 				<label for="file_u_e">{TEXT_EXECUTE}</label>
 			</td>
-			<td>
+			<td width="100" nowrap="nowrap">
 				<input type="checkbox" name="file_g_r" id="file_g_r" value="true"{FILE_G_R_CHECKED} />
 				<label for="file_g_r">{TEXT_READ}</label>
 				<br />
@@ -439,7 +439,7 @@
 				<input type="checkbox" name="file_g_e" id="file_g_e" value="true"{FILE_G_E_CHECKED} />
 				<label for="file_g_e">{TEXT_EXECUTE}</label>
 			</td>
-			<td>
+			<td width="100" nowrap="nowrap">
 				<input type="checkbox" name="file_o_r" id="file_o_r" value="true"{FILE_O_R_CHECKED} />
 				<label for="file_o_r">{TEXT_READ}</label>
 				<br />
@@ -465,7 +465,7 @@
 			<td>{TEXT_OTHERS}:</td>
 		</tr>
 		<tr>
-			<td>
+			<td width="100" nowrap="nowrap">
 				<input type="checkbox" name="dir_u_r" id="dir_u_r" value="true"{DIR_U_R_CHECKED} />
 				<label for="dir_u_r">{TEXT_READ}</label>
 				<br />
@@ -475,7 +475,7 @@
 				<input type="checkbox" name="dir_u_e" id="dir_u_e" value="true"{DIR_U_E_CHECKED} />
 				<label for="dir_u_e">{TEXT_EXECUTE}</label>
 			</td>
-			<td>
+			<td width="100" nowrap="nowrap">
 				<input type="checkbox" name="dir_g_r" id="dir_g_r" value="true"{DIR_G_R_CHECKED} />
 				<label for="dir_g_r">{TEXT_READ}</label>
 				<br />
@@ -485,7 +485,7 @@
 				<input type="checkbox" name="dir_g_e" id="dir_g_e" value="true"{DIR_G_E_CHECKED} />
 				<label for="dir_g_e">{TEXT_EXECUTE}</label>
 			</td>
-			<td>
+			<td width="100" nowrap="nowrap">
 				<input type="checkbox" name="dir_o_r" id="dir_o_r" value="true"{DIR_O_R_CHECKED} />
 				<label for="dir_o_r">{TEXT_READ}</label>
 				<br />

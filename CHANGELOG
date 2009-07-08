@@ -14,6 +14,8 @@ Legend:
 08-July-2009 Dietrich Roland Pehlke
 !	Removed unused marker {USERS} inside the "groups.htt" of the wb-theme.	
 08-July-2009 Matthias Gallas
++	Added PageID and SectionID to all backend themes (Thanks to Luiseshahne)
+#	Fixed some display issues in all backend themes (Thanks to Luisehahne)
 !	Replaced wbmodules.gif in FCKEditor Plugins (Thanks to Stefek)
 08-July-2009 Dietrich Roland Pehlke
 !	admin -> users -> index.php

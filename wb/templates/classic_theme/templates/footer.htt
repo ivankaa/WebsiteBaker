@@ -31,7 +31,7 @@
           }
 
         if($("a[rel^='lightbox']").length) {
-            $.insert("{THEME_URL}/css/jquery-slimbox2.css");
+            $.insert("{WB_URL}/include/jquery/plugins/jquery-slimbox2.css");
             $.insert("{WB_URL}/include/jquery/plugins/jquery-slimbox2-min.js");
           }
 
