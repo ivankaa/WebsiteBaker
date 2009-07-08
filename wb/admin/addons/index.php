@@ -34,27 +34,34 @@ $template->set_block('page', 'main_block', 'main');
 
 // Insert values into the template object
 $template->set_var(array(
-								'ADMIN_URL' => ADMIN_URL,
-								'THEME_URL' => THEME_URL,
-								'WB_URL' => WB_URL
-								)
-						);
+		'ADMIN_URL' => ADMIN_URL,
+		'THEME_URL' => THEME_URL,
+		'WB_URL' => WB_URL
+	)
+);
 
-// Insert permission values into the template object
-if($admin->get_permission('modules') != true) {
-	$template->set_var('DISPLAY_MODULES', 'none');
-}
-if($admin->get_permission('templates') != true) {
-	$template->set_var('DISPLAY_TEMPLATES', 'none');
-}
-if($admin->get_permission('languages') != true) {
-	$template->set_var('DISPLAY_LANGUAGES', 'none');
-}
-if(!isset($_GET['advanced']) || $admin->get_permission('admintools') != true) {
-	$template->set_var('DISPLAY_RELOAD', 'none');
-}
+/**
+ *	Setting up the blocks
+ */
+$template->set_block('main_block', "modules_block", "modules");
+$template->set_block('main_block', "templates_block", "templates");
+$template->set_block('main_block', "languages_block", "languages");
+$template->set_block('main_block', "reload_block", "reload");
 
-// Insert section names and descriptions
+/**
+ *	Insert permission values into the template object
+ *	Obsolete as we are using blocks ... see "parsing the blocks" section
+ */
+$display_none = "style=\"display: none;\"";
+if($admin->get_permission('modules') != true) 	$template->set_var('DISPLAY_MODULES', $display_none);	
+if($admin->get_permission('templates') != true)	$template->set_var('DISPLAY_TEMPLATES', $display_none);
+if($admin->get_permission('languages') != true)	$template->set_var('DISPLAY_LANGUAGES', $display_none);
+if(!isset($_GET['advanced']) || $admin->get_permission('admintools') != true)
+	$template->set_var('DISPLAY_RELOAD', $display_none);
+
+/**
+ *	Insert section names and descriptions
+ */
 $template->set_var(array(
 	'ADDONS_OVERVIEW' => $MENU['ADDONS'],
 	'MODULES' => $MENU['MODULES'],
@@ -72,11 +79,23 @@ $template->set_var(array(
 	)
 );
 
-// Parse template object
+/**
+ *	Parsing the blocks ...
+ */
+if ( $admin->get_permission('modules') == true) $template->parse('main_block', "modules_block", true);
+if ( $admin->get_permission('templates') == true) $template->parse('main_block', "templates_block", true);
+if ( $admin->get_permission('languages') == true) $template->parse('main_block', "languages_block", true);
+if ( isset($_GET['advanced']) AND $admin->get_permission('admintools') == true) $template->parse('main_block', "reload_block", true);
+
+/**
+ *	Parse template object
+ */
 $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
-// Print admin footer
+/**
+ *	Print admin footer
+ */
 $admin->print_footer();
 
 ?>

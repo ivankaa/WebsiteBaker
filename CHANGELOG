@@ -12,6 +12,13 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 08-July-2009 Dietrich Roland Pehlke
+!	admin -> addons -> index.php	codechanges
+!	admin -> access -> index.php	codechanges
+	Codechanges to get rid of the empty display(style) declaration "style='display: ;'",
+	and to avoid to generate (hidden) elements if the user isn't alowed to edit one.
+!	wb_theme|classic_theme|argos_theme -> templates -> addons.htt
+!	wb_theme|classic_theme|argos_theme -> templates -> access.htt
+	add block-comments
 #	Bugfix inside wb/admin/groups/get_permissions.php - replacing wrong "AND" within "OR" in line 64
 	if one checkbox of "user" or "group" is selected (like in line 178; advanced settings).
 07-July-2009 Matthias Gallas
