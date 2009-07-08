@@ -61,7 +61,7 @@ if($admin->get_post('advanced') != 'yes') {
 	$system_permissions['settings'] = $admin->get_post('settings');
 		$system_permissions['settings_basic'] = $system_permissions['settings'];
 		$system_permissions['settings_advanced'] = $system_permissions['settings'];
-	if($admin->get_post('users') != '' AND $admin->get_post('groups') != '') {
+	if($admin->get_post('users') != '' OR $admin->get_post('groups') != '') {
 		$system_permissions['access'] = 1;
 	} else {
 		$system_permissions['access'] = 0;

@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+08-July-2009 Dietrich Roland Pehlke
+#	Bugfix inside wb/admin/groups/get_permissions.php - replacing wrong "AND" within "OR" in line 64
+	if one checkbox of "user" or "group" is selected (like in line 178; advanced settings).
 07-July-2009 Matthias Gallas
 #	Fixed some minor bugs in argos_theme (Thanks to Argos)
 #	Fixed bugs in admin additons for argos_theme (Thanks to Argos)
