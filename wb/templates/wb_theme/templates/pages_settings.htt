@@ -7,7 +7,7 @@
 	<td valign="middle" align="left">
 		<h2>{HEADING_MODIFY_PAGE_SETTINGS}</h2>
 	</td>
-	<td nowrap="nowrap">Id: {PAGE_ID}</td>
+	<td nowrap="nowrap">ID: {PAGE_ID}</td>
 	<td align="right">
 		{TEXT_CURRENT_PAGE}:
 		<b>{PAGE_TITLE}</b>
