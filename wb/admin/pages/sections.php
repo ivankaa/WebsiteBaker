@@ -201,6 +201,8 @@ if($query_sections->numRows() > 0) {
 						'VAR_SECTION_ID' => $section['section_id'],
 						'VAR_POSITION' => $section['position'],
 						'LINK_MODIFY_URL_VAR_MODUL_NAME' => $edit_page,
+						'SELECT' => '',
+						'SET_NONE_DISPLAY_OPTION' => '',
 				) );
 				// Add block options to the section_list
 				$template->clear_var('block_list');
@@ -225,6 +227,7 @@ if($query_sections->numRows() > 0) {
 						'VAR_SECTION_ID' => $section['section_id'],
 						'VAR_POSITION' => $section['position'],
 						'LINK_MODIFY_URL_VAR_MODUL_NAME' => $edit_page,
+						'SET_NONE_DISPLAY_OPTION' => '<option>&nbsp;</option>',
 					) );
 			}
 			// Insert icon and images
@@ -283,7 +286,7 @@ if($query_sections->numRows() > 0) {
 						) );
 		} else {
 			$template->set_var(array(
-							'DISPLAY_DEBUG' => ' style="visibility="hidden;"',
+							'DISPLAY_DEBUG' => ' style="display:none;"',
 							'TEXT_PID' => '',
 							'POSITION' => '',
 						) );

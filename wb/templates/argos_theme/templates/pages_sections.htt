@@ -33,6 +33,7 @@
                     <td width="{NAME_SIZE}">{LINK_MODIFY_URL_VAR_MODUL_NAME}</td>
                     <td {STYLE_DISPLAY_SECTION_BLOCK} class="{INPUT_ATTRIBUTE}">
                     	<select name="block{VAR_SECTION_ID}" class="input_normal">
+                        {SET_NONE_DISPLAY_OPTION}
                     	<!-- BEGIN block_block -->
                     		<option value="{VALUE}"{SELECTED}>{NAME}</option>
                     	<!-- END block_block -->

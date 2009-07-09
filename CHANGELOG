@@ -11,13 +11,14 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
-08-July-2009 Dietrich Roland Pehlke
-!	Removed unused marker {USERS} inside the "groups.htt" of the wb-theme.	
+09-July-2009 Matthias
+#	Fixed invalid output of page_sections Page in Backend (Thanks to Luisehahne)
 08-July-2009 Matthias Gallas
 +	Added PageID and SectionID to all backend themes (Thanks to Luiseshahne)
 #	Fixed some display issues in all backend themes (Thanks to Luisehahne)
 !	Replaced wbmodules.gif in FCKEditor Plugins (Thanks to Stefek)
 08-July-2009 Dietrich Roland Pehlke
+!	Removed unused marker {USERS} inside the "groups.htt" of the wb-theme.
 !	admin -> users -> index.php
 !	admin -> groups -> index.php
 	Codechanges using blocks to avoid to generate the "switch"-link right-top,

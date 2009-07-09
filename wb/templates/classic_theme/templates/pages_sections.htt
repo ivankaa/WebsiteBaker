@@ -38,6 +38,7 @@
 
                     <td valign="middle" class="{INPUT_ATTRIBUTE}"{STYLE_DISPLAY_SECTION_BLOCK}>
                     	<select name="block{VAR_SECTION_ID}" class="input_narrow">
+                        {SET_NONE_DISPLAY_OPTION}
                     	<!-- BEGIN block_block -->
                     		<option value="{VALUE}"{SELECTED}>{NAME}</option>
                     	<!-- END block_block -->
