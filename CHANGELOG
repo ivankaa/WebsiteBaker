@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 09-July-2009 Matthias
+#	Fixed wrong path to unitpngfix.js and added missing script
 #	Fixed invalid output of page_sections Page in Backend (Thanks to Luisehahne)
 08-July-2009 Matthias Gallas
 +	Added PageID and SectionID to all backend themes (Thanks to Luiseshahne)
