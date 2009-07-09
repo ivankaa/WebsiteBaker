@@ -34,7 +34,7 @@ $post_loop = '<tr class=\"post_top\">
 <tr>
 <td class=\"post_short\" colspan=\"2\">
 [SHORT] 
-<a href=\"[LINK]\">[TEXT_READ_MORE]</a>
+<span style=\"visibility:[SHOW_READ_MORE];\"><a href=\"[LINK]\">[TEXT_READ_MORE]</a></span>
 </td>
 </tr>';
 $footer = '</table>

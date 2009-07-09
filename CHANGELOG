@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+09-July-2009 Ruud Eisinga
+!	Added a better option to hide the READ_MORE link in the news module. (ticket #739)
 09-July-2009 Matthias Gallas
 #	Fixed bug that backend.js is not loaded in backend themes (ticket #740)
 #	Fixed wrong path to unitpngfix.js and added missing script
