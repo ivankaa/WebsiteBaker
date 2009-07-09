@@ -37,7 +37,7 @@
           }
 
 </script>
-{JS_THEME_INC_PHP}
+{BACKEND_MODULE_JS}
 </body>
 </html>
 <!-- END footer_block -->

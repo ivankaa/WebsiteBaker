@@ -11,7 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
-09-July-2009 Matthias
+09-July-2009 Matthias Gallas
+#	Fixed bug that backend.js is not loaded in backend themes (ticket #740)
 #	Fixed wrong path to unitpngfix.js and added missing script
 #	Fixed invalid output of page_sections Page in Backend (Thanks to Luisehahne)
 08-July-2009 Matthias Gallas
