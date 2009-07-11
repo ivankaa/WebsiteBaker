@@ -283,41 +283,41 @@ $comments_page = '<h1>[TEXT_COMMENT]</h1>
 $query_dates = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings where section_id != 0 and page_id != 0");
 while($result = $query_dates->fetchRow()) {
 	
-	echo "<b>Add default settings data to database for news section_id= ".$result['section_id']."</b><br />";
+	echo "<br /><u>Add default settings to database for news section_id= ".$result['section_id']."</u><br />";
 	$section_id = $result['section_id'];
 
 	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `post_loop` = '$post_loop' WHERE `section_id` = $section_id")) {
-		echo 'Database data post_loop added successfully<br />';
+		echo 'Database data post_loop added successfully';
 	}
 	echo mysql_error().'<br />';
 	
 	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `post_header` = '$post_header' WHERE `section_id` = $section_id")) {
-		echo 'Database data post_header added successfully<br />';
+		echo 'Database data post_header added successfully';
 	}
 	echo mysql_error().'<br />';
 	
 	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `post_footer` = '$post_footer' WHERE `section_id` = $section_id")) {
-		echo 'Database data post_footer added successfully<br />';
+		echo 'Database data post_footer added successfully';
 	}
 	echo mysql_error().'<br />';
 	
 	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `comments_header` = '$comments_header' WHERE `section_id` = $section_id")) {
-		echo 'Database data comments_header added successfully<br />';
+		echo 'Database data comments_header added successfully';
 	}
 	echo mysql_error().'<br />';
 	
 	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `comments_loop` = '$comments_loop' WHERE `section_id` = $section_id")) {
-		echo 'Database data comments_loop added successfully<br />';
+		echo 'Database data comments_loop added successfully';
 	}
 	echo mysql_error().'<br />';
 	
 	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `comments_footer` = '$comments_footer' WHERE `section_id` = $section_id")) {
-		echo 'Database data comments_footer added successfully<br />';
+		echo 'Database data comments_footer added successfully';
 	}
 	echo mysql_error().'<br />';
 	
 	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `comments_page` = '$comments_page' WHERE `section_id` = $section_id")) {
-		echo 'Database data comments_page added successfully<br />';
+		echo 'Database data comments_page added successfully';
 	}
 	echo mysql_error().'<br />';
 
