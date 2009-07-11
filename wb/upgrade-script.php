@@ -234,6 +234,96 @@ echo ($database->query($sql)) ? " $OK<br />" : " $FAIL<br />";
 
 
 /**********************************************************
+ *  - Update settings of News Modul
+ */
+
+// These are the default setting
+$post_loop = '<tr class=\"post_top\">
+<td class=\"post_title\"><a href=\"[LINK]\">[TITLE]</a></td>
+<td class=\"post_date\">[PUBLISHED_TIME], [PUBLISHED_DATE]</td>
+</tr>
+<tr>
+<td class=\"post_short\" colspan=\"2\">
+[SHORT] 
+<span style=\"visibility:[SHOW_READ_MORE];\"><a href=\"[LINK]\">[TEXT_READ_MORE]</a></span>
+</td>
+</tr>';
+$post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" width="98%">
+<tr>
+<td height="30"><h1>[TITLE]</h1></td>
+<td rowspan="3" style="display: [DISPLAY_IMAGE]"><img src="[GROUP_IMAGE]" alt="[GROUP_TITLE]" /></td>
+</tr>
+<tr>
+<td valign="top"><b>[TEXT_POSTED_BY] [DISPLAY_NAME] ([USERNAME]) [TEXT_ON] [PUBLISHED_DATE]</b></td>
+</tr>
+<tr style="display: [DISPLAY_GROUP]">
+<td valign="top"><a href="[BACK]">[PAGE_TITLE]</a> >> <a href="[BACK]?g=[GROUP_ID]">[GROUP_TITLE]</a></td>
+</tr>
+</table>');
+$post_footer = '<p>[TEXT_LAST_CHANGED]: [MODI_DATE] [TEXT_AT] [MODI_TIME]</p>
+<a href=\"[BACK]\">[TEXT_BACK]</a>';
+$comments_header = addslashes('<br /><br />
+<h2>[TEXT_COMMENTS]</h2>
+<table cellpadding="2" cellspacing="0" border="0" width="98%">');
+$comments_loop = addslashes('<tr>
+<td class="comment_title">[TITLE]</td>
+<td class="comment_info">[TEXT_BY] [DISPLAY_NAME] [TEXT_ON] [DATE] [TEXT_AT] [TIME]</td>
+</tr>
+<tr>
+<td colspan="2" class="comment_text">[COMMENT]</td>
+</tr>');
+$comments_footer = '</table>
+<br /><a href=\"[ADD_COMMENT_URL]\">[TEXT_ADD_COMMENT]</a>';
+$comments_page = '<h1>[TEXT_COMMENT]</h1>
+<h2>[POST_TITLE]</h2>
+<br />';
+
+
+// Insert default settings into database
+$query_dates = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_news_settings where section_id != 0 and page_id != 0");
+while($result = $query_dates->fetchRow()) {
+	
+	echo "<b>Add default settings data to database for news section_id= ".$result['section_id']."</b><br />";
+	$section_id = $result['section_id'];
+
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `post_loop` = '$post_loop' WHERE `section_id` = $section_id")) {
+		echo 'Database data post_loop added successfully<br />';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `post_header` = '$post_header' WHERE `section_id` = $section_id")) {
+		echo 'Database data post_header added successfully<br />';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `post_footer` = '$post_footer' WHERE `section_id` = $section_id")) {
+		echo 'Database data post_footer added successfully<br />';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `comments_header` = '$comments_header' WHERE `section_id` = $section_id")) {
+		echo 'Database data comments_header added successfully<br />';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `comments_loop` = '$comments_loop' WHERE `section_id` = $section_id")) {
+		echo 'Database data comments_loop added successfully<br />';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `comments_footer` = '$comments_footer' WHERE `section_id` = $section_id")) {
+		echo 'Database data comments_footer added successfully<br />';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `comments_page` = '$comments_page' WHERE `section_id` = $section_id")) {
+		echo 'Database data comments_page added successfully<br />';
+	}
+	echo mysql_error().'<br />';
+
+}
+
+/**********************************************************
  *  - Set Version to WB 2.8RC1
  */
 echo "<br />Update database version number to 2.8RC1 : ";

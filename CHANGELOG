@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+11-July-2009 Matthias Gallas
++	Added changed news settings to upgrade-script
 09-July-2009 Ruud Eisinga
 !	Added a better option to hide the READ_MORE link in the news module. (ticket #739)
 09-July-2009 Matthias Gallas
