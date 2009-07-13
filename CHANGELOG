@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+13-July-2009 Ruud Eisinga
+#	admin / media / browse reported an error in E_STRICT mode.
 13-July 2009 Dietrich Roland Pehlke
 #	News-Modul: add the unlink-routine for the ".news" folder inside uninstall.php
 	so the groupe-images are also unlink.

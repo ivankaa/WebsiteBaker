@@ -260,7 +260,8 @@ $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
 function ShowTip($name,$detail='') {
-$ext = strtolower(end(explode(".", $name)));
+$parts = explode(".", $name);
+$ext = strtolower(end($parts));
 if (strpos('.gif.jpg.jpeg.png.bmp.',$ext) )
 	return 'onmouseover="overlib(\'<img src=\\\''.$name.'\\\' maxwidth=\\\'200\\\' maxheight=\\\'200\\\'>\',VAUTO, WIDTH)" onmouseout="nd()" ' ;
 else
