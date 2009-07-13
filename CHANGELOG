@@ -11,6 +11,14 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+13-July 2009 Dietrich Roland Pehlke
+#	News-Modul: add the unlink-routine for the ".news" folder inside uninstall.php
+	so the groupe-images are also unlink.
+!	News-Modul: add <tr><td> and </td></tr>-tags to the "none found" part in the view.php to 
+	get valid output inside a table.
+!	Change the setting of $display_image and $display_groupe to avoid the 
+	empty display roule problematic (<tr style="display: ">) for valid output.
+!	Add &gt;&gt; in "add.php" instead of >> to avoid invalid output.
 11-July-2009 Ruud Eisinga
 !	The news module post_title link made unclickable when there is no full post.
 11-July-2009 Matthias Gallas

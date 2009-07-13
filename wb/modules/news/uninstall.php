@@ -35,5 +35,6 @@ $database->query("DROP TABLE ".TABLE_PREFIX."mod_news_settings");
 
 require_once(WB_PATH.'/framework/functions.php');
 rm_full_dir(WB_PATH.PAGES_DIRECTORY.'/posts');
+rm_full_dir(WB_PATH.MEDIA_DIRECTORY.'/.news');
 
 ?>

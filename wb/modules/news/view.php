@@ -216,8 +216,8 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				$group_id = $post['group_id'];
 				$group_title = $groups[$group_id]['title'];
 				$group_image = $groups[$group_id]['image'];
-				if($group_image == '') { $display_image = 'none'; } else { $display_image = ''; }
-				if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
+				$display_image = ($group_image == '') ? "none" : "inherit";
+				$display_group = ($group_id == 0) ? 'none' : 'inherit';
 				// Replace [wblink--PAGE_ID--] with real link
 				$short = ($post['content_short']);
 				$wb->preprocess($short);
@@ -308,8 +308,8 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			$group_id = $post['group_id'];
 			$group_title = $groups[$group_id]['title'];
 			$group_image = $groups[$group_id]['image'];
-			if($group_image == '') { $display_image = 'none'; } else { $display_image = ''; }
-			if($group_id == 0) { $display_group = 'none'; } else { $display_group = ''; }
+			$display_image = ($group_image == '') ? "none" : "inherit";
+			$display_group = ($group_id == 0) ? 'none' : 'inherit';
 			$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[BACK]', '[TEXT_BACK]', '[TEXT_LAST_CHANGED]', '[MODI_DATE]', '[TEXT_AT]', '[MODI_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[TEXT_POSTED_BY]', '[TEXT_ON]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]');
 			$post_short=$post['content_short'];
 			$wb->preprocess($post_short);
@@ -366,9 +366,9 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		} else {
 			// Say no comments found
 			if(isset($TEXT['NONE_FOUND'])) {
-				echo $TEXT['NONE_FOUND'].'<br />';
+				$content .= "<tr><td>".$TEXT['NONE_FOUND'].'<br /></td></tr>';
 			} else {
-				echo 'None Found<br />';
+				$content .= '<tr><td>None Found<br /></td></tr>';
 			}
 		}
 		
