@@ -32,7 +32,7 @@ This file is used to generate a list of time formats for the user to select
 */
 
 if(!defined('WB_URL')) {
-	header('Location: ../index.php');
+	header('Location: ../../../index.php');
 	exit(0);
 }
 
@@ -45,24 +45,20 @@ if(!defined('TIME_FORMATS_LOADED')) {
 $TIME_FORMATS = array();
 
 // Get the current time (in the users timezone if required)
-if(isset($user_time) AND $user_time == true) {
-	$mktime = mktime()+TIMEZONE;
-} else {
-	$mktime = mktime()+DEFAULT_TIMEZONE;
-}
+$actual_time = time()+ ((isset($user_time) AND $user_time == true) ? TIMEZONE : DEFAULT_TIMEZONE);
 
 // Add values to list
-$TIME_FORMATS['g:i|A'] = gmdate('g:i A', $mktime);
-$TIME_FORMATS['g:i|a'] = gmdate('g:i a', $mktime);
-$TIME_FORMATS['H:i:s'] = gmdate('H:i:s', $mktime);
-$TIME_FORMATS['H:i'] = gmdate('H:i', $mktime);
+$TIME_FORMATS['g:i|A'] = gmdate('g:i A', $actual_time);
+$TIME_FORMATS['g:i|a'] = gmdate('g:i a', $actual_time);
+$TIME_FORMATS['H:i:s'] = gmdate('H:i:s', $actual_time);
+$TIME_FORMATS['H:i'] = gmdate('H:i', $actual_time);
 
 // Add "System Default" to list (if we need to)
 if(isset($user_time) AND $user_time == true) {
 	if(isset($TEXT['SYSTEM_DEFAULT'])) {
-		$TIME_FORMATS['system_default'] = gmdate(DEFAULT_TIME_FORMAT, $mktime).' ('.$TEXT['SYSTEM_DEFAULT'].')';
+		$TIME_FORMATS['system_default'] = gmdate(DEFAULT_TIME_FORMAT, $actual_time).' ('.$TEXT['SYSTEM_DEFAULT'].')';
 	} else {
-		$TIME_FORMATS['system_default'] = gmdate(DEFAULT_TIME_FORMAT, $mktime).' (System Default)';
+		$TIME_FORMATS['system_default'] = gmdate(DEFAULT_TIME_FORMAT, $actual_time).' (System Default)';
 	}
 }
 

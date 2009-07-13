@@ -32,7 +32,7 @@ This file is used to generate a list of date formats for the user to select
 */
 
 if(!defined('WB_URL')) {
-	header('Location: ../index.php');
+	header('Location: ../../../index.php');
 	exit(0);
 }
 
@@ -45,31 +45,27 @@ if(!defined('DATE_FORMATS_LOADED')) {
 $DATE_FORMATS = array();
 
 // Get the current time (in the users timezone if required)
-if(isset($user_time) AND $user_time == true) {
-	$mktime = mktime()+TIMEZONE;
-} else {
-	$mktime = mktime()+DEFAULT_TIMEZONE;
-}
+$actual_time = time()+ ((isset($user_time) AND $user_time == true) ? TIMEZONE : DEFAULT_TIMEZONE);
 
 // Add values to list
-$DATE_FORMATS['l,|jS|F,|Y'] = gmdate('l, jS F, Y', $mktime);
-$DATE_FORMATS['jS|F,|Y'] = gmdate('jS F, Y', $mktime);
-$DATE_FORMATS['d|M|Y'] = gmdate('d M Y', $mktime);
-$DATE_FORMATS['M|d|Y'] = gmdate('M d Y', $mktime);
-$DATE_FORMATS['D|M|d,|Y'] = gmdate('D M d, Y', $mktime);
-$DATE_FORMATS['d-m-Y'] = gmdate('d-m-Y', $mktime).' (D-M-Y)';
-$DATE_FORMATS['m-d-Y'] = gmdate('m-d-Y', $mktime).' (M-D-Y)';
-$DATE_FORMATS['d.m.Y'] = gmdate('d.m.Y', $mktime).' (D.M.Y)';
-$DATE_FORMATS['m.d.Y'] = gmdate('m.d.Y', $mktime).' (M.D.Y)';
-$DATE_FORMATS['d/m/Y'] = gmdate('d/m/Y', $mktime).' (D/M/Y)';
-$DATE_FORMATS['m/d/Y'] = gmdate('m/d/Y', $mktime).' (M/D/Y)';
+$DATE_FORMATS['l,|jS|F,|Y'] = gmdate('l, jS F, Y', $actual_time);
+$DATE_FORMATS['jS|F,|Y'] = gmdate('jS F, Y', $actual_time);
+$DATE_FORMATS['d|M|Y'] = gmdate('d M Y', $actual_time);
+$DATE_FORMATS['M|d|Y'] = gmdate('M d Y', $actual_time);
+$DATE_FORMATS['D|M|d,|Y'] = gmdate('D M d, Y', $actual_time);
+$DATE_FORMATS['d-m-Y'] = gmdate('d-m-Y', $actual_time).' (D-M-Y)';
+$DATE_FORMATS['m-d-Y'] = gmdate('m-d-Y', $actual_time).' (M-D-Y)';
+$DATE_FORMATS['d.m.Y'] = gmdate('d.m.Y', $actual_time).' (D.M.Y)';
+$DATE_FORMATS['m.d.Y'] = gmdate('m.d.Y', $actual_time).' (M.D.Y)';
+$DATE_FORMATS['d/m/Y'] = gmdate('d/m/Y', $actual_time).' (D/M/Y)';
+$DATE_FORMATS['m/d/Y'] = gmdate('m/d/Y', $actual_time).' (M/D/Y)';
 
 // Add "System Default" to list (if we need to)
 if(isset($user_time) AND $user_time == true) {
 	if(isset($TEXT['SYSTEM_DEFAULT'])) {
-		$DATE_FORMATS['system_default'] = gmdate(DEFAULT_DATE_FORMAT, $mktime).' ('.$TEXT['SYSTEM_DEFAULT'].')';
+		$DATE_FORMATS['system_default'] = gmdate(DEFAULT_DATE_FORMAT, $actual_time).' ('.$TEXT['SYSTEM_DEFAULT'].')';
 	} else {
-		$DATE_FORMATS['system_default'] = gmdate(DEFAULT_DATE_FORMAT, $mktime).' (System Default)';
+		$DATE_FORMATS['system_default'] = gmdate(DEFAULT_DATE_FORMAT, $actual_time).' (System Default)';
 	}
 }
 

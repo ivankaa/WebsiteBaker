@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+13-July 2009 Dietrich Roland Pehlke
+!	Change inside "date_formats.php" and "time_formats.php" mktime() within time()
+	to avoid warnings and strict messages. See #741. Minor cosmetic changes.
 13-July-2009 Ruud Eisinga
 #	admin / media / browse reported an error in E_STRICT mode.
 13-July 2009 Dietrich Roland Pehlke
