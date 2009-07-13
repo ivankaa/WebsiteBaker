@@ -11,12 +11,13 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
-13-July 2009 Dietrich Roland Pehlke
-!	Change inside "date_formats.php" and "time_formats.php" mktime() within time()
-	to avoid warnings and strict messages. See #741. Minor cosmetic changes.
+13-July 2009 Matthias Gallas
++	added changes from news/add.php to the upgrade-script.php
 13-July-2009 Ruud Eisinga
 #	admin / media / browse reported an error in E_STRICT mode.
 13-July 2009 Dietrich Roland Pehlke
+!	Change inside "date_formats.php" and "time_formats.php" mktime() within time()
+	to avoid warnings and strict messages. See #741. Minor cosmetic changes.
 #	News-Modul: add the unlink-routine for the ".news" folder inside uninstall.php
 	so the groupe-images are also unlink.
 !	News-Modul: add <tr><td> and </td></tr>-tags to the "none found" part in the view.php to 
