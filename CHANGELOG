@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+14-July 2009 Dietrich Roland Pehlke
+!	changes in frontend.functions.php, line 323: 'date' to 'gmdate' to avoid E_STRICT warnings.
+!	changes in wb-setup.php, line 50: 'date' to 'gmdate' to avoid E_STRICT warnings. See also #741.
 13-July 2009 Matthias Gallas
 +	added changes from news/add.php to the upgrade-script.php
 13-July-2009 Ruud Eisinga
