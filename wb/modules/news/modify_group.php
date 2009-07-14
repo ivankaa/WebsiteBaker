@@ -46,9 +46,9 @@ $fetch_content = $query_content->fetchRow();
 
 <form name="modify" action="<?php echo WB_URL; ?>/modules/news/save_group.php" method="post" enctype="multipart/form-data" style="margin: 0;">
 
-<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
-<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
+<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
+<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 
 <table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
 <tr>
@@ -75,12 +75,12 @@ $fetch_content = $query_content->fetchRow();
 <tr>
 	<td><?php echo $TEXT['ACTIVE']; ?>:</td>
 	<td>
-		<input type="radio" name="active" id="active_true" value="1" <?php if($fetch_content['active'] == 1) { echo ' checked'; } ?> />
+		<input type="radio" name="active" id="active_true" value="1" <?php if($fetch_content['active'] == 1) { echo ' checked="checked"'; } ?> />
 		<a href="#" onclick="javascript: document.getElementById('active_true').checked = true;">
 		<?php echo $TEXT['YES']; ?>
 		</a>
 		-
-		<input type="radio" name="active" id="active_false" value="0" <?php if($fetch_content['active'] == 0) { echo ' checked'; } ?> />
+		<input type="radio" name="active" id="active_false" value="0" <?php if($fetch_content['active'] == 0) { echo ' checked="checked"'; } ?> />
 		<a href="#" onclick="javascript: document.getElementById('active_false').checked = true;">
 		<?php echo $TEXT['NO']; ?>
 		</a>
@@ -91,14 +91,14 @@ $fetch_content = $query_content->fetchRow();
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 	<td align="left">
-		<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;"></form>
+		<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
 	</td>
 	<td align="right">
 		<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
 	</td>
 </tr>
 </table>
-
+</form>
 
 <?php
 

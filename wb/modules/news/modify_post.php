@@ -57,10 +57,10 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 
 <form name="modify" action="<?php echo WB_URL; ?>/modules/news/save_post.php" method="post" style="margin: 0;">
 
-<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
-<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
-<input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
-<input type="hidden" name="link" value="<?php echo $fetch_content['link']; ?>">
+<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
+<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
+<input type="hidden" name="post_id" value="<?php echo $post_id; ?>" />
+<input type="hidden" name="link" value="<?php echo $fetch_content['link']; ?>" />
 
 <table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
 <tr>
@@ -101,12 +101,12 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 <tr>
 	<td><?php echo $TEXT['ACTIVE']; ?>:</td>
 	<td>
-		<input type="radio" name="active" id="active_true" value="1" <?php if($fetch_content['active'] == 1) { echo ' checked'; } ?> />
+		<input type="radio" name="active" id="active_true" value="1" <?php if($fetch_content['active'] == 1) { echo ' checked="checked"'; } ?> />
 		<a href="#" onclick="javascript: document.getElementById('active_true').checked = true;">
 		<?php echo $TEXT['YES']; ?>
 		</a>
 		&nbsp;
-		<input type="radio" name="active" id="active_false" value="0" <?php if($fetch_content['active'] == 0) { echo ' checked'; } ?> />
+		<input type="radio" name="active" id="active_false" value="0" <?php if($fetch_content['active'] == 0) { echo ' checked="checked"'; } ?> />
 		<a href="#" onclick="javascript: document.getElementById('active_false').checked = true;">
 		<?php echo $TEXT['NO']; ?>
 		</a>
@@ -116,16 +116,16 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 	<td><?php echo $TEXT['PUBL_START_DATE']; ?>:</td>
 	<td>
 	<input type="text" id="publishdate" name="publishdate" value="<?php if($fetch_content['published_when']==0) print date($jscal_format, strtotime((date('Y-m-d H:i')))); else print date($jscal_format, $fetch_content['published_when']);?>" style="width: 120px;" />
-	<img src="<?php echo THEME_URL ?>/images/clock_16.png" id="publishdate_trigger" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
-	<img src="<?php echo THEME_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="<?php echo $TEXT['DELETE_DATE']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.modify.publishdate.value=''" />
+	<img src="<?php echo THEME_URL ?>/images/clock_16.png" id="publishdate_trigger" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" alt="<?php echo $TEXT['CALENDAR']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
+	<img src="<?php echo THEME_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="<?php echo $TEXT['DELETE_DATE']; ?>" alt="<?php echo $TEXT['DELETE_DATE']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.modify.publishdate.value=''" />
 	</td>
 </tr>
 <tr>
 	<td><?php echo $TEXT['PUBL_END_DATE']; ?>:</td>
 	<td>
 	<input type="text" id="enddate" name="enddate" value="<?php if($fetch_content['published_until']==0) print ""; else print date($jscal_format, $fetch_content['published_until'])?>" style="width: 120px;" />
-	<img src="<?php echo THEME_URL ?>/images/clock_16.png" id="enddate_trigger" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
-	<img src="<?php echo THEME_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="<?php echo $TEXT['DELETE_DATE']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.modify.enddate.value=''" />
+	<img src="<?php echo THEME_URL ?>/images/clock_16.png" id="enddate_trigger" style="cursor: pointer;" title="<?php echo $TEXT['CALENDAR']; ?>" alt="<?php echo $TEXT['CALENDAR']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" />
+	<img src="<?php echo THEME_URL ?>/images/clock_del_16.png" style="cursor: pointer;" title="<?php echo $TEXT['DELETE_DATE']; ?>" alt="<?php echo $TEXT['DELETE_DATE']; ?>" onmouseover="this.style.background='lightgrey';" onmouseout="this.style.background=''" onclick="document.modify.enddate.value=''" />
 	</td>
 </tr>
 </table>
@@ -156,13 +156,14 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 <table cellpadding="2" cellspacing="0" border="0" width="100%">
 <tr>
 	<td align="left">
-		<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;"></form>
+		<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
 	</td>
 	<td align="right">
 		<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
 	</td>
 </tr>
 </table>
+</form>
 
 <script type="text/javascript">
 	Calendar.setup(
@@ -212,7 +213,7 @@ if($query_comments->numRows() > 0) {
 	<?php
 	while($comment = $query_comments->fetchRow()) {
 		?>
-		<tr class="row_<?php echo $row; ?>" height="20">
+		<tr class="row_<?php echo $row; ?>" >
 			<td width="20" style="padding-left: 5px;">
 				<a href="<?php echo WB_URL; ?>/modules/news/modify_comment.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&comment_id=<?php echo $comment['comment_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="^" />
