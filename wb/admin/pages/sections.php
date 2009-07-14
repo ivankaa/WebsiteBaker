@@ -218,7 +218,7 @@ if($query_sections->numRows() > 0) {
 					$template->parse('block_list', 'block_block', true);
 				}
 			} else {
-				$edit_page = $module_name;
+				$edit_page ='<a name="'.$section['section_id'].'" href="'.ADMIN_URL.'/pages/modify.php?page_id='.$page_id.'#'.$section['section_id'].'">'.$module_name.'</a>';
 				$input_attribute = 'input_small';
 				$template->set_var(array(
 						'STYLE_DISPLAY_SECTION_BLOCK' => ' style="visibility: hidden;"',
