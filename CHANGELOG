@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 14-July 2009 Dietrich Roland Pehlke
+#	Removed added marker, placed by mistake, to avoid double loading of backend.js files
+14-July 2009 Dietrich Roland Pehlke
 !	changes in frontend.functions.php, line 323: 'date' to 'gmdate' to avoid E_STRICT warnings.
 !	changes in wb-setup.php, line 50: 'date' to 'gmdate' to avoid E_STRICT warnings. See also #741.
 !	Add missing backend-js marker in the backend-themes templates (header.htt)
