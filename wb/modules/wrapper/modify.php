@@ -25,7 +25,7 @@
 
 // Setup template object
 $template = new Template(WB_PATH.'/modules/wrapper');
-$template->set_file('page', 'modify.html');
+$template->set_file('page', 'modify.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Get page content
