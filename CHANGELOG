@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 15-July 2009 Matthias Gallas
+!	changed in modules/admin.php and admin/pages/add.php mktime() to time()
 !	changed in wrapper modul modify.html to modify.htt
 #	Fixed some validiation bugs in core and different modules (Thanks to luisehahne)
 #	fixed display issue of jscalendar in news modul (Thanks to Aldus)

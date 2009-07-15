@@ -163,7 +163,7 @@ $template->pparse('output', 'page');
 
 // Work-out if the developer wants us to update the timestamp for when the page was last modified
 if(isset($update_when_modified) AND $update_when_modified == true) {
-	$database->query("UPDATE ".TABLE_PREFIX."pages SET modified_when = '".mktime()."', modified_by = '".$admin->get_user_id()."' WHERE page_id = '$page_id'");
+	$database->query("UPDATE ".TABLE_PREFIX."pages SET modified_when = '".time()."', modified_by = '".$admin->get_user_id()."' WHERE page_id = '$page_id'");
 }
 
 ?>
