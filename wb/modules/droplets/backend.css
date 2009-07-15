@@ -23,3 +23,5 @@ thead	{
 }
 
 .row_om_over   { background: #ffffe0; border: outset 1px #679b38 }
+a.tooltip span {display:none; margin-left:14px; width:430px;}
+a.tooltip:hover span{display:inline; position:absolute; padding:5px; border:1px solid #000000; background:#ffffff; color:#000000;}

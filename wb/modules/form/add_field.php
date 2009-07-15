@@ -33,6 +33,11 @@ require('../../config.php');
 // Include WB admin wrapper script
 require(WB_PATH.'/modules/admin.php');
 
+//overwrite php.ini on Apache servers for valid SESSION ID Separator
+if(function_exists('ini_set')) {
+	ini_set('arg_separator.output', '&amp;');
+}
+
 // Include the ordering class
 require(WB_PATH.'/framework/class.order.php');
 // Get new order
@@ -47,9 +52,9 @@ $field_id = $database->get_one("SELECT LAST_INSERT_ID()");
 
 // Say that a new record has been added, then redirect to modify page
 if($database->is_error()) {
-	$admin->print_error($database->get_error(), WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
+	$admin->print_error($database->get_error(), WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&amp;section_id='.$section_id.'&amp;field_id='.$field_id);
 } else {
-	$admin->print_success($TEXT['SUCCESS'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
+	$admin->print_success($TEXT['SUCCESS'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&amp;section_id='.$section_id.'&amp;field_id='.$field_id);
 }
 
 // Print admin footer

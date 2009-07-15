@@ -41,6 +41,11 @@ if(!isset($_GET['field_id']) OR !is_numeric($_GET['field_id'])) {
 // Include WB admin wrapper script
 require(WB_PATH.'/modules/admin.php');
 
+//overwrite php.ini on Apache servers for valid SESSION ID Separator
+if(function_exists('ini_set')) {
+	ini_set('arg_separator.output', '&amp;');
+}
+
 // Get header and footer
 $query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_fields WHERE field_id = '$field_id'");
 $form = $query_content->fetchRow();
@@ -56,9 +61,9 @@ $friendly = array('&lt;', '&gt;');
 
 <form name="modify" action="<?php echo WB_URL; ?>/modules/form/save_field.php" method="post" style="margin: 0;">
 
-<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
-<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
-<input type="hidden" name="field_id" value="<?php echo $field_id; ?>">
+<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
+<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
+<input type="hidden" name="field_id" value="<?php echo $field_id; ?>" />
 
 <table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
 	<tr>
@@ -75,13 +80,13 @@ $friendly = array('&lt;', '&gt;');
 		<td>
 			<select name="type" style="width: 98%;">
 				<option value=""><?php echo $TEXT['PLEASE_SELECT']; ?>...</option>
-				<option value="heading"<?php if($type == 'heading') { echo ' selected'; } ?>><?php echo $TEXT['HEADING']; ?></option>
-				<option value="textfield"<?php if($type == 'textfield') { echo ' selected'; } ?>><?php echo $TEXT['SHORT'].' '.$TEXT['TEXT']; ?> (Textfield)</option>
-				<option value="textarea"<?php if($type == 'textarea') { echo ' selected'; } ?>><?php echo $TEXT['LONG'].' '.$TEXT['TEXT']; ?> (Textarea)</option>
-				<option value="select"<?php if($type == 'select') { echo ' selected'; } ?>><?php echo $TEXT['SELECT_BOX']; ?></option>
-				<option value="checkbox"<?php if($type == 'checkbox') { echo ' selected'; } ?>><?php echo $TEXT['CHECKBOX_GROUP']; ?></option>
-				<option value="radio"<?php if($type == 'radio') { echo ' selected'; } ?>><?php echo $TEXT['RADIO_BUTTON_GROUP']; ?></option>
-				<option value="email"<?php if($type == 'email') { echo ' selected'; } ?>><?php echo $TEXT['EMAIL_ADDRESS']; ?></option>
+				<option value="heading"<?php if($type == 'heading') { echo ' selected="selected"'; } ?>><?php echo $TEXT['HEADING']; ?></option>
+				<option value="textfield"<?php if($type == 'textfield') { echo ' selected="selected"'; } ?>><?php echo $TEXT['SHORT'].' '.$TEXT['TEXT']; ?> (Textfield)</option>
+				<option value="textarea"<?php if($type == 'textarea') { echo ' selected="selected"'; } ?>><?php echo $TEXT['LONG'].' '.$TEXT['TEXT']; ?> (Textarea)</option>
+				<option value="select"<?php if($type == 'select') { echo ' selected="selected"'; } ?>><?php echo $TEXT['SELECT_BOX']; ?></option>
+				<option value="checkbox"<?php if($type == 'checkbox') { echo ' selected="selected"'; } ?>><?php echo $TEXT['CHECKBOX_GROUP']; ?></option>
+				<option value="radio"<?php if($type == 'radio') { echo ' selected="selected"'; } ?>><?php echo $TEXT['RADIO_BUTTON_GROUP']; ?></option>
+				<option value="email"<?php if($type == 'email') { echo ' selected="selected"'; } ?>><?php echo $TEXT['EMAIL_ADDRESS']; ?></option>
 			</select>
 		</td>
 	</tr>
@@ -162,12 +167,12 @@ $friendly = array('&lt;', '&gt;');
 	<tr>
 		<td><?php echo $TEXT['ALLOW_MULTIPLE_SELECTIONS']; ?>:</td>
 		<td>
-			<input type="radio" name="multiselect" id="multiselect_true" value="multiple" <?php if($form['extra'][1] == 'multiple') { echo ' checked'; } ?> />
+			<input type="radio" name="multiselect" id="multiselect_true" value="multiple" <?php if($form['extra'][1] == 'multiple') { echo ' checked="checked"'; } ?> />
 			<a href="#" onclick="javascript: document.getElementById('multiselect_true').checked = true;">
 			<?php echo $TEXT['YES']; ?>
 			</a>
 			&nbsp;
-			<input type="radio" name="multiselect" id="multiselect_false" value="" <?php if($form['extra'][1] == '') { echo ' checked'; } ?> />
+			<input type="radio" name="multiselect" id="multiselect_false" value="" <?php if($form['extra'][1] == '') { echo ' checked="checked"'; } ?> />
 			<a href="#" onclick="javascript: document.getElementById('multiselect_false').checked = true;">
 			<?php echo $TEXT['NO']; ?>
 			</a>
@@ -186,12 +191,12 @@ $friendly = array('&lt;', '&gt;');
 	<tr>
 		<td><?php echo $TEXT['REQUIRED']; ?>:</td>
 		<td>
-			<input type="radio" name="required" id="required_true" value="1" <?php if($form['required'] == 1) { echo ' checked'; } ?> />
+			<input type="radio" name="required" id="required_true" value="1" <?php if($form['required'] == 1) { echo ' checked="checked"'; } ?> />
 			<a href="#" onclick="javascript: document.getElementById('required_true').checked = true;">
 			<?php echo $TEXT['YES']; ?>
 			</a>
 			&nbsp;
-			<input type="radio" name="required" id="required_false" value="0" <?php if($form['required'] == 0) { echo ' checked'; } ?> />
+			<input type="radio" name="required" id="required_false" value="0" <?php if($form['required'] == 0) { echo ' checked="checked"'; } ?> />
 			<a href="#" onclick="javascript: document.getElementById('required_false').checked = true;">
 			<?php echo $TEXT['NO']; ?>
 			</a>
@@ -203,14 +208,14 @@ $friendly = array('&lt;', '&gt;');
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 	<tr>
 		<td align="left">
-			<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;"></form>
+			<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
 		</td>
 		<?php
 		// added by John Maats, PCWacht, 12 januar 2006
 		if ($type<>'none') {
 		?>
 		<td align="center">
-			<input type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['FIELD']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/form/add_field.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>';" style="width: 200px; margin-top: 5px;" />
+			<input type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['FIELD']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/form/add_field.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 200px; margin-top: 5px;" />
 		</td>
 		<?php } 
 		// end addition
@@ -220,7 +225,7 @@ $friendly = array('&lt;', '&gt;');
 		</td>
 	</tr>
 </table>
-
+</form>
 <?php
 
 // Print admin footer

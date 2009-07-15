@@ -39,10 +39,6 @@ $admintool_url = ADMIN_URL .'/admintools/index.php';
 //removes empty entries from the table so they will not be displayed
 $database->query("DELETE FROM ".TABLE_PREFIX."mod_droplets WHERE name=''");
 ?>
-<style type="text/css">
-a.tooltip span {display:none; margin-left:14px; width:430px;}
-a.tooltip:hover span{display:inline; position:absolute; padding:5px; border:1px solid #000000; background:#ffffff; color:#000000;}
-</style>
 
 <br />
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -71,15 +67,15 @@ $num_droplets = $query_droplets->numRows();
 if($num_droplets > 0) {
 	?>
 	<table class="row_a" border="0" cellspacing="0" cellpadding="3" width="100%">
-	<tr>
-		<thead>
+	<thead>
+		<tr>
 			<td width="3%"></td>
 			<td width="21%"><?php echo $TEXT['NAME']; ?></td>
 			<td width="68%"><?php echo $TEXT['DESCRIPTION']; ?></td>
-			<td width="4%"><?php echo $TEXT['ACTIVE']; ?></td>  
+			<td width="4%"><?php echo $TEXT['ACTIVE']; ?></td>
 			<td width="3%"></td>
-		</thead>
-	</tr>
+		</tr>
+	</thead>
 	<?php
 	$row = 'a';
 	while($droplet = $query_droplets->fetchRow()) {
@@ -102,7 +98,7 @@ if($num_droplets > 0) {
 		$comments = '<span>'.$comments.'</span>';
 		?>
 		
-		<tr class="row_<?php echo $row; ?>" height="20">
+		<tr class="row_<?php echo $row; ?>" >
 			<td >
 				<a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $droplet['id']?>" title="<?php echo $TEXT['MODIFY']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="Modify" /> 

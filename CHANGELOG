@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 15-July 2009 Matthias Gallas
+#	Fixed some validiation bugs in core and different modules (Thanks to luisehahne)
 #	fixed display issue of jscalendar in news modul (Thanks to Aldus)
 !	changed modules/admin.php to also make use of backend theme templates
 !	changed in class_login.php mktime() to time()

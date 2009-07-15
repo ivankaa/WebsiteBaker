@@ -125,11 +125,11 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 		// output content of module file to textareas
 	?>
 		<form name="edit_module_file" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" style="margin: 0;">
-	  	<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
-	  	<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
-	  	<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>">
+	  	<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
+	  	<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
+	  	<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>" />
 		<input type="hidden" name="edit_file" value="<?php echo $css_file; ?>" />
-	  	<input type="hidden" name="action" value="save">
+	  	<input type="hidden" name="action" value="save" />
 		<textarea id="code_area" name="css_data" cols="115" rows="25" wrap="VIRTUAL" style="margin:2px;"><?php
 			echo htmlspecialchars($css_content); ?>
 		</textarea>

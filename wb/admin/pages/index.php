@@ -335,7 +335,7 @@ if($editable_pages == 0) {
 									'LINK_COLOR' => '000000',
 									'CURSOR' => 'default',
 									'NAME' => $admin_group_name['name'],
-									'CHECKED' => ' checked'
+									'CHECKED' => ' checked="checked"'
 									)
 							);
 	$template->parse('group_list', 'group_list_block', true);
@@ -384,7 +384,7 @@ if($editable_pages == 0) {
 									'LINK_COLOR' => '000000',
 									'CURSOR' => 'default',
 									'NAME' => $admin_group_name['name'],
-									'CHECKED' => ' checked'
+									'CHECKED' => ' checked="checked"'
 									)
 							);
 	$template->parse('group_list2', 'group_list_block2', true);

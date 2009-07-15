@@ -73,8 +73,8 @@ if(function_exists('edit_module_css')) {
 
 <form name="edit" action="<?php echo WB_URL; ?>/modules/form/save_settings.php" method="post" style="margin: 0;">
 
-<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
-<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
+<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
+<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
 
 <table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
 	<tr>
@@ -83,9 +83,9 @@ if(function_exists('edit_module_css')) {
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['CAPTCHA_VERIFICATION']; ?>:</td>
 		<td>
-			<input type="radio" name="use_captcha" id="use_captcha_true" value="1"<?php if($setting['use_captcha'] == true) { echo ' checked'; } ?> />
+			<input type="radio" name="use_captcha" id="use_captcha_true" value="1"<?php if($setting['use_captcha'] == true) { echo ' checked="checked"'; } ?> />
 			<label for="use_captcha_true"><?php echo $TEXT['ENABLED']; ?></label>
-			<input type="radio" name="use_captcha" id="use_captcha_false" value="0"<?php if($setting['use_captcha'] == false) { echo ' checked'; } ?> />
+			<input type="radio" name="use_captcha" id="use_captcha_false" value="0"<?php if($setting['use_captcha'] == false) { echo ' checked="checked"'; } ?> />
 			<label for="use_captcha_false"><?php echo $TEXT['DISABLED']; ?></label>
 		</td>
 	</tr>
@@ -104,19 +104,19 @@ if(function_exists('edit_module_css')) {
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['HEADER']; ?>:</td>
 		<td class="setting_value">
-			<textarea name="header" style="width: 98%; height: 80px;"><?php echo ($setting['header']); ?></textarea>
+			<textarea name="header" cols="80" rows="6" style="width: 98%; height: 80px;"><?php echo ($setting['header']); ?></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['FIELD'].' '.$TEXT['LOOP']; ?>:</td>
 		<td class="setting_value">
-			<textarea name="field_loop" style="width: 98%; height: 80px;"><?php echo ($setting['field_loop']); ?></textarea>
+			<textarea name="field_loop" cols="80" rows="6" style="width: 98%; height: 80px;"><?php echo ($setting['field_loop']); ?></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['FOOTER']; ?>:</td>
 		<td class="setting_value">
-			<textarea name="footer" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($setting['footer'])); ?></textarea>
+			<textarea name="footer" cols="80" rows="6" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($setting['footer'])); ?></textarea>
 		</td>
 	</tr>
 </table>	
@@ -213,7 +213,7 @@ if(function_exists('edit_module_css')) {
 	<tr>
 		<td class="setting_name"><?php echo $TEXT['EMAIL'].' '.$TEXT['TEXT']; ?>:</td>
 		<td class="setting_value">
-			<textarea name="success_email_text" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($setting['success_email_text'])); ?></textarea>
+			<textarea name="success_email_text" cols="80" rows="1" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($setting['success_email_text'])); ?></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -229,9 +229,9 @@ if(function_exists('edit_module_css')) {
 					continue;
 				$mail_pagename = $mail_page['menu_title'];		
 				$success_page = $mail_page['page_id'];
-				echo $success_page.':'.$setting['success_page'].':';
+			  //	echo $success_page.':'.$setting['success_page'].':'; not vailde
 				if($setting['success_page'] == $success_page) {
-					$selected = ' selected';
+					$selected = ' selected="selected"';
 				} else { 
 					$selected = '';
 				}
@@ -246,14 +246,14 @@ if(function_exists('edit_module_css')) {
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 	<tr>
 		<td align="left">
-			<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;"></form>
+			<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;">
 		</td>
 		<td align="right">
 			<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
 		</td>
 	</tr>
 </table>
-
+</form>
 <?php
 
 // Print admin footer

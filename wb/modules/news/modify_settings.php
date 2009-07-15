@@ -136,9 +136,9 @@ if(function_exists('edit_module_css')) {
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['CAPTCHA_VERIFICATION']; ?>:</td>
 			<td>
-				<input type="radio" name="use_captcha" id="use_captcha_true" value="1"<?php if($fetch_content['use_captcha'] == true) { echo ' checked'; } ?> />
+				<input type="radio" name="use_captcha" id="use_captcha_true" value="1"<?php if($fetch_content['use_captcha'] == true) { echo ' checked="checked"'; } ?> />
 				<label for="use_captcha_true"><?php echo $TEXT['ENABLED']; ?></label>
-				<input type="radio" name="use_captcha" id="use_captcha_false" value="0"<?php if($fetch_content['use_captcha'] == false) { echo ' checked'; } ?> />
+				<input type="radio" name="use_captcha" id="use_captcha_false" value="0"<?php if($fetch_content['use_captcha'] == false) { echo ' checked="checked"'; } ?> />
 				<label for="use_captcha_false"><?php echo $TEXT['DISABLED']; ?></label>
 			</td>
 		</tr>

@@ -302,10 +302,10 @@ function change_os(type) {
 				Server Operating System:
 			</td>
 			<td width="180">
-				<input type="radio" tabindex="4" name="operating_system" id="operating_system_linux" onclick="document.getElementById('file_perms_box').style.display = 'block';" value="linux"<?php if(!isset($_SESSION['operating_system']) OR $_SESSION['operating_system'] == 'linux') { echo ' checked'; } ?> />
+				<input type="radio" tabindex="4" name="operating_system" id="operating_system_linux" onclick="document.getElementById('file_perms_box').style.display = 'block';" value="linux"<?php if(!isset($_SESSION['operating_system']) OR $_SESSION['operating_system'] == 'linux') { echo ' checked="checked"'; } ?> />
 				<font style="cursor: pointer;" onclick="javascript: change_os('linux');">Linux/Unix based</font>
 				<br />
-				<input type="radio" tabindex="5" name="operating_system" id="operating_system_windows" onclick="document.getElementById('file_perms_box').style.display = 'none';" value="windows"<?php if(isset($_SESSION['operating_system']) AND $_SESSION['operating_system'] == 'windows') { echo ' checked'; } ?> />
+				<input type="radio" tabindex="5" name="operating_system" id="operating_system_windows" onclick="document.getElementById('file_perms_box').style.display = 'none';" value="windows"<?php if(isset($_SESSION['operating_system']) AND $_SESSION['operating_system'] == 'windows') { echo ' checked="checked"'; } ?> />
 				<font style="cursor: pointer;" onclick="javascript: change_os('windows');">Windows</font>
 			</td>
 			<td>
@@ -353,7 +353,7 @@ function change_os(type) {
 			</td>
 			<td>&nbsp;</td>
 			<td colspan="2">
-				<input type="checkbox" tabindex="12" name="install_tables" id="install_tables" value="true"<?php if(!isset($_SESSION['install_tables'])) { echo ' checked'; } elseif($_SESSION['install_tables'] == 'true') { echo ' checked'; } ?> />
+				<input type="checkbox" tabindex="12" name="install_tables" id="install_tables" value="true"<?php if(!isset($_SESSION['install_tables'])) { echo ' checked="checked"'; } elseif($_SESSION['install_tables'] == 'true') { echo ' checked="checked"'; } ?> />
 				<label for="install_tables" style="color: #666666;">Install Tables</label>
 				<br />
 				<span style="font-size: 10px; color: #666666;">(Please note: May remove existing tables and data)</span></td>		

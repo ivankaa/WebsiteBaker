@@ -137,11 +137,15 @@ if($query_settings->numRows() > 0) {
 
 ?>
 <form <?php echo ( ( (strlen($form_name) > 0) AND (false == $use_xhtml_strict) ) ? "name=\"".$form_name."\"" : ""); ?> action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])); ?>#wb_<?PHP echo $section_id;?>" method="post">
-<div><input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" /></div>
+<div>
+<input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" />
+</div>
 <?php
 if(ENABLED_ASP) { // first add some honeypot-fields
 ?>
-<div><input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" /></div>
+<div>
+<input type="hidden" name="submitted_when" value="<?php $t=time(); echo $t; $_SESSION['submitted_when']=$t; ?>" />
+</div>
 <p class="nixhier">
 email address:
 <label for="email">Leave this field email-address blank:</label>

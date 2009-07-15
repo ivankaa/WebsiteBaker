@@ -80,12 +80,12 @@ if (!function_exists('edit_module_css')) {
 			?>
 			<form name="edit_module_file" action="<?php echo WB_URL .'/modules/edit_module_files.php?page_id='.$page_id;?>" 
 				method="post" style="margin: 0; align:right;">
-				<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
-				<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
-				<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>">
-				<input type="hidden" name="edit_file" value="<?php echo ($frontend_css) ?'frontend.css' : 'backend.css';?>">
-				<input type="hidden" name="action" value="edit">
-				<input type="submit" value="<?php echo $edit_css_caption;?>" class="mod_<?php echo $mod_dir;?>_edit_css">
+				<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
+				<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
+				<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>" />
+				<input type="hidden" name="edit_file" value="<?php echo ($frontend_css) ?'frontend.css' : 'backend.css';?>" />
+				<input type="hidden" name="action" value="edit" />
+				<input type="submit" value="<?php echo $edit_css_caption;?>" class="mod_<?php echo $mod_dir;?>_edit_css" />
 			</form>
 			<?php
     }
@@ -110,12 +110,12 @@ if (!function_exists('toggle_css_file')) {
 		if(mod_file_exists($mod_dir, $toggle_file)) {
 			?>
 			<form name="toggle_module_file" action="<?php echo WB_URL .'/modules/edit_module_files.php?page_id='.$page_id;?>" method="post" style="margin: 0; align:right;">
-				<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
-				<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
-				<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>">
-				<input type="hidden" name="edit_file" value="<?php echo $toggle_file; ?>">
-				<input type="hidden" name="action" value="edit">
-				<input type="submit" value="<?php echo ucwords($toggle_file);?>" class="mod_<?php echo $mod_dir;?>_edit_css">
+				<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
+				<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
+				<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>" />
+				<input type="hidden" name="edit_file" value="<?php echo $toggle_file; ?>" />
+				<input type="hidden" name="action" value="edit" />
+				<input type="submit" value="<?php echo ucwords($toggle_file);?>" class="mod_<?php echo $mod_dir;?>_edit_css" />
 			</form>
 			<?php
 		}

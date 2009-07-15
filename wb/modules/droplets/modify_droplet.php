@@ -62,8 +62,8 @@ $content = (htmlspecialchars($fetch_content['code']));
 <br />
 <form name="modify" action="<?php echo WB_URL; ?>/modules/droplets/save_droplet.php" method="post" style="margin: 0;">
 <input type="hidden" name="data_codepress" value="" />
-<input type="hidden" name="droplet_id" value="<?php echo $droplet_id; ?>">
-<input type="hidden" name="show_wysiwyg" value="<?php echo $fetch_content['show_wysiwyg']; ?>">
+<input type="hidden" name="droplet_id" value="<?php echo $droplet_id; ?>" />
+<input type="hidden" name="show_wysiwyg" value="<?php echo $fetch_content['show_wysiwyg']; ?>" />
 
 <table class="row_a" cellpadding="4" cellspacing="0" border="0" width="100%">
 		<tr>
@@ -85,11 +85,11 @@ $content = (htmlspecialchars($fetch_content['code']));
 			<?php echo $TEXT['ACTIVE']; ?>:
 		</td>
 		<td>	
-			<input type="radio" name="active" id="active_true" value="1" <?php if($fetch_content['active'] == 1) { echo ' checked'; } ?> />
+			<input type="radio" name="active" id="active_true" value="1" <?php if($fetch_content['active'] == 1) { echo ' checked="checked"'; } ?> />
 			<a href="#" onclick="javascript: document.getElementById('active_true').checked = true;">
 			<label><?php echo $TEXT['YES']; ?></label>
 			</a>
-			<input type="radio" name="active" id="active_false" value="0" <?php if($fetch_content['active'] == 0) { echo ' checked'; } ?> />
+			<input type="radio" name="active" id="active_false" value="0" <?php if($fetch_content['active'] == 0) { echo ' checked="checked"'; } ?> />
 			<a href="#" onclick="javascript: document.getElementById('active_false').checked = true;">
 			<label><?php echo $TEXT['NO']; ?></label>
 			</a>
@@ -105,21 +105,21 @@ if ($modified_by == 1) {
 		</td>
 		<td> 
 			<?php echo $DR_TEXT['ADMIN_EDIT']; ?>&nbsp;   	
-			<input type="radio" name="admin_edit" id="admin_edit_true" value="1" <?php if($fetch_content['admin_edit'] == 1) { echo ' checked'; } ?> />
+			<input type="radio" name="admin_edit" id="admin_edit_true" value="1" <?php if($fetch_content['admin_edit'] == 1) { echo ' checked="checked"'; } ?> />
 			<a href="#" onclick="javascript: document.getElementById('admin_edit_true').checked = true;">
 			<label><?php echo $TEXT['YES']; ?></label>
 			</a>
-			<input type="radio" name="admin_edit" id="admin_edit_false" value="0" <?php if($fetch_content['admin_edit'] == 0) { echo ' checked'; } ?> />
+			<input type="radio" name="admin_edit" id="admin_edit_false" value="0" <?php if($fetch_content['admin_edit'] == 0) { echo ' checked="checked"'; } ?> />
 			<a href="#" onclick="javascript: document.getElementById('admin_edit_false').checked = true;">
 			<label><?php echo $TEXT['NO']; ?></label>
 			</a>
 			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 			<?php echo $DR_TEXT['ADMIN_VIEW']; ?>:
-			<input type="radio" name="admin_view" id="admin_view_true" value="1" <?php if($fetch_content['admin_view'] == 1) { echo ' checked'; } ?> />
+			<input type="radio" name="admin_view" id="admin_view_true" value="1" <?php if($fetch_content['admin_view'] == 1) { echo ' checked="checked"'; } ?> />
 			<a href="#" onclick="javascript: document.getElementById('admin_view_true').checked = true;">
 			<label><?php echo $TEXT['YES']; ?></label>
 			</a>
-			<input type="radio" name="admin_view" id="admin_view_false" value="0" <?php if($fetch_content['admin_view'] == 0) { echo ' checked'; } ?> />
+			<input type="radio" name="admin_view" id="admin_view_false" value="0" <?php if($fetch_content['admin_view'] == 0) { echo ' checked="checked"'; } ?> />
 			<a href="#" onclick="javascript: document.getElementById('admin_view_false').checked = true;">
 			<label><?php echo $TEXT['NO']; ?></label>
 			</a>
@@ -130,7 +130,7 @@ if ($modified_by == 1) {
 ?>
 	<tr>
 		<td valign="top" class="setting_name" width="60px"><?php echo $TEXT['CODE']; ?>:</td>
-		<td ><textarea name="savecontent" id ="contentedit" style="width: 98%; height: 450px;" wrap="off"><?php echo $content; ?></textarea>&nbsp;
+		<td ><textarea name="savecontent" id ="contentedit" style="width: 98%; height: 450px;" rows="50" cols="120"><?php echo $content; ?></textarea>&nbsp;
 		</td>
 	</tr>
 	<tr>
@@ -140,7 +140,7 @@ if ($modified_by == 1) {
 	<tr>
 		<td valign="top" class="setting_name" width="60px"><?php echo $TEXT['COMMENTS']; ?>:</td>
 		<td>
-			<textarea name="comments" style="width: 98%; height: 100px;"><?php echo stripslashes($fetch_content['comments']); ?></textarea>
+			<textarea name="comments" style="width: 98%; height: 100px;" rows="50" cols="120"><?php echo stripslashes($fetch_content['comments']); ?></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -160,14 +160,14 @@ if ($modified_by == 1 OR $fetch_content['admin_edit'] == 0 ) {
 	<?php
 }
 ?>
-			</form>
+
 		</td>
 		<td align="right">
 			<button class="cancel" type="button" onclick="javascript: window.location = '<?php echo $module_edit_link; ?>';"><?php echo $TEXT['CANCEL']; ?></button>
 		</td>
 	</tr>
 </table>
-
+</form>
 <?php
 
 // Print admin footer
