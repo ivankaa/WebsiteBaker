@@ -117,8 +117,8 @@ if($results_array['modified_when'] != 0) {
 }
 
 // Include page info script
-$template = new Template(ADMIN_PATH.'/pages');
-$template->set_file('page', 'modify.html');
+$template = new Template(THEME_PATH.'/templates');
+$template->set_file('page', 'pages_modify.htt');
 $template->set_block('page', 'main_block', 'main');
 $template->set_var(array(
 								'PAGE_ID' => $results_array['page_id'],
