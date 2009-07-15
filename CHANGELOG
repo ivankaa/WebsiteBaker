@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+15-July 2009 Matthias Gallas
+!	changed in class_login.php mktime() to time()
 14-July 2009 Matthias Gallas
 #	Fixed bug with sections are only editable in new backend-themes if blocks are enabled
 	(Thanks to Luisehahne)

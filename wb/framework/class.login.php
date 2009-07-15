@@ -258,7 +258,7 @@ class login extends admin {
 			}	
 
 			// Update the users table with current ip and timestamp
-			$get_ts = mktime();
+			$get_ts = time();
 			$get_ip = $_SERVER['REMOTE_ADDR'];
 			$query = "UPDATE ".$this->USERS_TABLE." SET login_when = '$get_ts', login_ip = '$get_ip' WHERE user_id = '$user_id'";
 			$database->query($query);
