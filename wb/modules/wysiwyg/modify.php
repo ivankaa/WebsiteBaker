@@ -68,7 +68,6 @@ show_wysiwyg_editor('content'.$section_id,'content'.$section_id,$content,'725px'
 		<input type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
 	</td>
 	<td align="right">
-		</form>
 		<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = 'index.php';" style="width: 100px; margin-top: 5px;" />
 	</td>
 </tr>
