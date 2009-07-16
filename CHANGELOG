@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 16-July 2009 Matthias Gallas
+#	Fixed E_ALL notice in news/view.php
 !	replaced in form and news delimiter "&amp;" with "&"
 	was introduced with changeset [1069] but didn't work on all servers
 #	Removed double </form> tags in pages/intro.php and wysiwyg/modify.php

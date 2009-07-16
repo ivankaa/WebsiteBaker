@@ -365,8 +365,9 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			}
 		} else {
 			// Say no comments found
+			$content = '';
 			if(isset($TEXT['NONE_FOUND'])) {
-				$content .= "<tr><td>".$TEXT['NONE_FOUND'].'<br /></td></tr>';
+				$content .= '<tr><td>'.$TEXT['NONE_FOUND'].'<br /></td></tr>';
 			} else {
 				$content .= '<tr><td>None Found<br /></td></tr>';
 			}
