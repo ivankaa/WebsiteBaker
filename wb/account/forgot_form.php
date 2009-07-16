@@ -46,7 +46,7 @@ if(isset($_POST['email']) && $_POST['email'] != "" &&
 		
 		// Check if the password has been reset in the last 2 hours
 		$last_reset = $results_array['last_reset'];
-		$time_diff = mktime()-$last_reset; // Time since last reset in seconds
+		$time_diff = time()-$last_reset; // Time since last reset in seconds
 		$time_diff = $time_diff/60/60; // Time since last reset in hours
 		if($time_diff < 2) {
 			
@@ -68,7 +68,7 @@ if(isset($_POST['email']) && $_POST['email'] != "" &&
 				$new_pass = $new_pass . $tmp;
 				$i++;
 			}
-			$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".md5($new_pass)."', last_reset = '".mktime()."' WHERE user_id = '".$results_array['user_id']."'");
+			$database->query("UPDATE ".TABLE_PREFIX."users SET password = '".md5($new_pass)."', last_reset = '".time()."' WHERE user_id = '".$results_array['user_id']."'");
 			
 			if($database->is_error()) {
 				// Error updating database

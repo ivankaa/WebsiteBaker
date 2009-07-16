@@ -24,7 +24,7 @@
 */
 
 // Filename to use
-$filename = $_SERVER['HTTP_HOST'].'-backup-'.gmdate('Y-m-d', mktime()+TIMEZONE).'.sql';
+$filename = $_SERVER['HTTP_HOST'].'-backup-'.gmdate('Y-m-d', time()+TIMEZONE).'.sql';
 
 // Check if user clicked on the backup button
 if(!isset($_POST['backup'])){ 
@@ -40,7 +40,7 @@ $output = "".
 "#\n".
 "# Website Baker ".WB_VERSION." Database Backup\n".
 "# ".WB_URL."\n".
-"# ".gmdate(DATE_FORMAT, mktime()+TIMEZONE).", ".gmdate(TIME_FORMAT, mktime()+TIMEZONE)."\n".
+"# ".gmdate(DATE_FORMAT, time()+TIMEZONE).", ".gmdate(TIME_FORMAT, time()+TIMEZONE)."\n".
 "#".
 "\n";
 

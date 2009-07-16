@@ -111,7 +111,7 @@ if($publisheduntil == '' || $publisheduntil < 1)
 	$publisheduntil=0;
 
 // Update row
-$database->query("UPDATE ".TABLE_PREFIX."mod_news_posts SET group_id = '$group_id', title = '$title', link = '$post_link', content_short = '$short', content_long = '$long', commenting = '$commenting', active = '$active', published_when = '$publishedwhen', published_until = '$publisheduntil', posted_when = '".mktime()."', posted_by = '".$admin->get_user_id()."' WHERE post_id = '$post_id'");
+$database->query("UPDATE ".TABLE_PREFIX."mod_news_posts SET group_id = '$group_id', title = '$title', link = '$post_link', content_short = '$short', content_long = '$long', commenting = '$commenting', active = '$active', published_when = '$publishedwhen', published_until = '$publisheduntil', posted_when = '".time()."', posted_by = '".$admin->get_user_id()."' WHERE post_id = '$post_id'");
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {

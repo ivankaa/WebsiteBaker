@@ -72,7 +72,7 @@ $results_array = $results->fetchRow();
 $module = $results_array['module'];
 
 // Update the pages table
-$now = mktime();
+$now = time();
 $query = "UPDATE ".TABLE_PREFIX."pages SET modified_when = '$now', modified_by = '".$admin->get_user_id()."' WHERE page_id = '$page_id'";
 $database->query($query);
 

@@ -48,7 +48,7 @@ if($admin->get_post('title') == '') {
 	$content = $admin->add_slashes(str_replace($tags, '', $_POST['savecontent']));
 	
 	$comments = $admin->add_slashes($admin->get_post('comments'));
-	$modified_when = mktime();
+	$modified_when = time();
 	$modified_by = $admin->get_user_id(); 
 }
 

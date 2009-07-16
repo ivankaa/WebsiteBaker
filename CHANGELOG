@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+16-July 2009 Matthias Gallas
+!	replaced all remaining mktime() with time(), except from third party scripts
 15-July 2009 Matthias Gallas
 !	changed in modules/admin.php and admin/pages/add.php mktime() to time()
 !	changed in wrapper modul modify.html to modify.htt

@@ -435,7 +435,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 						$submitted_by = 0;
 					}
 					$email_body = $wb->add_slashes($email_body);
-					$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_submissions (page_id,section_id,submitted_when,submitted_by,body) VALUES ('".PAGE_ID."','$section_id','".mktime()."','$submitted_by','$email_body')");
+					$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_submissions (page_id,section_id,submitted_when,submitted_by,body) VALUES ('".PAGE_ID."','$section_id','".time()."','$submitted_by','$email_body')");
 					// Make sure submissions table isn't too full
 					$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions ORDER BY submitted_when");
 					$num_submissions = $query_submissions->numRows();

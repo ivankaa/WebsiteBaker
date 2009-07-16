@@ -97,7 +97,7 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id']) AND isset($_GET['sec
 	}
 
 	// Insert the comment into db
-	$commented_when = mktime();
+	$commented_when = time();
 	if($wb->is_authenticated() == true) {
 		$commented_by = $wb->get_user_id();
 	} else {

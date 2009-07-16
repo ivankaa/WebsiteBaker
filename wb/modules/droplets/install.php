@@ -62,7 +62,7 @@ foreach ($names as $dropfile) {
 		}
 		$droplet = implode ( "\n", $cArray );
 		$name = substr($dropfile,0,-4);
-		$modified_when = mktime();
+		$modified_when = time();
 		$modified_by = method_exists($admin, 'get_user_id') ? $admin->get_user_id() : 1;
 		$database->query("INSERT INTO `$table`  
 			(name, code, description, comments, active, modified_when, modified_by) 

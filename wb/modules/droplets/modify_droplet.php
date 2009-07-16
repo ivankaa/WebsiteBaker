@@ -46,7 +46,7 @@ require_once(WB_PATH . '/include/editarea/wb_wrapper_edit_area.php');
 echo registerEditArea ('contentedit','php',true,'both',true,true,600,450,'search, fullscreen, |, undo, redo, |, select_font,|, highlight, reset_highlight, |, help');
 		
 
-$modified_when = mktime();
+$modified_when = time();
 $modified_by = $admin->get_user_id();
 
 // Get header and footer

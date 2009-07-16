@@ -22,7 +22,7 @@ if($admin->get_permission('admintools') == true) {
 	$module_edit_link = ADMIN_URL .'/admintools/tool.php?tool=droplets';
 	$admin = new admin('admintools', 'admintools');
 
-	$modified_when = mktime();
+	$modified_when = time();
 	$modified_by = $admin->get_user_id();
 
 	// Insert new row into database
