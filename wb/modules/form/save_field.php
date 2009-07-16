@@ -42,14 +42,9 @@ if(!isset($_POST['field_id']) OR !is_numeric($_POST['field_id'])) {
 $update_when_modified = true; // Tells script to update when this page was last updated
 require(WB_PATH.'/modules/admin.php');
 
-//overwrite php.ini on Apache servers for valid SESSION ID Separator
-if(function_exists('ini_set')) {
-	ini_set('arg_separator.output', '&amp;');
-}
-
 // Validate all fields
 if($admin->get_post('title') == '' OR $admin->get_post('type') == '') {
-	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&amp;section_id='.$section_id.'&amp;field_id='.$field_id);
+	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
 } else {
 	$title = $admin->add_slashes($admin->get_post('title'));
 	$type = $admin->add_slashes($admin->get_post('type'));
@@ -98,9 +93,9 @@ if($admin->get_post('type') == 'textfield') {
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {
-	$admin->print_error($database->get_error(), WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&amp;section_id='.$section_id.'&amp;field_id='.$field_id);
+	$admin->print_error($database->get_error(), WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
 } else {
-	$admin->print_success($TEXT['SUCCESS'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&amp;section_id='.$section_id.'&amp;field_id='.$field_id);
+	$admin->print_success($TEXT['SUCCESS'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
 }
 
 // Print admin footer

@@ -41,11 +41,6 @@ if(!isset($_GET['field_id']) OR !is_numeric($_GET['field_id'])) {
 // Include WB admin wrapper script
 require(WB_PATH.'/modules/admin.php');
 
-//overwrite php.ini on Apache servers for valid SESSION ID Separator
-if(function_exists('ini_set')) {
-	ini_set('arg_separator.output', '&amp;');
-}
-
 // Get header and footer
 $query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_fields WHERE field_id = '$field_id'");
 $form = $query_content->fetchRow();
@@ -215,7 +210,7 @@ $friendly = array('&lt;', '&gt;');
 		if ($type<>'none') {
 		?>
 		<td align="center">
-			<input type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['FIELD']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/form/add_field.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>';" style="width: 200px; margin-top: 5px;" />
+			<input type="button" value="<?php echo $TEXT['ADD'].' '.$TEXT['FIELD']; ?>" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/form/add_field.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>';" style="width: 200px; margin-top: 5px;" />
 		</td>
 		<?php } 
 		// end addition

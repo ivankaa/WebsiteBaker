@@ -41,11 +41,6 @@ if(!isset($_GET['submission_id']) OR !is_numeric($_GET['submission_id'])) {
 // Include WB admin wrapper script
 require(WB_PATH.'/modules/admin.php');
 
-//overwrite php.ini on Apache servers for valid SESSION ID Separator
-if(function_exists('ini_set')) {
-	ini_set('arg_separator.output', '&amp;');
-}
-
 // Get submission details
 $query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_submissions WHERE submission_id = '$submission_id'");
 $submission = $query_content->fetchRow();
@@ -89,7 +84,7 @@ if($get_user->numRows() != 0) {
 <br />
 
 <input type="button" value="<?php echo $TEXT['CLOSE']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 150px; margin-top: 5px;" />
-<input type="button" value="<?php echo $TEXT['DELETE']; ?>" onclick="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/form/delete_submission.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&submission_id=<?php echo $submission_id; ?>');" style="width: 150px; margin-top: 5px;" />
+<input type="button" value="<?php echo $TEXT['DELETE']; ?>" onclick="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/form/delete_submission.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&submission_id=<?php echo $submission_id; ?>');" style="width: 150px; margin-top: 5px;" />
 <?php
 
 // Print admin footer
