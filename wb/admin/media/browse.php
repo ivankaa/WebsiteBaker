@@ -32,6 +32,15 @@ $admin = new admin('Media', 'media', false);
 require_once(WB_PATH.'/framework/functions.php');
 include ('parameters.php');
 
+// check if theme language file exists for the language set by the user (e.g. DE, EN)
+if(!file_exists(THEME_PATH .'/languages/'.LANGUAGE .'.php')) {
+	// no theme language file exists for the language set by the user, include default theme language file EN.php
+	require_once(THEME_PATH .'/languages/EN.php');
+} else {
+	// a theme language file exists for the language defined by the user, load it
+	require_once(THEME_PATH .'/languages/'.LANGUAGE .'.php');
+}
+
 // Byte convert for filesize
 function byte_convert($bytes) {
 	$symbol = array(' bytes', ' KB', ' MB', ' GB', ' TB');

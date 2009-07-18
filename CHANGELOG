@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 18-July 2009 Matthias Gallas
++	Added multilnaguage support to media section of argos_theme (Thanks to Argos)
+#	Fixed smaller display issue in argos_theme (Thanks to Argos)
 +	Added more meta tags to backend themes
 !	Updated Argos_theme (Thanks to Argos and Luisehahne)
 #	Again added some &amp; to news and form to get more valid output (Thanks to Luisehahne)

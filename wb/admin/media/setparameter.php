@@ -29,6 +29,15 @@ $admin = new admin('Media', 'media', false);
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
+// check if theme language file exists for the language set by the user (e.g. DE, EN)
+if(!file_exists(THEME_PATH .'/languages/'.LANGUAGE .'.php')) {
+	// no theme language file exists for the language set by the user, include default theme language file EN.php
+	require_once(THEME_PATH .'/languages/EN.php');
+} else {
+	// a theme language file exists for the language defined by the user, load it
+	require_once(THEME_PATH .'/languages/'.LANGUAGE .'.php');
+}
+
 //Save post vars to the parameters file
 if ( !is_null($admin->get_post_escaped("save"))) {
 	//Check for existing settings entry, if not existing, create a record first!
@@ -68,7 +77,7 @@ if ($_SESSION['GROUP_ID'] != 1) {
 	$template->set_var('DISPLAY_ADMIN', 'hide');
 }
 $template->set_var(array( 
-					'TEXT_HEADER' => 'Set maximum imagesize for a folder</b><br><small><i>(resizing on new uploads only)</i></small>',
+					'TEXT_HEADER' => $TEXT['TEXT_HEADER'],
 					'SAVE_TEXT' => $TEXT['SAVE'],
 					'BACK' => $TEXT['BACK']
 				)
@@ -105,9 +114,9 @@ foreach($dirs AS $name) {
 								'CUR_WIDTH' => $cur_width,
 								'CUR_HEIGHT' => $cur_height,
 								'SETTINGS' => $TEXT['SETTINGS'],
-								'ADMIN_ONLY' => 'Settings for administrator only',
+								'ADMIN_ONLY' => $TEXT['ADMIN_ONLY'],
 								'ADMIN_ONLY_SELECTED' => $pathsettings['global']['admin_only'],
-								'NO_SHOW_THUMBS' => 'Hide thumbnails',
+								'NO_SHOW_THUMBS' => $TEXT['NO_SHOW_THUMBS'],
 								'NO_SHOW_THUMBS_SELECTED' => $pathsettings['global']['show_thumbs'],
 								'ROW_BG_COLOR' => $row_bg_color
 							)

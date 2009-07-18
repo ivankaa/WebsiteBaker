@@ -4,7 +4,7 @@ body,td,th,input,textarea {font-family:verdana,arial,helvetica,sans-serif;font-s
 body {background:#f9f9f9 url(images/background.jpg) 0 0 repeat-x;margin:0;text-align:center;}
 img {	border: 0px;}
 
-#admin_header{text-align:center;width:900px;height:105px;margin:0 auto;padding:0;*padding-top:10px;}
+#admin_header {text-align:center;width:900px;height:105px;margin:0 auto;padding:10px 0 0 0;}
 #admin_header a#website_title {display:block;text-align:left;font-size:14px;font-weight:bold;color:#fff;text-transform:uppercase;text-decoration:none;}
 #topmenu {float:right;text-align:right;color:#fff;}
 #topmenu a {font-size:11px;color:#fff;text-decoration:underline;margin:0 5px;}
