@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 18-July 2009 Matthias Gallas
+!	Updated Dutch language File (Thanks to argos)
 !	Updated French language File (Thanks to mylesk42)
 16-July 2009 Matthias Gallas
 #	Fixed E_ALL notice in news/view.php

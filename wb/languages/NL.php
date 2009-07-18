@@ -410,34 +410,34 @@ $TEXT['CHARSET'] = 'Tekenset';
 $TEXT['MODULE_ORDER'] = 'Module volgorde om te zoeken';
 $TEXT['MAX_EXCERPT'] = 'Max lijnen per zoeksessie';
 $TEXT['TIME_LIMIT'] = 'Max tijd om gegevens te zoeken per module';
-$TEXT['PUBL_START_DATE'] = 'Start datum';
-$TEXT['PUBL_END_DATE'] = 'Eind datum';
+$TEXT['PUBL_START_DATE'] = 'Startdatum';
+$TEXT['PUBL_END_DATE'] = 'Einddatum';
 $TEXT['CALENDAR'] = 'Kalender';
 $TEXT['DELETE_DATE'] = 'Wis datum';
 $TEXT['WBMAILER_DEFAULT_SETTINGS_NOTICE'] = 'Specifieer hieronder een standaard "VAN" adres en "AFZENDER" naam. Het is aanbevolen om een VAN adres zoals: <strong>admin@yourdomain.com</strong> te gebruiken. Om spam te verhinderen kunnen sommige mailproviders (vb <em>mail.com</em>) mails verwerpen met een VAN: adres zoals <em>name@mail.com</em>, die verzonden worden vanaf een vreemde relay-server.<br /><br />Onderstaande standaardwaarden worden enkel gebruikt indien geen andere waarden gespecifieerd worden door Website Baker. Indien uw server <acronym title="Simple mail transfer protocol">SMTP</acronym> ondersteunt kunt u deze optie gebruiken voor het versturen van uitgaande mails.';
-$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Standaard mail Van';
-$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Standaard Afzender Naam';
+$TEXT['WBMAILER_DEFAULT_SENDER_MAIL'] = 'Standaard afzendermailadres';
+$TEXT['WBMAILER_DEFAULT_SENDER_NAME'] = 'Standaard afzendernaam';
 $TEXT['WBMAILER_NOTICE'] = '<strong>SMTP Mailer Instellingen:</strong><br />Onderstaande instellingen zijn enkel van toepassing indien u mails wenst te verzenden via <acronym title="Simple mail transfer protocol">SMTP</acronym>. Indien u de naam of instellingen van de SMTP server niet kent, selecteer dan bij de standaard mail routine: PHP MAIL.';
 $TEXT['WBMAILER_FUNCTION'] = 'Mail Routine';
 $TEXT['WBMAILER_SMTP_HOST'] = 'SMTP Host';
 $TEXT['WBMAILER_PHP'] = 'PHP MAIL';
 $TEXT['WBMAILER_SMTP'] = 'SMTP';
-$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP authenticatie';
+$TEXT['WBMAILER_SMTP_AUTH'] = 'SMTP-authenticatie';
 $TEXT['WBMAILER_SMTP_AUTH_NOTICE'] = 'Enkel wanneer men zich dient aan te melden op de SMTP Host';
-$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP gebruikersnaam';
-$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP Paswoord';
+$TEXT['WBMAILER_SMTP_USERNAME'] = 'SMTP-gebruikersnaam';
+$TEXT['WBMAILER_SMTP_PASSWORD'] = 'SMTP-wachtwoord';
 $TEXT['PLEASE_LOGIN'] = 'Inloggen aub';
 $TEXT['CAP_EDIT_CSS'] = 'Wijzig CSS';
-$TEXT['HEADING_CSS_FILE'] = 'Actuele module bestand: ';
-$TEXT['TXT_EDIT_CSS_FILE'] = 'Wijzig de CSS definities in het tekstveld hieronder.';
+$TEXT['HEADING_CSS_FILE'] = 'Actuele modulebestand: ';
+$TEXT['TXT_EDIT_CSS_FILE'] = 'Wijzig de CSS-definities in het tekstveld hieronder.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
 $TEXT['REQUIREMENT'] = "Benodigd";
 $TEXT['INSTALLED'] = "ge&iuml;nstalleerd";
 $TEXT['NOT_INSTALLED'] = "niet ge&iuml;nstalleerd";
 $TEXT['ADDON'] = "Add-On";
 $TEXT['EXTENSION'] = "Extensie";
-$TEXT['UNZIP_FILE'] = "Upload and unpack a zip archiv";
-$TEXT['DELETE_ZIP'] = "Delete zip archiv after unpacking";
+$TEXT['UNZIP_FILE'] = "Uploaden en uitpakken van ZIP-bestand";
+$TEXT['DELETE_ZIP'] = "Verwijder ZIP van server na uitpakken";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Sorry, u heeft geen bevoegdheden om deze pagina te bekijken';
@@ -455,7 +455,7 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Dit wachtwoord is te lang';
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Gebruikersnaam en/of wachtwoord incorrect';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'U moet een e-mailadres invullen';
-$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Uw login gegevens...';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Uw login-gegevens...';
 $MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
 Hallo {LOGIN_DISPLAY_NAME},
 
