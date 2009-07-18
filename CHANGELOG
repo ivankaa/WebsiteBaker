@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 18-July 2009 Matthias Gallas
+!	Replaced in some alt tags hardcoded signs with language variables (Thanks to argos)
 !	Updated Dutch language File (Thanks to argos)
 !	Updated French language File (Thanks to mylesk42)
 16-July 2009 Matthias Gallas

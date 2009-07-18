@@ -253,7 +253,7 @@ if($query_sections->numRows() > 0) {
 				$template->set_var(
 							'VAR_MOVE_UP_URL',
 							'<a href="'.ADMIN_URL.'/pages/move_up.php?page_id='.$page_id.'&amp;section_id='.$section['section_id'].'">
-							<img src="'.THEME_URL.'/images/up_16.png" alt="^" />
+							<img src="'.THEME_URL.'/images/up_16.png" alt="{TEXT_MOVE_UP}" />
 							</a>' );
 			} else {
 				$template->set_var(array(
@@ -264,7 +264,7 @@ if($query_sections->numRows() > 0) {
 				$template->set_var(
 							'VAR_MOVE_DOWN_URL',
 							'<a href="'.ADMIN_URL.'/pages/move_down.php?page_id='.$page_id.'&amp;section_id='.$section['section_id'].'">
-							<img src="'.THEME_URL.'/images/down_16.png" alt="v" />
+							<img src="'.THEME_URL.'/images/down_16.png" alt="{TEXT_MOVE_DOWN}" />
 							</a>' );
 			} else {
 				$template->set_var(array(
@@ -361,6 +361,8 @@ $template->set_var(array(
 					'TEXT_CALENDAR' => $TEXT['CALENDAR'],
 					'TEXT_DELETE_DATE' => $TEXT['DELETE_DATE'],
 					'TEXT_ADD_SECTION' => $TEXT['ADD_SECTION'],
+					'TEXT_MOVE_UP' => $TEXT['MOVE_UP'],
+					'TEXT_MOVE_DOWN' => $TEXT['MOVE_DOWN']
 				) );
 $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');

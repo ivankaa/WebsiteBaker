@@ -197,7 +197,7 @@ function make_list($parent, $editable_pages) {
 					<?php if($page['visibility'] != 'deleted') { ?>
 						<?php if($admin->get_permission('pages_settings') == true AND $can_modify == true) { ?>
 						<a href="<?php echo ADMIN_URL; ?>/pages/move_up.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MOVE_UP']; ?>">
-							<img src="<?php echo THEME_URL; ?>/images/up_16.png" border="0" alt="^" />
+							<img src="<?php echo THEME_URL; ?>/images/up_16.png" border="0" alt="<?php echo $TEXT['MOVE_UP']; ?>" />
 						</a>
 						<?php } ?>
 					<?php } ?>
@@ -208,7 +208,7 @@ function make_list($parent, $editable_pages) {
 					<?php if($page['visibility'] != 'deleted') { ?>
 						<?php if($admin->get_permission('pages_settings') == true AND $can_modify == true) { ?>
 						<a href="<?php echo ADMIN_URL; ?>/pages/move_down.php?page_id=<?php echo $page['page_id']; ?>" title="<?php echo $TEXT['MOVE_DOWN']; ?>">
-							<img src="<?php echo THEME_URL; ?>/images/down_16.png" border="0" alt="v" />
+							<img src="<?php echo THEME_URL; ?>/images/down_16.png" border="0" alt="<?php echo $TEXT['MOVE_DOWN']; ?>" />
 						</a>
 						<?php } ?>
 					<?php } ?>
@@ -217,7 +217,7 @@ function make_list($parent, $editable_pages) {
 				<td class="list_actions">
 					<?php if($admin->get_permission('pages_delete') == true AND $can_modify == true) { ?>
 					<a href="javascript: confirm_link('<?php echo $MESSAGE['PAGES']['DELETE_CONFIRM']; ?>?', '<?php echo ADMIN_URL; ?>/pages/delete.php?page_id=<?php echo $page['page_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
-						<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
+						<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="<?php echo $TEXT['DELETE']; ?>" />
 					</a>
 					<?php } ?>
 				</td>
