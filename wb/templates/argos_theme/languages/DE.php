@@ -27,8 +27,8 @@
 $template_description 	= 'Ein erweitertes Backend-Theme f&uuml;r Websitebaker 2.8';
 
 //Texts
-$TEXT['ADMIN_ONLY'] = 'nur f&uuml;r Administratoren';
+$TEXT['ADMIN_ONLY'] = 'diese Optionen nur Administratoren zug&auml;nglich machen';
 $TEXT['NO_SHOW_THUMBS'] = 'Vorschaubilder verstecken';
-$TEXT['TEXT_HEADER'] = 'Maximale Bildergr&ouml;&szlig;e für diesen Ordner</b><br><small><i>(&Auml;nderung nur beim Hochladen)</i></small>';
+$TEXT['TEXT_HEADER'] = 'Maximale Bildergr&ouml;&szlig;e f&uuml;r Ordner festlegen</b><br><small><i>(&Auml;nderung nur beim Hochladen)</i></small>';
 
 ?>
