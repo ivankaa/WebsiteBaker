@@ -140,6 +140,7 @@ $template->set_var(array(
 								'WB_URL' => WB_URL,
 								'ADMIN_URL' => ADMIN_URL,
 								'THEME_URL' => THEME_URL,
+								'LANGUAGE' => strtolower(LANGUAGE),
 								'TEXT_EMAIL' => $TEXT['EMAIL'],
 								'TEXT_SEND_DETAILS' => $TEXT['SEND_DETAILS'],
 								'TEXT_HOME' => $TEXT['HOME'],

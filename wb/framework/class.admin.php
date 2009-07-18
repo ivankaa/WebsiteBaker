@@ -139,6 +139,7 @@ class admin extends wb {
 													'CURRENT_USER' => $MESSAGE['START']['CURRENT_USER'],
 													'DISPLAY_NAME' => $this->get_display_name(),
 													'CHARSET' => $charset,
+													'LANGUAGE' => strtolower(LANGUAGE),
 													'VERSION' => VERSION,
 													'WB_URL' => WB_URL,
 													'ADMIN_URL' => ADMIN_URL,

@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 18-July 2009 Matthias Gallas
++	Added more meta tags to backend themes
 !	Updated Argos_theme (Thanks to Argos and Luisehahne)
 #	Again added some &amp; to news and form to get more valid output (Thanks to Luisehahne)
 #	Fixed wrong set </form> tag to get valid output (Thanks to Luisehahne)
