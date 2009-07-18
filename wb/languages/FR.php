@@ -120,8 +120,8 @@ $HEADING['MODIFY_DELETE_GROUP'] = 'Modifier/Supprimer un groupe';
 $HEADING['ADD_GROUP'] = 'Ajouter un groupe';
 $HEADING['MODIFY_GROUP'] = 'Modifier un groupe';
 
-$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
-$HEADING['INVOKE_MODULE_FILES'] = 'Execute module files manually';
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Les param&egrave;tres requis du Add-On ne sont pas v&eacute;rifi&eacute;s';
+$HEADING['INVOKE_MODULE_FILES'] = 'Ex&eacute;cuter manuellement les fichiers module';
 
 // Other text
 $TEXT['OPEN'] = 'Open';
@@ -209,7 +209,7 @@ $TEXT['TEXT'] = 'Texte';
 $TEXT['HEADER'] = 'Ent&ecirc;te';
 $TEXT['FOOTER'] = 'Pied de page';
 $TEXT['TEMPLATE'] = 'Mod&egrave;le';
-$TEXT['THEME'] = 'Backend-Theme';
+$TEXT['THEME'] = 'Th&egrave;me graphique du Backend';
 $TEXT['INSTALLATION'] = 'Installation';
 $TEXT['DATABASE'] = 'Base de donn&eacute;es';
 $TEXT['HOST'] = 'H&ocirc;te';
@@ -380,7 +380,7 @@ $TEXT['ON'] = 'Sur';
 $TEXT['LAST_UPDATED_BY'] = 'Mis &agrave; jour par';
 $TEXT['RESULTS_FOR'] = 'R&eacute;sultats';
 $TEXT['TIME'] = 'Heure';
-$TEXT['REDIRECT_AFTER'] = 'Redirect after';
+$TEXT['REDIRECT_AFTER'] = 'Redirection apr&egrave;s';
 $TEXT['WYSIWYG_STYLE'] = 'Style WYSIWYG';
 $TEXT['WYSIWYG_EDITOR'] = 'Editeur WYSIWYG';
 $TEXT['SERVER_EMAIL'] = 'Serveur Email';
@@ -393,7 +393,7 @@ $TEXT['MAIN'] = 'Principal';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Renommer les fichiers au chargement';
 $TEXT['APP_NAME'] = 'Nom de lapplication';
 $TEXT['SESSION_IDENTIFIER'] = 'Identifiant de session';
-$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
+$TEXT['SEC_ANCHOR'] = 'Texte Section-Anchor';
 $TEXT['BACKUP'] = 'Sauvegarde';
 $TEXT['RESTORE'] = 'Restaurer';
 $TEXT['BACKUP_DATABASE'] = 'Sauvegarde de la base de donn&eacute;es';
@@ -431,9 +431,9 @@ $TEXT['CAP_EDIT_CSS'] = 'Modifier CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Fichier du module en cours d&apos;&eacute;dition: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Modifiez les styles CSS dans la zone de texte ci-dessous.';
 $TEXT['CODE_SNIPPET'] = "Code-snippet";
-$TEXT['REQUIREMENT'] = "Requirement";
-$TEXT['INSTALLED'] = "installed";
-$TEXT['NOT_INSTALLED'] = "not installed";
+$TEXT['REQUIREMENT'] = "Param&egrave;tres requis";
+$TEXT['INSTALLED'] = "install&eacute;";
+$TEXT['NOT_INSTALLED'] = "pas install&eacute;";
 $TEXT['ADDON'] = "Add-On";
 $TEXT['EXTENSION'] = "Extension";
 $TEXT['UNZIP_FILE'] = "Upload and unpack a zip archiv";
@@ -455,18 +455,18 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Votre mot de passe est trop long';
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Votre nom d&apos;utilisateur ou votre mot de passe est incorrect';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'L&apos;adresse email est obligatoire';
-$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Param&egrave;tres de votre connexion ...';
 $MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
-Hello {LOGIN_DISPLAY_NAME},
+Bonjour, {LOGIN_DISPLAY_NAME},
 
-Your '{LOGIN_WEBSITE_TITLE}' login details are:
-Username: {LOGIN_NAME}
-Password: {LOGIN_PASSWORD}
+Les param&egrave;tres de connexion de votre site '{LOGIN_WEBSITE_TITLE}' sont :
+Identifiant: {LOGIN_NAME}
+Mot de passe: {LOGIN_PASSWORD}
 
-Your password has been set to the one above.
-This means that your old password will no longer work.
+Votre mot de passe a &eacute;t&eacute; renseign&eacute; comme ci-dessus.
+Par cons&eacute;quent, votre ancien mot de passe n'est plus actif.
 
-If you have received this message in error, please delete it immediately.
+Si vous avez re&ccdil;u ce message par erreur, merci de le supprimer imm&eacute;diatement.
 EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Merci de saisir votre adresse email';
@@ -575,28 +575,28 @@ $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Impossible d&apos;&eacute;crire dans l
 $MESSAGE['GENERIC']['INVALID'] = 'Le fichier charg&eacute; est invalide';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'D&eacute;sinstallation impossible : fichier en cours d&apos;utilisation';
 
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />Le {{type}} <b>{{type_name}}</b> ne sait pas &ecirc;tre supprim&eacute; comme il est en usage sur {{pages}}:<br /><br />";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "page suivante;pages suivantes";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Le template <b>{{name}}</b> ne sait pas &ecirc;tre supprimé comme il s'agit d'un template standard!";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> ne peut pas &ecirc;tre install&eacute; car il est actuellement en cours d'utilisation dans les pages {{pages}}.<br /><br />";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "cette page;ces pages";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Impossible de d&eacute;sinstaller le template <b>{{name}}</b>, parce que c'est le template par d&eacute;faut!";
 
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Site en construction';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Merci de revenir plus tard';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'Merci de patienter';
-$MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Erreur lors de l&apos;ouverture du fichier';
-$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
-$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
+$MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Erreur lors de louverture du fichier';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Fichier d&apos;installation Website Baker incorrect. V&eacute;rifiez le format *.zip .';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Fichier de langue Website Baker incorrect. V&eacute;rifiez le fichier texte.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Vous devez renseigner les champs suivants';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'D&eacute;sol&eacute; mais vous avez utilis&eacute; ce formulaire trop de fois durant cette heure. Merci de r&eacute;essayer &agrave; l&apos;heure suivante';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Le num&eacute;ro de v&eacute;rification (Captcha) que vous avez entr&eacute; est incorrect. Si vous rencontrez des probl&egrave;mes quant &agrave; la lecture de ce num&eacute;ro, merci d&apos;envoyer un Email &agrave; : '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
-$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
-$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Modules r&eacute;install&eacute;s avec succ&egrave;s';
-$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Mod&egrave;les r&eacute;install&eacute;s avec succ&egrave;s';
-$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Langages r&eacute;install&eacute;s avec succ&egrave;s';
-$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'When modules are uploaded via FTP (not recommended), the module installation files <tt>install.php</tt>, <tt>upgrade.php</tt> or <tt>uninstall.php</tt> will not be executed automatically. Those modules may not work correct or do not uninstall properly.<br /><br />You can execute the module files manually for modules uploaded via FTP below.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warning: Existing module database entries will get lost. Only use this option if you experience problems with modules uploaded via FTP.';
+$MESSAGE['ADDON']['RELOAD'] = 'Mise &agrave; jour de la base de donn&eacute;es avec les informations des fichiers Add-on (ou apr&egrave;s l&apos;upload via FTP).';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Erreur pendant la mise &agrave; jour des informations Add-On.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Les modules ont &eacute;t&eacute; correctement recharg&eacute;s';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Les templates ont &eacute;t&eacute; correctement recharg&eacute;s';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Les langues ont &eacute;t&eacute; correctement recharg&eacute;es';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Echec de l&apos;installation du Add-on. Votre syst&egrave;me ne respecte pas les pr&eacute;-requis de cet Add-on. Pour faire fonctionner cet Add-on, merci de solutionner les erreurs list&eacute;es ci-dessous.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'Quand les modules sont upload&eacute;s via FTP (ce qui n&apos;est pas recommand&eacute;), les fichiers d&apos;installation du module <tt>install.php</tt>, <tt>upgrade.php</tt> ou <tt>uninstall.php</tt> ne seront pas ex&eacute;cut&eacute;s automatiquement. Ces modules peuvent ne pas fonctionner ou ne pas se d&eacute;sinstaller correctement.<br /><br />Vous pouvez ex&eacute;cuter les fichiers module manuellement pour les modules upload&eacute;s via FTP ci-dessous.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Attention: les donn&eacute;es de la base de donn&eacute;es du module existant vont &ecirc;tre perdues. Utilisez cette option si vous rencontrez des probl&egrave;mes avec des modules upload&eacute;s via FTP.';
 
 ?>

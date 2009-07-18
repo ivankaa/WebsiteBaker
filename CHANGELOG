@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+18-July 2009 Matthias Gallas
+!	Updated French language File (Thanks to mylesk42)
 16-July 2009 Matthias Gallas
 #	Fixed E_ALL notice in news/view.php
 !	replaced in form and news delimiter "&amp;" with "&"
