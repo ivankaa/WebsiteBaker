@@ -23,8 +23,8 @@ function confirm_link(message, url) {
       <span class="version">CMS version {VERSION}</span><br/>
       <span class="version">Admin version 1.1</span>
 	 </div>
-    <a href="{ADMIN_URL}" title="{TITLE_START}">
-    <h1>{WEBSITE_TITLE} - {TEXT_ADMINISTRATION}</h1>
+    <a href="{ADMIN_URL}" title="{TITLE_START}" id="website_title">
+    {WEBSITE_TITLE} - {TEXT_ADMINISTRATION}
     <!-- <img src="{THEME_URL}/images/logo.png" border="0" alt="Logo" /> -->
     </a> 
 	</div>

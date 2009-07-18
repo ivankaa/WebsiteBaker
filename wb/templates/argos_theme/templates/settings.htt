@@ -190,7 +190,7 @@
 		<input type="reset" name="reset" value="{TEXT_RESET}" class="reset" />
 	</td>
 	<td style="text-align: right;">
-		<button title="{MODE_SWITCH_WARNING}" onClick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
+		<button title="{MODE_SWITCH_WARNING}" onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
 	</td>
 </tr>
 <tr>
@@ -277,7 +277,7 @@
 		<input type="reset" name="reset" value="{TEXT_RESET}" class="reset" />
 	</td>
 	<td style="text-align: right;">
-		<button title="{MODE_SWITCH_WARNING}" onClick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
+		<button title="{MODE_SWITCH_WARNING}" onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
 	</td>
 </tr>
 <tr>
@@ -365,7 +365,7 @@
 		<input type="reset" name="reset" value="{TEXT_RESET}" class="reset" />
 	</td>
 	<td style="text-align: right;">
-		<button title="{MODE_SWITCH_WARNING}" onClick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
+		<button title="{MODE_SWITCH_WARNING}" onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
 	</td>
 </tr>
 <tr>
@@ -374,10 +374,24 @@
 <tr>
 	<td class="setting_name">{TEXT_SERVER_OPERATING_SYSTEM}:</td>
 	<td class="setting_value" colspan="3">
-		<input type="radio" name="operating_system" id="operating_system_linux" onClick="javascript: change_os('linux');" style="width: 14px; height: 14px;" value="linux"{LINUX_SELECTED} />
-		<label for="operating_system_linux" onClick="javascript: change_os('linux');">{TEXT_LINUX_UNIX_BASED}</label>
-		<input type="radio" name="operating_system" id="operating_system_windows" onClick="javascript: change_os('windows');" style="width: 14px; height: 14px;" value="windows"{WINDOWS_SELECTED} />
-		<label for="operating_system_windows" onClick="javascript: change_os('windows');">{TEXT_WINDOWS}</label>
+		<input type="radio" name="operating_system" id="operating_system_linux" onclick="javascript: change_os('linux');" style="width: 14px; height: 14px;" value="linux"{LINUX_SELECTED} />
+		<label for="operating_system_linux" onclick="javascript: change_os('linux');">{TEXT_LINUX_UNIX_BASED}</label>
+		<input type="radio" name="operating_system" id="operating_system_windows" onclick="javascript: change_os('windows');" style="width: 14px; height: 14px;" value="windows"{WINDOWS_SELECTED} />
+		<label for="operating_system_windows" onclick="javascript: change_os('windows');">{TEXT_WINDOWS}</label>
+	</td>
+</tr>
+<tr>
+	<td class="setting_name"><div id="{BASIC_FILE_PERMS_ID}1" style="margin: 0; padding: 0;">&nbsp;</div></td>
+	<td class="setting_value" colspan="3">
+		<div id="{BASIC_FILE_PERMS_ID}2" style="margin: 0; padding: 0;">
+			<input type="checkbox" name="world_writeable" id="world_writeable" style="width: 14px; height: 14px;" value="true"{WORLD_WRITEABLE_SELECTED} />
+			<label for="world_writeable">
+				{TEXT_WORLD_WRITEABLE_FILE_PERMISSIONS} (777)
+			</label>
+			<br />
+			<font class="note">({WORLD_WRITEABLE_WARNING})</font>
+		</div>
+		<div id="{BASIC_FILE_PERMS_ID}3" style="margin: 0; padding: 0;"></div>
 	</td>
 </tr>
 
@@ -518,10 +532,10 @@
 <tr>
 	<td class="setting_name">{TEXT_WBMAILER_FUNCTION}:</td>
 	<td class="setting_value" colspan="3">
-		<input type="radio" name="wbmailer_routine" id="wbmailer_routine_phpmail" onClick="javascript: change_wbmailer('phpmail');" style="width: 14px; height: 14px;" value="phpmail"{PHPMAIL_SELECTED} />
-		<label for="wbmailer_routine_phpmail" onClick="javascript: change_wbmailer('phpmail');">{TEXT_WBMAILER_PHP}</label>
-		<input type="radio" name="wbmailer_routine" id="wbmailer_routine_smtp" onClick="javascript: change_wbmailer('smtp');" style="width: 14px; height: 14px;" value="smtp"{SMTPMAIL_SELECTED} />
-		<label for="wbmailer_routine_smtp" onClick="javascript: change_wbmailer('smtp');">{TEXT_WBMAILER_SMTP}</label>
+		<input type="radio" name="wbmailer_routine" id="wbmailer_routine_phpmail" onclick="javascript: change_wbmailer('phpmail');" style="width: 14px; height: 14px;" value="phpmail"{PHPMAIL_SELECTED} />
+		<label for="wbmailer_routine_phpmail" onclick="javascript: change_wbmailer('phpmail');">{TEXT_WBMAILER_PHP}</label>
+		<input type="radio" name="wbmailer_routine" id="wbmailer_routine_smtp" onclick="javascript: change_wbmailer('smtp');" style="width: 14px; height: 14px;" value="smtp"{SMTPMAIL_SELECTED} />
+		<label for="wbmailer_routine_smtp" onclick="javascript: change_wbmailer('smtp');">{TEXT_WBMAILER_SMTP}</label>
 	</td>
 </tr>
 <!-- MORE ADVANCED SMTP MAILER SETTINGS -->
@@ -535,8 +549,8 @@
 <tr id="row_wbmailer_smtp_auth_mode" style="display:{SMTP_VISIBILITY};">
 	<td class="setting_name">{TEXT_WBMAILER_SMTP_AUTH}:</td>
 	<td class="setting_value" colspan="3">
-		<input type="checkbox" name="wbmailer_smtp_auth" id="wbmailer_smtp_auth" onClick="javascript: toggle_wbmailer_auth();" style="width: 14px; height: 14px;" value="true"{SMTP_AUTH_SELECTED} />
-		<label for="wbmailer_smtp_auth" onClick="javascript: toggle_wbmailer_auth(this.value);">({TEXT_WBMAILER_SMTP_AUTH_NOTICE})</label>
+		<input type="checkbox" name="wbmailer_smtp_auth" id="wbmailer_smtp_auth" onclick="javascript: toggle_wbmailer_auth();" style="width: 14px; height: 14px;" value="true"{SMTP_AUTH_SELECTED} />
+		<label for="wbmailer_smtp_auth" onclick="javascript: toggle_wbmailer_auth(this.value);">({TEXT_WBMAILER_SMTP_AUTH_NOTICE})</label>
 	</td>
 </tr>
 <tr id="row_wbmailer_smtp_username" style="display:{SMTP_VISIBILITY_AUTH};">
@@ -554,7 +568,7 @@
 		<input type="reset" name="reset" value="{TEXT_RESET}" class="reset" />
 	</td>
 	<td style="text-align: right;">
-		<button title="{MODE_SWITCH_WARNING}" onClick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
+		<button title="{MODE_SWITCH_WARNING}" onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
 	</td>
 </tr>
 </table>
@@ -563,7 +577,7 @@
 
 <hr size="1" />
 
-<button title="{MODE_SWITCH_WARNING}" onClick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
+<button title="{MODE_SWITCH_WARNING}" onclick="window.location = '{ADVANCED_LINK}'; return false;" class="{DISPLAY_ADVANCED_BUTTON}">{ADVANCED_BUTTON}</button>
 <br />
 <font class="{DISPLAY_ADVANCED_BUTTON}">{MODE_SWITCH_WARNING}</font>
 <script src="{ADMIN_URL}/settings/setting.js" language="javascript" type="text/javascript"></script>

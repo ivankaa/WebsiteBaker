@@ -14,24 +14,27 @@
 </table>
 
         <form name="section_properties" action="{ADMIN_URL}/pages/sections_save.php?page_id={VAR_PAGE_ID}" method="post">
-        <table cellpadding="5" cellspacing="0" align="center" border="0" width="100%" class="img_noborder">
-                <tr>
-					<td valign="middle" width="300">{TEXT_TYPE}:</td>
-                	<td {STYLE_DISPLAY_SECTION_BLOCK} width="250">{TEXT_BLOCK}:</td>
-                	<td valign="middle" align="left" width="250">{TEXT_PUBL_START_DATE}:</td>
-                	<td valign="middle" align="left" width="250">{TEXT_PUBL_END_DATE}:</td>
-                    <td valign="middle" align="left" colspan="3">{TEXT_ACTIONS}:</td>
-                    <td valign="middle" >SID</td>
-                </tr>
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tr class="pages_list">
+				<td class="header_list_type">{TEXT_TYPE}</td>
+				<td class="header_list_block" {STYLE_DISPLAY_SECTION_BLOCK}>{TEXT_BLOCK}</td>
+				<td class="header_list_pubdate_start">{TEXT_PUBL_START_DATE}</td>
+				<td class="header_list_pubdate_end">{TEXT_PUBL_END_DATE}</td>
+				<td class="header_list_sections_actions">{TEXT_ACTIONS}</td>
+				<td class="header_list_section_ID">SID</td>
+			</tr>
+		</table>
+		
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="img_noborder">
 <!-- BEGIN section_block -->
-            	<tr onMouseOver="this.style.backgroundColor='#f1f8dd'" onMouseOut="this.style.backgroundColor='#fff'">
+            	<tr>
     				<td align="right" style="display:none;" width="5">
                       <input type="hidden" name="page_id" value="{VAR_PAGE_ID}"  />
                       <input type="hidden" name="section_id" value="{VAR_SECTION_ID}"  />
                       {VAR_SECTION_ID}
                     </td>
-                    <td width="{NAME_SIZE}">{LINK_MODIFY_URL_VAR_MODUL_NAME}</td>
-                    <td {STYLE_DISPLAY_SECTION_BLOCK} class="{INPUT_ATTRIBUTE}">
+                    <td class="list_type">{LINK_MODIFY_URL_VAR_MODUL_NAME}</td>
+                    <td class="list_block {INPUT_ATTRIBUTE}" {STYLE_DISPLAY_SECTION_BLOCK}>
                     	<select name="block{VAR_SECTION_ID}" class="input_normal">
                         {SET_NONE_DISPLAY_OPTION}
                     	<!-- BEGIN block_block -->
@@ -39,38 +42,32 @@
                     	<!-- END block_block -->
                     	</select>
                     </td>
-                    <td><input type="text" id="start_date{VAR_SECTION_ID}" name="start_date{VAR_SECTION_ID}" value="{VALUE_PUBL_START}" class="input_normal" />
+                    <td class="list_pubdate_start"><input type="text" id="start_date{VAR_SECTION_ID}" name="start_date{VAR_SECTION_ID}" value="{VALUE_PUBL_START}" class="input_normal" />
                         <img src="{THEME_URL}/images/{CLOCK_16_PNG}" id="trigger_start{VAR_SECTION_ID}" style="cursor:pointer;" title="{TEXT_CALENDAR}" alt="{TEXT_CALENDAR}"  />
-                        <img src="{THEME_URL}/images/{CLOCK_DEL_16_PNG}" style="cursor:pointer;" alt="{TEXT_DELETE_DATE}" title="{TEXT_DELETE_DATE}" onClick="document.section_properties.start_date{VAR_SECTION_ID}.value=''" />
+                        <img src="{THEME_URL}/images/{CLOCK_DEL_16_PNG}" style="cursor:pointer;" alt="{TEXT_DELETE_DATE}" title="{TEXT_DELETE_DATE}" onclick="document.section_properties.start_date{VAR_SECTION_ID}.value=''" />
                     </td>
-                    <td><input type="text" id="end_date{VAR_SECTION_ID}" name="end_date{VAR_SECTION_ID}" value="{VALUE_PUBL_END}" class="input_normal" />
+                    <td class="list_pubdate_end"><input type="text" id="end_date{VAR_SECTION_ID}" name="end_date{VAR_SECTION_ID}" value="{VALUE_PUBL_END}" class="input_normal" />
                         <img src="{THEME_URL}/images/{CLOCK_16_PNG}" id="trigger_stop{VAR_SECTION_ID}" alt="{TEXT_CALENDAR}" style="cursor: pointer;" title="{TEXT_CALENDAR}"  />
-                        <img src="{THEME_URL}/images/{CLOCK_DEL_16_PNG}" style="cursor:pointer;" alt="{TEXT_DELETE_DATE}" title="{TEXT_DELETE_DATE}" onClick="document.section_properties.end_date{VAR_SECTION_ID}.value=''" />
+                        <img src="{THEME_URL}/images/{CLOCK_DEL_16_PNG}" style="cursor:pointer;" alt="{TEXT_DELETE_DATE}" title="{TEXT_DELETE_DATE}" onclick="document.section_properties.end_date{VAR_SECTION_ID}.value=''" />
                     </td>
 
-                    <td width="20">
-                        {VAR_MOVE_UP_URL}
-                    </td>
-
-                    <td width="20">
-                        {VAR_MOVE_DOWN_URL}
-                    </td>
-
-                    <td width="20">
+					<td class="list_actions">{VAR_MOVE_UP_URL}</td>
+                    <td class="list_actions">{VAR_MOVE_DOWN_URL}</td>
+                    <td class="list_actions">
                         <a href="javascript: confirm_link('{TEXT_ARE_YOU_SURE}', '{ADMIN_URL}/pages/sections.php?page_id={VAR_PAGE_ID}&amp;section_id={VAR_SECTION_ID}');">
-                        <img src="{THEME_URL}/images/{DELETE_16_PNG}" alt="X" border="0" />
+                        <img src="{THEME_URL}/images/{DELETE_16_PNG}" alt="{TEXT_DELETE}" border="0" />
                         </a>
                     </td>
-                    <td align="right">
-                       {VAR_SECTION_ID}
-                    </td>
-                    <td align="right" {DISPLAY_DEBUG}>
-                       {POSITION}
-                    </td>
+                    <td class="list_section_id">{VAR_SECTION_ID}</td>
+                    <td {DISPLAY_DEBUG}>{POSITION}</td>
                 </tr>
+
 <!-- END section_block -->
                 <tr>
-                    <td align="right" colspan="{DEBUG_COLSPAN_SIZE}"><input type="submit" name="save" value="{TEXT_SAVE}" class="input_medium" /></td>
+                    <td align="left" colspan="{DEBUG_COLSPAN_SIZE}">
+					<br />
+					<input type="submit" name="save" value="{TEXT_SAVE}" class="input_medium" />
+					</td>
     	        </tr>
 	    </table>
     </form>

@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 18-July 2009 Matthias Gallas
+!	Updated Argos_theme (Thanks to Argos and Luisehahne)
 #	Again added some &amp; to news and form to get more valid output (Thanks to Luisehahne)
 #	Fixed wrong set </form> tag to get valid output (Thanks to Luisehahne)
 !	Replaced in some alt tags hardcoded signs with language variables (Thanks to argos)

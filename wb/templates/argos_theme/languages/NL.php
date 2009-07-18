@@ -24,11 +24,10 @@
 */
 
 //Modul Description
-$template_description 	= 'Ein erweitertes Backend-Theme f&uuml;r Websitebaker 2.8';
+$template_description 	= 'Geavanceerde admin-template voor Website Baker 2.8.';
 
 //Texts
-$TEXT['ADMIN_ONLY'] = 'nur f&uuml;r Administratoren';
-$TEXT['NO_SHOW_THUMBS'] = 'Vorschaubilder verstecken';
-$TEXT['TEXT_HEADER'] = 'Maximale Bildergr&ouml;&szlig;e für diesen Ordner</b><br><small><i>(&Auml;nderung nur beim Hochladen)</i></small>';
-
+$TEXT['ADMIN_ONLY'] = 'Instellingen alleen beschikbaar voor administrator';
+$TEXT['NO_SHOW_THUMBS'] = 'Thumbnails niet weergeven';
+$TEXT['TEXT_HEADER'] = 'Stel de maximale grootte voor \'resized\' afbeeldingen in per folder</b><br><small><i>(NB: werkt alleen bij nieuwe uploads)</i></small>';
 ?>
