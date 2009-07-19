@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+19-July 2009 Matthias Gallas
+#	Fixed display issue of jsadmin in backend themes (Thanks to Argos)
 18-July 2009 Matthias Gallas
 !	Updated german laguage file in argos_theme
 +	Added multilnaguage support to media section of argos_theme (Thanks to Argos)
