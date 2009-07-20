@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 20-July 2009 Matthias Gallas
+!	Moved backend.js back from <body> to <head>
++	Added possibility to add a backend_body.js to modules wich is then called in <body>
 +	Readded admin/images folder to keep backward compatibility to old modules
 19-July 2009 Matthias Gallas
 #	Fixed display issue of jsadmin in backend themes (Thanks to Argos)

@@ -201,7 +201,7 @@ class admin extends wb {
 		$footer_template->set_file('page', 'footer.htt');
 		$footer_template->set_block('page', 'footer_block', 'header');
 		$footer_template->set_var(array(
-						'BACKEND_MODULE_JS' => $this->register_backend_modfiles('js'),
+						'BACKEND_BODY_MODULE_JS' => $this->register_backend_modfiles_body('js'),
 						'WB_URL' => WB_URL,
 						'WB_PATH' => WB_PATH,
 						'ADMIN_URL' => ADMIN_URL,
@@ -323,11 +323,72 @@ class admin extends wb {
 		}
 	}
 
+	// Function to add optional module Javascript or CSS stylesheets into the <body> section of the backend
+	function register_backend_modfiles_body($file_id="js")
+		{
+		// sanity check of parameter passed to the function
+		$file_id = strtolower($file_id);
+		if($file_id !== "javascript" && $file_id !== "js")
+		{
+			return;
+		}
+		global $database;
+        $body_links = "";
+		// define default baselink and filename for optional module javascript and stylesheet files
+		if($file_id == "js") {
+			$base_link = '<script type="text/javascript" src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/backend_body.js"></script>';
+			$base_file = "backend_body.js";
+		}
+		// check if backend_body.js files needs to be included to the <body></body> section of the backend
+		if(isset($_GET['tool']))
+			{
+			// check if displayed page contains a installed admin tool
+			$result = $database->query("SELECT * FROM " .TABLE_PREFIX ."addons
+				WHERE type = 'module' AND function = 'tool' AND directory = '".addslashes($_GET['tool'])."'");
+			if($result->numRows())
+				{
+				// check if admin tool directory contains a backend_body.js file to include
+				$tool = $result->fetchRow();
+				if(file_exists(WB_PATH ."/modules/" .$tool['directory'] ."/$base_file"))
+				{
+					// return link to the backend_body.js file
+					return str_replace("{MODULE_DIRECTORY}", $tool['directory'], $base_link);
+				}
+			}
+		} elseif(isset($_GET['page_id']) or isset($_POST['page_id']))
+		{
+			// check if displayed page in the backend contains a page module
+			if (isset($_GET['page_id']))
+			{
+				$page_id = (int) addslashes($_GET['page_id']);
+			} else {
+				$page_id = (int) addslashes($_POST['page_id']);
+			}
+			// gather information for all models embedded on actual page
+			$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections
+				WHERE page_id=$page_id");
+			while($row = $query_modules->fetchRow()) {
+				// check if page module directory contains a backend_body.js file
+				if(file_exists(WB_PATH ."/modules/" .$row['module'] ."/$base_file")) {
+					// create link with backend_body.js source for the current module
+					$tmp_link = str_replace("{MODULE_DIRECTORY}", $row['module'], $base_link);
+					// ensure that backend_body.js is only added once per module type
+					if(strpos($body_links, $tmp_link) === false) {
+						$body_links .= $tmp_link ."\n";
+					}
+				}
+			}
+			// write out links with all external module javascript/CSS files, remove last line feed
+			return rtrim($body_links);
+		}
+	}
+
+
 	// Function to add optional module Javascript or CSS stylesheets into the <head> section of the backend
 	function register_backend_modfiles($file_id="css") {
 		// sanity check of parameter passed to the function
 		$file_id = strtolower($file_id);
-		if($file_id !== "css" && $file_id !== "javascript" && $file_id !== "js") { 
+		if($file_id !== "css" && $file_id !== "javascript" && $file_id !== "js") {
 			return;
 		}
 
@@ -335,7 +396,7 @@ class admin extends wb {
 		// define default baselink and filename for optional module javascript and stylesheet files
 		$head_links = "";
 		if($file_id == "css") {
-      	$base_link = '<link href="'.WB_URL.'/modules/{MODULE_DIRECTORY}/backend.css"'; 
+      	$base_link = '<link href="'.WB_URL.'/modules/{MODULE_DIRECTORY}/backend.css"';
 			$base_link.= ' rel="stylesheet" type="text/css" media="screen" />';
 			$base_file = "backend.css";
 		} else {
@@ -346,7 +407,7 @@ class admin extends wb {
 		// check if backend.js or backend.css files needs to be included to the <head></head> section of the backend
 		if(isset($_GET['tool'])) {
 			// check if displayed page contains a installed admin tool
-			$result = $database->query("SELECT * FROM " .TABLE_PREFIX ."addons 
+			$result = $database->query("SELECT * FROM " .TABLE_PREFIX ."addons
 				WHERE type = 'module' AND function = 'tool' AND directory = '".addslashes($_GET['tool'])."'");
 
 			if($result->numRows()) {
@@ -366,7 +427,7 @@ class admin extends wb {
 			}
 
     		// gather information for all models embedded on actual page
-			$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections 
+			$query_modules = $database->query("SELECT module FROM " .TABLE_PREFIX ."sections
 				WHERE page_id=$page_id");
 
     		while($row = $query_modules->fetchRow()) {

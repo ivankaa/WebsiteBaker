@@ -37,7 +37,7 @@
           }
 
 </script>
-{BACKEND_MODULE_JS}
+{BACKEND_BODY_MODULE_JS}
 </body>
 </html>
 <!-- END footer_block -->
