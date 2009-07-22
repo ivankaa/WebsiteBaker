@@ -77,7 +77,12 @@ $template->set_file('page', 'media_browse.htt');
 $template->set_block('page', 'main_block', 'main');
 
 // Get the current dir
-$directory = $admin->strip_slashes($admin->get_get('dir'));
+$currentHome = $admin->get_home_folder();
+$directory =	(($currentHome) AND (!array_key_exists('dir',$_GET)))
+				? 
+				$currentHome
+				:
+				$admin->strip_slashes($admin->get_get('dir')) ;
 if($directory == '/' OR $directory == '\\') {
 	$directory = '';
 }
@@ -107,7 +112,7 @@ if ($_SESSION['GROUP_ID'] != 1 && $pathsettings['global']['admin_only']) { // On
 // Workout the parent dir link
 $parent_dir_link = ADMIN_URL.'/media/browse.php?dir='.$directory.'&up=1';
 // Workout if the up arrow should be shown
-if($directory == '') {
+if(($directory == '') or ($directory==$currentHome)) {
 	$display_up_arrow = 'hide';
 } else {
 	$display_up_arrow = '';

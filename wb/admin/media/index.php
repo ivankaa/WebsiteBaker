@@ -43,6 +43,15 @@ $home_folders = get_home_folders();
 // Insert values
 $template->set_block('main_block', 'dir_list_block', 'dir_list');
 $dirs = directory_list(WB_PATH.MEDIA_DIRECTORY);
+$currentHome = $admin->get_home_folder();
+
+if ($currentHome){
+	$dirs = directory_list(WB_PATH.MEDIA_DIRECTORY.$currentHome);
+}
+else
+{
+	$dirs = directory_list(WB_PATH.MEDIA_DIRECTORY);
+}
 $array_lowercase = array_map('strtolower', $dirs);
 array_multisort($array_lowercase, SORT_ASC, SORT_STRING, $dirs);
 foreach($dirs AS $name) {
@@ -62,10 +71,18 @@ if($admin->get_permission('media_upload') != true) {
 if ($_SESSION['GROUP_ID'] != 1 && $pathsettings['global']['admin_only']) { // Only show admin the settings link
 	$template->set_var('DISPLAY_SETTINGS', 'hide');
 }
+// Workout if the up arrow should be shown
+if(($dirs == '') or ($dirs==$currentHome) or (!array_key_exists('dir', $_GET))) {
+	$display_up_arrow = 'hide';
+} else {
+	$display_up_arrow = '';
+}
 
 // Insert language headings
 $template->set_var(array(
 								'HEADING_BROWSE_MEDIA' => $HEADING['BROWSE_MEDIA'],
+								'HOME_DIRECTORY' => $currentHome,
+								'DISPLAY_UP_ARROW' => $display_up_arrow, // **!
 								'HEADING_CREATE_FOLDER' => $HEADING['CREATE_FOLDER'],
 								'HEADING_UPLOAD_FILES' => $HEADING['UPLOAD_FILES']
 								)

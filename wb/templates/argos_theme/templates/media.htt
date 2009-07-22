@@ -27,7 +27,7 @@ function toggle() {
 		   onChange="browse.location.href='browse.php?dir=' +
 		   	document.upload.target.value.substr(6,100);
 		   document.create.target.value = document.upload.target.value;">
-                <option value="{MEDIA_DIRECTORY}" selected>{MEDIA_DIRECTORY}</option>
+                <option value="{MEDIA_DIRECTORY}{HOME_DIRECTORY}" selected="selected">{MEDIA_DIRECTORY}{HOME_DIRECTORY}</option>
                 <!-- BEGIN dir_list_block -->
                 <option value="{NAME}">{NAME}</option>
                 <!-- END dir_list_block -->
@@ -104,7 +104,7 @@ please set the class below to "hide", else to "show".
             <tr>
               <td>{TEXT_TARGET_FOLDER}:<br />
                 <select name="target" style="width:100%;">
-                  <option value="{MEDIA_DIRECTORY}" selected>{MEDIA_DIRECTORY} </option>
+                  <option value="{MEDIA_DIRECTORY}{HOME_DIRECTORY}" selected="selected">{MEDIA_DIRECTORY}{HOME_DIRECTORY}</option>
                   <!-- BEGIN dir_list_block -->
                   <option value="{NAME}">{NAME} </option>
                   <!-- END dir_list_block -->

@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+22-July 2009 Matthias Gallas
+#	Fixed bug with home folders are viewable and writable from other users
+	(ticket #605 and #748) (Thanks to Aldus)
 20-July 2009 Matthias Gallas
 !	Moved backend.js back from <body> to <head>
 +	Added possibility to add a backend_body.js to modules wich is then called in <body>

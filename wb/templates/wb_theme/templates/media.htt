@@ -30,7 +30,7 @@ function toggle() {
 	<td width="100">{TEXT_TARGET_FOLDER}:</td>
 	<td>
 		<select name="target" style="width: 100%;">
-			<option value="{MEDIA_DIRECTORY}" selected="selected">{MEDIA_DIRECTORY}</option>
+			<option value="{MEDIA_DIRECTORY}{HOME_DIRECTORY}" selected="selected">{MEDIA_DIRECTORY}{HOME_DIRECTORY}</option>
 			<!-- BEGIN dir_list_block -->
 				<option value="{NAME}">{NAME}</option>
 			<!-- END dir_list_block -->
@@ -63,7 +63,7 @@ function toggle() {
 	<td width="100">{TEXT_TARGET_FOLDER}:</td>
 	<td>
 		<select name="target" style="width: 100%;">
-			<option value="{MEDIA_DIRECTORY}" selected="selected">{MEDIA_DIRECTORY}</option>
+			<option value="{MEDIA_DIRECTORY}{HOME_DIRECTORY}" selected="selected">{MEDIA_DIRECTORY}{HOME_DIRECTORY}</option>
 			<!-- BEGIN dir_list_block -->
 				<option value="{NAME}">{NAME}</option>
 			<!-- END dir_list_block -->
