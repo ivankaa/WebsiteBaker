@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 22-July 2009 Matthias Gallas
+#	Fixed E_ALL&E_STRICT warning on PHP5 servers (Thanks to Aldus) 
 #	Fixed bug with home folders are viewable and writable from other users
 	(ticket #605 and #748) (Thanks to Aldus)
 20-July 2009 Matthias Gallas

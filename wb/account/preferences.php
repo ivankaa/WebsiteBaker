@@ -36,7 +36,8 @@ if(!FRONTEND_LOGIN) {
 }
 
 require_once(WB_PATH.'/framework/class.wb.php');
-if (wb::is_authenticated()==false) {
+$wb_inst = new wb();
+if ($wb_inst->is_authenticated()==false) {
 	header('Location: '.WB_URL.'/account/login.php');
 	exit(0);
 }
