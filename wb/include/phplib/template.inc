@@ -8,7 +8,7 @@
  * (C) Copyright 1999-2000 NetUSE GmbH
  *                    Kristian Koehntopp
  *
- * $Id: template.inc,v 1.15 2004/07/23 20:36:29 layne_weathers Exp $
+ * $Id$
  *
  */
 
@@ -653,12 +653,19 @@ class Template
   * @return    false
   * @see       parse
   */
-  function pparse($target, $varname, $append = false) {
+  function pparse($target, $varname, $append = false, $clear = true) { // added $clear: whether to delete undefined vars or not (needed for wb-module code) - thorn
     if ($this->debug & 4) {
       echo "<p><b>pparse:</b> passing parameters to parse...</p>\n";
     }
-    print $this->finish($this->parse($target, $varname, $append));
-    return false;
+		if(!$clear) {
+			$unknowns = $this->unknowns;
+			$this->set_unknowns('keep');
+			print $this->finish($this->parse($target, $varname, $append));
+			$this->set_unknowns($unknowns);
+		} else {
+			print $this->finish($this->parse($target, $varname, $append));
+		}
+		return false;
   }
 
 

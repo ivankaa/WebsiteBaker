@@ -11,6 +11,9 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+23-July 2009 Matthias Gallas
+#	readded to phplib/template.inc $clear: whether to delete undefined vars or not
+	was already added in WB 2.7 but was deleted for unknown reasons
 22-July 2009 Matthias Gallas
 !	set Version to RC2
 !	small modification on german language file (ticket #746)
