@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 23-July 2009 Matthias Gallas
+#	fixed bug with missing filetype icon in media section of classic_theme (ticket #752)
 #	fixed bug with page not showing if 2 sections active (ticket #751) (Thanks to Pumpi)
 #	readded to phplib/template.inc $clear: whether to delete undefined vars or not
 	was already added in WB 2.7 but was deleted for unknown reasons (Thanks to FrankH)
