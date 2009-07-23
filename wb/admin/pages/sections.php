@@ -85,7 +85,7 @@ if(isset($_GET['section_id']) AND is_numeric($_GET['section_id'])) {
 	// Include the selected modules add file if it exists
 	if(file_exists(WB_PATH.'/modules/'.$module.'/add.php')) {
 		require(WB_PATH.'/modules/'.$module.'/add.php');
-	}	
+	}
 }
 
 // Get perms
@@ -149,7 +149,7 @@ $template->set_file('page', 'pages_sections.htt');
 $template->set_block('page', 'main_block', 'main');
 $template->set_block('main_block', 'module_block', 'module_list');
 $template->set_block('main_block', 'section_block', 'section_list');
-$template->set_block('section_block', 'block_block', 'block_list');
+$template->set_block('section_block', '&nbsp;block_block', 'block_list');
 $template->set_block('main_block', 'calendar_block', 'calendar_list');
 
 // set first defaults and messages
@@ -227,7 +227,9 @@ if($query_sections->numRows() > 0) {
 						'VAR_SECTION_ID' => $section['section_id'],
 						'VAR_POSITION' => $section['position'],
 						'LINK_MODIFY_URL_VAR_MODUL_NAME' => $edit_page,
-						'SET_NONE_DISPLAY_OPTION' => '<option>&nbsp;</option>',
+						'NAME' => htmlentities(strip_tags($block[1])),
+						'VALUE' => 1,
+						'SET_NONE_DISPLAY_OPTION' => '',
 					) );
 			}
 			// Insert icon and images
