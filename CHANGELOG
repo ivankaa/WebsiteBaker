@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+25-July 2009 Matthias Gallas
+#	fixed some language bugs in search.php (Thanks to Thorn)
 23-July 2009 Matthias Gallas
 #	fixed bug with missing filetype icon in media section of classic_theme (ticket #752)
 #	fixed bug with page not showing if 2 sections active (ticket #751) (Thanks to Pumpi)

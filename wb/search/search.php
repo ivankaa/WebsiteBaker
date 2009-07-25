@@ -117,7 +117,7 @@ if($query->numRows() > 0) {
 	}
 }
 
-// Get search language
+// Get search language, used for special umlaut handling (DE: ß=ss, ...)
 $search_lang = '';
 if(isset($_REQUEST['search_lang'])) {
 	$search_lang = $_REQUEST['search_lang'];
@@ -143,7 +143,7 @@ if(isset($_REQUEST['search_lang'])) {
 $search_path_SQL = '';
 $search_path = '';
 if(isset($_REQUEST['search_path'])) {
-	$search_path = addslashes(htmlspecialchars(strip_tags($wb->strip_slashes($_REQUEST['search_path']))));
+	$search_path = addslashes(htmlspecialchars(strip_tags($wb->strip_slashes($_REQUEST['search_path'])), ENT_QUOTES));
 	if(!preg_match('~^%?[-a-zA-Z0-9_,/ ]+$~', $search_path))
 		$search_path = '';
 	if($search_path != '') {
@@ -166,6 +166,16 @@ if(isset($_REQUEST['search_path'])) {
 		}
 		$search_path_SQL .= ' )';
 	}
+}
+
+// use page_languages?
+if(PAGE_LANGUAGES) {
+	$table = TABLE_PREFIX."pages";
+	$search_language_SQL_t = "AND $table.`language` = '".LANGUAGE."'";
+	$search_language_SQL = "AND `language` = '".LANGUAGE."'";
+} else {
+	$search_language_SQL_t = '';
+	$search_language_SQL = '';
 }
 
 // Get the search type
@@ -236,7 +246,7 @@ if($match == 'exact') {
 	}
 }
 // make an extra copy of search_normal_array for use in regex
-require_once(WB_PATH.'/search/search_convert.php');
+require(WB_PATH.'/search/search_convert.php');
 $search_words = array();
 foreach($search_normal_array AS $str) {
 	$str = str_replace($string_ul_umlaut, $string_ul_regex, $str);
@@ -344,69 +354,72 @@ if($search_normal_string != '') {
 	// now call module-based $search_funcs[]
 	$seen_pages = array(); // seen pages per module.
 	$pages_listed = array(); // seen pages.
-	foreach($sorted_modules AS $module_name) {
-		$start_time = time();	// get start-time to check time-limit; not very accurate, but ok
-		$seen_pages[$module_name] = array();
-		if(!isset($search_funcs[$module_name])) {
-			continue; // there is no search_func for this module
-		}
-		// get each section for $module_name
-		$table_s = TABLE_PREFIX."sections";	
-		$table_p = TABLE_PREFIX."pages";
-		$sections_query = $database->query("
-			SELECT s.section_id, s.page_id, s.module, s.publ_start, s.publ_end,
-			       p.page_title, p.menu_title, p.link, p.description, p.keywords, p.modified_when, p.modified_by,
-			       p.visibility, p.viewing_groups, p.viewing_users
-			FROM $table_s AS s INNER JOIN $table_p AS p ON s.page_id = p.page_id
-			WHERE s.module = '$module_name' AND p.visibility NOT IN ('none','deleted') AND p.searching = '1' $search_path_SQL
-			ORDER BY s.page_id, s.position ASC
-		");
-		if($sections_query->numRows() > 0) {
-			while($res = $sections_query->fetchRow()) {
-				// check if time-limit is exceeded for this module
-				if($search_time_limit > 0 && (time()-$start_time > $search_time_limit)) {
-					break;
-				}
-				// Only show this section if it is not "out of publication-date"
-				$now = time();
-				if( !( $now<$res['publ_end'] && ($now>$res['publ_start'] || $res['publ_start']==0) ||
-					$now>$res['publ_start'] && $res['publ_end']==0) ) {
-					continue;
-				}
-				$search_func_vars = array(
-					'database' => $database,
-					'page_id' => $res['page_id'],
-					'section_id' => $res['section_id'],
-					'page_title' => $res['page_title'],
-					'page_menu_title' => $res['menu_title'],
-					'page_description' => ($cfg_show_description?$res['description']:""),
-					'page_keywords' => $res['keywords'],
-					'page_link' => $res['link'],
-					'page_modified_when' => $res['modified_when'],
-					'page_modified_by' => $res['modified_by'],
-					'users' => $users,
-					'search_words' => $search_words, // needed for preg_match
-					'search_match' => $match,
-					'search_url_array' => $search_url_array, // needed for url-string only
-					'results_loop_string' => $fetch_results_loop['value'],
-					'default_max_excerpt' => $search_max_excerpt,
-					'enable_flush' => $cfg_enable_flush
-				);
-				// Only show this page if we are allowed to see it
-				if($admin->page_is_visible($res) == false) {
-					if($res['visibility'] == 'registered') { // don't show excerpt
-						$search_func_vars['default_max_excerpt'] = 0;
-						$search_func_vars['page_description'] = $TEXT['REGISTERED'];
-					} else { // private
+	if($search_max_excerpt!=0) { // skip this search if $search_max_excerpt==0
+		foreach($sorted_modules AS $module_name) {
+			$start_time = time();	// get start-time to check time-limit; not very accurate, but ok
+			$seen_pages[$module_name] = array();
+			if(!isset($search_funcs[$module_name])) {
+				continue; // there is no search_func for this module
+			}
+			// get each section for $module_name
+			$table_s = TABLE_PREFIX."sections";	
+			$table_p = TABLE_PREFIX."pages";
+			$sections_query = $database->query("
+				SELECT s.section_id, s.page_id, s.module, s.publ_start, s.publ_end,
+							 p.page_title, p.menu_title, p.link, p.description, p.keywords, p.modified_when, p.modified_by,
+							 p.visibility, p.viewing_groups, p.viewing_users
+				FROM $table_s AS s INNER JOIN $table_p AS p ON s.page_id = p.page_id
+				WHERE s.module = '$module_name' AND p.visibility NOT IN ('none','deleted') AND p.searching = '1' $search_path_SQL $search_language_SQL
+				ORDER BY s.page_id, s.position ASC
+			");
+			if($sections_query->numRows() > 0) {
+				while($res = $sections_query->fetchRow()) {
+					// check if time-limit is exceeded for this module
+					if($search_time_limit > 0 && (time()-$start_time > $search_time_limit)) {
+						break;
+					}
+					// Only show this section if it is not "out of publication-date"
+					$now = time();
+					if( !( $now<$res['publ_end'] && ($now>$res['publ_start'] || $res['publ_start']==0) ||
+						$now>$res['publ_start'] && $res['publ_end']==0) ) {
 						continue;
 					}
-				}
-				$uf_res = call_user_func($search_funcs[$module_name], $search_func_vars);
-				if($uf_res) {
-					$pages_listed[$res['page_id']] = true;
-					$seen_pages[$module_name][$res['page_id']] = true;
-				} else {
-					$seen_pages[$module_name][$res['page_id']] = true;
+					$search_func_vars = array(
+						'database' => $database,
+						'page_id' => $res['page_id'],
+						'section_id' => $res['section_id'],
+						'page_title' => $res['page_title'],
+						'page_menu_title' => $res['menu_title'],
+						'page_description' => ($cfg_show_description?$res['description']:""),
+						'page_keywords' => $res['keywords'],
+						'page_link' => $res['link'],
+						'page_modified_when' => $res['modified_when'],
+						'page_modified_by' => $res['modified_by'],
+						'users' => $users,
+						'search_words' => $search_words, // needed for preg_match
+						'search_match' => $match,
+						'search_url_array' => $search_url_array, // needed for url-string only
+						'results_loop_string' => $fetch_results_loop['value'],
+						'default_max_excerpt' => $search_max_excerpt,
+						'enable_flush' => $cfg_enable_flush,
+						'time_limit' => $search_time_limit // time-limit in secs
+					);
+					// Only show this page if we are allowed to see it
+					if($admin->page_is_visible($res) == false) {
+						if($res['visibility'] == 'registered') { // don't show excerpt
+							$search_func_vars['default_max_excerpt'] = 0;
+							$search_func_vars['page_description'] = $TEXT['REGISTERED'];
+						} else { // private
+							continue;
+						}
+					}
+					$uf_res = call_user_func($search_funcs[$module_name], $search_func_vars);
+					if($uf_res) {
+						$pages_listed[$res['page_id']] = true;
+						$seen_pages[$module_name][$res['page_id']] = true;
+					} else {
+						$seen_pages[$module_name][$res['page_id']] = true;
+					}
 				}
 			}
 		}
@@ -445,7 +458,7 @@ if($search_normal_string != '') {
 		SELECT page_id, page_title, menu_title, link, description, keywords, modified_when, modified_by,
 		       visibility, viewing_groups, viewing_users
 		FROM $table
-		WHERE visibility NOT IN ('none','deleted') AND searching = '1' $search_path_SQL
+		WHERE visibility NOT IN ('none','deleted') AND searching = '1' $search_path_SQL $search_language_SQL
 	");
 	if($query_pages->numRows() > 0) {
 		while($page = $query_pages->fetchRow()) {
@@ -602,7 +615,7 @@ if($search_normal_string != '') {
 				}
 				$prepared_query .= " ) ) ) ".$query_end;
 				// Execute query
-				$page_query = $database->query($prepared_query." ".$search_path_SQL);
+				$page_query = $database->query($prepared_query." ".$search_path_SQL." ".$search_language_SQL_t);
 
 				// Loop through queried items
 				if($page_query->numRows() > 0) {
