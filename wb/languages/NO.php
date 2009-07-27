@@ -436,8 +436,8 @@ $TEXT['INSTALLED'] = "installert";
 $TEXT['NOT_INSTALLED'] = "ikke installert";
 $TEXT['ADDON'] = "Tillegg";
 $TEXT['EXTENSION'] = "Utvidelse";
-$TEXT['UNZIP_FILE'] = "Upload and unpack a zip archiv";
-$TEXT['DELETE_ZIP'] = "Delete zip archiv after unpacking";
+$TEXT['UNZIP_FILE'] = "Upload and unpack a zip archive";
+$TEXT['DELETE_ZIP'] = "Delete zip archive after unpacking";
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Beklager, du har ikke tillgang til &aring; se denne siden';
