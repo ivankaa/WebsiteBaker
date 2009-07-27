@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 27-July 2009 Matthias Gallas
++	Added German language file to droplets
++	Added modul_description to language files of droplets
 +	Added Danish language files to modules (Thanks to Achrist)
 !	Updated Danish language file (Thanks to Achrist)
 #	Fixed improper spelling in language files (#754)

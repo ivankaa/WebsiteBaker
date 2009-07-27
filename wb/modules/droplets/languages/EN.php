@@ -23,6 +23,10 @@
 
 */
 
+//Modul Description
+$module_description = 'This tool allows you to manage your local Droplets.';
+
+//Variables for the backend
 $DR_TEXT['DROPLETS']	= 'Droplet';
 $DR_TEXT['BACKUP']		= 'Backup Droplets (Zip)';
 $DR_TEXT['RESTORE']		= 'Restore Droplets (Zipped)';
