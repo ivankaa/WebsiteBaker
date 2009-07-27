@@ -32,10 +32,10 @@ define('LANGUAGE_LOADED', true);
 
 // Set the language information
 $language_code = 'DA';
-$language_name = 'Danish';
+$language_name = 'Dansk';
 $language_version = '2.8';
 $language_platform = '2.8.x';
-$language_author = 'Webstedbaker.dk + Achrist';
+$language_author = 'Achrist';
 $language_license = 'GNU General Public License';
 
 // Menu titles
@@ -86,7 +86,7 @@ $HEADING['MODIFY_INTRO_PAGE'] = 'Rediger intro-side';
 
 $HEADING['BROWSE_MEDIA'] = 'Gennemse medie-mappe';
 $HEADING['CREATE_FOLDER'] = 'Opret mappe';
-$HEADING['UPLOAD_FILES'] = 'Upload fil(er)';
+$HEADING['UPLOAD_FILES'] = 'Overf&oslash;r fil(er)';
 
 $HEADING['INSTALL_MODULE'] = 'Install&eacute;r modul';
 $HEADING['UNINSTALL_MODULE'] = 'Afinstall&eacute;r modul';
@@ -120,8 +120,8 @@ $HEADING['MODIFY_DELETE_GROUP'] = 'Ret/slet gruppe';
 $HEADING['ADD_GROUP'] = 'Tilf&oslash;j gruppe';
 $HEADING['MODIFY_GROUP'] = 'Ret gruppe';
 
-$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On requirements not met';
-$HEADING['INVOKE_MODULE_FILES'] = 'Execute module files manually';
+$HEADING['ADDON_PRECHECK_FAILED'] = 'Add-On krav er ikke opfyldt';
+$HEADING['INVOKE_MODULE_FILES'] = 'Eksekver modulfiler manuelt';
 
 // Other text
 $TEXT['OPEN'] = '&Aring;ben';
@@ -173,7 +173,7 @@ $TEXT['FILES'] = 'Filer';
 $TEXT['FOLDER'] = 'Mappe';
 $TEXT['FOLDERS'] = 'Mapper';
 $TEXT['CREATE_FOLDER'] = 'Opret mappe';
-$TEXT['UPLOAD_FILES'] = 'Upload fil(er)';
+$TEXT['UPLOAD_FILES'] = 'Overf&oslash;r fil(er)';
 $TEXT['CURRENT_FOLDER'] = 'Nuv&aelig;rende mappe';
 $TEXT['TO'] = 'Til';
 $TEXT['FROM'] = 'Fra';
@@ -209,7 +209,7 @@ $TEXT['TEXT'] = 'Tekst';
 $TEXT['HEADER'] = 'Hoved (overligger)';
 $TEXT['FOOTER'] = 'Fod (bund)';
 $TEXT['TEMPLATE'] = 'Skabelon';
-$TEXT['THEME'] = 'Backend-Theme';
+$TEXT['THEME'] = 'Backend-tema';
 $TEXT['INSTALLATION'] = 'Installation';
 $TEXT['DATABASE'] = 'Database';
 $TEXT['HOST'] = 'V&aelig;rt';
@@ -380,7 +380,7 @@ $TEXT['ON'] = 'D.';
 $TEXT['LAST_UPDATED_BY'] = 'Sidst opdateret af:';
 $TEXT['RESULTS_FOR'] = 'Resultater for';
 $TEXT['TIME'] = 'Tid';
-$TEXT['REDIRECT_AFTER'] = 'Redirect after';
+$TEXT['REDIRECT_AFTER'] = 'Videresend efter';
 $TEXT['WYSIWYG_STYLE'] = 'WYSIWYG-stil';
 $TEXT['WYSIWYG_EDITOR'] = 'WYSIWYG-editor';
 $TEXT['SERVER_EMAIL'] = 'Server email';
@@ -393,7 +393,7 @@ $TEXT['MAIN'] = 'Hovedoversigt';
 $TEXT['RENAME_FILES_ON_UPLOAD'] = 'Omd&oslash;b filer under opload';
 $TEXT['APP_NAME'] = 'Applikationsnavn';
 $TEXT['SESSION_IDENTIFIER'] = 'Sessions-ID';
-$TEXT['SEC_ANCHOR'] = 'Section-Anchor text';
+$TEXT['SEC_ANCHOR'] = 'Sektionsankertekst';
 $TEXT['BACKUP'] = 'Backup';
 $TEXT['RESTORE'] = 'Gendannelse';
 $TEXT['BACKUP_DATABASE'] = 'Backup af database';
@@ -430,14 +430,14 @@ $TEXT['PLEASE_LOGIN'] = 'Log ind';
 $TEXT['CAP_EDIT_CSS'] = 'Rediger CSS';
 $TEXT['HEADING_CSS_FILE'] = 'Aktuel modulfil: ';
 $TEXT['TXT_EDIT_CSS_FILE'] = 'Rediger CSS definitioner i tekstfeltet nedenfor';
-$TEXT['CODE_SNIPPET'] = "Code-snippet";
-$TEXT['REQUIREMENT'] = "Requirement";
-$TEXT['INSTALLED'] = "installed";
-$TEXT['NOT_INSTALLED'] = "not installed";
-$TEXT['ADDON'] = "Add-On";
-$TEXT['EXTENSION'] = "Extension";
-$TEXT['UNZIP_FILE'] = "Upload and unpack a zip archive";
-$TEXT['DELETE_ZIP'] = "Delete zip archive after unpacking";
+$TEXT['CODE_SNIPPET'] = 'Kodestump';
+$TEXT['REQUIREMENT'] = 'Krav';
+$TEXT['INSTALLED'] = 'installeret';
+$TEXT['NOT_INSTALLED'] = 'ikke installeret';
+$TEXT['ADDON'] = 'Add-On';
+$TEXT['EXTENSION'] = 'Udvidelse';
+$TEXT['UNZIP_FILE'] = 'Overf&oslash;r og udpak et zip-arkiv';
+$TEXT['DELETE_ZIP'] = 'Slet zip-arkiv efter udpakning';
 
 // Success/error messages
 $MESSAGE['FRONTEND']['SORRY_NO_VIEWING_PERMISSIONS'] = 'Beklager - du har ikke adgang til at se denne side';
@@ -455,18 +455,18 @@ $MESSAGE['LOGIN']['PASSWORD_TOO_LONG'] = 'Den indtastede adgangskode er for LANG
 $MESSAGE['LOGIN']['AUTHENTICATION_FAILED'] = 'Brugernavn og/eller adgangskode er forkert';
 
 $MESSAGE['SIGNUP']['NO_EMAIL'] = 'Du skal indtaste en gyldig email-adresse';
-$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Your login details...';
+$MESSAGE['SIGNUP2']['SUBJECT_LOGIN_INFO'] = 'Dine login-oplysninger...';
 $MESSAGE['SIGNUP2']['BODY_LOGIN_INFO'] = <<< EOT
-Hello {LOGIN_DISPLAY_NAME},
+Hej {LOGIN_DISPLAY_NAME},
 
-Your '{LOGIN_WEBSITE_TITLE}' login details are:
-Username: {LOGIN_NAME}
-Password: {LOGIN_PASSWORD}
+Dine '{LOGIN_WEBSITE_TITLE}' loginoplysninger er:
+Brugernavn: {LOGIN_NAME}
+Adgangskode: {LOGIN_PASSWORD}
 
-Your password has been set to the one above.
-This means that your old password will no longer work.
+Din adgangskode er sat til ovenst&aring;ende.
+Det betyder, at din gamle adgangskode ikke virker mere.
 
-If you have received this message in error, please delete it immediately.
+Hvis du har modtaget denne besked ved en fejl, bedes du straks slette den.
 EOT;
 
 $MESSAGE['FORGOT_PASS']['NO_DATA'] = 'Indtast din email-adresse nedenfor';
@@ -575,28 +575,28 @@ $MESSAGE['GENERIC']['BAD_PERMISSIONS'] = 'Kan ikke skrive i det valgte modtagebi
 $MESSAGE['GENERIC']['INVALID'] = 'Filen du over&oslash;rte er fejlbeh&aelig;ftet';
 $MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE'] = 'Kan ikke afinstallere: Den valgte fil er i brug';
 
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = "<br /><br />{{type}} <b>{{type_name}}</b> could not be uninstalled, because it is still in use on {{pages}}.<br /><br />";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = "this page;these pages";
-$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = "Can't uninstall the template <b>{{name}}</b>, because it is the default template!";
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL'] = '<br /><br />{{type}} <b>{{type_name}}</b> kan ikke afinstalleres, da den stadig bruges p&aring; {{pages}}.<br /><br />';
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IN_USE_TMPL_PAGES'] = 'denne side;disse sider';
+$MESSAGE['GENERIC']['CANNOT_UNINSTALL_IS_DEFAULT_TEMPLATE'] = 'Kan ikke afinstallere skabelonen <b>{{name}}</b>, da den er standardskabelonen!';
 
 $MESSAGE['GENERIC']['WEBSITE_UNDER_CONSTRUCTION'] = 'Website under konstruktion';
 $MESSAGE['GENERIC']['PLEASE_CHECK_BACK_SOON'] = 'Kom venligst igen senere...';
 $MESSAGE['GENERIC']['PLEASE_BE_PATIENT'] = 'V&aelig;r t&aring;lmodig, dette kan godt vare et stykke tid.';
 $MESSAGE['GENERIC']['ERROR_OPENING_FILE'] = 'Fejl ved &aring;bning af filen.';
-$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Invalid Website Baker installation file. Please check the *.zip format.';
-$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Invalid Website Baker language file. Please check the text file.';
+$MESSAGE['GENERIC']['INVALID_ADDON_FILE'] = 'Website Baker installationsfil ikke i korrekt format. Kontroller *.zip formatet.';
+$MESSAGE['GENERIC']['INVALID_LANGUAGE_FILE'] = 'Website Baker sprogfil ikke i korrekt format. Kontroller tekstfilen.';
 
 $MESSAGE['MOD_FORM']['REQUIRED_FIELDS'] = 'Du skal udfylde f&oslash;lgende felter:';
 $MESSAGE['MOD_FORM']['EXCESS_SUBMISSIONS'] = 'Beklager! Denne formular er blevet afsendt for mange gange indenfor den sidste time, og du vil derfor blive afvist - Pr&oslash;v igen om en times tid!';
 $MESSAGE['MOD_FORM']['INCORRECT_CAPTCHA'] = 'Verifikations tallene (ogs&aring; kendt som Captcha) som du tastede er ikke korrekte. Hvis du har problemer med at l&aelig;se Captha tallene, s&aring; kontakt venligst sidens Administrator p&aring; denne mailadresse: '.SERVER_EMAIL.'';
 
-$MESSAGE['ADDON']['RELOAD'] = 'Update database with information from Add-on files (e.g. after FTP upload).';
-$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Error while updating the Add-On information.';
-$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Moduler opdateret med succes';
-$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Templates opdateret med succes';
-$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Sprog opdateret med succes';
-$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on installation failed. Your system does not fulfill the requirements of this Add-on. To make this Add-on working on your system, please fix the issues summarized below.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'When modules are uploaded via FTP (not recommended), the module installation files <tt>install.php</tt>, <tt>upgrade.php</tt> or <tt>uninstall.php</tt> will not be executed automatically. Those modules may not work correct or do not uninstall properly.<br /><br />You can execute the module files manually for modules uploaded via FTP below.';
-$MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Warning: Existing module database entries will get lost. Only use this option if you experience problems with modules uploaded via FTP.';
+$MESSAGE['ADDON']['RELOAD'] = 'Opdater databasen med information fra  Add-on-filer (f.eks. efter en FPT-overf&oslash;rsel).';
+$MESSAGE['ADDON']['ERROR_RELOAD'] = 'Fejl under opdatering af Add-On information.';
+$MESSAGE['ADDON']['MODULES_RELOADED'] = 'Moduler opdateret fejlfrit';
+$MESSAGE['ADDON']['TEMPLATES_RELOADED'] = 'Skabelinger opdateret fejlfrit';
+$MESSAGE['ADDON']['LANGUAGES_RELOADED'] = 'Sprog opdateret fejlfrit';
+$MESSAGE['ADDON']['PRECHECK_FAILED'] = 'Add-on-installation mislykkedes. Dit system lever ikke op til de krav, denne Add-on stiller. For at f&aring; denne Add-on til at fungere p&aring; dit system, m&aring; du bringe f&oslash;lgende forhold i orden.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION'] = 'N&aring;r moduler overf&oslash;res via FTP (anbefales ikke), vil modul-installationsfilerne <tt>install.php</tt>, <tt>upgrade.php</tt> og <tt>uninstall.php</tt> ikke bliver udf&oslash;rt automatisk. Disse moduler vil eventuelt ikke fungere korrekt eller kan ikke afinstalleres rigtigt.<br /><br />Du kan eksekvere modulfiler manuelt for module, der er overf&oslash;rt via FTP, nedenfor.';
+$MESSAGE['ADDON']['MANUAL_INSTALLATION_WARNING'] = 'Advarsel: Eksisterende databaseregistreringer om modulerne vil g&aring; tabt. Anvend kun denne mulighed, hvis du oplever problemer med at overf&oslash;re via FTP.';
 
 ?>
