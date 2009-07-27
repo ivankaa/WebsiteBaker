@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+27-July 2009 Matthias Gallas
+#	Fixed bug introduced in changeset [1092]
 25-July 2009 Matthias Gallas
 #	fixed some language bugs in search.php (Thanks to Thorn)
 23-July 2009 Matthias Gallas

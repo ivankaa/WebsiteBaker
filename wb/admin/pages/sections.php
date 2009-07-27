@@ -149,7 +149,7 @@ $template->set_file('page', 'pages_sections.htt');
 $template->set_block('page', 'main_block', 'main');
 $template->set_block('main_block', 'module_block', 'module_list');
 $template->set_block('main_block', 'section_block', 'section_list');
-$template->set_block('section_block', '&nbsp;block_block', 'block_list');
+$template->set_block('section_block', 'block_block', 'block_list');
 $template->set_block('main_block', 'calendar_block', 'calendar_list');
 
 // set first defaults and messages
