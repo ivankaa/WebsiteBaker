@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id:$
+ * $Id$
  * Website Baker Add-On precheck functions
  *
  * This file contains the functions of the pretest performed upfront
@@ -54,7 +54,7 @@ function getVersion($version, $strip_suffix = true)
 	$version = str_replace(',', '.', $version);
 
 	// convert version into major.minor.revision numbering system
-	@list($major, $minor, $revision) = explode('.', $version, 3);
+	list($major, $minor, $revision) = explode('.', $version, 3);
 
 	// convert versioning style 5.21 into 5.2.1
 	if ($revision == '' && strlen(intval($minor)) == 2) {
@@ -70,6 +70,42 @@ function getVersion($version, $strip_suffix = true)
 		(($strip_suffix == false && $suffix != '') ? '_' . $suffix : '');
 }
 
+/**
+ *	As "version_compare" it self seems only got trouble 
+ *	within words like "Alpha", "Beta" a.s.o. this function
+ *	only modify the version-string in the way that these words are replaced by values/numbers.
+ *
+ *	E.g:	"1.2.3 Beta2" => "1.2.322"
+ *			"0.1.1 ALPHA" => "0.1.11"
+ *
+ *	Notice:	Please keep in mind, that this will not correct the way "version_control" 
+ *			handel "1 < 1.0 < 1.0.0 < 1.0.0.0" and will not correct missformed version-strings
+ *			below 2.7, e.g. "1.002 released candidate 2.3"
+ *			
+ *	@since	2.8.0 RC2
+ *
+ *	@param	string	A versionstring
+ *	@return	string	The modificated versionstring
+ *
+ */
+function getVersion2 ($version="") {
+	
+	$states = array (
+		'1' => "alpha",
+		'2' => "beta",
+		'4' => "rc",
+		'8' => "final"	
+	);
+
+	$version = strtolower($version);
+	
+	foreach($states as $value=>$keys) $version = str_replace($keys, $value, $version);
+
+	$version = str_replace(" ", "", $version);
+
+	return $version;
+}
+
 function versionCompare($version1, $version2, $operator = '>=')
 {
 	/**
@@ -77,7 +113,8 @@ function versionCompare($version1, $version2, $operator = '>=')
 	 * The versions are first converted into a string following the major.minor.revision 
 	 * convention and performs a version_compare afterwards.
 	 */
-	return version_compare(getVersion($version1), getVersion($version2), $operator);
+	// return version_compare(getVersion($version1), getVersion($version2), $operator);
+	return version_compare(getVersion2($version1), getVersion2($version2), $operator);
 }
 
 function sortPreCheckArray($precheck_array)

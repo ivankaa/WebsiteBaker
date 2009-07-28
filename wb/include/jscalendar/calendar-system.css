@@ -33,7 +33,7 @@
 }
 
 .calendar .nav {
-  background: ButtonFace url(<?php echo WB_URL ?>/include/jscalendar/menuarrow.gif) no-repeat 100% 100%;
+  background: #DDDDDD url(menuarrow.gif) no-repeat 100% 100%;
 }
 
 .calendar thead .title { /* This holds the current "month, year" */
