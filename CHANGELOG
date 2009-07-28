@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+28-July 2009 Matthias Gallas
+#	fixed some smaller issues in rss.php (Thanks to Kibmcz)
 27-July 2009 Matthias Gallas
 +	Added German language file to droplets
 +	Added modul_description to language files of droplets

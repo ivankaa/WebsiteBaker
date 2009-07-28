@@ -67,8 +67,8 @@ echo '<?xml version="1.0" encoding="'.$charset.'"?>';
 <?php
 // Optional header info 
 ?>
-<language><?php echo DEFAULT_LANGUAGE; ?></language>
-<copyright><?php echo WB_URL.$_SERVER['REQUEST_URI']; ?></copyright>
+<language><?php echo strtolower(DEFAULT_LANGUAGE); ?></language>
+<copyright><?php $thedate = date('Y'); $websitetitle = WEBSITE_TITLE; echo "Copyright {$thedate}, {$websitetitle}"; ?></copyright>
 <managingEditor><?php echo SERVER_EMAIL; ?></managingEditor>
 <webMaster><?php echo SERVER_EMAIL; ?></webMaster>
 <category><?php echo WEBSITE_TITLE; ?></category>
