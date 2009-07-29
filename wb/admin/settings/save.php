@@ -138,7 +138,7 @@ while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
 	if ($setting_name!='wb_version') {
-		$allow_tags_in_fields = array('website_header', 'website_footer');
+		$allow_tags_in_fields = array('website_header', 'website_footer','wbmailer_smtp_password');
 		if(!in_array($setting_name, $allow_tags_in_fields)) {
 			$value = strip_tags($value);
 		}

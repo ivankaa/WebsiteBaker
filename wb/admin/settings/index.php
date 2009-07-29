@@ -45,7 +45,7 @@ $query = "SELECT * FROM ".TABLE_PREFIX."settings";
 $results = $database->query($query);
 while($setting = $results->fetchRow()) {
 	$setting_name = $setting['name'];
-	$setting_value = htmlspecialchars($setting['value']);
+	$setting_value = ( $setting_name != 'wbmailer_smtp_password' ) ? htmlspecialchars($setting['value']) : $setting['value'];
 	$template->set_var(strtoupper($setting_name),$setting_value);
 }
 

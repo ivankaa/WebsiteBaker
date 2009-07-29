@@ -299,10 +299,12 @@ class wb
 		$success_template->set_var('BACK', $TEXT['BACK']);
 		$success_template->parse('main', 'main_block', false);
 		$success_template->pparse('output', 'page');
-		if($auto_footer == true) {
-			$this->print_footer();
+		if ( $auto_footer == true ) {
+			if ( method_exists($this, "print_footer") ) {
+				$this->print_footer();
+				exit();
+			}
 		}
-		exit();
 	}
 
 	// Validate send email

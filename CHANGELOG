@@ -11,6 +11,14 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+29-July 2009 Dietrich Roland Pehlke (Aldus)
+#	changes in framework/class.wb.php to avoid the "print->footer()" bug in the frontend,
+	as this function/method doesn't exists for the frontend.
+#	Changes inside index.php and save.php in settings to get rid of the situation
+	that a SMTP-Password could not contain an "<" char (right chars are craped),
+	and also "<" is not transformed into an entitie "&lt;". (Thanks to FrankH)
+#	Modify of "addon.precheck.inc.php" to get rid of the problematic that version_compare
+	could faild if words like "alpha", "beta" are inside a version-string. (missing in changelog 1100)
 28-July 2009 Matthias Gallas
 #	fixed some smaller issues in rss.php (Thanks to Kibmcz)
 27-July 2009 Matthias Gallas
