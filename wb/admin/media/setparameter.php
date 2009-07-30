@@ -48,7 +48,7 @@ if ( !is_null($admin->get_post_escaped("save"))) {
 	$dirs[] = WB_PATH.MEDIA_DIRECTORY;
 	foreach($dirs AS $name) {
 		$r = str_replace(WB_PATH, '', $name);
-		$r = str_replace('/','_',$r);
+		$r = str_replace(array('/',' '),'_',$r);
 		$w = (int)$admin->get_post_escaped($r.'-w');
 		$h = (int)$admin->get_post_escaped($r.'-h');
 		$pathsettings[$r]['width']=$w; 
@@ -94,7 +94,7 @@ array_multisort($array_lowercase, SORT_ASC, SORT_STRING, $dirs);
 
 foreach($dirs AS $name) {
 	$relative = str_replace(WB_PATH, '', $name);
-	$safepath = str_replace('/','_',$relative);
+	$safepath = str_replace(array('/',' '),'_',$relative);
 	$cur_width = $cur_height = '';
 	if (isset($pathsettings[$safepath]['width'])) $cur_width = $pathsettings[$safepath]['width'];
 	if (isset($pathsettings[$safepath]['height'])) $cur_height = $pathsettings[$safepath]['height'];

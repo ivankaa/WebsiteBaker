@@ -50,7 +50,7 @@ if(strstr($target, '../')) {
 
 // Create relative path of the target location for the file
 $relative = WB_PATH.$target.'/';
-$resizepath = str_replace('/','_',$target);
+$resizepath = str_replace(array('/',' '),'_',$target);
 
 // Find out whether we should replace files or give an error
 if($admin->get_post('overwrite') != '') {

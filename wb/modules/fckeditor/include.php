@@ -30,7 +30,9 @@ function reverse_htmlentities($mixed) {
 
 function get_template_name() {
 	// returns the template name of the current displayed page
-	require_once('../../config.php');
+
+	// Loading config.php is not needed here, it is loaded before. It breaks the module when the editor is called form another dir as WB_PATH/modules/mymodule
+	// require_once('../../config.php');
 	require_once(WB_PATH. '/framework/class.database.php');
 
 	// work out default editor.css file for FCKEditor

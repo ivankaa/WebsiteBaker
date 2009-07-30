@@ -11,6 +11,10 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+30-July-2009 Ruud Eisinga (Ruud)
+#	Fixed a bug in the /admin/media resizer parameters for dirs with whitespaces (thnx to tiesy)
+#	Fixed a bug in FCKeditor include.php. Now the editor can be used from other 
+	subdirectories than WB_PATH/modules/mymodule
 29-July 2009 Dietrich Roland Pehlke (Aldus)
 #	changes in framework/class.wb.php to avoid the "print->footer()" bug in the frontend,
 	as this function/method doesn't exists for the frontend.
