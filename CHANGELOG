@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+6-Aug-2009 Matthias Gallas
+#	Fixed some display issues in argos_theme (Thanks to Argos)
 30-July-2009 Ruud Eisinga (Ruud)
 #	Fixed a bug in the /admin/media resizer parameters for dirs with whitespaces (thnx to tiesy)
 #	Fixed a bug in FCKeditor include.php. Now the editor can be used from other 

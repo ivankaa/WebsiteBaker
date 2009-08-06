@@ -88,7 +88,7 @@ select option.disabled {color:#aaa;}
 
 table.pages_view {width:900px;}
 table.pages_view tr {background:#f0f0f0;}
-table.pages_view tr:hover {background:#eaeff6;}
+table.pages_view tr:hover, tr.sectionrow:hover {background:#eaeff6;}
 
 .page_list {display:none;}
 .page_list_show li {display:block;}
@@ -99,19 +99,16 @@ img.page_list_rights {border:none;float:left;margin:0;}
 .header_list_page_ID{width:40px;text-align:left;}
 .header_list_actions {text-align:left;width:120px;}
 
-.header_list_type {text-align:left;width:px;}
+.header_list_type {text-align:left;}
 .header_list_block {text-align:left;width:180px;}
 .header_list_pubdate_start {text-align:left;width:200px;}
 .header_list_pubdate_end {text-align:left;width:200px;}
-.header_list_section_ID {width:55px;text-align: right;}
 .header_list_sections_actions {text-align:left;width:60px;}
+.header_list_section_ID {width:55px;text-align:left;}
 
 .list_page_title {text-align:left;}
 .list_menu_title {width:300px;text-align:left;}
 .list_page_id {width:40px;text-align:left;}
 .list_actions {width:20px;}
-.list_type {text-align:left;width:px;}
-.list_block {text-align:left;width:180px;}
-.list_section_id {width:55px;text-align: right;}
 .list_pubdate_start {text-align:left;width:200px;}
 .list_pubdate_end {text-align:left;width:200px;}

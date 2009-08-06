@@ -195,7 +195,7 @@ if($query_sections->numRows() > 0) {
 				$edit_page ='<a name="'.$section['section_id'].'" href="'.ADMIN_URL.'/pages/modify.php?page_id='.$page_id.'#'.$section['section_id'].'">'.$module_name.'</a>';
 				$input_attribute = 'input_normal';
 				$template->set_var(array(
-						'STYLE_DISPLAY_SECTION_BLOCK' => ' style="visibility: visible;"',
+						'STYLE_DISPLAY_SECTION_BLOCK' => ' style="visibility:visible;"',
 						'NAME_SIZE' => 180,
 						'INPUT_ATTRIBUTE' => $input_attribute,
 						'VAR_SECTION_ID' => $section['section_id'],
@@ -221,7 +221,7 @@ if($query_sections->numRows() > 0) {
 				$edit_page ='<a name="'.$section['section_id'].'" href="'.ADMIN_URL.'/pages/modify.php?page_id='.$page_id.'#'.$section['section_id'].'">'.$module_name.'</a>';
 				$input_attribute = 'input_small';
 				$template->set_var(array(
-						'STYLE_DISPLAY_SECTION_BLOCK' => ' style="visibility: hidden;"',
+						'STYLE_DISPLAY_SECTION_BLOCK' => ' style="display:none;"',
 						'NAME_SIZE' => 270,
 						'INPUT_ATTRIBUTE' => $input_attribute,
 						'VAR_SECTION_ID' => $section['section_id'],

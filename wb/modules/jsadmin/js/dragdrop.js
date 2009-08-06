@@ -220,7 +220,7 @@ JsAdmin.DD.trDDSwap.prototype.onDragEnter = function(e, id) {
 
 JsAdmin.DD.trDDSwap.prototype.endDrag = function(e) {
 	YAHOO.util.Dom.setStyle(this.getEl(), "opacity", this.opacity);
-	YAHOO.util.Dom.setStyle(this.getEl(), "background", "white");
+	YAHOO.util.Dom.setStyle(this.getEl(), "background", "transparent");
 	
 	JsAdmin.DD.dragee = null;
 
