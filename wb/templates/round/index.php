@@ -244,6 +244,9 @@ if (!defined('WB_PATH')) die(header('Location: ../../../index.php'));
 	</td>
 </tr>
 </table>
-
+<?php 
+// automatically include optional WB module file frontend_body.js)
+if (function_exists('register_frontend_modfiles_body')) { register_frontend_modfiles_body(); } 
+?>
 </body>
 </html>

@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 6-Aug-2009 Matthias Gallas
++	Added new function 'register_frontend_modfiles_body' to default templates
 +	Added option to use a frontend_body.js in modules to include javascript from modules
 	in the body of the frontend (Thanks to Luisehahne)
 !	Updated Danish language Files (Thanks to Achrist)

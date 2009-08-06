@@ -141,6 +141,9 @@ if (!defined('WB_PATH')) die(header('Location: ../../index.php'));
 <div class="powered_by">
 	Powered by <a href="http://www.websitebaker.org" target="_blank">Website Baker</a>
 </div>
-
+<?php 
+// automatically include optional WB module file frontend_body.js)
+if (function_exists('register_frontend_modfiles_body')) { register_frontend_modfiles_body(); } 
+?>
 </body>
 </html>
