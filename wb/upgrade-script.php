@@ -343,10 +343,10 @@ while($result = $query_dates->fetchRow()) {
 }
 
 /**********************************************************
- *  - Set Version to WB 2.8RC1
+ *  - Set Version to WB 2.8
  */
-echo "<br />Update database version number to 2.8RC1 : ";
-$version = '2.8RC1';
+echo "<br />Update database version number to 2.8 : ";
+$version = '2.8';
 echo ($database->query("UPDATE `".TABLE_PREFIX."settings` SET `value` = '$version' WHERE `name` = 'wb_version'")) ? " $OK<br />" : " $FAIL<br />";
 
 
