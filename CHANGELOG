@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 6-Aug-2009 Matthias Gallas
+!	Updated upgrade_script to make use of the changed news settings
 +	Added to show_menu2 the aOption 'SM2_HIDEPAGES'. If set all hidden pages are
 	hidden again (Thanks to DarkViper)
 #	Fixed again some bugs in news modul (ticket #756) (Thanks to Aldus and Luisehahne)

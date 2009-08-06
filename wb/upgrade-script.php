@@ -238,33 +238,42 @@ echo ($database->query($sql)) ? " $OK<br />" : " $FAIL<br />";
  */
 
 // These are the default setting
+$header = '<table cellpadding=\"0\" cellspacing=\"0\" class=\"loop-header\">'."\n";
 $post_loop = '<tr class=\"post_top\">
 <td class=\"post_title\"><a href=\"[LINK]\">[TITLE]</a></td>
 <td class=\"post_date\">[PUBLISHED_TIME], [PUBLISHED_DATE]</td>
 </tr>
 <tr>
 <td class=\"post_short\" colspan=\"2\">
-[SHORT] 
+[SHORT]
 <span style=\"visibility:[SHOW_READ_MORE];\"><a href=\"[LINK]\">[TEXT_READ_MORE]</a></span>
 </td>
 </tr>';
-$post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" width="98%">
+$footer = '</table>
+<table cellpadding="0" cellspacing="0" class="page-header" style="display: [DISPLAY_PREVIOUS_NEXT_LINKS]">
 <tr>
-<td height="30"><h1>[TITLE]</h1></td>
-<td rowspan="3" style="display: [DISPLAY_IMAGE]"><img src="[GROUP_IMAGE]" alt="[GROUP_TITLE]" /></td>
+<td class="page-left">[PREVIOUS_PAGE_LINK]</td>
+<td class="page-center">[OF]</td>
+<td class="page-right">[NEXT_PAGE_LINK]</td>
+</tr>
+</table>';
+$post_header = addslashes('<table cellpadding="0" cellspacing="0" class="post-header">
+<tr>
+<td><h1>[TITLE]</h1></td>
+<td rowspan="3" style="display: [DISPLAY_IMAGE]">[GROUP_IMAGE]</td>
 </tr>
 <tr>
-<td valign="top"><b>[TEXT_POSTED_BY] [DISPLAY_NAME] ([USERNAME]) [TEXT_ON] [PUBLISHED_DATE]</b></td>
+<td class="public-info"><b>[TEXT_POSTED_BY] [DISPLAY_NAME] ([USERNAME]) [TEXT_ON] [PUBLISHED_DATE]</b></td>
 </tr>
 <tr style="display: [DISPLAY_GROUP]">
-<td valign="top"><a href="[BACK]">[PAGE_TITLE]</a> &gt;&gt; <a href="[BACK]?g=[GROUP_ID]">[GROUP_TITLE]</a></td>
+<td class="group-page"><a href="[BACK]">[PAGE_TITLE]</a> &gt;&gt; <a href="[BACK]?g=[GROUP_ID]">[GROUP_TITLE]</a></td>
 </tr>
 </table>');
 $post_footer = '<p>[TEXT_LAST_CHANGED]: [MODI_DATE] [TEXT_AT] [MODI_TIME]</p>
 <a href=\"[BACK]\">[TEXT_BACK]</a>';
 $comments_header = addslashes('<br /><br />
 <h2>[TEXT_COMMENTS]</h2>
-<table cellpadding="2" cellspacing="0" border="0" width="98%">');
+<table cellpadding="2" cellspacing="0" class="comment-header">');
 $comments_loop = addslashes('<tr>
 <td class="comment_title">[TITLE]</td>
 <td class="comment_info">[TEXT_BY] [DISPLAY_NAME] [TEXT_ON] [DATE] [TEXT_AT] [TIME]</td>
@@ -286,8 +295,18 @@ while($result = $query_dates->fetchRow()) {
 	echo "<br /><u>Add default settings to database for news section_id= ".$result['section_id']."</u><br />";
 	$section_id = $result['section_id'];
 
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `header` = '$header' WHERE `section_id` = $section_id")) {
+		echo 'Database data header added successfully';
+	}
+	echo mysql_error().'<br />';
+	
 	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `post_loop` = '$post_loop' WHERE `section_id` = $section_id")) {
 		echo 'Database data post_loop added successfully';
+	}
+	echo mysql_error().'<br />';
+	
+	if($database->query("UPDATE `".TABLE_PREFIX."mod_news_settings` SET `footer` = '$footer' WHERE `section_id` = $section_id")) {
+		echo 'Database data footer added successfully';
 	}
 	echo mysql_error().'<br />';
 	
