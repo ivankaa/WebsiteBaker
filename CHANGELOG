@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 6-Aug-2009 Matthias Gallas
+#	Fixed again some bugs in news modul (ticket #756) (Thanks to Aldus and Luisehahne)
 #	Fixed bug that frontend.js, frontend.css and frontend_body.js are not used
 	from snippets (ticket #764) (Thanks to Luisehahne)
 +	Added new function 'register_frontend_modfiles_body' to default templates

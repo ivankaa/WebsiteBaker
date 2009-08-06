@@ -77,31 +77,31 @@ if(function_exists('edit_module_css')) {
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['HEADER']; ?>:</td>
 			<td class="setting_value">
-				<textarea name="header" style="width: 98%; height: 80px;"><?php echo ($fetch_content['header']); ?></textarea>
+				<textarea name="header" rows="10" cols="1" style="width: 98%; height: 80px;"><?php echo ($fetch_content['header']); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['POST'].' '.$TEXT['LOOP']; ?>:</td>
 			<td class="setting_value">
-				<textarea name="post_loop" style="width: 98%; height: 60px;"><?php echo ($fetch_content['post_loop']); ?></textarea>
+				<textarea name="post_loop" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo ($fetch_content['post_loop']); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['FOOTER']; ?>:</td>
 			<td class="setting_value">
-				<textarea name="footer" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($fetch_content['footer'])); ?></textarea>
+				<textarea name="footer" rows="10" cols="1" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($fetch_content['footer'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['POST_HEADER']; ?>:</td>
 			<td class="setting_value">
-				<textarea name="post_header" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['post_header'])); ?></textarea>
+				<textarea name="post_header" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['post_header'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['POST_FOOTER']; ?>:</td>
 			<td class="setting_value">
-				<textarea name="post_footer" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['post_footer'])); ?></textarea>
+				<textarea name="post_footer" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['post_footer'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -166,32 +166,32 @@ if(function_exists('edit_module_css')) {
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['HEADER']; ?>:</td>
 			<td class="setting_value">
-				<textarea name="comments_header" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_header'])); ?></textarea>
+				<textarea name="comments_header" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_header'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['LOOP']; ?>:</td>
 			<td class="setting_value">
-				<textarea name="comments_loop" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_loop'])); ?></textarea>
+				<textarea name="comments_loop" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_loop'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['FOOTER']; ?>:</td>
 			<td class="setting_value">
-				<textarea name="comments_footer" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_footer'])); ?></textarea>
+				<textarea name="comments_footer" rows="10" cols="1" style="width: 98%; height: 60px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_footer'])); ?></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['COMMENTS'].' '.$TEXT['PAGE']; ?>:</td>
 			<td class="setting_value">
-				<textarea name="comments_page" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_page'])); ?></textarea>
+				<textarea name="comments_page" rows="10" cols="1" style="width: 98%; height: 80px;"><?php echo str_replace($raw, $friendly, ($fetch_content['comments_page'])); ?></textarea>
 			</td>
 		</tr>
 	</table>
 	<table cellpadding="0" cellspacing="0" border="0" width="100%">
 		<tr>
 			<td align="left">
-				<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;">
+				<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
 			</td>
 			<td align="right">
 				<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />

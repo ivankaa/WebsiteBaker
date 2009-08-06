@@ -61,7 +61,7 @@ $fetch_content = $query_content->fetchRow();
 <tr>
 	<td valign="top"><?php echo $TEXT['COMMENT']; ?>:</td>
 	<td>
-		<textarea name="comment" style="width: 98%; height: 150px;"><?php echo (htmlspecialchars($fetch_content['comment'])); ?></textarea>
+		<textarea name="comment" rows="10" cols="1" style="width: 98%; height: 150px;"><?php echo (htmlspecialchars($fetch_content['comment'])); ?></textarea>
 	</td>
 </tr>
 </table>

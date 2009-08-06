@@ -93,9 +93,9 @@ if($query_settings->numRows() == 0) {
 	?>:
 	<br />
 	<?php if(ENABLED_ASP) { ?>
-		<textarea name="c0mment_<?php echo date('W'); ?>" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
+		<textarea name="c0mment_<?php echo date('W'); ?>" rows="10" cols="1" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
 	<?php } else { ?>
-		<textarea name="comment" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
+		<textarea name="comment" rows="10" cols="1" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
 	<?php } ?>
 	<br /><br />
 	<?php

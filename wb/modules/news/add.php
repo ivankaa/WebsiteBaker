@@ -26,42 +26,42 @@
 // Must include code to stop this file being access directly
 if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
-$header = '<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"98%\">';
+$header = '<table cellpadding=\"0\" cellspacing=\"0\" class=\"loop-header\">'."\n";
 $post_loop = '<tr class=\"post_top\">
 <td class=\"post_title\"><a href=\"[LINK]\">[TITLE]</a></td>
 <td class=\"post_date\">[PUBLISHED_TIME], [PUBLISHED_DATE]</td>
 </tr>
 <tr>
 <td class=\"post_short\" colspan=\"2\">
-[SHORT] 
+[SHORT]
 <span style=\"visibility:[SHOW_READ_MORE];\"><a href=\"[LINK]\">[TEXT_READ_MORE]</a></span>
 </td>
 </tr>';
 $footer = '</table>
-<table cellpadding="0" cellspacing="0" border="0" width="98%" style="display: [DISPLAY_PREVIOUS_NEXT_LINKS]">
+<table cellpadding="0" cellspacing="0" class="page-header" style="display: [DISPLAY_PREVIOUS_NEXT_LINKS]">
 <tr>
-<td width="35%" align="left">[PREVIOUS_PAGE_LINK]</td>
-<td width="30%" align="center">[OF]</td>
-<td width="35%" align="right">[NEXT_PAGE_LINK]</td>
+<td class="page-left">[PREVIOUS_PAGE_LINK]</td>
+<td class="page-center">[OF]</td>
+<td class="page-right">[NEXT_PAGE_LINK]</td>
 </tr>
 </table>';
-$post_header = addslashes('<table cellpadding="0" cellspacing="0" border="0" width="98%">
+$post_header = addslashes('<table cellpadding="0" cellspacing="0" class="post-header">
 <tr>
-<td height="30"><h1>[TITLE]</h1></td>
-<td rowspan="3" style="display: [DISPLAY_IMAGE]"><img src="[GROUP_IMAGE]" alt="[GROUP_TITLE]" /></td>
+<td><h1>[TITLE]</h1></td>
+<td rowspan="3" style="display: [DISPLAY_IMAGE]">[GROUP_IMAGE]</td>
 </tr>
 <tr>
-<td valign="top"><b>[TEXT_POSTED_BY] [DISPLAY_NAME] ([USERNAME]) [TEXT_ON] [PUBLISHED_DATE]</b></td>
+<td class="public-info"><b>[TEXT_POSTED_BY] [DISPLAY_NAME] ([USERNAME]) [TEXT_ON] [PUBLISHED_DATE]</b></td>
 </tr>
 <tr style="display: [DISPLAY_GROUP]">
-<td valign="top"><a href="[BACK]">[PAGE_TITLE]</a> &gt;&gt; <a href="[BACK]?g=[GROUP_ID]">[GROUP_TITLE]</a></td>
+<td class="group-page"><a href="[BACK]">[PAGE_TITLE]</a> &gt;&gt; <a href="[BACK]?g=[GROUP_ID]">[GROUP_TITLE]</a></td>
 </tr>
 </table>');
 $post_footer = '<p>[TEXT_LAST_CHANGED]: [MODI_DATE] [TEXT_AT] [MODI_TIME]</p>
 <a href=\"[BACK]\">[TEXT_BACK]</a>';
 $comments_header = addslashes('<br /><br />
 <h2>[TEXT_COMMENTS]</h2>
-<table cellpadding="2" cellspacing="0" border="0" width="98%">');
+<table cellpadding="2" cellspacing="0" class="comment-header">');
 $comments_loop = addslashes('<tr>
 <td class="comment_title">[TITLE]</td>
 <td class="comment_info">[TEXT_BY] [DISPLAY_NAME] [TEXT_ON] [DATE] [TEXT_AT] [TIME]</td>

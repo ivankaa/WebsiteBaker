@@ -29,7 +29,7 @@
 	padding-bottom: 15px;
 }
 
-.comment_title, .comment_text {
+.comment_title, .comment-text {
 	border-left: 1px solid #DDDDDD;
 }
 
@@ -50,4 +50,38 @@
 /*** Don't remove the class nixhier, this is required for ASP ***/
 .nixhier {
 	display:none;
+}
+
+.loop-header {
+	width: 100%;
+}
+
+.page-header {
+	width: 100%;	
+}
+.post-header {
+	width: 100%;	
+}
+
+.page-left {
+	text-align: left;	
+}
+.page-center {
+	text-align: center;
+}
+
+.page-right {
+	text-align: right;	
+}
+
+.comment-header {
+	width: 100%;
+}
+
+.public-info {
+	text-align: right;
+}
+
+.group-page {
+	text-align: center;
 }

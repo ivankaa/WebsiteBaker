@@ -42,7 +42,7 @@ $fetch_content = $query_content->fetchRow();
 
 if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php')) {
 	function show_wysiwyg_editor($name,$id,$content,$width,$height) {
-		echo '<textarea name="'.$name.'" id="'.$id.'" style="width: '.$width.'; height: '.$height.';">'.$content.'</textarea>';
+		echo '<textarea name="'.$name.'" id="'.$id.'" rows="10" cols="1" style="width: '.$width.'; height: '.$height.';">'.$content.'</textarea>';
 	}
 } else {
 	$id_list=array("short","long");

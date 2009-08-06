@@ -174,7 +174,15 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 	} else {
 		$display_previous_next_links = 'none';
 	}
-		
+
+	if ($num_posts === 0) {
+		$setting_header = '';
+		$setting_post_loop = '';
+		$setting_footer = '';
+		$setting_posts_per_page = '';
+
+	}
+
 	// Print header
 	if($display_previous_next_links == 'none') {
 		echo  str_replace(array('[NEXT_PAGE_LINK]','[NEXT_LINK]','[PREVIOUS_PAGE_LINK]','[PREVIOUS_LINK]','[OUT_OF]','[OF]','[DISPLAY_PREVIOUS_NEXT_LINKS]'), array('','','','','','', $display_previous_next_links), $setting_header);
@@ -194,6 +202,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false) { // Make sure parent group is active
 				$uid = $post['posted_by']; // User who last modified the post
 				// Workout date and time of last modified post
+				if ($post['published_when'] === '0') $post['published_when'] = time();
 				if ($post['published_when'] > $post['posted_when']) {
 					$post_date = gmdate(DATE_FORMAT, $post['published_when']+TIMEZONE);
 					$post_time = gmdate(TIME_FORMAT, $post['published_when']+TIMEZONE);
@@ -217,7 +226,8 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 				$group_title = $groups[$group_id]['title'];
 				$group_image = $groups[$group_id]['image'];
 				$display_image = ($group_image == '') ? "none" : "inherit";
-				$display_group = ($group_id == 0) ? 'none' : 'inherit';
+				$display_group = ($group_id == 0) ? 'none' : 'inherit'; 
+				if ($group_image != "") $group_image= "<img src='".$group_image."' alt='".$group_title."' />";
 				// Replace [wblink--PAGE_ID--] with real link
 				$short = ($post['content_short']);
 				$wb->preprocess($short);
@@ -295,6 +305,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 		if(isset($groups[$post['group_id']]['active']) AND $groups[$post['group_id']]['active'] != false) { // Make sure parent group is active
 			$uid = $post['posted_by']; // User who last modified the post
 			// Workout date and time of last modified post
+			if ($post['published_when'] === '0') $post['published_when'] = time();
 			if ($post['published_when'] > $post['posted_when']) {
 				$post_date = gmdate(DATE_FORMAT, $post['published_when']+TIMEZONE);
 				$post_time = gmdate(TIME_FORMAT, $post['published_when']+TIMEZONE);
@@ -309,7 +320,8 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			$group_title = $groups[$group_id]['title'];
 			$group_image = $groups[$group_id]['image'];
 			$display_image = ($group_image == '') ? "none" : "inherit";
-			$display_group = ($group_id == 0) ? 'none' : 'inherit';
+			$display_group = ($group_id == 0) ? 'none' : 'inherit'; 
+			if ($group_image != "") $group_image= "<img src='".$group_image."' alt='".$group_title."' />";
 			$vars = array('[PAGE_TITLE]', '[GROUP_ID]', '[GROUP_TITLE]', '[GROUP_IMAGE]', '[DISPLAY_GROUP]', '[DISPLAY_IMAGE]', '[TITLE]', '[SHORT]', '[BACK]', '[TEXT_BACK]', '[TEXT_LAST_CHANGED]', '[MODI_DATE]', '[TEXT_AT]', '[MODI_TIME]', '[PUBLISHED_DATE]', '[PUBLISHED_TIME]', '[TEXT_POSTED_BY]', '[TEXT_ON]', '[USER_ID]', '[USERNAME]', '[DISPLAY_NAME]', '[EMAIL]');
 			$post_short=$post['content_short'];
 			$wb->preprocess($post_short);
