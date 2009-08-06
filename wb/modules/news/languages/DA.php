@@ -30,15 +30,15 @@ $module_description = 'Denne side er beregnet til at lave en nyhedsside.';
 $MOD_NEWS['SETTINGS'] = 'Nyhedsindstillinger';
 
 //Variables for the frontend
-$MOD_NEWS['TEXT_READ_MORE'] = 'L&Atilde;&brvbar;s mere';
+$MOD_NEWS['TEXT_READ_MORE'] = 'L&aelig;s mere';
 $MOD_NEWS['TEXT_POSTED_BY'] = 'Indsendt af';
 $MOD_NEWS['TEXT_ON'] = 'den';
-$MOD_NEWS['TEXT_LAST_CHANGED'] = 'Sidst &Atilde;&brvbar;ndret';
+$MOD_NEWS['TEXT_LAST_CHANGED'] = 'Sidst &aelig;ndret';
 $MOD_NEWS['TEXT_AT'] = 'kl.';
 $MOD_NEWS['TEXT_BACK'] = 'Tilbage';
 $MOD_NEWS['TEXT_COMMENTS'] = 'Kommentarer';
 $MOD_NEWS['TEXT_COMMENT'] = 'Kommentar';
-$MOD_NEWS['TEXT_ADD_COMMENT'] = 'Tilf&Atilde;¸j kommentar';
+$MOD_NEWS['TEXT_ADD_COMMENT'] = 'Tilf&oslash;j kommentar';
 $MOD_NEWS['TEXT_BY'] = 'Af';
 
 ?>

@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 6-Aug-2009 Matthias Gallas
+!	Updated Danish language Files (Thanks to Achrist)
 #	Fixed some display issues in argos_theme (Thanks to Argos)
 30-July-2009 Ruud Eisinga (Ruud)
 #	Fixed a bug in the /admin/media resizer parameters for dirs with whitespaces (thnx to tiesy)
