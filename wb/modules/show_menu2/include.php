@@ -43,6 +43,7 @@ define('SM2_ESCAPE',    0x0100); // bit 8
 define('SM2_NOESCAPE',       0); // NOOP, unnecessary with WB 2.6.7+
 define('SM2_BUFFER',    0x0200); // bit 9
 define('SM2_CURRTREE',  0x0400); // bit 10
+define('SM2_HIDEPAGES', 0x0800); // bit 11 (reactivate old behavior and doesn't show hidden pages)
 
 define('_SM2_GROUP_1',  0x000F); // exactly one flag from group 1 is required
 
@@ -574,7 +575,9 @@ function show_menu2(
                 if ($page['page_id'] == $CURR_PAGE_ID) {
                     $page['sm2_is_curr'] = true;
                     $page['sm2_on_curr_path'] = true;
-                    unset($page['sm2_hide']); // don't hide the current page
+                    if (($flags & SM2_HIDEPAGES) == 0){
+                        unset($page['sm2_hide']); // don't hide the current page
+                    }
                 }
 
                 // mark parents of the current page as such
