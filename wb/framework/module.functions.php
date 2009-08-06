@@ -155,7 +155,7 @@ if (!function_exists('include_module_css')) {
 		
 		if($css_file == 'frontend.css') {
 			// check if frontend.css needs to be included into the <body> section
-			if(!((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) && 
+			if(!((!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) &&
 					file_exists(WB_PATH .'/modules/' .$mymod_dir .'/frontend.css'))) {
 				return false;
 			} 
@@ -178,11 +178,11 @@ if (!function_exists('include_module_css')) {
 if (!function_exists('requires_module_js')) {
 	function requires_module_js($mymod_dir, $js_file) {
 		if(!in_array(strtolower($js_file), array('frontend.js', 'backend.js'))) {
-			echo '<strong>Note: </strong>Javascript file "' .htmlentities($js_file) .'" 
-			specified in module "' .htmlentities($mymod_dir) .'" not valid.'; 
+			echo '<strong>Note: </strong>Javascript file "' .htmlentities($js_file) .'"
+			specified in module "' .htmlentities($mymod_dir) .'" not valid.';
 			return false;
 		}
-		
+
 		if($js_file == 'frontend.js') {
 			// check if frontend.js is included to the <head> section
 			if(!defined('MOD_FRONTEND_JAVASCRIPT_REGISTERED')) {
@@ -192,9 +192,9 @@ if (!function_exists('requires_module_js')) {
 				to ensure that module frontend.js files are automatically loaded if required.</p>
 				<code style="color: #800000;">&lt;?php<br />if(function_exists(\'register_frontend_modfiles\')) { <br />
 				&nbsp;&nbsp;register_frontend_modfiles(\'js\');<br />?&gt;</code><br />
-				<p><strong>Tip:</strong> For WB 2.6.7 copy the code above to the index.php of your template. 
-				Then open the view.php of the "' .htmlentities($mymod_dir) .'" module and set the variable 
-				<code>$requires_frontend_js</code> to false. This may do the trick.</p><p>All WB versions below 2.6.7 needs 
+				<p><strong>Tip:</strong> For WB 2.6.7 copy the code above to the index.php of your template.
+				Then open the view.php of the "' .htmlentities($mymod_dir) .'" module and set the variable
+				<code>$requires_frontend_js</code> to false. This may do the trick.</p><p>All WB versions below 2.6.7 needs
 				to be upgraded to work with this module.</p>
 				';
 				return false;
@@ -206,6 +206,46 @@ if (!function_exists('requires_module_js')) {
 				echo '<p><strong>Note:</strong> The module: "' .htmlentities($mymod_dir) .'" requires WB 2.6.7 or higher</p>
 				<p>This module uses Javascript functions contained in backend.js of the module.<br />
 				You need WB 2.6.7 or higher to ensure that module backend.js files are automatically loaded if required.</p>
+				<p>Sorry, you can not use this tool with your WB installation, please upgrade to the latest WB version available.</p><br />
+				';
+				return false;
+			}
+		}
+		return true;
+	}
+}
+// function to check if the optional module Javascript files are loaded into the <body> section
+if (!function_exists('requires_module_body_js')) {
+	function requires_module_body_js($mymod_dir, $js_file) {
+		if(!in_array(strtolower($js_file), array('frontend_body.js', 'backend_body.js'))) {
+			echo '<strong>Note: </strong>Javascript file "' .htmlentities($js_file) .'"
+			specified in module "' .htmlentities($mymod_dir) .'" not valid.';
+			return false;
+		}
+
+		if($js_file == 'frontend_body.js') {
+			// check if frontend_body.js is included to the <body> section
+			if(!defined('MOD_FRONTEND_BODY_JAVASCRIPT_REGISTERED')) {
+				echo '<p><strong>Note:</strong> The module: "' .htmlentities($mymod_dir) .'" requires WB 2.6.7 or higher</p>
+				<p>This module uses Javascript functions contained in frontend_body.js of the module.<br />
+				Add the code below before to the &lt;/body&gt; section in the index.php of your template
+				to ensure that module frontend_body.js files are automatically loaded if required.</p>
+				<code style="color: #800000;">&lt;?php<br />if(function_exists(\'register_frontend_modfiles_body\')) { <br />
+				&nbsp;&nbsp;register_frontend_modfiles_body(\'js\');<br />?&gt;</code><br />
+				<p><strong>Tip:</strong> For WB 2.6.7 copy the code above to the index.php of your template.
+				Then open the view.php of the "' .htmlentities($mymod_dir) .'" module and set the variable
+				<code>$requires_frontend_body_js</code> to false. This may do the trick.</p><p>All WB versions below 2.6.7 needs
+				to be upgraded to work with this module.</p>
+				';
+				return false;
+			}
+		} else {
+			// check if backend_body.js is included to the <body> section
+			global $admin;
+				if(!method_exists($admin, 'register_backend_modfiles_body') && file_exists(WB_PATH .'/modules/' .$mymod_dir .'/backend_body.js')) {
+				echo '<p><strong>Note:</strong> The module: "' .htmlentities($mymod_dir) .'" requires WB 2.6.7 or higher</p>
+				<p>This module uses Javascript functions contained in backend_body.js of the module.<br />
+				You need WB 2.6.7 or higher to ensure that module backend_body.js files are automatically loaded if required.</p>
 				<p>Sorry, you can not use this tool with your WB installation, please upgrade to the latest WB version available.</p><br />
 				';
 				return false;

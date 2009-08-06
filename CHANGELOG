@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 6-Aug-2009 Matthias Gallas
++	Added option to use a frontend_body.js in modules to include javascript from modules
+	in the body of the frontend (Thanks to Luisehahne)
 !	Updated Danish language Files (Thanks to Achrist)
 #	Fixed some display issues in argos_theme (Thanks to Argos)
 30-July-2009 Ruud Eisinga (Ruud)
