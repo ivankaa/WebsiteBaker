@@ -47,6 +47,10 @@ $page_link=&$wb->link;
 $extra_sql=&$wb->extra_sql;
 $extra_where_sql=&$wb->extra_where_sql;
 
+$include_head_link_css = '';
+$include_body_links = '';
+$include_head_links = '';
+
 $query="SELECT directory FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'snippet'";
 $query_result=$database->query($query);
 if ($query_result->numRows()>0) {
@@ -54,6 +58,23 @@ if ($query_result->numRows()>0) {
 		$module_dir = $row['directory'];
 		if (file_exists(WB_PATH.'/modules/'.$module_dir.'/include.php')) {
 			include(WB_PATH.'/modules/'.$module_dir.'/include.php');
+			/* check if frontend.css file needs to be included into the <head></head> of index.php
+			*/
+			if( file_exists(WB_PATH .'/modules/'.$module_dir.'/frontend.css')) {
+				$include_head_link_css .= '<link href="'.WB_URL.'/modules/'.$module_dir.'/frontend.css"';
+				$include_head_link_css .= ' rel="stylesheet" type="text/css" media="screen" />'."\n";
+				$include_head_file = 'frontend.css';
+			}
+			// check if frontend.js file needs to be included into the <body></body> of index.php
+			if(file_exists(WB_PATH .'/modules/'.$module_dir.'/frontend.js')) {
+				$include_head_links .= '<script src="'.WB_URL.'/modules/'.$module_dir.'/frontend.js" type="text/javascript"></script>'."\n";
+				$include_head_file = 'frontend.js';
+			}
+			// check if frontend_body.js file needs to be included into the <body></body> of index.php
+			if(file_exists(WB_PATH .'/modules/'.$module_dir.'/frontend_body.js')) {
+				$include_body_links .= '<script src="'.WB_URL.'/modules/'.$module_dir.'/frontend_body.js" type="text/javascript"></script>'."\n";
+				$include_body_file = 'frontend_body.js';
+			}
 		}
 	}
 }
@@ -334,11 +355,18 @@ if(!function_exists('register_frontend_modfiles_body')) {
 			return;
 		}
 
-		global $wb, $database;
+		global $wb, $database, $include_body_links;
 		// define default baselink and filename for optional module javascript files
 		$body_links = "";
-        $base_link = '<script src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend_body.js" type="text/javascript"></script>';
-        $base_file = "frontend_body.js";
+		$base_link = '<script src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend_body.js" type="text/javascript"></script>';
+		$base_file = "frontend_body.js";
+
+		if(!empty($include_body_links)) {
+			if(strpos($body_links, $include_body_links) === false) {
+				$body_links .= $include_body_links;
+			}
+			$include_body_links = '';
+		}
 
 		// gather information for all models embedded on actual page
 		$page_id = $wb->page_id;
@@ -371,6 +399,7 @@ if(!function_exists('register_frontend_modfiles_body')) {
 	}
 }
 
+
 // Function to add optional module Javascript or CSS stylesheets into the <head> section of the frontend
 if(!function_exists('register_frontend_modfiles')) {
 	function register_frontend_modfiles($file_id="css") {
@@ -380,9 +409,10 @@ if(!function_exists('register_frontend_modfiles')) {
 			return;
 		}
 
-		global $wb, $database;
+		global $wb, $database, $include_head_link_css, $include_head_links;
 		// define default baselink and filename for optional module javascript and stylesheet files
 		$head_links = "";
+
 		if($file_id == "css") {
 			$base_link = '<link href="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend.css"';
 			$base_link.= ' rel="stylesheet" type="text/css" media="screen" />';
@@ -390,6 +420,20 @@ if(!function_exists('register_frontend_modfiles')) {
 		} else {
 			$base_link = '<script src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/frontend.js" type="text/javascript"></script>';
 			$base_file = "frontend.js";
+		}
+
+		if(!empty($include_head_link_css)) {
+			if(strpos($head_links, $include_head_link_css) === false) {
+				$head_links .= $include_head_link_css;
+			}
+			$include_head_link_css = '';
+		} else {
+			if(!empty($include_head_links)) {
+				if(strpos($head_links, $include_head_links) === false) {
+					$head_links .= $include_head_links;
+				}
+				$include_head_links = '';
+			}
 		}
 
 		// gather information for all models embedded on actual page
