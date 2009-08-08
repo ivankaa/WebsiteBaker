@@ -78,6 +78,14 @@ $template->set_var(array(
 		'HEADING_ADD_USER' => $HEADING['ADD_USER']
 		)
 );
+// insert urls
+$template->set_var(array(
+		'ADMIN_URL' => ADMIN_URL,
+		'WB_URL' => WB_URL,
+		'WB_PATH' => WB_PATH,
+		'THEME_URL' => THEME_URL
+		)
+);
 // Insert language text and messages
 $template->set_var(array(
 		'TEXT_MODIFY' => $TEXT['MODIFY'],
@@ -99,6 +107,14 @@ $template->set_var('DISPLAY_EXTRA', 'none');
 $template->set_var('ACTIVE_CHECKED', ' checked="checked"');
 $template->set_var('ACTION_URL', ADMIN_URL.'/users/add.php');
 $template->set_var('SUBMIT_TITLE', $TEXT['ADD']);
+// insert urls
+$template->set_var(array(
+		'ADMIN_URL' => ADMIN_URL,
+		'WB_URL' => WB_URL,
+		'WB_PATH' => WB_PATH,
+		'THEME_URL' => THEME_URL
+		)
+);
 
 // Add groups to list
 $template->set_block('main_block', 'group_list_block', 'group_list');

@@ -56,7 +56,11 @@ $template->set_var(array(
 								'NAME' => $language_name,
 								'AUTHOR' => $language_author,
 								'VERSION' => $language_version,
-								'DESIGNED_FOR' => $language_platform
+								'DESIGNED_FOR' => $language_platform,
+								'ADMIN_URL' => ADMIN_URL,
+								'WB_URL' => WB_URL,
+								'WB_PATH' => WB_PATH,
+								'THEME_URL' => THEME_URL
 								)
 						);
 

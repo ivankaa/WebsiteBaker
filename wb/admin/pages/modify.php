@@ -64,7 +64,10 @@ $template->set_var(array(
 								'MODIFIED_BY' => $user['display_name'],
 								'MODIFIED_BY_USERNAME' => $user['username'],
 								'MODIFIED_WHEN' => $modified_ts,
-								'ADMIN_URL' => ADMIN_URL
+								'ADMIN_URL' => ADMIN_URL,
+								'WB_URL' => WB_URL,
+								'WB_PATH' => WB_PATH,
+								'THEME_URL' => THEME_URL
 								)
 						);
 if($modified_ts == 'Unknown') {

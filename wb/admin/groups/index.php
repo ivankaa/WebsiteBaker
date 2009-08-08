@@ -33,7 +33,14 @@ $template = new Template(THEME_PATH.'/templates');
 $template->set_file('page', 'groups.htt');
 $template->set_block('page', 'main_block', 'main');
 $template->set_block('main_block', 'manage_users_block', 'users');
-$template->set_var('ADMIN_URL', ADMIN_URL);
+// insert urls
+$template->set_var(array(
+	'ADMIN_URL' => ADMIN_URL,
+	'WB_URL' => WB_URL,
+	'WB_PATH' => WB_PATH,
+	'THEME_URL' => THEME_URL
+	)
+);
 
 // Get existing value from database
 $database = new database();
@@ -181,6 +188,10 @@ $template->set_var(array(
 								'TEXT_ADVANCED' => $TEXT['ADVANCED'],
 								'CHANGING_PASSWORD' => $MESSAGE['USERS']['CHANGING_PASSWORD'],
 								'CHECKED' => ' checked="checked"',
+								'ADMIN_URL' => ADMIN_URL,
+								'WB_URL' => WB_URL,
+								'WB_PATH' => WB_PATH,
+								'THEME_URL' => THEME_URL
 								)
 						);
 

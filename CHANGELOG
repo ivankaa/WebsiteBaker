@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+8-Aug-2009 Matthias Gallas
+#	Added some missing variables to backend_themes (Thanks to Stefek)
 6-Aug-2009 Matthias Gallas
 !	Set Version to 2.8
 !	Updated upgrade_script to make use of the changed news settings

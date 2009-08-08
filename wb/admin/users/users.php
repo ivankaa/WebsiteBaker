@@ -58,9 +58,13 @@ if($_POST['action'] == 'modify') {
 										'USER_ID' => $user['user_id'],
 										'USERNAME' => $user['username'],
 										'DISPLAY_NAME' => $user['display_name'],
-										'EMAIL' => $user['email']
+										'EMAIL' => $user['email'],
+										'ADMIN_URL' => ADMIN_URL,
+										'WB_URL' => WB_URL,
+										'WB_PATH' => WB_PATH,
+										'THEME_URL' => THEME_URL
 										)
-							);
+								);
 	if($user['active'] == 1) {
 		$template->set_var('ACTIVE_CHECKED', ' checked="checked"');
 	} else {

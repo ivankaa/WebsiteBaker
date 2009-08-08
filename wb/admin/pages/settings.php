@@ -97,8 +97,9 @@ $template->set_var(array(
 				'ADMIN_URL' => ADMIN_URL,
 				'WB_URL' => WB_URL,
 				'WB_PATH' => WB_PATH,
-				'THEME_URL' => THEME_URL,
-			) );
+				'THEME_URL' => THEME_URL
+				)
+		);
 
 // Work-out if we should show the "manage sections" link
 $query_sections = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'menu_link'");

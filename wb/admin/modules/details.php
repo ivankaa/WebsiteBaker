@@ -80,7 +80,11 @@ $template->set_var(array(
 								'AUTHOR' => $module['author'],
 								'DESCRIPTION' => $module['description'],
 								'VERSION' => $module['version'],
-								'DESIGNED_FOR' => $module['platform']
+								'DESIGNED_FOR' => $module['platform'],
+								'ADMIN_URL' => ADMIN_URL,
+								'WB_URL' => WB_URL,
+								'WB_PATH' => WB_PATH,
+								'THEME_URL' => THEME_URL
 								)
 						);
 						
