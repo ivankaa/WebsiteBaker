@@ -80,35 +80,41 @@ select option.disabled {color:#aaa;}
 #file_mode input, #dir_mode input {width:12px;height:12px;}
 #hide2 {display:none;}
 
-.pages_list {font-weight:bold;margin-top:5px;}
+.pages_list {font-weight:bold;}
 .pages_list .icon_col td img {display:block;border-style:none;float:left;padding-right:7px;}
 .pages_list table {width:900px;}
 .pages_list ul {margin:0;font-weight:normal;padding: 0;}
 .pages_list ul li {list-style-type:none;margin:2px 0;}
 
 table.pages_view {width:900px;}
-table.pages_view tr {background:#f0f0f0;}
+table.pages_view tr, tr.sectionrow {background:#f0f0f0;}
 table.pages_view tr:hover, tr.sectionrow:hover {background:#eaeff6;}
+tr.sectionrow {padding:0 10px;}
+tr.sectionrow td {border-top:3px solid #f9f9f9;}
 
 .page_list {display:none;}
 .page_list_show li {display:block;}
-img.page_list_rights {border:none;float:left;margin:0;}
+img.page_list_rights {border:none;float:left;margin:0;vertical-align:middle;}
 
-.header_list_page_title {text-align:left;padding-left:50px;}
+.sections_list {font-weight:bold;padding-left:10px;}
+.sections_list table {width:900px;}
+
+.header_list_page_title {text-align:left;padding-left:35px;}
 .header_list_menu_title {width:300px;text-align:left;}
-.header_list_page_ID{width:40px;text-align:left;}
-.header_list_actions {text-align:left;width:120px;}
+.header_list_page_id{width:50px;text-align:left;}
+.header_list_actions {text-align:left;width:150px;}
 
 .header_list_type {text-align:left;}
 .header_list_block {text-align:left;width:180px;}
 .header_list_pubdate_start {text-align:left;width:200px;}
 .header_list_pubdate_end {text-align:left;width:200px;}
-.header_list_sections_actions {text-align:left;width:60px;}
-.header_list_section_ID {width:55px;text-align:left;}
+.header_list_sections_actions {text-align:left;width:30px;}
+.header_list_section_id {width:30px;text-align:right;}
 
 .list_page_title {text-align:left;}
 .list_menu_title {width:300px;text-align:left;}
-.list_page_id {width:40px;text-align:left;}
-.list_actions {width:20px;}
+.list_page_id {width:50px;text-align:left;}
+.list_section_id {width:30px;text-align:right;}
+.list_actions {width:25px;}
 .list_pubdate_start {text-align:left;width:200px;}
 .list_pubdate_end {text-align:left;width:200px;}

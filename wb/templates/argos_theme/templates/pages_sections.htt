@@ -16,13 +16,13 @@
         <form name="section_properties" action="{ADMIN_URL}/pages/sections_save.php?page_id={VAR_PAGE_ID}" method="post">
 		
         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="img_noborder">
-			<tr class="pages_list">
+			<tr class="sections_list">
 				<td class="header_list_type">{TEXT_TYPE}</td>
 				<td class="header_list_block"><span {STYLE_DISPLAY_SECTION_BLOCK}>{TEXT_BLOCK}&nbsp;</span></td>
 				<td class="header_list_pubdate_start">{TEXT_PUBL_START_DATE}</td>
 				<td class="header_list_pubdate_end">{TEXT_PUBL_END_DATE}</td>
 				<td class="header_list_sections_actions" colspan="3">{TEXT_ACTIONS}</td>
-				<td class="header_list_section_ID">{TEXT_SID}</td>
+				<td class="header_list_section_id">ID</td>
 				<td {DISPLAY_DEBUG}>{TEXT_PID}</td>
 			</tr>
 <!-- BEGIN section_block -->
@@ -44,13 +44,13 @@
                     	</select></span>&nbsp;
                     </td>
 					
-                    <td><input type="text" id="start_date{VAR_SECTION_ID}" name="start_date{VAR_SECTION_ID}" value="{VALUE_PUBL_START}" class="input_normal" />
-                        <img src="{THEME_URL}/images/{CLOCK_16_PNG}" id="trigger_start{VAR_SECTION_ID}" style="cursor:pointer;" title="{TEXT_CALENDAR}" alt="{TEXT_CALENDAR}"  />
+                    <td class="list_pubdate_start"><input type="text" id="start_date{VAR_SECTION_ID}" name="start_date{VAR_SECTION_ID}" value="{VALUE_PUBL_START}" class="input_normal" />
+                        <img src="{THEME_URL}/images/calendar_16.png" id="trigger_start{VAR_SECTION_ID}" style="cursor:pointer;" title="{TEXT_CALENDAR}" alt="{TEXT_CALENDAR}"  />
                         <img src="{THEME_URL}/images/{CLOCK_DEL_16_PNG}" style="cursor:pointer;" alt="{TEXT_DELETE_DATE}" title="{TEXT_DELETE_DATE}" onclick="document.section_properties.start_date{VAR_SECTION_ID}.value=''" />
                     </td>
 					
-                    <td><input type="text" id="end_date{VAR_SECTION_ID}" name="end_date{VAR_SECTION_ID}" value="{VALUE_PUBL_END}" class="input_normal" />
-                        <img src="{THEME_URL}/images/{CLOCK_16_PNG}" id="trigger_stop{VAR_SECTION_ID}" alt="{TEXT_CALENDAR}" style="cursor: pointer;" title="{TEXT_CALENDAR}"  />
+                    <td class="list_pubdate_end"><input type="text" id="end_date{VAR_SECTION_ID}" name="end_date{VAR_SECTION_ID}" value="{VALUE_PUBL_END}" class="input_normal" />
+                        <img src="{THEME_URL}/images/calendar_16.png" id="trigger_stop{VAR_SECTION_ID}" alt="{TEXT_CALENDAR}" style="cursor: pointer;" title="{TEXT_CALENDAR}"  />
                         <img src="{THEME_URL}/images/{CLOCK_DEL_16_PNG}" style="cursor:pointer;" alt="{TEXT_DELETE_DATE}" title="{TEXT_DELETE_DATE}" onclick="document.section_properties.end_date{VAR_SECTION_ID}.value=''" />
                     </td>
 
@@ -64,7 +64,7 @@
                         </a>
                     </td>
 					
-                    <td>{VAR_SECTION_ID}</td>
+                    <td class="list_section_id">{VAR_SECTION_ID}</td>
 					
                     <td {DISPLAY_DEBUG}>{POSITION}</td>
                 </tr>

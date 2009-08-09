@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 9-Aug-2009 Matthias Gallas
+!	updated argos_theme to version 1.4 (Thanks to Argos)
 !	some code cleaning of admin/pages/sections.php
 #	Fixed possible xss injection in login/forgot/index.php
 #	Fixed bug in news modul introduced in changeset [1057]

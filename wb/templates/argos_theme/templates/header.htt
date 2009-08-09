@@ -25,7 +25,7 @@ function confirm_link(message, url) {
 	  <br />
       <br />
       <span class="version">CMS version {VERSION}</span><br/>
-      <span class="version">Admin version 1.1</span>
+      <span class="version">Admin version 1.4</span>
 	 </div>
     <a href="{ADMIN_URL}" title="{TITLE_START}" id="website_title">
     {WEBSITE_TITLE} - {TEXT_ADMINISTRATION}

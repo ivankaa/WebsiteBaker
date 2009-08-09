@@ -176,7 +176,7 @@ JsAdmin.DD.trDDSwap.prototype.startDrag = function(x, y) {
 		this.opacity = YAHOO.util.Dom.getStyle(this.getEl(), "opacity");
 		this.background = YAHOO.util.Dom.getStyle(this.getEl(), "background");
 		YAHOO.util.Dom.setStyle(this.getEl(), "opacity", 0.5);
-		YAHOO.util.Dom.setStyle(this.getEl(), "background", "#dde");
+		YAHOO.util.Dom.setStyle(this.getEl(), "background", "transparent");
 	}
 	JsAdmin.DD.dragee = this;
 };
@@ -220,7 +220,7 @@ JsAdmin.DD.trDDSwap.prototype.onDragEnter = function(e, id) {
 
 JsAdmin.DD.trDDSwap.prototype.endDrag = function(e) {
 	YAHOO.util.Dom.setStyle(this.getEl(), "opacity", this.opacity);
-	YAHOO.util.Dom.setStyle(this.getEl(), "background", "transparent");
+	YAHOO.util.Dom.setStyle(this.getEl(), "background", "#f0f0f0");
 	
 	JsAdmin.DD.dragee = null;
 
