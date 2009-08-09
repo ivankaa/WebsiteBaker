@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 9-Aug-2009 Matthias Gallas
+#	Fixed bug in news modul introduced in changeset [1057]
 #	Added missing variables also to preferences.php. Forgot in Changeset [1112]
 8-Aug-2009 Matthias Gallas
 #	Added some missing variables to backend_themes (Thanks to Stefek)

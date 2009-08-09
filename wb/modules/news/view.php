@@ -383,6 +383,7 @@ if(!defined('POST_ID') OR !is_numeric(POST_ID)) {
 			} else {
 				$content .= '<tr><td>None Found<br /></td></tr>';
 			}
+			echo $content;
 		}
 		
 		// Print comments footer
