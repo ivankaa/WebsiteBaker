@@ -137,6 +137,14 @@ $template->set_var(array(
 								'HEADING_MY_PASSWORD' => $HEADING['MY_PASSWORD']
 								)
 						);
+// insert urls
+$template->set_var(array(
+								'ADMIN_URL' => ADMIN_URL,
+								'WB_URL' => WB_URL,
+								'WB_PATH' => WB_PATH,
+								'THEME_URL' => THEME_URL
+								)
+						);
 // Insert language text and messages
 $template->set_var(array(
 								'TEXT_SAVE' => $TEXT['SAVE'],
