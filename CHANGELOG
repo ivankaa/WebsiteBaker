@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 9-Aug-2009 Matthias Gallas
+!	some code cleaning of admin/pages/sections.php
 #	Fixed possible xss injection in login/forgot/index.php
 #	Fixed bug in news modul introduced in changeset [1057]
 #	Added missing variables also to preferences.php. Forgot in Changeset [1112]

@@ -172,16 +172,17 @@ $template->set_var(array(
 				'WB_URL' => WB_URL,
 				'WB_PATH' => WB_PATH,
 				'THEME_URL' => THEME_URL
-				)
-		);
+				) 
+			);
 
 // Insert variables
 $template->set_var(array(
 				'VAR_PAGE_ID' => $results_array['page_id'],
 				'VAR_PAGE_TITLE' => $results_array['page_title'],
 				'SETTINGS_LINK' => ADMIN_URL.'/pages/settings.php?page_id='.$results_array['page_id'],
-				'MODIFY_LINK' => ADMIN_URL.'/pages/modify.php?page_id='.$results_array['page_id'],
-			) );
+				'MODIFY_LINK' => ADMIN_URL.'/pages/modify.php?page_id='.$results_array['page_id']
+				) 
+			);
 
 $query_sections = $database->query("SELECT section_id,module,position,block,publ_start,publ_end FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' ORDER BY position ASC");
 if($query_sections->numRows() > 0) {
@@ -203,8 +204,9 @@ if($query_sections->numRows() > 0) {
 						'VAR_POSITION' => $section['position'],
 						'LINK_MODIFY_URL_VAR_MODUL_NAME' => $edit_page,
 						'SELECT' => '',
-						'SET_NONE_DISPLAY_OPTION' => '',
-				) );
+						'SET_NONE_DISPLAY_OPTION' => ''
+						) 
+					);
 				// Add block options to the section_list
 				$template->clear_var('block_list');
 				foreach($block AS $number => $name) {
@@ -230,15 +232,17 @@ if($query_sections->numRows() > 0) {
 						'LINK_MODIFY_URL_VAR_MODUL_NAME' => $edit_page,
 						'NAME' => htmlentities(strip_tags($block[1])),
 						'VALUE' => 1,
-						'SET_NONE_DISPLAY_OPTION' => '',
-					) );
+						'SET_NONE_DISPLAY_OPTION' => ''
+						) 
+					);
 			}
 			// Insert icon and images
 			$template->set_var(array(
 						'CLOCK_16_PNG' => 'clock_16.png',
 						'CLOCK_DEL_16_PNG' => 'clock_del_16.png',
-						'DELETE_16_PNG' => 'delete_16.png',
-					) );
+						'DELETE_16_PNG' => 'delete_16.png'
+						) 
+					);
 			// set calendar start values
 			if($section['publ_start']==0) {
 				$template->set_var('VALUE_PUBL_START', '');
@@ -260,8 +264,9 @@ if($query_sections->numRows() > 0) {
 							</a>' );
 			} else {
 				$template->set_var(array(
-							'VAR_MOVE_UP_URL' => '',
-						) );
+							'VAR_MOVE_UP_URL' => ''
+							) 
+						);
 			}
 			if($section['position'] != $num_sections ) {
 				$template->set_var(
@@ -271,28 +276,32 @@ if($query_sections->numRows() > 0) {
 							</a>' );
 			} else {
 				$template->set_var(array(
-							'VAR_MOVE_DOWN_URL' => '',
-						) );
+							'VAR_MOVE_DOWN_URL' => ''
+							) 
+						);
 			}
 		}
 			$template->set_var(array(
 							'DISPLAY_DEBUG' => ' style="visibility="visible;"',
 							'TEXT_SID' => 'SID',
-							'DEBUG_COLSPAN_SIZE' => 9,
-						) );
+							'DEBUG_COLSPAN_SIZE' => 9
+							) 
+						);
 		if($debug) {
 			$template->set_var(array(
 							'DISPLAY_DEBUG' => ' style="visibility="visible;"',
 							'TEXT_PID' => 'PID',
 							'TEXT_SID' => 'SID',
-							'POSITION' => $section['position'],
-						) );
+							'POSITION' => $section['position']
+							) 
+						);
 		} else {
 			$template->set_var(array(
 							'DISPLAY_DEBUG' => ' style="display:none;"',
 							'TEXT_PID' => '',
-							'POSITION' => '',
-						) );
+							'POSITION' => ''
+							) 
+						);
 		}
 		$template->parse('section_list', 'section_block', true);
 	}
@@ -314,18 +323,21 @@ if($query_sections->numRows() > 0) {
 						'start_date' => 'start_date'.$section['section_id'],
 						'end_date' => 'end_date'.$section['section_id'],
 						'trigger_start' => 'trigger_start'.$section['section_id'],
-						'trigger_end' => 'trigger_stop'.$section['section_id'],
-					) );
+						'trigger_end' => 'trigger_stop'.$section['section_id']
+						) 
+					);
 			if(isset($jscal_use_time) && $jscal_use_time==TRUE) {
 				$template->set_var(array(
 						'showsTime' => "true",
-						'timeFormat' => "24",
-					) );
+						'timeFormat' => "24"
+						) 
+					);
 			}  else {
 				$template->set_var(array(
 						'showsTime' => "false",
-						'timeFormat' => "24",
-					) );
+						'timeFormat' => "24"
+						) 
+					);
 			}
 		}
 		$template->parse('calendar_list', 'calendar_block', true);
@@ -366,7 +378,8 @@ $template->set_var(array(
 					'TEXT_ADD_SECTION' => $TEXT['ADD_SECTION'],
 					'TEXT_MOVE_UP' => $TEXT['MOVE_UP'],
 					'TEXT_MOVE_DOWN' => $TEXT['MOVE_DOWN']
-				) );
+					) 
+				);
 $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
