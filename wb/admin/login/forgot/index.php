@@ -40,7 +40,7 @@ $website_title = $results['value'];
 // Check if the user has already submitted the form, otherwise show it
 if(isset($_POST['email']) AND $_POST['email'] != "") {
 	
-	$email = $_POST['email'];
+	$email = htmlspecialchars($_POST['email'],ENT_QUOTES);
 	
 	// Check if the email exists in the database
 	$query = "SELECT user_id,username,display_name,email,last_reset,password FROM ".TABLE_PREFIX."users WHERE email = '".$admin->add_slashes($_POST['email'])."'";
@@ -105,6 +105,8 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 	} else {
 		// Email doesn't exist, so tell the user
 		$message = $MESSAGE['FORGOT_PASS']['EMAIL_NOT_FOUND'];
+		// and delete the wrong Email
+		$email = '';
 	}
 	
 } else {
