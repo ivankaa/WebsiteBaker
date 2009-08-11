@@ -12,6 +12,8 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 11-Aug-2009 Matthias Gallas
+!	commentet out the droplets logo for a more similar backend design with
+	other admin tools
 !	Updated icons in argos_theme (Thanks to Argos)
 !	Updated Dutch language file (Thanks to Argos)
 !	Updated show_menu2 to version 4.9

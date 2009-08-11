@@ -43,11 +43,13 @@ $database->query("DELETE FROM ".TABLE_PREFIX."mod_droplets WHERE name=''");
 <br />
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
-	<td valign="bottom" width="30%">
+	<td valign="bottom" width="50%">
 		<button class="add" type="button" name="add_droplet" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/droplets/add_droplet.php';"><?php echo $TEXT['ADD'].' '.$DR_TEXT['DROPLETS']; ?></button>	
 	</td>
-	<td align="center"><img src="<?php echo WB_URL; ?>/modules/droplets/img/droplets_logo.png" border="1" alt=""/></td>
-	<td valign="top" width="30%" align="right">
+	<!-- commentet out the droplets logo for a more similar backend design with other admin tools
+	<td align="center"><img src="<?php /*echo WB_URL;*/ ?>/modules/droplets/img/droplets_logo.png" border="1" alt=""/></td>
+	-->
+	<td valign="top" width="50%" align="right">
 		<a href="#" onclick="javascript: window.open('<?php echo WB_URL; ?>/modules/droplets/readme/<?php echo $DR_TEXT['README']; ?>','helpwindow','width=700,height=550,directories=no,location=no,menubar=no,scrollbars=yes,status=no,toolbar=no,resizable=yes');"><?php echo $DR_TEXT['HELP']; ?></a>
 		<br /><br />
 		<a href="#" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/droplets/backup_droplets.php';"><?php echo $DR_TEXT['BACKUP']; ?></a>
