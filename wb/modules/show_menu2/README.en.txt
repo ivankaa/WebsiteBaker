@@ -1,4 +1,4 @@
-show_menu2, version 4.8
+show_menu2, version 4.9
 =======================
 A code snippet for the Website Baker CMS software. It provides a complete 
 replacement for the builtin menu functions. All menu data is retrieved using 
@@ -329,6 +329,7 @@ $aOptions
     SM2_NUMCLASS    Add the numbered menu classes to the menu. If this 
                     flag is supplied, the "menu-N" and "menu-child-N" 
                     classes will be added.
+                    
     SM2_ALLINFO     Load all fields from the page table of the database.
                     This will result in quite a lot of memory being used
                     and is not recommended, however it will make keywords,
@@ -337,22 +338,33 @@ $aOptions
                     NOTE: This flag must be used on the *FIRST* call to
                     show_menu2 *for this menu ID*, or in combination with
                     SM2_NOCACHE otherwise it will have no effect.
+                    
     SM2_NOCACHE     Do not reuse or store the data read from the database
                     between calls to show_menu2. 
+                    
     SM2_PRETTY      Pretty print the menu HTML with spacing and newlines
                     for debugging purposes.
+                    
     SM2_BUFFER      Do not output the menu HTML but instead buffer it 
                     internally and return it as a string from show_menu2.
+                    
     SM2_CURRTREE    Exclude all other top level menus from being considered. 
                     Only items in the current menu tree will be output.
                     This can be combined with any of the Group 1 flags as
                     necessary.
+                    
     SM2_ESCAPE      Call htmlspecialchars on the menu strings. This may be
                     required with older installations of WB. By escaping the
                     raw database strings, it permits menus to have HTML 
                     formatting in them that would cause otherwise cause
                     pages to fail validation. 
-    SM2_NOESCAPE    Default behaviour. Exists only for backwards compatibility.                    
+    
+    SM2_SHOWHIDDEN  Hidden pages are usually hidden all of the time, including 
+                    when they are active (i.e. current page or a parent page).
+                    Use private pages for time when you want pages to be
+                    hidden except when active. However for compatibility with
+                    release 4.8, supply this flag to enable hidden pages to
+                    become visible when they are active.
 
     This parameter also has an extended mode where an associative array of 
     options is supplied. See the EXTENDED OPTIONS section for details. 

@@ -1,4 +1,4 @@
-﻿show_menu2, version 4.8
+﻿show_menu2, version 4.9
 =======================
 Ist ein Code-Snippet für das CMS Website Baker. Es stellt einen kompletten 
 Ersatz für die eingebaute Menüfuntionalität zur Verfügung. Alle, für die 
@@ -397,8 +397,12 @@ $aOptions
                     Dies kann bei älteren Websitebaker Installationen erforderlich
                     sein um eine valide HTML Ausgabe zu erzeugen.
                         
-    SM2_NOESCAPE    Dies ist das Standarverhalten und existiert nur aus Gründen der 
-                    Abwärtskompatibilität.                   
+    SM2_SHOWHIDDEN  Hidden pages are usually hidden all of the time, including 
+                    when they are active (i.e. current page or a parent page).
+                    Use private pages for time when you want pages to be
+                    hidden except when active. However for compatibility with
+                    release 4.8, supply this flag to enable hidden pages to
+                    become visible when they are active.
 
     Für diesen Parameter gibt es auch einen erweiterten Modus, bei dem die Optionen
     als assoziatives Array übergeben werden. Näheres dazu im Abschnitt ERWEITERTE
