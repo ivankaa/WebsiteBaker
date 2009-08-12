@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.0 -------------------------------------
+12-Aug-2009 Matthias Gallas
++	Added missing images to argos_theme (forgotten in changeset [1117])
 11-Aug-2009 Matthias Gallas
 !	commentet out the droplets logo for a more similar backend design with
 	other admin tools
