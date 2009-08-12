@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 12-Aug-2009 Matthias Gallas
+#	Fixed some display issues in all backend themes
 !	Again updated dutch language file (Thanks to Argos)
 #	Fixed missing language variable in form modul (Thanks to Argos)
 +	Added missing images to argos_theme (forgotten in changeset [1117])
