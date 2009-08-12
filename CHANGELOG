@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 12-Aug-2009 Matthias Gallas
+#	Fixed missing language variable in form modul (Thanks to Argos)
 +	Added missing images to argos_theme (forgotten in changeset [1117])
 11-Aug-2009 Matthias Gallas
 !	commentet out the droplets logo for a more similar backend design with

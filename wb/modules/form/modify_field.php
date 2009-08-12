@@ -115,7 +115,7 @@ $friendly = array('&lt;', '&gt;');
 	</tr>
 	<?php } elseif($type == 'select' OR $type = 'radio' OR $type = 'checkbox') { ?>
 	<tr>
-		<td valign="top"><?php echo 'List'; ?>:</td>
+		<td valign="top"><?php echo $TEXT['LIST_OPTIONS']; ?>:</td>
 		<td>
 			<?php
 			$option_count = 0;
