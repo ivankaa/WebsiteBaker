@@ -12,6 +12,7 @@ Legend:
 
 ------------------------------------- 2.8.0 -------------------------------------
 14-Aug-2009 Matthias Gallas
+#	Fixed typo in dutch language file (Thanks to Argos)
 #	Changed FCKEditor to not show index.php files in browse media window (ticket #774)
 	(Thanks to BerndJM)
 12-Aug-2009 Matthias Gallas
