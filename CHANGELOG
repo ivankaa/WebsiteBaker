@@ -11,6 +11,12 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.1 -------------------------------------
+22-Sep-2009	Dietrich Roland Pehlke
+!	Changes inside the class.database.php; e.g. Logfile-support, Error-Message-Template.
+	for future testings.
+-	Remove the empty config.php from the project.
+!	Installer files (index.php and save.php) to handle the //new// situation.
+!	Modify the PHP-Version Test up to PHP 5.1 (instead of php 4.1).
 21-Sep-2009 Dietrrich Roland Pehlke
 !	Dutch tranlation(-s) for the captcha-control. [Ticket: #777] (Thanks to Argos)
 #	Missing code inside "framework/addon.precheck.php" (ticket #798).
