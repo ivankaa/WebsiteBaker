@@ -25,13 +25,29 @@
 
 $starttime = array_sum(explode(" ",microtime()));
 
-// Include config file
-require_once(dirname(__FILE__).'/config.php');
-
-// Check if the config file has been set-up
-if(!defined('WB_PATH')) {
+/** 
+ *	looking for the config file
+ */
+if (!file_exists(dirname(__FILE__).'/config.php')) {
+	/**
+	 *	Config doesn't exists
+	 *	So we've try to run the installation
+	 */
 	header("Location: install/index.php");
 	exit(0);
+} else {
+	/**
+	 *	Config file exists
+	 */
+	require_once(dirname(__FILE__).'/config.php');
+
+	if (!defined(WB_PATH)) {
+		/**
+		 *	Ups ... config seems to be corrupt
+		 */
+		header("Location: install/index.php");
+		exit(0);
+	}
 }
 
 require_once(WB_PATH.'/framework/class.frontend.php');

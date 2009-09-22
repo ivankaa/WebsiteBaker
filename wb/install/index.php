@@ -137,16 +137,13 @@ function change_os(type) {
 		</tr>
 		<?php } ?>
 		<tr>
-			<td width="160" style="color: #666666;">PHP Version > 4.1.0</td>
+			<td width="160" style="color: #666666;">PHP Version > 5.1.0</td>
 			<td width="60">
 				<?php
-				$phpversion = substr(PHP_VERSION, 0, 6);
-				if($phpversion > 4.1) {
-					?><font class="good">Yes</font><?php
-				} else {
-					?><font class="bad">No</font><?php
-				}
-				?>
+			echo ( true === version_compare( PHP_VERSION, "5.1", ">") )
+				? "<font class=\"good\">Yes</font>"
+				: "<font class=\"bad\">No</font>" ;
+			?>
 			</td>
 			<td width="140" style="color: #666666;">PHP Session Support</td>
 			<td width="105"><?php echo $session_support; ?></td>
@@ -186,7 +183,7 @@ function change_os(type) {
 		</tr>
 		<tr>
 			<td style="color: #666666;">wb/config.php</td>
-			<td><?php if(is_writable('../config.php')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../config.php')) { echo '<font class="bad">File Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
+			<td><!--<?php if(is_writable('../config.php')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../config.php')) { echo '<font class="bad">File Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?>--></td>
 			<td style="color: #666666;">wb/pages/</td>
 			<td><?php if(is_writable('../pages/')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../pages/')) { echo '<font class="bad">Directory Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
 			<td style="color: #666666;">wb/media/</td>

@@ -91,8 +91,9 @@ function set_error($message, $field_name = '') {
 // Dummy class to allow modules' install scripts to call $admin->print_error
 class admin_dummy
 {
-	var $error='';
-	function print_error($message)
+	public  $error='';
+	
+	public function print_error($message)
 	{
 		$this->error=$message;
 	}
@@ -317,19 +318,32 @@ $config_content = "" .
 
 $config_filename = '../config.php';
 
-// Check if the file exists and is writable first.
-if(file_exists($config_filename) AND is_writable($config_filename)) {
-	if(!$handle = fopen($config_filename, 'w')) {
-		set_error("Cannot open the configuration file ($config_filename)");
-	} else {
-		if (fwrite($handle, $config_content) === FALSE) {
-			set_error("Cannot write to the configuration file ($config_filename)");
-		}
-		// Close file
-		fclose($handle);
-	}
+/**
+ *	Looks a littel bit confuse, but in some circumstances
+ *	the config.php file could be corrupted - so the installer
+ *	is called even if the config.php file exists!
+ */
+if (file_exists($config_filename)) unlink($config_filename);
+
+/**
+ * Try to write the config file
+ */
+$fp = fopen($config_filename, 'w');
+if (!$fp ) {
+	set_error ("Can't create the config file.");
 } else {
-	set_error("The configuration file $config_filename is not writable. Change its permissions so it is, then re-run step 4.");
+	if (fwrite($fp, $config_content, strlen($config_content) ) === FALSE) {
+		/**
+		 *	We have to close the file-pointer first, as
+		 *	the following function "die's" and keep the 
+		 *	file-handle //open//
+		 */
+		fclose( $fp );
+		set_error("Can't write to the configuration file [b]".$config_filename."[/b]!<br />Please check the permissions.");
+	
+	} else {
+		fclose($fp);
+	}
 }
 
 // Define configuration vars
