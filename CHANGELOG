@@ -11,6 +11,8 @@ Legend:
 ! = Update/Change
 
 ------------------------------------- 2.8.1 -------------------------------------
+23-Sep-2009 Dietrich Roland Pehlke
+#	Fixed typos inside index.php.
 22-Sep-2009	Dietrich Roland Pehlke
 !	Changes inside the class.database.php; e.g. Logfile-support, Error-Message-Template.
 	for future testings.

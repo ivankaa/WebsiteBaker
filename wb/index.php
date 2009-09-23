@@ -41,7 +41,7 @@ if (!file_exists(dirname(__FILE__).'/config.php')) {
 	 */
 	require_once(dirname(__FILE__).'/config.php');
 
-	if (!defined(WB_PATH)) {
+	if (!defined('WB_PATH')) {
 		/**
 		 *	Ups ... config seems to be corrupt
 		 */
