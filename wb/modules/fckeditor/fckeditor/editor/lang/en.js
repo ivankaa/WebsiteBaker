@@ -187,6 +187,7 @@ DlgGenLongDescr		: "Long Description URL",
 DlgGenClass			: "Stylesheet Classes",
 DlgGenTitle			: "Advisory Title",
 DlgGenContType		: "Advisory Content Type",
+DlgGenContRel		: "Relationtyp",
 DlgGenLinkCharset	: "Linked Resource Charset",
 DlgGenStyle			: "Style",
 
@@ -525,10 +526,16 @@ DlgAboutBrowserInfoTab	: "Browser Info",
 DlgAboutLicenseTab	: "License",
 DlgAboutVersion		: "version",
 DlgAboutInfo		: "For further information go to",
+DlgAboutModule		: "Developed for Website Baker<br />modul version 2.9.4",
 
 // Div Dialog
 DlgDivGeneralTab	: "General",
 DlgDivAdvancedTab	: "Advanced",
 DlgDivStyle		: "Style",
-DlgDivInlineStyle	: "Inline Style"
+DlgDivInlineStyle	: "Inline Style",
+
+ScaytTitle			: "SCAYT",
+ScaytTitleOptions	: "Options",
+ScaytTitleLangs		: "Languages",
+ScaytTitleAbout		: "About"
 };

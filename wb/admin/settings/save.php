@@ -1,30 +1,23 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        admin
+ * @package         settings
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 // prevent this file from being accessed directly in the browser (would set all entries in DB settings table to '')
-if(!isset($_POST['default_language']) || $_POST['default_language'] == '') die(header('Location: index.php'));  
+if(!isset($_POST['default_language']) || $_POST['default_language'] == '') die(header('Location: index.php'));
 
 // Find out if the user was view advanced options or not
 if($_POST['advanced'] == 'yes' ? $advanced = '?advanced=yes' : $advanced = '');
@@ -43,7 +36,8 @@ if($advanced == '') {
 $js_back = "javascript: history.go(-1);";
 
 // Ensure that the specified default email is formally valid
-if(isset($_POST['server_email'])) {
+if(isset($_POST['server_email']))
+{
 	$_POST['server_email'] = strip_tags($_POST['server_email']);
 	if(!eregi("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$", $_POST['server_email'])) {
 		$admin->print_error($MESSAGE['USERS']['INVALID_EMAIL'].
@@ -52,9 +46,11 @@ if(isset($_POST['server_email'])) {
 }
 
 // Work-out file mode
-if($advanced == '') {
+if($advanced == '')
+{
 	// Check if should be set to 777 or left alone
-	if(isset($_POST['world_writeable']) AND $_POST['world_writeable'] == 'true') {
+	if(isset($_POST['world_writeable']) AND $_POST['world_writeable'] == 'true')
+    {
 		$file_mode = '0777';
 		$dir_mode = '0777';
 	} else {
@@ -129,15 +125,17 @@ if($advanced == '') {
 }
 
 // Create new database object
-$database = new database();
+/*$database = new database(); */
 
 // Query current settings in the db, then loop through them and update the db with the new value
 $query = "SELECT name FROM ".TABLE_PREFIX."settings";
 $results = $database->query($query);
-while($setting = $results->fetchRow()) {
+while($setting = $results->fetchRow())
+{
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
-	if ($setting_name!='wb_version') {
+	if ($setting_name!='wb_version')
+    {
 		$allow_tags_in_fields = array('website_header', 'website_footer','wbmailer_smtp_password');
 		if(!in_array($setting_name, $allow_tags_in_fields)) {
 			$value = strip_tags($value);
@@ -164,14 +162,15 @@ while($setting = $results->fetchRow()) {
 // Query current search settings in the db, then loop through them and update the db with the new value
 $query = "SELECT name, value FROM ".TABLE_PREFIX."search WHERE extra = ''";
 $results = $database->query($query);
-while($search_setting = $results->fetchRow()) {
+while($search_setting = $results->fetchRow())
+{
 	$old_value = $search_setting['value'];
 	$setting_name = $search_setting['name'];
 	$post_name = 'search_'.$search_setting['name'];
-	if($admin->get_post($post_name) == '')
-		$value = $old_value;
-	else
-		$value = $admin->get_post($post_name);
+    // hold old value if post is empty
+    // check search template
+    $value = ( ($admin->get_post($post_name) == '') AND ($setting_name != 'template') ) ? $old_value : $admin->get_post($post_name);
+
 	$value = $admin->add_slashes($value);
 	$database->query("UPDATE ".TABLE_PREFIX."search SET value = '$value' WHERE name = '$setting_name'");
 }

@@ -1,40 +1,28 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        modules
+ * @package         news
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 // Make sure page cannot be accessed directly
-if(!defined('WB_URL')) { 
+if(!defined('WB_URL')) {
 	header('Location: ../index.php');
 	exit(0);
 }
 
-//overwrite php.ini on Apache servers for valid SESSION ID Separator
-if(function_exists('ini_set')) {
-	ini_set('arg_separator.output', '&amp;');
-}
-
-// check if frontend.css file needs to be included into the <body></body> of page
+/* check if frontend.css file needs to be included into the <body></body> of page  */
 if ( (!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) && file_exists(WB_PATH .'/modules/news/frontend.css')) {
 	echo '<style type="text/css">';
 	include(WB_PATH .'/modules/news/frontend.css');
@@ -42,10 +30,13 @@ if ( (!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_C
 }
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
-if(!file_exists(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php')) {
+if(!file_exists(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php'))
+{
 	// no module language file exists for the language set by the user, include default module language file EN.php
 	require_once(WB_PATH .'/modules/news/languages/EN.php');
-} else {
+}
+else
+{
 	// a module language file exists for the language defined by the user, load it
 	require_once(WB_PATH .'/modules/news/languages/'.LANGUAGE .'.php');
 }
@@ -54,10 +45,13 @@ require_once(WB_PATH.'/include/captcha/captcha.php');
 
 // Get comments page template details from db
 $query_settings = $database->query("SELECT comments_page,use_captcha,commenting FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '".SECTION_ID."'");
-if($query_settings->numRows() == 0) {
+if($query_settings->numRows() == 0)
+{
 	header("Location: ".WB_URL.PAGES_DIRECTORY."");
-	exit(0);
-} else {
+	exit( 0 );
+}
+else
+{
 	$settings = $query_settings->fetchRow();
 
 	// Print comments page
@@ -93,7 +87,7 @@ if($query_settings->numRows() == 0) {
 	?>:
 	<br />
 	<?php if(ENABLED_ASP) { ?>
-		<textarea name="c0mment_<?php echo date('W'); ?>" rows="10" cols="1" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
+		<textarea name="comment_<?php echo date('W'); ?>" rows="10" cols="1" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
 	<?php } else { ?>
 		<textarea name="comment" rows="10" cols="1" style="width: 90%; height: 150px;"><?php if(isset($_SESSION['comment_body'])) { echo $_SESSION['comment_body']; unset($_SESSION['comment_body']); } ?></textarea>
 	<?php } ?>
@@ -110,8 +104,8 @@ if($query_settings->numRows() == 0) {
 	<tr>
 		<td><?php echo $TEXT['VERIFICATION']; ?>:</td>
 		<td><?php call_captcha(); ?></td>
-	</tr></table>
-	<br />
+	</tr>
+    </table>
 	<?php
 	if(isset($_SESSION['captcha_error'])) {
 		unset($_SESSION['captcha_error']);
@@ -120,8 +114,17 @@ if($query_settings->numRows() == 0) {
 	<?php
 	}
 	?>
-	<input type="submit" name="submit" value="<?php echo $MOD_NEWS['TEXT_ADD_COMMENT']; ?>" />
-	</form>	
+	<table class="news-table">
+	<tr>
+	    <td>
+            <input type="submit" name="submit" value="<?php echo $MOD_NEWS['TEXT_ADD_COMMENT']; ?>" />
+        </td>
+        <td>
+		    <input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="history.go(-1)"  />
+        </td>
+	</tr>
+    </table>
+	</form>
 	<?php
 }
 

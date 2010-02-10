@@ -1,27 +1,20 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        modules
+ * @package         news
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 require('../../config.php');
 
@@ -61,19 +54,21 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH ."
 // include the button to edit the optional module CSS files (function added with WB 2.7)
 // Note: CSS styles for the button are defined in backend.css (div class="mod_moduledirectory_edit_css")
 // Place this call outside of any <form></form> construct!!!
-if(function_exists('edit_module_css')) {
+if(function_exists('edit_module_css'))
+{
 	edit_module_css('news');
 }
 ?>
 
 <form name="modify" action="<?php echo WB_URL; ?>/modules/news/save_settings.php" method="post" style="margin: 0;">
 
-	<input type="hidden" name="section_id" value="<?php echo $section_id; ?>">
-	<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
+	<input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
+	<input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
 
-	<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
+	<table class="row_a" cellpadding="2" cellspacing="0" width="100%">
 		<tr>
 			<td colspan="2"><strong><?php echo $HEADING['GENERAL_SETTINGS']; ?></strong></td>
+		</tr>
 		<tr>
 			<td class="setting_name"><?php echo $TEXT['HEADER']; ?>:</td>
 			<td class="setting_value">
@@ -111,7 +106,7 @@ if(function_exists('edit_module_css')) {
 					<option value=""><?php echo $TEXT['UNLIMITED']; ?></option>
 					<?php
 					for($i = 1; $i <= 20; $i++) {
-						if($fetch_content['posts_per_page'] == ($i*5)) { $selected = ' selected'; } else { $selected = ''; }
+						if($fetch_content['posts_per_page'] == ($i*5)) { $selected = ' selected="selected"'; } else { $selected = ''; }
 						echo '<option value="'.($i*5).'"'.$selected.'>'.($i*5).'</option>';
 					}
 					?>
@@ -119,7 +114,7 @@ if(function_exists('edit_module_css')) {
 			</td>
 		</tr>
 	</table>
-	<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%" style="margin-top: 3px;">
+	<table class="row_a" cellpadding="2" cellspacing="0" width="100%" style="margin-top: 3px;">
 		<tr>
 			<td colspan="2"><strong><?php echo $TEXT['COMMENTS']; ?></strong></td>
 		</tr>
@@ -128,8 +123,8 @@ if(function_exists('edit_module_css')) {
 			<td class="setting_value">
 				<select name="commenting" style="width: 98%;">
 					<option value="none"><?php echo $TEXT['DISABLED']; ?></option>
-					<option value="public" <?php if($fetch_content['commenting'] == 'public') { echo 'selected'; } ?>><?php echo $TEXT['PUBLIC']; ?></option>
-					<option value="private" <?php if($fetch_content['commenting'] == 'private') { echo 'selected'; } ?>><?php echo $TEXT['PRIVATE']; ?></option>
+					<option value="public" <?php if($fetch_content['commenting'] == 'public') { echo ' selected="selected"'; } ?>><?php echo $TEXT['PUBLIC']; ?></option>
+					<option value="private" <?php if($fetch_content['commenting'] == 'private') { echo 'selected="selected"'; } ?>><?php echo $TEXT['PRIVATE']; ?></option>
 				</select>
 			</td>
 		</tr>
@@ -155,7 +150,7 @@ if(function_exists('edit_module_css')) {
 					$SIZES['125'] = '125x125px';
 					$SIZES['150'] = '150x150px';
 					foreach($SIZES AS $size => $size_name) {
-						if($fetch_content['resize'] == $size) { $selected = ' selected'; } else { $selected = ''; }
+						if($fetch_content['resize'] == $size) { $selected = ' selected="selected"'; } else { $selected = ''; }
 						echo '<option value="'.$size.'"'.$selected.'>'.$size_name.'</option>';
 					}
 					?>
@@ -190,10 +185,10 @@ if(function_exists('edit_module_css')) {
 	</table>
 	<table cellpadding="0" cellspacing="0" border="0" width="100%">
 		<tr>
-			<td align="left">
+			<td class="left">
 				<input name="save" type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />
 			</td>
-			<td align="right">
+			<td class="right">
 				<input type="button" value="<?php echo $TEXT['CANCEL']; ?>" onclick="javascript: window.location = '<?php echo ADMIN_URL; ?>/pages/modify.php?page_id=<?php echo $page_id; ?>';" style="width: 100px; margin-top: 5px;" />
 			</td>
 		</tr>

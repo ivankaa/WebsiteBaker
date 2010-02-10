@@ -1,29 +1,22 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
+/**
+ *
+ * @category        admin
+ * @package         users
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
 */
 
-// Include config file and admin class file
+ // Include config file and admin class file
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 
@@ -34,6 +27,12 @@ if(!isset($_POST['action']) OR ($_POST['action'] != "modify" AND $_POST['action'
 	header("Location: index.php");
 	exit(0);
 }
+
+// Set parameter 'action' as alternative to javascript mechanism
+if(isset($_POST['modify']))
+	$_POST['action'] = "modify";
+if(isset($_POST['delete']))
+	$_POST['action'] = "delete";
 
 // Check if user id is a valid number and doesnt equal 1
 if(!isset($_POST['user_id']) OR !is_numeric($_POST['user_id']) OR $_POST['user_id'] == 1) {
@@ -81,7 +80,7 @@ if($_POST['action'] == 'modify') {
 		while($group = $results->fetchRow()) {
 			$template->set_var('ID', $group['group_id']);
 			$template->set_var('NAME', $group['name']);
-			if(in_array($group['group_id'], split(",",$user['groups_id']))) {
+			if(in_array($group['group_id'], explode(",",$user['groups_id']))) {
 				$template->set_var('SELECTED', ' selected="selected"');
 			} else {
 				$template->set_var('SELECTED', '');
@@ -97,7 +96,7 @@ if($_POST['action'] == 'modify') {
 		
 		$in_group = FALSE;
 		foreach($admin->get_groups_id() as $cur_gid){
-		    if (in_array($cur_gid, split(",", $user['groups_id']))) {
+		    if (in_array($cur_gid, explode(",", $user['groups_id']))) {
 		        $in_group = TRUE;
 		    }
 		}
@@ -131,7 +130,7 @@ if($_POST['action'] == 'modify') {
 	
 	// Work-out if home folder should be shown
 	if(!HOME_FOLDERS) {
-		$template->set_var('DISPLAY_HOME_FOLDERS', 'none');
+		$template->set_var('DISPLAY_HOME_FOLDERS', 'display:none;');
 	}
 	
 	// Include the WB functions file
@@ -139,7 +138,8 @@ if($_POST['action'] == 'modify') {
 	
 	// Add media folders to home folder list
 	$template->set_block('main_block', 'folder_list_block', 'folder_list');
-	foreach(directory_list(WB_PATH.MEDIA_DIRECTORY) AS $name) {
+	foreach(directory_list(WB_PATH.MEDIA_DIRECTORY) AS $name)
+    {
 		$template->set_var('NAME', str_replace(WB_PATH, '', $name));
 		$template->set_var('FOLDER', str_replace(WB_PATH.MEDIA_DIRECTORY, '', $name));
 		if($user['home_folder'] == str_replace(WB_PATH.MEDIA_DIRECTORY, '', $name)) {

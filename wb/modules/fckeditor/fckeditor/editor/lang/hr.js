@@ -525,10 +525,16 @@ DlgAboutBrowserInfoTab	: "Podaci o pretraživaču",
 DlgAboutLicenseTab	: "Licenca",
 DlgAboutVersion		: "inačica",
 DlgAboutInfo		: "Za više informacija posjetite",
+DlgAboutModule		: "Developed for Website Baker<br />modul version 2.9.4",
 
 // Div Dialog
 DlgDivGeneralTab	: "Općenito",
 DlgDivAdvancedTab	: "Napredno",
 DlgDivStyle		: "Stil",
-DlgDivInlineStyle	: "Stil u redu"
+DlgDivInlineStyle	: "Stil u redu",
+
+ScaytTitle			: "SCAYT",	//MISSING
+ScaytTitleOptions	: "Options",	//MISSING
+ScaytTitleLangs		: "Languages",	//MISSING
+ScaytTitleAbout		: "About"	//MISSING
 };

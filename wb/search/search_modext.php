@@ -1,27 +1,20 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        frontend
+ * @package         search
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 // make the url-string for highlighting
 function make_url_searchstring($search_match, $search_url_array) {
@@ -52,13 +45,12 @@ function get_page_modified($page_modified_when) {
 // make username and displayname for "last modified by... on ..."-string
 function get_page_modified_by($page_modified_by, $users) {
 	global $TEXT;
-	if($page_modified_by > 0) {
-			$username = $users[$page_modified_by]['username'];
-			$displayname = $users[$page_modified_by]['display_name'];
-		} else {
-			$username = "";
-			$displayname = $TEXT['UNKNOWN'];
-		}
+	// check for existing user-id
+	if(!isset($users[$page_modified_by]))
+		$page_modified_by = 0;
+	
+	$username = $users[$page_modified_by]['username'];
+	$displayname = $users[$page_modified_by]['display_name'];
 	return array($username, $displayname);
 }
 

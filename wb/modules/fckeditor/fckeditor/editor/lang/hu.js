@@ -525,10 +525,16 @@ DlgAboutBrowserInfoTab	: "Böngésző információ",
 DlgAboutLicenseTab	: "Licensz",
 DlgAboutVersion		: "verzió",
 DlgAboutInfo		: "További információkért látogasson el ide:",
+DlgAboutModule		: "Developed for Website Baker<br />modul version 2.9.4",
 
 // Div Dialog
 DlgDivGeneralTab	: "General",	//MISSING
 DlgDivAdvancedTab	: "Advanced",	//MISSING
 DlgDivStyle		: "Style",	//MISSING
-DlgDivInlineStyle	: "Inline Style"	//MISSING
+DlgDivInlineStyle	: "Inline Style",	//MISSING
+
+ScaytTitle			: "SCAYT",	//MISSING
+ScaytTitleOptions	: "Options",	//MISSING
+ScaytTitleLangs		: "Languages",	//MISSING
+ScaytTitleAbout		: "About"	//MISSING
 };

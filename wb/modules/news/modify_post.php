@@ -1,27 +1,20 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        modules
+ * @package         news
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 require('../../config.php');
 
@@ -46,7 +39,7 @@ if (!defined('WYSIWYG_EDITOR') OR WYSIWYG_EDITOR=="none" OR !file_exists(WB_PATH
 	}
 } else {
 	$id_list=array("short","long");
-			require(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
+	require(WB_PATH.'/modules/'.WYSIWYG_EDITOR.'/include.php');
 }
 
 // include jscalendar-setup
@@ -62,7 +55,7 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 <input type="hidden" name="post_id" value="<?php echo $post_id; ?>" />
 <input type="hidden" name="link" value="<?php echo $fetch_content['link']; ?>" />
 
-<table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
+<table class="row_a" cellpadding="2" cellspacing="0" width="100%">
 <tr>
 	<td><?php echo $TEXT['TITLE']; ?>:</td>
 	<td width="80%">
@@ -80,7 +73,7 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 				// Loop through groups
 				while($group = $query->fetchRow()) {
 					?>
-					<option value="<?php echo $group['group_id']; ?>"<?php if($fetch_content['group_id'] == $group['group_id']) { echo ' selected'; } ?>><?php echo $group['title']; ?></option>
+					<option value="<?php echo $group['group_id']; ?>"<?php if($fetch_content['group_id'] == $group['group_id']) { echo ' selected="selected"'; } ?>><?php echo $group['title']; ?></option>
 					<?php
 				}
 			}
@@ -93,8 +86,8 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 	<td>
 		<select name="commenting" style="width: 100%;">
 			<option value="none"><?php echo $TEXT['DISABLED']; ?></option>
-			<option value="public" <?php if($fetch_content['commenting'] == 'public') { echo 'selected'; } ?>><?php echo $TEXT['PUBLIC']; ?></option>
-			<option value="private" <?php if($fetch_content['commenting'] == 'private') { echo 'selected'; } ?>><?php echo $TEXT['PRIVATE']; ?></option>
+			<option value="public" <?php if($fetch_content['commenting'] == 'public') { echo ' selected="selected"'; } ?>><?php echo $TEXT['PUBLIC']; ?></option>
+			<option value="private" <?php if($fetch_content['commenting'] == 'private') { echo ' selected="selected"'; } ?>><?php echo $TEXT['PRIVATE']; ?></option>
 		</select>
 	</td>
 </tr>
@@ -137,7 +130,7 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 <tr>
 	<td>
 	<?php
-	show_wysiwyg_editor("short","short",htmlspecialchars($fetch_content['content_short']),"100%","135px");
+	show_wysiwyg_editor("short","short",htmlspecialchars($fetch_content['content_short']),"100%","200px");
 	?>
 	</td>
 </tr>
@@ -147,7 +140,7 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 <tr>
 	<td>
 	<?php
-	show_wysiwyg_editor("long","long",htmlspecialchars($fetch_content['content_long']),"100%","300px");
+	show_wysiwyg_editor("long","long",htmlspecialchars($fetch_content['content_long']),"100%","650px");
 	?>
 	</td>
 </tr>
@@ -172,10 +165,12 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 			ifFormat    : "<?php echo $jscal_ifformat ?>",
 			button      : "publishdate_trigger",
 			firstDay    : <?php echo $jscal_firstday ?>,
-			<?php if(isset($jscal_use_time) && $jscal_use_time==TRUE) { ?>
+			<?php if(isset($jscal_use_time) && $jscal_use_time==TRUE)
+            { ?>
 				showsTime   : "true",
 				timeFormat  : "24",
-			<?php } ?>
+			<?php
+            } ?>
 			date        : "<?php echo $jscal_today ?>",
 			range       : [1970, 2037],
 			step        : 1
@@ -187,10 +182,12 @@ require_once(WB_PATH."/include/jscalendar/wb-setup.php");
 			ifFormat    : "<?php echo $jscal_ifformat ?>",
 			button      : "enddate_trigger",
 			firstDay    : <?php echo $jscal_firstday ?>,
-			<?php if(isset($jscal_use_time) && $jscal_use_time==TRUE) { ?>
+			<?php if(isset($jscal_use_time) && $jscal_use_time==TRUE)
+            { ?>
 				showsTime   : "true",
 				timeFormat  : "24",
-			<?php } ?>
+			<?php
+            } ?>
 			date        : "<?php echo $jscal_today ?>",
 			range       : [1970, 2037],
 			step        : 1
@@ -215,17 +212,17 @@ if($query_comments->numRows() > 0) {
 		?>
 		<tr class="row_<?php echo $row; ?>" >
 			<td width="20" style="padding-left: 5px;">
-				<a href="<?php echo WB_URL; ?>/modules/news/modify_comment.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&comment_id=<?php echo $comment['comment_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
+				<a href="<?php echo WB_URL; ?>/modules/news/modify_comment.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;comment_id=<?php echo $comment['comment_id']; ?>" title="<?php echo $TEXT['MODIFY']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="^" />
 				</a>
 			</td>	
 			<td>
-				<a href="<?php echo WB_URL; ?>/modules/news/modify_comment.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&comment_id=<?php echo $comment['comment_id']; ?>">
+				<a href="<?php echo WB_URL; ?>/modules/news/modify_comment.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;comment_id=<?php echo $comment['comment_id']; ?>">
 					<?php echo $comment['title']; ?>
 				</a>
 			</td>
 			<td width="20">
-				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/news/delete_comment.php?page_id=<?php echo $page_id; ?>&section_id=<?php echo $section_id; ?>&post_id=<?php echo $post_id; ?>&comment_id=<?php echo $comment['comment_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
+				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/news/delete_comment.php?page_id=<?php echo $page_id; ?>&amp;section_id=<?php echo $section_id; ?>&amp;post_id=<?php echo $post_id; ?>&amp;comment_id=<?php echo $comment['comment_id']; ?>');" title="<?php echo $TEXT['DELETE']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
 				</a>
 			</td>
@@ -245,11 +242,6 @@ if($query_comments->numRows() > 0) {
 	echo $TEXT['NONE_FOUND'];
 }
 
-?>
-
-
-
-<?php
 
 // Print admin footer
 $admin->print_footer();

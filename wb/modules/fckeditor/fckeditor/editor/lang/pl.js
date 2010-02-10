@@ -308,7 +308,7 @@ DlgTableCellSpace	: "Odstęp pomiędzy komórkami",
 DlgTableCellPad		: "Margines wewnętrzny komórek",
 DlgTableCaption		: "Tytuł",
 DlgTableSummary		: "Podsumowanie",
-DlgTableHeaders		: "Headers",	//MISSING
+DlgTableHeaders		: "Nagłówki",
 DlgTableHeadersNone		: "None",	//MISSING
 DlgTableHeadersColumn	: "First column",	//MISSING
 DlgTableHeadersRow		: "First Row",	//MISSING
@@ -512,7 +512,7 @@ DlgDocMeCopy		: "Prawa autorskie",
 DlgDocPreview		: "Podgląd",
 
 // Templates Dialog
-Templates			: "Sablony",
+Templates			: "Szablony",
 DlgTemplatesTitle	: "Szablony zawartości",
 DlgTemplatesSelMsg	: "Wybierz szablon do otwarcia w edytorze<br>(obecna zawartość okna edytora zostanie utracona):",
 DlgTemplatesLoading	: "Ładowanie listy szablonów. Proszę czekać...",
@@ -525,10 +525,16 @@ DlgAboutBrowserInfoTab	: "O przeglądarce",
 DlgAboutLicenseTab	: "Licencja",
 DlgAboutVersion		: "wersja",
 DlgAboutInfo		: "Więcej informacji uzyskasz pod adresem",
+DlgAboutModule		: "Developed for Website Baker<br />modul version 2.9.4",
 
 // Div Dialog
 DlgDivGeneralTab	: "General",	//MISSING
 DlgDivAdvancedTab	: "Advanced",	//MISSING
 DlgDivStyle		: "Style",	//MISSING
-DlgDivInlineStyle	: "Inline Style"	//MISSING
+DlgDivInlineStyle	: "Inline Style",	//MISSING
+
+ScaytTitle			: "SCAYT",	//MISSING
+ScaytTitleOptions	: "Options",	//MISSING
+ScaytTitleLangs		: "Languages",	//MISSING
+ScaytTitleAbout		: "About"	//MISSING
 };

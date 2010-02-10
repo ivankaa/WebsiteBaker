@@ -525,10 +525,16 @@ DlgAboutBrowserInfoTab	: "Informácie o prehliadači",
 DlgAboutLicenseTab	: "Licencia",
 DlgAboutVersion		: "verzia",
 DlgAboutInfo		: "Viac informácií získate na",
+DlgAboutModule		: "Developed for Website Baker<br />modul version 2.9.4",
 
 // Div Dialog
 DlgDivGeneralTab	: "Hlavné",
 DlgDivAdvancedTab	: "Rozšírené",
 DlgDivStyle		: "Štýl",
-DlgDivInlineStyle	: "Inline štýl"
+DlgDivInlineStyle	: "Inline štýl",
+
+ScaytTitle			: "SCAYT",	//MISSING
+ScaytTitleOptions	: "Options",	//MISSING
+ScaytTitleLangs		: "Languages",	//MISSING
+ScaytTitleAbout		: "About"	//MISSING
 };

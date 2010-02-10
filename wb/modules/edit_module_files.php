@@ -1,36 +1,24 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
-
 /**
-	This file contains the routines to edit the optional module files: frontend.css and backend.css
-	Mechanism was introduced with WB 2.7 to provide a global solution for all modules
-*/
+ *
+ * @category        backend
+ * @package         modules
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 // prevent this file from being accessed directly
-if(!(isset($_POST['page_id']) && isset($_POST['section_id']) && isset($_POST['action']) 
-	&& isset($_POST['mod_dir'])  && isset($_POST['edit_file']))) die(header('Location: index.php')); 
+if(!(isset($_POST['page_id']) && isset($_POST['section_id']) && isset($_POST['action'])
+	&& isset($_POST['mod_dir'])  && isset($_POST['edit_file']))) die(header('Location: index.php'));
 
 // include configuration file and admin wrapper script
 require('../config.php');
@@ -44,8 +32,7 @@ if(!file_exists(WB_PATH .'/framework/module.functions.php')) {
 	die;
 }
 
-// register the textarea to use edit_area
-echo (function_exists('registerEditArea')) ? registerEditArea('code_area', 'css', false) : '';
+echo (function_exists('registerEditArea')) ? registerEditArea('code_area', 'css', false) : 'none';
 
 // set default text output if varibles are not defined in the global WB language files
 $HEADING_CSS_FILE = (isset($GLOBALS['TEXT']['HEADING_CSS_FILE'])) ?$GLOBALS['TEXT']['HEADING_CSS_FILE'] :'Actual module file: ';
@@ -56,7 +43,8 @@ require_once(WB_PATH .'/framework/module.functions.php');
 
 // check if the module directory is valid
 $mod_dir = check_module_dir($_POST['mod_dir']);
-if($mod_dir == '') {
+if($mod_dir == '')
+{
 	echo 'The specified module directory is invalid - script stopped.';
 	die;
 };
@@ -72,7 +60,8 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	}
 
 	$bytes = 0;
-	if ($css_content != '') {
+	if ($css_content != '')
+    {
 		// open the module CSS file for writting
 		$mod_file = @fopen(WB_PATH .'/modules/' .$mod_dir .'/' .$_POST['edit_file'], 'wb');
 		// write new content to the module CSS file
@@ -82,7 +71,8 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	}
 
 	// write out status message
-	if($bytes == 0 ) {
+	if($bytes == 0 )
+    {
 		$admin->print_error($TEXT['ERROR'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
 	} else {
 		$admin->print_success($TEXT['SUCCESS'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
@@ -105,7 +95,8 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	$css_file = (in_array($_POST['edit_file'], array('frontend.css', 'backend.css'))) ? $_POST['edit_file'] : '';
 
 	// display output
-	if($css_file == '') {
+	if($css_file == '')
+    {
 		// no valid module file to edit; display error message and backlink to modify.php
 		echo "<h2>Nothing to edit</h2>";
 		echo "<p>No valid module file exists for this module.</p>";
@@ -130,16 +121,18 @@ if($_POST['action'] == 'save' && mod_file_exists($mod_dir, $_POST['edit_file']))
 	  	<input type="hidden" name="mod_dir" value="<?php echo $mod_dir; ?>" />
 		<input type="hidden" name="edit_file" value="<?php echo $css_file; ?>" />
 	  	<input type="hidden" name="action" value="save" />
-		<textarea id="code_area" name="css_data" cols="115" rows="25" wrap="VIRTUAL" style="margin:2px;"><?php
+		<textarea id="code_area" name="css_data" cols="115" rows="25" wrap="VIRTUAL" style="margin:2px;width:100%;"><?php
 			echo htmlspecialchars($css_content); ?>
 		</textarea>
+<?php
 
+?>
   			<table cellpadding="0" cellspacing="0" border="0" width="100%">
   			<tr>
-    			<td align="left">
+    			<td class="left">
  				<input name="save" type="submit" value="<?php echo $TEXT['SAVE'];?>" style="width: 100px; margin-top: 5px;" />
     			</td>
-  				<td align="right">
+  				<td class="right">
       			<input type="button" value="<?php echo $TEXT['CANCEL']; ?>"
 						onclick="javascript: window.location = '<?php echo ADMIN_URL;?>/pages/modify.php?page_id=<?php echo $page_id; ?>';"
 						style="width: 100px; margin-top: 5px;" />

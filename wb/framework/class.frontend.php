@@ -1,32 +1,19 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
-
-/*
-
-Frontend class
-
+/**
+ *
+ * @category        frontend
+ * @package         framework
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
 */
 
 if(!defined('WB_PATH')) {
@@ -144,7 +131,7 @@ class frontend extends wb {
 			// Check if the page language is also the selected language. If not, send headers again.
 			if ($this->page['language']!=LANGUAGE) {
 				if(isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != '') { // check if there is an query-string
-					header('Location: '.$this->page_link($this->page['link']).'?lang='.$this->page['language'].'&'.$_SERVER['QUERY_STRING']);
+					header('Location: '.$this->page_link($this->page['link']).'?'.$_SERVER['QUERY_STRING'].'&lang='.$this->page['language']);
 				} else {
 					header('Location: '.$this->page_link($this->page['link']).'?lang='.$this->page['language']);
 				}
@@ -152,29 +139,29 @@ class frontend extends wb {
 			}
 			// Begin code to set details as either variables of constants
 			// Page ID
-			define('PAGE_ID', $this->page['page_id']);
+			if(!defined('PAGE_ID')) {define('PAGE_ID', $this->page['page_id']);}
 			// Page Title
-			define('PAGE_TITLE', $this->page['page_title']);
+			if(!defined('PAGE_TITLE')) {define('PAGE_TITLE', $this->page['page_title']);}
 			$this->page_title=PAGE_TITLE;
 			// Menu Title
 			$menu_title = $this->page['menu_title'];
 			if($menu_title != '') {
-				define('MENU_TITLE', $menu_title);
+				if(!defined('MENU_TITLE')) {define('MENU_TITLE', $menu_title);}
 			} else {
-				define('MENU_TITLE', PAGE_TITLE);
+				if(!defined('MENU_TITLE')) {define('MENU_TITLE', PAGE_TITLE);}
 			}
-			$this->menu_title=MENU_TITLE;
+			$this->menu_title = MENU_TITLE;
 			// Page parent
-			define('PARENT', $this->page['parent']);
+			if(!defined('PARENT')) {define('PARENT', $this->page['parent']);}
 			$this->parent=$this->page['parent'];
 			// Page root parent
-			define('ROOT_PARENT', $this->page['root_parent']);
+			if(!defined('ROOT_PARENT')) {define('ROOT_PARENT', $this->page['root_parent']);}
 			$this->root_parent=$this->page['root_parent'];
 			// Page level
-			define('LEVEL', $this->page['level']);
+			if(!defined('LEVEL')) {define('LEVEL', $this->page['level']);}
 			$this->level=$this->page['level'];
 			// Page visibility
-			define('VISIBILITY', $this->page['visibility']);
+			if(!defined('VISIBILITY')) {define('VISIBILITY', $this->page['visibility']);}
 			$this->visibility=$this->page['visibility'];
 			// Page trail
 			foreach(explode(',', $this->page['page_trail']) AS $pid) {

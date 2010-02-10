@@ -187,6 +187,7 @@ DlgGenLongDescr		: "Lange URL-omschrijving",
 DlgGenClass			: "Stylesheet-klassen",
 DlgGenTitle			: "Aanbevolen titel",
 DlgGenContType		: "Aanbevolen content-type",
+DlgGenContRel		: "Relationtyp",
 DlgGenLinkCharset	: "Karakterset van gelinkte bron",
 DlgGenStyle			: "Stijl",
 
@@ -525,10 +526,16 @@ DlgAboutBrowserInfoTab	: "Browserinformatie",
 DlgAboutLicenseTab	: "Licentie",
 DlgAboutVersion		: "Versie",
 DlgAboutInfo		: "Voor meer informatie ga naar ",
+DlgAboutModule		: "Developed for Website Baker<br />modul version 2.9.4",
 
 // Div Dialog
 DlgDivGeneralTab	: "Algemeen",
 DlgDivAdvancedTab	: "Geavanceerd",
 DlgDivStyle		: "Style",
-DlgDivInlineStyle	: "Inline Style"
+DlgDivInlineStyle	: "Inline Style",
+
+ScaytTitle			: "SCAYT",	//MISSING
+ScaytTitleOptions	: "Options",	//MISSING
+ScaytTitleLangs		: "Languages",	//MISSING
+ScaytTitleAbout		: "About"	//MISSING
 };

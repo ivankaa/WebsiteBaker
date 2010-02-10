@@ -525,10 +525,16 @@ DlgAboutBrowserInfoTab	: "Інформація браузера",
 DlgAboutLicenseTab	: "Ліцензія",
 DlgAboutVersion		: "Версія",
 DlgAboutInfo		: "Додаткову інформацію дивіться на ",
+DlgAboutModule		: "Developed for Website Baker<br />modul version 2.9.4",
 
 // Div Dialog
 DlgDivGeneralTab	: "Загальна",
 DlgDivAdvancedTab	: "Розширена",
 DlgDivStyle		: "Стиль",
-DlgDivInlineStyle	: "Inline стиль"
+DlgDivInlineStyle	: "Inline стиль",
+
+ScaytTitle			: "SCAYT",	//MISSING
+ScaytTitleOptions	: "Options",	//MISSING
+ScaytTitleLangs		: "Languages",	//MISSING
+ScaytTitleAbout		: "About"	//MISSING
 };

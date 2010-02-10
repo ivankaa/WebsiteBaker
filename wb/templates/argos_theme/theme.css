@@ -1,4 +1,7 @@
-html {overflow: -moz-scrollbars-vertical;} /* Force firefox to always show room for a vertical scrollbar */
+
+html {
+overflow: -moz-scrollbars-vertical;  /* Force firefox to always show room for a vertical scrollbar */
+}
 
 body,td,th,input,textarea {font-family:verdana,arial,helvetica,sans-serif;font-size:11px;color:#333;}
 body {background:#f9f9f9 url(images/background.jpg) 0 0 repeat-x;margin:0;text-align:center;}
@@ -68,8 +71,8 @@ select option.disabled {color:#aaa;}
 .modify_link {padding:4px 0 0 7px;}
 
 .settings_table td {vertical-align:top;text-align:left;padding:5px;}
-.setting_name {width:180px;min-width:180px;}
-.setting_value {}
+.setting_name {width:10%;min-width:180px;}
+.setting_value { width: 90%}
 .setting_value input, .setting_value select, .setting_value textarea {width:100%;}
 .setting_value textarea {height:50px;}
 
@@ -99,10 +102,6 @@ img.page_list_rights {border:none;float:left;margin:0;vertical-align:middle;}
 .sections_list {font-weight:bold;padding-left:10px;}
 .sections_list table {width:900px;}
 
-.header_list_page_title {text-align:left;}
-.header_list_menu_title {width:300px;text-align:left;}
-.header_list_page_id{width:50px;text-align:left;}
-.header_list_actions {text-align:left;width:150px;}
 
 .header_list_type {text-align:left;}
 .header_list_block {text-align:left;width:180px;}
@@ -111,10 +110,30 @@ img.page_list_rights {border:none;float:left;margin:0;vertical-align:middle;}
 .header_list_sections_actions {text-align:left;width:30px;}
 .header_list_section_id {width:30px;text-align:right;}
 
+
+.list_section_id {width:30px;text-align:right;}
+.list_pubdate_start {text-align:left;width:200px;}
+.list_pubdate_end {text-align:left;width:200px;}
+/*
+.header_list_page_title {text-align:left;}
+.header_list_menu_title {width:300px;text-align:left;}
+.header_list_page_id{width:50px;text-align:left;}
 .list_page_title {text-align:left;}
 .list_menu_title {width:300px;text-align:left;}
 .list_page_id {width:50px;text-align:left;}
-.list_section_id {width:30px;text-align:right;}
-.list_actions {width:25px;}
-.list_pubdate_start {text-align:left;width:200px;}
-.list_pubdate_end {text-align:left;width:200px;}
+*/
+.header_list_menu_title {text-align:left;}
+.header_list_page_title {width:300px; text-align:left;}
+.header_list_page_id {width:50px; text-align: right; padding-right:15px;}
+.header_list_actions {width:150px; text-align:left;}
+
+.list_menu_title {text-align:left;}
+.list_page_title {width:300px;text-align:left; }
+
+.list_page_id {width:50px;text-align: right; padding-right:15px;}
+.list_actions {width:25px;text-align:left;}
+
+.value_page_code {color: #006400; font-weight: 400; width: 240px; }
+.list_page_code { width: 240px; }
+.list_page_language { width: 240px; }
+#multi_lingual { font-weight: bolder; }

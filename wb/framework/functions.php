@@ -1,33 +1,19 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
-
-/*
-
-Website Baker functions file
-This file contains general functions used in Website Baker
-
+/**
+ *
+ * @category        frontend
+ * @package         framework
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
 */
 
 // Stop this file from being accessed directly
@@ -48,72 +34,84 @@ function rm_full_dir($directory)
     }
 
     // Empty the folder
-    $dir = dir($directory);
-    while (false !== $entry = $dir->read()) {
-        // Skip pointers
-        if ($entry == '.' || $entry == '..') {
-            continue;
+	if (is_dir($directory))
+    {
+        $dir = dir($directory);
+        while (false !== $entry = $dir->read())
+        {
+            // Skip pointers
+            if ($entry == '.' || $entry == '..') {
+                continue;
+            }
+
+            // Deep delete directories
+            if (is_dir("$directory/$entry")) {
+                rm_full_dir("$directory/$entry");
+            }
+            else
+            {
+                unlink("$directory/$entry");
+            }
         }
 
-        // Deep delete directories      
-        if (is_dir("$directory/$entry")) {
-            rm_full_dir("$directory/$entry");
-        } else {
-            unlink("$directory/$entry");
-        }
-    }
-
-    // Now delete the folder
-    $dir->close();
-    return rmdir($directory);
+        // Now delete the folder
+        $dir->close();
+        return rmdir($directory);
+	}
 }
 
 // Function to open a directory and add to a dir list
-function directory_list($directory) {
-	
+function directory_list($directory)
+{
 	$list = array();
 
-	// Open the directory then loop through its contents
-	$dir = dir($directory);
-	while (false !== $entry = $dir->read()) {
-		// Skip pointers
-		if(substr($entry, 0, 1) == '.' || $entry == '.svn') {
-			continue;
-		}
-		// Add dir and contents to list
-		if (is_dir("$directory/$entry")) {
-			$list = array_merge($list, directory_list("$directory/$entry"));
-			$list[] = "$directory/$entry";
-		}
-	}
+	if (is_dir($directory))
+    {
+    	// Open the directory then loop through its contents
+    	$dir = dir($directory);
+    	while (false !== $entry = $dir->read()) {
+    		// Skip pointers
+    		if(substr($entry, 0, 1) == '.' || $entry == '.svn') {
+    			continue;
+    		}
+    		// Add dir and contents to list
+    		if (is_dir("$directory/$entry")) {
+    			$list = array_merge($list, directory_list("$directory/$entry"));
+    			$list[] = "$directory/$entry";
+    		}
+    	}
 
-	// Now return the list
+        $dir->close();
+    }
+    // Now return the list
 	return $list;
 }
 
 // Function to open a directory and add to a dir list
-function chmod_directory_contents($directory, $file_mode) {
-	
-	// Set the umask to 0
-	$umask = umask(0);
-	
-	// Open the directory then loop through its contents
-	$dir = dir($directory);
-	while (false !== $entry = $dir->read()) {
-		// Skip pointers
-		if(substr($entry, 0, 1) == '.' || $entry == '.svn') {
-			continue;
-		}
-		// Chmod the sub-dirs contents
-		if(is_dir("$directory/$entry")) {
-			chmod_directory_contents("$directory/$entry", $file_mode);
-		}
-		change_mode($directory.'/'.$entry);
-	}
-	
-	// Restore the umask
-	umask($umask);
+function chmod_directory_contents($directory, $file_mode)
+{
+	if (is_dir($directory))
+    {
+    	// Set the umask to 0
+    	$umask = umask(0);
 
+    	// Open the directory then loop through its contents
+    	$dir = dir($directory);
+    	while (false !== $entry = $dir->read()) {
+    		// Skip pointers
+    		if(substr($entry, 0, 1) == '.' || $entry == '.svn') {
+    			continue;
+    		}
+    		// Chmod the sub-dirs contents
+    		if(is_dir("$directory/$entry")) {
+    			chmod_directory_contents("$directory/$entry", $file_mode);
+    		}
+    		change_mode($directory.'/'.$entry);
+    	}
+        $dir->close();
+    	// Restore the umask
+    	umask($umask);
+    }
 }
 
 // Function to open a directory and add to a file list
@@ -122,30 +120,38 @@ function file_list($directory, $skip = array()) {
 	$list = array();
 	$skip_file = false;
 	
-	// Open the directory then loop through its contents
-	$dir = dir($directory);
-	while (false !== $entry = $dir->read()) {
+	if (is_dir($directory))
+    {
+    	// Open the directory then loop through its contents
+    	$dir = dir($directory);
+    }
+	while (false !== $entry = $dir->read())
+    {
 		// Skip pointers
-		if($entry == '.' || $entry == '..') {
+		if($entry == '.' || $entry == '..')
+        {
 			$skip_file = true;
 		}
 		// Check if we to skip anything else
 		if($skip != array()) {
-			foreach($skip AS $skip_name) {
-				if($entry == $skip_name) {
+			foreach($skip AS $skip_name)
+            {
+				if($entry == $skip_name)
+                {
 					$skip_file = true;
 				}
 			}
 		}
 		// Add dir and contents to list
-		if($skip_file != true AND is_file("$directory/$entry")) {
+		if($skip_file != true AND is_file("$directory/$entry"))
+        {
 			$list[] = "$directory/$entry";
 		}
 		
 		// Reset the skip file var
 		$skip_file = false;
 	}
-
+    $dir->close();
 	// Now delete the folder
 	return $list;
 }
@@ -157,7 +163,7 @@ function get_home_folders() {
 	// Only return home folders is this feature is enabled
 	// and user is not admin
 //	if(HOME_FOLDERS AND ($_SESSION['GROUP_ID']!='1')) {
-	if(HOME_FOLDERS AND (!in_array('1',split(",",$_SESSION['GROUPS_ID'])))) {
+	if(HOME_FOLDERS AND (!in_array('1',explode(",", $_SESSION['GROUPS_ID'])))) {
 
 		$query_home_folders = $database->query("SELECT home_folder FROM ".TABLE_PREFIX."users WHERE home_folder != '".$admin->get_home_folder()."'");
 		if($query_home_folders->numRows() > 0) {
@@ -193,8 +199,10 @@ function get_home_folders() {
 }
 
 // Function to create directories
-function make_dir($dir_name, $dir_mode = OCTAL_DIR_MODE) {
-	if(!file_exists($dir_name)) {
+function make_dir($dir_name, $dir_mode = OCTAL_DIR_MODE)
+{
+	if(!is_dir($dir_name))
+    {
 		$umask = umask(0);
 		mkdir($dir_name, $dir_mode);
 		umask($umask);
@@ -206,22 +214,32 @@ function make_dir($dir_name, $dir_mode = OCTAL_DIR_MODE) {
 
 // Function to chmod files and directories
 function change_mode($name) {
-	if(OPERATING_SYSTEM != 'windows') {
+	if(OPERATING_SYSTEM != 'windows')
+    {
 		// Only chmod if os is not windows
-		if(is_dir($name)) {
+		if(is_dir($name))
+        {
 			$mode = OCTAL_DIR_MODE;
-		} else {
+		}
+        else
+        {
 			$mode = OCTAL_FILE_MODE;
 		}
-		if(file_exists($name)) {
+
+		if(file_exists($name))
+        {
 			$umask = umask(0);
 			chmod($name, $mode);
 			umask($umask);
 			return true;
-		} else {
+		}
+        else
+        {
 			return false;	
 		}
-	} else {
+	}
+    else
+    {
 		return true;
 	}
 }
@@ -776,16 +794,19 @@ function delete_page($page_id) {
 // Load module into DB
 function load_module($directory, $install = false) {
 	global $database,$admin,$MESSAGE;
-	if(file_exists($directory.'/info.php')) {
+	if(is_dir($directory) AND file_exists($directory.'/info.php'))
+	{
 		require($directory.'/info.php');
-		if(isset($module_name)) {
+		if(isset($module_name))
+	{
 			if(!isset($module_license)) { $module_license = 'GNU General Public License'; }
 			if(!isset($module_platform) AND isset($module_designed_for)) { $module_platform = $module_designed_for; }
 			if(!isset($module_function) AND isset($module_type)) { $module_function = $module_type; }
 			$module_function = strtolower($module_function);
 			// Check that it doesn't already exist
-			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$module_directory."' LIMIT 0,1");
-			if($result->numRows() == 0) {
+			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND directory = '".$module_directory."' LIMIT 0,1");
+			if($result->numRows() == 0)
+			{
 				// Load into DB
 				$query = "INSERT INTO ".TABLE_PREFIX."addons ".
 				"(directory,name,description,type,function,version,platform,author,license) ".
@@ -793,7 +814,8 @@ function load_module($directory, $install = false) {
 				"'$module_function','$module_version','$module_platform','$module_author','$module_license')";
 				$database->query($query);
 				// Run installation script
-				if($install == true) {
+				if($install == true)
+				{
 					if(file_exists($directory.'/install.php')) {
 						require($directory.'/install.php');
 					}
@@ -806,14 +828,14 @@ function load_module($directory, $install = false) {
 // Load template into DB
 function load_template($directory) {
 	global $database;
-	if(file_exists($directory.'/info.php')) {
+	if(is_dir($directory) AND file_exists($directory.'/info.php')) {
 		require($directory.'/info.php');
 		if(isset($template_name)) {
 			if(!isset($template_license)) { $template_license = 'GNU General Public License'; }
 			if(!isset($template_platform) AND isset($template_designed_for)) { $template_platform = $template_designed_for; }
 			if(!isset($template_function)) { $template_function = 'template'; }
 			// Check that it doesn't already exist
-			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$template_directory."' LIMIT 0,1");
+			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE type = 'template' AND directory = '".$template_directory."' LIMIT 0,1");
 			if($result->numRows() == 0) {
 				// Load into DB
 				$query = "INSERT INTO ".TABLE_PREFIX."addons ".
@@ -835,7 +857,7 @@ function load_language($file) {
 			if(!isset($language_license)) { $language_license = 'GNU General Public License'; }
 			if(!isset($language_platform) AND isset($language_designed_for)) { $language_platform = $language_designed_for; }
 			// Check that it doesn't already exist
-			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE directory = '".$language_code."' LIMIT 0,1");
+			$result = $database->query("SELECT addon_id FROM ".TABLE_PREFIX."addons WHERE type = 'language' AND directory = '".$language_code."' LIMIT 0,1");
 			if($result->numRows() == 0) {
 				// Load into DB
 				$query = "INSERT INTO ".TABLE_PREFIX."addons ".

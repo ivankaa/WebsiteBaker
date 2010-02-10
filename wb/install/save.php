@@ -1,27 +1,21 @@
 <?php
+/**
+ *
+ * @category        backend
+ * @package         install
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version      	$Id$
+ * @filesource		$HeadURL:  $
+ * @lastmodified    $Date: $
+ *
+ */
 
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
 $debug = true;
 
 if (true === $debug) {
@@ -175,7 +169,7 @@ if(!isset($_POST['default_timezone']) OR !is_numeric($_POST['default_timezone'])
 // End path and timezone details code
 
 // Get the default language
-$allowed_languages = array('BG','CA', 'CS', 'DA', 'DE', 'EN', 'ES', 'ET', 'FI', 'FR', 'HR', 'HU', 'IT', 'LV', 'NL', 'NO', 'PL', 'PT', 'RU','SE', 'TR');
+$allowed_languages = array('BG','CA', 'CS', 'DA', 'DE', 'EN', 'ES', 'ET', 'FI', 'FR', 'HR', 'HU', 'IT', 'LV', 'NL', 'NO', 'PL', 'PT', 'RU','SE','SK','TR');
 if(!isset($_POST['default_language']) OR !in_array($_POST['default_language'], $allowed_languages)) {
 	set_error('Please select a valid default backend language','default_language');
 } else {
@@ -273,7 +267,7 @@ if(!isset($_POST['admin_username']) OR $_POST['admin_username'] == '') {
 if(!isset($_POST['admin_email']) OR $_POST['admin_email'] == '') {
 	set_error('Please enter an email for the Administrator account','admin_email');
 } else {
-	if(eregi("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$", $_POST['admin_email'])) {
+	if(preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i', $_POST['admin_email'])) {
 		$admin_email = $_POST['admin_email'];
 	} else {
 		set_error('Please enter a valid email address for the Administrator account','admin_email');
@@ -569,7 +563,7 @@ if($install_tables == true) {
 	$search_header = addslashes('
 <h1>[TEXT_SEARCH]</h1>
 
-<form name="search" action="[WB_URL]/search/index.php" method="get">
+<form name="searchpage" action="[WB_URL]/search/index.php" method="get">
 <table cellpadding="3" cellspacing="0" border="0" width="500">
 <tr>
 <td>

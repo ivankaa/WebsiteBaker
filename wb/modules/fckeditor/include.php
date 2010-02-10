@@ -1,27 +1,20 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        modules
+ * @package         fckeditor
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 function reverse_htmlentities($mixed) {
 	$mixed = str_replace(array('&gt;','&lt;','&quot;','&amp;'), array('>','<','"','&'), $mixed);
@@ -35,7 +28,7 @@ function get_template_name() {
 	// require_once('../../config.php');
 	require_once(WB_PATH. '/framework/class.database.php');
 
-	// work out default editor.css file for FCKEditor
+	// work out default editor.css file for CKeditor
 	if(file_exists(WB_PATH .'/templates/' .DEFAULT_TEMPLATE .'/editor.css')) {
 		$fck_template_dir = DEFAULT_TEMPLATE;
 	} else {
@@ -47,10 +40,10 @@ function get_template_name() {
 		$pageid = (int) $_GET["page_id"];
 
 		// obtain template folder of current page from the database
-		if(!isset($admin)) { 
-			$database = new database(); 
+		if(!isset($admin)) {
+			$database = new database();
 		}
-		$query_page = "SELECT template FROM " .TABLE_PREFIX ."pages WHERE page_id =$pageid"; 
+		$query_page = "SELECT template FROM " .TABLE_PREFIX ."pages WHERE page_id =$pageid";
 		$pagetpl = $database->get_one($query_page);   // if empty, default template is used
 
 		// check if a specific template is defined for current page
@@ -65,7 +58,7 @@ function get_template_name() {
 }
 
 function show_wysiwyg_editor($name, $id, $content, $width, $height) {
-	// create new FCKEditor instance
+	// create new CKeditor instance
 	require_once(WB_PATH.'/modules/fckeditor/fckeditor/fckeditor.php');
 	$oFCKeditor = new FCKeditor($name);
 
@@ -111,7 +104,13 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height) {
   $oFCKeditor->Config['FlashBrowserURL'] = $oFCKeditor->BasePath.'editor/filemanager/browser/default/browser.html?Connector='
 		.$connectorPath;
 
+  if(defined('EDITOR_WIDTH'))
+  {
+    $width = ( ($width > EDITOR_WIDTH ) OR (EDITOR_WIDTH <= 0) ) ? $width : EDITOR_WIDTH;
+  }
+
 	$oFCKeditor->Value = reverse_htmlentities($content);
+    $oFCKeditor->Width  = $width;
 	$oFCKeditor->Height = $height;
 	$oFCKeditor->Create();
 }

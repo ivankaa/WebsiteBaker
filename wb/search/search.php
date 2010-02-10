@@ -1,29 +1,22 @@
 <?php
+/**
+ *
+ * @category        frontend
+ * @package         search
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
-
-if(!defined('WB_URL')) { 
+if(!defined('WB_URL')) {
 	header('Location: index.php');
 	exit(0);
 }
@@ -195,16 +188,18 @@ $search_entities_string = ''; // for SQL's LIKE
 $search_display_string = ''; // for displaying
 $search_url_string = ''; // for $_GET -- ATTN: unquoted! Will become urldecoded later
 $string = '';
-if(isset($_REQUEST['string'])) {
-	if($match!='exact') { // $string will be cleaned below
+if(isset($_REQUEST['string']))
+{
+	if($match!='exact') // $string will be cleaned below 
+    {
 		$string=str_replace(',', '', $_REQUEST['string']);
 	} else {
 		$string=$_REQUEST['string'];
 	}
-	// redo possible magic quotes
-	$string = $wb->strip_slashes($string);
-	$string = preg_replace('/\s+/', ' ', $string);
-	$string = trim($string);
+    // redo possible magic quotes
+    $string = $wb->strip_slashes($string);
+    $string = preg_replace('/[ \r\n\t]+/', ' ', $string);
+    $string = trim($string);
 	// remove some bad chars
 	$string = str_replace ( array('[[',']]'),'', $string);
 	$string = preg_replace('/(^|\s+)[|.]+(?=\s+|$)/', '', $string);
@@ -488,7 +483,7 @@ if($search_normal_string != '') {
 				if($page['visibility'] != 'registered') {
 					continue;
 				} else { // page: registered, user: access denied
-					$func_vars['page_description'] = 'registered';
+					$func_vars['page_description'] = $TEXT['REGISTERED'];
 				}
 			}
 			if($admin->page_is_active($page) == false) {
@@ -616,7 +611,7 @@ if($search_normal_string != '') {
 				$prepared_query .= " ) ) ) ".$query_end;
 				// Execute query
 				$page_query = $database->query($prepared_query." ".$search_path_SQL." ".$search_language_SQL_t);
-
+				if(!$page_query) continue; // on error, skip the rest of the current loop iteration
 				// Loop through queried items
 				if($page_query->numRows() > 0) {
 					while($page = $page_query->fetchRow()) {

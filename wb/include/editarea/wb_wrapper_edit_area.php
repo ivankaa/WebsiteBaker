@@ -1,34 +1,60 @@
 <?php
 /**
- * Website Baker wrapper functions for the Javascript code editor: "EditArea"
  *
- * EditArea is created by Christophe Dolivet and released under "LGPL", 
- * "Apache" and "BSD" licenses. For the integration into Website Baker 
- * the LGPL license was choosen.
+ * @category        framework
+ * @package         include
+ * @author		    Christophe Dolivet (EditArea), Christian Sommer (WB wrapper)
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
  *
- * LICENSE: GNU Lesser General Public License 3.0
- * 
- * @author		Christophe Dolivet (EditArea), Christian Sommer (WB wrapper)
- * @copyright	(c) 2005-2009
- * @license		http://www.gnu.org/copyleft/lesser.html
- * @version		0.7.2.3 
- * @platform	Website Baker 2.7
-*/
+ */
+
+function loader_help()
+{
+?>
+   <script type="text/javascript">
+      var head= document.getElementsByTagName('head')[0];
+      var script= document.createElement('script');
+      script.type= 'text/javascript';
+      script.src= '<?php print WB_URL; ?>/include/editarea/edit_area_full.js';
+      head.appendChild(script);
+   </script>
+<?php
+
+}
 
 if (!function_exists('registerEditArea')) {
-	function registerEditArea($id = 'code_area', $syntax = 'php', $syntax_selection = true
-		, $allow_resize = 'no', $allow_toggle = true, $start_highlight = true
-		, $min_width = 600, $min_height = 300, $toolbar = 'default')
-	{ 
+	function registerEditArea(
+                $id = 'code_area',
+                $syntax = 'php',
+                $syntax_selection = true,
+                $allow_resize = 'both',
+                $allow_toggle = true,
+                $start_highlight = true,
+                $min_width = 600,
+                $min_height = 300,
+                $toolbar = 'default'
+            )
+	{
+
 		// set default toolbar if no user defined was specified
 		if ($toolbar == 'default') {
 			$toolbar = 'search, fullscreen, |, undo, redo, |, select_font, syntax_selection, |, highlight, reset_highlight, |, help';
 			$toolbar = (!$syntax_selection) ? str_replace('syntax_selection,', '', $toolbar) : $toolbar;
 		}
-	
+
 		// check if used Website Baker backend language is supported by EditArea
 		$language = 'en';
-		if (defined('LANGUAGE') && file_exists(dirname(__FILE__) . '/langs/' . strtolower(LANGUAGE) . '.js')) {
+		if (defined('LANGUAGE') && file_exists(dirname(__FILE__) . '/langs/' . strtolower(LANGUAGE) . '.js'))
+        {
 			$language = strtolower(LANGUAGE);
 		}
 
@@ -40,17 +66,17 @@ if (!function_exists('registerEditArea')) {
 
 		// return the Javascript code
 		$result = <<< EOT
-		<script language="javascript" type="text/javascript">
+		<script type="text/javascript">
 			editAreaLoader.init({
-				id: 				'$id'
-				,start_highlight:	$start_highlight
-				,syntax:			'$syntax'
-				,min_width:			$min_width
-				,min_height:		$min_height
-				,allow_resize: 		'$allow_resize'
-				,allow_toggle: 		$allow_toggle
-				,toolbar: 			'$toolbar'
-				,language:			'$language'
+				id: 				'$id',
+				start_highlight:	$start_highlight,
+				syntax:			    '$syntax',
+				min_width:			$min_width,
+				min_height:		    $min_height,
+				allow_resize: 		'$allow_resize',
+				allow_toggle: 		$allow_toggle,
+				toolbar: 			'$toolbar',
+				language:			'$language'
 			});
 		</script>
 EOT;

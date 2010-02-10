@@ -1,34 +1,26 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        modules
+ * @package         news
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 // Check that GET values have been supplied
 if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])) {
 	$page_id = $_GET['page_id'];
-	define('PAGE_ID', $page_id);
 } else {
-	header('Location: '.WB_URL);
+	header('Location: /');
 	exit(0);
 }
 if(isset($_GET['group_id']) AND is_numeric($_GET['group_id'])) {
@@ -60,20 +52,19 @@ header("Content-type: text/xml; charset=$charset" );
 echo '<?xml version="1.0" encoding="'.$charset.'"?>';
 ?> 
 <rss version="2.0">
-<channel>
-<title><?php echo PAGE_TITLE; ?></title>
-<link>http://<?php echo $_SERVER['SERVER_NAME']; ?></link>
-<description> <?php echo PAGE_DESCRIPTION; ?></description>
+	<channel>
+		<title><?php echo PAGE_TITLE; ?></title>
+		<link>http://<?php echo $_SERVER['SERVER_NAME']; ?></link>
+		<description> <?php echo PAGE_DESCRIPTION; ?></description>
 <?php
 // Optional header info 
 ?>
-<language><?php echo strtolower(DEFAULT_LANGUAGE); ?></language>
-<copyright><?php $thedate = date('Y'); $websitetitle = WEBSITE_TITLE; echo "Copyright {$thedate}, {$websitetitle}"; ?></copyright>
-<managingEditor><?php echo SERVER_EMAIL; ?></managingEditor>
-<webMaster><?php echo SERVER_EMAIL; ?></webMaster>
-<category><?php echo WEBSITE_TITLE; ?></category>
-<generator>Website Baker Content Management System</generator>
-
+		<language><?php echo strtolower(DEFAULT_LANGUAGE); ?></language>
+		<copyright><?php $thedate = date('Y'); $websitetitle = WEBSITE_TITLE; echo "Copyright {$thedate}, {$websitetitle}"; ?></copyright>
+		<managingEditor><?php echo SERVER_EMAIL; ?></managingEditor>
+		<webMaster><?php echo SERVER_EMAIL; ?></webMaster>
+		<category><?php echo WEBSITE_TITLE; ?></category>
+		<generator>WebsiteBaker Content Management System</generator>
 <?php
 // Get news items from database
 $t = TIME();
@@ -87,16 +78,13 @@ if(isset($group_id)) {
 $result = $database->query($query);
 
 //Generating the news items
-while($item = $result->fetchRow($result)){ ?>
-
-<item>
-<title><![CDATA[<?php echo stripslashes($item["title"]); ?>]]></title>
-<description><![CDATA[<?php echo stripslashes($item["content_short"]); ?>]]></description>
-<guid><?php echo WB_URL.PAGES_DIRECTORY.$item["link"].PAGE_EXTENSION; ?></guid>
-<link><?php echo WB_URL.PAGES_DIRECTORY.$item["link"].PAGE_EXTENSION; ?></link>
-</item>
-
+while($item = $result->fetchRow()){ ?>
+		<item>
+			<title><![CDATA[<?php echo stripslashes($item["title"]); ?>]]></title>
+			<description><![CDATA[<?php echo stripslashes($item["content_short"]); ?>]]></description>
+			<guid><?php echo WB_URL.PAGES_DIRECTORY.$item["link"].PAGE_EXTENSION; ?></guid>
+			<link><?php echo WB_URL.PAGES_DIRECTORY.$item["link"].PAGE_EXTENSION; ?></link>
+		</item>
 <?php } ?>
-
-</channel>
+	</channel>
 </rss>

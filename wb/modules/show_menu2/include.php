@@ -22,28 +22,27 @@
     02110-1301, USA.
 
     ***********************************************
-    ** Version 4.9: see README for documentation **
+    ** Version 4.8: see README for documentation **
     ***********************************************
 */
 
-define('SM2_ROOT',        -1000);
-define('SM2_CURR',        -2000);
-define('SM2_ALLMENU',        -1);
-define('SM2_START',        1000);
-define('SM2_MAX',          2000);
-define('SM2_ALL',        0x0001); // bit 0 (group 1) (Note: also used for max level!)
-define('SM2_TRIM',       0x0002); // bit 1 (group 1)
-define('SM2_CRUMB',      0x0004); // bit 2 (group 1)
-define('SM2_SIBLING',    0x0008); // bit 3 (group 1)
-define('SM2_NUMCLASS',   0x0010); // bit 4
-define('SM2_ALLINFO',    0x0020); // bit 5
-define('SM2_NOCACHE',    0x0040); // bit 6
-define('SM2_PRETTY',     0x0080); // bit 7
-define('SM2_ESCAPE',     0x0100); // bit 8
-define('SM2_NOESCAPE',        0); // NOOP, unnecessary with WB 2.6.7+
-define('SM2_BUFFER',     0x0200); // bit 9
-define('SM2_CURRTREE',   0x0400); // bit 10
-define('SM2_SHOWHIDDEN', 0x0800); // bit 11
+define('SM2_ROOT',       -1000);
+define('SM2_CURR',       -2000);
+define('SM2_ALLMENU',       -1);
+define('SM2_START',       1000);
+define('SM2_MAX',         2000);
+define('SM2_ALL',       0x0001); // bit 0 (group 1) (Note: also used for max level!)
+define('SM2_TRIM',      0x0002); // bit 1 (group 1)
+define('SM2_CRUMB',     0x0004); // bit 2 (group 1)
+define('SM2_SIBLING',   0x0008); // bit 3 (group 1)
+define('SM2_NUMCLASS',  0x0010); // bit 4
+define('SM2_ALLINFO',   0x0020); // bit 5
+define('SM2_NOCACHE',   0x0040); // bit 6
+define('SM2_PRETTY',    0x0080); // bit 7
+define('SM2_ESCAPE',    0x0100); // bit 8
+define('SM2_NOESCAPE',       0); // NOOP, unnecessary with WB 2.6.7+
+define('SM2_BUFFER',    0x0200); // bit 9
+define('SM2_CURRTREE',  0x0400); // bit 10
 
 define('_SM2_GROUP_1',  0x000F); // exactly one flag from group 1 is required
 
@@ -271,7 +270,7 @@ class SM2_Formatter
                 $rgTests[$n] = $this->ifTest($rgMatches[1], $rgMatches[2], $rgMatches[3]);
             }
             else {
-                error_log("show_menu2 error: conditional expression is invalid!");
+                @error_logs("show_menu2 error: conditional expression is invalid!");
                 $rgTests[$n] = false;
             }
         }
@@ -403,6 +402,20 @@ class SM2_Formatter
     }
 };
 
+function error_logs($error_str)
+{
+                $log_error = true;
+                if ( ! function_exists('error_log') )
+                        $log_error = false;
+
+                $log_file = @ini_get('error_log');
+                if ( !empty($log_file) && ('syslog' != $log_file) && !@is_writable($log_file) )
+                        $log_error = false;
+
+                if ( $log_error )
+                        @error_log($error_str, 0);
+}
+
 function show_menu2(
     $aMenu          = 0,
     $aStart         = SM2_ROOT,
@@ -430,13 +443,13 @@ function show_menu2(
     else {
         $flags = SM2_TRIM;
         $aOptions = array();
-        error_log('show_menu2 error: $aOptions is invalid. No flags supplied!');
+        @error_logs('show_menu2 error: $aOptions is invalid. No flags supplied!');
     }
     
-    // ensure we have our group 1 flag, we don't check for the "exactly 1" part, but 
+    // ensure we have our group 1 flag, we don't check for the "exactly 1" part, but
     // we do ensure that they provide at least one.
     if (0 == ($flags & _SM2_GROUP_1)) {
-        error_log('show_menu2 error: $aOptions is invalid. No flags from group 1 supplied!');
+        @error_logs('show_menu2 error: $aOptions is invalid. No flags from group 1 supplied!');
         $flags |= SM2_TRIM; // default to TRIM
     }
     
@@ -486,14 +499,14 @@ function show_menu2(
     // the database. If this variable exists, then we have already retrieved all
     // of the information and processed it, so we don't need to do it again.
     if (($flags & SM2_NOCACHE) != 0
-        || !array_key_exists('show_menu2_data', $GLOBALS) 
+        || !array_key_exists('show_menu2_data', $GLOBALS)
         || !array_key_exists($aMenu, $GLOBALS['show_menu2_data'])) 
     {
         global $database;
 
         // create an array of all parents of the current page. As the page_trail
         // doesn't include the theoretical root element 0, we add it ourselves.
-        $rgCurrParents = split(',', '0,'.$wb->page['page_trail']);
+        $rgCurrParents = explode(",", '0,'.$wb->page['page_trail']);
         array_pop($rgCurrParents); // remove the current page
         $rgParent = array();
 
@@ -575,20 +588,14 @@ function show_menu2(
                 if ($page['page_id'] == $CURR_PAGE_ID) {
                     $page['sm2_is_curr'] = true;
                     $page['sm2_on_curr_path'] = true;
-                    if ($flags & SM2_SHOWHIDDEN) { 
-                        // show hidden pages if active and SHOWHIDDEN flag supplied
-                        unset($page['sm2_hide']); 
-                    }
+                    unset($page['sm2_hide']); // don't hide the current page
                 }
 
                 // mark parents of the current page as such
                 if (in_array($page['page_id'], $rgCurrParents)) {
                     $page['sm2_is_parent'] = true;
                     $page['sm2_on_curr_path'] = true;
-                    if ($flags & SM2_SHOWHIDDEN) {
-                        // show hidden pages if active and SHOWHIDDEN flag supplied
-                        unset($page['sm2_hide']); 
-                    }
+                    unset($page['sm2_hide']); // don't hide a parent page                
                 }
                 
                 // add the entry to the array                

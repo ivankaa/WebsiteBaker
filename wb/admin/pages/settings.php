@@ -1,30 +1,24 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        admin
+ * @package         pages
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 // Get page id
-if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id'])) {
+if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
+{
 	header("Location: index.php");
 	exit(0);
 } else {
@@ -40,26 +34,37 @@ $admin = new admin('Pages', 'pages_settings');
 require_once(WB_PATH.'/framework/functions-utf8.php');
 
 // Get perms
-$database = new database();
-$results = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'");
+/*$database = new database(); */
+
+$sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$page_id;
+$results = $database->query($sql);
 $results_array = $results->fetchRow();
+
 $old_admin_groups = explode(',', $results_array['admin_groups']);
 $old_admin_users = explode(',', $results_array['admin_users']);
 
+// Work-out if we should check for existing page_code
+$sql = 'DESCRIBE `'.TABLE_PREFIX.'pages` `page_code`';
+$field_sql = $database->query($sql);
+$field_set = $field_sql->numRows();
+
 $in_old_group = FALSE;
-foreach($admin->get_groups_id() as $cur_gid){
-	if (in_array($cur_gid, $old_admin_groups)) {
+foreach($admin->get_groups_id() as $cur_gid)
+{
+	if (in_array($cur_gid, $old_admin_groups))
+    {
 		$in_old_group = TRUE;
 	}
 }
-if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users))) {
+if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users)))
+{
 	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
 }
 
 // Get page details
-$database = new database();
-$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'";
-$results = $database->query($query);
+/* $database = new database();  */
+$sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id`='.$page_id;
+$results = $database->query($sql);
 if($database->is_error()) {
 	$admin->print_header();
 	$admin->print_error($database->get_error());
@@ -74,7 +79,8 @@ $results_array = $results->fetchRow();
 $user=$admin->get_user_details($results_array['modified_by']);
 
 // Convert the unix ts for modified_when to human a readable form
-if($results_array['modified_when'] != 0) {
+if($results_array['modified_when'] != 0)
+{
 	$modified_ts = gmdate(TIME_FORMAT.', '.DATE_FORMAT, $results_array['modified_when']+TIMEZONE);
 } else {
 	$modified_ts = 'Unknown';
@@ -102,13 +108,16 @@ $template->set_var(array(
 		);
 
 // Work-out if we should show the "manage sections" link
-$query_sections = $database->query("SELECT section_id FROM ".TABLE_PREFIX."sections WHERE page_id = '$page_id' AND module = 'menu_link'");
-if($query_sections->numRows() > 0) {
-	$template->set_var('DISPLAY_MANAGE_SECTIONS', 'none');
-} elseif(MANAGE_SECTIONS == 'enabled') {
+$sql = 'SELECT `section_id` FROM `'.TABLE_PREFIX.'sections` WHERE `page_id`='.$page_id.' AND `module`="menu_link"';
+$query_sections = $database->query($sql);
+if($query_sections->numRows() > 0)
+{
+    $template->set_var('DISPLAY_MANAGE_SECTIONS', 'display:none;');
+} elseif(MANAGE_SECTIONS == 'enabled')
+{
 	$template->set_var('TEXT_MANAGE_SECTIONS', $HEADING['MANAGE_SECTIONS']);
 } else {
-	$template->set_var('DISPLAY_MANAGE_SECTIONS', 'none');
+	$template->set_var('DISPLAY_MANAGE_SECTIONS', 'display:none;');
 }
 
 // Visibility
@@ -120,15 +129,15 @@ if($results_array['visibility'] == 'public') {
 	$template->set_var('REGISTERED_SELECTED', ' selected="selected"');
 } elseif($results_array['visibility'] == 'hidden') {
 	$template->set_var('HIDDEN_SELECTED', ' selected="selected"');
-} elseif($results_array['visibility'] == 'none') {
+} elseif($results_array['visibility'] == 'display:none;') {
 	$template->set_var('NO_VIS_SELECTED', ' selected="selected"');
 }
 // Group list 1 (admin_groups)
 	$admin_groups = explode(',', str_replace('_', '', $results_array['admin_groups']));
 
-	$query = "SELECT * FROM ".TABLE_PREFIX."groups";
-	
-	$get_groups = $database->query($query);
+	$sql = 'SELECT * FROM `'.TABLE_PREFIX.'groups`';
+    $get_groups = $database->query($sql);
+
 	$template->set_block('main_block', 'group_list_block', 'group_list');
 	// Insert admin group and current group first
 	$admin_group_name = $get_groups->fetchRow();
@@ -143,24 +152,6 @@ if($results_array['visibility'] == 'public') {
 									)
 							);
 	$template->parse('group_list', 'group_list_block', true);
-	/*
-	if(!in_array(1, $admin->get_groups_id())) {
-		$users_groups = $admin->get_groups_name();
-		foreach ($admin->get_groups_id() as $users_group_id) {
-			$template->set_var(array(
-										'ID' => $users_group_id,
-										'TOGGLE' => '',
-										'DISABLED' => ' disabled',
-										'LINK_COLOR' => '000000',
-										'CURSOR' => 'default',
-										'NAME' => $users_groups[$users_group_id],
-										'CHECKED' => ' checked'
-										)
-								);
-			$template->parse('group_list', 'group_list_block', true);
-		}
-	}
-	*/
 	while($group = $get_groups->fetchRow()) {
 		// check if the user is a member of this group
 		$flag_disabled = '';
@@ -198,9 +189,9 @@ if($results_array['visibility'] == 'public') {
 // Group list 2 (viewing_groups)
 	$viewing_groups = explode(',', str_replace('_', '', $results_array['viewing_groups']));
 
-	$query = "SELECT * FROM ".TABLE_PREFIX."groups";
+    $sql = 'SELECT * FROM `'.TABLE_PREFIX.'groups`';
+    $get_groups = $database->query($sql);
 
-	$get_groups = $database->query($query);
 	$template->set_block('main_block', 'group_list_block2', 'group_list2');
 	// Insert admin group and current group first
 	$admin_group_name = $get_groups->fetchRow();
@@ -216,14 +207,15 @@ if($results_array['visibility'] == 'public') {
 							);
 	$template->parse('group_list2', 'group_list_block2', true);
 
-
-	while($group = $get_groups->fetchRow()) {
+	while($group = $get_groups->fetchRow())
+    {
 		// check if the user is a member of this group
 		$flag_disabled = '';
 		$flag_checked =  '';
 		$flag_cursor =   'pointer';
 		$flag_color =    '';
-		if (in_array($group["group_id"], $admin->get_groups_id())) {
+		if (in_array($group["group_id"], $admin->get_groups_id()))
+        {
 			$flag_disabled = ''; //' disabled';
 			$flag_checked =  ''; //' checked';
 			$flag_cursor =   'default';
@@ -240,48 +232,167 @@ if($results_array['visibility'] == 'public') {
 										'CHECKED' => $flag_checked
 										)
 								);
-		if(is_numeric(array_search($group['group_id'], $viewing_groups))) {
+		if(is_numeric(array_search($group['group_id'], $viewing_groups)))
+        {
 			$template->set_var('CHECKED', 'checked="checked"');
 		} else {
-			if (!$flag_checked) $template->set_var('CHECKED', '');
+			if (!$flag_checked) {$template->set_var('CHECKED', '');}
 		}
+
 		$template->parse('group_list2', 'group_list_block2', true);
+
 	}
+
 // Show private viewers
-if($results_array['visibility'] == 'private' OR $results_array['visibility'] == 'registered') {
+if($results_array['visibility'] == 'private' OR $results_array['visibility'] == 'registered')
+{
 	$template->set_var('DISPLAY_VIEWERS', '');
 } else {
-	$template->set_var('DISPLAY_VIEWERS', 'none');
+	$template->set_var('DISPLAY_VIEWERS', 'display:none;');
 }
 
+//-- insert page_code 20090904-->
+$template->set_var('DISPLAY_CODE_PAGE_LIST', ' id="multi_lingual" style="display:none;"');
+
+// Work-out if page languages feature is enabled
+if((defined('PAGE_LANGUAGES') && PAGE_LANGUAGES) && $field_set && file_exists(WB_PATH.'/modules/mod_multilingual/update_keys.php') )
+{
+    // workout field is set but module missing
+    $TEXT['PAGE_CODE'] = empty($TEXT['PAGE_CODE']) ? 'Pagecode' : $TEXT['PAGE_CODE'];
+	$template->set_var( array(
+            'DISPLAY_CODE_PAGE_LIST' => ' id="multi_lingual"',
+            'TEXT_PAGE_CODE' => '<a href="'.WB_URL.'/modules/mod_multilingual/update_keys.php?page_id='.$page_id.'">'.$TEXT['PAGE_CODE'].'</a>'
+        )
+    );
+
+	// Page_code list
+   /* 	$database = new database();  */
+	function page_code_list($parent)
+    {
+		global $admin, $database, $template, $results_array, $pageCode;
+		$default_language = DEFAULT_LANGUAGE;
+
+        $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `parent` = '.$parent.' AND `language` = "'.$default_language.'" ORDER BY `position` ASC';
+        $get_pages = $database->query($sql);
+
+		while($page = $get_pages->fetchRow())
+        {
+			if($admin->page_is_visible($page)==false)
+				continue;
+			$template->set_var('FLAG_CODE_ICON',' none ');
+			if( $page['parent'] == 0 )
+            {
+				$template->set_var('FLAG_CODE_ICON','url('.THEME_URL.'/images/flags/'.strtolower($page['language']).'.png)');
+			}
+			// If the current page cannot be parent, then its children neither
+			$list_next_level = true;
+			// Stop users from adding pages with a level of more than the set page level limit
+			if($page['level']+1 < PAGE_LEVEL_LIMIT)
+            {
+				// Get user perms
+				$admin_groups = explode(',', str_replace('_', '', $page['admin_groups']));
+				$admin_users = explode(',', str_replace('_', '', $page['admin_users']));
+
+				$in_group = FALSE;
+				foreach($admin->get_groups_id() as $cur_gid)
+                {
+					if (in_array($cur_gid, $admin_groups))
+					{
+						$in_group = TRUE;
+					}
+				}
+
+				if(($in_group) OR is_numeric(array_search($admin->get_user_id(), $admin_users)))
+                {
+					$can_modify = true;
+				} else {
+					$can_modify = false;
+				}
+
+				$title_prefix = '';
+				for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - - &nbsp;'; }
+                // $space = str_repeat('&nbsp;', 3);  $space.'&lt;'..'&gt;'
+				$template->set_var(array(
+										'VALUE' => $page['page_code'],
+                                        'PAGE_VALUE' => $title_prefix.$page['page_code'],
+										'PAGE_CODE' => $title_prefix.$page['menu_title']
+										)
+								);
+				if($results_array['page_code'] == $page['page_code']) {
+					$template->set_var('SELECTED', ' selected="selected"');
+				} elseif($results_array['page_code'] == $page['page_code']) {
+					$template->set_var('SELECTED', ' disabled="disabled" class="disabled"');
+					$list_next_level=false;
+				} elseif($can_modify != true) {
+					$template->set_var('SELECTED', ' disabled="disabled" class="disabled"');
+				} else {
+					$template->set_var('SELECTED', '');
+				}
+				$template->parse('page_code_list', 'page_code_list_block', true);
+			}
+			if ($list_next_level)
+				page_code_list($page['page_id']);
+		}
+	}
+
+	// Insert code_page values from page to modify
+	$template->set_block('main_block', 'page_code_list_block', 'page_code_list');
+	if($admin->get_permission('pages_add_l0') == true OR $results_array['level'] == 0) {
+		if($results_array['parent'] == 0) { $selected = ' selected'; } else { $selected = ''; }
+		$template->set_var(array(
+									'VALUE' => '',
+									'PAGE_CODE' => $TEXT['NONE'],
+                                    'PAGE_VALUE' => '',
+									'SELECTED' => $selected
+								)
+							);
+		$template->parse('page_code_list', 'page_code_list_block', true);
+	}
+	// get pagecode form this page_id
+   	page_code_list(0);
+}
+//-- page code -->
+
 // Parent page list
-$database = new database();
-function parent_list($parent) {
-	global $admin, $database, $template, $results_array;
-	$query = "SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' ORDER BY position ASC";
-	$get_pages = $database->query($query);
-	while($page = $get_pages->fetchRow()) {
+/* $database = new database();  */
+function parent_list($parent)
+{
+	global $admin, $database, $template, $results_array,$field_set;
+
+    $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `parent` = '.$parent.' ORDER BY `position` ASC';
+    $get_pages = $database->query($sql);
+
+	while($page = $get_pages->fetchRow())
+    {
 		if($admin->page_is_visible($page)==false)
-			continue;
-		// if psrent = 0 set flag_icon
+        {
+          continue;
+        }
+
+		// if parent = 0 set flag_icon
 		$template->set_var('FLAG_ROOT_ICON',' none ');
-		if( $page['parent'] == 0 ) {
+		if( $page['parent'] == 0  && $field_set)
+        {
 			$template->set_var('FLAG_ROOT_ICON','url('.THEME_URL.'/images/flags/'.strtolower($page['language']).'.png)');
 		}
 		// If the current page cannot be parent, then its children neither
 		$list_next_level = true;
 		// Stop users from adding pages with a level of more than the set page level limit
-		if($page['level']+1 < PAGE_LEVEL_LIMIT) {
+		if($page['level']+1 < PAGE_LEVEL_LIMIT)
+        {
 			// Get user perms
 			$admin_groups = explode(',', str_replace('_', '', $page['admin_groups']));
 			$admin_users = explode(',', str_replace('_', '', $page['admin_users']));
 			$in_group = FALSE;
-			foreach($admin->get_groups_id() as $cur_gid){
-				if (in_array($cur_gid, $admin_groups)) {
+			foreach($admin->get_groups_id() as $cur_gid)
+            {
+				if (in_array($cur_gid, $admin_groups))
+                {
 					$in_group = TRUE;
 				}
 			}
-			if(($in_group) OR is_numeric(array_search($admin->get_user_id(), $admin_users))) {
+			if(($in_group) OR is_numeric(array_search($admin->get_user_id(), $admin_users)))
+            {
 				$can_modify = true;
 			} else {
 				$can_modify = false;
@@ -291,16 +402,21 @@ function parent_list($parent) {
 			for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - '; }
 			$template->set_var(array(
 											'ID' => $page['page_id'],
-											'TITLE' => ($title_prefix.$page['page_title']),
-											'FLAG_ICON' => 'none',
+											'TITLE' => ($title_prefix.$page['menu_title']),
+											'MENU-TITLE' => ($title_prefix.$page['menu_title']),
+											'PAGE-TITLE' => ($title_prefix.$page['page_title']),
+											'FLAG_ICON' => ' none ',
 											));
 
-			if($results_array['parent'] == $page['page_id']) {
+			if($results_array['parent'] == $page['page_id'])
+            {
 				$template->set_var('SELECTED', ' selected="selected"');
-			} elseif($results_array['page_id'] == $page['page_id']) {
+			} elseif($results_array['page_id'] == $page['page_id'])
+            {
 				$template->set_var('SELECTED', ' disabled="disabled" class="disabled"');
 				$list_next_level=false;
-			} elseif($can_modify != true) {
+			} elseif($can_modify != true)
+            {
 				$template->set_var('SELECTED', ' disabled="disabled" class="disabled"');
 			} else {
 				$template->set_var('SELECTED', '');
@@ -308,13 +424,17 @@ function parent_list($parent) {
 			$template->parse('page_list2', 'page_list_block2', true);
 		}
 		if ($list_next_level)
-			parent_list($page['page_id']);
+        {
+          parent_list($page['page_id']);
+        }
+
 	}
 }
 
 $template->set_block('main_block', 'page_list_block2', 'page_list2');
 if($admin->get_permission('pages_add_l0') == true OR $results_array['level'] == 0) {
-	if($results_array['parent'] == 0) {
+	if($results_array['parent'] == 0)
+    {
 		$selected = ' selected="selected"';
 	} else { 
 		$selected = '';
@@ -329,21 +449,30 @@ if($admin->get_permission('pages_add_l0') == true OR $results_array['level'] == 
 }
 parent_list(0);
 
-if($modified_ts == 'Unknown') {
+if($modified_ts == 'Unknown')
+{
 	$template->set_var('DISPLAY_MODIFIED', 'hide');
 } else {
 	$template->set_var('DISPLAY_MODIFIED', '');
 }
+
 // Templates list
 $template->set_block('main_block', 'template_list_block', 'template_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template' and function = 'template' order by name");
-if($result->numRows() > 0) {
-	while($addon = $result->fetchRow()) { 
+
+$sql = 'SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" AND `function` = "template" order by `name`';
+$result = $database->query($sql);
+
+if($result->numRows() > 0)
+{
+	while($addon = $result->fetchRow())
+    {
 		// Check if the user has perms to use this template
-		if($addon['directory'] == $results_array['template'] OR $admin->get_permission($addon['directory'], 'template') == true) {
+		if($addon['directory'] == $results_array['template'] OR $admin->get_permission($addon['directory'], 'template') == true)
+        {
 			$template->set_var('VALUE', $addon['directory']);
 			$template->set_var('NAME', $addon['name']);
-			if($addon['directory'] == $results_array['template']) {
+			if($addon['directory'] == $results_array['template'])
+            {
 				$template->set_var('SELECTED', ' selected="selected"');
 			} else {
 				$template->set_var('SELECTED', '');
@@ -354,29 +483,35 @@ if($result->numRows() > 0) {
 }
 
 // Menu list
-if(MULTIPLE_MENUS == false) {
-	$template->set_var('DISPLAY_MENU_LIST', 'none');
+if(MULTIPLE_MENUS == false)
+{
+	$template->set_var('DISPLAY_MENU_LIST', 'display:none;');
 }
 // Include template info file (if it exists)
-if($results_array['template'] != '') {
+if($results_array['template'] != '')
+{
 	$template_location = WB_PATH.'/templates/'.$results_array['template'].'/info.php';
 } else {
 	$template_location = WB_PATH.'/templates/'.DEFAULT_TEMPLATE.'/info.php';
 }
-if(file_exists($template_location)) {
+if(file_exists($template_location))
+{
 	require($template_location);
 }
 // Check if $menu is set
-if(!isset($menu[1]) OR $menu[1] == '') {
+if(!isset($menu[1]) OR $menu[1] == '')
+{
 	// Make our own menu list
 	$menu[1] = $TEXT['MAIN'];
 }
 // Add menu options to the list
 $template->set_block('main_block', 'menu_list_block', 'menu_list');
-foreach($menu AS $number => $name) {
+foreach($menu AS $number => $name)
+{
 	$template->set_var('NAME', $name);
 	$template->set_var('VALUE', $number);
-	if($results_array['menu'] == $number) {
+	if($results_array['menu'] == $number)
+    {
 		$template->set_var('SELECTED', ' selected="selected"');
 	} else {
 		$template->set_var('SELECTED', '');
@@ -386,14 +521,20 @@ foreach($menu AS $number => $name) {
 
 // Insert language values
 $template->set_block('main_block', 'language_list_block', 'language_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by name");
-if($result->numRows() > 0) {
-	while($addon = $result->fetchRow()) {
+
+$sql = 'SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "language" ORDER BY `name`';
+$result = $database->query($sql);
+
+if($result->numRows() > 0)
+{
+	while($addon = $result->fetchRow())
+    {
 		$l_codes[$addon['name']] = $addon['directory'];
 		$l_names[$addon['name']] = entities_to_7bit($addon['name']); // sorting-problem workaround
 	}
 	asort($l_names);
-	foreach($l_names as $l_name=>$v) {
+	foreach($l_names as $l_name=>$v)
+    {
 		// Insert code and name
 		$template->set_var(array(
 								'VALUE' => $l_codes[$l_name],
@@ -401,7 +542,8 @@ if($result->numRows() > 0) {
 								'FLAG_LANG_ICONS' => 'url('.THEME_URL.'/images/flags/'.strtolower($l_codes[$l_name]).'.png)',
 								));
 		// Check if it is selected
-		if($results_array['language'] == $l_codes[$l_name]) {
+		if($results_array['language'] == $l_codes[$l_name])
+        {
 			$template->set_var('SELECTED', ' selected="selected"');
 		} else {
 			$template->set_var('SELECTED', '');
@@ -411,11 +553,13 @@ if($result->numRows() > 0) {
 }
 
 // Select disabled if searching is disabled
-if($results_array['searching'] == 0) {
+if($results_array['searching'] == 0)
+{
 	$template->set_var('SEARCHING_DISABLED', ' selected="selected"');
 }
 // Select what the page target is
-switch ($results_array['target']) {
+switch ($results_array['target'])
+{
 	case '_top':
 		$template->set_var('TOP_SELECTED', ' selected="selected"');
 		break;
@@ -426,7 +570,6 @@ switch ($results_array['target']) {
 		$template->set_var('BLANK_SELECTED', ' selected="selected"');
 		break;
 }
-	
 
 // Insert language text
 $template->set_var(array(

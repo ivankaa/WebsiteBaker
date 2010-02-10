@@ -1,27 +1,20 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        backend
+ * @package         install
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2010, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 4.3.4 and higher
+ * @version      	$Id$
+ * @filesource		$HeadURL:  $
+ * @lastmodified    $Date: $
+ *
+ */
 
 // Start a session
 if(!defined('SESSION_STARTED')) {
@@ -74,7 +67,8 @@ if(strpos($sapi, 'apache')!==FALSE || strpos($sapi, 'nsapi')!==FALSE) {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>Website Baker Installation Wizard</title>
-<link href="stylesheet.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link href="stylesheet.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript">
 
 function confirm_link(message, url) {
@@ -263,7 +257,7 @@ function change_os(type) {
 					$TIMEZONES['13'] = 'GMT +13 Hours';
 					foreach($TIMEZONES AS $hour_offset => $title) {
 						?>
-							<option value="<?php echo $hour_offset; ?>"<?php if(isset($_SESSION['default_timezone']) AND $_SESSION['default_timezone'] == $hour_offset) { echo ' selected'; } elseif(!isset($_SESSION['default_timezone']) AND $hour_offset == 0) { echo 'selected'; } ?>><?php echo $title; ?></option>
+							<option value="<?php echo $hour_offset; ?>"<?php if(isset($_SESSION['default_timezone']) AND $_SESSION['default_timezone'] == $hour_offset) { echo ' selected="selected"'; } elseif(!isset($_SESSION['default_timezone']) AND $hour_offset == 0) { echo ' selected="selected"'; } ?>><?php echo $title; ?></option>
 						<?php
 					}
 					?>
@@ -281,11 +275,11 @@ function change_os(type) {
 						'BG'=>'Bulgarian', 'CA'=>'Catalan', 'CS'=>'&#268;e&scaron;tina', 'DA'=>'Danish', 'DE'=>'Deutsch', 'EN'=>'English',
 						'ES'=>'Spanish', 'ET'=>'Eesti', 'FI'=>'Suomi', 'FR'=>'Fran&ccedil;ais',
 						'HR'=>'Hrvatski', 'HU'=>'Magyar','IT'=>'Italiano', 'LV'=>'Latviesu',
-						'NL'=>'Nederlands', 'NO'=>'Norsk', 'PL'=>'Polski', 'PT'=>'Portuguese (Brazil)', 'RU'=>'Russian', 'SE'=>'Svenska', 'TR'=>'Turkish'
+						'NL'=>'Nederlands', 'NO'=>'Norsk', 'PL'=>'Polski', 'PT'=>'Portuguese (Brazil)', 'RU'=>'Russian', 'SE'=>'Svenska','SK'=>'Slovensky','TR'=>'Turkish'
 					);
 					foreach($DEFAULT_LANGUAGE as $lang_id => $lang_title) {
 						?>
-							<option value="<?php echo $lang_id; ?>"<?php if(isset($_SESSION['default_language']) AND $_SESSION['default_language'] == $lang_id) { echo ' selected'; } elseif(!isset($_SESSION['default_language']) AND $lang_id == 'EN') { echo 'selected'; } ?>><?php echo $lang_title; ?></option>
+							<option value="<?php echo $lang_id; ?>"<?php if(isset($_SESSION['default_language']) AND $_SESSION['default_language'] == $lang_id) { echo ' selected="selected"'; } elseif(!isset($_SESSION['default_language']) AND $lang_id == 'EN') { echo ' selected="selected"'; } ?>><?php echo $lang_title; ?></option>
 						<?php
 					}
 					?>
@@ -297,19 +291,19 @@ function change_os(type) {
 		<tr>
 			<td colspan="3"><h1>Step 4</h1>Please specify your operating system information below...</td>
 		</tr>
-		<tr height="50">
+		<tr>
 			<td width="170">
 				Server Operating System:
 			</td>
 			<td width="180">
 				<input type="radio" tabindex="4" name="operating_system" id="operating_system_linux" onclick="document.getElementById('file_perms_box').style.display = 'block';" value="linux"<?php if(!isset($_SESSION['operating_system']) OR $_SESSION['operating_system'] == 'linux') { echo ' checked="checked"'; } ?> />
-				<font style="cursor: pointer;" onclick="javascript: change_os('linux');">Linux/Unix based</font>
+				<span style="cursor: pointer;" onclick="javascript: change_os('linux');">Linux/Unix based</span>
 				<br />
 				<input type="radio" tabindex="5" name="operating_system" id="operating_system_windows" onclick="document.getElementById('file_perms_box').style.display = 'none';" value="windows"<?php if(isset($_SESSION['operating_system']) AND $_SESSION['operating_system'] == 'windows') { echo ' checked="checked"'; } ?> />
-				<font style="cursor: pointer;" onclick="javascript: change_os('windows');">Windows</font>
+				<span style="cursor: pointer;" onclick="javascript: change_os('windows');">Windows</span>
 			</td>
 			<td>
-				<div name="file_perms_box" id="file_perms_box" style="margin: 0; padding: 0; display: <?php if(isset($_SESSION['operating_system']) AND $_SESSION['operating_system'] == 'windows') { echo 'none'; } else { echo 'block'; } ?>;">
+				<div id="file_perms_box" style="margin: 0; padding: 0; display: <?php if(isset($_SESSION['operating_system']) AND $_SESSION['operating_system'] == 'windows') { echo 'none'; } else { echo 'block'; } ?>;">
 					<input type="checkbox" tabindex="6" name="world_writeable" id="world_writeable" value="true"<?php if(isset($_SESSION['world_writeable']) AND $_SESSION['world_writeable'] == true) { echo 'checked'; } ?> />
 					<label for="world_writeable">
 						World-writeable file permissions (777)
@@ -321,31 +315,31 @@ function change_os(type) {
 		</tr>
 		</table>
 		<table cellpadding="5" cellspacing="0" width="100%" align="center">
-		<tr>
-			<td colspan="5">Please enter your MySQL database server details below...</td>
-		</tr>
-		<tr>
-			<td width="120" style="color: #666666;">Host Name:</td>
-			<td width="230">
-				<input <?php echo field_error('database_host');?> type="text" tabindex="7" name="database_host" style="width: 98%;" value="<?php if(isset($_SESSION['database_host'])) { echo $_SESSION['database_host']; } else { echo 'localhost'; } ?>" />
-			</td>
-			<td width="7">&nbsp;</td>
-			<td width="70" style="color: #666666;">Username:</td>
-			<td>
-				<input <?php echo field_error('database_username');?> type="text" tabindex="9" name="database_username" style="width: 98%;" value="<?php if(isset($_SESSION['database_username'])) { echo $_SESSION['database_username']; } else { echo 'root'; } ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td style="color: #666666;">Database Name:<br />[a-zA-Z0-9_-]</td>
-			<td>
-				<input <?php echo field_error('database_name');?> type="text" tabindex="8" name="database_name" style="width: 98%;" value="<?php if(isset($_SESSION['database_name'])) { echo $_SESSION['database_name']; } else { echo 'wb'; } ?>" />
-			</td>
-			<td>&nbsp;</td>
-			<td style="color: #666666;">Password:</td>
-			<td>
-				<input type="password" tabindex="10" name="database_password" style="width: 98%;"<?php if(isset($_SESSION['database_password'])) { echo ' value = "'.$_SESSION['database_password'].'"'; } ?> />
-			</td>
-		</tr>
+    		<tr>
+    			<td colspan="5">Please enter your MySQL database server details below...</td>
+    		</tr>
+    		<tr>
+    			<td width="120" style="color: #666666;">Host Name:</td>
+    			<td width="230">
+    				<input <?php echo field_error('database_host');?> type="text" tabindex="7" name="database_host" style="width: 98%;" value="<?php if(isset($_SESSION['database_host'])) { echo $_SESSION['database_host']; } else { echo 'localhost'; } ?>" />
+    			</td>
+    			<td width="7">&nbsp;</td>
+    			<td width="70" style="color: #666666;">Username:</td>
+    			<td>
+    				<input <?php echo field_error('database_username');?> type="text" tabindex="9" name="database_username" style="width: 98%;" value="<?php if(isset($_SESSION['database_username'])) { echo $_SESSION['database_username']; } else { echo 'root'; } ?>" />
+    			</td>
+    		</tr>
+    		<tr>
+    			<td style="color: #666666;">Database Name:<br />[a-zA-Z0-9_-]</td>
+    			<td>
+    				<input <?php echo field_error('database_name');?> type="text" tabindex="8" name="database_name" style="width: 98%;" value="<?php if(isset($_SESSION['database_name'])) { echo $_SESSION['database_name']; } else { echo 'wb'; } ?>" />
+    			</td>
+    			<td>&nbsp;</td>
+    			<td style="color: #666666;">Password:</td>
+    			<td>
+    				<input type="password" tabindex="10" name="database_password" style="width: 98%;"<?php if(isset($_SESSION['database_password'])) { echo ' value = "'.$_SESSION['database_password'].'"'; } ?> />
+    			</td>
+    		</tr>
 		<tr>
 			<td style="color: #666666;">Table Prefix:<br />[a-zA-Z0-9_]</td>
 			<td>
@@ -356,7 +350,7 @@ function change_os(type) {
 				<input type="checkbox" tabindex="12" name="install_tables" id="install_tables" value="true"<?php if(!isset($_SESSION['install_tables'])) { echo ' checked="checked"'; } elseif($_SESSION['install_tables'] == 'true') { echo ' checked="checked"'; } ?> />
 				<label for="install_tables" style="color: #666666;">Install Tables</label>
 				<br />
-				<span style="font-size: 10px; color: #666666;">(Please note: May remove existing tables and data)</span></td>		
+				<span style="font-size: 10px; color: #666666;">(Please note: May remove existing tables and data)</span>
 			</td>
 		</tr>
 		<tr>

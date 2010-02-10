@@ -525,10 +525,16 @@ DlgAboutBrowserInfoTab	: "Navigateur",
 DlgAboutLicenseTab	: "Licence",
 DlgAboutVersion		: "Version",
 DlgAboutInfo		: "Pour plus d'informations, aller à",
+DlgAboutModule		: "Developed for Website Baker<br />modul version 2.9.4",
 
 // Div Dialog
 DlgDivGeneralTab	: "Général",
 DlgDivAdvancedTab	: "Avancé",
 DlgDivStyle		: "Style",
-DlgDivInlineStyle	: "Attribut Style"
+DlgDivInlineStyle	: "Attribut Style",
+
+ScaytTitle			: "SCAYT",	//MISSING
+ScaytTitleOptions	: "Options",	//MISSING
+ScaytTitleLangs		: "Languages",	//MISSING
+ScaytTitleAbout		: "About"	//MISSING
 };
