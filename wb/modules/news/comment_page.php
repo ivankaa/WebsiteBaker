@@ -5,22 +5,20 @@
  * @package         news
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
  */
 
-// Make sure page cannot be accessed directly
-if(!defined('WB_URL')) {
-	header('Location: ../index.php');
-	exit(0);
-}
+
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 /* check if frontend.css file needs to be included into the <body></body> of page  */
 if ( (!function_exists('register_frontend_modfiles') || !defined('MOD_FRONTEND_CSS_REGISTERED')) && file_exists(WB_PATH .'/modules/news/frontend.css')) {
@@ -78,8 +76,8 @@ else
 	<input id="comment" name="comment" size="60" value="" /><br />
 	</p>
 	<?php }
-	?>
-	<?php echo $TEXT['TITLE']; ?>:
+	// echo $admin->getFTAN();
+	echo $TEXT['TITLE']; ?>:
 	<br />
 	<input type="text" name="title" maxlength="255" style="width: 90%;"<?php if(isset($_SESSION['comment_title'])) { echo ' value="'.$_SESSION['comment_title'].'"'; unset($_SESSION['comment_title']); } ?> />
 	<br /><br />

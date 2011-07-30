@@ -5,14 +5,14 @@
  * @package         install
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version      	$Id$
- * @filesource		$HeadURL:  $
- * @lastmodified    $Date: $
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
  *
  */
 
@@ -22,6 +22,11 @@ if(!defined('SESSION_STARTED')) {
 	session_start();
 	define('SESSION_STARTED', true);
 }
+	$mod_path = dirname(str_replace('\\', '/', __FILE__));
+    $doc_root = rtrim(str_replace('\\', '/',$_SERVER['DOCUMENT_ROOT']),'/');
+	$mod_name = basename($mod_path);
+	$wb_path = dirname(dirname(str_replace('\\', '/', __FILE__)));
+    $wb_root = str_replace($doc_root,'',$wb_path);
 
 // Function to highlight input fields which contain wrong/missing data
 function field_error($field_name='') {
@@ -90,7 +95,7 @@ function change_os(type) {
 </head>
 <body>
 
-<table cellpadding="0" cellspacing="0" border="0" width="750" align="center">
+<table cellpadding="0" cellspacing="0" border="0" width="850" align="center">
 <tr>
 	<td width="60" valign="top">
 		<img src="../templates/wb_theme/images/logo.png" alt="Logo" />
@@ -108,7 +113,7 @@ function change_os(type) {
 <input type="hidden" name="password_fieldname" value="admin_password" />
 <input type="hidden" name="remember" id="remember" value="true" />
 
-<table cellpadding="0" cellspacing="0" border="0" width="750" align="center" style="margin-top: 10px;">
+<table cellpadding="0" cellspacing="0" border="0" width="850" align="center" style="margin-top: 10px;">
 <tr>
 	<td class="content">
 	
@@ -131,11 +136,11 @@ function change_os(type) {
 		</tr>
 		<?php } ?>
 		<tr>
-			<td width="160" style="color: #666666;">PHP Version > 4.1.0</td>
+			<td width="160" style="color: #666666;">PHP Version > 5.2.1</td>
 			<td width="60">
 				<?php
-				$phpversion = substr(PHP_VERSION, 0, 6);
-				if($phpversion > 4.1) {
+			   if (version_compare(PHP_VERSION, '5.2.1', '>='))
+			   {
 					?><font class="good">Yes</font><?php
 				} else {
 					?><font class="bad">No</font><?php
@@ -151,7 +156,7 @@ function change_os(type) {
 					?><font class="good">Disabled</font><?php
 				} else {
 					?><font class="bad">Enabled</font><?php
-				}	
+				}
 				?>
 			</td>
 		</tr>
@@ -179,21 +184,21 @@ function change_os(type) {
 			<td colspan="8"><h1>Step 2</h1>Please check the following files/folders are writeable before continuing...</td>
 		</tr>
 		<tr>
-			<td style="color: #666666;">wb/config.php</td>
+			<td style="color: #666666;"><?php print $wb_root ?>/config.php</td>
 			<td><?php if(is_writable('../config.php')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../config.php')) { echo '<font class="bad">File Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
-			<td style="color: #666666;">wb/pages/</td>
+			<td style="color: #666666;"><?php print $wb_root ?>/pages/</td>
 			<td><?php if(is_writable('../pages/')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../pages/')) { echo '<font class="bad">Directory Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
-			<td style="color: #666666;">wb/media/</td>
+			<td style="color: #666666;"><?php print $wb_root ?>/media/</td>
 			<td><?php if(is_writable('../media/')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../media/')) { echo '<font class="bad">Directory Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
-			<td style="color: #666666;">wb/templates/</td>
+			<td style="color: #666666;"><?php print $wb_root ?>/templates/</td>
 			<td><?php if(is_writable('../templates/')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../templates/')) { echo '<font class="bad">Directory Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
 		</tr>
 		<tr>
-			<td style="color: #666666;">wb/modules/</td>
+			<td style="color: #666666;"><?php print $wb_root ?>/modules/</td>
 			<td><?php if(is_writable('../modules/')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../modules/')) { echo '<font class="bad">Directory Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
-			<td style="color: #666666;">wb/languages/</td>
+			<td style="color: #666666;"><?php print $wb_root ?>/languages/</td>
 			<td><?php if(is_writable('../languages/')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../languages/')) { echo '<font class="bad">Directory Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
-			<td style="color: #666666;">wb/temp/</td>
+			<td style="color: #666666;"><?php print $wb_root ?>/temp/</td>
 			<td><?php if(is_writable('../temp/')) { echo '<font class="good">Writeable</font>'; } elseif(!file_exists('../temp/')) { echo '<font class="bad">Directory Not Found</font>'; } else { echo '<font class="bad">Unwriteable</font>'; } ?></td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>

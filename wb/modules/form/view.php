@@ -1,40 +1,20 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
- * @category   frontend
- * @package    outputfilter
- * @author(s)  Dietmar Wöllbrink <Luisehahne>, Dietrich Roland Pehlke <Aldus>
- * @platform   WB 2.8.0
- * @require    PHP 5.2.x
- * @license    http://www.gnu.org/licenses/gpl.html
- * @link       http://project.websitebaker2.org/browser/branches/2.8.x/wb/modules/form/view.php
- * @changeset   2009/12/03 comment out ob_end_flush line 259
-*/
-
-/*
-The Website Baker Project would like to thank Rudolph Lartey <www.carbonect.com>
-for his contributions to this module - adding extra field types
-*/
+/**
+ *
+ * @category        module
+ * @package         Form
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ * @description     
+ */
 
 // Must include code to stop this file being access directly
 if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
@@ -80,7 +60,7 @@ if (!function_exists('make_checkbox')) {
 function make_checkbox(&$n, $idx, $params) {
 	$field_id = $params[0][0];
 	$seperator = $params[0][1];
-	$label_id = 'wb_'.str_replace(" ", "_", $n);
+	$label_id = 'wb_'.preg_replace('/[^a-z0-1]/i', '_', $n);
 	if(in_array($n, $params[1])) {
 		$n = '<input class="field_checkbox" type="checkbox" id="'.$label_id.'" name="field'.$field_id.'['.$idx.']" value="'.$n.'" checked="checked" />'.'<label for="'.$label_id.'" class="checkbox_label">'.$n.'</lable>'.$seperator;
 	} else {
@@ -94,7 +74,7 @@ function make_radio(&$n, $idx, $params) {
 	$field_id = $params[0];
 	$group = $params[1];
 	$seperator = $params[2];
-	$label_id = 'wb_'.str_replace(" ", "_", $n);
+	$label_id = 'wb_'.preg_replace('/[^a-z0-1]/i', '_', $n);
 	if($n == $params[3]) { 
 		$n = '<input class="field_radio" type="radio" id="'.$label_id.'" name="field'.$field_id.'" value="'.$n.'" checked="checked" />'.'<label for="'.$label_id.'" class="radio_label">'.$n.'</label>'.$seperator;
 	} else {
@@ -144,9 +124,10 @@ if($query_settings->numRows() > 0) {
 }
 
 ?>
-<form <?php echo ( ( (strlen($form_name) > 0) AND (false == $use_xhtml_strict) ) ? "name=\"".$form_name."\"" : ""); ?> action="<?php echo htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])); ?>#wb_<?PHP echo $section_id;?>" method="post">
+<form <?php echo ( ( (strlen($form_name) > 0) AND (false == $use_xhtml_strict) ) ? "name=\"".$form_name."\"" : ""); ?> action="<?php echo htmlspecialchars(strip_tags($_SERVER['SCRIPT_NAME'])); ?>#wb_<?PHP echo $section_id;?>" method="post">
 <div>
 <input type="hidden" name="submission_id" value="<?php echo $_SESSION['form_submission_id']; ?>" />
+<?php echo $admin->getFTAN(); ?>
 </div>
 <?php
 if(ENABLED_ASP) { // first add some honeypot-fields
@@ -197,7 +178,8 @@ if($query_fields->numRows() > 0) {
 		}
 		if($field['type'] == 'textfield') {
 			$vars[] = '{FIELD}';
-			$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'" maxlength="'.$field['extra'].'" value="'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:$value).'" class="textfield" />';
+			$max_lenght_para = (intval($field['extra']) ? ' maxlenght="'.intval($field['extra']).'"' : '');
+			$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'"'.$max_lenght_para.' value="'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:$value).'" class="textfield" />';
 		} elseif($field['type'] == 'textarea') {
 			$vars[] = '{FIELD}';
 			$values[] = '<textarea name="field'.$field_id.'" id="field'.$field_id.'" class="textarea" cols="25" rows="5">'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:$value).'</textarea>';
@@ -227,7 +209,8 @@ if($query_fields->numRows() > 0) {
 			$values[] = implode($options);
 		} elseif($field['type'] == 'email') {
 			$vars[] = '{FIELD}';
-			$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'" value="'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:'').'" maxlength="'.$field['extra'].'" class="email" />';
+			$max_lenght_para = (intval($field['extra']) ? ' maxlenght="'.intval($field['extra']).'"' : '');
+			$values[] = '<input type="text" name="field'.$field_id.'" id="field'.$field_id.'" value="'.(isset($_SESSION['field'.$field_id])?$_SESSION['field'.$field_id]:'').'"'.$max_lenght_para.' class="email" />';
 		}
 		if(isset($_SESSION['field'.$field_id])) unset($_SESSION['field'.$field_id]);
 		if($field['type'] != '') {
@@ -282,7 +265,13 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 		)) {
 			exit(header("Location: ".WB_URL.PAGES_DIRECTORY.""));
 		}
-
+/*
+		if (!$admin->checkFTAN())
+		{
+			$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS']);
+			exit();
+		}
+*/
 		// Submit form data
 		// First start message settings
 		$query_settings = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_settings WHERE section_id = '$section_id'");
@@ -338,10 +327,11 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 				// Add to message body
 				if($field['type'] != '') {
 					if(!empty($_POST['field'.$field['field_id']])) {
+						// do not allow droplets in user input!
 						if (is_array($_POST['field'.$field['field_id']])) {
-							$_SESSION['field'.$field['field_id']] = $_POST['field'.$field['field_id']];
+							$_SESSION['field'.$field['field_id']] = str_replace(array("[[", "]]"), array("&#91;&#91;", "&#93;&#93;"), $_POST['field'.$field['field_id']]);
 						} else {
-							$_SESSION['field'.$field['field_id']] = htmlspecialchars($_POST['field'.$field['field_id']]);
+							$_SESSION['field'.$field['field_id']] = str_replace(array("[[", "]]"), array("&#91;&#91;", "&#93;&#93;"), htmlspecialchars($_POST['field'.$field['field_id']]));
 						}
 						// if the output filter is active, we need to revert (dot) to . and (at) to @ (using current filter settings)
 						// otherwise the entered mail will not be accepted and the recipient would see (dot), (at) etc.
@@ -389,16 +379,16 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 			if(isset($captcha_error)) {
 				echo '<li>'.$captcha_error.'</li>';
 			}
-			echo '</ul><a href="'.htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])).'">'.$TEXT['BACK'].'</a>';
+			echo '</ul><a href="'.htmlspecialchars(strip_tags($_SERVER['SCRIPT_NAME'])).'">'.$TEXT['BACK'].'</a>';
 		} else {
 			if(isset($email_error)) {
 				echo '<br /><ul>';
 				echo '<li>'.$email_error.'</li>';
-				echo '</ul><a href="'.htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])).'">'.$TEXT['BACK'].'</a>';
+				echo '</ul><a href="'.htmlspecialchars(strip_tags($_SERVER['SCRIPT_NAME'])).'">'.$TEXT['BACK'].'</a>';
 			} elseif(isset($captcha_error)) {
 				echo '<br /><ul>';
 				echo '<li>'.$captcha_error.'</li>';
-				echo '</ul><a href="'.htmlspecialchars(strip_tags($_SERVER['PHP_SELF'])).'">'.$TEXT['BACK'].'</a>';
+				echo '</ul><a href="'.htmlspecialchars(strip_tags($_SERVER['SCRIPT_NAME'])).'">'.$TEXT['BACK'].'</a>';
 			} else {
 				// Check how many times form has been submitted in last hour
 				$last_hour = time()-3600;
@@ -442,7 +432,7 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 					} else {
 						$submitted_by = 0;
 					}
-					$email_body = $wb->add_slashes($email_body);
+					$email_body = htmlspecialchars($wb->add_slashes($email_body));
 					$database->query("INSERT INTO ".TABLE_PREFIX."mod_form_submissions (page_id,section_id,submitted_when,submitted_by,body) VALUES ('".PAGE_ID."','$section_id','".time()."','$submitted_by','$email_body')");
 					// Make sure submissions table isn't too full
 					$query_submissions = $database->query("SELECT submission_id FROM ".TABLE_PREFIX."mod_form_submissions ORDER BY submitted_when");
@@ -490,5 +480,3 @@ if($filter_settings['email_filter'] && !($filter_settings['at_replacement']=='@'
 		}
 	}
 }
-
-?>

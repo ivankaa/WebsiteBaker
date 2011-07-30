@@ -5,27 +5,25 @@
  * @package         account
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
  */
 
-if(!defined('WB_URL')) {
-	header('Location: ../pages/index.php');
-	exit(0);
-}
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 require_once(WB_PATH.'/framework/class.wb.php');
 $wb = new wb('Start', 'start', false, false);
 
 // Create new database object
-$database = new database();
+// $database = new database();
 
 // Get details entered
 $groups_id = FRONTEND_SIGNUP;
@@ -35,14 +33,21 @@ $display_name = strip_tags($wb->get_post_escaped('display_name'));
 $email = $wb->get_post('email');
 
 // Create a javascript back link
-$js_back = "javascript: history.go(-1);";
-
+$js_back = WB_URL.'/account/signup.php';
+/*
+if (!$wb->checkFTAN())
+{
+	$wb->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], $js_back, false);
+	exit();
+}
+*/
 // Check values
 if($groups_id == "") {
 	$wb->print_error($MESSAGE['USERS']['NO_GROUP'], $js_back, false);
 }
-if(strlen($username) < 3) {
-	$wb->print_error($MESSAGE['USERS']['USERNAME_TOO_SHORT'], $js_back, false);
+if(!preg_match('/^[a-z]{1}[a-z0-9_-]{2,}$/i', $username)) {
+	$wb->print_error( $MESSAGE['USERS_NAME_INVALID_CHARS'].' / '.
+	                  $MESSAGE['USERS_USERNAME_TOO_SHORT'], $js_back);
 }
 if($email != "") {
 	if($wb->validate_email($email) == false) {
@@ -119,11 +124,10 @@ if($database->is_error()) {
 	// Try sending the email
 	if($wb->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 
 		$display_form = false;
-		$wb->print_success($MESSAGE['FORGOT_PASS']['PASSWORD_RESET'], WB_URL.'/account/login.php');
+		$wb->print_success($MESSAGE['FORGOT_PASS']['PASSWORD_RESET'], WB_URL.'/account/login.php' );
 	} else {
 		$database->query("DELETE FROM ".TABLE_PREFIX."users WHERE username = '$username'");
 		$wb->print_error($MESSAGE['FORGOT_PASS']['CANNOT_EMAIL'], $js_back, false);
 	}
 }
 
-?>

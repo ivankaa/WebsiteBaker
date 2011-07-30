@@ -1,48 +1,44 @@
 <?php
+/**
+ *
+ * @category        module
+ * @package         show_menu2
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.7.0 | 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
-// $Id$
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
-/*
-    show_menu2: show_menu replacement for Website Baker 
-    Copyright (C) 2006-2009, Brodie Thiesfield
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public License
-    as published by the Free Software Foundation; either version 2
-    of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  
-    02110-1301, USA.
-
-    ***********************************************
-    ** Version 4.8: see README for documentation **
-    ***********************************************
-*/
-
-define('SM2_ROOT',       -1000);
-define('SM2_CURR',       -2000);
-define('SM2_ALLMENU',       -1);
-define('SM2_START',       1000);
-define('SM2_MAX',         2000);
-define('SM2_ALL',       0x0001); // bit 0 (group 1) (Note: also used for max level!)
-define('SM2_TRIM',      0x0002); // bit 1 (group 1)
-define('SM2_CRUMB',     0x0004); // bit 2 (group 1)
-define('SM2_SIBLING',   0x0008); // bit 3 (group 1)
-define('SM2_NUMCLASS',  0x0010); // bit 4
-define('SM2_ALLINFO',   0x0020); // bit 5
-define('SM2_NOCACHE',   0x0040); // bit 6
-define('SM2_PRETTY',    0x0080); // bit 7
-define('SM2_ESCAPE',    0x0100); // bit 8
-define('SM2_NOESCAPE',       0); // NOOP, unnecessary with WB 2.6.7+
-define('SM2_BUFFER',    0x0200); // bit 9
-define('SM2_CURRTREE',  0x0400); // bit 10
+define('SM2_ROOT',          -1000);
+define('SM2_CURR',          -2000);
+define('SM2_ALLMENU',          -1);
+define('SM2_START',          1000);
+define('SM2_MAX',            2000);
+define('SM2_ALL',          0x0001); // bit 0 (group 1) (Note: also used for max level!)
+define('SM2_TRIM',         0x0002); // bit 1 (group 1)
+define('SM2_CRUMB',        0x0004); // bit 2 (group 1)
+define('SM2_SIBLING',      0x0008); // bit 3 (group 1)
+define('SM2_NUMCLASS',     0x0010); // bit 4
+define('SM2_ALLINFO',      0x0020); // bit 5
+define('SM2_NOCACHE',      0x0040); // bit 6
+define('SM2_PRETTY',       0x0080); // bit 7
+define('SM2_ESCAPE',       0x0100); // bit 8
+define('SM2_NOESCAPE',          0); // NOOP, unnecessary with WB 2.6.7+
+define('SM2_BUFFER',       0x0200); // bit 9
+define('SM2_CURRTREE',     0x0400); // bit 10
+define('SM2_SHOWHIDDEN',   0x0800); // bit 11
+define('SM2_XHTML_STRICT', 0x1000); // bit 12
+define('SM2_NO_TITLE',     0x1001); // bit 13
 
 define('_SM2_GROUP_1',  0x000F); // exactly one flag from group 1 is required
 
@@ -212,7 +208,8 @@ class SM2_Formatter
         if (!is_string($aCurrItem)) return '';
         return preg_replace(
             '@\[('.
-                'a|ac|/a|li|/li|ul|/ul|menu_title|page_title|url|target|page_id|'.
+                'a|ac|/a|li|/li|ul|/ul|menu_title|menu_icon_0|menu_icon_1|'.
+				'page_title|page_icon|url|target|page_id|tooltip|'.
                 'parent|level|sib|sibCount|class|description|keywords|'.
                 SM2_CONDITIONAL.
             ')\]@e', 
@@ -221,43 +218,55 @@ class SM2_Formatter
     
     // replace the keywords
     function replace($aMatch) {
+        $retval = '['.$aMatch.'=UNKNOWN]';
         switch ($aMatch) {
         case 'a':
-            return '<a href="'.$this->url.'" target="'.$this->page['target'].'">';
-        case 'ac':
-            return '<a href="'.$this->url.'" target="'.$this->page['target'].'" class="'.$this->currClass.'">';
+            $retval = '<a href="'.$this->url.'"';
+			// break; // ignore 'break' to add the rest of <a>-tag
+		case 'ac':
+			if( substr($retval, 0, 2) != '<a'){
+				$retval = '<a href="'.$this->url.'" class="'.$this->currClass.'"';
+			}
+			if(($this->flags & SM2_NO_TITLE)) {
+				$retval .= ' title="'.$this->page['tooltip'].'"';
+			}
+			if(!($this->flags & SM2_XHTML_STRICT)) {
+				$retval .= ' target="'.$this->page['target'].'"';
+			}
+			$retval .= '>';
+			break;
         case '/a':
-            return '</a>';
+            $retval = '</a>'; break;
         case 'li':
-            return '<li class="'.$this->currClass.'">';
+            $retval = '<li class="'.$this->currClass.'">'; break;
         case '/li':
-            return '</li>';
+            $retval = '</li>'; break;
         case 'ul':
-            return '<ul class="'.$this->currClass.'">';
+            $retval = '<ul class="'.$this->currClass.'">'; break;
         case '/ul':
-            return '</ul>';
+            $retval = '</ul>'; break;
         case 'url':
-            return $this->url;
+            $retval = $this->url; break;
         case 'sib':
-            return $this->currSib;
+            $retval = $this->currSib; break;
         case 'sibCount':
-            return $this->sibCount;
+            $retval = $this->sibCount; break;
         case 'class':
-            return $this->currClass;
+            $retval = $this->currClass; break;
         default:
             if (array_key_exists($aMatch, $this->page)) {
                 if ($this->flags & SM2_ESCAPE) {
-                    return htmlspecialchars($this->page[$aMatch], ENT_QUOTES);
+                    $retval = htmlspecialchars($this->page[$aMatch], ENT_QUOTES);
                 }
                 else {
-                    return $this->page[$aMatch];
+                    $retval = $this->page[$aMatch];
                 }
             }
             if (preg_match('/'.SM2_CONDITIONAL.'/', $aMatch, $rgMatches)) {
-                return $this->replaceIf($rgMatches[1], $rgMatches[2], $rgMatches[3]);
+                $retval = $this->replaceIf($rgMatches[1], $rgMatches[2], $rgMatches[3]);
             }
         }
-        return "[$aMatch=UNKNOWN]";
+        return $retval;
     }
     
     // conditional replacement
@@ -303,6 +312,9 @@ class SM2_Formatter
             // for the value we are testing.
             $operand = " $this->currClass "; 
             break;
+		case 'target':
+			$operand = $this->page['target'];
+			break;
         case 'sib':
             $operand = $this->currSib;
             if ($aValue == 'sibCount') {
@@ -374,7 +386,7 @@ class SM2_Formatter
             $this->output($this->itemClose);
         }
     }
-    
+
     // finish the current menu
     function finishList() {
         $this->prettyLevel -= 3;
@@ -458,7 +470,7 @@ function show_menu2(
     $CURR_PAGE_ID = defined('REFERRER_ID') ? REFERRER_ID : PAGE_ID;
     if (count($wb->page) == 0 && defined('REFERRER_ID') && REFERRER_ID > 0) {
         global $database;
-        $sql = "SELECT * FROM ".TABLE_PREFIX."pages WHERE page_id = '".REFERRER_ID."'";
+        $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.REFERRER_ID.'';
         $result = $database->query($sql);
         if ($result->numRows() == 1) {
             $wb->page = $result->fetchRow();
@@ -512,7 +524,7 @@ function show_menu2(
 
         // if the caller wants all menus gathered together (e.g. for a sitemap)
         // then we don't limit our SQL query
-        $menuLimitSql = ' AND menu = ' .$aMenu;
+        $menuLimitSql = ' AND `menu`='.$aMenu;
         if ($aMenu == SM2_ALLMENU) {
             $menuLimitSql = '';
         }
@@ -522,27 +534,25 @@ function show_menu2(
         // we haven't been told to load these fields the *FIRST TIME* show_menu2
         // is called (i.e. where the database is loaded) then the info won't
         // exist anyhow.
-        $fields = 'parent,page_id,menu_title,page_title,link,target,level,visibility,viewing_groups';
+        $fields  = '`parent`,`page_id`,`menu_title`,`page_title`,`link`,`target`,';
+		$fields .= '`level`,`visibility`,`viewing_groups`';
         if (version_compare(WB_VERSION, '2.7', '>=')) { // WB 2.7+
-            $fields .= ',viewing_users';
+            $fields .= ',`viewing_users`';
         }
+		if(version_compare(WB_VERSION, '2.9.0', '>=')) {
+            $fields .= ',`menu_icon_0`,`menu_icon_1`,`page_icon`,`tooltip`';
+		}
         if ($flags & SM2_ALLINFO) {
             $fields = '*';
         }
-        
-        // get this once for performance. We really should be calling only need to
-        // call $wb->get_group_id() but that outputs a warning notice if the 
-        // groupid isn't set in the session, so we check it first here.
-        $currGroup = array_key_exists('GROUP_ID', $_SESSION) ? 
-            ','.$wb->get_group_id().',' : 'NOGROUP';
-        
-        // we request all matching rows from the database for the menu that we 
-        // are about to create it is cheaper for us to get everything we need 
+
+        // we request all matching rows from the database for the menu that we
+        // are about to create it is cheaper for us to get everything we need
         // from the database once and create the menu from memory then make 
         // multiple calls to the database. 
-        $sql = "SELECT $fields FROM ".TABLE_PREFIX.
-               "pages WHERE $wb->extra_where_sql $menuLimitSql ".
-               'ORDER BY level ASC, position ASC';
+        $sql  = 'SELECT '.$fields.' FROM `'.TABLE_PREFIX.'pages` ';
+		$sql .= 'WHERE '.$wb->extra_where_sql.' '.$menuLimitSql.' ';
+		$sql .= 'ORDER BY `level` ASC, `position` ASC';
         $sql = str_replace('hidden', 'IGNOREME', $sql); // we want the hidden pages
         $oRowset = $database->query($sql);
         if (is_object($oRowset) && $oRowset->numRows() > 0) {
@@ -566,18 +576,7 @@ function show_menu2(
                         continue;
                     }
                 }
-                else {  // WB < 2.7
-                    // We can't do this in SQL as the viewing_groups column contains multiple 
-                    // values which are hard to process correctly in SQL. Essentially we add the
-                    // following limit to the SQL query above:
-                    //  (visibility <> "private" OR $wb->get_group_id() IN viewing_groups)
-                    if ($page['visibility'] == 'private' 
-                        && false === strstr(",{$page['viewing_groups']},", $currGroup)) 
-                    {
-                        continue;
-                    }
-                }
-
+				if(!isset($page['tooltip'])) { $page['tooltip'] = $page['page_title']; }
                 // ensure that we have an array entry in the table to add this to
                 $idx = $page['parent'];
                 if (!array_key_exists($idx, $rgParent)) {
@@ -588,14 +587,22 @@ function show_menu2(
                 if ($page['page_id'] == $CURR_PAGE_ID) {
                     $page['sm2_is_curr'] = true;
                     $page['sm2_on_curr_path'] = true;
-                    unset($page['sm2_hide']); // don't hide the current page
+                    if ($flags & SM2_SHOWHIDDEN) 
+					{ 
+                        // show hidden pages if active and SHOWHIDDEN flag supplied
+                        unset($page['sm2_hide']); 
+                    }
                 }
 
                 // mark parents of the current page as such
                 if (in_array($page['page_id'], $rgCurrParents)) {
                     $page['sm2_is_parent'] = true;
                     $page['sm2_on_curr_path'] = true;
-                    unset($page['sm2_hide']); // don't hide a parent page                
+                    if ($flags & SM2_SHOWHIDDEN) 
+					{
+                        // show hidden pages if active and SHOWHIDDEN flag supplied
+						unset($page['sm2_hide']); // don't hide a parent page                
+                    }
                 }
                 
                 // add the entry to the array                
@@ -800,7 +807,7 @@ function sm2_recurse(
         if ($pageLevel >= $aStartLevel) {
             // massage the link into the correct form
             if(!INTRO_PAGE && $page['link'] == $wb->default_link) {
-                $url = WB_URL;
+                $url = WB_URL.'/';
             }
             else {
                 $url = $wb->page_link($page['link']);
@@ -836,4 +843,3 @@ function sm2_recurse(
     }
 }
 
-?>

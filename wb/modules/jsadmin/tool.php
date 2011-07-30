@@ -1,36 +1,23 @@
 <?php
-
-// $Id$
-
-// JsAdmin module for Website Baker
-// Copyright (C) 2006, Stepan Riha
-// www.nonplus.net
-
-// modified by Swen Uth for Website Baker 2.7
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
+/**
+ *
+ * @category        modules
+ * @package         JsAdmin
+ * @author          WebsiteBaker Project, modified by Swen Uth for Website Baker 2.7
+ * @copyright       (C) 2006, Stepan Riha
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
 */
 
-// direct access prevention
-defined('WB_PATH') OR die(header('Location: ../index.php'));
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
 if(!file_exists(WB_PATH .'/modules/jsadmin/languages/'.LANGUAGE .'.php')) {
@@ -40,32 +27,48 @@ if(!file_exists(WB_PATH .'/modules/jsadmin/languages/'.LANGUAGE .'.php')) {
 	// a module language file exists for the language defined by the user, load it
 	require_once(WB_PATH .'/modules/jsadmin/languages/'.LANGUAGE .'.php');
 }
-
+/*
 // check if backend.css file needs to be included into the <body></body>
 if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH .'/modules/jsadmin/backend.css')) {
 	echo '<style type="text/css">';
 	include(WB_PATH .'/modules/jsadmin/backend.css');
 	echo "\n</style>\n";
 }
-
+*/
 require_once(WB_PATH.'/modules/jsadmin/jsadmin.php');
 
 // Check if user selected what add-ons to reload
-if(isset($_POST['submit']) AND $_POST['submit'] != '') {
+if(isset($_POST['save_settings']))  {
+
+	if (!$admin->checkFTAN())
+	{
+		if(!$admin_header) { $admin->print_header(); }
+		$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'],$_SERVER['REQUEST_URI']);
+	}
+
 	// Include functions file
 	require_once(WB_PATH.'/framework/functions.php');
 	save_setting('mod_jsadmin_persist_order', isset($_POST['persist_order']));
 	save_setting('mod_jsadmin_ajax_order_pages', isset($_POST['ajax_order_pages']));
 	save_setting('mod_jsadmin_ajax_order_sections', isset($_POST['ajax_order_sections']));
-	echo '<div style="border: solid 2px #9c9; background: #ffd; padding: 0.5em; margin-top: 1em">'.$MESSAGE['SETTINGS']['SAVED'].'</div>';
+   // 	echo '<div style="border: solid 2px #9c9; background: #ffd; padding: 0.5em; margin-top: 1em">'.$MESSAGE['SETTINGS']['SAVED'].'</div>';
+	// check if there is a database error, otherwise say successful
+	if(!$admin_header) { $admin->print_header(); }
+	if($database->is_error()) {
+		$admin->print_error($database->get_error(), $js_back);
+	} else {
+
+		$admin->print_success($MESSAGE['PAGES']['SAVED'], ADMIN_URL.'/admintools/tool.php?tool=jsadmin');
+	}
+
+} else {
+	// $admin->print_header();
 }
 
 // Display form
-$persist_order = get_setting('mod_jsadmin_persist_order', true) ? 'checked="checked"' : '';
-$ajax_order_pages = get_setting('mod_jsadmin_ajax_order_pages', true) ? 'checked="checked"' : '';
-$ajax_order_sections = get_setting('mod_jsadmin_ajax_order_sections', true) ? 'checked="checked"' : '';
-?>
-<?php
+	$persist_order = get_setting('mod_jsadmin_persist_order', true) ? 'checked="checked"' : '';
+	$ajax_order_pages = get_setting('mod_jsadmin_ajax_order_pages', true) ? 'checked="checked"' : '';
+	$ajax_order_sections = get_setting('mod_jsadmin_ajax_order_sections', true) ? 'checked="checked"' : '';
 
 // THIS ROUTINE CHECKS THE EXISTING OFF ALL NEEDED YUI FILES
   $YUI_ERROR=false; // ist there an Error
@@ -80,16 +83,18 @@ $ajax_order_sections = get_setting('mod_jsadmin_ajax_order_sections', true) ? 'c
 	}
 	if($YUI_ERROR)
 	{
-    ?><div id="jsadmin_install" style="border: solid 2px #c99; background: #ffd; padding: 0.5em; margin-top: 1em">
+?>
+	<div id="jsadmin_install" style="border: solid 2px #c99; background: #ffd; padding: 0.5em; margin-top: 1em">
 
      <?php echo $MOD_JSADMIN['TXT_ERROR_INSTALLINFO_B'].$YUI_PUT_MISSING_Files; ?>
       </div>
-      <?php
+<?php
   }
   else
   {
   ?>
-   <form id="jsadmin_form" style="margin-top: 1em; display: true;" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+   <form id="jsadmin_form" name="store_settings" style="margin-top: 1em; display: true;" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+	<?php echo $admin->getFTAN(); ?>
    <table cellpadding="4" cellspacing="0" border="0">
    <tr>
 	     <td colspan="2"><?php echo $MOD_JSADMIN['TXT_HEADING_B']; ?>:</td>
@@ -109,11 +114,10 @@ $ajax_order_sections = get_setting('mod_jsadmin_ajax_order_sections', true) ? 'c
    <tr>
 	     <td>&nbsp;</td>
 	     <td>
-		   <input type="submit" name="submit" value="<?php echo $TEXT['SAVE']; ?>" />
+		   <input type="submit" name="save_settings" value="<?php echo $TEXT['SAVE']; ?>" />
 	    </td>
    </tr>
    </table>
    </form>
  <?php
  }
-?>

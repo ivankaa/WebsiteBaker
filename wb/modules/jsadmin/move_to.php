@@ -1,56 +1,58 @@
 <?php
-
-// $Id$
-
-// JsAdmin module for Website Baker
-// Copyright (C) 2006, Stepan Riha
-// www.nonplus.net
-
-// modified by Swen Uth for Website Baker 2.7
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
+/**
+ *
+ * @category        modules
+ * @package         JsAdmin
+ * @author          WebsiteBaker Project, modified by Swen Uth for Website Baker 2.7
+ * @copyright       (C) 2006, Stepan Riha
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
 */
 
 require('../../config.php');
 
- if(isset($_GET['page_id']) AND is_numeric($_GET['page_id']) AND is_numeric(@$_GET['position'])) {
-	$position = $_GET['position'];
+if(isset($_GET['page_id']) AND is_numeric($_GET['page_id']) AND is_numeric(@$_GET['position'])) {
+	$position = (int)$_GET['position'];
 
 	// Include WB admin wrapper script
-	$update_when_modified = true; // Tells script to update when this page was last updated
+	$update_when_modified = true;
+	// Tells script to update when this page was last updated
 	require(WB_PATH.'/modules/admin.php');
 
+if( isset($_GET['file_id']) || (isset($_GET['group_id'])) ) {
+	if(isset($_GET['group_id']) && is_numeric($_GET['group_id'])) {
+		$id = (int)$_GET['group_id'];
+		$id_field = 'group_id';
+		$table = TABLE_PREFIX.'mod_download_gallery_groups';
+		$common_field = 'section_id';
+	} else {
+		$id = (int)$_GET['file_id'];
+		$id_field = 'file_id';
+		$table = TABLE_PREFIX.'mod_download_gallery_files';
+		$common_field = 'group_id';
+	}
+} elseif( isset($_GET['page_id']) || (isset($_GET['section_id'])) ) {
 	// Get common fields
-	if(isset($_GET['section_id']) AND is_numeric($_GET['section_id'])) {
-		$page_id = $_GET['page_id'];
-		$id = $_GET['section_id'];
+	if(isset($_GET['section_id']) && is_numeric($_GET['section_id'])) {
+		$page_id = (int)$_GET['page_id'];
+		$id = (int)$_GET['section_id'];
 		$id_field = 'section_id';
 		$common_field = 'page_id';
 		$table = TABLE_PREFIX.'sections';
 	} else {
-		$id = $_GET['page_id'];
+		$id = (int)$_GET['page_id'];
 		$id_field = 'page_id';
 		$common_field = 'parent';
 		$table = TABLE_PREFIX.'pages';
 	}
+}
 
 	// Get current index
 	$sql = <<<EOT
@@ -94,4 +96,3 @@ EOT;
 	header("Location: index.php");
 	exit(0);
 }
-?>

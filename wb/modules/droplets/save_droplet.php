@@ -1,15 +1,21 @@
 <?php
-
-// $Id$
-
-/*
-*	@version	1.0
-*	@author		Ruud Eisinga (Ruud) John (PCWacht)
-*	@date		June 2009
-*
-*	droplets are small codeblocks that are called from anywhere in the template. 
-* 	To call a droplet just use [[dropletname]]. optional parameters for a droplet can be used like [[dropletname?parameter=value&parameter2=value]]
-*/
+/**
+ *
+ * @category        module
+ * @package         droplet
+ * @author          Ruud Eisinga (Ruud) John (PCWacht)
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 require('../../config.php');
 
@@ -17,39 +23,45 @@ require('../../config.php');
 if(!isset($_POST['droplet_id']) OR !is_numeric($_POST['droplet_id'])) {
 	header("Location: ".ADMIN_URL."/pages/index.php");
 } else {
-	$droplet_id = $_POST['droplet_id'];
+	$droplet_id = (int) $_POST['droplet_id'];
 }
 // Include WB admin wrapper script
 require_once(WB_PATH.'/framework/class.admin.php');
 require_once(WB_PATH.'/framework/functions.php');
 
+$module_edit_link = ADMIN_URL .'/admintools/tool.php?tool=droplets';
 // check website baker platform (with WB 2.7, Admin-Tools were moved out of settings dialogue)
 if(file_exists(ADMIN_PATH .'/admintools/tool.php')) {
 	$admintool_link = ADMIN_URL .'/admintools/index.php';
-	$module_edit_link = ADMIN_URL .'/admintools/tool.php?tool=droplets';
-	$admin = new admin('admintools', 'admintools');
+	$admin = new admin('admintools', 'admintools',false);
 } else {
 	$admintool_link = ADMIN_URL .'/settings/index.php?advanced=yes#administration_tools"';
-	$module_edit_link = ADMIN_URL .'/settings/tool.php?tool=droplets';
-	$admin = new admin('Settings', 'settings_advanced');
+	$admin = new admin('Settings', 'settings_advanced',false);
 }
+
+if (!$admin->checkFTAN())
+{
+	$admin->print_header();
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], $module_edit_link);
+}
+$admin->print_header();
 
 // Validate all fields
 if($admin->get_post('title') == '') {
-	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/droplets/modify_droplet.php?droplet_id='.$droplet_id);
+	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/droplets/modify_droplet.php?droplet_id='. $admin->getIDKEY($droplet_id));
 } else {
 	$title = $admin->add_slashes($admin->get_post('title'));
-	$active = $admin->get_post('active');
-	$admin_view = $admin->get_post('admin_view');
-	$admin_edit = $admin->get_post('admin_edit');
-	$show_wysiwyg = $admin->get_post('show_wysiwyg');
+	$active = (int) $admin->get_post('active');
+	$admin_view = (int) $admin->get_post('admin_view');
+	$admin_edit = (int) $admin->get_post('admin_edit');
+	$show_wysiwyg = (int) $admin->get_post('show_wysiwyg');
 	$description = $admin->add_slashes($admin->get_post('description'));
 	$tags = array('<?php', '?>' , '<?');
 	$content = $admin->add_slashes(str_replace($tags, '', $_POST['savecontent']));
-	
+
 	$comments = $admin->add_slashes($admin->get_post('comments'));
 	$modified_when = time();
-	$modified_by = $admin->get_user_id(); 
+	$modified_by = (int) $admin->get_user_id(); 
 }
 
 // Update row
@@ -57,12 +69,10 @@ $database->query("UPDATE ".TABLE_PREFIX."mod_droplets SET name = '$title', activ
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {
-	$admin->print_error($database->get_error(), WB_URL.'/modules/droplets/modify_droplet.php?droplet_id='.$droplet_id);
+	$admin->print_error($database->get_error(), WB_URL.'/modules/droplets/modify_droplet.php?droplet_id='. $admin->getIDKEY($droplet_id));
 } else {
     $admin->print_success($TEXT['SUCCESS'], $module_edit_link);
 }
 
 // Print admin footer
 $admin->print_footer();
-
-?>

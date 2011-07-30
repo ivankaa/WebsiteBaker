@@ -5,18 +5,19 @@
  * @package         account
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
  */
 
-if(!defined('WB_URL')) die(header('Location: ../../index.php'));
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 ?>
 
@@ -24,7 +25,6 @@ if(!defined('WB_URL')) die(header('Location: ../../index.php'));
 
 <form name="user" action="<?php print WB_URL.'/account/preferences.php'; ?>" method="post" style="margin-bottom: 5px;">
 <input type="hidden" name="user_id" value="{USER_ID}" />
-
 <table cellpadding="5" cellspacing="0" border="0" width="97%">
 <tr>
 	<td width="140"><?php print $TEXT['DISPLAY_NAME']; ?>:</td>
@@ -44,13 +44,15 @@ if(!defined('WB_URL')) die(header('Location: ../../index.php'));
 		 *	storred in the field "directory" ...
 		 *
 		 */
-		$query = "SELECT directory, name from ".TABLE_PREFIX."addons where type='language' order by 'name'";
+		$query  = 'SELECT * FROM `'.TABLE_PREFIX.'addons` ';
+		$query .= 'WHERE `type` = \'language\' ORDER BY `directory`';
 		$result = $database->query($query);
 		if ($result) {
 			$options_html = "";
 			while($data = $result->fetchRow()) {
 				$sel = ($data['directory'] == LANGUAGE) ? " selected=\"selected\" " : "";
-				$options_html .= "<option value=\"".$data['directory']."\" ".$sel.">".$data['name']." (".$data['directory'].")</option>\n";
+				// $options_html .= "<option value=\"".$data['directory']."\" ".$sel.">".$data['name']." (".$data['directory'].")</option>\n";
+				$options_html .= "<option value=\"".$data['directory']."\" ".$sel." style=\"background: url(".THEME_URL.'/images/flags/'.strtolower($data['directory']).".png) no-repeat center left; padding-left: 20px;\">".$data['name']." (".$data['directory'].")</option>\n";
 			}
 			echo $options_html;
 		}
@@ -146,7 +148,6 @@ if(!defined('WB_URL')) die(header('Location: ../../index.php'));
 
 <form name="email" action="<?php print WB_URL.'/account/preferences.php'; ?>" method="post" style="margin-bottom: 5px;">
 <input type="hidden" name="user_id" value="{USER_ID}" />
-
 <table cellpadding="5" cellspacing="0" border="0" width="97%">
 <tr>
 	<td width="140"><?php print $TEXT['CURRENT_PASSWORD']; ?>:</td>
@@ -176,7 +177,6 @@ if(!defined('WB_URL')) die(header('Location: ../../index.php'));
 
 <form name="user" action="<?php print WB_URL.'/account/preferences.php'; ?>" method="post">
 <input type="hidden" name="user_id" value="{USER_ID}" />
-
 <table cellpadding="5" cellspacing="0" border="0" width="97%">
 <tr>
 	<td width="140"><?php print $TEXT['CURRENT_PASSWORD']; ?>:</td>

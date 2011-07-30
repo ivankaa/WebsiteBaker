@@ -1,17 +1,26 @@
 <?php
-
-// $Id$
-
-/*
-*	@version	1.0
-*	@author		Ruud Eisinga (Ruud) John (PCWacht)
-*	@date		June 2009
-*
-*/
+/**
+ *
+ * @category        module
+ * @package         droplet
+ * @author          Ruud Eisinga (Ruud) John (PCWacht)
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 // tool_edit.php
 require_once('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
+
 require_once(WB_PATH.'/framework/functions.php');
 // create admin object depending on platform (admin tools were moved out of settings with WB 2.7)
 $admin = new admin('admintools', 'admintools');
@@ -19,6 +28,12 @@ $admintool_link = ADMIN_URL .'/admintools/index.php';
 $module_edit_link = ADMIN_URL .'/admintools/tool.php?tool=droplets';
 $template_edit_link = ADMIN_URL .'/admintools/tool.php?tool=templateedit';
 
+// protect from CSRF
+$id = $admin->checkIDKEY('id', false, 'GET');
+if (!$id or $id != 999) {
+ $admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], $module_edit_link);
+ exit();
+}
 
 ?>
 <h4 style="margin: 0; border-bottom: 1px solid #DDD; padding-bottom: 5px;">
@@ -57,7 +72,6 @@ else {
 delete_directory ( $temp_dir );
 $admin->print_footer();
 
-
 function delete_directory($dirname) {
     if (is_dir($dirname))
         $dir_handle = opendir($dirname);
@@ -75,4 +89,3 @@ function delete_directory($dirname) {
     rmdir($dirname);
     return true;
 }
-?>

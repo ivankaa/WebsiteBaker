@@ -5,18 +5,19 @@
  * @package         account
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
  */
 
-if(!defined('WB_URL')) die(header('Location: ../../index.php'));
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 $username_fieldname = 'username';
 $password_fieldname = 'password';
@@ -42,7 +43,7 @@ if(defined('SMART_LOGIN') AND SMART_LOGIN == 'enabled') {
 <form action="<?php echo WB_URL.'/account/login.php'; ?>" method="post">
 <p style="display:none;"><input type="hidden" name="username_fieldname" value="<?php echo $username_fieldname; ?>" /></p>
 <p style="display:none;"><input type="hidden" name="password_fieldname" value="<?php echo $password_fieldname; ?>" /></p>
-<p style="display:none;"><input type="hidden" name="redirect" value="<?php echo $thisApp->redirect_url;?>" /></p>
+<p style="display:none;"><input type="hidden" name="url" value="<?php echo $thisApp->redirect_url;?>" /></p>
 
 <table cellpadding="5" cellspacing="0" border="0" width="90%">
 <tr>

@@ -5,21 +5,20 @@
  * @package         account
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
  */
 
-if(!defined('WB_URL')) {
-	header('Location: ../index.php');
-	exit(0);
-}
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
+
 require_once(WB_PATH.'/include/captcha/captcha.php');
 
 ?>
@@ -27,7 +26,7 @@ require_once(WB_PATH.'/include/captcha/captcha.php');
 <h1>&nbsp;<?php echo $TEXT['SIGNUP']; ?></h1>
 
 <form name="user" action="<?php echo WB_URL.'/account/signup.php'; ?>" method="post">
-
+	<?php echo $admin->getFTAN(); ?>
 	<?php if(ENABLED_ASP) { // add some honeypot-fields
 	?>
     <div style="display:none;">

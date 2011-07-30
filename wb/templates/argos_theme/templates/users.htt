@@ -2,8 +2,9 @@
 
 <form name="users" action="users.php" method="post">
 <input type="hidden" name="action" value="delete" />
+{FTAN}
 
-<table cellpadding="5" cellspacing="0" border="0" align="center" width="100%" style="margin-bottom:10px;">
+<table summary="" cellpadding="5" cellspacing="0" border="0" align="center" width="100%" style="margin-bottom:10px;">
 	<tr style="background:#f0f0f0;">
 		<td align="left"><h2>{HEADING_MODIFY_DELETE_USER}</h2></td>
 		<td align="right">
@@ -16,7 +17,7 @@
 
 <select name="user_id" style="width: 500px;">
 <!-- BEGIN list_block -->
-	<option value="{VALUE}">{NAME}</option>
+	<option value="{VALUE}" style="{STATUS}">{NAME}</option>
 <!-- END list_block -->
 </select>
 

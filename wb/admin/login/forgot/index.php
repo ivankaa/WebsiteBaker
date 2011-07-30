@@ -5,11 +5,11 @@
  * @package         login
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -23,7 +23,6 @@ require(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
 // Include the database class file and initiate an object
 require(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Start', 'start', false, false);
-$database = new database();
 
 // Get the website title
 $results = $database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name = 'title'");
@@ -81,7 +80,7 @@ if(isset($_POST['email']) AND $_POST['email'] != "") {
 				// Replace placeholders from language variable with values
 				$search = array('{LOGIN_DISPLAY_NAME}', '{LOGIN_WEBSITE_TITLE}', '{LOGIN_NAME}', '{LOGIN_PASSWORD}');
 				$replace = array($results_array['display_name'], WEBSITE_TITLE, $results_array['username'], $new_pass); 
-				$mail_message = str_replace($search, $replace, $MESSAGE['SIGNUP2']['BODY_LOGIN_INFO']);
+				$mail_message = str_replace($search, $replace, $MESSAGE['SIGNUP2']['BODY_LOGIN_FORGOT']);
 
 				// Try sending the email
 				if($admin->mail(SERVER_EMAIL,$mail_to,$mail_subject,$mail_message)) { 

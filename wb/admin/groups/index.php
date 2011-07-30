@@ -5,11 +5,11 @@
  * @package         groups
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -20,6 +20,7 @@
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Access', 'groups');
+$ftan = $admin->getFTAN();
 
 // Create new template object for the modify/remove menu
 $template = new Template(THEME_PATH.'/templates');
@@ -30,13 +31,13 @@ $template->set_block('main_block', 'manage_users_block', 'users');
 $template->set_var(array(
 	'ADMIN_URL' => ADMIN_URL,
 	'WB_URL' => WB_URL,
-	'WB_PATH' => WB_PATH,
-	'THEME_URL' => THEME_URL
+	'THEME_URL' => THEME_URL,
+	'FTAN' => $ftan
 	)
 );
 
 // Get existing value from database
-$database = new database();
+// $database = new database();
 $query = "SELECT group_id,name FROM ".TABLE_PREFIX."groups WHERE group_id != '1'";
 $results = $database->query($query);
 if($database->is_error()) {
@@ -52,7 +53,7 @@ if($results->numRows() > 0) {
 	$template->parse('list', 'list_block', true);
 	// Loop through groups
 	while($group = $results->fetchRow()) {
-		$template->set_var('VALUE', $group['group_id']);
+		$template->set_var('VALUE',$admin->getIDKEY($group['group_id']));
 		$template->set_var('NAME', $group['name']);
 		$template->parse('list', 'list_block', true);
 	}
@@ -121,7 +122,7 @@ if($admin->get_permission('groups_add') != true) {
 
 // Insert values into module list
 $template->set_block('main_block', 'module_list_block', 'module_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'module' AND function = 'page'");
+$result = $database->query('SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "module" AND `function` = "page" ORDER BY `name`');
 if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('VALUE', $addon['directory']);
@@ -132,7 +133,7 @@ if($result->numRows() > 0) {
 
 // Insert values into template list
 $template->set_block('main_block', 'template_list_block', 'template_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'template'");
+$result = $database->query('SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" ORDER BY `name`');
 if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('VALUE', $addon['directory']);
@@ -183,8 +184,8 @@ $template->set_var(array(
 								'CHECKED' => ' checked="checked"',
 								'ADMIN_URL' => ADMIN_URL,
 								'WB_URL' => WB_URL,
-								'WB_PATH' => WB_PATH,
-								'THEME_URL' => THEME_URL
+								'THEME_URL' => THEME_URL,
+								'FTAN' => $ftan
 								)
 						);
 
@@ -194,5 +195,3 @@ $template->pparse('output', 'page');
 
 // Print the admin footer
 $admin->print_footer();
-
-?>

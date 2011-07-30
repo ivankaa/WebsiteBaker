@@ -2,8 +2,9 @@
 
 <form name="settings" action="save.php" method="post">
 <input type="hidden" name="advanced" value="{ADVANCED}" />
+{FTAN}
 
-<table cellpadding="3" cellspacing="0" border="0" align="center" width="100%" class="settings_table">
+<table summary="" cellpadding="3" cellspacing="0" border="0" align="center" width="100%" class="settings_table">
 <tr>
 	<td colspan="3">
 		<h2>{HEADING_GENERAL_SETTINGS}</h2>
@@ -39,6 +40,7 @@
 		<textarea name="website_footer" cols="50" rows="3">{WEBSITE_FOOTER}</textarea>
 	</td>
 </tr>
+<!-- BEGIN show_page_level_limit_block -->
 <tr{DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_PAGE_LEVEL_LIMIT}:</td>
 	<td class="setting_value" colspan="2">
@@ -49,6 +51,7 @@
 		</select>
 	</td>
 </tr>
+<!-- END show_page_level_limit_block -->
 <tr>
 	<td class="setting_name">{TEXT_PAGE_TRASH}:</td>
 	<td class="setting_value" colspan="2">
@@ -62,6 +65,7 @@
 		</div>
 	</td>
 </tr>
+<!-- BEGIN show_checkbox_1_block -->
 <tr{DISPLAY_ADVANCED}>
         <td class="setting_name">{TEXT_PAGE_LANGUAGES}:</td>
         <td class="setting_value" colspan="2">
@@ -80,6 +84,7 @@
 		<label for="multiple_menus_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
+<!-- END show_checkbox_1_block -->
 <tr>
 	<td class="setting_name">{TEXT_HOME_FOLDERS}:</td>
 	<td class="setting_value" colspan="2">
@@ -89,6 +94,7 @@
 		<label for="home_folders_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
+<!-- BEGIN show_checkbox_2_block -->
 <tr{DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_MANAGE_SECTIONS}:</td>
 	<td class="setting_value" colspan="2">
@@ -107,6 +113,7 @@
 		<label for="section_blocks_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
+<!-- END show_checkbox_2_block -->
 <tr>
 	<td class="setting_name">{TEXT_INTRO_PAGE}:</td>
 	<td class="setting_value" colspan="2">
@@ -116,6 +123,7 @@
 		<label for="intro_page_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
+<!-- BEGIN show_checkbox_3_block -->
 <tr{DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_HOMEPAGE_REDIRECTION}:</td>
 	<td class="setting_value" colspan="2">
@@ -134,6 +142,7 @@
 		<label for="smart_login_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
+<!-- END show_checkbox_3_block -->
 <tr>
 	<td class="setting_name">{TEXT_LOGIN}:</td>
 	<td class="setting_value" colspan="2">
@@ -143,12 +152,15 @@
 		<label for="frontend_login_false">{TEXT_DISABLED}</label>
 	</td>
 </tr>
+<!-- BEGIN show_redirect_timer_block -->
 <tr{DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_REDIRECT_AFTER}:</td>
-	<td class="setting_value" colspan="2">
-		<input type="text" name="redirect_timer" value="{REDIRECT_TIMER}" />
+	<td class="setting_value" colspan="3">
+		<input type="text" name="redirect_timer" value="{REDIRECT_TIMER}" style="width:50%;" />
+		<label>&nbsp;&nbsp;( <strong>-1</strong> = {TEXT_DISABLED}, <strong>0 -10000</strong> )</label><br />
 	</td>
 </tr>
+<!-- END show_redirect_timer_block -->
 <tr>
 	<td class="setting_name">{TEXT_SIGNUP}:</td>
 	<td class="setting_value" colspan="2">
@@ -160,6 +172,7 @@
 		</select>
 	</td>
 </tr>
+<!-- BEGIN show_php_error_level_block -->
 <tr{DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_PHP_ERROR_LEVEL}:</td>
 	<td class="setting_value" colspan="2">
@@ -171,6 +184,8 @@
 		</select>
 	</td>
 </tr>
+<!-- END show_php_error_level_block -->
+<!-- BEGIN show_wysiwyg_block -->
 <tr{DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_WYSIWYG_STYLE}:</td>
 	<td class="setting_value" colspan="2">
@@ -187,6 +202,7 @@
 		</select>
 	</td>
 </tr>
+<!-- END show_wysiwyg_block -->
 <tr>
 	<td>&nbsp;</td>
 	<td align="left" nowrap="nowrap">
@@ -212,6 +228,7 @@
 		</select>
 	</td>
 </tr>
+<!-- BEGIN show_charset_block -->
 <tr{DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_CHARSET}:</td>
 	<td class="setting_value" colspan="2">
@@ -223,6 +240,7 @@
 		</select>
 	</td>
 </tr>
+<!-- END show_charset_block -->
 <tr>
 	<td class="setting_name">{TEXT_TIMEZONE}:</td>
 	<td class="setting_value" colspan="2">
@@ -312,6 +330,7 @@
 		</select>
 	</td>
 </tr>
+<!-- BEGIN show_search_block -->
 <tr{DISPLAY_ADVANCED}>
 	<td class="setting_name">{TEXT_HEADER}:</td>
 	<td class="setting_value" colspan="2">
@@ -366,6 +385,7 @@
 		<input type="text" name="search_time_limit" value="{SEARCH_TIME_LIMIT}" />
 	</td>
 </tr>
+<!-- END show_search_block -->
 <tr>
 	<td>&nbsp;</td>
 	<td>
@@ -398,16 +418,16 @@
 			<label for="world_writeable">
 				{TEXT_WORLD_WRITEABLE_FILE_PERMISSIONS} (777)
 			</label>
-			<br />
-			<font class="note">({WORLD_WRITEABLE_WARNING})</font>
+			<span class="warning">({WORLD_WRITEABLE_WARNING})</span>
 		</div>
 		<div id="{BASIC_FILE_PERMS_ID}3" style="margin: 0; padding: 0;"></div>
 	</td>
 </tr>
+<!-- BEGIN show_access_block -->
 <tr{DISPLAY_ADVANCED}>
 	<td class="setting_name"><div id="{ADVANCED_FILE_PERMS_ID}1" style="margin: 0; padding: 0;">{TEXT_FILESYSTEM_PERMISSIONS}:</div></td>
 	<td class="setting_value" id="file_mode" align="left">
-		<table cellpadding="2" cellspacing="0" border="0" width="100%" style="border-right: 1px solid #DDDDDD;" id="{ADVANCED_FILE_PERMS_ID}2">
+		<table summary="" cellpadding="2" cellspacing="0" border="0" width="100%" style="border-right: 1px solid #DDDDDD;" id="{ADVANCED_FILE_PERMS_ID}2">
 		<tr>
 			<td colspan="3" style="text-align: center; font-weight: bold;">
 				{TEXT_FILES}:
@@ -453,7 +473,7 @@
 		</table>
 	</td>
 	<td class="setting_value" id="dir_mode" style="text-align: right;">
-		<table cellpadding="2" cellspacing="0" border="0" width="100%" id="{ADVANCED_FILE_PERMS_ID}3">
+		<table summary="" cellpadding="2" cellspacing="0" border="0" width="100%" id="{ADVANCED_FILE_PERMS_ID}3">
 		<tr>
 			<td colspan="3" style="text-align: center; font-weight: bold;">
 				{TEXT_DIRECTORIES}:
@@ -541,6 +561,7 @@
 		<input type="text" name="sec_anchor" value="{SEC_ANCHOR}" />
 	</td>
 </tr>
+<!-- END show_access_block -->
 <!-- BASIC MAILER SETTINGS -->
 <tr>
 	<td colspan="3" style="padding-top: 10px;">

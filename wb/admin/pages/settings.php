@@ -5,19 +5,28 @@
  * @package         pages
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
  */
 
+/*
+*/
+// Create new admin object
+require('../../config.php');
+require_once(WB_PATH.'/framework/class.admin.php');
+$admin = new admin('Pages', 'pages_settings');
+// Include the WB functions file
+require_once(WB_PATH.'/framework/functions-utf8.php');
+
 // Get page id
-if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
+if(!isset($_GET['page_id']) || !is_numeric($_GET['page_id']))
 {
 	header("Location: index.php");
 	exit(0);
@@ -25,17 +34,13 @@ if(!isset($_GET['page_id']) OR !is_numeric($_GET['page_id']))
 	$page_id = $_GET['page_id'];
 }
 
-// Create new admin object
-require('../../config.php');
-require_once(WB_PATH.'/framework/class.admin.php');
-$admin = new admin('Pages', 'pages_settings');
-
-// Include the WB functions file
-require_once(WB_PATH.'/framework/functions-utf8.php');
-
-// Get perms
-/*$database = new database(); */
-
+/*
+if( (!($page_id = $admin->checkIDKEY('page_id', 0, $_SERVER['REQUEST_METHOD']))) )
+{
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS']);
+	exit();
+}
+*/
 $sql = 'SELECT * FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$page_id;
 $results = $database->query($sql);
 $results_array = $results->fetchRow();
@@ -44,9 +49,7 @@ $old_admin_groups = explode(',', $results_array['admin_groups']);
 $old_admin_users = explode(',', $results_array['admin_users']);
 
 // Work-out if we should check for existing page_code
-$sql = 'DESCRIBE `'.TABLE_PREFIX.'pages` `page_code`';
-$field_sql = $database->query($sql);
-$field_set = $field_sql->numRows();
+$field_set = $database->field_exists(TABLE_PREFIX.'pages', 'page_code');
 
 $in_old_group = FALSE;
 foreach($admin->get_groups_id() as $cur_gid)
@@ -56,7 +59,7 @@ foreach($admin->get_groups_id() as $cur_gid)
 		$in_old_group = TRUE;
 	}
 }
-if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users)))
+if((!$in_old_group) && !is_numeric(array_search($admin->get_user_id(), $old_admin_users)))
 {
 	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
 }
@@ -90,9 +93,12 @@ if($results_array['modified_when'] != 0)
 $template = new Template(THEME_PATH.'/templates');
 $template->set_file('page', 'pages_settings.htt');
 $template->set_block('page', 'main_block', 'main');
+$template->set_var('FTAN', $admin->getFTAN());
 
 $template->set_var(array(
 				'PAGE_ID' => $results_array['page_id'],
+				// 'PAGE_IDKEY' => $admin->getIDKEY($results_array['page_id']),
+				'PAGE_IDKEY' => $results_array['page_id'],
 				'PAGE_TITLE' => ($results_array['page_title']),
 				'MENU_TITLE' => ($results_array['menu_title']),
 				'DESCRIPTION' => ($results_array['description']),
@@ -102,15 +108,14 @@ $template->set_var(array(
 				'MODIFIED_WHEN' => $modified_ts,
 				'ADMIN_URL' => ADMIN_URL,
 				'WB_URL' => WB_URL,
-				'WB_PATH' => WB_PATH,
 				'THEME_URL' => THEME_URL
 				)
 		);
 
 // Work-out if we should show the "manage sections" link
-$sql = 'SELECT `section_id` FROM `'.TABLE_PREFIX.'sections` WHERE `page_id`='.$page_id.' AND `module`="menu_link"';
-$query_sections = $database->query($sql);
-if($query_sections->numRows() > 0)
+$sql = 'SELECT COUNT(*) FROM `'.TABLE_PREFIX.'sections` WHERE `page_id`='.$page_id.' AND `module`="menu_link"';
+$sections_available = (intval($database->get_one($sql)) != 0);
+if ($sections_available)
 {
     $template->set_var('DISPLAY_MANAGE_SECTIONS', 'display:none;');
 } elseif(MANAGE_SECTIONS == 'enabled')
@@ -129,7 +134,7 @@ if($results_array['visibility'] == 'public') {
 	$template->set_var('REGISTERED_SELECTED', ' selected="selected"');
 } elseif($results_array['visibility'] == 'hidden') {
 	$template->set_var('HIDDEN_SELECTED', ' selected="selected"');
-} elseif($results_array['visibility'] == 'display:none;') {
+} elseif($results_array['visibility'] == 'none') {
 	$template->set_var('NO_VIS_SELECTED', ' selected="selected"');
 }
 // Group list 1 (admin_groups)
@@ -186,6 +191,7 @@ if($results_array['visibility'] == 'public') {
 			$template->parse('group_list', 'group_list_block', true);
 		}
 	}
+
 // Group list 2 (viewing_groups)
 	$viewing_groups = explode(',', str_replace('_', '', $results_array['viewing_groups']));
 
@@ -277,13 +283,14 @@ if((defined('PAGE_LANGUAGES') && PAGE_LANGUAGES) && $field_set && file_exists(WB
 
 		while($page = $get_pages->fetchRow())
         {
-			if($admin->page_is_visible($page)==false)
-				continue;
+			if(($admin->page_is_visible($page)==false) && ($page['visibility'] <> 'none') ) { continue; }
+
 			$template->set_var('FLAG_CODE_ICON',' none ');
 			if( $page['parent'] == 0 )
             {
 				$template->set_var('FLAG_CODE_ICON','url('.THEME_URL.'/images/flags/'.strtolower($page['language']).'.png)');
 			}
+
 			// If the current page cannot be parent, then its children neither
 			$list_next_level = true;
 			// Stop users from adding pages with a level of more than the set page level limit
@@ -314,16 +321,19 @@ if((defined('PAGE_LANGUAGES') && PAGE_LANGUAGES) && $field_set && file_exists(WB
                 // $space = str_repeat('&nbsp;', 3);  $space.'&lt;'..'&gt;'
 				$template->set_var(array(
 										'VALUE' => $page['page_code'],
-                                        'PAGE_VALUE' => $title_prefix.$page['page_code'],
-										'PAGE_CODE' => $title_prefix.$page['menu_title']
+                                        'PAGE_VALUE' => $title_prefix.$page['menu_title'],
+										'PAGE_CODE' => $title_prefix.$page['page_id']
 										)
 								);
-				if($results_array['page_code'] == $page['page_code']) {
+				if($results_array['page_code'] == $page['page_code'])
+                {
 					$template->set_var('SELECTED', ' selected="selected"');
-				} elseif($results_array['page_code'] == $page['page_code']) {
+				} elseif($results_array['page_code'] == $page['page_code'])
+                {
 					$template->set_var('SELECTED', ' disabled="disabled" class="disabled"');
 					$list_next_level=false;
-				} elseif($can_modify != true) {
+				} elseif($can_modify != true)
+                {
 					$template->set_var('SELECTED', ' disabled="disabled" class="disabled"');
 				} else {
 					$template->set_var('SELECTED', '');
@@ -399,14 +409,14 @@ function parent_list($parent)
 			}
 			// Title -'s prefix
 			$title_prefix = '';
-			for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - '; }
+			for($i = 1; $i <= $page['level']; $i++) { $title_prefix .= ' - - &nbsp;'; }
 			$template->set_var(array(
-											'ID' => $page['page_id'],
-											'TITLE' => ($title_prefix.$page['menu_title']),
-											'MENU-TITLE' => ($title_prefix.$page['menu_title']),
-											'PAGE-TITLE' => ($title_prefix.$page['page_title']),
-											'FLAG_ICON' => ' none ',
-											));
+								'ID' => $page['page_id'],
+								'TITLE' => ($title_prefix.$page['menu_title']),
+								'MENU-TITLE' => ($title_prefix.$page['menu_title']),
+								'PAGE-TITLE' => ($title_prefix.$page['page_title']),
+								'FLAG_ICON' => ' none ',
+								));
 
 			if($results_array['parent'] == $page['page_id'])
             {
@@ -440,11 +450,10 @@ if($admin->get_permission('pages_add_l0') == true OR $results_array['level'] == 
 		$selected = '';
 	}
 	$template->set_var(array(
-									'ID' => '0',
-									'TITLE' => $TEXT['NONE'],
-									'SELECTED' => $selected
-									)
-							);
+						'ID' => '0',
+						'TITLE' => $TEXT['NONE'],
+						'SELECTED' => $selected
+						) );
 	$template->parse('page_list2', 'page_list_block2', true);
 }
 parent_list(0);
@@ -460,18 +469,16 @@ if($modified_ts == 'Unknown')
 $template->set_block('main_block', 'template_list_block', 'template_list');
 
 $sql = 'SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "template" AND `function` = "template" order by `name`';
-$result = $database->query($sql);
-
-if($result->numRows() > 0)
+if( ($res_templates = $database->query($sql)) )
 {
-	while($addon = $result->fetchRow())
+	while($rec_template = $res_templates->fetchRow())
     {
 		// Check if the user has perms to use this template
-		if($addon['directory'] == $results_array['template'] OR $admin->get_permission($addon['directory'], 'template') == true)
+		if($rec_template['directory'] == $results_array['template'] OR $admin->get_permission($rec_template['directory'], 'template') == true)
         {
-			$template->set_var('VALUE', $addon['directory']);
-			$template->set_var('NAME', $addon['name']);
-			if($addon['directory'] == $results_array['template'])
+			$template->set_var('VALUE', $rec_template['directory']);
+			$template->set_var('NAME', $rec_template['name']);
+			if($rec_template['directory'] == $results_array['template'])
             {
 				$template->set_var('SELECTED', ' selected="selected"');
 			} else {
@@ -523,23 +530,23 @@ foreach($menu AS $number => $name)
 $template->set_block('main_block', 'language_list_block', 'language_list');
 
 $sql = 'SELECT * FROM `'.TABLE_PREFIX.'addons` WHERE `type` = "language" ORDER BY `name`';
-$result = $database->query($sql);
-
-if($result->numRows() > 0)
+if( ($res_languages = $database->query($sql)) )
 {
-	while($addon = $result->fetchRow())
+	while($rec_language = $res_languages->fetchRow())
     {
-		$l_codes[$addon['name']] = $addon['directory'];
-		$l_names[$addon['name']] = entities_to_7bit($addon['name']); // sorting-problem workaround
+		$l_codes[$rec_language['name']] = $rec_language['directory'];
+		$l_names[$rec_language['name']] = entities_to_7bit($rec_language['name']); // sorting-problem workaround
 	}
 	asort($l_names);
+
 	foreach($l_names as $l_name=>$v)
     {
+        $langIcons = (empty($l_codes[$l_name])) ? 'none' : strtolower($l_codes[$l_name]);
 		// Insert code and name
 		$template->set_var(array(
 								'VALUE' => $l_codes[$l_name],
 								'NAME' => $l_name,
-								'FLAG_LANG_ICONS' => 'url('.THEME_URL.'/images/flags/'.strtolower($l_codes[$l_name]).'.png)',
+								'FLAG_LANG_ICONS' => 'url('.THEME_URL.'/images/flags/'.$langIcons.'.png)',
 								));
 		// Check if it is selected
 		if($results_array['language'] == $l_codes[$l_name])

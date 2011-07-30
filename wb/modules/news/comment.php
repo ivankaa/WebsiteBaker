@@ -5,11 +5,11 @@
  * @package         news
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -18,16 +18,19 @@
 
 // Include config file
 require('../../config.php');
+require_once(WB_PATH.'/framework/class.wb.php');
+$wb = new wb;
 
 // Check if there is a post id
-if(!isset($_GET['post_id']) OR !is_numeric($_GET['post_id'])
-    OR !isset($_GET['section_id']) OR !is_numeric($_GET['section_id']))
-{
-	header("Location: ".WB_URL.PAGES_DIRECTORY."");
-	exit( 0 );
+// $post_id = $wb->checkIDKEY('post_id', false, 'GET');
+
+$post_id = (int)$_GET['post_id'];
+$section_id = (int)$_GET['section_id'];
+
+if (!$post_id OR !isset($_GET['section_id']) OR !is_numeric($_GET['section_id'])) {
+	$wb->print_error('ABORT::'.$MESSAGE['GENERIC_SECURITY_ACCESS'], WB_URL.PAGES_DIRECTORY );
+	exit();
 }
-$post_id = $_GET['post_id'];
-$section_id = $_GET['section_id'];
 
 // Query post for page id
 $query_post = $database->query("SELECT post_id,title,section_id,page_id FROM ".TABLE_PREFIX."mod_news_posts WHERE post_id = '$post_id'");

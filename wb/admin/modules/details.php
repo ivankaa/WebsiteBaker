@@ -1,27 +1,20 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        admin
+ * @package         modules
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 // Include the config file
 require('../../config.php');
@@ -29,6 +22,13 @@ require_once(WB_PATH .'/framework/functions.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 // No print admin header
 $admin = new admin('Addons', 'modules_view', false);
+if( !$admin->checkFTAN() )
+{
+	$admin->print_header();
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS']);
+}
+// After check print the header
+$admin->print_header();
 
 // Get module name
 if(!isset($_POST['file']) OR $_POST['file'] == "")
@@ -38,7 +38,7 @@ if(!isset($_POST['file']) OR $_POST['file'] == "")
 }
 else
 {
-	$file = $admin->add_slashes($_POST['file']);
+	$file = preg_replace("/\W/", "", $_POST['file']);  // fix secunia 2010-92-1
 }
 
 // Check if the module exists
@@ -46,9 +46,6 @@ if(!file_exists(WB_PATH.'/modules/'.$file)) {
 	header("Location: index.php");
 	exit(0);
 }
-
-// Print admin header
-$admin = new admin('Addons', 'modules_view');
 
 // Setup module object
 $template = new Template(THEME_PATH.'/templates');
@@ -88,7 +85,6 @@ $template->set_var(array(
 								'DESIGNED_FOR' => $module['platform'],
 								'ADMIN_URL' => ADMIN_URL,
 								'WB_URL' => WB_URL,
-								'WB_PATH' => WB_PATH,
 								'THEME_URL' => THEME_URL
 								)
 						);
@@ -143,5 +139,3 @@ $template->pparse('output', 'page');
 
 // Print admin footer
 $admin->print_footer();
-
-?>

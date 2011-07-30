@@ -24,15 +24,25 @@
 */
 
 // displays the image or text inside an <iframe>
-function display_captcha_real($kind='image') {
-	$t = time();
-	$_SESSION['captcha_time'] = $t;
-	if($kind=='image') {
-		?><a title="reload" href="<?php echo WB_URL.'/include/captcha/captcha.php?display_captcha_X986E21=2'; ?>">
-		  <img style="border: none;" src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" />
-			</a><?php
-	} else {
-		echo 'error';
+if(!function_exists('display_captcha_real')) {
+	function display_captcha_real($kind='image') {
+		$t = time();
+		$output  = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" ";
+		$output .= "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n";
+		$output .= "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"";
+		$output .= strtolower(LANGUAGE)."\" lang=\"".strtolower(LANGUAGE)."\">\n";
+		$output .= "\t<head>\n\t\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n";
+		$output .= "\t\t<title>captcha</title>\n\t</head>\n\t<body>\n";
+		$_SESSION['captcha_time'] = $t;
+		if($kind=='image') {
+			$output .= "\t\t<a title=\"reload\" href=\"".WB_URL."/include/captcha/captcha.php?display_captcha_X986E21=2\">";
+			$output .= "<img style=\"border: none;\" src=\"".WB_URL."/include/captcha/captchas/";
+			$output .= CAPTCHA_TYPE.".php?t=".$t."\" alt=\"Captcha\" /></a>\n";
+		} else {
+			$output .= "\t\t<h2>error</h2>";
+		}
+		$output .= "\t</body>\n</html>";
+		echo $output;
 	}
 }
 
@@ -70,7 +80,6 @@ if(!function_exists('captcha_header')) {
 		header("Expires: Mon, 1 Jan 1990 05:00:00 GMT");
 		header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
 		header("Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate");
-		header("Cache-Control: post-check=0, pre-check=0", false); // MS made there own headers :-(
 		header("Pragma: no-cache");
 		header("Content-type: image/png");
 		return;
@@ -102,7 +111,7 @@ if(extension_loaded('gd') && function_exists('imagepng') && function_exists('ima
 }
 
 if(!function_exists('call_captcha')) {
-	function call_captcha($action='all', $style='') {
+	function call_captcha($action='all', $style='', $sec_id='') {
 		global $MOD_CAPTCHA;
 		$t = time();
 		$_SESSION['captcha_time'] = $t;
@@ -133,7 +142,7 @@ if(!function_exists('call_captcha')) {
 		if($action=='all') {
 			switch(CAPTCHA_TYPE) {
 				case 'text': // text-captcha
-					?><table class="captcha_table"><tr>
+					?><table class="captcha_table" summary="captcha control"><tr>
 					<td class="text_captcha">
 						<?php include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php'); ?>
 					</td>
@@ -143,7 +152,7 @@ if(!function_exists('call_captcha')) {
 					</tr></table><?php
 					break;
 				case 'calc_text': // calculation as text
-					?><table class="captcha_table"><tr>
+					?><table class="captcha_table" summary="captcha control"><tr>
 					<td class="text_captcha">
 						<?php include(WB_PATH.'/include/captcha/captchas/'.CAPTCHA_TYPE.'.php'); ?>
 					</td>
@@ -154,10 +163,10 @@ if(!function_exists('call_captcha')) {
 					break;
 				case 'calc_image': // calculation with image (old captcha)
 				case 'calc_ttf_image': // calculation with varying background and ttf-font
-				  ?><table class="captcha_table"><tr>
+				  ?><table class="captcha_table" summary="captcha control"><tr>
 					<td class="image_captcha">
-						<iframe class="captcha_iframe" width="<?php echo $captcha_width; ?>" height="<?php echo $captcha_height; ?>" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" name="captcha_iframe" src="<?php echo WB_URL.'/include/captcha/captcha.php?display_captcha_X986E21=1'; ?>">
-						<img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" />
+						<?php echo "<iframe class=\"captcha_iframe\" width=\"$captcha_width\" height=\"$captcha_height\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" frameborder=\"0\" name=\"captcha_iframe_$sec_id\" src=\"". WB_URL ."/include/captcha/captcha.php?display_captcha_X986E21=1&amp;s=$sec_id"; ?>">
+						<img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t&amp;s=$sec_id"; ?>" alt="Captcha" />
 						</iframe>
 					</td>
 					<td>&nbsp;=&nbsp;</td>
@@ -168,10 +177,10 @@ if(!function_exists('call_captcha')) {
 				// normal images
 				case 'ttf_image': // captcha with varying background and ttf-font
 				case 'old_image': // old captcha
-					?><table class="captcha_table"><tr>
+					?><table class="captcha_table" summary="captcha control"><tr>
 					<td class="image_captcha">
-						<iframe class="captcha_iframe" width="<?php echo $captcha_width; ?>" height="<?php echo $captcha_height; ?>" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" name="captcha_iframe" src="<?php echo WB_URL.'/include/captcha/captcha.php?display_captcha_X986E21=1'; ?>">
-						<img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t"; ?>" alt="Captcha" />
+						<?php echo "<iframe class=\"captcha_iframe\" width=\"$captcha_width\" height=\"$captcha_height\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" frameborder=\"0\" name=\"captcha_iframe_$sec_id\" src=\"". WB_URL ."/include/captcha/captcha.php?display_captcha_X986E21=1&amp;s=$sec_id"; ?>">
+						<img src="<?php echo WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t&amp;s=$sec_id"; ?>" alt="Captcha" />
 						</iframe>
 					</td>
 					<td></td>
@@ -192,7 +201,7 @@ if(!function_exists('call_captcha')) {
 				case 'calc_ttf_image': // calculation with varying background and ttf-font
 				case 'ttf_image': // captcha with varying background and ttf-font
 				case 'old_image': // old captcha
-					echo "<img $style src=\"".WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t\" />";
+					echo "<img $style src=\"".WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t&amp;s=$sec_id\" />";
 					break;
 			}
 		} elseif($action=='image_iframe') {
@@ -209,7 +218,9 @@ if(!function_exists('call_captcha')) {
 				case 'calc_ttf_image': // calculation with varying background and ttf-font
 				case 'ttf_image': // captcha with varying background and ttf-font
 				case 'old_image': // old captcha
-					?><iframe class="captcha_iframe" width="<?php echo $captcha_width; ?>" height="<?php echo $captcha_height; ?>" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" name="captcha_iframe" src="<?php echo WB_URL.'/include/captcha/captcha.php?display_captcha_X986E21=1'; ?>"><?php
+					?>
+					<?php echo "<iframe class=\"captcha_iframe\" width=\"$captcha_width\" height=\"$captcha_height\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" frameborder=\"0\" name=\"captcha_iframe_$sec_id\" src=\"". WB_URL ."/include/captcha/captcha.php?display_captcha_X986E21=1&amp;s=$sec_id"; ?>">
+					<?php
 					echo "<img $style alt=\"Captcha\" src=\"".WB_URL.'/include/captcha/captchas/'.CAPTCHA_TYPE.".php?t=$t\" />";
 					?></iframe><?php
 					break;

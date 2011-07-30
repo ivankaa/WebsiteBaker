@@ -5,11 +5,11 @@
  * @package         news
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -19,14 +19,33 @@
 // Include config file
 require('../../config.php');
 
-/*overwrite php.ini on Apache servers for valid SESSION ID Separator
+/*
+overwrite php.ini on Apache servers for valid SESSION ID Separator
 if(function_exists('ini_set')) {
 	ini_set('arg_separator.output', '&amp;');
 }
 */
+
 require_once(WB_PATH.'/framework/class.wb.php');
 $wb = new wb;
-         /*  */
+
+/*
+$post_id = (int)$_GET['post_id'];
+$section_id = (int)$_GET['section_id'];
+if (!$wb->checkFTAN())
+{
+	$wb->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], WB_URL."/modules/news/comment.php?post_id=".$post_id."&section_id=".$section_id);
+}
+ */
+// Get page id
+	$requestMethod = '_'.strtoupper($_SERVER['REQUEST_METHOD']);
+	$page_id = intval(isset(${$requestMethod}['page_id'])) ? ${$requestMethod}['page_id'] : (isset($page_id) ? intval($page_id) : 0);
+// Get post_id
+	$requestMethod = '_'.strtoupper($_SERVER['REQUEST_METHOD']);
+	$post_id = (intval(isset(${$requestMethod}['post_id'])) ? ${$requestMethod}['post_id'] : (isset($post_id) ? intval($post_id) : 0));
+// Get section id if there is one
+	$requestMethod = '_'.strtoupper($_SERVER['REQUEST_METHOD']);
+	$section_id = intval(isset(${$requestMethod}['section_id'])) ? ${$requestMethod}['section_id'] : (isset($section_id) ? intval($section_id) : 0);
 
 // Check if we should show the form or add a comment
 if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
@@ -46,9 +65,13 @@ if(isset($_GET['page_id']) AND is_numeric($_GET['page_id'])
 
 	$comment = $wb->add_slashes(strip_tags($comment));
 	$title = $wb->add_slashes(strip_tags($_POST['title']));
-	$page_id = $_GET['page_id'];
-	$section_id = $_GET['section_id'];
-	$post_id = $_GET['post_id'];
+	// do not allow droplets in user input!
+	$title = str_replace(array("[[", "]]"), array("&#91;&#91;", "&#93;&#93;"), $title);
+	$comment = str_replace(array("[[", "]]"), array("&#91;&#91;", "&#93;&#93;"), $comment);
+
+	$page_id = (int)$_GET['page_id'];
+	$section_id = (int)$_GET['section_id'];
+	$post_id = (int)$_GET['post_id'];
 
 	// Check captcha
 	$query_settings = $database->query("SELECT use_captcha FROM ".TABLE_PREFIX."mod_news_settings WHERE section_id = '$section_id'");
@@ -141,7 +164,7 @@ else
 	if( isset($_GET['post_id']) AND is_numeric($_GET['post_id'])
         AND isset($_GET['section_id']) AND is_numeric($_GET['section_id']) )
     {
- 		header("Location: ".WB_URL."/modules/news/comment.php?post_id=".($_GET['post_id'])."&section_id=".($_GET['section_id'])."" ) ;
+ 		header("Location: ".WB_URL."/modules/news/comment.php?post_id=".(int)$_GET['post_id']."&section_id=".(int)$_GET['section_id']."" ) ;
 	    exit( 0 );
     }
 	else
@@ -150,5 +173,3 @@ else
 	    exit( 0 );
     }
 }
-
-?>

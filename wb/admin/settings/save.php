@@ -5,11 +5,11 @@
  * @package         settings
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -20,26 +20,38 @@
 if(!isset($_POST['default_language']) || $_POST['default_language'] == '') die(header('Location: index.php'));
 
 // Find out if the user was view advanced options or not
-if($_POST['advanced'] == 'yes' ? $advanced = '?advanced=yes' : $advanced = '');
+$advanced = ($_POST['advanced'] == 'yes') ? '?advanced=yes' : '';
 
 // Print admin header
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
-if($advanced == '') {
-	$admin = new admin('Settings', 'settings_basic');
-	$_POST['database_password'] = DB_PASSWORD;
+
+// suppress to print the header, so no new FTAN will be set
+if($advanced == '')
+{
+	$admin = new admin('Settings', 'settings_basic',false);
 } else {
-	$admin = new admin('Settings', 'settings_advanced');
+	$admin = new admin('Settings', 'settings_advanced',false);
 }
 
 // Create a javascript back link
-$js_back = "javascript: history.go(-1);";
+$js_back = ADMIN_URL.'/settings/index.php'.$advanced;
+if( !$admin->checkFTAN() )
+{
+	$admin->print_header();
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'],$js_back );
+}
+// After check print the header
+$admin->print_header();
 
 // Ensure that the specified default email is formally valid
 if(isset($_POST['server_email']))
 {
 	$_POST['server_email'] = strip_tags($_POST['server_email']);
-	if(!eregi("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$", $_POST['server_email'])) {
+    // $pattern = '/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9]([-a-z0-9_]?[a-z0-9])*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z]{2})|([1]?\d{1,2}|2[0-4]{1}\d{1}|25[0-5]{1})(\.([1]?\d{1,2}|2[0-4]{1}\d{1}|25[0-5]{1})){3})(:[0-9]{1,5})?\r/im';
+    $pattern = '/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,6}))$/';
+    if(false == preg_match($pattern, $_POST['server_email']))
+    {
 		$admin->print_error($MESSAGE['USERS']['INVALID_EMAIL'].
 			'<br /><strong>Email: '.htmlentities($_POST['server_email']).'</strong>', $js_back);
 	}
@@ -49,7 +61,7 @@ if(isset($_POST['server_email']))
 if($advanced == '')
 {
 	// Check if should be set to 777 or left alone
-	if(isset($_POST['world_writeable']) AND $_POST['world_writeable'] == 'true')
+	if(isset($_POST['world_writeable']) && $_POST['world_writeable'] == 'true')
     {
 		$file_mode = '0777';
 		$dir_mode = '0777';
@@ -60,129 +72,171 @@ if($advanced == '')
 } else {
 	// Work-out the octal value for file mode
 	$u = 0;
-	if(isset($_POST['file_u_r']) AND $_POST['file_u_r'] == 'true') {
+	if(isset($_POST['file_u_r']) && $_POST['file_u_r'] == 'true') {
 		$u = $u+4;
 	}
-	if(isset($_POST['file_u_w']) AND $_POST['file_u_w'] == 'true') {
+	if(isset($_POST['file_u_w']) && $_POST['file_u_w'] == 'true') {
 		$u = $u+2;
 	}
-	if(isset($_POST['file_u_e']) AND $_POST['file_u_e'] == 'true') {
+	if(isset($_POST['file_u_e']) && $_POST['file_u_e'] == 'true') {
 		$u = $u+1;
 	}
 	$g = 0;
-	if(isset($_POST['file_g_r']) AND $_POST['file_g_r'] == 'true') {
+	if(isset($_POST['file_g_r']) && $_POST['file_g_r'] == 'true') {
 		$g = $g+4;
 	}
-	if(isset($_POST['file_g_w']) AND $_POST['file_g_w'] == 'true') {
+	if(isset($_POST['file_g_w']) && $_POST['file_g_w'] == 'true') {
 		$g = $g+2;
 	}
-	if(isset($_POST['file_g_e']) AND $_POST['file_g_e'] == 'true') {
+	if(isset($_POST['file_g_e']) && $_POST['file_g_e'] == 'true') {
 		$g = $g+1;
 	}
 	$o = 0;
-	if(isset($_POST['file_o_r']) AND $_POST['file_o_r'] == 'true') {
+	if(isset($_POST['file_o_r']) && $_POST['file_o_r'] == 'true') {
 		$o = $o+4;
 	}
-	if(isset($_POST['file_o_w']) AND $_POST['file_o_w'] == 'true') {
+	if(isset($_POST['file_o_w']) && $_POST['file_o_w'] == 'true') {
 		$o = $o+2;
 	}
-	if(isset($_POST['file_o_e']) AND $_POST['file_o_e'] == 'true') {
+	if(isset($_POST['file_o_e']) && $_POST['file_o_e'] == 'true') {
 		$o = $o+1;
 	}
 	$file_mode = "0".$u.$g.$o;
 	// Work-out the octal value for dir mode
 	$u = 0;
-	if(isset($_POST['dir_u_r']) AND $_POST['dir_u_r'] == 'true') {
+	if(isset($_POST['dir_u_r']) && $_POST['dir_u_r'] == 'true') {
 		$u = $u+4;
 	}
-	if(isset($_POST['dir_u_w']) AND $_POST['dir_u_w'] == 'true') {
+	if(isset($_POST['dir_u_w']) && $_POST['dir_u_w'] == 'true') {
 		$u = $u+2;
 	}
-	if(isset($_POST['dir_u_e']) AND $_POST['dir_u_e'] == 'true') {
+	if(isset($_POST['dir_u_e']) && $_POST['dir_u_e'] == 'true') {
 		$u = $u+1;
 	}
 	$g = 0;
-	if(isset($_POST['dir_g_r']) AND $_POST['dir_g_r'] == 'true') {
+	if(isset($_POST['dir_g_r']) && $_POST['dir_g_r'] == 'true') {
 		$g = $g+4;
 	}
-	if(isset($_POST['dir_g_w']) AND $_POST['dir_g_w'] == 'true') {
+	if(isset($_POST['dir_g_w']) && $_POST['dir_g_w'] == 'true') {
 		$g = $g+2;
 	}
-	if(isset($_POST['dir_g_e']) AND $_POST['dir_g_e'] == 'true') {
+	if(isset($_POST['dir_g_e']) && $_POST['dir_g_e'] == 'true') {
 		$g = $g+1;
 	}
 	$o = 0;
-	if(isset($_POST['dir_o_r']) AND $_POST['dir_o_r'] == 'true') {
+	if(isset($_POST['dir_o_r']) && $_POST['dir_o_r'] == 'true') {
 		$o = $o+4;
 	}
-	if(isset($_POST['dir_o_w']) AND $_POST['dir_o_w'] == 'true') {
+	if(isset($_POST['dir_o_w']) && $_POST['dir_o_w'] == 'true') {
 		$o = $o+2;
 	}
-	if(isset($_POST['dir_o_e']) AND $_POST['dir_o_e'] == 'true') {
+	if(isset($_POST['dir_o_e']) && $_POST['dir_o_e'] == 'true') {
 		$o = $o+1;
 	}
 	$dir_mode = "0".$u.$g.$o;
 }
 
+$allow_tags_in_fields = array('website_header', 'website_footer');
+$allow_empty_values = array('website_header','website_footer','sec_anchor','pages_directory','page_spacer');
+$disallow_in_fields = array('pages_directory', 'media_directory','wb_version');
 // Create new database object
 /*$database = new database(); */
 
 // Query current settings in the db, then loop through them and update the db with the new value
-$query = "SELECT name FROM ".TABLE_PREFIX."settings";
-$results = $database->query($query);
-while($setting = $results->fetchRow())
+$settings = array();
+$old_settings = array();
+// Query current settings in the db, then loop through them to get old values
+$sql = 'SELECT `name`, `value` FROM `'.TABLE_PREFIX.'settings`';
+$sql .= 'ORDER BY `name`';
+
+$res_settings = $database->query($sql);
+$passed = false;
+while($setting = $res_settings->fetchRow())
 {
+	$old_settings[$setting['name']] = $setting['value'];
 	$setting_name = $setting['name'];
 	$value = $admin->get_post($setting_name);
-	if ($setting_name!='wb_version')
+	$value = isset($_POST[$setting_name]) ? $value : $old_settings[$setting_name] ;
+	switch ($setting_name) {
+		case 'default_timezone':
+			$value=$value*60*60;
+			$passed = true;
+			break;
+		case 'string_dir_mode':
+			$value=$dir_mode;
+			$passed = true;
+			break;
+		case 'string_file_mode':
+			$value=$file_mode;
+ 			$passed = true;
+		break;
+		case 'pages_directory':
+			break;
+		default :
+		    $passed = in_array($setting_name, $allow_empty_values);
+			break;
+	}
+    if (!in_array($setting_name, $allow_tags_in_fields))
     {
-		$allow_tags_in_fields = array('website_header', 'website_footer','wbmailer_smtp_password');
-		if(!in_array($setting_name, $allow_tags_in_fields)) {
-			$value = strip_tags($value);
-		}
-		switch ($setting_name) {
-			case 'default_timezone':
-				$value=$value*60*60;
-				break;
-			case 'string_dir_mode':
-				$value=$dir_mode;
-				break;
-			case 'string_file_mode':
-				$value=$file_mode;
-				break;
-			case 'pages_directory':
-				if(trim($value)=='/') $value='';
-				break;
-		}
-		$value = $admin->add_slashes($value);
-		$database->query("UPDATE ".TABLE_PREFIX."settings SET value = '$value' WHERE name = '$setting_name'");
+        $value = strip_tags($value);
+    }
+
+
+    if ( !in_array($value, $disallow_in_fields) && (isset($_POST[$setting_name]) || $passed == true) )
+    {
+        $value = trim($admin->add_slashes($value));
+        $sql = 'UPDATE `'.TABLE_PREFIX.'settings` ';
+        $sql .= 'SET `value` = \''.$value.'\' ';
+        $sql .= 'WHERE `name` <> \'wb_version\' ';
+        $sql .= 'AND `name` = \''.$setting_name.'\' ';
+
+        if (!$database->query($sql))
+        {
+			if($database->is_error()) {
+				$admin->print_error($database->get_error, $js_back );
+			}
+        }
 	}
 }
 
 // Query current search settings in the db, then loop through them and update the db with the new value
-$query = "SELECT name, value FROM ".TABLE_PREFIX."search WHERE extra = ''";
-$results = $database->query($query);
-while($search_setting = $results->fetchRow())
+$sql  = 'SELECT `name`, `value` FROM `'.TABLE_PREFIX.'search` ';
+$sql .= 'WHERE `extra` = ""';
+$res_search = $database->query($sql);
+
+if($database->is_error()) {
+	$admin->print_error($database->is_error(), $js_back );
+}
+
+while($search_setting = $res_search->fetchRow())
 {
 	$old_value = $search_setting['value'];
 	$setting_name = $search_setting['name'];
 	$post_name = 'search_'.$search_setting['name'];
+
     // hold old value if post is empty
     // check search template
-    $value = ( ($admin->get_post($post_name) == '') AND ($setting_name != 'template') ) ? $old_value : $admin->get_post($post_name);
-
-	$value = $admin->add_slashes($value);
-	$database->query("UPDATE ".TABLE_PREFIX."search SET value = '$value' WHERE name = '$setting_name'");
+    $value = ( ($admin->get_post($post_name) == '') && ($setting_name != 'template') ) ? $old_value : $admin->get_post($post_name);
+    // $value =  ( ($admin->get_post($post_name) == '') && ($setting_name == 'template') ) ? DEFAULT_TEMPLATE : $admin->get_post($post_name);
+    if(isset($value))
+	{
+		$value = $admin->add_slashes($value);
+        $sql  = 'UPDATE `'.TABLE_PREFIX.'search` ';
+        $sql .= 'SET `value` = "'.$value.'" ';
+        $sql .= 'WHERE `name` = "'.$setting_name.'" ';
+        $sql .= 'AND `extra` = ""';
+		if($database->query($sql)) {
+		}
+		$sql_info = mysql_info($database->db_handle);
+    }
 }
 
 // Check if there was an error updating the db
 if($database->is_error()) {
-	$admin->print_error($database->get_error, ADMIN_URL.'/settings/index.php'.$advanced);
-	$admin->print_footer();
-	exit();
+	$admin->print_error($database->get_error, $js_back );
+} else {
+	$admin->print_success($MESSAGE['SETTINGS']['SAVED'], $js_back );
 }
-
-$admin->print_success($MESSAGE['SETTINGS']['SAVED'], ADMIN_URL.'/settings/index.php'.$advanced);
 $admin->print_footer();
 
 ?>

@@ -5,11 +5,11 @@
  * @package         news
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -36,7 +36,7 @@ $commenting = $fetch_settings['commenting'];
 $database->query("INSERT INTO ".TABLE_PREFIX."mod_news_posts (section_id,page_id,position,commenting,active) VALUES ('$section_id','$page_id','$position','$commenting','1')");
 
 // Get the id
-$post_id = $database->get_one("SELECT LAST_INSERT_ID()");
+$post_id = $admin->getIDKEY($database->get_one("SELECT LAST_INSERT_ID()"));
 
 // Say that a new record has been added, then redirect to modify page
 if($database->is_error()) {

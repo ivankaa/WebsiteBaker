@@ -5,22 +5,19 @@
  * @package         login
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
  */
 
-// Stop this file from being accessed directly
-if(!defined('WB_URL')) {
-	header('Location: ../index.php');
-	exit(0);
-}
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 define('LOGIN_CLASS_LOADED', true);
 
@@ -30,29 +27,15 @@ require_once(WB_PATH."/framework/class.admin.php");
 require_once(ADMIN_PATH.'/interface/version.php');
 
 class login extends admin {
-	function login($config_array) {
+	public function __construct($config_array) {
 		// Get language vars
-		global $MESSAGE;
-		$this->wb();
+		global $MESSAGE, $database;
+		parent::__construct();
 		// Get configuration values
-		$this->USERS_TABLE = $config_array['USERS_TABLE'];
-		$this->GROUPS_TABLE = $config_array['GROUPS_TABLE'];
-		$this->username_fieldname = $config_array['USERNAME_FIELDNAME'];
-		$this->password_fieldname = $config_array['PASSWORD_FIELDNAME'];
-		$this->remember_me_option = $config_array['REMEMBER_ME_OPTION'];
-		$this->max_attemps = $config_array['MAX_ATTEMPS'];
-		$this->warning_url = $config_array['WARNING_URL'];
-		$this->login_url = $config_array['LOGIN_URL'];
-		$this->template_dir = $config_array['TEMPLATE_DIR'];
-		$this->template_file = $config_array['TEMPLATE_FILE'];
-		$this->frontend = $config_array['FRONTEND'];
-		$this->forgotten_details_app = $config_array['FORGOTTEN_DETAILS_APP'];
-		$this->max_username_len = $config_array['MAX_USERNAME_LEN'];
-		$this->max_password_len = $config_array['MAX_PASSWORD_LEN'];
-		if (array_key_exists('REDIRECT_URL',$config_array))
-			$this->redirect_url = $config_array['REDIRECT_URL'];
-		else
-			$this->redirect_url = '';
+		while(list($key, $value) = each($config_array)) {
+			$this->{(strtolower($key))} = $value;
+		}
+		if(!isset($this->redirect_url)) { $this->redirect_url = ''; }
 		// Get the supplied username and password
 		if ($this->get_post('username_fieldname') != ''){
 			$username_fieldname = $this->get_post('username_fieldname');
@@ -61,7 +44,8 @@ class login extends admin {
 			$username_fieldname = 'username';
 			$password_fieldname = 'password';
 		}
-		$this->username = $this->add_slashes(strtolower($this->get_post($username_fieldname)));
+		$this->username = htmlspecialchars (strtolower($this->get_post($username_fieldname)), ENT_QUOTES);
+
 		$this->password = $this->get_post($password_fieldname);
 		// Figure out if the "remember me" option has been checked
 		if($this->get_post('remember') == 'true') {
@@ -89,8 +73,8 @@ class login extends admin {
 		} elseif($this->is_remembered() == true) {
 			// User has been "remembered"
 			// Get the users password
-			$database = new database();
-			$query_details = $database->query("SELECT * FROM ".$this->USERS_TABLE." WHERE user_id = '".$this->get_safe_remember_key()."' LIMIT 1");
+			// $database = new database();
+			$query_details = $database->query("SELECT * FROM ".$this->users_table." WHERE user_id = '".$this->get_safe_remember_key()."' LIMIT 1");
 			$fetch_details = $query_details->fetchRow();
 			$this->username = $fetch_details['username'];
 			$this->password = $fetch_details['password'];
@@ -138,16 +122,19 @@ class login extends admin {
 			}
 		}
 	}
-	
+
 	// Authenticate the user (check if they exist in the database)
 	function authenticate() {
+		global $database;
 		// Get user information
-		$database = new database();
-		$query = "SELECT * FROM ".$this->USERS_TABLE." WHERE username = '".$this->username."' AND password = '".$this->password."' AND active = '1'";
+		// $database = new database();
+		// $query = 'SELECT * FROM `'.$this->users_table.'` WHERE MD5(`username`) = "'.md5($this->username).'" AND `password` = "'.$this->password.'" AND `active` = 1';
+ 		$loginname = ( preg_match('/[\;\=\&\|\<\> ]/',$this->username) ? '' : $this->username );
+		$query = 'SELECT * FROM `'.$this->users_table.'` WHERE `username` = "'.$loginname.'" AND `password` = "'.$this->password.'" AND `active` = 1';
 		$results = $database->query($query);
 		$results_array = $results->fetchRow();
 		$num_rows = $results->numRows();
-		if($num_rows) {
+		if($num_rows == 1) {
 			$user_id = $results_array['user_id'];
 			$this->user_id = $user_id;
 			$_SESSION['USER_ID'] = $user_id;
@@ -186,30 +173,8 @@ class login extends admin {
 				// Set a session var so apps can tell user is using default time format
 				$_SESSION['USE_DEFAULT_TIME_FORMAT'] = true;
 			}
-			// Get group information
-//			$query = "SELECT * FROM ".$this->GROUPS_TABLE." WHERE group_id = '".$this->get_session('GROUP_ID')."'";
-//			$results = $database->query($query);
-//			$results_array = $results->fetchRow();
-//			$_SESSION['GROUP_NAME'] = $results_array['name'];
-//			// Set system permissions
-//			if($results_array['system_permissions'] != '') {
-//				$_SESSION['SYSTEM_PERMISSIONS'] = explode(',', $results_array['system_permissions']);
-//			} else {
-//				$_SESSION['SYSTEM_PERMISSIONS'] = array();
-//			}
-//			// Set module permissions
-//			if($results_array['module_permissions'] != '') {
-//				$_SESSION['MODULE_PERMISSIONS'] = explode(',', $results_array['module_permissions']);
-//			} else {
-//				$_SESSION['MODULE_PERMISSIONS'] = array();
-//			}
-//			// Set template permissions
-//			if($results_array['template_permissions'] != '') {
-//				$_SESSION['TEMPLATE_PERMISSIONS'] = explode(',', $results_array['template_permissions']);
-//			} else {
-//				$_SESSION['TEMPLATE_PERMISSIONS'] = array();
-//			}
 
+			// Get group information
 			$_SESSION['SYSTEM_PERMISSIONS'] = array();
 			$_SESSION['MODULE_PERMISSIONS'] = array();
 			$_SESSION['TEMPLATE_PERMISSIONS'] = array();
@@ -218,7 +183,7 @@ class login extends admin {
 			$first_group = true;
 			foreach (explode(",", $this->get_session('GROUPS_ID')) as $cur_group_id)
             {
-				$query = "SELECT * FROM ".$this->GROUPS_TABLE." WHERE group_id = '".$cur_group_id."'";
+				$query = "SELECT * FROM ".$this->groups_table." WHERE group_id = '".$cur_group_id."'";
 				$results = $database->query($query);
 				$results_array = $results->fetchRow();
 				$_SESSION['GROUP_NAME'][$cur_group_id] = $results_array['name'];
@@ -248,13 +213,15 @@ class login extends admin {
 			// Update the users table with current ip and timestamp
 			$get_ts = time();
 			$get_ip = $_SERVER['REMOTE_ADDR'];
-			$query = "UPDATE ".$this->USERS_TABLE." SET login_when = '$get_ts', login_ip = '$get_ip' WHERE user_id = '$user_id'";
+			$query = "UPDATE ".$this->users_table." SET login_when = '$get_ts', login_ip = '$get_ip' WHERE user_id = '$user_id'";
 			$database->query($query);
+		}else {
+		  $num_rows = 0;
 		}
 		// Return if the user exists or not
 		return $num_rows;
 	}
-	
+
 	// Increase the count for login attemps
 	function increase_attemps() {
 		if(!isset($_SESSION['ATTEMPS'])) {
@@ -267,80 +234,91 @@ class login extends admin {
 	
 	// Function to set a "remembering" cookie for the user
 	function remember($user_id) {
-		$remember_key = '';
-		// Generate user id to append to the remember key
-		$length = 11-strlen($user_id);
-		if($length > 0) {
-			for($i = 1; $i <= $length; $i++) {
-				$remember_key .= '0';
-			}
-		}
-		// Generate remember key
-		$remember_key .= $user_id.'_';
-		$salt = "abchefghjkmnpqrstuvwxyz0123456789";
-		srand((double)microtime()*1000000);
-		$i = 0;
-		while ($i <= 10) {
-			$num = rand() % 33;
-			$tmp = substr($salt, $num, 1);
-			$remember_key = $remember_key . $tmp;
-			$i++;
-		}
-		$remember_key = $remember_key;
-		// Update the remember key in the db
-		$database = new database();
-		$database->query("UPDATE ".$this->USERS_TABLE." SET remember_key = '$remember_key' WHERE user_id = '$user_id' LIMIT 1");
-		if($database->is_error()) {
-			return false;
-		} else {
-			// Workout options for the cookie
-			$cookie_name = 'REMEMBER_KEY';
-			$cookie_value = $remember_key;
-			$cookie_expire = time()+60*60*24*30;
-			// Set the cookie
-			if(setcookie($cookie_name, $cookie_value, $cookie_expire, '/')) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		return true;
+//		global $database;
+//		$remember_key = '';
+//		// Generate user id to append to the remember key
+//		$length = 11-strlen($user_id);
+//		if($length > 0) {
+//			for($i = 1; $i <= $length; $i++) {
+//				$remember_key .= '0';
+//			}
+//		}
+//		// Generate remember key
+//		$remember_key .= $user_id.'_';
+//		$salt = "abchefghjkmnpqrstuvwxyz0123456789";
+//		srand((double)microtime()*1000000);
+//		$i = 0;
+//		while ($i <= 10) {
+//			$num = rand() % 33;
+//			$tmp = substr($salt, $num, 1);
+//			$remember_key = $remember_key . $tmp;
+//			$i++;
+//		}
+//		$remember_key = $remember_key;
+//		// Update the remember key in the db
+//		// $database = new database();
+//		$database->query("UPDATE ".$this->users_table." SET remember_key = '$remember_key' WHERE user_id = '$user_id' LIMIT 1");
+//		if($database->is_error()) {
+//			return false;
+//		} else {
+//			// Workout options for the cookie
+//			$cookie_name = 'REMEMBER_KEY';
+//			$cookie_value = $remember_key;
+//			$cookie_expire = time()+60*60*24*30;
+//			// Set the cookie
+//			if(setcookie($cookie_name, $cookie_value, $cookie_expire, '/')) {
+//				return true;
+//			} else {
+//				return false;
+//			}
+//		}
 	}
 	
 	// Function to check if a user has been remembered
-	function is_remembered() {
-		if(isset($_COOKIE['REMEMBER_KEY']) AND $_COOKIE['REMEMBER_KEY'] != '') {
-			// Check if the remember key is correct
-			$database = new database();
-			$sql = "SELECT `user_id` FROM `" . $this->USERS_TABLE . "` WHERE `remember_key` = '";
-			$sql .= $this->get_safe_remember_key() . "' LIMIT 1";
-			$check_query = $database->query($sql);
-
-			if($check_query->numRows() > 0) {
-				$check_fetch = $check_query->fetchRow();
-				$user_id = $check_fetch['user_id'];
-				// Check the remember key prefix
-				$remember_key_prefix = '';
-				$length = 11-strlen($user_id);
-				if($length > 0) {
-					for($i = 1; $i <= $length; $i++) {
-						$remember_key_prefix .= '0';
-					}
-				}
-				$remember_key_prefix .= $user_id.'_';
-				$length = strlen($remember_key_prefix);
-				if(substr($_COOKIE['REMEMBER_KEY'], 0, $length) == $remember_key_prefix) {
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
+	function is_remembered()
+	{
+		return false;
+//		global $database;
+//		// add if get_safe_remember_key not empty
+//		if(isset($_COOKIE['REMEMBER_KEY']) && ($_COOKIE['REMEMBER_KEY'] != '') && ($this->get_safe_remember_key() <> '' ) )
+//		{
+//			// Check if the remember key is correct
+//			// $database = new database();
+//			$sql = "SELECT `user_id` FROM `" . $this->users_table . "` WHERE `remember_key` = '";
+//			$sql .= $this->get_safe_remember_key() . "' LIMIT 1";
+//			$check_query = $database->query($sql);
+//
+//			if($check_query->numRows() > 0)
+//			{
+//				$check_fetch = $check_query->fetchRow();
+//				$user_id = $check_fetch['user_id'];
+//				// Check the remember key prefix
+//				$remember_key_prefix = '';
+//				$length = 11-strlen($user_id);
+//				if($length > 0)
+//				{
+//					for($i = 1; $i <= $length; $i++)
+//					{
+//						$remember_key_prefix .= '0';
+//					}
+//				}
+//				$remember_key_prefix .= $user_id.'_';
+//				$length = strlen($remember_key_prefix);
+//				if(substr($_COOKIE['REMEMBER_KEY'], 0, $length) == $remember_key_prefix)
+//				{
+//					return true;
+//				} else {
+//					return false;
+//				}
+//			} else {
+//				return false;
+//			}
+//		} else {
+//			return false;
+//		}
 	}
-	
+
 	// Display the login screen
 	function display_login() {
 		// Get language vars
@@ -363,31 +341,31 @@ class login extends admin {
 				$template->set_var('DISPLAY_REMEMBER_ME', '');
 			}
 			$template->set_var(array(
-											'ACTION_URL' => $this->login_url,
-											'ATTEMPS' => $this->get_session('ATTEMPS'),
-											'USERNAME' => $this->username,
-											'USERNAME_FIELDNAME' => $this->username_fieldname,
-											'PASSWORD_FIELDNAME' => $this->password_fieldname,
-											'MESSAGE' => $this->message,
-											'INTERFACE_DIR_URL' =>  ADMIN_URL.'/interface',
-											'MAX_USERNAME_LEN' => $this->max_username_len,
-											'MAX_PASSWORD_LEN' => $this->max_password_len,
-											'WB_URL' => WB_URL,
-											'THEME_URL' => THEME_URL,
-                                            'VERSION' => VERSION,
-                                            'REVISION' => REVISION,
-											'LANGUAGE' => strtolower(LANGUAGE),
-											'FORGOTTEN_DETAILS_APP' => $this->forgotten_details_app,
-											'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS'],
-											'TEXT_USERNAME' => $TEXT['USERNAME'],
-											'TEXT_PASSWORD' => $TEXT['PASSWORD'],
-											'TEXT_REMEMBER_ME' => $TEXT['REMEMBER_ME'],
-											'TEXT_LOGIN' => $TEXT['LOGIN'],
-											'TEXT_HOME' => $TEXT['HOME'],
-											'PAGES_DIRECTORY' => PAGES_DIRECTORY,
-											'SECTION_LOGIN' => $MENU['LOGIN']
-											)
-									);
+				'ACTION_URL' => $this->login_url,
+				'ATTEMPS' => $this->get_session('ATTEMPS'),
+				'USERNAME' => $this->username,
+				'USERNAME_FIELDNAME' => $this->username_fieldname,
+				'PASSWORD_FIELDNAME' => $this->password_fieldname,
+				'MESSAGE' => $this->message,
+				'INTERFACE_DIR_URL' =>  ADMIN_URL.'/interface',
+				'MAX_USERNAME_LEN' => $this->max_username_len,
+				'MAX_PASSWORD_LEN' => $this->max_password_len,
+				'WB_URL' => WB_URL,
+				'THEME_URL' => THEME_URL,
+				'VERSION' => VERSION,
+				'REVISION' => REVISION,
+				'LANGUAGE' => strtolower(LANGUAGE),
+				'FORGOTTEN_DETAILS_APP' => $this->forgotten_details_app,
+				'TEXT_FORGOTTEN_DETAILS' => $TEXT['FORGOTTEN_DETAILS'],
+				'TEXT_USERNAME' => $TEXT['USERNAME'],
+				'TEXT_PASSWORD' => $TEXT['PASSWORD'],
+				'TEXT_REMEMBER_ME' => $TEXT['REMEMBER_ME'],
+				'TEXT_LOGIN' => $TEXT['LOGIN'],
+				'TEXT_HOME' => $TEXT['HOME'],
+				'PAGES_DIRECTORY' => PAGES_DIRECTORY,
+				'SECTION_LOGIN' => $MENU['LOGIN']
+				)
+			);
 			if(defined('DEFAULT_CHARSET')) {
 				$charset=DEFAULT_CHARSET;
 			} else {

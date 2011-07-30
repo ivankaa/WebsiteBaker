@@ -5,11 +5,11 @@
  * @package         wysiwyg
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -52,10 +52,11 @@ if(!isset($wysiwyg_editor_loaded)) {
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
 
 <?php
-show_wysiwyg_editor('content'.$section_id,'content'.$section_id,$content,'100%','350px');
+echo $admin->getFTAN()."\n"; 
+show_wysiwyg_editor('content'.$section_id,'content'.$section_id,$content,'100%','350');
 ?>
 
-<table cellpadding="0" cellspacing="0" border="0" width="100%" style="padding-bottom: 10px;">
+<table summary="" cellpadding="0" cellspacing="0" border="0" width="100%" style="padding-bottom: 10px;">
 <tr>
 	<td align="left">
 		<input type="submit" value="<?php echo $TEXT['SAVE']; ?>" style="width: 100px; margin-top: 5px;" />

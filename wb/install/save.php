@@ -5,11 +5,11 @@
  * @package         install
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version      	$Id$
  * @filesource		$HeadURL:  $
  * @lastmodified    $Date: $
@@ -354,6 +354,10 @@ mysql_query('CREATE DATABASE `'.$database_name.'`');
 // Close the mysql connection
 mysql_close();
 
+$sSecMod = (defined('SECURE_FORM_MODULE') && SECURE_FORM_MODULE != '') ? '.'.SECURE_FORM_MODULE : '';
+$sSecMod = WB_PATH.'/framework/SecureForm'.$sSecMod.'.php';
+require_once($sSecMod);
+
 // Include WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
@@ -459,25 +463,27 @@ if($install_tables == true) {
 	." ('default_time_format', 'g:i A'),"
 	." ('redirect_timer', '1500'),"
 	." ('home_folders', 'true'),"
+	." ('warn_page_leave', '1'),"
 	." ('default_template', 'round'),"
 	." ('default_theme', 'wb_theme'),"
 	." ('default_charset', 'utf-8'),"
-	." ('multiple_menus', 'false'),"
+	." ('multiple_menus', 'true'),"
 	." ('page_level_limit', '4'),"
 	." ('intro_page', 'false'),"
-	." ('page_trash', 'disabled'),"
+	." ('page_trash', 'inline'),"
 	." ('homepage_redirection', 'false'),"
-	." ('page_languages', 'false'),"
+	." ('page_languages', 'true'),"
 	." ('wysiwyg_editor', 'fckeditor'),"
 	." ('manage_sections', 'true'),"
-	." ('section_blocks', 'false'),"
-	." ('smart_login', 'false'),"
+	." ('section_blocks', 'true'),"
+	." ('smart_login', 'true'),"
 	." ('frontend_login', 'false'),"
 	." ('frontend_signup', 'false'),"
 	." ('search', 'public'),"
 	." ('page_extension', '.php'),"
 	." ('page_spacer', '-'),"
 	." ('pages_directory', '/pages'),"
+	." ('rename_files_on_upload', 'ph.*?,cgi,pl,pm,exe,com,bat,pif,cmd,src,asp,aspx'),"
 	." ('media_directory', '/media'),"
 	." ('operating_system', '$operating_system'),"
 	." ('string_file_mode', '$file_mode'),"
@@ -489,6 +495,8 @@ if($install_tables == true) {
 	." ('wbmailer_smtp_auth', ''),"
 	." ('wbmailer_smtp_username', ''),"
 	." ('wbmailer_smtp_password', ''),"
+	." ('fingerprint_with_ip_octets', '3'),"
+	." ('secure_form_module', ''),"
 	." ('mediasettings', '')";
 	$database->query($settings_rows);
 	
@@ -641,10 +649,10 @@ if($install_tables == true) {
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` VALUES ('', 'cfg_enable_flush', 'false', '')");
 	// Search template
 	$database->query("INSERT INTO `".TABLE_PREFIX."search` (name) VALUES ('template')");
-		
+
 	require_once(WB_PATH.'/framework/initialize.php');
-	
-	// Include the PclZip class file (thanks to 
+
+	// Include the PclZip class file (thanks to
 	require_once(WB_PATH.'/include/pclzip/pclzip.lib.php');
 			
 	// Install add-ons

@@ -28,7 +28,7 @@ require_once(WB_PATH.'/include/captcha/captcha.php');
 
 if(!isset($_SESSION['captcha_time']))
 	exit;
-unset($_SESSION['captcha_time']);
+//unset($_SESSION['captcha_time']);
 
 // get lists of fonts and backgrounds
 require_once(WB_PATH.'/framework/functions.php');
@@ -54,7 +54,10 @@ if(!function_exists('randomString')) {
 	}
 }
 $text = randomString(5); // number of characters
-$_SESSION['captcha'] = $text; 
+
+$sec_id = '';
+if(isset($_GET['s'])) $sec_id = $_GET['s'];
+$_SESSION['captcha'.$sec_id] = $text;
 
 // choose a font and background
 $font = $fonts[array_rand($fonts)];

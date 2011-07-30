@@ -1,27 +1,20 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        admin
+ * @package         admintools
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL:  $
+ * @lastmodified    $Date:  $
+ *
+ */
 
 // Create admin object
 require('../../config.php');
@@ -33,26 +26,34 @@ require_once(WB_PATH.'/framework/functions.php');
 
 // Get the current dir
 $directory = $admin->get_get('dir');
-if($directory == '/') {
-	$directory = '';
-}
-// Check to see if it contains ../
-if(strstr($directory, '../')) {
-	$admin->print_header();
-	$admin->print_error($MESSAGE['MEDIA']['DOT_DOT_SLASH']);
+$directory = ($directory == '/') ?  '' : $directory;
+
+$dirlink = 'browse.php?dir='.$directory;
+$rootlink = 'browse.php?dir=';
+
+// Check to see if it contains ..
+if (!check_media_path($directory)) {
+	// $admin->print_header();
+	$admin->print_error($MESSAGE['MEDIA']['DIR_DOT_DOT_SLASH'],$rootlink,false );
 }
 
-// Get the temp id
-if(!is_numeric($admin->get_get('id'))) {
-	header("Location: browse.php?dir=$directory");
-	exit(0);
-} else {
-	$file_id = $admin->get_get('id');
+// Get the file id
+$file_id = $admin->checkIDKEY('id', false, $_SERVER['REQUEST_METHOD']);
+if (!$file_id) {
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], $dirlink,false);
 }
 
 // Get home folder not to show
 $home_folders = get_home_folders();
+$usedFiles = array();
+// feature freeze
+// require_once(ADMIN_PATH.'/media/dse.php');
+/*
 
+if(!empty($currentdir)) {
+	$usedFiles = $Dse->getMatchesFromDir( $directory, DseTwo::RETURN_USED);
+}
+*/
 // Figure out what folder name the temp id is
 if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 	// Loop through the files and dirs an add to list
@@ -92,28 +93,28 @@ if($handle = opendir(WB_PATH.MEDIA_DIRECTORY.'/'.$directory)) {
 
 // Check to see if we could find an id to match
 if(!isset($delete_file)) {
-	$admin->print_error($MESSAGE['MEDIA']['FILE_NOT_FOUND'], "browse.php?dir=$directory", false);
+	$admin->print_error($MESSAGE['MEDIA']['FILE_NOT_FOUND'], $dirlink, false);
 }
 $relative_path = WB_PATH.MEDIA_DIRECTORY.'/'.$directory.'/'.$delete_file;
 // Check if the file/folder exists
 if(!file_exists($relative_path)) {
-	$admin->print_error($MESSAGE['MEDIA']['FILE_NOT_FOUND'], "browse.php?dir=$directory", false);	
+	$admin->print_error($MESSAGE['MEDIA']['FILE_NOT_FOUND'], $dirlink, false);
 }
 
 // Find out whether its a file or folder
 if($type == 'folder') {
 	// Try and delete the directory
 	if(rm_full_dir($relative_path)) {
-		$admin->print_success($MESSAGE['MEDIA']['DELETED_DIR'], "browse.php?dir=$directory");
+		$admin->print_success($MESSAGE['MEDIA']['DELETED_DIR'], $dirlink);
 	} else {
-		$admin->print_error($MESSAGE['MEDIA']['CANNOT_DELETE_DIR'], "browse.php?dir=$directory", false);
+		$admin->print_error($MESSAGE['MEDIA']['CANNOT_DELETE_DIR'], $dirlink, false);
 	}
 } else {
 	// Try and delete the file
 	if(unlink($relative_path)) {
-		$admin->print_success($MESSAGE['MEDIA']['DELETED_FILE'], "browse.php?dir=$directory");
+		$admin->print_success($MESSAGE['MEDIA']['DELETED_FILE'], $dirlink);
 	} else {
-		$admin->print_error($MESSAGE['MEDIA']['CANNOT_DELETE_FILE'], "browse.php?dir=$directory", false);
+		$admin->print_error($MESSAGE['MEDIA']['CANNOT_DELETE_FILE'], $dirlink, false);
 	}
 }
 

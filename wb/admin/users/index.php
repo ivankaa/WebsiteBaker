@@ -5,17 +5,16 @@
  * @package         users
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
 */
-
 
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
@@ -27,10 +26,11 @@ $template->set_file('page', 'users.htt');
 $template->set_block('page', 'main_block', 'main');
 $template->set_block("main_block", "manage_groups_block", "groups");
 $template->set_var('ADMIN_URL', ADMIN_URL);
+$template->set_var('FTAN', $admin->getFTAN());
 
 // Get existing value from database
-$database = new database();
-$query = "SELECT user_id, username, display_name FROM ".TABLE_PREFIX."users WHERE user_id != '1' ORDER BY username";
+// $database = new database();
+$query = "SELECT user_id, username, display_name FROM ".TABLE_PREFIX."users WHERE user_id != '1' ORDER BY display_name,username";
 $results = $database->query($query);
 if($database->is_error()) {
 	$admin->print_error($database->get_error(), 'index.php');
@@ -45,7 +45,8 @@ if($results->numRows() > 0) {
 	$template->parse('list', 'list_block', true);
 	// Loop through users
 	while($user = $results->fetchRow()) {
-		$template->set_var('VALUE', $user['user_id']);
+		$template->set_var('VALUE',$admin->getIDKEY($user['user_id']));
+		$template->set_var('STATUS', ($user['active']==false ? 'text-decoration:line-through' : 'text-decoration :none;') );
 		$template->set_var('NAME', $user['display_name'].' ('.$user['username'].')');
 		$template->parse('list', 'list_block', true);
 	}
@@ -76,7 +77,6 @@ $template->set_var(array(
 $template->set_var(array(
 		'ADMIN_URL' => ADMIN_URL,
 		'WB_URL' => WB_URL,
-		'WB_PATH' => WB_PATH,
 		'THEME_URL' => THEME_URL
 		)
 );
@@ -101,11 +101,11 @@ $template->set_var('DISPLAY_EXTRA', 'display:none;');
 $template->set_var('ACTIVE_CHECKED', ' checked="checked"');
 $template->set_var('ACTION_URL', ADMIN_URL.'/users/add.php');
 $template->set_var('SUBMIT_TITLE', $TEXT['ADD']);
+$template->set_var('FTAN', $admin->getFTAN());
 // insert urls
 $template->set_var(array(
 		'ADMIN_URL' => ADMIN_URL,
 		'WB_URL' => WB_URL,
-		'WB_PATH' => WB_PATH,
 		'THEME_URL' => THEME_URL
 		)
 );
@@ -198,5 +198,3 @@ $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
 
 $admin->print_footer();
-
-?>

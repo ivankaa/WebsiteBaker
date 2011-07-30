@@ -1,18 +1,24 @@
 <?php
+/**
+ *
+ * @category        module
+ * @package         droplet
+ * @author          Ruud Eisinga (Ruud) John (PCWacht)
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
-// $Id$
-
-/*
-*	@version	1.0
-*	@author		Ruud Eisinga (Ruud) John (PCWacht)
-*	@date		June 2009
-*
-*	droplets are small codeblocks that are called from anywhere in the template. 
-* 	To call a droplet just use [[dropletname]]. optional parameters for a droplet can be used like [[dropletname?parameter=value&parameter2=value]]
-*/
-
-// Direct access prevention
-defined('WB_PATH') OR die(header('Location: ../index.php'));
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 // Load Language file
 if(LANGUAGE_LOADED) {
@@ -32,7 +38,9 @@ if(!method_exists($admin, 'register_backend_modfiles') && file_exists(WB_PATH .'
 
 // Get userid for showing admin only droplets or not
 $loggedin_user = $admin->get_user_id();
-	
+$loggedin_group = $admin->get_groups_id();
+$admin_user = ( ($admin->get_home_folder() == '') && ($admin->ami_group_member('1') ) || ($loggedin_user == '1'));
+
 // And... action
 $admintool_url = ADMIN_URL .'/admintools/index.php';
 
@@ -41,7 +49,7 @@ $database->query("DELETE FROM ".TABLE_PREFIX."mod_droplets WHERE name=''");
 ?>
 
 <br />
-<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<table summary="" cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 	<td valign="bottom" width="50%">
 		<button class="add" type="button" name="add_droplet" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/droplets/add_droplet.php';"><?php echo $TEXT['ADD'].' '.$DR_TEXT['DROPLETS']; ?></button>	
@@ -52,7 +60,7 @@ $database->query("DELETE FROM ".TABLE_PREFIX."mod_droplets WHERE name=''");
 	<td valign="top" width="50%" align="right">
 		<a href="#" onclick="javascript: window.open('<?php echo WB_URL; ?>/modules/droplets/readme/<?php echo $DR_TEXT['README']; ?>','helpwindow','width=700,height=550,directories=no,location=no,menubar=no,scrollbars=yes,status=no,toolbar=no,resizable=yes');"><?php echo $DR_TEXT['HELP']; ?></a>
 		<br /><br />
-		<a href="#" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/droplets/backup_droplets.php';"><?php echo $DR_TEXT['BACKUP']; ?></a>
+		<a href="#" onclick="javascript: window.location = '<?php echo WB_URL; ?>/modules/droplets/backup_droplets.php?id=<?php echo $admin->getIDKEY(999); ?>'"><?php echo $DR_TEXT['BACKUP']; ?></a>
 	</td>
 </tr>
 </table>
@@ -60,7 +68,8 @@ $database->query("DELETE FROM ".TABLE_PREFIX."mod_droplets WHERE name=''");
 
 <h2><?php echo $TEXT['MODIFY'].'/'.$TEXT['DELETE'].' '.$DR_TEXT['DROPLETS']; ?></h2>
 <?php
-if ($loggedin_user == '1') {
+// if ($loggedin_user == '1') {
+if ($admin_user) {
 	$query_droplets = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_droplets ORDER BY modified_when DESC");
 } else { 
 	$query_droplets = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_droplets WHERE admin_view <> '1' ORDER BY modified_when DESC");
@@ -68,7 +77,7 @@ if ($loggedin_user == '1') {
 $num_droplets = $query_droplets->numRows();
 if($num_droplets > 0) {
 	?>
-	<table class="row_a" border="0" cellspacing="0" cellpadding="3" width="100%">
+	<table summary="" class="row_a" border="0" cellspacing="0" cellpadding="3" width="100%">
 	<thead>
 		<tr>
 			<td width="3%"></td>
@@ -102,12 +111,12 @@ if($num_droplets > 0) {
 		
 		<tr class="row_<?php echo $row; ?>" >
 			<td >
-				<a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $droplet['id']?>" title="<?php echo $TEXT['MODIFY']; ?>">
+				<a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $admin->getIDKEY($droplet['id']); ?>" title="<?php echo $TEXT['MODIFY']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/modify_16.png" border="0" alt="Modify" /> 
 				</a>
 			</td>
 			<td >
-				<a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $droplet['id']?>" class="tooltip">
+				<a href="<?php echo WB_URL; ?>/modules/droplets/modify_droplet.php?droplet_id=<?php echo $admin->getIDKEY($droplet['id']); ?>" class="tooltip">
 							<?php if ($valid_code && $unique_droplet) { ?><img src="<?php echo WB_URL; ?>/modules/droplets/img/droplet.png" border="0" alt=""/>
 							<?php } else {  ?><img src="<?php echo WB_URL; ?>/modules/droplets/img/invalid.gif" border="0" title="" alt=""/><?php }  ?>
 					<?php echo $droplet['name']; ?><?php echo $comments; ?>
@@ -120,7 +129,7 @@ if($num_droplets > 0) {
 				<b><?php if($droplet['active'] == 1){ echo '<span style="color: green;">'. $TEXT['YES']. '</span>'; } else { echo '<span style="color: red;">'.$TEXT['NO'].'</span>';  } ?></b>
 			</td>
 			<td >
-				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/droplets/delete_droplet.php?droplet_id=<?php echo $droplet['id']?>');" title="<?php echo $TEXT['DELETE']; ?>">
+				<a href="javascript: confirm_link('<?php echo $TEXT['ARE_YOU_SURE']; ?>', '<?php echo WB_URL; ?>/modules/droplets/delete_droplet.php?droplet_id=<?php echo $admin->getIDKEY($droplet['id']); ?>');" title="<?php echo $TEXT['DELETE']; ?>">
 					<img src="<?php echo THEME_URL; ?>/images/delete_16.png" border="0" alt="X" />
 				</a>
 			</td>
@@ -147,4 +156,3 @@ function check_unique($name) {
 	$query_droplets = $database->query("SELECT name FROM ".TABLE_PREFIX."mod_droplets WHERE name = '$name'");
 	return ($query_droplets->numRows() == 1);
 }
-?>

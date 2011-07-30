@@ -5,11 +5,11 @@
  * @package         news
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -31,7 +31,6 @@ if(isset($_GET['group_id']) AND is_numeric($_GET['group_id'])) {
 // Include WB files
 require_once('../../config.php');
 require_once(WB_PATH.'/framework/class.frontend.php');
-$database = new database();
 $wb = new frontend();
 $wb->page_id = $page_id;
 $wb->get_page_details();

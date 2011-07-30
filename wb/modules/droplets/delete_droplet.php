@@ -1,38 +1,43 @@
 <?php
-
-// $Id$
-
-/*
-*	@version	1.0
-*	@author		Ruud Eisinga (Ruud) John (PCWacht)
-*	@date		June 2009
-*
-*	droplets are small codeblocks that are called from anywhere in the template. 
-* 	To call a droplet just use [[dropletname]]. optional parameters for a droplet can be used like [[dropletname?parameter=value&parameter2=value]]
-*/
+/**
+ *
+ * @category        module
+ * @package         droplet
+ * @author          Ruud Eisinga (Ruud) John (PCWacht)
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 require('../../config.php');
-
-// Get id
-if(!isset($_GET['droplet_id']) OR !is_numeric($_GET['droplet_id'])) {
-	header("Location: ".ADMIN_URL."/pages/index.php");
-} else {
-	$droplet_id = $_GET['droplet_id'];
-}
 
 // Include WB admin wrapper script
 require_once(WB_PATH.'/framework/class.admin.php');
 require_once(WB_PATH.'/framework/functions.php');
 
+$module_edit_link = ADMIN_URL .'/admintools/tool.php?tool=droplets';
 // check website baker platform (with WB 2.7, Admin-Tools were moved out of settings dialogue)
 if(file_exists(ADMIN_PATH .'/admintools/tool.php')) {
 	$admintool_link = ADMIN_URL .'/admintools/index.php';
-	$module_edit_link = ADMIN_URL .'/admintools/tool.php?tool=droplets';
 	$admin = new admin('admintools', 'admintools');
 } else {
 	$admintool_link = ADMIN_URL .'/settings/index.php?advanced=yes#administration_tools"';
-	$module_edit_link = ADMIN_URL .'/settings/tool.php?tool=droplets';
 	$admin = new admin('Settings', 'settings_advanced');
+}
+
+// Get id
+$droplet_id = $admin->checkIDKEY('droplet_id', false, 'GET');
+if (!$droplet_id) {
+ $admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], $module_edit_link);
+ exit();
 }
 
 // Delete droplet
@@ -47,5 +52,3 @@ if($database->is_error()) {
 
 // Print admin footer
 $admin->print_footer();
-
-?>

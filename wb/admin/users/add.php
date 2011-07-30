@@ -1,38 +1,40 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        admin
+ * @package         users
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
 // Print admin header
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
-$admin = new admin('Access', 'users_add');
+// suppress to print the header, so no new FTAN will be set
+$admin = new admin('Access', 'users_add',false);
 
-// Create new database object
-$database = new database();
+// Create a javascript back link
+$js_back = ADMIN_URL.'/users/index.php';
+
+if( !$admin->checkFTAN() )
+{
+	$admin->print_header();
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], $js_back);
+}
+// After check print the header
+$admin->print_header();
 
 // Get details entered
-$groups_id = implode(",", $admin->add_slashes($_POST['groups'])); //should check permissions
+$groups_id = (isset($_POST['groups'])) ? implode(",", $admin->add_slashes($_POST['groups'])) : ''; //should check permissions
 $groups_id = trim($groups_id, ','); // there will be an additional ',' when "Please Choose" was selected, too
 $active = $admin->add_slashes($_POST['active'][0]);
 $username_fieldname = $admin->get_post_escaped('username_fieldname');
@@ -44,15 +46,13 @@ $email = $admin->get_post_escaped('email');
 $home_folder = $admin->get_post_escaped('home_folder');
 $default_language = DEFAULT_LANGUAGE;
 
-// Create a javascript back link
-$js_back = 'javascript: history.go(-1);';
-
 // Check values
 if($groups_id == '') {
 	$admin->print_error($MESSAGE['USERS']['NO_GROUP'], $js_back);
 }
-if(strlen($username) < 2) {
-	$admin->print_error($MESSAGE['USERS']['USERNAME_TOO_SHORT'], $js_back);
+if(!preg_match('/^[a-z]{1}[a-z0-9_-]{2,}$/i', $username)) {
+	$admin->print_error( $MESSAGE['USERS_NAME_INVALID_CHARS'].' / '.
+	                  $MESSAGE['USERS_USERNAME_TOO_SHORT'], $js_back);
 }
 if(strlen($password) < 2) {
 	$admin->print_error($MESSAGE['USERS']['PASSWORD_TOO_SHORT'], $js_back);
@@ -60,10 +60,14 @@ if(strlen($password) < 2) {
 if($password != $password2) {
 	$admin->print_error($MESSAGE['USERS']['PASSWORD_MISMATCH'], $js_back);
 }
-if($email != '') {
-	if($admin->validate_email($email) == false) {
+if($email != '')
+{
+	if($admin->validate_email($email) == false)
+    {
 		$admin->print_error($MESSAGE['USERS']['INVALID_EMAIL'], $js_back);
 	}
+} else { // e-mail must be present
+	$admin->print_error($MESSAGE['SIGNUP']['NO_EMAIL'], $js_back);
 }
 
 // choose group_id from groups_id - workaround for still remaining calls to group_id (to be cleaned-up)
@@ -80,8 +84,10 @@ if($results->numRows() > 0) {
 
 // Check if the email already exists
 $results = $database->query("SELECT user_id FROM ".TABLE_PREFIX."users WHERE email = '".$admin->add_slashes($_POST['email'])."'");
-if($results->numRows() > 0) {
-	if(isset($MESSAGE['USERS']['EMAIL_TAKEN'])) {
+if($results->numRows() > 0)
+{
+	if(isset($MESSAGE['USERS']['EMAIL_TAKEN']))
+    {
 		$admin->print_error($MESSAGE['USERS']['EMAIL_TAKEN'], $js_back);
 	} else {
 		$admin->print_error($MESSAGE['USERS']['INVALID_EMAIL'], $js_back);
@@ -102,5 +108,3 @@ if($database->is_error()) {
 
 // Print admin footer
 $admin->print_footer();
-
-?>

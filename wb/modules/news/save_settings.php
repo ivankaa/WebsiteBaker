@@ -5,11 +5,11 @@
  * @package         news
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -17,10 +17,30 @@
  */
 
 require('../../config.php');
-
+/*
 // Include WB admin wrapper script
 $update_when_modified = true; // Tells script to update when this page was last updated
 require(WB_PATH.'/modules/admin.php');
+
+if (!$admin->checkFTAN())
+{
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'],ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
+	exit();
+}
+*/
+
+$admin_header = false;
+// Tells script to update when this page was last updated
+$update_when_modified = true;
+// Include WB admin wrapper script
+require(WB_PATH.'/modules/admin.php');
+
+if (!$admin->checkFTAN())
+{
+	$admin->print_header();
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
+}
+$admin->print_header();
 
 // This code removes any <?php tags and adds slashes
 $friendly = array('&lt;', '&gt;', '?php');
@@ -44,7 +64,11 @@ if(extension_loaded('gd') AND function_exists('imageCreateFromJpeg')) {
 }
 
 // Update settings
-$database->query("UPDATE ".TABLE_PREFIX."mod_news_settings SET header = '$header', post_loop = '$post_loop', footer = '$footer', posts_per_page = '$posts_per_page', post_header = '$post_header', post_footer = '$post_footer', comments_header = '$comments_header', comments_loop = '$comments_loop', comments_footer = '$comments_footer', comments_page = '$comments_page', commenting = '$commenting', resize = '$resize', use_captcha = '$use_captcha' WHERE section_id = '$section_id'");
+$database->query("UPDATE ".TABLE_PREFIX."mod_news_settings SET header = '$header', post_loop = '$post_loop', footer = '$footer',
+				 posts_per_page = '$posts_per_page', post_header = '$post_header', post_footer = '$post_footer',
+				 comments_header = '$comments_header', comments_loop = '$comments_loop', comments_footer = '$comments_footer',
+				 comments_page = '$comments_page', commenting = '$commenting', resize = '$resize', use_captcha = '$use_captcha'
+				 WHERE section_id = '$section_id'");
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {

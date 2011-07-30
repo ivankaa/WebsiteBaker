@@ -1,30 +1,24 @@
 <?php
+/**
+ *
+ * @category        modules
+ * @package         captcha_control
+ * @author          Independend-Software-Team
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link            http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource      $HeadURL$
+ * @lastmodified    $Date$
+ *
+ */
 
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
-
-// direct access prevention
-defined('WB_PATH') OR die(header('Location: ../index.php'));
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 // check if module language file exists for the language set by the user (e.g. DE, EN)
 if(!file_exists(WB_PATH .'/modules/captcha_control/languages/'.LANGUAGE .'.php')) {
@@ -36,9 +30,16 @@ if(!file_exists(WB_PATH .'/modules/captcha_control/languages/'.LANGUAGE .'.php')
 }
 
 $table = TABLE_PREFIX.'mod_captcha_control';
+$js_back = ADMIN_URL.'/admintools/tool.php?tool=captcha_control';
 
 // check if data was submitted
 if(isset($_POST['save_settings'])) {
+	if (!$admin->checkFTAN())
+	{
+		if(!$admin_header) { $admin->print_header(); }
+		$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], $js_back );
+	}
+	
 	// get configuration settings
 	$enabled_captcha = ($_POST['enabled_captcha'] == '1') ? '1' : '0';
 	$enabled_asp = ($_POST['enabled_asp'] == '1') ? '1' : '0';
@@ -60,13 +61,15 @@ if(isset($_POST['save_settings'])) {
 	}
 	
 	// check if there is a database error, otherwise say successful
+	if(!$admin_header) { $admin->print_header(); }
 	if($database->is_error()) {
 		$admin->print_error($database->get_error(), $js_back);
 	} else {
-		$admin->print_success($MESSAGE['PAGES']['SAVED'], ADMIN_URL.'/admintools/tool.php?tool=captcha_control');
+		$admin->print_success($MESSAGE['PAGES']['SAVED'], $js_back);
 	}
 
 } else {
+}
 	
 	// include captcha-file
 	require_once(WB_PATH .'/include/captcha/captcha.php');
@@ -139,6 +142,7 @@ if(isset($_POST['save_settings'])) {
 	echo '<p>' .$MOD_CAPTCHA_CONTROL['HOWTO'] .'</p>';
 ?>
 <form name="store_settings" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+	<?php echo $admin->getFTAN(); ?>
 	<table width="98%" cellspacing="0" border="0" cellpadding="5px" class="row_a">
 	<tr><td colspan="2"><strong><?php echo $MOD_CAPTCHA_CONTROL['CAPTCHA_CONF'];?>:</strong></td></tr>
 	<tr>
@@ -190,7 +194,3 @@ if(isset($_POST['save_settings'])) {
 	</table>
 	<input type="submit" name="save_settings" style="margin-top:10px; width:140px;" value="<?php echo $TEXT['SAVE']; ?>" />
 </form>
-<?php
-}
-
-?>

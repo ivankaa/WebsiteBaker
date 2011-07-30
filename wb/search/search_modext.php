@@ -45,12 +45,13 @@ function get_page_modified($page_modified_when) {
 // make username and displayname for "last modified by... on ..."-string
 function get_page_modified_by($page_modified_by, $users) {
 	global $TEXT;
-	// check for existing user-id
-	if(!isset($users[$page_modified_by]))
-		$page_modified_by = 0;
-	
-	$username = $users[$page_modified_by]['username'];
-	$displayname = $users[$page_modified_by]['display_name'];
+	if($page_modified_by>0) {
+		$username = $users[$page_modified_by]['username'];
+		$displayname = $users[$page_modified_by]['display_name'];
+	} else {
+		$username = "";
+		$displayname = $TEXT['UNKNOWN'];
+	}
 	return array($username, $displayname);
 }
 
@@ -58,7 +59,7 @@ function get_page_modified_by($page_modified_by, $users) {
 function is_all_matched($text, $search_words) {
 	$all_matched = true;
 	foreach ($search_words AS $word) {
-		if(!preg_match('/'.$word.'/ui', $text)) {
+		if(!preg_match('/'.$word.'/i', $text)) {
 			$all_matched = false;
 			break;
 		}
@@ -70,7 +71,7 @@ function is_all_matched($text, $search_words) {
 function is_any_matched($text, $search_words) {
 	$any_matched = false;
 	$word = '('.implode('|', $search_words).')';
-	if(preg_match('/'.$word.'/ui', $text)) {
+	if(preg_match('/'.$word.'/i', $text)) {
 		$any_matched = true;
 	}
 	return $any_matched;
@@ -78,55 +79,35 @@ function is_any_matched($text, $search_words) {
 
 // collects the matches from text in excerpt_array
 function get_excerpts($text, $search_words, $max_excerpt_num) {
-	$match_array = array();
-	$excerpt_array = array();
+	$excerpt_array = FALSE;
 	$word = '('.implode('|', $search_words).')';
-
-	//Filter droplets from the page data
-	preg_match_all('~\[\[(.*?)\]\]~', $text, $matches);
-	foreach ($matches[1] as $match) {
-		$text = str_replace('[['.$match.']]', '', $text);					
-	}
-
-	// Build the regex-string
-	if(strpos(strtoupper(PHP_OS), 'WIN')===0) { // windows -> see below
-		$str1=".!?;";
-		$str2=".!?;";
-	} else { // linux & Co.
-		// start-sign: .!?; + INVERTED EXCLAMATION MARK - INVERTED QUESTION MARK - DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
-		$str1=".!?;"."\xC2\xA1"."\xC2\xBF"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
-		// stop-sign: .!?; + DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
-		$str2=".!?;"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
-	}
-	$regex='/(?:^|\b|['.$str1.'])([^'.$str1.']{0,200}?'.$word.'[^'.$str2.']{0,200}(?:['.$str2.']|\b|$))/uis';
-	if(version_compare(PHP_VERSION, '4.3.3', '>=') &&
-	   strpos(strtoupper(PHP_OS), 'WIN')!==0
-	) { // this may crash windows server, so skip if on windows
-		// jump from match to match, get excerpt, stop if $max_excerpt_num is reached
-		$last_end = 0; $offset = 0;
-		while(preg_match('/'.$word.'/uis', $text, $match_array, PREG_OFFSET_CAPTURE, $last_end)) {
-			$offset = ($match_array[0][1]-206 < $last_end)?$last_end:$match_array[0][1]-206;
-			if(preg_match($regex, $text, $matches, PREG_OFFSET_CAPTURE, $offset)) {
-				$last_end = $matches[1][1]+strlen($matches[1][0])-1;
-				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./', $matches[1][0])) // skip excerpts with email-addresses
-					$excerpt_array[] = trim($matches[1][0]);
-				if(count($excerpt_array)>=$max_excerpt_num) {
-					$excerpt_array = array_unique($excerpt_array);
-					if(count($excerpt_array) >= $max_excerpt_num)
-						break;
-				}
-			} else { // problem: preg_match failed - can't find a start- or stop-sign
-				$last_end += 201; // jump forward and try again
-			}
+	// start-sign: .!?; + INVERTED EXCLAMATION MARK - INVERTED QUESTION MARK - DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
+	$p_start=".!?;"."\xC2\xA1"."\xC2\xBF"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
+	// stop-sign: .!?; + DOUBLE EXCLAMATION MARK - INTERROBANG - EXCLAMATION QUESTION MARK - QUESTION EXCLAMATION MARK - DOUBLE QUESTION MARK - HALFWIDTH IDEOGRAPHIC FULL STOP - IDEOGRAPHIC FULL STOP - IDEOGRAPHIC COMMA
+	$p_stop=".!?;"."\xE2\x80\xBC"."\xE2\x80\xBD"."\xE2\x81\x89"."\xE2\x81\x88"."\xE2\x81\x87"."\xEF\xBD\xA1"."\xE3\x80\x82"."\xE3\x80\x81";
+	// jump from match to match, get excerpt, stop if $max_excerpt_num is reached
+	$match_array = $matches = array();
+	$startpos = $wordpos = $endpos = 0; // although preg_match with u-switch handles unicode correctly, the ...pos-variables will count bytes (not chars) 
+	while(preg_match("/$word/i", $text, $match_array, PREG_OFFSET_CAPTURE, $startpos)) {
+		$wordpos = $match_array[0][1];
+		$startpos = ($wordpos-200 < $endpos)?$endpos:$wordpos-200;
+		$endpos = $wordpos+200;
+		// look for better start position
+		if(preg_match_all("/[$p_start]/u", substr($text, $startpos, $wordpos-$startpos), $matches, PREG_OFFSET_CAPTURE))
+			$startpos += $matches[0][count($matches[0])-1][1]; // set startpos at last punctuation before word
+		// look for better end position
+		if(preg_match_all("/[$p_stop]/u", substr($text, $wordpos, $endpos-$wordpos), $matches, PREG_OFFSET_CAPTURE))
+			$endpos = $wordpos+$matches[0][0][1]; // set endpos at first punctuation after word
+		$match = substr($text, $startpos+1, $endpos-$startpos);
+		if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./', $match)) // skip excerpts with email-addresses
+			$excerpt_array[] = trim($match);
+		if(count($excerpt_array)>=$max_excerpt_num) {
+			$excerpt_array = array_unique($excerpt_array);
+			if(count($excerpt_array) >= $max_excerpt_num)
+				break;
 		}
-	} else { // compatible, but may be very slow with large pages
-		if(preg_match_all($regex, $text, $match_array)) {
-			foreach($match_array[1] AS $string) {
-				if(!preg_match('/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\./', $string))  // skip excerpts with email-addresses
-					$excerpt_array[] = trim($string);
-				
-			}
-		}
+		// restart at last endpos
+		$startpos = $endpos;
 	}
 	return $excerpt_array;
 }
@@ -150,9 +131,9 @@ function prepare_excerpts($excerpt_array, $search_words, $max_excerpt_num) {
 	// but we need some 'magic' to prevent <br />, <b>... from being highlighted
 	$excerpt = '';
 	foreach($excerpt_array as $str) {
-		$excerpt .= '#,,#'.preg_replace("/($string)/iu","#,,,,#$1#,,,,,#",$str).'#,,,#';
+		$excerpt .= '#,,#'.preg_replace("/($string)/i","#,,,,#$1#,,,,,#",$str).'#,,,#';
 	}
-	$excerpt = str_replace(array('&','<','>','"','\'',"\xC2\xA0"), array('&amp;','&lt;','&gt;','&quot;','&#039;','&nbsp;'), $excerpt);
+	$excerpt = str_replace(array('&','<','>','"','\'',"\xC2\xA0"), array('&amp;','&lt;','&gt;','&quot;','&#039;',' '), $excerpt);
 	$excerpt = str_replace(array('#,,,,#','#,,,,,#'), array($EXCERPT_MARKUP_START,$EXCERPT_MARKUP_END), $excerpt);
 	$excerpt = str_replace(array('#,,#','#,,,#'), array($EXCERPT_BEFORE,$EXCERPT_AFTER), $excerpt);
 	// prepare to write out
@@ -170,21 +151,12 @@ function make_url_target($page_link_target, $text, $search_words) {
 	// 4. $page_link_target=="" - do nothing
 	if(version_compare(PHP_VERSION, '4.3.3', ">=") && substr($page_link_target,0,12)=='#wb_section_') {
 		$word = '('.implode('|', $search_words).')';
-		preg_match('/'.$word.'/ui', $text, $match, PREG_OFFSET_CAPTURE);
+		preg_match('/'.$word.'/i', $text, $match, PREG_OFFSET_CAPTURE);
 		if($match && is_array($match[0])) {
 			$x=$match[0][1]; // position of first match
 			// is there an anchor nearby?
-			if(preg_match_all('/<(?:[^>]+id|\s*a[^>]+name)\s*=\s*"(.*)"/iU', substr($text,0,$x), $match, PREG_OFFSET_CAPTURE)) {
-				$anchor='';
-				foreach($match[1] AS $array) {
-					if($array[1] > $x) {
-						break;
-					}
-					$anchor = $array[0];
-				}
-				if($anchor != '') {
-					$page_link_target = '#'.$anchor;
-				}
+			if(preg_match_all('/<\s*(?:a[^>]+?name|[^>]+?id)\s*=\s*"([^"]+)"/i', substr($text,0,$x), $match)) {
+				$page_link_target = '#'.$match[1][count($match[1])-1];
 			}
 		}
 	}
@@ -255,10 +227,10 @@ function print_excerpt2($mod_vars, $func_vars) {
 	if($mod_no_highlight) // no highlighting
 		{ $mod_page_link_target = "&amp;nohighlight=1".$mod_page_link_target; }
 	// clean the text:
+	$mod_text = preg_replace('#<(br|dt|/dd|/?(?:h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>#i', '.', $mod_text);
 	$mod_text = preg_replace('#<(!--.*--|style.*</style|script.*</script)>#iU', ' ', $mod_text);
-	$mod_text = preg_replace('#<(br( /)?|dt|/dd|/?(h[1-6]|tr|table|p|li|ul|pre|code|div|hr))[^>]*>#i', '.', $mod_text);
-	$mod_text = preg_replace('/(\v\s?|\s\s)+/', ' ', $mod_text);
-	$mod_text = preg_replace('/\s\./', '.', $mod_text);
+	$mod_text = preg_replace('#\[\[.*?\]\]#', '', $mod_text); //Filter droplets from the page data
+	// strip_tags() is called below
 	if($mod_ext_charset!='') { // data from external database may have a different charset
 		require_once(WB_PATH.'/framework/functions-utf8.php');
 		switch($mod_ext_charset) {
@@ -289,13 +261,13 @@ function print_excerpt2($mod_vars, $func_vars) {
 			$mod_text = charset_to_utf8($mod_text, 'UTF-8');
 		}
 	} else {
-	$mod_text = entities_to_umlauts($mod_text, 'UTF-8');
+		$mod_text = entities_to_umlauts($mod_text, 'UTF-8');
 	}
 	$anchor_text = $mod_text; // make an copy containing html-tags
 	$mod_text = strip_tags($mod_text);
-	$mod_text = str_replace(array('&gt;','&lt;','&amp;','&quot;','&#039;','&apos;','&nbsp;'), array('>','<','&','"','\'','\'',"\xC2\xA0"), $mod_text);
+	$mod_text = str_replace(array('&gt;','&lt;','&amp;','&quot;','&#039;','&apos;','&nbsp;'), array('>','<','&','"','\'','\'',' '), $mod_text);
 	$mod_text = '.'.trim($mod_text).'.';
-	// Do a fast scan over $mod_text first. This will speedup things a lot.
+	// Do a fast scan over $mod_text first. This may speedup things a lot.
 	if($func_search_match == 'all') {
 		if(!is_all_matched($mod_text, $func_search_words))
 			return false;
@@ -305,7 +277,6 @@ function print_excerpt2($mod_vars, $func_vars) {
 	}
 	// search for an better anchor - this have to be done before strip_tags() (may fail if search-string contains <, &, amp, gt, lt, ...)
 	$anchor =  make_url_target($mod_page_link_target, $anchor_text, $func_search_words);
-
 	// make the link from $mod_page_link, add anchor
 	$link = "";
 	$link = page_link($mod_page_link);
@@ -322,10 +293,12 @@ function print_excerpt2($mod_vars, $func_vars) {
 		}
 		$excerpt = prepare_excerpts($excerpt_array, $func_search_words, $mod_max_excerpt_num);
 	}
-
 	// handle thumbs - to deactivate this look in the module's search.php: $show_thumb (or maybe in the module's settings-page)
 	if($mod_pic_link != "") {
-		$excerpt = '<table class="excerpt_thumb" width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td width="110" valign="top"><a href="'.$link.'"><img src="'.WB_URL.'/'.MEDIA_DIRECTORY.$mod_pic_link.'" alt="" /></a></td><td>'.$excerpt.'</td></tr></tbody></table>';
+		if(isset($mod_special) && $mod_special=='lightbox2_plus')
+			$excerpt = '<table class="excerpt_thumb" width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td width="110" valign="top">'.$mod_special_piclink.'<img src="'.WB_URL.'/'.MEDIA_DIRECTORY.$mod_pic_link.'" alt="" /></a></td><td>'.$excerpt.'</td></tr></tbody></table>';
+		else
+			$excerpt = '<table class="excerpt_thumb" width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td width="110" valign="top"><a href="'.$link.'"><img src="'.WB_URL.'/'.MEDIA_DIRECTORY.$mod_pic_link.'" alt="" /></a></td><td>'.$excerpt.'</td></tr></tbody></table>';
 	}
 
 	// print-out the excerpt
@@ -333,10 +306,12 @@ function print_excerpt2($mod_vars, $func_vars) {
 	$values = array();
 	list($date, $time) = get_page_modified($mod_page_modified_when);
 	list($username, $displayname) = get_page_modified_by($mod_page_modified_by, $func_users);
-	$vars = array('[LINK]', '[TITLE]', '[DESCRIPTION]', '[USERNAME]','[DISPLAY_NAME]','[DATE]','[TIME]','[TEXT_LAST_UPDATED_BY]','[TEXT_ON]','[EXCERPT]');
+	$vars = array('[LINK]', '[TITLE]','[PAGE_TITLE]' ,'[MENU_TITLE]' , '[DESCRIPTION]', '[USERNAME]','[DISPLAY_NAME]','[DATE]','[TIME]','[TEXT_LAST_UPDATED_BY]','[TEXT_ON]','[EXCERPT]');
 	$values = array(
 		$link,
 		$mod_page_title,
+		$func_page_title,
+		$func_page_menu_title,
 		$mod_page_description,
 		$username,
 		$displayname,
@@ -387,11 +362,11 @@ function clear_filelist($files, $str, $keep=true) {
 		return $files;
 	foreach($files as $file) {
 		if($keep) {
-			if(eregi($str, $file)) {
+			if(preg_match("~$str~i", $file)) {
 				$c_filelist[] = $file;
 			}
 		} else {
-			if(!eregi($str, $file)) {
+			if(!preg_match("~$str~i", $file)) {
 				$c_filelist[] = $file;
 			}
 		}
@@ -399,4 +374,96 @@ function clear_filelist($files, $str, $keep=true) {
 	return($c_filelist);
 }
 
-?>
+function search_make_sql_part($words, $match, $columns) {
+	// $words are utf-8 encoded, will be converted to DEFAULT_CHARSET below
+	if(empty($words) || empty($columns)) return('(1=1)');
+	global $database;
+
+	// check if we can use SQL'S "LIKE"
+	// work-around for WB'S missing-SET-NAMES-problem
+	static $checked = FALSE;
+	if($checked===FALSE) {
+		$checked = TRUE;
+		$lowers = array('utf8'=>"\xc3\xa1", 'iso'=>"\xe1");
+		$uppers = array('utf8'=>"\xc3\x81", 'iso'=>"\xc1");
+		switch(DEFAULT_CHARSET) {
+			case 'utf-8':
+				$lo = $lowers['utf8'];
+				$up = $uppers['utf8'];
+				break;
+			case 'iso-8859-1':
+			case 'iso-8859-2':
+			case 'iso-8859-3':
+			case 'iso-8859-4':
+			case 'iso-8859-5':
+			case 'iso-8859-7':
+			case 'iso-8859-9':
+			case 'iso-8859-10':
+				$lo = $lowers['iso'];
+				$up = $uppers['iso'];
+				break;
+			default:
+				$checked = 'check failed'; // we can't handle arabic,hebrew,thai
+		}
+		if($checked===TRUE && $query = $database->query("SELECT UPPER('$lo')='$up'")) {
+			$res = $query->fetchRow();
+			if($res[0]==0) {
+				$checked = 'check failed';
+			}
+		} else
+			$checked = 'check failed';
+	}
+
+	require_once(WB_PATH.'/framework/functions-utf8.php');
+	global $search_table_sql_local;
+	$altnum = count($search_table_sql_local);
+
+	if($match=='all') $op = 'AND';
+	else $op = ' OR'; // keep the leading space!
+
+	// create sql-template
+	$sql = '';
+	$i = 0;
+	foreach($words as $w) {
+		if(empty($w)) continue;
+		$w_alts = $e_alts = array();
+		if($altnum) {
+			for($x=0;$x<$altnum;$x++)
+				$w_alts[$x] = strtr($w, $search_table_sql_local[$x]);
+		} else {
+			$w_alts[0] = $w;
+		}
+		$w_alts = array_unique($w_alts);
+		foreach($w_alts as $a) {
+			$tmp = htmlentities($a, ENT_COMPAT, 'UTF-8');
+			// if the missing-SET-NAMES-issue appears and $tmp contains non-ascii characters: exit and use the normal (slow) search-function instead
+			if($checked!==TRUE && preg_match('/[\x80-\xFF]/', $tmp)) return('(1=1)'); // missing-SET-NAMES-issue
+			$e_alts[] = $tmp;
+		}
+		$sql .= "";
+		foreach($w_alts as $a)
+			$sql .= "{{COL}} LIKE '%".addslashes(utf8_to_charset($a))."%' OR ";
+		if(isset($e_alts[$i]) && $e_alts[$i]!=$w)
+			$sql .= " {{COL}} LIKE '%".addslashes($e_alts[$i])."%'";
+		else {
+			$sql = substr($sql, 0, strlen($sql)-4);
+			$sql .= '';
+		}
+		$sql .= " $op ";
+		$i++;
+	}
+	$sql = substr($sql, 0, strlen($sql)-5);
+	$sql_template = $sql;
+
+	// create SQL-string from template
+	$sql = '(';
+	foreach($columns as $c) {
+		$sql .= '(';
+		$sql .= str_replace('{{COL}}', $c, $sql_template);
+		$sql .= ")  OR ";
+	}
+	$sql = substr($sql, 0, strlen($sql)-4);
+	$sql .= ')';
+
+	return($sql);
+}

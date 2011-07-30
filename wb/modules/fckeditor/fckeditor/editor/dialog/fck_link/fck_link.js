@@ -1,6 +1,6 @@
 ﻿/*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
- * Copyright (C) 2003-2009 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2010 Frederico Caldeira Knabben
  *
  * == BEGIN LICENSE ==
  *
@@ -466,6 +466,38 @@ function LoadSelection()
 		}
 	}
 
+		var sLnkRel = GetE('cmbAttContentRel') ;
+		if (  (sLnkRel.length == 0) && (oLink.rel.lenght != 0) )	// Modifying an existent rel.
+		{
+			sLnkRel = oLink.rel;
+		}
+
+		if ( sLnkRel.lenght == null ) 
+		{
+			var myselect = document.getElementById("cmbAttContentRel")
+			var found = false;
+
+			for (var i=0; i < myselect.options.length; i++)
+			{
+				if (myselect.options[i].value == oLink.rel)
+				{
+				  found = true;
+				  break;
+				} 
+			}			
+
+			if ( found == false ) 
+			{
+				try {
+					myselect.add(new Option(oLink.rel, oLink.rel,true ), myselect.options[1]) //add new option to beginning of "cmbAttContentRel"
+					}
+				catch(e) { //in IE, try the below version instead of add()
+					myselect.add(new Option( oLink.rel, oLink.rel,true ),1 ) //add new option to beginning of "cmbAttContentRel"
+					//myselect.options[1].selected=true;
+					}
+			}
+		} 
+
 	// Get Advances Attributes
 	GetE('txtAttId').value			= oLink.id ;
 	GetE('txtAttName').value		= oLink.name ;
@@ -475,8 +507,8 @@ function LoadSelection()
 	GetE('txtAttTabIndex').value	= oLink.tabIndex <= 0 ? '' : oLink.tabIndex ;
 	GetE('txtAttTitle').value		= oLink.title ;
 	GetE('txtAttContentType').value	= oLink.type ;
-	GetE('cmbAttContentRel').value	= oLink.rel ;
 	GetE('txtAttCharSet').value		= oLink.charset ;
+	GetE('cmbAttContentRel').value	= oLink.rel ;
 
 	var sClass ;
 	if ( oEditor.FCKBrowserInfo.IsIE )
@@ -768,7 +800,7 @@ function Ok()
 		SetAttribute( oLink, 'tabindex'	, ( GetE('txtAttTabIndex').value > 0 ? GetE('txtAttTabIndex').value : null ) ) ;
 		SetAttribute( oLink, 'title'	, GetE('txtAttTitle').value ) ;
 		SetAttribute( oLink, 'type'		, GetE('txtAttContentType').value ) ;
-		SetAttribute( oLink, 'rel'		, GetE('cmbAttContentRel').value ) ;
+		SetAttribute( oLink, 'rel'		, GetE('cmbAttContentRel').value  ) ;
 		SetAttribute( oLink, 'charset'	, GetE('txtAttCharSet').value ) ;
 
 		if ( oEditor.FCKBrowserInfo.IsIE )

@@ -1,18 +1,18 @@
 <?php
 /**
  * $Id$
- * Website Baker theme: argos_theme
+ * Website Baker theme: wb_theme
  * This theme is the default WB backend Theme
  * Feel free to modify or build up on this template.
  *
- * This file defines the template variables required by Website Baker.
+ * This file prevents directory listing.
  *
  * LICENSE: GNU General Public License
  * 
- * @author     Jurgen Nijhuis (Argos Media) & Ruud Eisinga
+ * @author     Johannes Tassilo Gruber
  * @copyright  GNU General Public License
  * @license    http://www.gnu.org/licenses/gpl.html
- * @version    1.1
+ * @version    2.80
  * @platform   Website Baker 2.8
  *
  * Website Baker is free software; you can redistribute it and/or modify

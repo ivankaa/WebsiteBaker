@@ -1,45 +1,34 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
-
-/*
-The Website Baker Project would like to thank Rudolph Lartey <www.carbonect.com>
-for his contributions to this module - adding extra field types
-*/
+/**
+ *
+ * @category        module
+ * @package         Form
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ * @description     
+ */
 
 require('../../config.php');
 
-// Get id
-if(!isset($_GET['field_id']) OR !is_numeric($_GET['field_id'])) {
-	header("Location: ".ADMIN_URL."/pages/index.php");
-	exit(0);
-} else {
-	$field_id = $_GET['field_id'];
-}
-
+$print_info_banner = true;
+// Tells script to update when this page was last updated
+$update_when_modified = false;
 // Include WB admin wrapper script
 require(WB_PATH.'/modules/admin.php');
+/* */
+// Get id
+$field_id = $admin->checkIDKEY('field_id', false, 'GET');
+if (!$field_id) {
+ $admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS']." MF: $field_id :-(", ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
+}
 
 // Get header and footer
 $query_content = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_form_fields WHERE field_id = '$field_id'");
@@ -49,16 +38,18 @@ if($type == '') {
 	$type = 'none';
 }
 
+// set new token
+$field_id = $admin->getIDKEY($form['field_id']);
 // Set raw html <'s and >'s to be replaced by friendly html code
 $raw = array('<', '>');
 $friendly = array('&lt;', '&gt;');
 ?>
 
 <form name="modify" action="<?php echo WB_URL; ?>/modules/form/save_field.php" method="post" style="margin: 0;">
-
 <input type="hidden" name="section_id" value="<?php echo $section_id; ?>" />
 <input type="hidden" name="page_id" value="<?php echo $page_id; ?>" />
 <input type="hidden" name="field_id" value="<?php echo $field_id; ?>" />
+<?php echo $admin->getFTAN(); ?>
 
 <table class="row_a" cellpadding="2" cellspacing="0" border="0" width="100%">
 	<tr>
@@ -225,5 +216,3 @@ $friendly = array('&lt;', '&gt;');
 
 // Print admin footer
 $admin->print_footer();
-
-?>

@@ -5,17 +5,19 @@
  * @package         framework
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
- * @filesource		$HeadURL: $
- * @lastmodified    $Date:  $
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
  *
  */
 
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 // Include PHPLIB template class
 require_once(WB_PATH."/include/phplib/template.inc");
 
@@ -24,11 +26,54 @@ require_once(WB_PATH.'/framework/class.database.php');
 // Include new wbmailer class (subclass of PHPmailer)
 require_once(WB_PATH."/framework/class.wbmailer.php");
 
-class wb
+//require_once(WB_PATH."/framework/SecureForm.php");
+
+class wb extends SecureForm
 {
-	// General initialization function 
+
+ 	public $password_chars = 'a-zA-Z0-9\_\-\!\#\*\+\@\$\&\:';	// General initialization function
 	// performed when frontend or backend is loaded.
-	function wb() {
+
+	public function  __construct($mode = SecureForm::FRONTEND) {
+		parent::__construct($mode);
+	}
+
+/* ****************
+ * check if one or more group_ids are in both group_lists
+ *
+ * @access public
+ * @param mixed $groups_list1: an array or a coma seperated list of group-ids
+ * @param mixed $groups_list2: an array or a coma seperated list of group-ids
+ * @param array &$matches: an array-var whitch will return possible matches
+ * @return bool: true there is a match, otherwise false
+ */
+	function is_group_match( $groups_list1 = '', $groups_list2 = '', &$matches = null )
+	{
+		if( $groups_list1 == '' ) { return false; }
+		if( $groups_list2 == '' ) { return false; }
+		if( !is_array($groups_list1) )
+		{
+			$groups_list1 = explode(',', $groups_list1);
+		}
+		if( !is_array($groups_list2) )
+		{
+			$groups_list2 = explode(',', $groups_list2);
+		}
+		$matches = array_intersect( $groups_list1, $groups_list2);
+		return ( sizeof($matches) != 0 );
+	}
+/* ****************
+ * check if current user is member of at least one of given groups
+ * ADMIN (uid=1) always is treated like a member of any groups
+ *
+ * @access public
+ * @param mixed $groups_list: an array or a coma seperated list of group-ids
+ * @return bool: true if current user is member of one of this groups, otherwise false
+ */
+	function ami_group_member( $groups_list = '' )
+	{
+		if( $this->get_user_id() == 1 ) { return true; }
+		return $this->is_group_match( $groups_list, $this->get_groups_id() );
 	}
 
 	// Check whether a page is visible or not.
@@ -262,37 +307,106 @@ class wb
 
 	// Validate supplied email address
 	function validate_email($email) {
-		if(preg_match('/^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/', $email)) {
-		return true;
-		} else {
-			return false;
+		if(function_exists('idn_to_ascii')){ /* use pear if available */
+			$email = idn_to_ascii($email);
+		}else {
+			require_once(WB_PATH.'/include/idna_convert/idna_convert.class.php');
+			$IDN = new idna_convert();
+			$email = $IDN->encode($email);
+			unset($IDN);
 		}
+		// regex from NorHei 2011-01-11
+		$retval = preg_match("/^((([!#$%&'*+\\-\/\=?^_`{|}~\w])|([!#$%&'*+\\-\/\=?^_`{|}~\w][!#$%&'*+\\-\/\=?^_`{|}~\.\w]{0,}[!#$%&'*+\\-\/\=?^_`{|}~\w]))[@]\w+(([-.]|\-\-)\w+)*\.\w+(([-.]|\-\-)\w+)*)$/", $email);
+		return ($retval != false);
 	}
 
+/* ****************
+ * set one or more bit in a integer value
+ *
+ * @access public
+ * @param int $value: reference to the integer, containing the value
+ * @param int $bits2set: the bitmask witch shall be added to value
+ * @return void
+ */
+	function bit_set( &$value, $bits2set )
+	{
+		$value |= $bits2set;
+	}
+
+/* ****************
+ * reset one or more bit from a integer value
+ *
+ * @access public
+ * @param int $value: reference to the integer, containing the value
+ * @param int $bits2reset: the bitmask witch shall be removed from value
+ * @return void
+ */
+	function bit_reset( &$value, $bits2reset)
+	{
+		$value &= ~$bits2reset;
+	}
+
+/* ****************
+ * check if one or more bit in a integer value are set
+ *
+ * @access public
+ * @param int $value: reference to the integer, containing the value
+ * @param int $bits2set: the bitmask witch shall be added to value
+ * @return void
+ */
+	function bit_isset( $value, $bits2test )
+	{
+		return (($value & $bits2test) == $bits2test);
+	}
+
+/*
+	// Validate supplied email address
+	function validate_email($email) {
+		if(function_exists('idn_to_ascii')){ // use pear if available
+			$email = idn_to_ascii($email);
+		}else {
+			require_once(WB_PATH.'/include/idna_convert/idna_convert.class.php');
+			$IDN = new idna_convert();
+			$email = $IDN->encode($email);
+			unset($IDN);
+		}
+		return !(filter_var($email, FILTER_VALIDATE_EMAIL) == false);
+	}
+*/
 	// Print a success message which then automatically redirects the user to another page
-	function print_success($message, $redirect = 'index.php') {
-		global $TEXT, $database;
-		
-		// fetch redirect timer for sucess messages from settings table
-		$table = TABLE_PREFIX . 'settings';
-		$results = @$database->get_one("SELECT `value` FROM `$table` WHERE `name` = 'redirect_timer'");
-		$redirect_timer = ($results) ? $results : '1500';
-
-		// add template variables
-		$success_template = new Template(THEME_PATH.'/templates');
-		$success_template->set_file('page', 'success.htt');
-		$success_template->set_block('page', 'main_block', 'main');
-		$success_template->set_var('MESSAGE', $message);
-		$success_template->set_var('REDIRECT', $redirect);
-		$success_template->set_var('REDIRECT_TIMER', $redirect_timer);
-		$success_template->set_var('NEXT', $TEXT['NEXT']);
-		$success_template->parse('main', 'main_block', false);
-		$success_template->pparse('output', 'page');
+	function print_success( $message, $redirect = 'index.php' ) {
+	    global $TEXT;
+        if(is_array($message)) {
+           $message = implode ('<br />',$message);
+        }
+	    // fetch redirect timer for sucess messages from settings table
+	    $redirect_timer = ((defined( 'REDIRECT_TIMER' )) && (REDIRECT_TIMER <= 10000)) ? REDIRECT_TIMER : 0;
+	    // add template variables
+	    $tpl = new Template( THEME_PATH.'/templates' );
+	    $tpl->set_file( 'page', 'success.htt' );
+	    $tpl->set_block( 'page', 'main_block', 'main' );
+	    $tpl->set_block( 'main_block', 'show_redirect_block', 'show_redirect' );
+	    $tpl->set_var( 'MESSAGE', $message );
+	    $tpl->set_var( 'REDIRECT', $redirect );
+	    $tpl->set_var( 'REDIRECT_TIMER', $redirect_timer );
+	    $tpl->set_var( 'NEXT', $TEXT['NEXT'] );
+	    $tpl->set_var( 'BACK', $TEXT['BACK'] );
+	    if ($redirect_timer == -1) {
+	        $tpl->set_block( 'show_redirect', '' );
+	    }
+	    else {
+	        $tpl->parse( 'show_redirect', 'show_redirect_block', true );
+	    }
+	    $tpl->parse( 'main', 'main_block', false );
+	    $tpl->pparse( 'output', 'page' );
 	}
-	
+
 	// Print an error message
 	function print_error($message, $link = 'index.php', $auto_footer = true) {
 		global $TEXT;
+        if(is_array($message)) {
+           $message = implode ('<br />',$message);
+        }
 		$success_template = new Template(THEME_PATH.'/templates');
 		$success_template->set_file('page', 'error.htt');
 		$success_template->set_block('page', 'main_block', 'main');
@@ -324,9 +438,9 @@ class wb
 		$fromaddress = preg_replace('/[\r\n]/', '', $fromaddress);
 		$toaddress = preg_replace('/[\r\n]/', '', $toaddress);
 		$subject = preg_replace('/[\r\n]/', '', $subject);
-		$message_alt = $message;
-		$message = preg_replace('/[\r\n]/', '<br \>', $message);
-		
+		// $message_alt = $message;
+		// $message = preg_replace('/[\r\n]/', '<br \>', $message);
+
 		// create PHPMailer object and define default settings
 		$myMail = new wbmailer();
 
@@ -340,9 +454,9 @@ class wb
 		// define recepient and information to send out
 		$myMail->AddAddress($toaddress);                            // TO:
 		$myMail->Subject = $subject;                                // SUBJECT
-		$myMail->Body = $message;                                   // CONTENT (HTML)
-		$myMail->AltBody = strip_tags($message_alt);				// CONTENT (TEXT)
-		
+		$myMail->Body = nl2br($message);                                   // CONTENT (HTML)
+		$myMail->AltBody = strip_tags($message);				// CONTENT (TEXT)
+
 		// check if there are any send mail errors, otherwise say successful
 		if (!$myMail->Send()) {
 			return false;
@@ -352,4 +466,3 @@ class wb
 	}
 
 }
-?>

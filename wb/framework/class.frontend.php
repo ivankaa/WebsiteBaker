@@ -5,49 +5,51 @@
  * @package         framework
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
 */
 
-if(!defined('WB_PATH')) {
-	header('Location: ../index.php');
-	exit(0);
-}
-
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 require_once(WB_PATH.'/framework/class.wb.php');
+//require_once(WB_PATH.'/framework/SecureForm.php');
 
 class frontend extends wb {
 	// defaults
-	var $default_link,$default_page_id;
-	// when multiple blocks are used, show home page blocks on 
+	public $default_link,$default_page_id;
+	// when multiple blocks are used, show home page blocks on
 	// pages where no content is defined (search, login, ...)
-	var $default_block_content=true;
+	public $default_block_content=true;
 
 	// page details
 	// page database row
-	var $page;
-	var $page_id,$page_title,$menu_title,$parent,$root_parent,$level,$visibility;
-	var $page_description,$page_keywords,$page_link;
-	var $page_trail=array();
+	public $page;
+	public $page_id,$page_title,$menu_title,$parent,$root_parent,$level,$position,$visibility;
+	public $page_description,$page_keywords,$page_link;
+	public $page_trail=array();
 	
-	var $page_access_denied;
-	var $page_no_active_sections;
+	public $page_access_denied;
+	public $page_no_active_sections;
 	
 	// website settings
-	var $website_title,$website_description,$website_keywords,$website_header,$website_footer;
+	public $website_title,$website_description,$website_keywords,$website_header,$website_footer;
 
 	// ugly database stuff
-	var $extra_where_sql, $sql_where_language;
+	public $extra_where_sql, $sql_where_language;
+	
+	public function __construct() {
+		parent::__construct(SecureForm::FRONTEND);
+	}
 
-	function page_select() {
+	public function page_select() {
 		global $page_id,$no_intro;
 		global $database;
 		// We have no page id and are supposed to show the intro page
@@ -115,7 +117,7 @@ class frontend extends wb {
 		return true;
 	}
 
-	function get_page_details() {
+	public function get_page_details() {
 		global $database;
 	    if($this->page_id != 0) {
 			// Query page details
@@ -160,6 +162,8 @@ class frontend extends wb {
 			// Page level
 			if(!defined('LEVEL')) {define('LEVEL', $this->page['level']);}
 			$this->level=$this->page['level'];
+			// Page position
+			$this->level=$this->page['position'];
 			// Page visibility
 			if(!defined('VISIBILITY')) {define('VISIBILITY', $this->page['visibility']);}
 			$this->visibility=$this->page['visibility'];
@@ -221,7 +225,8 @@ class frontend extends wb {
 		}
 	}
 
-	function get_website_settings() {
+	public function get_website_settings()
+    {
 		global $database;
 
 		// set visibility SQL code
@@ -264,7 +269,38 @@ class frontend extends wb {
 			define('SIGNUP_URL', WB_URL.'/account/signup.php');
 		}
 	}
-	
+
+/*
+ * replace all "[wblink{page_id}]" with real links
+ * @param string &$content : reference to global $content
+ * @return void
+ * @history 100216 17:00:00 optimise errorhandling, speed, SQL-strict
+ */
+	public function preprocess(&$content)
+	{
+		global $database;
+		$replace_list = array();
+		$pattern = '/\[wblink([0-9]+)\]/isU';
+		if(preg_match_all($pattern,$content,$ids))
+		{
+			foreach($ids[1] as $key => $page_id)
+			{
+				$replace_list[$page_id] = $ids[0][$key];
+			}
+			foreach($replace_list as $page_id => $tag)
+			{
+				$sql = 'SELECT `link` FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.(int)$page_id;
+				$link = $database->get_one($sql);
+				if(!is_null($link))
+				{
+					$link = $this->page_link($link);
+					$content = str_replace($tag, $link, $content);
+				}
+			}
+		}
+	}
+
+/*
 	function preprocess(&$content) {
 		global $database;
 		// Replace [wblink--PAGE_ID--] with real link
@@ -279,8 +315,8 @@ class frontend extends wb {
 			$content = preg_replace($pattern,$link,$content);
 		}
 	}
-	
-	function menu() {
+*/
+	public function menu() {
 		global $wb;
 	   if (!isset($wb->menu_number)) {
 	   	$wb->menu_number = 1;
@@ -318,7 +354,7 @@ class frontend extends wb {
 	   $wb->show_menu();
 	}
 	
-	function show_menu() {
+	public function show_menu() {
 		global $database;
 		if ($this->menu_start_level>0) {
 			$key_array=array_keys($this->page_trail);
@@ -387,7 +423,7 @@ class frontend extends wb {
 
 
 	// Function to show the "Under Construction" page
-	function print_under_construction() {
+	public function print_under_construction() {
 		global $MESSAGE;
 		require_once(WB_PATH.'/languages/'.DEFAULT_LANGUAGE.'.php');
 		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

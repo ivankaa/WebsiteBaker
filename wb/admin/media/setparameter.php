@@ -1,27 +1,20 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        admin
+ * @package         media
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL:  $
+ * @lastmodified    $Date:  $
+ *
+ */
 
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
@@ -40,10 +33,22 @@ if(!file_exists(THEME_PATH .'/languages/'.LANGUAGE .'.php')) {
 
 //Save post vars to the parameters file
 if ( !is_null($admin->get_post_escaped("save"))) {
-	//Check for existing settings entry, if not existing, create a record first!
-	if (!$database->query ( "SELECT * FROM ".TABLE_PREFIX."settings where `name`='mediasettings'" )) {
-		$database->query ( "INSERT INTO ".TABLE_PREFIX."settings (`name`,`value`) VALUES ('mediasettings','')" );
+/*
+	if (!$admin->checkFTAN())
+	{
+		$admin->print_error('::'.$MESSAGE['GENERIC_SECURITY_ACCESS'],'browse.php',false);
 	}
+*/
+
+	if(DEFAULT_THEME != ' wb_theme') {
+		//Check for existing settings entry, if not existing, create a record first!
+		if (!$database->query ( "SELECT * FROM ".TABLE_PREFIX."settings where `name`='mediasettings'" )) {
+			$database->query ( "INSERT INTO ".TABLE_PREFIX."settings (`name`,`value`) VALUES ('mediasettings','')" );
+		}
+	} else {
+		$pathsettings = array();
+	}
+
 	$dirs = directory_list(WB_PATH.MEDIA_DIRECTORY);
 	$dirs[] = WB_PATH.MEDIA_DIRECTORY;
 	foreach($dirs AS $name) {
@@ -77,12 +82,11 @@ if ($_SESSION['GROUP_ID'] != 1) {
 	$template->set_var('DISPLAY_ADMIN', 'hide');
 }
 $template->set_var(array( 
-					'TEXT_HEADER' => $TEXT['TEXT_HEADER'],
-					'SAVE_TEXT' => $TEXT['SAVE'],
-					'BACK' => $TEXT['BACK']
-				)
-			);
-
+				'TEXT_HEADER' => $TEXT['TEXT_HEADER'],
+				'SAVE_TEXT' => $TEXT['SAVE'],
+				'BACK' => $TEXT['BACK'],
+			)
+		);
 
 $template->set_block('main_block', 'list_block', 'list');
 $row_bg_color = '';
@@ -105,27 +109,25 @@ foreach($dirs AS $name) {
 	else $row_bg_color = 'DEDEDE';
 
 	$template->set_var(array( 
-								'ADMIN_URL' => ADMIN_URL,
-								'PATH_NAME' => $relative,
-								'WIDTH' => $TEXT['WIDTH'],
-								'HEIGHT' => $TEXT['HEIGHT'],
-								'FIELD_NAME_W' => $safepath.'-w',
-								'FIELD_NAME_H' => $safepath.'-h',
-								'CUR_WIDTH' => $cur_width,
-								'CUR_HEIGHT' => $cur_height,
-								'SETTINGS' => $TEXT['SETTINGS'],
-								'ADMIN_ONLY' => $TEXT['ADMIN_ONLY'],
-								'ADMIN_ONLY_SELECTED' => $pathsettings['global']['admin_only'],
-								'NO_SHOW_THUMBS' => $TEXT['NO_SHOW_THUMBS'],
-								'NO_SHOW_THUMBS_SELECTED' => $pathsettings['global']['show_thumbs'],
-								'ROW_BG_COLOR' => $row_bg_color
-							)
-					);
+					'ADMIN_URL' => ADMIN_URL,
+					'PATH_NAME' => $relative,
+					'WIDTH' => $TEXT['WIDTH'],
+					'HEIGHT' => $TEXT['HEIGHT'],
+					'FIELD_NAME_W' => $safepath.'-w',
+					'FIELD_NAME_H' => $safepath.'-h',
+					'CUR_WIDTH' => $cur_width,
+					'CUR_HEIGHT' => $cur_height,
+					'SETTINGS' => $TEXT['SETTINGS'],
+					'ADMIN_ONLY' => $TEXT['ADMIN_ONLY'],
+					'ADMIN_ONLY_SELECTED' => $pathsettings['global']['admin_only'],
+					'NO_SHOW_THUMBS' => $TEXT['NO_SHOW_THUMBS'],
+					'NO_SHOW_THUMBS_SELECTED' => $pathsettings['global']['show_thumbs'],
+					'ROW_BG_COLOR' => $row_bg_color,
+					'FTAN' => $admin->getFTAN()
+				)
+		);
 	$template->parse('list', 'list_block', true);
 }
 
 $template->parse('main', 'main_block', false);
 $template->pparse('output', 'page');
-
-
-?>

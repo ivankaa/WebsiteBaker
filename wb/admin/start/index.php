@@ -5,11 +5,11 @@
  * @package         start
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -19,7 +19,39 @@
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Start','start');
-
+// ---------------------------------------
+if(defined('FINALIZE_SETUP')) {
+	require_once(WB_PATH.'/framework/functions.php');
+	$dirs = array( 'modules'   => WB_PATH.'/modules/',
+	               'templates' => WB_PATH.'/templates/',
+	               'languages' => WB_PATH.'/languages/'
+	             );
+	foreach($dirs AS $type => $dir) {
+		if( ($handle = opendir($dir)) ) {
+			while(false !== ($file = readdir($handle))) {
+				if($file != '' AND substr($file, 0, 1) != '.' AND $file != 'admin.php' AND $file != 'index.php') {
+					// Get addon type
+					if($type == 'modules') {
+						load_module($dir.'/'.$file, true);
+						// Pretty ugly hack to let modules run $admin->set_error
+						// See dummy class definition admin_dummy above
+						if(isset($admin->error) && $admin->error != '') {
+							$admin->print_error($admin->error);
+						}
+					} elseif($type == 'templates') {
+						load_template($dir.'/'.$file);
+					} elseif($type == 'languages') {
+						load_language($dir.'/'.$file);
+					}
+				}
+			}
+		closedir($handle);
+		}
+	}
+	$sql = 'DELETE FROM `'.TABLE_PREFIX.'settings` WHERE `name`=\'FINALIZE_SETUP\'';
+	$database->query($sql);
+}
+// ---------------------------------------
 // Setup template object
 $template = new Template(THEME_PATH.'/templates');
 $template->set_file('page', 'start.htt');
@@ -27,15 +59,15 @@ $template->set_block('page', 'main_block', 'main');
 
 // Insert values into the template object
 $template->set_var(array(
-								'WELCOME_MESSAGE' => $MESSAGE['START']['WELCOME_MESSAGE'],
-								'CURRENT_USER' => $MESSAGE['START']['CURRENT_USER'],
-								'DISPLAY_NAME' => $admin->get_display_name(),
-								'ADMIN_URL' => ADMIN_URL,
-								'WB_URL' => WB_URL,
-								'THEME_URL' => THEME_URL,
-								'WB_VERSION' => WB_VERSION
-								)
-						);
+					'WELCOME_MESSAGE' => $MESSAGE['START']['WELCOME_MESSAGE'],
+					'CURRENT_USER' => $MESSAGE['START']['CURRENT_USER'],
+					'DISPLAY_NAME' => $admin->get_display_name(),
+					'ADMIN_URL' => ADMIN_URL,
+					'WB_URL' => WB_URL,
+					'THEME_URL' => THEME_URL,
+					'WB_VERSION' => WB_VERSION
+				)
+			);
 
 // Insert permission values into the template object
 if($admin->get_permission('pages') != true)
@@ -63,12 +95,15 @@ if($admin->get_permission('admintools') != true)
 	$template->set_var('DISPLAY_ADMINTOOLS', 'display:none;');
 }
 
+$msg = (file_exists(WB_PATH.'/install/')) ?  $MESSAGE['START']['INSTALL_DIR_EXISTS'] : '';
+$msg .= (file_exists(WB_PATH.'/upgrade-script.php')) ? '<br />'.$MESSAGE['START_UPGRADE_SCRIPT_EXISTS'] : '';
+
 // Check if installation directory still exists
-if(file_exists(WB_PATH.'/install/')) {
+if(file_exists(WB_PATH.'/install/') || file_exists(WB_PATH.'/upgrade-script.php') ) {
 	// Check if user is part of Adminstrators group
 	if(in_array(1, $admin->get_groups_id()))
     {
-		$template->set_var('WARNING', $MESSAGE['START']['INSTALL_DIR_EXISTS']);
+		$template->set_var('WARNING', $msg );
 	} else {
 		$template->set_var('DISPLAY_WARNING', 'display:none;');
 	}
@@ -111,23 +146,23 @@ if($admin->get_permission('groups') == true) {
 
 // Insert section names and descriptions
 $template->set_var(array(
-								'PAGES' => $MENU['PAGES'],
-								'MEDIA' => $MENU['MEDIA'],
-								'ADDONS' => $MENU['ADDONS'],
-								'ACCESS' => $MENU['ACCESS'],
-								'PREFERENCES' => $MENU['PREFERENCES'],
-								'SETTINGS' => $MENU['SETTINGS'],
-								'ADMINTOOLS' => $MENU['ADMINTOOLS'],
-								'HOME_OVERVIEW' => $OVERVIEW['START'],
-								'PAGES_OVERVIEW' => $OVERVIEW['PAGES'],
-								'MEDIA_OVERVIEW' => $OVERVIEW['MEDIA'],
-								'ADDONS_OVERVIEW' => $addons_overview,
-								'ACCESS_OVERVIEW' => $access_overview,
-								'PREFERENCES_OVERVIEW' => $OVERVIEW['PREFERENCES'],
-								'SETTINGS_OVERVIEW' => $OVERVIEW['SETTINGS'],
-								'ADMINTOOLS_OVERVIEW' => $OVERVIEW['ADMINTOOLS']
-								)
-						);
+					'PAGES' => $MENU['PAGES'],
+					'MEDIA' => $MENU['MEDIA'],
+					'ADDONS' => $MENU['ADDONS'],
+					'ACCESS' => $MENU['ACCESS'],
+					'PREFERENCES' => $MENU['PREFERENCES'],
+					'SETTINGS' => $MENU['SETTINGS'],
+					'ADMINTOOLS' => $MENU['ADMINTOOLS'],
+					'HOME_OVERVIEW' => $OVERVIEW['START'],
+					'PAGES_OVERVIEW' => $OVERVIEW['PAGES'],
+					'MEDIA_OVERVIEW' => $OVERVIEW['MEDIA'],
+					'ADDONS_OVERVIEW' => $addons_overview,
+					'ACCESS_OVERVIEW' => $access_overview,
+					'PREFERENCES_OVERVIEW' => $OVERVIEW['PREFERENCES'],
+					'SETTINGS_OVERVIEW' => $OVERVIEW['SETTINGS'],
+					'ADMINTOOLS_OVERVIEW' => $OVERVIEW['ADMINTOOLS']
+				)
+			);
 
 // Parse template object
 $template->parse('main', 'main_block', false);
@@ -135,5 +170,3 @@ $template->pparse('output', 'page');
 
 // Print admin footer
 $admin->print_footer();
-
-?>

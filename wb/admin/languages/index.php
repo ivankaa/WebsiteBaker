@@ -1,27 +1,21 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+/**
+ *
+ * @category        admin
+ * @package         languages
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link            http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource      $HeadURL$
+ * @lastmodified    $Date$
+ * @description
+ *
+ */
 
 // Print admin header
 require('../../config.php');
@@ -35,7 +29,7 @@ $template->set_block('page', 'main_block', 'main');
 
 // Insert values into language list
 $template->set_block('main_block', 'language_list_block', 'language_list');
-$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by name");
+$result = $database->query("SELECT * FROM ".TABLE_PREFIX."addons WHERE type = 'language' order by directory");
 if($result->numRows() > 0) {
 	while($addon = $result->fetchRow()) {
 		$template->set_var('VALUE', $addon['directory']);
@@ -64,19 +58,19 @@ $template->set_var(array(
 						);
 // insert urls
 $template->set_var(array(
-								'ADMIN_URL' => ADMIN_URL,
-								'WB_URL' => WB_URL,
-								'WB_PATH' => WB_PATH,
-								'THEME_URL' => THEME_URL
-								)
-						);
+					'ADMIN_URL' => ADMIN_URL,
+					'WB_URL' => WB_URL,
+					'THEME_URL' => THEME_URL,
+					'FTAN' => $admin->getFTAN()
+				)
+			);
 // Insert language text and messages
 $template->set_var(array(
-	'URL_MODULES' => $admin->get_permission('modules') ? 
+	'URL_MODULES' => $admin->get_permission('modules') ?
 		'<a href="' . ADMIN_URL . '/modules/index.php">' . $MENU['MODULES'] . '</a>' : '',
-	'URL_ADVANCED' => $admin->get_permission('admintools') ? 
-		'<a href="' . ADMIN_URL . '/modules/index.php?advanced">' . $TEXT['ADVANCED'] . '</a>' : '',		
-	'URL_TEMPLATES' => $admin->get_permission('templates') ? 
+	'URL_ADVANCED' => $admin->get_permission('admintools') ?
+		'<a href="' . ADMIN_URL . '/modules/index.php?advanced">' . $TEXT['ADVANCED'] . '</a>' : '',
+	'URL_TEMPLATES' => $admin->get_permission('templates') ?
 		'<a href="' . ADMIN_URL . '/templates/index.php">' . $MENU['TEMPLATES'] . '</a>' : '',
 	'TEXT_INSTALL' => $TEXT['INSTALL'],
 	'TEXT_UNINSTALL' => $TEXT['UNINSTALL'],
@@ -91,5 +85,3 @@ $template->pparse('output', 'page');
 
 // Print admin footer
 $admin->print_footer();
-
-?>

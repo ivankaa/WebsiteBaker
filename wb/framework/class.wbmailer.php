@@ -23,13 +23,8 @@
 
 */
 
-/*
-
-wbmailer class
-
-This class is a subclass of the PHPMailer class and replaces the mail() function of PHP
-
-*/
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 // Include PHPMailer class
 require_once(WB_PATH."/include/phpmailer/class.phpmailer.php");
@@ -40,6 +35,7 @@ class wbmailer extends PHPMailer
 	// setting default values 
 
 	function wbmailer() {
+		global $database;
 		// set mailer defaults (PHP mail function)
 		$db_wbmailer_routine = "phpmail";
 		$db_wbmailer_smtp_host = "";
@@ -47,7 +43,7 @@ class wbmailer extends PHPMailer
 		$db_server_email = SERVER_EMAIL;
 
 		// get mailer settings from database
-		$database = new database();
+		// $database = new database();
 		$query = "SELECT * FROM " .TABLE_PREFIX. "settings";
 		$results = $database->query($query);
 		while($setting = $results->fetchRow()) {

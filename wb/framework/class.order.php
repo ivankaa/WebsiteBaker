@@ -32,11 +32,8 @@ which contains a special order field (type must be integer)
 
 */
 
-// Stop this file from being accessed directly
-if(!defined('WB_URL')) {
-	header('Location: ../index.php');
-	exit(0);
-}
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 define('ORDERING_CLASS_LOADED', true);
 
@@ -120,7 +117,7 @@ class order {
 	// Get new number for order
 	function get_new($cf_value) {
 		global $database;
-		$database = new database();
+		// $database = new database();
 		// Get last order
 		$query_last = "SELECT ".$this->order_field." FROM ".$this->table." WHERE ".$this->common_field." = '$cf_value' ORDER BY ".$this->order_field." DESC LIMIT 1";
 		$get_last = $database->query($query_last);

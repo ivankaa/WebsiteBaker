@@ -5,11 +5,11 @@
  * @package         account
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
@@ -21,6 +21,8 @@ require("../config.php");
 if(isset($_COOKIE['REMEMBER_KEY'])) {
 	setcookie('REMEMBER_KEY', '', time()-3600, '/');
 }
+
+$redirect = (isset($_SERVER['HTTP_REFERER'])) ?  $_SERVER['HTTP_REFERER'] : WB_URL.'/index.php';
 
 $_SESSION['USER_ID'] = null;
 $_SESSION['GROUP_ID'] = null;
@@ -36,7 +38,6 @@ session_destroy();
 if(INTRO_PAGE) {
 	header('Location: '.WB_URL.PAGES_DIRECTORY.'/index.php');
 } else {
-	header('Location: '.WB_URL.'/index.php');
+	header('Location: '.$redirect);
 }
 
-?>

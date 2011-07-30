@@ -5,52 +5,71 @@
  * @package         pages
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
  */
-
-// Get page id
-if(!isset($_POST['page_id']) OR !is_numeric($_POST['page_id']))
-{
-	header("Location: index.php");
-	exit(0);
-} else {
-	$page_id = $_POST['page_id'];
-}
+/* */
 
 // Create new admin object and print admin header
 require('../../config.php');
 require_once(WB_PATH.'/framework/class.admin.php');
-$admin = new admin('Pages', 'pages_settings');
+
+// suppress to print the header, so no new FTAN will be set
+$admin = new admin('Pages', 'pages_settings',false);
+
+// Get page id
+if(!isset($_POST['page_id']) || !is_numeric($_POST['page_id']))
+{
+	header("Location: index.php");
+	exit(0);
+} else {
+	$page_id = (int)$_POST['page_id'];
+}
+
+/*
+if( (!($page_id = $admin->checkIDKEY('page_id', 0, $_SERVER['REQUEST_METHOD']))) )
+{
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS']);
+}
+*/
+$pagetree_url = ADMIN_URL.'/pages/index.php';
+$target_url = ADMIN_URL.'/pages/settings.php?page_id='.$page_id;
+
+if (!$admin->checkFTAN())
+{
+	$admin->print_header();
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'],$target_url);
+}
+// After check print the header
+$admin->print_header();
 
 // Include the WB functions file
 require_once(WB_PATH.'/framework/functions.php');
 
 // Get values
-$page_title = $admin->get_post_escaped('page_title');
-$page_title = htmlspecialchars($page_title);
-$menu_title = $admin->get_post_escaped('menu_title');
-$menu_title = htmlspecialchars($menu_title);
-$page_code = $admin->get_post_escaped('page_code');
-$page_code = htmlspecialchars($page_code);
-$description = htmlspecialchars($admin->add_slashes($admin->get_post('description')));
-$keywords = htmlspecialchars($admin->add_slashes($admin->get_post('keywords')));
-$parent = $admin->get_post_escaped('parent');
+$page_title = str_replace(array("[[", "]]"), '', htmlspecialchars($admin->get_post_escaped('page_title')));
+$menu_title = str_replace(array("[[", "]]"), '', htmlspecialchars($admin->get_post_escaped('menu_title')));
+$page_code = intval($admin->get_post('page_code')) ;
+$description = str_replace(array("[[", "]]"), '', htmlspecialchars($admin->add_slashes($admin->get_post('description'))));
+$keywords = str_replace(array("[[", "]]"), '', htmlspecialchars($admin->add_slashes($admin->get_post('keywords'))));
+$parent = intval($admin->get_post('parent')); // fix secunia 2010-91-3
 $visibility = $admin->get_post_escaped('visibility');
-$template = $admin->get_post_escaped('template');
-$target = $admin->get_post_escaped('target');
+if (!in_array($visibility, array('public', 'private', 'registered', 'hidden', 'none'))) {$visibility = 'public';} // fix secunia 2010-93-3
+$template = preg_replace("/\W/", "", $admin->get_post('template')); // fix secunia 2010-93-3
+$target = preg_replace("/\W/", "", $admin->get_post('target'));
 $admin_groups = $admin->get_post_escaped('admin_groups');
 $viewing_groups = $admin->get_post_escaped('viewing_groups');
-$searching = $admin->get_post_escaped('searching');
-$language = $admin->get_post_escaped('language');
-$menu = $admin->get_post_escaped('menu');
+$searching = intval($admin->get_post('searching'));
+$language = strtoupper($admin->get_post('language'));
+$language = (preg_match('/^[A-Z]{2}$/', $language) ? $language : DEFAULT_LANGUAGE);
+$menu = intval($admin->get_post('menu')); // fix secunia 2010-91-3
 
 // Validate data
 if($page_title == '' || substr($page_title,0,1)=='.')
@@ -76,17 +95,17 @@ $old_admin_groups = explode(',', str_replace('_', '', $results_array['admin_grou
 $old_admin_users = explode(',', str_replace('_', '', $results_array['admin_users']));
 
 // Work-out if we should check for existing page_code
-$sql = 'DESCRIBE `'.TABLE_PREFIX.'pages` `page_code`';
-$field_sql = $database->query($sql);
-$field_set = $field_sql->numRows();
+$field_set = $database->field_exists(TABLE_PREFIX.'pages', 'page_code');
 
 $in_old_group = FALSE;
-foreach($admin->get_groups_id() as $cur_gid){
-    if (in_array($cur_gid, $old_admin_groups)) {
+foreach($admin->get_groups_id() as $cur_gid)
+{
+    if (in_array($cur_gid, $old_admin_groups))
+    {
 	$in_old_group = TRUE;
     }
 }
-if((!$in_old_group) AND !is_numeric(array_search($admin->get_user_id(), $old_admin_users)))
+if((!$in_old_group) && !is_numeric(array_search($admin->get_user_id(), $old_admin_users)))
 {
 	$admin->print_error($MESSAGE['PAGES']['INSUFFICIENT_PERMISSIONS']);
 }
@@ -96,13 +115,13 @@ $admin_groups[] = 1;
 //if(!in_array(1, $admin->get_groups_id())) {
 //	$admin_groups[] = implode(",",$admin->get_groups_id());
 //}
-$admin_groups = implode(',', $admin_groups);
+$admin_groups = preg_replace("/[^\d,]/", "", implode(',', $admin_groups));
 // Setup viewing groups
 $viewing_groups[] = 1;
 //if(!in_array(1, $admin->get_groups_id())) {
 //	$viewing_groups[] = implode(",",$admin->get_groups_id());
 //}
-$viewing_groups = implode(',', $viewing_groups);
+$viewing_groups = preg_replace("/[^\d,]/", "", implode(',', $viewing_groups));
 
 // If needed, get new order
 if($parent != $old_parent)
@@ -194,7 +213,7 @@ $sql .= '`searching` = '.$searching.', ';
 $sql .= '`language` = "'.$language.'", ';
 $sql .= '`admin_groups` = "'.$admin_groups.'", ';
 $sql .= '`viewing_groups` = "'.$viewing_groups.'"';
-$sql .= (defined('PAGE_LANGUAGES') && PAGE_LANGUAGES) && $field_set && (file_exists(WB_PATH.'/modules/mod_multilingual/update_keys.php')) ? ', `page_code` = "'.$page_code.'" ' : ' ';
+$sql .= (defined('PAGE_LANGUAGES') && PAGE_LANGUAGES) && $field_set && (file_exists(WB_PATH.'/modules/mod_multilingual/update_keys.php')) ? ', `page_code` = '.(int)$page_code.' ' : ' ';
 $sql .= 'WHERE `page_id` = '.$page_id;
 $database->query($sql);
 
@@ -216,8 +235,9 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/'))
 {
 	$admin->print_error($MESSAGE['PAGES']['CANNOT_CREATE_ACCESS_FILE']);
 } else {
+    $old_filename = WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION;
 	// First check if we need to create a new file
-	if($old_link != $link)
+	if(($old_link != $link) || (!file_exists($old_filename)))
     {
 		// Delete old file
 		$old_filename = WB_PATH.PAGES_DIRECTORY.$old_link.PAGE_EXTENSION;
@@ -228,7 +248,7 @@ if(!is_writable(WB_PATH.PAGES_DIRECTORY.'/'))
 		// Create access file
 		create_access_file($filename,$page_id,$level);
 		// Move a directory for this page
-		if(file_exists(WB_PATH.PAGES_DIRECTORY.$old_link.'/') AND is_dir(WB_PATH.PAGES_DIRECTORY.$old_link.'/'))
+		if(file_exists(WB_PATH.PAGES_DIRECTORY.$old_link.'/') && is_dir(WB_PATH.PAGES_DIRECTORY.$old_link.'/'))
         {
 			rename(WB_PATH.PAGES_DIRECTORY.$old_link.'/', WB_PATH.PAGES_DIRECTORY.$link.'/');
 		}
@@ -293,8 +313,8 @@ fix_page_trail($page_id,$root_parent);
 
 /* END page "access file" code */
 
-$pagetree_url = ADMIN_URL.'/pages/index.php';
-$target_url = ADMIN_URL.'/pages/settings.php?page_id='.$page_id;
+//$pagetree_url = ADMIN_URL.'/pages/index.php';
+//$target_url = ADMIN_URL.'/pages/settings.php?page_id='.$page_id;
 // Check if there is a db error, otherwise say successful
 if($database->is_error())
 {
@@ -305,5 +325,3 @@ if($database->is_error())
 
 // Print admin footer
 $admin->print_footer();
-
-?>

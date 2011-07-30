@@ -1,54 +1,71 @@
 <?php
-
-// $Id$
-
-/*
-
- Website Baker Project <http://www.websitebaker.org/>
- Copyright (C) 2004-2009, Ryan Djurovich
-
- Website Baker is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- Website Baker is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with Website Baker; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
-
-/*
-The Website Baker Project would like to thank Rudolph Lartey <www.carbonect.com>
-for his contributions to this module - adding extra field types
-*/
+/**
+ *
+ * @category        module
+ * @package         Form
+ * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
+ * @link			http://www.websitebaker2.org/
+ * @license         http://www.gnu.org/licenses/gpl.html
+ * @platform        WebsiteBaker 2.8.x
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
+ * @description     
+ */
 
 require('../../config.php');
 
+// suppress to print the header, so no new FTAN will be set
+$admin_header = false;
+// Tells script to update when this page was last updated
+$update_when_modified = true;
+// Include WB admin wrapper script
+require(WB_PATH.'/modules/admin.php');
+/* */
+
+// check FTAN
+if (!$admin->checkFTAN())
+{
+	$admin->print_header();
+	$admin->print_error('::'.$MESSAGE['GENERIC_SECURITY_ACCESS'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
+}
+// After check print the header
+$admin->print_header();
+
+
+/*  */
+// Get id
+$field_id = intval($admin->checkIDKEY('field_id', false ));
+if (!$field_id) {
+ $admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'].'::', ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
+}
+/*
 // Get id
 if(!isset($_POST['field_id']) OR !is_numeric($_POST['field_id'])) {
-	header("Location: ".ADMIN_URL."/pages/index.php");
-	exit(0);
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
 } else {
-	$field_id = $_POST['field_id'];
+	$field_id = (int)$_POST['field_id'];
 }
-
+/*
 // Include WB admin wrapper script
 $update_when_modified = true; // Tells script to update when this page was last updated
-require(WB_PATH.'/modules/admin.php');
 
+if (!$admin->checkFTAN())
+{
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], ADMIN_URL.'/pages/modify.php?page_id='.$page_id);
+	exit();
+}
+*/
 // Validate all fields
 if($admin->get_post('title') == '' OR $admin->get_post('type') == '') {
-	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
+	$admin->print_error($MESSAGE['GENERIC']['FILL_IN_ALL'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$admin->getIDKEY($field_id));
 } else {
-	$title = $admin->add_slashes($admin->get_post('title'));
+	$title = str_replace(array("[[", "]]"), '', htmlspecialchars($admin->get_post_escaped('title'), ENT_QUOTES));
 	$type = $admin->add_slashes($admin->get_post('type'));
-	$required = $admin->add_slashes($admin->get_post('required'));
+	$required = (int) $admin->add_slashes($admin->get_post('required'));
 }
 $value = '';
 
@@ -70,13 +87,13 @@ if(is_numeric($list_count)) {
 // Get extra fields for field-type-specific settings
 if($admin->get_post('type') == 'textfield') {
 	$length = $admin->get_post_escaped('length');
-	$value = $admin->get_post_escaped('value');
+	$value = str_replace(array("[[", "]]"), '', $admin->get_post_escaped('value'));
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '$length' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'textarea') {
-	$value = $admin->get_post_escaped('value');
+	$value = str_replace(array("[[", "]]"), '', $admin->get_post_escaped('value'));
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'heading') {
-	$extra = $admin->get_post('template');
+	$extra = str_replace(array("[[", "]]"), '', $admin->get_post('template'));
 	if(trim($extra) == '') $extra = '<tr><td class="field_heading" colspan="2">{TITLE}{FIELD}</td></tr>';
 	$extra = $admin->add_slashes($extra);
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '', extra = '$extra' WHERE field_id = '$field_id'");
@@ -84,21 +101,19 @@ if($admin->get_post('type') == 'textfield') {
 	$extra = $admin->get_post_escaped('size').','.$admin->get_post_escaped('multiselect');
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '$extra' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'checkbox') {
-	$extra = $admin->get_post_escaped('seperator');
+	$extra = str_replace(array("[[", "]]"), '', $admin->get_post_escaped('seperator'));
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '$extra' WHERE field_id = '$field_id'");
 } elseif($admin->get_post('type') == 'radio') {
-	$extra = $admin->get_post_escaped('seperator');
+	$extra = str_replace(array("[[", "]]"), '', $admin->get_post_escaped('seperator'));
 	$database->query("UPDATE ".TABLE_PREFIX."mod_form_fields SET value = '$value', extra = '$extra' WHERE field_id = '$field_id'");
 }
 
 // Check if there is a db error, otherwise say successful
 if($database->is_error()) {
-	$admin->print_error($database->get_error(), WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
+	$admin->print_error($database->get_error(), WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$admin->getIDKEY($field_id));
 } else {
-	$admin->print_success($TEXT['SUCCESS'], WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$field_id);
+	$admin->print_success($TEXT['SUCCESS'],     WB_URL.'/modules/form/modify_field.php?page_id='.$page_id.'&section_id='.$section_id.'&field_id='.$admin->getIDKEY($field_id));
 }
 
 // Print admin footer
 $admin->print_footer();
-
-?>

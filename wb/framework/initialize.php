@@ -3,29 +3,26 @@
  *
  * @category        framework
  * @package         initialize
- * @author          Ryan Djurovich
- * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
- * @filesource		$HeadURL$
- * @author          Ryan Djurovich
- * @copyright       2004-2009, Ryan Djurovich
- *
  * @author          WebsiteBaker Project
+ * @copyright       2004-2009, Ryan Djurovich
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
- * @copyright       2009-2010, Website Baker Org. e.V.
- * @link			http://start.websitebaker2.org/impressum-datenschutz.php
  * @license         http://www.gnu.org/licenses/gpl.html
- * @version         $Id$
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
+ * @version         $Id$
+ * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
  */
 
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 //set_include_path(get_include_path() . PATH_SEPARATOR . WB_PATH);
 
 if (file_exists(WB_PATH.'/framework/class.database.php')) {
 
+	date_default_timezone_set('UTC');
 	require_once(WB_PATH.'/framework/class.database.php');
 
 	// Create database class
@@ -53,11 +50,13 @@ if (file_exists(WB_PATH.'/framework/class.database.php')) {
 	define('OCTAL_FILE_MODE',(int) octdec($string_file_mode));
 	$string_dir_mode = STRING_DIR_MODE;
 	define('OCTAL_DIR_MODE',(int) octdec($string_dir_mode));
-	
+	$sSecMod = (defined('SECURE_FORM_MODULE') && SECURE_FORM_MODULE != '') ? '.'.SECURE_FORM_MODULE : '';
+	$sSecMod = WB_PATH.'/framework/SecureForm'.$sSecMod.'.php';
+	require_once($sSecMod);
 	if (!defined("WB_INSTALL_PROCESS")) {
 		// get CAPTCHA and ASP settings
 		$table = TABLE_PREFIX.'mod_captcha_control';
-		if($get_settings = $database->query("SELECT * FROM $table LIMIT 1")) {
+		if( ($get_settings = $database->query("SELECT * FROM $table LIMIT 1")) ) {
 			if($get_settings->numRows() == 0) { die("CAPTCHA-Settings not found"); }
 			$setting = $get_settings->fetchRow();
 			if($setting['enabled_captcha'] == '1') define('ENABLED_CAPTCHA', true);
@@ -70,11 +69,16 @@ if (file_exists(WB_PATH.'/framework/class.database.php')) {
 			define('ASP_INPUT_MIN_AGE', (int)$setting['asp_input_min_age']);
 		}
 	}
-	// set error-reporting
-	if(is_numeric(ER_LEVEL)) {
-		error_reporting(ER_LEVEL);
-	}
 
+	// set error-reporting
+	if(intval(ER_LEVEL) > 0 )
+	{
+		error_reporting(ER_LEVEL);
+		if( intval(ini_get ( 'display_errors' )) == 0 )
+		{
+			ini_set('display_errors', 1);
+		}
+	}
 	// Start a session
 	if(!defined('SESSION_STARTED')) {
 		session_name(APP_NAME.'_session_id');
@@ -129,7 +133,7 @@ if (file_exists(WB_PATH.'/framework/class.database.php')) {
 	define('THEME_PATH', WB_PATH.'/templates/'.DEFAULT_THEME);
 
     // extended wb_settings
-	define('EDIT_ONE_SECTION', true);
+	define('EDIT_ONE_SECTION', false);
 
 	define('EDITOR_WIDTH', 0);
 

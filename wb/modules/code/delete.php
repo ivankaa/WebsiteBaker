@@ -1,6 +1,6 @@
 <?php
 
-// $Id$
+// $Id: delete.php 1420 2011-01-26 17:43:56Z Luisehahne $
 
 /*
 
@@ -22,6 +22,8 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 // Delete record from the database
 $database->query("DELETE FROM ".TABLE_PREFIX."mod_code WHERE section_id = '$section_id'");

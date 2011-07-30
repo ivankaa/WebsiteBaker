@@ -5,61 +5,58 @@
  * @package         account
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
  * @filesource		$HeadURL$
  * @lastmodified    $Date$
  *
  */
 
-if(!defined('WB_URL')) {
-	header('Location: ../index.php');
-	exit(0);
-}
+// Must include code to stop this file being access directly
+if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 require_once(WB_PATH.'/framework/class.wb.php');
-
-// Include PHPLIB template class
-require_once(WB_PATH."/include/phplib/template.inc");
 
 // Get WB version
 require_once(ADMIN_PATH.'/interface/version.php');
 
 // Include EditArea wrapper functions
-require_once(WB_PATH . '/include/editarea/wb_wrapper_edit_area.php');
-
-/*
-Begin user changeable settings
-*/
+// require_once(WB_PATH . '/include/editarea/wb_wrapper_edit_area.php');
+//require_once(WB_PATH . '/framework/SecureForm.php');
 
 
 class admin extends wb {
 	// Authenticate user then auto print the header
-	function admin($section_name, $section_permission = 'start', $auto_header = true, $auto_auth = true) {
-		$this->wb();
-		global $MESSAGE;
+	public function __construct($section_name= '##skip##', $section_permission = 'start', $auto_header = true, $auto_auth = true)
+	{
+		parent::__construct(SecureForm::BACKEND);
+	if( $section_name != '##skip##' )
+	{
+		global $database, $MESSAGE;
 		// Specify the current applications name
 		$this->section_name = $section_name;
 		$this->section_permission = $section_permission;
 		// Authenticate the user for this application
-		if($auto_auth == true) {
+		if($auto_auth == true)
+		{
 			// First check if the user is logged-in
-			if($this->is_authenticated() == false) {
+			if($this->is_authenticated() == false)
+			{
 				header('Location: '.ADMIN_URL.'/login/index.php');
 				exit(0);
 			}
+
 			// Now check if they are allowed in this section
 			if($this->get_permission($section_permission) == false) {
 				die($MESSAGE['ADMIN']['INSUFFICIENT_PRIVELLIGES']);
 			}
 		}
-		
+
 		// Check if the backend language is also the selected language. If not, send headers again.
-		global $database;
 		$get_user_language = @$database->query("SELECT language FROM ".TABLE_PREFIX.
 			"users WHERE user_id = '" .(int) $this->get_user_id() ."'");
 		$user_language = ($get_user_language) ? $get_user_language->fetchRow() : '';
@@ -85,7 +82,8 @@ class admin extends wb {
 			$this->print_header();
 		}
 	}
-	
+	}
+
 	// Print the admin header
 	function print_header($body_tags = '') {
 		// Get vars from the language file
@@ -94,6 +92,8 @@ class admin extends wb {
 		global $TEXT;
 		// Connect to database and get website title
 		global $database;
+		// $GLOBALS['FTAN'] = $this->getFTAN();
+		$this->createFTAN();
 		$get_title = $database->query("SELECT value FROM ".TABLE_PREFIX."settings WHERE name = 'website_title'");
 		$title = $get_title->fetchRow();
 		$header_template = new Template(THEME_PATH.'/templates');
@@ -116,29 +116,29 @@ class admin extends wb {
 		}
 
 		$header_template->set_var(	array(
-													'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
-													'BODY_TAGS' => $body_tags,
-													'WEBSITE_TITLE' => ($title['value']),
-													'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
-													'CURRENT_USER' => $MESSAGE['START']['CURRENT_USER'],
-													'DISPLAY_NAME' => $this->get_display_name(),
-													'CHARSET' => $charset,
-													'LANGUAGE' => strtolower(LANGUAGE),
-													'VERSION' => VERSION,
-													'REVISION' => REVISION,
-													'WB_URL' => WB_URL,
-													'ADMIN_URL' => ADMIN_URL,
-													'THEME_URL' => THEME_URL,
-													'TITLE_START' => $MENU['START'],
-													'TITLE_VIEW' => $MENU['VIEW'],
-													'TITLE_HELP' => $MENU['HELP'],
-													'TITLE_LOGOUT' =>  $MENU['LOGOUT'],
-													'URL_VIEW' => $view_url,
-													'URL_HELP' => 'http://www.websitebaker.org/',
-													'BACKEND_MODULE_CSS' => $this->register_backend_modfiles('css'),	// adds backend.css
-													'BACKEND_MODULE_JS'  => $this->register_backend_modfiles('js')		// adds backend.js
-													)
-											);
+							'SECTION_NAME' => $MENU[strtoupper($this->section_name)],
+							'BODY_TAGS' => $body_tags,
+							'WEBSITE_TITLE' => ($title['value']),
+							'TEXT_ADMINISTRATION' => $TEXT['ADMINISTRATION'],
+							'CURRENT_USER' => $MESSAGE['START']['CURRENT_USER'],
+							'DISPLAY_NAME' => $this->get_display_name(),
+							'CHARSET' => $charset,
+							'LANGUAGE' => strtolower(LANGUAGE),
+							'VERSION' => VERSION,
+							'REVISION' => REVISION,
+							'WB_URL' => WB_URL,
+							'ADMIN_URL' => ADMIN_URL,
+							'THEME_URL' => THEME_URL,
+							'TITLE_START' => $MENU['START'],
+							'TITLE_VIEW' => $MENU['VIEW'],
+							'TITLE_HELP' => $MENU['HELP'],
+							'TITLE_LOGOUT' =>  $MENU['LOGOUT'],
+							'URL_VIEW' => $view_url,
+							'URL_HELP' => 'http://www.websitebaker2.org/',
+							'BACKEND_MODULE_CSS' => $this->register_backend_modfiles('css'),	// adds backend.css
+							'BACKEND_MODULE_JS'  => $this->register_backend_modfiles('js')		// adds backend.js
+						)
+					);
 
 		// Create the menu
 		$menu = array(
@@ -177,18 +177,20 @@ class admin extends wb {
 	}
 	
 	// Print the admin footer
-	function print_footer() {
+		function print_footer($activateJsAdmin = false) {
 		// include the required file for Javascript admin
-		if(file_exists(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php')){
-		@include(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php');
+		if($activateJsAdmin != false) {
+			if(file_exists(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php')){
+				@include_once(WB_PATH.'/modules/jsadmin/jsadmin_backend_include.php');
+			}
 		}
+
 		$footer_template = new Template(THEME_PATH.'/templates');
 		$footer_template->set_file('page', 'footer.htt');
 		$footer_template->set_block('page', 'footer_block', 'header');
 		$footer_template->set_var(array(
 						'BACKEND_BODY_MODULE_JS' => $this->register_backend_modfiles_body('js'),
 						'WB_URL' => WB_URL,
-						'WB_PATH' => WB_PATH,
 						'ADMIN_URL' => ADMIN_URL,
 						'THEME_URL' => THEME_URL,
 			 ) );
@@ -226,40 +228,73 @@ class admin extends wb {
 			}
 		}
 	}
-		
+/*
 	function get_user_details($user_id) {
 		global $database;
-		$query_user = "SELECT username,display_name FROM ".TABLE_PREFIX."users WHERE user_id = '$user_id'";
-		$get_user = $database->query($query_user);
-		if($get_user->numRows() != 0) {
-			$user = $get_user->fetchRow();
-		} else {
-			$user['display_name'] = 'Unknown';
-			$user['username'] = 'unknown';
+		$sql  = 'SELECT * FROM `'.TABLE_PREFIX.'users` ';
+		$sql .= 'WHERE `user_id`='.(int)$user_id.' LIMIT 1';
+		if(($resUser = $database->query($sql))){
+			if(!($recUser = $resUser->fetchRow())) {
+				$recUser['display_name'] = 'Unknown';
+				$recUser['username'] = 'unknown';
+			}
 		}
-		return $user;
-	}	
-	
-	function get_page_details($page_id) {
-		global $database;
-		$query = "SELECT page_id,page_title,menu_title,modified_by,modified_when FROM ".TABLE_PREFIX."pages WHERE page_id = '$page_id'";
-		$results = $database->query($query);
-		if($database->is_error()) {
-			$this->print_header();
-			$this->print_error($database->get_error());
-		}
-		if($results->numRows() == 0) {
-			$this->print_header();
-			$this->print_error($MESSAGE['PAGES']['NOT_FOUND']);
-		}
-		$results_array = $results->fetchRow();
-		return $results_array;
-	}	
-	
+		return $recUser;
+	}
+*/
+ function get_user_details($user_id) {
+  global $database;
+  $retval = array('username'=>'unknown','display_name'=>'Unknown','email'=>'');
+  $sql  = 'SELECT `username`,`display_name`,`email` ';
+  $sql .= 'FROM `'.TABLE_PREFIX.'users` ';
+  $sql .= 'WHERE `user_id`='.(int)$user_id.' ';
+  // $sql .= 'AND (`statusflags` & '.USERS_DELETED.') > 0';
+  if( ($resUsers = $database->query($sql)) ) {
+   if( ($recUser = $resUsers->fetchRow()) ) {
+    $retval = $recUser;
+   }
+  }
+  return $retval;
+ }
+
+    //
+	function get_section_details( $section_id, $backLink = 'index.php' ) {
+	global $database, $TEXT;
+		$sql  = 'SELECT * FROM `'.TABLE_PREFIX.'sections` ';
+		$sql .= 'WHERE `section_id`='.intval($section_id).' LIMIT 1';
+		if(($resSection = $database->query($sql))){
+			if(!($recSection = $resSection->fetchRow())) {
+				$this->print_header();
+				$this->print_error($TEXT['SECTION'].' '.$TEXT['NOT_FOUND'], $backLink, true);
+			}
+			} else {
+				$this->print_header();
+				$this->print_error($database->get_error(), $backLink, true);
+			}
+		return $recSection;
+	}
+
+	function get_page_details( $page_id, $backLink = 'index.php' ) {
+	  global $database, $TEXT;
+	  $sql  = 'SELECT * FROM `'.TABLE_PREFIX.'pages` ';
+	  $sql .= 'WHERE `page_id`='.(int)$page_id.' LIMIT 1';
+	  if(($resPages = $database->query($sql))){
+	   if(!($recPage = $resPages->fetchRow())) {
+	    $this->print_header();
+	    $this->print_error($TEXT['PAGE'].' '.$TEXT['NOT_FOUND'], $backLink, true);
+	   }
+	  } else {
+	   $this->print_header();
+	   $this->print_error($database->get_error(), $backLink, true);
+	  }
+	  return $recPage;
+	 }
+
 	/** Function get_page_permission takes either a numerical page_id,
 	 * upon which it looks up the permissions in the database,
-	 * or an array with keys admin_groups and admin_users  
+	 * or an array with keys admin_groups and admin_users
 	 */
+/*
 	function get_page_permission($page,$action='admin') {
 		if ($action!='viewing') $action='admin';
 		$action_groups=$action.'_groups';
@@ -267,7 +302,7 @@ class admin extends wb {
 		if (is_array($page)) {
 				$groups=$page[$action_groups];
 				$users=$page[$action_users];
-		} else {				
+		} else {
 			global $database;
 			$results = $database->query("SELECT $action_groups,$action_users FROM ".TABLE_PREFIX."pages WHERE page_id = '$page'");
 			$result = $results->fetchRow();
@@ -286,7 +321,30 @@ class admin extends wb {
 		}
 		return true;
 	}
-		
+*/
+
+	function get_page_permission($page,$action='admin') {
+		if($action != 'viewing') { $action = 'admin'; }
+		$action_groups = $action.'_groups';
+		$action_users  = $action.'_users';
+		$groups = $users = '0';
+		if(is_array($page)) {
+			$groups = $page[$action_groups];
+			$users  = $page[$action_users];
+		} else {
+			global $database;
+			$sql  = 'SELECT `'.$action_groups.'`,`'.$action_users.'` ';
+			$sql .= 'FROM `'.TABLE_PREFIX.'pages` ';
+			$sql .= 'WHERE `page_id`='.(int)$page;
+			if( ($res = $database->query($sql)) ) {
+				if( ($rec = $res->fetchRow()) ) {
+					$groups = $rec[$action_groups];
+					$users  = $rec[$action_users];
+				}
+			}
+		}
+		return ($this->ami_group_member($groups) || $this->is_group_match($this->get_user_id(), $users));
+	}
 
 	// Returns a system permission for a menu link
 	function get_link_permission($title) {
@@ -321,7 +379,7 @@ class admin extends wb {
         $body_links = "";
 		// define default baselink and filename for optional module javascript and stylesheet files
 		if($file_id == "js") {
-			$base_link = '<script type="text/javascript" src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/backend_body.js"></script>';
+			$base_link = '<script src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/backend_body.js" type="text/javascript"></script>';
 			$base_file = "backend_body.js";
 		}
 		// check if backend_body.js files needs to be included to the <body></body> section of the backend
@@ -385,7 +443,7 @@ class admin extends wb {
 			$base_link.= ' rel="stylesheet" type="text/css" media="screen" />';
 			$base_file = "backend.css";
 		} else {
-			$base_link = '<script type="text/javascript" src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/backend.js"></script>';
+			$base_link = '<script src="'.WB_URL.'/modules/{MODULE_DIRECTORY}/backend.js" type="text/javascript"></script>';
 			$base_file = "backend.js";
 		}
 
@@ -403,12 +461,12 @@ class admin extends wb {
 					return str_replace("{MODULE_DIRECTORY}", $tool['directory'], $base_link);
 				}
 			}
-		} elseif(isset($_GET['page_id']) or isset($_POST['page_id'])) {
+		} elseif(isset($_GET['page_id']) || isset($_POST['page_id'])) {
 			// check if displayed page in the backend contains a page module
 			if (isset($_GET['page_id'])) {
-				$page_id = (int) addslashes($_GET['page_id']);
+				$page_id = (int)$_GET['page_id'];
 			} else {
-				$page_id = (int) addslashes($_POST['page_id']);
+				$page_id = (int)$_POST['page_id'];
 			}
 
     		// gather information for all models embedded on actual page

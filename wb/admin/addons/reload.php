@@ -5,14 +5,14 @@
  * @package         addons
  * @author          WebsiteBaker Project
  * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
+ * @copyright       2009-2011, Website Baker Org. e.V.
  * @link			http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
- * @requirements    PHP 4.3.4 and higher
+ * @requirements    PHP 5.2.2 and higher
  * @version         $Id$
- * @filesource		$HeadURL:  $
- * @lastmodified    $Date:  $
+ * @filesource		$HeadURL$
+ * @lastmodified    $Date$
  *
  */
 
@@ -34,15 +34,15 @@ require_once('../../framework/class.admin.php');
 
 // check user permissions for admintools (redirect users with wrong permissions)
 $admin = new admin('Admintools', 'admintools', false, false);
+
 if ($admin->get_permission('admintools') == false) die(header('Location: ../../index.php'));
 
 // check if the referer URL if available
-$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 
+$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] :
 	(isset($HTTP_SERVER_VARS['HTTP_REFERER']) ? $HTTP_SERVER_VARS['HTTP_REFERER'] : '');
-
 // if referer is set, check if script was invoked from "admin/modules/index.php"
 $required_url = ADMIN_URL . '/addons/index.php';
-if ($referer != '' && (!(strpos($referer, $required_url) !== false || strpos($referer, $required_url) !== false))) 
+if ($referer != '' && (!(strpos($referer, $required_url) !== false || strpos($referer, $required_url) !== false)))
 	die(header('Location: ../../index.php'));
 
 // include WB functions file
@@ -52,8 +52,14 @@ require_once(WB_PATH . '/framework/functions.php');
 require_once(WB_PATH . '/languages/' . LANGUAGE .'.php');
 
 // create Admin object with admin header
-$admin = new admin('Addons', '', true, false);
+$admin = new admin('Addons', '', false, false);
 $js_back = ADMIN_URL . '/addons/index.php?advanced';
+
+if (!$admin->checkFTAN())
+{
+	$admin->print_header();
+	$admin->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'],$js_back);
+}
 
 /**
  * Reload all specified Addons
@@ -103,6 +109,7 @@ foreach ($post_check as $key) {
 
 			} else {
 				// provide error message and stop
+				$admin->print_header();
 				$admin->print_error($MESSAGE['ADDON']['ERROR_RELOAD'], $js_back);
 			}
 			break;
@@ -125,6 +132,7 @@ foreach ($post_check as $key) {
 				
 			} else {
 				// provide error message and stop
+				$admin->print_header();
 				$admin->print_error($MESSAGE['ADDON']['ERROR_RELOAD'], $js_back);
 			}
 			break;
@@ -132,6 +140,7 @@ foreach ($post_check as $key) {
 }
 
 // output success message
+$admin->print_header();
 $admin->print_success(implode($msg, '<br />'), $js_back);
 $admin->print_footer();
 
